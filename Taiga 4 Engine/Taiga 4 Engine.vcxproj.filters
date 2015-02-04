@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Файлы исходного кода">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Заголовочные файлы">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Console">
+      <UniqueIdentifier>{0a3568a4-bbaf-497b-b690-cc376802c03b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Window">
+      <UniqueIdentifier>{58a8a6ca-f328-47db-aa74-dc805e14e81f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Core">
+      <UniqueIdentifier>{cbacebaf-8f3b-4046-bca8-bac86499cf73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Character">
+      <UniqueIdentifier>{d335f9fa-ba40-42a5-9ccf-0cbdd121c880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Database">
+      <UniqueIdentifier>{e640ff0a-deed-4a18-8823-1680226e30c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Network">
+      <UniqueIdentifier>{5a36c3a9-03e9-4744-ab25-c870daed1847}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Visual">
+      <UniqueIdentifier>{59b95d4c-2557-4c96-8a84-5a8a95b530e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Character\Item">
+      <UniqueIdentifier>{74a79a1a-b012-455f-a977-377e2dc7811b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Util">
+      <UniqueIdentifier>{baf90401-aa11-4bd6-9694-63789c1d2e0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\UI">
+      <UniqueIdentifier>{4f390426-a1de-4940-8568-3fa7d5f98895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\World">
+      <UniqueIdentifier>{63a48669-ca4f-4cc7-8951-b2d67b1e5e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Util\Reference">
+      <UniqueIdentifier>{84447c4d-2f8c-4adb-a7b5-3220eb35ed1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Util\Pathing">
+      <UniqueIdentifier>{e4952ce8-d822-4600-b6ca-572bdf262f1f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="console_cmd.cpp">
+      <Filter>Файлы исходного кода\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="console_main.cpp">
+      <Filter>Файлы исходного кода\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="window_main.cpp">
+      <Filter>Файлы исходного кода\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="window_event.cpp">
+      <Filter>Файлы исходного кода\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Файлы исходного кода\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="window_paint_main.cpp">
+      <Filter>Файлы исходного кода\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="visual_main.cpp">
+      <Filter>Файлы исходного кода\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="database.cpp">
+      <Filter>Файлы исходного кода\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Файлы исходного кода\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="server_main.cpp">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="unit.cpp">
+      <Filter>Файлы исходного кода\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="math.cpp">
+      <Filter>Файлы исходного кода\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="animation.cpp">
+      <Filter>Файлы исходного кода\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_main.cpp">
+      <Filter>Файлы исходного кода\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_button.cpp">
+      <Filter>Файлы исходного кода\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Файлы исходного кода\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="client_main.cpp">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="client_util.cpp">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="server_util.cpp">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="settings.cpp">
+      <Filter>Файлы исходного кода\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_inventory.cpp">
+      <Filter>Файлы исходного кода\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_util.cpp">
+      <Filter>Файлы исходного кода\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>Файлы исходного кода\Character\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_update.cpp">
+      <Filter>Файлы исходного кода\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="craft.cpp">
+      <Filter>Файлы исходного кода\Character\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_contextMenu.cpp">
+      <Filter>Файлы исходного кода\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="precomp.cpp">
+      <Filter>Файлы исходного кода\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="database_util.cpp">
+      <Filter>Файлы исходного кода\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="refSystem.cpp">
+      <Filter>Файлы исходного кода\Util\Reference</Filter>
+    </ClCompile>
+    <ClCompile Include="itemActive.cpp">
+      <Filter>Файлы исходного кода\Character\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="world.cpp">
+      <Filter>Файлы исходного кода\World</Filter>
+    </ClCompile>
+    <ClCompile Include="server_world.cpp">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="server_message.cpp">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="client_message.cpp">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="path.cpp">
+      <Filter>Файлы исходного кода\Util\Pathing</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="console.h">
+      <Filter>Файлы исходного кода\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="window.h">
+      <Filter>Файлы исходного кода\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="visual.h">
+      <Filter>Файлы исходного кода\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="database.h">
+      <Filter>Файлы исходного кода\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="server.h">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>Файлы исходного кода\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="client.h">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Файлы исходного кода\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Файлы исходного кода\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="settings.h">
+      <Filter>Файлы исходного кода\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>Файлы исходного кода\Character\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="craft.h">
+      <Filter>Файлы исходного кода\Character\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="util.h">
+      <Filter>Файлы исходного кода\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Файлы исходного кода\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="unit.h">
+      <Filter>Файлы исходного кода\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="precomp.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="refSystem.h">
+      <Filter>Файлы исходного кода\Util\Reference</Filter>
+    </ClInclude>
+    <ClInclude Include="world.h">
+      <Filter>Файлы исходного кода\World</Filter>
+    </ClInclude>
+    <ClInclude Include="path.h">
+      <Filter>Файлы исходного кода\Util\Pathing</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
