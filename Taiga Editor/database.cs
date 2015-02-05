@@ -11,6 +11,7 @@ namespace Taiga_Editor
     // Header
     public class cDBObject
     {
+        public bool isValid = false;
         public string name = new string('0', 1);
     }
     public class cUnit : cDBObject
@@ -37,28 +38,89 @@ namespace Taiga_Editor
         int uiElementCount = 0;
         cUIElement[] uiElement = new cUIElement[256];
 
+        // Add object
         public int addUnit(string name)
         {
-            unit[unitCount].name = name;
-            parent.treeView.Nodes.Find("node_units", true)[0].Nodes.Add(unitCount.ToString(), name);
-            unitCount += 1;
-            return unitCount - 1;
+            int id = 0;
+            for (int i = 0; i < 256; i++)
+            {
+                if (!unit[i].isValid)
+                {
+                    id = i;
+                    unit[id].name = name;
+                    unit[id].isValid = true;
+                    parent.treeView.Nodes.Find("node_units", true)[0].Nodes.Add(id.ToString(), name);
+                    i = 256;
+                }
+            }
+            return id;
         }
         public int addItem(string name)
         {
-            item[itemCount].name = name;
-            parent.treeView.Nodes.Find("node_items", true)[0].Nodes.Add(itemCount.ToString(), name);
-            itemCount += 1;
-            return itemCount - 1;
+            int id = 0;
+            for (int i = 0; i < 256; i++)
+            {
+                if (!item[i].isValid)
+                {
+                    id = i;
+                    item[id].name = name;
+                    item[id].isValid = true;
+                    parent.treeView.Nodes.Find("node_items", true)[0].Nodes.Add(id.ToString(), name);
+                    i = 256;
+                }
+            }
+            return id;
         }
         public int addUIElement(string name)
         {
-            uiElement[uiElementCount].name = name;
-            parent.treeView.Nodes.Find("node_ui", true)[0].Nodes.Add(uiElementCount.ToString(), name);
-            uiElementCount += 1;
-            return itemCount - 1;
+            int id = 0;
+            for (int i = 0; i < 256; i++)
+            {
+                if (!uiElement[i].isValid)
+                {
+                    id = i;
+                    uiElement[id].name = name;
+                    uiElement[id].isValid = true;
+                    parent.treeView.Nodes.Find("node_ui", true)[0].Nodes.Add(id.ToString(), name);
+                    i = 256;
+                }
+            }
+            return id;
         }
 
+        // Remove object
+        public bool removeUnitSel()
+        {
+            if (parent.treeView.SelectedNode == null
+                || parent.treeView.SelectedNode.Parent == null) { return false; }
+
+            unit[Convert.ToInt32(parent.treeView.SelectedNode.Name)].isValid = false;
+            parent.treeView.Nodes.Remove(parent.treeView.SelectedNode);
+
+            return true;
+        }
+        public bool removeItemSel()
+        {
+            if (parent.treeView.SelectedNode == null
+                || parent.treeView.SelectedNode.Parent == null) { return false; }
+
+            item[Convert.ToInt32(parent.treeView.SelectedNode.Name)].isValid = false;
+            parent.treeView.Nodes.Remove(parent.treeView.SelectedNode);
+
+            return true;
+        }
+        public bool removeUIElementSel()
+        {
+            if (parent.treeView.SelectedNode == null
+                || parent.treeView.SelectedNode.Parent == null) { return false; }
+
+            uiElement[Convert.ToInt32(parent.treeView.SelectedNode.Name)].isValid = false;
+            parent.treeView.Nodes.Remove(parent.treeView.SelectedNode);
+
+            return true;
+        }
+
+        // Constructor
         public cDatabase()
         {
             for (int i = 0; i < 256; i++)

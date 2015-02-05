@@ -72,5 +72,28 @@ namespace Taiga_Editor
             }
             treeView.EndUpdate();
         }
+
+        // Remove element button
+        private void btn_removeElement_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode != null && treeView.SelectedNode.Parent != null)
+            {
+                // Units
+                if (treeView.SelectedNode.Parent.Name == "node_units")
+                {
+                    database.removeUnitSel();
+                }
+                // Items
+                else if (treeView.SelectedNode.Parent.Name == "node_items")
+                {
+                    database.removeItemSel();
+                }
+                // UI Elements
+                else if (treeView.SelectedNode.Parent.Name == "node_ui")
+                {
+                    database.removeUIElementSel();
+                }
+            }
+        }
     }
 }
