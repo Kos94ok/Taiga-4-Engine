@@ -264,64 +264,37 @@ void cUI::updateInterfaceEquipment()
 			if (itemsFound >= 4) { i = cont.itemCounter; }
 		}
 	}
+	
+	// Hidden button
+	int baseId = ui.addElement("button", vec2(-2000.00f, 0));
+	ui.element[ui.getElementId(id)].size = sf::Vector2f(40, 40);
+	ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_icon_empty_white.png");
+	ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("ui_icon_empty_orange.png");
+	ui.element[ui.getElementId(id)].button.action = "activeItem";
+	ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[0].globalId);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM);
+	ui.element[ui.getElementId(id)].tooltip.setText(equip[0].displayName);
+	ui.element[ui.getElementId(id)].tooltip.offset.x = 12.00f;
+	ui.element[ui.getElementId(id)].tooltip.offset.y = -6.00f;
+	ui.element[ui.getElementId(id)].tooltip.delay = 0.50f;
+	ui.element[ui.getElementId(id)].tooltip.ignoreOrigin = true;
+	ui.element[ui.getElementId(id)].priority = 4;
+	ui.element[ui.getElementId(id)].setText("1");
+	ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 150, 0);
+	ui.element[ui.getElementId(id)].textOffset = vec2(8.00f, 5.00f);
+	ui.element[ui.getElementId(id)].textSize = 12;
 
-	// Item A
-	if (itemsFound > 0)
+	// Actual buttons
+	for (int i = 0; i < itemsFound; i++)
 	{
-		id = ui.addElement("button", vec2(20.00f, 550.00f * resModY));
-		ui.element[ui.getElementId(id)].size = sf::Vector2f(40, 40);
-		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_icon_empty_white.png");
-		ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("ui_icon_empty_orange.png");
-		ui.element[ui.getElementId(id)].button.action = "activeItem";
-		ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[0].globalId);
-		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM);
-		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + 1);
-		ui.element[ui.getElementId(id)].tooltip.setText(equip[0].displayName);
-		ui.element[ui.getElementId(id)].tooltip.offset.x = 12.00f;
-		ui.element[ui.getElementId(id)].tooltip.offset.y = -6.00f;
-		ui.element[ui.getElementId(id)].tooltip.delay = 0.50f;
-		ui.element[ui.getElementId(id)].tooltip.ignoreOrigin = true;
-		ui.element[ui.getElementId(id)].priority = 4;
-		ui.element[ui.getElementId(id)].setText("1");
-		ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 150,0);
-		ui.element[ui.getElementId(id)].textOffset = vec2(8.00f, 5.00f);
-		ui.element[ui.getElementId(id)].textSize = 12;
-	}
+		id = ui.addElement(ui.element[ui.getElementId(baseId)], vec2(20.00f + 40.00f * floor(i / (LIMIT_BUTTONSPERCOLUMN + 1)),
+						550.00f * resModY + 40.00f * (i % (LIMIT_BUTTONSPERCOLUMN + 1)) ) );
 
-	// Item B
-	if (itemsFound > 1)
-	{
-		id = ui.addElement(ui.element[ui.getElementId(id)], vec2(20.00f, 590.00f * resModY));
-		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + 2);
-		ui.element[ui.getElementId(id)].removeRef(REF_UI_ACTIVEITEM + 1);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + i + 1);
 		ui.element[ui.getElementId(id)].button.action = "activeItem";
-		ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[1].globalId);
-		ui.element[ui.getElementId(id)].tooltip.setText(equip[1].displayName);
-		ui.element[ui.getElementId(id)].setText("2");
-	}
-
-	// Item C
-	if (itemsFound > 2)
-	{
-		id = ui.addElement(ui.element[ui.getElementId(id)], vec2(20.00f, 630.00f * resModY));
-		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + 3);
-		ui.element[ui.getElementId(id)].removeRef(REF_UI_ACTIVEITEM + 2);
-		ui.element[ui.getElementId(id)].button.action = "activeItem";
-		ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[2].globalId);
-		ui.element[ui.getElementId(id)].tooltip.setText(equip[2].displayName);
-		ui.element[ui.getElementId(id)].setText("3");
-	}
-
-	// Item D
-	if (itemsFound > 3)
-	{
-		id = ui.addElement(ui.element[ui.getElementId(id)], vec2(20.00f, 670.00f * resModY));
-		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + 4);
-		ui.element[ui.getElementId(id)].removeRef(REF_UI_ACTIVEITEM + 3);
-		ui.element[ui.getElementId(id)].button.action = "activeItem";
-		ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[3].globalId);
-		ui.element[ui.getElementId(id)].tooltip.setText(equip[3].displayName);
-		ui.element[ui.getElementId(id)].setText("4");
+		ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[i].globalId);
+		ui.element[ui.getElementId(id)].tooltip.setText(equip[i].displayName);
+		ui.element[ui.getElementId(id)].setText(to_string(i + 1));
 	}
 	access.unlock();
 }
