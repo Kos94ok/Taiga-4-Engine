@@ -10,7 +10,6 @@
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
 [Rr]eleases/
 x64/
 x86/
@@ -70,6 +69,8 @@ ipch/
 *.opensdf
 *.sdf
 *.cachefile
+*.tlog
+*.lastbuildstate
 
 # Visual Studio profiler
 *.psess
