@@ -70,11 +70,7 @@ void cServer::introduce(int playerId)
 	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_ear", 100);
 	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_arm", 50);
 	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_leg", 70);
-	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("test_catWeapons", 1);
-	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("test_catArmor", 1);
-	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("test_catMaterials", 1);
-	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("test_catConsumables", 1);
-	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("test_catOther", 1);
+	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("weapon_rifle", 1);
 	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("test_resourceManipulator", 1);
 	ui.updateInterface();
 }

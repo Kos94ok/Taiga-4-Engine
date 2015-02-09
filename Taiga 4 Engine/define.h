@@ -117,6 +117,7 @@
 #define REF_ITEM_NOCRAFT				3		// Item can not be used in crafting
 #define REF_ITEM_BLINK					4		// Item can teleport the user to target point
 #define REF_ITEM_RIFLE					5		// Item can shoot bullets
+#define REF_ITEM_EDITOR					6		// Item is editor-only
 
 #define TEX_UI_TOOLTIP					1
 #define TEX_WORLD_GROUND				2

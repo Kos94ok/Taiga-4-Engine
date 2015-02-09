@@ -146,7 +146,7 @@ void cDatabase::loadItems()
 	i += 1;
 
 	// Category test items
-	item[i].type = "test_catWeapons";
+	item[i].type = "weapon_rifle";
 	item[i].setName("Hunter Rifle");
 	item[i].category = CATEGORY_WEAPONS;
 	item[i].addRef(REF_ITEM_EQUIP);
@@ -154,30 +154,19 @@ void cDatabase::loadItems()
 	item[i].addRef(REF_ITEM_RIFLE);
 	i += 1;
 
-	item[i].type = "test_catArmor";
-	item[i].setName("Armor category!");
-	item[i].category = CATEGORY_ARMOR;
+	// Editor items
+	item[i].type = "tree_basic_a";
+	item[i].setName("Tree");
+	item[i].addRef(REF_ITEM_EDITOR);
+	item[i].addRef(REF_ITEM_EQUIP);
+	item[i].addRef(REF_ITEM_ACTIVE);
 	i += 1;
 
-	item[i].type = "test_catMaterials";
-	item[i].setName("Materials category!");
-	item[i].category = CATEGORY_MATERIALS;
-	i += 1;
-
-	item[i].type = "test_catConsumables";
-	item[i].setName("Consumables category!");
-	item[i].category = CATEGORY_CONSUMABLES;
-	i += 1;
-
-	item[i].type = "test_catOther";
-	item[i].setName("Other category!");
-	item[i].category = CATEGORY_OTHER;
-	i += 1;
-
-	item[i].type = "test_catAll";
-	item[i].setName("All category!");
-	item[i].category = CATEGORY_ALL;
-	item[i].addDescrLine("Wait what..?");
+	item[i].type = "campfire_full";
+	item[i].setName("Campfire");
+	item[i].addRef(REF_ITEM_EDITOR);
+	item[i].addRef(REF_ITEM_EQUIP);
+	item[i].addRef(REF_ITEM_ACTIVE);
 	i += 1;
 
 	// More test items

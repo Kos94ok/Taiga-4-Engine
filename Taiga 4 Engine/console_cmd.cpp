@@ -266,6 +266,18 @@ void cmd_ui_getlist(string args[])
 	}
 }
 
+// Editor.enable
+void cmd_editor_enable(string args[])
+{
+	cout << "[CMD] Enabled editor mode." << endl;
+	cout << "[CMD] Editor mode is not yet implemented, expect random bugs." << endl;
+	cout << "[CMD] Saving system is not yet available, all the changes are temporary." << endl;
+
+	game.getUnit(client.unit).container.add("tree_basic_a");
+	
+	game.getUnit(client.unit).container.add("campfire_full");
+}
+
 // Exit command
 void cmd_exit(string args[])
 {

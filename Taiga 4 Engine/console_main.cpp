@@ -135,6 +135,12 @@ cConsole::cConsole()
 	console.cmdFunc[cmdID] = cmd_ui_getlist;
 	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^editor.enable");
+	console.cmdWrong[cmdID] = "editor.enable";
+	console.cmdSyntax[cmdID] = "\"editor.enable\" - Enable the editor mode";
+	console.cmdFunc[cmdID] = cmd_editor_enable;
+	console.cmdServerOnly[cmdID] = false;
+	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^exit");
 	console.cmdWrong[cmdID] = "exit";
 	console.cmdSyntax[cmdID] = "\"exit\" - Close the game";
