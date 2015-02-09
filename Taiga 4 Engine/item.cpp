@@ -35,14 +35,14 @@ int cItemContainer::add(std::string type, int count)
 	return add(database.getItem(type), count);
 }
 
-cItem cItemContainer::get(int id)
+cItem& cItemContainer::get(int id)
 {
 	id = getId(id);
 	if (id != -1) { return item[id]; }
 	return database.item[0];
 }
 
-cItem cItemContainer::get(std::string type, int begin)
+cItem& cItemContainer::get(std::string type, int begin)
 {
 	for (int i = begin; i < itemCounter; i++)
 	{

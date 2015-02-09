@@ -255,40 +255,37 @@ void cUI::updateInterfaceEquipment()
 
 	// Get equipped items
 	cItemContainer cont = game.getUnit(client.unit).container;
-	cItem equip[4];
+	cItem equip[LIMIT_ACTIVEBUTTONS];
 	int itemsFound = 0, id = 0;
 	for (int i = 0; i < cont.itemCounter; i++)
 	{
 		if (cont.item[i].equipped) {
 			equip[itemsFound++] = cont.item[i];
-			if (itemsFound >= 4) { i = cont.itemCounter; }
+			if (itemsFound >= LIMIT_ACTIVEBUTTONS) { i = cont.itemCounter; }
 		}
 	}
 	
 	// Hidden button
-	int baseId = ui.addElement("button", vec2(-2000.00f, 0));
+	id = ui.addElement("button", vec2(-2000.00f, 0));
 	ui.element[ui.getElementId(id)].size = sf::Vector2f(40, 40);
 	ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_icon_empty_white.png");
 	ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("ui_icon_empty_orange.png");
-	ui.element[ui.getElementId(id)].button.action = "activeItem";
-	ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[0].globalId);
 	ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM);
-	ui.element[ui.getElementId(id)].tooltip.setText(equip[0].displayName);
 	ui.element[ui.getElementId(id)].tooltip.offset.x = 12.00f;
 	ui.element[ui.getElementId(id)].tooltip.offset.y = -6.00f;
 	ui.element[ui.getElementId(id)].tooltip.delay = 0.50f;
 	ui.element[ui.getElementId(id)].tooltip.ignoreOrigin = true;
 	ui.element[ui.getElementId(id)].priority = 4;
-	ui.element[ui.getElementId(id)].setText("1");
 	ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 150, 0);
 	ui.element[ui.getElementId(id)].textOffset = vec2(8.00f, 5.00f);
 	ui.element[ui.getElementId(id)].textSize = 12;
+	int baseId = id;
 
 	// Actual buttons
 	for (int i = 0; i < itemsFound; i++)
 	{
-		id = ui.addElement(ui.element[ui.getElementId(baseId)], vec2(20.00f + 40.00f * floor(i / (LIMIT_BUTTONSPERCOLUMN + 1)),
-						550.00f * resModY + 40.00f * (i % (LIMIT_BUTTONSPERCOLUMN + 1)) ) );
+		id = ui.addElement(ui.element[ui.getElementId(baseId)], vec2(20.00f + 40.00f * floor(i / (LIMIT_BUTTONSPERCOLUMN)),
+						550.00f * resModY + 40.00f * (i % (LIMIT_BUTTONSPERCOLUMN)) ) );
 
 		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + i + 1);
 		ui.element[ui.getElementId(id)].button.action = "activeItem";

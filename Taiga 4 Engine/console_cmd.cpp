@@ -273,9 +273,20 @@ void cmd_editor_enable(string args[])
 	cout << "[CMD] Editor mode is not yet implemented, expect random bugs." << endl;
 	cout << "[CMD] Saving system is not yet available, all the changes are temporary." << endl;
 
-	game.getUnit(client.unit).container.add("tree_basic_a");
-	
-	game.getUnit(client.unit).container.add("campfire_full");
+	cUnit* clientUnit = &game.getUnit(client.unit);
+	cItem* targetItem;
+	if (clientUnit->type != "missingno")
+	{
+		clientUnit->container.add("tree_basic_a");
+		targetItem = &clientUnit->container.get("tree_basic_a");
+		targetItem->equipped = true;
+		clientUnit->container.add("campfire_full");
+		targetItem = &clientUnit->container.get("campfire_full");
+		targetItem->equipped = true;
+	}
+	ui.updateInterfaceEquipment();
+	ui.updateInterfaceItemList();
+	ui.updateInterfaceItemDescr();
 }
 
 // Exit command

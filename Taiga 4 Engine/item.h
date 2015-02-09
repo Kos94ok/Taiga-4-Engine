@@ -59,9 +59,9 @@ public:
 	int add(cItem target, int count = 1);
 	int add(std::string type, int count = 1);
 	// Get item from global id
-	cItem get(int id);
+	cItem& get(int id);
 	// Get item from type
-	cItem get(std::string type, int begin = 0);
+	cItem& get(std::string type, int begin = 0);
 	// Get amount of items with that type
 	int getAmount(std::string type);
 	// Remove item using it's global id
