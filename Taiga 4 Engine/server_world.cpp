@@ -187,16 +187,14 @@ void serverWorldUI(int elapsedTime)
 		if (ui.element[i].isValid)
 		{
 			isHovered = false;
+			// Regular buttons
+			if (ui.element[i].hasRef(REF_UI_INVENTORY_BUTTON) && sf::Keyboard::isKeyPressed(settings.hkInventory))
+			{
+				isHovered = true;
+			}
+			// Active buttons
 			for (int y = 1; y < LIMIT_ACTIVEBUTTONS; y++)
 			{
-				/*if ((ui.element[i].hasRef(REF_UI_ACTIVEITEM_A) && sf::Keyboard::isKeyPressed(settings.hkActiveItemA))
-					|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_B) && sf::Keyboard::isKeyPressed(settings.hkActiveItemB))
-					|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_C) && sf::Keyboard::isKeyPressed(settings.hkActiveItemC))
-					|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_D) && sf::Keyboard::isKeyPressed(settings.hkActiveItemD))
-					|| (ui.element[i].hasRef(REF_UI_INVENTORY_BUTTON) && sf::Keyboard::isKeyPressed(settings.hkInventory)))
-				{
-					isHovered = true;
-				}*/
 				if (ui.element[i].hasRef(REF_UI_ACTIVEITEM + y) && sf::Keyboard::isKeyPressed(settings.hkActiveItem[y]))
 				{
 					isHovered = true;
@@ -295,7 +293,7 @@ void serverWorldUI(int elapsedTime)
 	if (GetForegroundWindow() == window.winHandle.getSystemHandle())
 	{
 		bool isMoving = false;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(settings.hkCamMove[2])
 			|| window.getMousePos().x < 1.00f)
 		{
 			camera.move(sf::Vector2f(-camSpeed * timevar / core.timeModifier, 0.00f));
@@ -303,7 +301,7 @@ void serverWorldUI(int elapsedTime)
 			if (camera.moveVector.x < -1.00f) { camera.moveVector.x = -1.00f; }
 			isMoving = true;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(settings.hkCamMove[3])
 			|| window.getMousePos().x > camera.res.x - 2.00f)
 		{
 			camera.move(sf::Vector2f(camSpeed * timevar / core.timeModifier, 0.00f));
@@ -311,7 +309,7 @@ void serverWorldUI(int elapsedTime)
 			if (camera.moveVector.x > 1.00f) { camera.moveVector.x = 1.00f; }
 			isMoving = true;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(settings.hkCamMove[0])
 			|| window.getMousePos().y < 1.00f)
 		{
 			camera.move(sf::Vector2f(0.00f, -camSpeed * timevar / core.timeModifier));
@@ -319,7 +317,7 @@ void serverWorldUI(int elapsedTime)
 			if (camera.moveVector.y > 1.00f) { camera.moveVector.y = 1.00f; }
 			isMoving = true;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(settings.hkCamMove[1])
 			|| window.getMousePos().y > camera.res.y - 2.00f)
 		{
 			camera.move(sf::Vector2f(0.00f, camSpeed * timevar / core.timeModifier));

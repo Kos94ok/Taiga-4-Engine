@@ -34,6 +34,11 @@ void cSettings::setDefault()
 	this->hkActiveItem[2] = sf::Keyboard::Num2;
 	this->hkActiveItem[3] = sf::Keyboard::Num3;
 	this->hkActiveItem[4] = sf::Keyboard::Num4;
+		// Up, Down, Left, Right
+	this->hkCamMove[0] = sf::Keyboard::W;
+	this->hkCamMove[1] = sf::Keyboard::S;
+	this->hkCamMove[2] = sf::Keyboard::A;
+	this->hkCamMove[3] = sf::Keyboard::D;
 	this->hkDebugMode = sf::Keyboard::F3;
 	this->hkDebugAdvanced = sf::Keyboard::F4;
 

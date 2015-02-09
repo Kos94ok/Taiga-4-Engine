@@ -41,6 +41,7 @@ public:
 	sf::Keyboard::Key hkDebugAdvanced;
 	sf::Keyboard::Key hkInventory;
 	sf::Keyboard::Key hkActiveItem[LIMIT_ACTIVEBUTTONS];
+	sf::Keyboard::Key hkCamMove[4];
 
 	void setDefault();
 
