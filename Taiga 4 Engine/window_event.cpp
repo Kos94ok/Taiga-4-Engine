@@ -72,17 +72,26 @@ void cWindow::mainEvent()
 			// UI Element hotkeys
 			for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
 			{
-				if (   (ui.element[i].hasRef(REF_UI_ACTIVEITEM_A) && eventPoll.key.code == settings.hkActiveItemA)
-					|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_B) && eventPoll.key.code == settings.hkActiveItemB)
-					|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_C) && eventPoll.key.code == settings.hkActiveItemC)
-					|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_D) && eventPoll.key.code == settings.hkActiveItemD)
-					|| (ui.element[i].hasRef(REF_UI_INVENTORY_BUTTON) && eventPoll.key.code == settings.hkInventory) )
+				// Regular buttons
+				if (ui.element[i].hasRef(REF_UI_INVENTORY_BUTTON) && eventPoll.key.code == settings.hkInventory)
 				{
 					// Quick cast or normal hotkey
 					if (settings.enableQuickCast || !ui.element[i].hasRef(REF_UI_ACTIVEITEM))
 					{
 						ui.element[i].button.callbackLeft(i);
 						i = LIMIT_UI_ELEMENTS;
+					}
+				}
+				// Quick cast for active items
+				if (settings.enableQuickCast)
+				{
+					for (int y = 1; y < LIMIT_ACTIVEBUTTONS; y++)
+					{
+						if (ui.element[i].hasRef(REF_UI_ACTIVEITEM + y) && eventPoll.key.code == settings.hkActiveItem[y])
+						{
+							ui.element[i].button.callbackLeft(i);
+							i = LIMIT_UI_ELEMENTS;
+						}
 					}
 				}
 			}

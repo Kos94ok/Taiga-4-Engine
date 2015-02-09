@@ -33,6 +33,7 @@
 #define LIMIT_SERVER_PLAYERS			32
 #define LIMIT_SERVER_PACKETQUEUE		2048
 #define LIMIT_PATHNODE					256
+#define LIMIT_ACTIVEBUTTONS				35
 
 #define STATE_UNDEFINED					-1
 #define STATE_MAINMENU					0
@@ -101,11 +102,8 @@
 #define REF_UI_HEALTHBAR				12
 #define REF_UI_INVENTORY_WEIGHT			13		// Object is a total weight description
 #define REF_UI_CONTEXTMENU				14		// Object belongs to the context menu
+
 #define REF_UI_ACTIVEITEM				15		// Object is one of the active equipped item buttons
-#define REF_UI_ACTIVEITEM_A				16		// Object is the first active equipped item button
-#define REF_UI_ACTIVEITEM_B				17		// Object is the second active equipped item button
-#define REF_UI_ACTIVEITEM_C				18		// Object is the third active equipped item button
-#define REF_UI_ACTIVEITEM_D				19		// Object is the fourth active equipped item button
 #define REF_UNIT_PICKUP					0		// Unit can be picked up as an item
 #define REF_UNIT_HARVESTABLE			1		// Unit can be harvested for the resource
 #define REF_UNIT_NOSHADOW				2		// Unit can not create shadow

@@ -29,10 +29,11 @@ void cSettings::setDefault()
 
 	// Hotkeys
 	this->hkInventory = sf::Keyboard::E;
-	this->hkActiveItemA = sf::Keyboard::Num1;
-	this->hkActiveItemB = sf::Keyboard::Num2;
-	this->hkActiveItemC = sf::Keyboard::Num3;
-	this->hkActiveItemD = sf::Keyboard::Num4;
+		// Buttons [1; LIMIT) reserved for the items / abilities
+	this->hkActiveItem[1] = sf::Keyboard::Num1;
+	this->hkActiveItem[2] = sf::Keyboard::Num2;
+	this->hkActiveItem[3] = sf::Keyboard::Num3;
+	this->hkActiveItem[4] = sf::Keyboard::Num4;
 	this->hkDebugMode = sf::Keyboard::F3;
 	this->hkDebugAdvanced = sf::Keyboard::F4;
 

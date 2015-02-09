@@ -186,15 +186,23 @@ void serverWorldUI(int elapsedTime)
 	{
 		if (ui.element[i].isValid)
 		{
-			if (   (ui.element[i].hasRef(REF_UI_ACTIVEITEM_A) && sf::Keyboard::isKeyPressed(settings.hkActiveItemA))
-				|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_B) && sf::Keyboard::isKeyPressed(settings.hkActiveItemB))
-				|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_C) && sf::Keyboard::isKeyPressed(settings.hkActiveItemC))
-				|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_D) && sf::Keyboard::isKeyPressed(settings.hkActiveItemD))
-				|| (ui.element[i].hasRef(REF_UI_INVENTORY_BUTTON) && sf::Keyboard::isKeyPressed(settings.hkInventory)) )
+			isHovered = false;
+			for (int y = 1; y < LIMIT_ACTIVEBUTTONS; y++)
 			{
-				isHovered = true;
+				/*if ((ui.element[i].hasRef(REF_UI_ACTIVEITEM_A) && sf::Keyboard::isKeyPressed(settings.hkActiveItemA))
+					|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_B) && sf::Keyboard::isKeyPressed(settings.hkActiveItemB))
+					|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_C) && sf::Keyboard::isKeyPressed(settings.hkActiveItemC))
+					|| (ui.element[i].hasRef(REF_UI_ACTIVEITEM_D) && sf::Keyboard::isKeyPressed(settings.hkActiveItemD))
+					|| (ui.element[i].hasRef(REF_UI_INVENTORY_BUTTON) && sf::Keyboard::isKeyPressed(settings.hkInventory)))
+				{
+					isHovered = true;
+				}*/
+				if (ui.element[i].hasRef(REF_UI_ACTIVEITEM + y) && sf::Keyboard::isKeyPressed(settings.hkActiveItem[y]))
+				{
+					isHovered = true;
+				}
 			}
-			else
+			if (!isHovered)
 			{
 				if (ui.element[i].ignoreOrigin)
 				{

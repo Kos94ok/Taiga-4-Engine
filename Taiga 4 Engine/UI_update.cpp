@@ -275,7 +275,7 @@ void cUI::updateInterfaceEquipment()
 		ui.element[ui.getElementId(id)].button.action = "activeItem";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[0].globalId);
 		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM);
-		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM_A);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + 1);
 		ui.element[ui.getElementId(id)].tooltip.setText(equip[0].displayName);
 		ui.element[ui.getElementId(id)].tooltip.offset.x = 12.00f;
 		ui.element[ui.getElementId(id)].tooltip.offset.y = -6.00f;
@@ -292,8 +292,8 @@ void cUI::updateInterfaceEquipment()
 	if (itemsFound > 1)
 	{
 		id = ui.addElement(ui.element[ui.getElementId(id)], vec2(20.00f, 590.00f * resModY));
-		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM_B);
-		ui.element[ui.getElementId(id)].removeRef(REF_UI_ACTIVEITEM_A);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + 2);
+		ui.element[ui.getElementId(id)].removeRef(REF_UI_ACTIVEITEM + 1);
 		ui.element[ui.getElementId(id)].button.action = "activeItem";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[1].globalId);
 		ui.element[ui.getElementId(id)].tooltip.setText(equip[1].displayName);
@@ -304,8 +304,8 @@ void cUI::updateInterfaceEquipment()
 	if (itemsFound > 2)
 	{
 		id = ui.addElement(ui.element[ui.getElementId(id)], vec2(20.00f, 630.00f * resModY));
-		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM_C);
-		ui.element[ui.getElementId(id)].removeRef(REF_UI_ACTIVEITEM_B);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + 3);
+		ui.element[ui.getElementId(id)].removeRef(REF_UI_ACTIVEITEM + 2);
 		ui.element[ui.getElementId(id)].button.action = "activeItem";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[2].globalId);
 		ui.element[ui.getElementId(id)].tooltip.setText(equip[2].displayName);
@@ -316,8 +316,8 @@ void cUI::updateInterfaceEquipment()
 	if (itemsFound > 3)
 	{
 		id = ui.addElement(ui.element[ui.getElementId(id)], vec2(20.00f, 670.00f * resModY));
-		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM_D);
-		ui.element[ui.getElementId(id)].removeRef(REF_UI_ACTIVEITEM_C);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + 4);
+		ui.element[ui.getElementId(id)].removeRef(REF_UI_ACTIVEITEM + 3);
 		ui.element[ui.getElementId(id)].button.action = "activeItem";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[3].globalId);
 		ui.element[ui.getElementId(id)].tooltip.setText(equip[3].displayName);
