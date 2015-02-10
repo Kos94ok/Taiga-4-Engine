@@ -104,6 +104,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="api.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="client_main.cpp" />
     <ClCompile Include="client_message.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="api.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="editor.h" />
     <ClInclude Include="game.h" />

@@ -20,8 +20,8 @@ void cUI::openInventory()
 		ui.element[ui.getElementId(id)].size = sf::Vector2f(camera.res.x - 30, camera.res.y - 30);
 		ui.element[ui.getElementId(id)].texture = visual.addTexture("black.png");
 		ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_FULL_BG);
 		ui.element[ui.getElementId(id)].button.action = "-";
-		//ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_FULL);
 		ui.element[ui.getElementId(id)].alpha = 100.00f * game.ambientLight / 255.00f + 100.00f;
 		// Close button
 		id = ui.addElement("button", sf::Vector2f(camera.res.x - 15 - 12 - 5, 15 + 12 + 5));

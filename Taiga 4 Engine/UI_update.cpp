@@ -118,6 +118,9 @@ void cUI::updateInterfaceItemList()
 				ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
 				ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
 				ui.element[ui.getElementId(id)].button.action = "invItem_list";
+				// For editor mode default action is equip
+				if (core.editorMode) { ui.element[ui.getElementId(id)].button.action = "invItem_equip"; }
+
 				ui.element[ui.getElementId(id)].button.args[0] = to_string(cont.item[i].globalId);
 				ui.element[ui.getElementId(id)].hoverAlpha = 0;
 				// Attribute 0

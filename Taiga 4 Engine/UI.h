@@ -118,6 +118,7 @@ public:
 	int mouseStateLMB;
 	int mouseStateRMB;
 	float mouseNotMoving;
+	int lastCreatedElement;
 
 	cUIElement element[LIMIT_UI_ELEMENTS];
 	int elementGlobalCounter;

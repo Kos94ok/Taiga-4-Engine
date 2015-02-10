@@ -26,6 +26,7 @@ typedef sf::Vector2i		vec2i;
 #include "settings.h"
 #include "world.h"
 #include "editor.h"
+#include "api.h"
 
 using namespace std;
 
@@ -81,3 +82,4 @@ extern cCamera camera;
 extern cSettings settings;
 extern cWorld world;
 extern cEditor editor;
+extern cAPI api;

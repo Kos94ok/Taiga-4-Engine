@@ -17,6 +17,7 @@ void cDatabase::loadUnits()
 	unit[i].size = vec2(20, 20);
 	i+= 1;
 
+	// Actual units
 	unit[i].type = "player";
 	unit[i].size = vec2(64, 64);
 	unit[i].center = vec2(32, 52);
@@ -57,13 +58,7 @@ void cDatabase::loadUnits()
 	unit[i].collisionDistance = 20.00f;
 	i += 1;
 
-	unit[i].type = "editor";
-	unit[i].size = vec2(0, 0);
-	unit[i].center = vec2(0, 0);
-	unit[i].container.itemLimit = 1000;
-	unit[i].addRef(REF_UNIT_NOSAVE);
-	i += 1;
-
+	// Trees
 	unit[i].type = "tree_basic_a";
 	unit[i].size = vec2(100, 170);
 	unit[i].center = vec2(50, 165);
@@ -72,6 +67,21 @@ void cDatabase::loadUnits()
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 10.00f;
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "tree_basic_b";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_b_idle.png");
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "tree_basic_c";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_c_idle.png");
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "tree_basic_d";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_d_idle.png");
 	i += 1;
 
 	unit[i].type = "campfire_full";
@@ -85,6 +95,14 @@ void cDatabase::loadUnits()
 	unit[i].light.texture = visual.addTexture("light_orange.png");
 	unit[i].light.flickerMod = 0.04f;
 	unit[i].light.flickerTime = 0.25f;
+	i += 1;
+
+	// Other
+	unit[i].type = "editor";
+	unit[i].size = vec2(0, 0);
+	unit[i].center = vec2(0, 0);
+	unit[i].container.itemLimit = 1000;
+	unit[i].addRef(REF_UNIT_NOSAVE);
 	i += 1;
 
 	unit[i].type = "item_a";
@@ -163,17 +181,27 @@ void cDatabase::loadItems()
 
 	// Editor items
 	item[i].type = "tree_basic_a";
-	item[i].setName("Tree");
-	item[i].addRef(REF_ITEM_EDITOR);
-	item[i].addRef(REF_ITEM_EQUIP);
-	item[i].addRef(REF_ITEM_ACTIVE);
+	item[i].setName("Tree A");
 	i += 1;
 
+	item[i] = item[i - 1];
+	item[i].type = "tree_basic_b";
+	item[i].setName("Tree B");
+	i += 1;
+
+	item[i] = item[i - 1];
+	item[i].type = "tree_basic_c";
+	item[i].setName("Tree C");
+	i += 1;
+
+	item[i] = item[i - 1];
+	item[i].type = "tree_basic_d";
+	item[i].setName("Tree D");
+	i += 1;
+
+	item[i] = item[i - 1];
 	item[i].type = "campfire_full";
 	item[i].setName("Campfire");
-	item[i].addRef(REF_ITEM_EDITOR);
-	item[i].addRef(REF_ITEM_EQUIP);
-	item[i].addRef(REF_ITEM_ACTIVE);
 	i += 1;
 
 	// More test items

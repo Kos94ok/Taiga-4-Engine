@@ -3,13 +3,17 @@
 
 void cWorld::genTaigaMini()
 {
-	string wargs[] = { "0", "0", "0", "0" };
+	string type;
+	int random;
 	// Creating some trees
 	for (int i = 0; i < math.rand(500, 600); i++)
 	{
-		wargs[0] = "tree_basic_a";	wargs[1] = std::to_string(math.rand(-camera.res.x * 2, camera.res.x * 2));
-									wargs[2] = std::to_string(math.rand(-camera.res.y * 2, camera.res.y * 2));
-		cmd_unit_add(wargs);
+		random = math.rand(0, 3);
+		if (random == 0) { type = "tree_basic_a"; }
+		else if (random == 1) { type = "tree_basic_b"; }
+		else if (random == 2) { type = "tree_basic_c"; }
+		else { type = "tree_basic_d"; }
+		game.addUnit(type, vec2(math.rand(-camera.res.x * 2, camera.res.x * 2), math.rand(-camera.res.y * 2, camera.res.y * 2)));
 	}
 	// Creating some units
 	for (int i = 0; i < 10; i++)

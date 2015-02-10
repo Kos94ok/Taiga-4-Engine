@@ -55,6 +55,9 @@
     <Filter Include="Файлы исходного кода\Editor">
       <UniqueIdentifier>{94a65294-b040-48c2-9b8c-4f176a33f3b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Util\API">
+      <UniqueIdentifier>{6d45049f-4116-49c8-94a7-6086bf1fc5ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -165,6 +168,9 @@
     <ClCompile Include="editor.cpp">
       <Filter>Файлы исходного кода\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="api.cpp">
+      <Filter>Файлы исходного кода\Util\API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -232,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="editor.h">
       <Filter>Файлы исходного кода\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="api.h">
+      <Filter>Файлы исходного кода\Util\API</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

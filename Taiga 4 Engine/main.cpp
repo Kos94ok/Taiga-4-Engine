@@ -17,6 +17,7 @@ cCamera camera;
 cSettings settings;
 cWorld world;
 cEditor editor;
+cAPI api;
 
 int main(int argc, char* argv[])
 {

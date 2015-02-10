@@ -11,6 +11,7 @@ int cUI::addElement(string type, sf::Vector2f pos)
 			element[i].pos = pos;
 			element[i].globalId = elementGlobalCounter++;
 			element[i].isValid = true;
+			lastCreatedElement = i;
 			return elementGlobalCounter - 1;
 		}
 	}
@@ -27,6 +28,7 @@ int cUI::addElement(cUIElement elem, sf::Vector2f pos)
 			element[i].pos = pos;
 			element[i].globalId = elementGlobalCounter++;
 			element[i].isValid = true;
+			lastCreatedElement = i;
 			return elementGlobalCounter - 1;
 		}
 	}
