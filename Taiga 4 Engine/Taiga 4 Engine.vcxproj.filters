@@ -52,6 +52,9 @@
     <Filter Include="Файлы исходного кода\Util\Pathing">
       <UniqueIdentifier>{e4952ce8-d822-4600-b6ca-572bdf262f1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Editor">
+      <UniqueIdentifier>{94a65294-b040-48c2-9b8c-4f176a33f3b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -159,6 +162,9 @@
     <ClCompile Include="path.cpp">
       <Filter>Файлы исходного кода\Util\Pathing</Filter>
     </ClCompile>
+    <ClCompile Include="editor.cpp">
+      <Filter>Файлы исходного кода\Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -223,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="path.h">
       <Filter>Файлы исходного кода\Util\Pathing</Filter>
+    </ClInclude>
+    <ClInclude Include="editor.h">
+      <Filter>Файлы исходного кода\Editor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

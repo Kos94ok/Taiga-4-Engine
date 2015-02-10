@@ -30,10 +30,10 @@ void cSettings::setDefault()
 	// Hotkeys
 	this->hkInventory = sf::Keyboard::E;
 		// Buttons [1; LIMIT) reserved for the items / abilities
-	this->hkActiveItem[1] = sf::Keyboard::Num1;
-	this->hkActiveItem[2] = sf::Keyboard::Num2;
-	this->hkActiveItem[3] = sf::Keyboard::Num3;
-	this->hkActiveItem[4] = sf::Keyboard::Num4;
+	for (int i = 1; i < 9; i++)
+	{
+		this->hkActiveItem[i] = sf::Keyboard::Key(sf::Keyboard::Num0 + i);
+	}
 		// Up, Down, Left, Right
 	this->hkCamMove[0] = sf::Keyboard::W;
 	this->hkCamMove[1] = sf::Keyboard::S;

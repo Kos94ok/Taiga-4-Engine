@@ -57,6 +57,13 @@ void cDatabase::loadUnits()
 	unit[i].collisionDistance = 20.00f;
 	i += 1;
 
+	unit[i].type = "editor";
+	unit[i].size = vec2(0, 0);
+	unit[i].center = vec2(0, 0);
+	unit[i].container.itemLimit = 1000;
+	unit[i].addRef(REF_UNIT_NOSAVE);
+	i += 1;
+
 	unit[i].type = "tree_basic_a";
 	unit[i].size = vec2(100, 170);
 	unit[i].center = vec2(50, 165);

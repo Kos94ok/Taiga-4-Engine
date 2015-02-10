@@ -24,4 +24,9 @@ void cItem::use()
 		client.sendPacket(data);
 		data.clear();
 	}
+	// Editor items
+	if (hasRef(REF_ITEM_EDITOR))
+	{
+		game.addUnit(type, window.getMousePos(true));
+	}
 }

@@ -25,6 +25,7 @@ typedef sf::Vector2i		vec2i;
 #include "camera.h"
 #include "settings.h"
 #include "world.h"
+#include "editor.h"
 
 using namespace std;
 
@@ -40,6 +41,7 @@ public:
 	bool shutdown;
 	bool debugMode;
 	bool advancedDebug;
+	bool editorMode;
 
 	int thread_windowTicks;
 	int thread_serverWorldTicks;
@@ -56,6 +58,7 @@ public:
 		shutdown = false;
 		debugMode = false;
 		advancedDebug = false;
+		editorMode = false;
 
 		thread_windowTicks = 0;
 		thread_serverWorldTicks = 0;
@@ -77,3 +80,4 @@ extern cClient client;
 extern cCamera camera;
 extern cSettings settings;
 extern cWorld world;
+extern cEditor editor;

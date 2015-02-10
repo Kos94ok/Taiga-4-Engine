@@ -113,6 +113,7 @@
     <ClCompile Include="craft.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="database_util.cpp" />
+    <ClCompile Include="editor.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="itemActive.cpp" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="editor.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="client.h" />
     <ClInclude Include="console.h" />

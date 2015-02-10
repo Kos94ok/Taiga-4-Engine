@@ -641,7 +641,7 @@ void cUITooltip::display()
 	// Initializing the text
 	//brushText.setString(sf::String(text, locale("russian")));
 	brushText.setString(textDisplay);
-	brushText.setPosition(pos.x + offset.x, pos.y + offset.y);
+	brushText.setPosition(math.round(pos.x + offset.x), math.round(pos.y + offset.y));
 	brushText.setOrigin(0.00f, 0.00f);
 	brushText.setCharacterSize(16);
 	if (!ignoreOrigin) {

@@ -125,6 +125,12 @@ void cUIButton::callbackLeft(int parent)
 		ui.updateFull();
 		client.connect("127.0.0.1", 21045);
 	}
+	else if (action == "start_editor")
+	{
+		editor.enable();
+		client.connect("127.0.0.1", 21045);
+		ui.updateFull();
+	}
 	else if (action == "start_arena")
 	{
 		world.genArena();

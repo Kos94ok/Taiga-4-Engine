@@ -111,6 +111,7 @@
 #define REF_UNIT_ALWAYSVISIBLE			3		// Unit will always be rendered on the screen
 #define REF_UNIT_MISSILE				4		// Unit is a projectile
 #define REF_UNIT_ROTATE					5		// Unit's sprite is rotated to the facing angle
+#define REF_UNIT_NOSAVE					6		// Unit is not saved
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_NODROP					2		// Item can not be dropped

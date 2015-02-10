@@ -55,7 +55,10 @@ void cServer::introduce(int playerId)
 		data.clear();
 	}
 	// Create new unit
-	server.player[playerId].unit = game.addUnit("player", sf::Vector2f(0, 0));
+	string playerType = "player";
+	if (core.editorMode) { playerType = "editor"; }
+
+	server.player[playerId].unit = game.addUnit(playerType, sf::Vector2f(0, 0));
 	if (!server.isLocalPlayer(playerId))
 	{
 		data << MSG_UNIT_HERO << server.player[playerId].unit;
@@ -67,11 +70,15 @@ void cServer::introduce(int playerId)
 	}
 	server.player[playerId].setHealth(100.00f);
 	server.player[playerId].setMaxHealth(100.00f);
-	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_ear", 100);
-	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_arm", 50);
-	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_leg", 70);
-	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("weapon_rifle", 1);
-	game.unit[game.getUnitId(server.player[playerId].unit)].container.add("test_resourceManipulator", 1);
+	if (!core.editorMode)
+	{
+		game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_ear", 100);
+		game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_arm", 50);
+		game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_leg", 70);
+		game.unit[game.getUnitId(server.player[playerId].unit)].container.add("weapon_rifle", 1);
+		game.unit[game.getUnitId(server.player[playerId].unit)].container.add("test_resourceManipulator", 1);
+	}
+	else { editor.initialize(); }
 	ui.updateInterface();
 }
 
