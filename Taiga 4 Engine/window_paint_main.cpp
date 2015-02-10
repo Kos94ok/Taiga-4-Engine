@@ -93,7 +93,9 @@ void cWindow::paintUnits()
 	sf::FloatRect objRect;
 
 	brushVertex.setPrimitiveType(sf::PrimitiveType::Quads);
+	brushRect.setOutlineColor(sf::Color(0, 255, 0));
 
+	game.access.lock();
 	visual.unitsPainted = 0;
 	int repeats = 1;
 	if (settings.enableBetterShadows) { repeats += 1; }
@@ -106,8 +108,9 @@ void cWindow::paintUnits()
 				unitLeft = game.unit[i].pos.x - game.unit[i].center.x;
 				unitRight = unitLeft + game.unit[i].size.x;
 
-				if ((game.unit[i].pos.y >= y && game.unit[i].pos.y < y + step && unitRight >= cameraLeft && unitLeft <= cameraRight)
-					|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE) && y == cameraTop))
+				if (!game.unit[i].hasRef(REF_UNIT_NORENDER)
+					&& ( (game.unit[i].pos.y >= y && game.unit[i].pos.y < y + step && unitRight >= cameraLeft && unitLeft <= cameraRight)
+					|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE) && y == cameraTop) )) 
 				{
 					// Animation
 					int anim = game.unit[i].anim.type;
@@ -215,7 +218,7 @@ void cWindow::paintUnits()
 						float shadowAngle = 0.00f, shadowScale = 1.20f;
 
 						float timeLocal = game.timeOfDay;
-						float shadowBrightness = (game.ambientLight - 100.00f) / 255.00f * 230.00f;
+						float shadowBrightness = (game.ambientLight - 100.00f) / 255.00f * 210.00f;
 						shadowBrightness = max(0.00f, min(255.00f, shadowBrightness));
 						if (shadowBrightness > 0.00f)
 						{
@@ -259,7 +262,7 @@ void cWindow::paintUnits()
 
 						// Shadow (night)
 						//visual.updateLightLevel(game.unit[i].pos);
-						shadowBrightness = -(game.ambientLight - 100.00f) / 255.00f * 230.00f / 1.00f;// - visual.maxLight / 10.00f;
+						shadowBrightness = -(game.ambientLight - 100.00f) / 255.00f * 210.00f * 1.50f;// - visual.maxLight / 10.00f;
 						shadowBrightness = max(0.00f, min(255.00f, shadowBrightness));
 						if (shadowBrightness > 0.00f && settings.enableNightShadows)
 						{
@@ -311,8 +314,10 @@ void cWindow::paintUnits()
 					brushRect.setPosition(game.unit[i].pos.x, game.unit[i].pos.y);
 					brushRect.setOrigin(game.unit[i].center.x, game.unit[i].center.y);
 					brushRect.setSize(sf::Vector2f(game.unit[i].size.x, game.unit[i].size.y));
+						// Editor selection
+					if (editor.sel.isSelected(game.unit[i].globalId)) { brushRect.setOutlineThickness(-1.00f); }
 					if (game.unit[i].hasRef(REF_UNIT_ROTATE)) { brushRect.setRotation(-game.unit[i].facingAngle); }
-					// Last-minute check
+						// Last-minute check
 					objRect = brushRect.getGlobalBounds();
 					if (camRect.intersects(objRect))
 					{
@@ -325,10 +330,12 @@ void cWindow::paintUnits()
 						visual.unitsPainted += 1;
 					}
 					brushRect.setRotation(0.00f);
+					brushRect.setOutlineThickness(0.00f);
 				}
 			}
 		}
 	}
+	game.access.unlock();
 }
 
 void cWindow::paintTileMap()

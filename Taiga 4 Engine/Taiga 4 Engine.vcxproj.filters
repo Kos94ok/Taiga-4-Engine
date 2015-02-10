@@ -165,11 +165,14 @@
     <ClCompile Include="path.cpp">
       <Filter>Файлы исходного кода\Util\Pathing</Filter>
     </ClCompile>
-    <ClCompile Include="editor.cpp">
-      <Filter>Файлы исходного кода\Editor</Filter>
-    </ClCompile>
     <ClCompile Include="api.cpp">
       <Filter>Файлы исходного кода\Util\API</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_main.cpp">
+      <Filter>Файлы исходного кода\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_util.cpp">
+      <Filter>Файлы исходного кода\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

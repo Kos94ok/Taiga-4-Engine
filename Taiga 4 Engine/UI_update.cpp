@@ -307,18 +307,18 @@ void cUI::updateFull()
 	int id;
 	if (!core.editorMode)
 	{
-		int id = ui.addElement("icon_health", sf::Vector2f(32, 32));
+		id = ui.addElement("icon_health", sf::Vector2f(32, 32));
 		ui.element[ui.getElementId(id)].addRef(REF_UI_HEALTHBAR);
 		ui.element[ui.getElementId(id)].bar.minOffset = 0.20f;
 		ui.element[ui.getElementId(id)].bar.maxOffset = 0.20f;
 		ui.element[ui.getElementId(id)].bar.vertical = true;
-
-		id = ui.addElement("button_test", sf::Vector2f(camera.res.x - 70.00f, 20.00f));
-		ui.element[ui.getElementId(id)].button.action = "invToggle";
-		ui.element[ui.getElementId(id)].setText("Inventory");
-		ui.element[ui.getElementId(id)].tooltip.setText("Open inventory screen");
-		ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_BUTTON);
 	}
+
+	id = ui.addElement("button_test", sf::Vector2f(camera.res.x - 70.00f, 20.00f));
+	ui.element[ui.getElementId(id)].button.action = "invToggle";
+	ui.element[ui.getElementId(id)].setText("Inventory");
+	ui.element[ui.getElementId(id)].tooltip.setText("Open inventory screen");
+	ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_BUTTON);
 
 	access.unlock();
 

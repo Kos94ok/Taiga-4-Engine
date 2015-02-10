@@ -35,6 +35,7 @@
 #define LIMIT_PATHNODE					256
 #define LIMIT_BUTTONSPERCOLUMN			5
 #define LIMIT_ACTIVEBUTTONS				35
+#define LIMIT_SELECTION					64
 
 #define STATE_UNDEFINED					-1
 #define STATE_MAINMENU					0
@@ -112,6 +113,7 @@
 #define REF_UNIT_MISSILE				4		// Unit is a projectile
 #define REF_UNIT_ROTATE					5		// Unit's sprite is rotated to the facing angle
 #define REF_UNIT_NOSAVE					6		// Unit is not saved
+#define REF_UNIT_NORENDER				7		// Unit is not displayed on the screen
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_NODROP					2		// Item can not be dropped

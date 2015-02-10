@@ -3,6 +3,7 @@
 
 void serverWorldOrders(int elapsedTime)
 {
+	game.access.lock();
 	float timevar = (float)elapsedTime / 1000;
 	timevar *= core.timeModifier;
 	float angle, offsetX, offsetY;
@@ -98,10 +99,12 @@ void serverWorldOrders(int elapsedTime)
 			}
 		}
 	}
+	game.access.unlock();
 }
 
 void serverWorldAnim(int elapsedTime)
 {
+	game.access.lock();
 	float timevar = (float)elapsedTime / 1000;
 	timevar *= core.timeModifier;
 	// Unit animations
@@ -156,6 +159,7 @@ void serverWorldAnim(int elapsedTime)
 		game.ambientLight -= timevar * 3;
 		if (game.ambientLight < game.ambientLightMin) { game.ambientLight = game.ambientLightMin; }
 	}
+	game.access.unlock();
 }
 
 void serverWorldUI(int elapsedTime)

@@ -15,7 +15,8 @@ void cDatabase::loadUnits()
 	int i = 0;
 	unit[i].type = "missingno";
 	unit[i].size = vec2(20, 20);
-	i+= 1;
+	unit[i].addRef(REF_UNIT_NORENDER);
+	i += 1;
 
 	// Actual units
 	unit[i].type = "player";
@@ -103,6 +104,7 @@ void cDatabase::loadUnits()
 	unit[i].center = vec2(0, 0);
 	unit[i].container.itemLimit = 1000;
 	unit[i].addRef(REF_UNIT_NOSAVE);
+	unit[i].addRef(REF_UNIT_NORENDER);
 	i += 1;
 
 	unit[i].type = "item_a";
@@ -182,6 +184,9 @@ void cDatabase::loadItems()
 	// Editor items
 	item[i].type = "tree_basic_a";
 	item[i].setName("Tree A");
+	item[i].addRef(REF_ITEM_EDITOR);
+	item[i].addRef(REF_ITEM_EQUIP);
+	item[i].addRef(REF_ITEM_ACTIVE);
 	i += 1;
 
 	item[i] = item[i - 1];

@@ -23,7 +23,7 @@ cUnit cAPI::unitCopy(int id, bool isGlobal) { return unitHandle(id, isGlobal); }
 cUnit& cAPI::lastCreatedUnit() { return game.unit[game.unitCounter - 1]; }
 cUnit& cAPI::controlledUnit() { return game.getUnit(client.unit); }
 void cAPI::issueMoveOrder(sf::Vector2f pos, int id, bool overwrite, bool isGlobal) { unitHandle(id, isGlobal).addOrder_moveto_path(pos, overwrite); }
-void cAPI::issueStopOrder(int id, bool isGlobal = true) { unitHandle(id, isGlobal).removeAllOrders(); }
+void cAPI::issueStopOrder(int id, bool isGlobal) { unitHandle(id, isGlobal).removeAllOrders(); }
 
 cUIElement& cAPI::elementHandle(int id)
 {

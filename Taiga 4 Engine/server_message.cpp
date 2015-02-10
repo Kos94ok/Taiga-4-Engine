@@ -20,7 +20,9 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 		id = game.getUnitId(server.player[i].unit);
 		if (id != -1)
 		{
+			game.access.lock();
 			game.unit[id].addOrder_moveto_path(sf::Vector2f(argf[0], argf[1]), !argb[2]);
+			game.access.unlock();
 		}
 		return true;
 	}

@@ -114,7 +114,8 @@
     <ClCompile Include="craft.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="database_util.cpp" />
-    <ClCompile Include="editor.cpp" />
+    <ClCompile Include="editor_main.cpp" />
+    <ClCompile Include="editor_util.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="itemActive.cpp" />

@@ -12,10 +12,10 @@ void cSettings::setDefault()
 
 	// 0 - Low / Disabled
 	// 1 - High / Enabled
-	this->enableScreenShaders = 0;
+	this->enableScreenShaders = 1;
 	this->enableNightShadows = 1;
-	this->enableBetterShadows = 0;
-	this->enableTextureSmoothing = 1;
+	this->enableBetterShadows = 1;
+	this->enableTextureSmoothing = 0;
 	this->enableCameraBlur = 0;
 	this->enableVertSync = 1;
 	this->enableQuickCast = 0;

@@ -108,53 +108,68 @@ void cWindow::mainEvent()
 		{
 			mousePos = window.getMousePos(true);
 			bool matchFound = false;
-			int search = game.getUnitId(mousePos, REF_UNIT_PICKUP);
-			// Item on the ground
-			if (search != -1)
+			int search;
+			// Editor mode
+			if (core.editorMode)
 			{
-				matchFound = true;
-				if (eventPoll.mouseButton.button == sf::Mouse::Left) {
-					ui.mouseStateLMB = MOUSE_CONTROLS_UNITCLICK;
-					data << MSG_CONTROLS_PICKUP << search << sf::Keyboard::isKeyPressed(sf::Keyboard::LShift);
-					client.sendPacket(data);
-					data.clear();
-				}
-				else {
-					ui.mouseStateRMB = MOUSE_UI_BUTTON;
-					ui.createContextMenuForUnit(search);
+				if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) { editor.sel.clear(); }
+				search = game.getUnitId(mousePos);
+				if (search != -1)
+				{
+					editor.sel.add(search);
 				}
 			}
-			// Harvestable object
-			search = game.getUnitId(mousePos, REF_UNIT_HARVESTABLE);
-			if (!matchFound && search != -1)
+			// Regular mode
+			else
 			{
-				matchFound = true;
-				if (eventPoll.mouseButton.button == sf::Mouse::Left) {
-					ui.mouseStateLMB = MOUSE_CONTROLS_UNITCLICK;
-					data << MSG_CONTROLS_HARVEST << search << sf::Keyboard::isKeyPressed(sf::Keyboard::LShift);
-					client.sendPacket(data);
-					data.clear();
-				}
-				else {
-					ui.mouseStateRMB = MOUSE_UI_BUTTON;
-					ui.createContextMenuForUnit(search);
-				}
-			}
-			// Ground click
-			if (!matchFound)
-			{
-				if (eventPoll.mouseButton.button == sf::Mouse::Left)
+				search = game.getUnitId(mousePos, REF_UNIT_PICKUP);
+				// Item on the ground
+				if (search != -1)
 				{
-					ui.mouseStateLMB = MOUSE_CONTROLS_MOVEMENT;
-					// Sending data to server
-					data << MSG_CONTROLS_MOVETO << mousePos.x << mousePos.y << sf::Keyboard::isKeyPressed(sf::Keyboard::LShift);
-					client.sendPacket(data);
-					data.clear();
+					matchFound = true;
+					if (eventPoll.mouseButton.button == sf::Mouse::Left) {
+						ui.mouseStateLMB = MOUSE_CONTROLS_UNITCLICK;
+						data << MSG_CONTROLS_PICKUP << search << sf::Keyboard::isKeyPressed(sf::Keyboard::LShift);
+						client.sendPacket(data);
+						data.clear();
+					}
+					else {
+						ui.mouseStateRMB = MOUSE_UI_BUTTON;
+						ui.createContextMenuForUnit(search);
+					}
 				}
-				else
+				// Harvestable object
+				search = game.getUnitId(mousePos, REF_UNIT_HARVESTABLE);
+				if (!matchFound && search != -1)
 				{
-					ui.mouseStateRMB = MOUSE_UI_BUTTON;
-					ui.createContextMenuForGround();
+					matchFound = true;
+					if (eventPoll.mouseButton.button == sf::Mouse::Left) {
+						ui.mouseStateLMB = MOUSE_CONTROLS_UNITCLICK;
+						data << MSG_CONTROLS_HARVEST << search << sf::Keyboard::isKeyPressed(sf::Keyboard::LShift);
+						client.sendPacket(data);
+						data.clear();
+					}
+					else {
+						ui.mouseStateRMB = MOUSE_UI_BUTTON;
+						ui.createContextMenuForUnit(search);
+					}
+				}
+				// Ground click
+				if (!matchFound)
+				{
+					if (eventPoll.mouseButton.button == sf::Mouse::Left)
+					{
+						ui.mouseStateLMB = MOUSE_CONTROLS_MOVEMENT;
+						// Sending data to server
+						data << MSG_CONTROLS_MOVETO << mousePos.x << mousePos.y << sf::Keyboard::isKeyPressed(sf::Keyboard::LShift);
+						client.sendPacket(data);
+						data.clear();
+					}
+					else
+					{
+						ui.mouseStateRMB = MOUSE_UI_BUTTON;
+						ui.createContextMenuForGround();
+					}
 				}
 			}
 		}

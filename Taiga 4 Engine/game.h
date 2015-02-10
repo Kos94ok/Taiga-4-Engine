@@ -4,6 +4,8 @@
 class cGame
 {
 public:
+	sf::Mutex access;
+
 	int unitCounter;
 	cUnit unit[LIMIT_UNIT];
 
