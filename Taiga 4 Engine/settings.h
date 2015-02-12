@@ -14,11 +14,10 @@ public:
 	// Night shadows [Moon can also cast objects' shadows]
 	int enableNightShadows;
 	// Alternate shadows [Prevents shadows from stacking]
-	// Warning: Animation glitch, do not release
 	int enableBetterShadows;
 	// Texture filtering [Reduces image pixelization]
 	int enableTextureSmoothing;
-	// Camera blur [Game world is blurred when moving the camera]
+	// Camera blur [Game world is blurred when the camera is moving]
 	int enableCameraBlur;
 	// Vertical sync [Fixes the image tearing]
 	int enableVertSync;

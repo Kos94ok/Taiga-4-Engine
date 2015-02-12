@@ -191,6 +191,8 @@ void cWindow::mainEvent()
 		if (eventPoll.type == sf::Event::KeyPressed && eventPoll.key.code == sf::Keyboard::Space)
 		{
 			camera.moveto(game.unit[game.getUnitId(client.unit)].pos);
+			camera.moveVector.x = 0.50f;
+			camera.moveVector.y = 0.50f;
 		}
 			// Camera zoom
 		if (eventPoll.type == sf::Event::MouseWheelMoved)

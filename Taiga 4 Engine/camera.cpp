@@ -28,7 +28,13 @@ void cCamera::moveto(sf::Vector2f newPos)
 
 void cCamera::setZoom(float zoom)
 {
-	zoomFactor = zoom;
+	if (zoomFactor != zoom)
+	{
+		zoomFactor = zoom;
+		// Enable the blur
+		moveVector.x = 0.50f;
+		moveVector.y = 0.50f;
+	}
 }
 
 void cCamera::adjustZoom(int delta)

@@ -16,8 +16,8 @@ void cSettings::setDefault()
 	this->enableNightShadows = 1;
 	this->enableBetterShadows = 1;
 	this->enableTextureSmoothing = 0;
-	this->enableCameraBlur = 0;
-	this->enableVertSync = 1;
+	this->enableCameraBlur = 1;
+	this->enableVertSync = 0;
 	this->enableQuickCast = 0;
 
 	// Any value

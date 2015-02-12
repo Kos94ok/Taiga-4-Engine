@@ -422,8 +422,8 @@ void cWindow::paintPostFX()
 			window.texHandleTop.display();
 			buffer = sf::Sprite(window.texHandleTop.getTexture());
 			shader = &visual.shader[SHADER_CAMBLUR];
-			shader->setParameter("iSampleCount", 3.00f);
-			shader->setParameter("sampleOffset", 0.01f);
+			shader->setParameter("iSampleCount", 1.00f);
+			shader->setParameter("sampleOffset", 0.0025f);
 			shader->setParameter("camVectorX", camera.moveVector.x);
 			shader->setParameter("camVectorY", camera.moveVector.y);
 			window.texHandleTop.draw(buffer, shader);

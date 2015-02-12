@@ -8,15 +8,17 @@ uniform float camVectorY;
 
 void main()
 {
-	float sampleDiv = iSampleCount * iSampleCount;
+	float sampleDiv = (iSampleCount * 2 + 1) * (iSampleCount * 2 + 1);
 	float sampleCount = iSampleCount;
+	float vecMod = max(abs(camVectorX), abs(camVectorY));
 	
 	vec4 sum = vec4(0);
-	for (int i = 1; i <= int(sampleCount); i++)
+	for (int i = -int(sampleCount); i <= int(sampleCount); i++)
 	{
-		for (int y = 1; y <= int(sampleCount); y++)
+		for (int y = -int(sampleCount); y <= int(sampleCount); y++)
 		{
-			vec2 offset = vec2(-camVectorX, -camVectorY) * vec2(i, y) * sampleOffset;
+			//vec2 offset = vec2(-camVectorX, -camVectorY) * vec2(i, y) * sampleOffset;
+			vec2 offset = vec2(i, y) * sampleOffset * vecMod;
 			sum += texture(texture, gl_TexCoord[0].xy + offset);
 		}
 	}
