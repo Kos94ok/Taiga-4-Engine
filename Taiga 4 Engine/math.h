@@ -20,7 +20,9 @@ public:
 	int rand(int min, int max);
 	float convertAngle(float angle);
 	bool intToBool(int a);
+	bool stringToBool(std::string str);
 	int boolToInt(bool a);
+	int stringToInt(std::string str);
 	bool isPointInRect(float x, float y, float rectX, float rectY, float rectSizeX, float rectSizeY);
 
 	float PI;

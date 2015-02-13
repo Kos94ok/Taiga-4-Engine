@@ -180,6 +180,9 @@
     <ClCompile Include="util.cpp">
       <Filter>Файлы исходного кода\Util</Filter>
     </ClCompile>
+    <ClCompile Include="settings_util.cpp">
+      <Filter>Файлы исходного кода\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

@@ -18,11 +18,11 @@ void cSettings::setDefault()
 	this->enableDynamicLight = 1;			// Only disabled if shaders are not supported
 	this->enableTextureSmoothing = 0;
 	this->enableCameraBlur = 1;
-	this->enableVertSync = 0;
-	this->enableQuickCast = 0;
+	this->enableVertSync = 1;
+	this->enableQuickCast = 1;
 
 	// Any value
-	this->screenMode = 0;					// 0 - Window, 1 - Borderless, 2 - Fullscreen
+	this->screenMode = 1;					// 0 - Window, 1 - Borderless, 2 - Fullscreen
 	this->pixelization = 5000.00f;			// 5000+ - Disabled
 	this->shadowBlur = 1;					// 1 - Disabled, 2+ - Shadow sample count	[Incompatible with better shadows]
 	this->antialiasingLevel = 0;			// 0 - Disabled, 1+ - AA level
@@ -44,8 +44,8 @@ void cSettings::setDefault()
 	this->hkDebugAdvanced = sf::Keyboard::F4;
 
 	// Garbage
-	camera.res.x = 1200;
-	camera.res.y = 600;
+	camera.res.x = window.getScreenSize().x;
+	camera.res.y = window.getScreenSize().y;
 }
 
 void cSettings::setUltra()
@@ -64,4 +64,104 @@ void cSettings::setUltra()
 	this->shadowBlur = 5;
 	this->antialiasingLevel = 16;
 	this->sampleMod = 2.00f;
+}
+
+void cSettings::load()
+{
+	bool retVal = true;
+	cSettingsKey key;
+	ifstream file;
+	file.open("settings.ini");
+	if (!file.good()) { cout << "[ERROR] Can't open the settings file. Returning to default" << endl; return; }
+	
+	// Looking for values until the end of the file
+	while (retVal)
+	{
+		retVal = getNextKey(&file, &key);
+		// Matching the values
+		if (key.name == "enableScreenShaders") { enableScreenShaders = math.stringToInt(key.value); }
+		else if (key.name == "enableNightShadows") { enableNightShadows = math.stringToInt(key.value); }
+		else if (key.name == "enableBetterShadows") { enableBetterShadows = math.stringToInt(key.value); }
+		else if (key.name == "enableTextureSmoothing") { enableTextureSmoothing = math.stringToInt(key.value); }
+		else if (key.name == "enableCameraBlur") { enableCameraBlur = math.stringToInt(key.value); }
+		else if (key.name == "enableVertSync") { enableVertSync = math.stringToInt(key.value); }
+		else if (key.name == "enableQuickCast") { enableQuickCast = math.stringToInt(key.value); }
+
+		else if (key.name == "screenMode") { screenMode = math.stringToInt(key.value); }
+		else if (key.name == "pixelization") { pixelization = (float)math.stringToInt(key.value); }
+		else if (key.name == "shadowBlur") { shadowBlur = math.stringToInt(key.value); }
+		else if (key.name == "sampleMod") { sampleMod = (float)math.stringToInt(key.value) / 100.00f; }
+
+		else if (key.name == "hkInventory") { hkInventory = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkActiveItem01") { hkActiveItem[1] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkActiveItem02") { hkActiveItem[2] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkActiveItem03") { hkActiveItem[3] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkActiveItem04") { hkActiveItem[4] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkActiveItem05") { hkActiveItem[5] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkActiveItem06") { hkActiveItem[6] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkActiveItem07") { hkActiveItem[7] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkActiveItem08") { hkActiveItem[8] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkActiveItem09") { hkActiveItem[9] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkCamMoveUp") { hkCamMove[0] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkCamMoveDown") { hkCamMove[1] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkCamMoveLeft") { hkCamMove[2] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkCamMoveRight") { hkCamMove[3] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkDebugMode") { hkDebugMode = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkDebugAdvanced") { hkDebugAdvanced = sf::Keyboard::Key(math.stringToInt(key.value)); }
+
+		else if (key.name == "screenWidth") { camera.res.x = math.stringToInt(key.value); }
+		else if (key.name == "screenHeight") { camera.res.y = math.stringToInt(key.value); }
+	}
+
+	// Fix the dependancies
+	if (enableScreenShaders == 0) { enableBetterShadows = 0; }
+
+	file.close();
+}
+
+void cSettings::save()
+{
+	ofstream file;
+	file.open("settings.ini");
+	if (file.good())
+	{
+		file << "[Display]" << endl;
+		file << "screenMode = " << screenMode << endl;
+		file << "screenWidth = " << camera.res.x << endl;
+		file << "screenHeight = " << camera.res.y << endl;
+		file << "enableVertSync = " << enableVertSync << endl;
+		file << "sampleMod = " << math.round(sampleMod * 100.00f) << endl;
+
+		file << endl << "[Visual]" << endl;
+		file << "enableScreenShaders = " << enableScreenShaders << endl;
+		file << "enableNightShadows = " << enableNightShadows << endl;
+		file << "enableBetterShadows = " << enableBetterShadows << endl;
+		file << "enableTextureSmoothing = " << enableTextureSmoothing << endl;
+		file << "enableCameraBlur = " << enableCameraBlur << endl;
+		file << "pixelization = " << math.round(pixelization) << endl;
+		file << "shadowBlur = " << shadowBlur << endl;
+
+		file << endl << "[Gameplay]" << endl;
+		file << "enableQuickCast = " << enableQuickCast << endl;
+
+		file << endl << "[Keyboard]" << endl;
+		file << "hkInventory = " << hkInventory << endl;
+		file << "hkActiveItem01 = " << hkActiveItem[1] << endl;
+		file << "hkActiveItem02 = " << hkActiveItem[2] << endl;
+		file << "hkActiveItem03 = " << hkActiveItem[3] << endl;
+		file << "hkActiveItem04 = " << hkActiveItem[4] << endl;
+		file << "hkActiveItem05 = " << hkActiveItem[5] << endl;
+		file << "hkActiveItem06 = " << hkActiveItem[6] << endl;
+		file << "hkActiveItem07 = " << hkActiveItem[7] << endl;
+		file << "hkActiveItem08 = " << hkActiveItem[8] << endl;
+		file << "hkActiveItem09 = " << hkActiveItem[9] << endl;
+		file << "hkCamMoveUp = " << hkCamMove[0] << endl;
+		file << "hkCamMoveDown = " << hkCamMove[1] << endl;
+		file << "hkCamMoveLeft = " << hkCamMove[2] << endl;
+		file << "hkCamMoveRight = " << hkCamMove[3] << endl;
+		file << "hkDebugMode = " << hkDebugMode << endl;
+		file << "hkDebugAdvanced = " << hkDebugAdvanced << endl;
+	}
+	else { cout << "[ERROR] Can't save the settings file!" << endl; }
+	file.close();
 }

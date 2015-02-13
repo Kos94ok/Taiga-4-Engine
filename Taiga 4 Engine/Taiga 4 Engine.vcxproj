@@ -131,6 +131,7 @@
     <ClCompile Include="server_util.cpp" />
     <ClCompile Include="server_world.cpp" />
     <ClCompile Include="settings.cpp" />
+    <ClCompile Include="settings_util.cpp" />
     <ClCompile Include="UI_button.cpp" />
     <ClCompile Include="UI_contextMenu.cpp" />
     <ClCompile Include="UI_inventory.cpp" />

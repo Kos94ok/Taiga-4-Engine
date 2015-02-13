@@ -117,11 +117,11 @@ void cDatabase::loadUnits()
 	i += 1;
 
 	unit[i].type = "proj_rifle";
-	unit[i].size = vec2(7, 7);
+	unit[i].size = vec2(10, 1);
 	unit[i].center = unit[i].size / 2.00f;
 	//unit[i].shadowOffset = vec2(30, -30);
 	unit[i].flyingHeight = 20.00f;
-	unit[i].animData[ANIM_MOVE].side.tex = visual.addTexture("missile_rifle.png");
+	unit[i].animData[ANIM_MOVE].side.tex = visual.addTexture("missile_rifleNew.png");
 	unit[i].movementSpeed = 3500.00f;
 	unit[i].addRef(REF_UNIT_ROTATE);
 	unit[i].addRef(REF_UNIT_MISSILE);

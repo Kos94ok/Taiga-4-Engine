@@ -1,6 +1,13 @@
 
 #include "define.h"
 
+class cSettingsKey
+{
+public:
+	std::string name;
+	std::string value;
+};
+
 class cSettings
 {
 public:
@@ -44,7 +51,11 @@ public:
 	sf::Keyboard::Key hkActiveItem[LIMIT_ACTIVEBUTTONS];
 	sf::Keyboard::Key hkCamMove[4];
 
+	void load();
+	void save();
 	void setDefault();
+
+	bool getNextKey(std::ifstream* file, cSettingsKey *key);
 
 	// Graphics presets
 	void setUltra();

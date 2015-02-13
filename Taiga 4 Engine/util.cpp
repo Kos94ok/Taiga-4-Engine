@@ -18,6 +18,6 @@ void cUtil::detectVideoCard()
 	}
 	else {
 		core.videoCard = VIDEO_OTHER;
-		cout << "[MAIN] Unknown video card: \"" << vendor << "\"." << endl;
+		cout << "[MAIN] Unknown video card: " << vendor << endl;
 	}
 }

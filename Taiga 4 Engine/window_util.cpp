@@ -22,3 +22,13 @@ void cWindow::showWarning(int msg, bool critical)
 	MessageBoxA(window.winHandle.getSystemHandle(), message.c_str(), "Warning", MB_ICONWARNING | MB_OK);
 #endif
 }
+
+void cWindow::updateAspectRatio()
+{
+	float minX = 0.00f;
+	float minY = 0.00f;
+	float maxX = camera.res.x;
+	float maxY = camera.res.y;
+	
+	winHandle.setView(sf::View(sf::FloatRect(minX, minY, maxX, maxY)));
+}

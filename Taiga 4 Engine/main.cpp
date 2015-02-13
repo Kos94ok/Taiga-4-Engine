@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
 	// Loading databases
 	cout << "[MAIN] Loading databases" << endl;
 	settings.setDefault();
+	settings.load();
 	database.init();
 	craft.loadRecipes();
 	visual.init();
