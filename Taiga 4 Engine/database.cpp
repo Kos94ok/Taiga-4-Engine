@@ -117,7 +117,7 @@ void cDatabase::loadUnits()
 	i += 1;
 
 	unit[i].type = "proj_rifle";
-	unit[i].size = vec2(10, 1);
+	unit[i].size = vec2(10, 2);
 	unit[i].center = unit[i].size / 2.00f;
 	//unit[i].shadowOffset = vec2(30, -30);
 	unit[i].flyingHeight = 20.00f;
