@@ -15,6 +15,8 @@ public:
 	int enableNightShadows;
 	// Alternate shadows [Prevents shadows from stacking]
 	int enableBetterShadows;
+	// Dynamic lighting [Enables realistic lighting system]
+	int enableDynamicLight;
 	// Texture filtering [Reduces image pixelization]
 	int enableTextureSmoothing;
 	// Camera blur [Game world is blurred when the camera is moving]

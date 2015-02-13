@@ -50,7 +50,7 @@ void main()
 	{
 		vec4 texColor = texture(texMain, gl_TexCoord[0].xy);
 		vec4 shadColor = texture(texShadow, gl_TexCoord[0].xy);
-		if (abs(texColor.r - shadColor.r) > 0.05 || abs(texColor.g - shadColor.g) > 0.05 || abs(texColor.b - shadColor.b) > 0.05)
+		if (abs(texColor.r - shadColor.r) > 0.03 || abs(texColor.g - shadColor.g) > 0.03 || abs(texColor.b - shadColor.b) > 0.03)
 		{
 			float md = max(0.0, min(1.0, lightLevel - ambientLight));
 			float tr = min(1.0, shadowBrightness * 1.2 + md);

@@ -18,11 +18,28 @@ void cVisual::init()
 		fontDescr.loadFromFile("C:/Windows/Fonts/times.ttf");
 	}
 	// Loading the shaders
-	shader[SHADER_FULLSCREEN].loadFromFile("Data/Shaders/universal.frag", sf::Shader::Fragment);
-	shader[SHADER_BLOOM].loadFromFile("Data/Shaders/bloom.frag", sf::Shader::Fragment);
-	shader[SHADER_LIGHT].loadFromFile("Data/Shaders/light.frag", sf::Shader::Fragment);
-	shader[SHADER_SHADOW].loadFromFile("Data/Shaders/shadow.frag", sf::Shader::Fragment);
-	shader[SHADER_CAMBLUR].loadFromFile("Data/Shaders/camblur.frag", sf::Shader::Fragment);
+	if (sf::Shader::isAvailable())
+	{
+		int shaderFail = 0;
+		// Universal shader
+		if (!shader[SHADER_FULLSCREEN].loadFromFile("Data/Shaders/universal.frag", sf::Shader::Fragment)) {
+			window.showWarning(MSG_SHADERCOMPILE_UNIVERSAL);
+			settings.enableScreenShaders = 0;
+			settings.enableBetterShadows = 0;
+			// Alternate light shader
+			if (!shader[SHADER_LIGHT].loadFromFile("Data/Shaders/light.frag", sf::Shader::Fragment)) {
+				window.showWarning(MSG_SHADERCOMPILE_LIGHT);
+				settings.enableDynamicLight = 0;
+				game.ambientLightMin = 10.00f;
+			}
+		}
+		// Other shaders
+		if (!shader[SHADER_BLOOM].loadFromFile("Data/Shaders/bloom.frag", sf::Shader::Fragment)) { shaderFail += 1; }
+		if (!shader[SHADER_SHADOW].loadFromFile("Data/Shaders/shadow.frag", sf::Shader::Fragment)) { shaderFail += 1; }
+		if (!shader[SHADER_CAMBLUR].loadFromFile("Data/Shaders/camblur.frag", sf::Shader::Fragment)) { shaderFail += 1; }
+		if (shaderFail > 0) { window.showWarning(MSG_SHADERCOMPILE_OTHER); }
+	}
+	else { window.showWarning(MSG_NOSHADERSUPPORT); }
 }
 
 int cVisual::addTexture(string name, bool ignoreFilter)

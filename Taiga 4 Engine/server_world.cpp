@@ -293,7 +293,8 @@ void serverWorldUI(int elapsedTime)
 	camera.moveUpdateTimer -= timevar;
 	if (camera.moveUpdateTimer < 0.00f) { camera.moveUpdateTimer = 0.00f; }
 	float camSpeed = 1000.00f / camera.zoomFactor;
-	float camVectorMod = 5.00f;
+	float camVecModIn = 2.00f;
+	float camVecModOut = 5.00f;
 	//camera.moveVector = vec2(0.00f, 0.00f);
 	if (GetForegroundWindow() == window.winHandle.getSystemHandle())
 	{
@@ -302,7 +303,7 @@ void serverWorldUI(int elapsedTime)
 			|| window.getMousePos().x < 1.00f)
 		{
 			camera.move(sf::Vector2f(-camSpeed * timevar / core.timeModifier, 0.00f));
-			camera.moveVector.x -= 1.00f * timevar * camVectorMod;
+			camera.moveVector.x -= 1.00f * timevar * camVecModIn;
 			if (camera.moveVector.x < -1.00f) { camera.moveVector.x = -1.00f; }
 			isMoving = true;
 		}
@@ -310,7 +311,7 @@ void serverWorldUI(int elapsedTime)
 			|| window.getMousePos().x > camera.res.x - 2.00f)
 		{
 			camera.move(sf::Vector2f(camSpeed * timevar / core.timeModifier, 0.00f));
-			camera.moveVector.x += 1.00f * timevar * camVectorMod;
+			camera.moveVector.x += 1.00f * timevar * camVecModIn;
 			if (camera.moveVector.x > 1.00f) { camera.moveVector.x = 1.00f; }
 			isMoving = true;
 		}
@@ -318,7 +319,7 @@ void serverWorldUI(int elapsedTime)
 			|| window.getMousePos().y < 1.00f)
 		{
 			camera.move(sf::Vector2f(0.00f, -camSpeed * timevar / core.timeModifier));
-			camera.moveVector.y += 1.00f * timevar * camVectorMod;
+			camera.moveVector.y += 1.00f * timevar * camVecModIn;
 			if (camera.moveVector.y > 1.00f) { camera.moveVector.y = 1.00f; }
 			isMoving = true;
 		}
@@ -326,26 +327,26 @@ void serverWorldUI(int elapsedTime)
 			|| window.getMousePos().y > camera.res.y - 2.00f)
 		{
 			camera.move(sf::Vector2f(0.00f, camSpeed * timevar / core.timeModifier));
-			camera.moveVector.y -= 1.00f * timevar * camVectorMod;
+			camera.moveVector.y -= 1.00f * timevar * camVecModIn;
 			if (camera.moveVector.y < -1.00f) { camera.moveVector.y = -1.00f; }
 			isMoving = true;
 		}
 		if (!isMoving)
 		{
 			if (camera.moveVector.x > 0.00f) {
-				camera.moveVector.x -= 1.00f * timevar * camVectorMod;
+				camera.moveVector.x -= 1.00f * timevar * camVecModOut;
 				if (camera.moveVector.x < 0.00f) { camera.moveVector.x = 0.00f; }
 			}
 			if (camera.moveVector.x < 0.00f) {
-				camera.moveVector.x += 1.00f * timevar * camVectorMod;
+				camera.moveVector.x += 1.00f * timevar * camVecModOut;
 				if (camera.moveVector.x > 0.00f) { camera.moveVector.x = 0.00f; }
 			}
 			if (camera.moveVector.y > 0.00f) {
-				camera.moveVector.y -= 1.00f * timevar * camVectorMod;
+				camera.moveVector.y -= 1.00f * timevar * camVecModOut;
 				if (camera.moveVector.y < 0.00f) { camera.moveVector.y = 0.00f; }
 			}
 			if (camera.moveVector.y < 0.00f) {
-				camera.moveVector.y += 1.00f * timevar * camVectorMod;
+				camera.moveVector.y += 1.00f * timevar * camVecModOut;
 				if (camera.moveVector.y > 0.00f) { camera.moveVector.y = 0.00f; }
 			}
 		}

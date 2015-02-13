@@ -33,6 +33,7 @@ using namespace std;
 class cCore
 {
 public:
+	int videoCard;
 	float timeModifier;
 
 	int menuState;
@@ -51,6 +52,7 @@ public:
 
 	// Initializing
 	cCore() {
+		videoCard = VIDEO_OTHER;
 		timeModifier = 1.00f;
 		menuState = STATE_GAME;
 		serverMode = false;
@@ -82,4 +84,5 @@ extern cCamera camera;
 extern cSettings settings;
 extern cWorld world;
 extern cEditor editor;
+extern cUtil util;
 extern cAPI api;

@@ -17,6 +17,7 @@ cCamera camera;
 cSettings settings;
 cWorld world;
 cEditor editor;
+cUtil util;
 cAPI api;
 
 int main(int argc, char* argv[])
@@ -34,6 +35,7 @@ int main(int argc, char* argv[])
 	srand(time(0));
 	timeBeginPeriod(5);
 	if (!core.serverMode) { core.localServer = true; }
+	util.detectVideoCard();
 
 	// Loading databases
 	cout << "[MAIN] Loading databases" << endl;

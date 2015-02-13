@@ -15,6 +15,7 @@ void cSettings::setDefault()
 	this->enableScreenShaders = 1;
 	this->enableNightShadows = 1;
 	this->enableBetterShadows = 1;
+	this->enableDynamicLight = 1;			// Only disabled if shaders are not supported
 	this->enableTextureSmoothing = 0;
 	this->enableCameraBlur = 1;
 	this->enableVertSync = 0;
@@ -23,7 +24,7 @@ void cSettings::setDefault()
 	// Any value
 	this->screenMode = 0;					// 0 - Window, 1 - Borderless, 2 - Fullscreen
 	this->pixelization = 5000.00f;			// 5000+ - Disabled
-	this->shadowBlur = 1;					// 1 - Disabled, 2+ - Shadow sample count
+	this->shadowBlur = 1;					// 1 - Disabled, 2+ - Shadow sample count	[Incompatible with better shadows]
 	this->antialiasingLevel = 0;			// 0 - Disabled, 1+ - AA level
 	this->sampleMod = 1.00f;				// 0.50 - Subsampling, 1.00 - Default, 2.00 - Supersampling
 
@@ -43,7 +44,7 @@ void cSettings::setDefault()
 	this->hkDebugAdvanced = sf::Keyboard::F4;
 
 	// Garbage
-	camera.res.x = 1366;
+	camera.res.x = 1200;
 	camera.res.y = 600;
 }
 

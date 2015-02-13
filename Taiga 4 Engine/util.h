@@ -21,3 +21,9 @@ public:
 		a = A;
 	}
 };
+
+class cUtil
+{
+public:
+	void detectVideoCard();
+};

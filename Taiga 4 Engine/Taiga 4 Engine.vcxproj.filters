@@ -174,6 +174,12 @@
     <ClCompile Include="editor_util.cpp">
       <Filter>Файлы исходного кода\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="window_util.cpp">
+      <Filter>Файлы исходного кода\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="util.cpp">
+      <Filter>Файлы исходного кода\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

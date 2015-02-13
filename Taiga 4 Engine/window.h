@@ -21,6 +21,8 @@ public:
 	void paintUI();
 	void paintDebugInfo();
 
+	void showWarning(int msg, bool critical = false);
+
 	sf::Vector2f getMousePos(bool useMatrix = false);
 	sf::Vector2f getScreenSize();
 };

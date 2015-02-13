@@ -311,6 +311,11 @@ void cWindow::paintUnits()
 					brushRect.setRotation(0.00f);
 					brushRect.setScale(1.00f, 1.00f);
 					brushRect.setFillColor(sf::Color(255, 255, 255));
+					if (!settings.enableDynamicLight) { brushRect.setFillColor(sf::Color(
+							min(game.ambientLight, 255.0f),
+							min(game.ambientLight, 255.0f),
+							min(game.ambientLight, 255.0f)));
+					}
 					brushRect.setPosition(game.unit[i].pos.x, game.unit[i].pos.y);
 					brushRect.setOrigin(game.unit[i].center.x, game.unit[i].center.y);
 					brushRect.setSize(sf::Vector2f(game.unit[i].size.x, game.unit[i].size.y));
@@ -355,6 +360,11 @@ void cWindow::paintTileMap()
 	brushRect.setSize(sf::Vector2f(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod));
 	brushRect.setTexture(&visual.gameTex[database.texture[TEX_WORLD_GROUND]].handle);
 	brushRect.setFillColor(sf::Color(255, 255, 255));
+	if (!settings.enableDynamicLight) { brushRect.setFillColor(sf::Color(
+			min(game.ambientLight, 255.0f),
+			min(game.ambientLight, 255.0f),
+			min(game.ambientLight, 255.0f)));
+	}
 	brushRect.setPosition(tileRect.left, tileRect.top);
 	brushRect.setTextureRect(sf::IntRect(tileRectTex));
 	window.texHandle.draw(brushRect);
@@ -373,6 +383,10 @@ void cWindow::paintLighting()
 			brushRect.setTexture(&visual.gameTex[tex].handle);
 			brushRect.setPosition(game.unit[i].pos);
 			brushRect.setFillColor(sf::Color(255, 255, 255, max(0.00f, min(255.00f, 300.00f - game.ambientLight))));
+			if (!settings.enableDynamicLight) {
+				brushRect.setTexture(&visual.gameTex[visual.addTexture("light_white.png")].handle);
+				brushRect.setFillColor(sf::Color(255, 255, 255, 50.00f));
+			}
 			brushRect.setTextureRect(sf::IntRect(0, 0, visual.gameTex[tex].handle.getSize().x, visual.gameTex[tex].handle.getSize().y));
 			power = game.unit[i].light.power;
 			if (game.unit[i].light.flickerMod != 0.00f) {
@@ -381,7 +395,8 @@ void cWindow::paintLighting()
 			}
 			brushRect.setOrigin(sf::Vector2f(power, power));
 			brushRect.setSize(sf::Vector2f(power * 2.00f, power * 2.00f));
-			window.texHandleLight.draw(brushRect, window.matrixHandle);
+			if (settings.enableDynamicLight) { window.texHandleLight.draw(brushRect, window.matrixHandle); }
+			else { window.texHandle.draw(brushRect, window.matrixHandle); }
 		}
 	}
 	window.texHandleLight.display();
@@ -389,12 +404,14 @@ void cWindow::paintLighting()
 
 void cWindow::paintPostFX()
 {
+	bool bufferReady = false;
 	sf::Shader *shader;
 	sf::RenderStates state;
 	sf::Sprite buffer;
 	
 	window.texHandle.display();
-	if (settings.enableScreenShaders == 1 && visual.shader[SHADER_FULLSCREEN].isAvailable())
+	// Universal shader
+	if (settings.enableScreenShaders == 1 && sf::Shader::isAvailable())
 	{
 		if (settings.enableBetterShadows) { window.texHandleShadow.display(); }
 		buffer = sf::Sprite(window.texHandle.getTexture());
@@ -416,29 +433,44 @@ void cWindow::paintPostFX()
 		}
 		else { shader->setParameter("checkForShadow", 0.00f); } 
 		window.texHandleTop.draw(buffer, shader);
-
-		if (settings.enableCameraBlur && (camera.moveVector.x != 0 || camera.moveVector.y != 0))
-		{
-			window.texHandleTop.display();
-			buffer = sf::Sprite(window.texHandleTop.getTexture());
-			shader = &visual.shader[SHADER_CAMBLUR];
-			shader->setParameter("iSampleCount", 1.00f);
-			shader->setParameter("sampleOffset", 0.0025f);
-			shader->setParameter("camVectorX", camera.moveVector.x);
-			shader->setParameter("camVectorY", camera.moveVector.y);
-			window.texHandleTop.draw(buffer, shader);
-		}
-
-		//window.texHandleTop.display();
-		//buffer = sf::Sprite(window.texHandleTop.getTexture());
+		bufferReady = true;
 	}
-	else
+	// Alternate light
+	else if (settings.enableDynamicLight == 1)
 	{
 		buffer = sf::Sprite(window.texHandle.getTexture());
 		shader = &visual.shader[SHADER_LIGHT];
 		shader->setParameter("texture", sf::Shader::CurrentTexture);
 		shader->setParameter("tex_light", window.texHandleLight.getTexture());
+		bufferReady = true;
 		window.texHandleTop.draw(buffer, shader);
+	}
+	// Camera blur
+	if (settings.enableCameraBlur && (camera.moveVector.x != 0 || camera.moveVector.y != 0))
+	{
+		if (bufferReady)
+		{
+			window.texHandleTop.display();
+			buffer = sf::Sprite(window.texHandleTop.getTexture());
+		}
+		else
+		{
+			window.texHandle.display();
+			buffer = sf::Sprite(window.texHandle.getTexture());
+		}
+		shader = &visual.shader[SHADER_CAMBLUR];
+		shader->setParameter("iSampleCount", 1.00f);
+		shader->setParameter("sampleOffset", 0.0025f);
+		shader->setParameter("camVectorX", camera.moveVector.x);
+		shader->setParameter("camVectorY", camera.moveVector.y);
+		window.texHandleTop.draw(buffer, shader);
+		bufferReady = true;
+	}
+	// No shaders used
+	if (!bufferReady)
+	{
+		buffer = sf::Sprite(window.texHandle.getTexture());
+		window.texHandleTop.draw(buffer);
 	}
 }
 
