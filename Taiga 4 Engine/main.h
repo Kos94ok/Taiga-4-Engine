@@ -24,6 +24,7 @@ typedef sf::Vector2i		vec2i;
 #include "server.h"
 #include "camera.h"
 #include "settings.h"
+#include "saveload.h"
 #include "world.h"
 #include "editor.h"
 #include "api.h"

@@ -133,7 +133,7 @@ void cUIButton::callbackLeft(int parent)
 	}
 	else if (action == "start_arena")
 	{
-		world.genArena();
+		world.genNormalWorld();
 		ui.updateFull();
 		client.connect("127.0.0.1", 21045);
 	}

@@ -332,7 +332,7 @@ void cWindow::paintUnits()
 							if (u == 0) { window.texHandle.draw(brushRect, window.matrixHandle); }
 							else { window.texHandleShadow.draw(brushRect, window.matrixHandle); }
 						}
-						visual.unitsPainted += 1;
+						if (u == 0) { visual.unitsPainted += 1; }
 					}
 					brushRect.setRotation(0.00f);
 					brushRect.setOutlineThickness(0.00f);

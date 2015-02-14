@@ -160,3 +160,8 @@
 #define VIDEO_NVIDIA					1
 #define VIDEO_AMD						2
 #define VIDEO_OTHER						3
+
+#define DIRECTION_RIGHT					0
+#define DIRECTION_UP					1
+#define DIRECTION_LEFT					2
+#define DIRECTION_DOWN					3

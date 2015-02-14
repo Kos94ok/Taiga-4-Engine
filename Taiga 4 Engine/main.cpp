@@ -44,6 +44,7 @@ int main(int argc, char* argv[])
 	database.init();
 	craft.loadRecipes();
 	visual.init();
+	world.analyzeBlueprints();
 
 	// Starting the threads
 	cout << "[MAIN] Starting the threads" << endl;
