@@ -272,6 +272,18 @@ void cmd_editor_enable(string args[])
 	editor.enable();
 }
 
+// Editor.save
+void cmd_editor_save(string args[])
+{
+	editor.saveBlueprint(args[0]);
+}
+
+// Editor.load
+void cmd_editor_load(string args[])
+{
+	editor.loadBlueprint(args[0]);
+}
+
 // Exit command
 void cmd_exit(string args[])
 {

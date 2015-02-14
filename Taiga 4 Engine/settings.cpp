@@ -31,7 +31,7 @@ void cSettings::setDefault()
 	// Hotkeys
 	this->hkInventory = sf::Keyboard::E;
 		// Buttons [1; LIMIT) reserved for the items / abilities
-	for (int i = 1; i < 9; i++)
+	for (int i = 1; i < 10; i++)
 	{
 		this->hkActiveItem[i] = sf::Keyboard::Key(sf::Keyboard::Num0 + i);
 	}

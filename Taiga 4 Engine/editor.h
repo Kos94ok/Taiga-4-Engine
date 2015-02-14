@@ -25,6 +25,9 @@ public:
 	void enable();
 	void initialize();
 
+	void saveBlueprint(std::string name);
+	void loadBlueprint(std::string name);
+
 	cEditor() {
 		
 	}

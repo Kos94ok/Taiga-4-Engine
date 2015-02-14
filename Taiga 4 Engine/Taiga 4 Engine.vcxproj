@@ -114,6 +114,7 @@
     <ClCompile Include="craft.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="database_util.cpp" />
+    <ClCompile Include="editor_file.cpp" />
     <ClCompile Include="editor_main.cpp" />
     <ClCompile Include="editor_util.cpp" />
     <ClCompile Include="game.cpp" />
@@ -145,7 +146,9 @@
     <ClCompile Include="window_main.cpp" />
     <ClCompile Include="window_paint_main.cpp" />
     <ClCompile Include="window_util.cpp" />
-    <ClCompile Include="world.cpp" />
+    <ClCompile Include="world_gen.cpp" />
+    <ClCompile Include="world_main.cpp" />
+    <ClCompile Include="world_util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api.h" />
@@ -163,6 +166,7 @@
     <ClInclude Include="path.h" />
     <ClInclude Include="precomp.h" />
     <ClInclude Include="refSystem.h" />
+    <ClInclude Include="saveload.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="settings.h" />
     <ClInclude Include="UI.h" />

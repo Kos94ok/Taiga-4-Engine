@@ -141,6 +141,16 @@ cConsole::cConsole()
 	console.cmdFunc[cmdID] = cmd_editor_enable;
 	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^editor.save [a-zA-Z0-9.]+");
+	console.cmdWrong[cmdID] = "editor.save";
+	console.cmdSyntax[cmdID] = "\"editor.save [str]\" - Save active blueprint as [file]";
+	console.cmdFunc[cmdID] = cmd_editor_save;
+	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^editor.load [a-zA-Z0-9.]+");
+	console.cmdWrong[cmdID] = "editor.load";
+	console.cmdSyntax[cmdID] = "\"editor.load [str]\" - Load [file] as active blueprint";
+	console.cmdFunc[cmdID] = cmd_editor_load;
+	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^exit");
 	console.cmdWrong[cmdID] = "exit";
 	console.cmdSyntax[cmdID] = "\"exit\" - Close the game";

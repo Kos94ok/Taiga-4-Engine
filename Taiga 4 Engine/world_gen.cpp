@@ -49,3 +49,14 @@ void cWorld::genArena()
 	id = game.addUnit("arena_wall", vec2(0.00f, arenaSizeY));
 	game.getUnit(id).size.x = arenaSizeX + 20.00f;
 }
+
+void cWorld::genNormalWorld()
+{
+	int random;
+	vec2 pos;
+	for (int i = 0; i < 10; i++)
+	{
+		
+		pos = applyBlueprint(pos, 0, &blueprint[0].attach[math.rand(0, 3)]);
+	}
+}

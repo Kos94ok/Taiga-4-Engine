@@ -45,4 +45,6 @@ void cmd_player_setunit(std::string args[]);
 void cmd_player_getlist(std::string args[]);
 void cmd_ui_getlist(std::string args[]);
 void cmd_editor_enable(std::string args[]);
+void cmd_editor_save(std::string args[]);
+void cmd_editor_load(std::string args[]);
 void cmd_exit(std::string args[]);

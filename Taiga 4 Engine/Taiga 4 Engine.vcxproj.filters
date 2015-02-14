@@ -58,6 +58,9 @@
     <Filter Include="Файлы исходного кода\Util\API">
       <UniqueIdentifier>{6d45049f-4116-49c8-94a7-6086bf1fc5ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Saveload">
+      <UniqueIdentifier>{29b816fc-766a-4c24-8d03-e0d8d54d0675}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -150,9 +153,6 @@
     <ClCompile Include="itemActive.cpp">
       <Filter>Файлы исходного кода\Character\Item</Filter>
     </ClCompile>
-    <ClCompile Include="world.cpp">
-      <Filter>Файлы исходного кода\World</Filter>
-    </ClCompile>
     <ClCompile Include="server_world.cpp">
       <Filter>Файлы исходного кода\Network</Filter>
     </ClCompile>
@@ -182,6 +182,18 @@
     </ClCompile>
     <ClCompile Include="settings_util.cpp">
       <Filter>Файлы исходного кода\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_file.cpp">
+      <Filter>Файлы исходного кода\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="world_gen.cpp">
+      <Filter>Файлы исходного кода\World</Filter>
+    </ClCompile>
+    <ClCompile Include="world_main.cpp">
+      <Filter>Файлы исходного кода\World</Filter>
+    </ClCompile>
+    <ClCompile Include="world_util.cpp">
+      <Filter>Файлы исходного кода\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="api.h">
       <Filter>Файлы исходного кода\Util\API</Filter>
+    </ClInclude>
+    <ClInclude Include="saveload.h">
+      <Filter>Файлы исходного кода\Saveload</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

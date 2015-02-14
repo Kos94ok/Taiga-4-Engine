@@ -221,7 +221,7 @@ void serverWorldUI(int elapsedTime)
 			// Tooltips
 			if (ui.element[i].tooltip.hasText())
 			{
-				if (isHovered && ui.mouseNotMoving > ui.element[i].tooltip.delay && ui.element[i].tooltip.alpha < 255)
+				if (isHovered && ui.mouseNotMoving > ui.element[i].tooltip.delay && ui.element[i].tooltip.alpha <= 255)
 				{
 					// Update position
 					if (!bindToMouse)
