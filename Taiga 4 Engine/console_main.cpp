@@ -151,6 +151,11 @@ cConsole::cConsole()
 	console.cmdSyntax[cmdID] = "\"editor.load [str]\" - Load [file] as active blueprint";
 	console.cmdFunc[cmdID] = cmd_editor_load;
 	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^editor.autogen");
+	console.cmdWrong[cmdID] = "editor.autogen";
+	console.cmdSyntax[cmdID] = "\"editor.autogen (num)\" - Generate (amount) of blueprints";
+	console.cmdFunc[cmdID] = cmd_editor_autogen;
+	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^exit");
 	console.cmdWrong[cmdID] = "exit";
 	console.cmdSyntax[cmdID] = "\"exit\" - Close the game";

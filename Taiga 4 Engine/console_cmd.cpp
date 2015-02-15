@@ -284,6 +284,20 @@ void cmd_editor_load(string args[])
 	editor.loadBlueprint(args[0]);
 }
 
+// Editor.autogen
+void cmd_editor_autogen(string args[])
+{
+	int count;
+	stringstream(args[0]) >> count;
+	
+	editor.genBlueprint();
+	for (int i = 0; i < count; i++)
+	{
+		editor.saveBlueprint("gen" + to_string(i));
+		editor.genBlueprint();
+	}
+}
+
 // Exit command
 void cmd_exit(string args[])
 {

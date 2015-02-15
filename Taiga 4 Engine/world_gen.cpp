@@ -62,16 +62,19 @@ void cWorld::genNormalWorld()
 	}
 
 	// Generating spawn point
-	vec2i spawnPoint = vec2i(math.rand(7, 55), math.rand(7, 55));
+	vec2i spawnPointI = vec2i(math.rand(7, 55), math.rand(7, 55));
 
 	// Generating paths
 	for (int i = 0; i < settings.wgStartingPath; i++)
 	{
-		genChunkPath(1, spawnPoint);
+		genChunkPath(1, spawnPointI);
 	}
 
+	// Writing global spawn point
+	spawnPoint = vec2(spawnPointI.x * LIMIT_CHUNKSIZE, spawnPointI.y * LIMIT_CHUNKSIZE);
+
 	// Applying spawn point
-	map[spawnPoint.x][spawnPoint.y].genStatus = CHUNK_SPAWN;
+	map[spawnPointI.x][spawnPointI.y].genStatus = CHUNK_SPAWN;
 
 	// Creating a wall around the normal chunks
 	for (int j = 1; j < LIMIT_MAP - 1; j++)

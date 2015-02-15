@@ -2,8 +2,12 @@
 #include "main.h"
 
 // Copy unit from database
-int cGame::addUnit(string type, sf::Vector2f pos, int owner)
+int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation)
 {
+	if (variation == 0) { type += "a"; }
+	if (variation == 1) { type += "b"; }
+	if (variation == 2) { type += "c"; }
+	if (variation == 3) { type += "d"; }
 	// Apply
 	if (unitCounter < LIMIT_UNIT - 1)
 	{
@@ -45,6 +49,12 @@ void cGame::removeUnit(int id)
 		}
 		unitCounter -= 1;
 	}
+}
+
+// Remove all units
+void cGame::clearUnits()
+{
+	unitCounter = 0;
 }
 
 // Convert global id to local id

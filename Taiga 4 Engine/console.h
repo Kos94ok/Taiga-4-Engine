@@ -47,4 +47,5 @@ void cmd_ui_getlist(std::string args[]);
 void cmd_editor_enable(std::string args[]);
 void cmd_editor_save(std::string args[]);
 void cmd_editor_load(std::string args[]);
+void cmd_editor_autogen(std::string args[]);
 void cmd_exit(std::string args[]);

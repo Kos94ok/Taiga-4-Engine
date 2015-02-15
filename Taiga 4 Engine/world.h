@@ -20,6 +20,7 @@ public:
 class cWorld
 {
 public:
+	sf::Vector2f spawnPoint;
 	std::vector<cBlueprint> blueprint;
 	cMapTile map[LIMIT_MAP][LIMIT_MAP];
 

@@ -28,6 +28,8 @@ public:
 	void saveBlueprint(std::string name);
 	void loadBlueprint(std::string name);
 
+	void genBlueprint();
+
 	cEditor() {
 		
 	}

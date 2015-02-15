@@ -29,10 +29,10 @@ void cSettings::setDefault()
 	this->sampleMod = 1.00f;				// 0.50 - Subsampling, 1.00 - Default, 2.00 - Supersampling
 
 	// World generation
-	this->wgStartingPath = 3;				// Amount of paths
-	this->wgMinimalPathLength = 10;			// Minimal amount of steps before termination
-	this->wgMaximalPathLength = 50;			// Maximum amount of steps before termination
-	this->wgPathForkChance = 10;			// Chance to create another path on every step (percentage)
+	this->wgStartingPath = 1;				// Amount of paths
+	this->wgMinimalPathLength = 3;			// Minimal amount of steps before termination
+	this->wgMaximalPathLength = 10;			// Maximum amount of steps before termination
+	this->wgPathForkChance = 20;			// Chance to create another path on every step (percentage)
 
 	// Hotkeys
 	this->hkInventory = sf::Keyboard::E;

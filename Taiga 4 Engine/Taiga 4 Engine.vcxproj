@@ -115,6 +115,7 @@
     <ClCompile Include="database.cpp" />
     <ClCompile Include="database_util.cpp" />
     <ClCompile Include="editor_file.cpp" />
+    <ClCompile Include="editor_gen.cpp" />
     <ClCompile Include="editor_main.cpp" />
     <ClCompile Include="editor_util.cpp" />
     <ClCompile Include="game.cpp" />

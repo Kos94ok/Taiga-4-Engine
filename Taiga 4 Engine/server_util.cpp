@@ -58,7 +58,7 @@ void cServer::introduce(int playerId)
 	string playerType = "player";
 	if (core.editorMode) { playerType = "editor"; }
 
-	server.player[playerId].unit = game.addUnit(playerType, sf::Vector2f(0, 0));
+	server.player[playerId].unit = game.addUnit(playerType, world.spawnPoint);
 	if (!server.isLocalPlayer(playerId))
 	{
 		data << MSG_UNIT_HERO << server.player[playerId].unit;
