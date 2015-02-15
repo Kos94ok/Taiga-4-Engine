@@ -9,6 +9,8 @@ void cItem::setName(string txt)
 void cItem::addDescrLine(string line)
 {
 	description[descrLinesUsed++] = line;
+	//description.push_back(line);
+	//descrLinesUsed += 1;
 }
 
 int cItemContainer::add(cItem target, int count)

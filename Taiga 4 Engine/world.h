@@ -1,37 +1,34 @@
 
 #include "define.h"
 
-class cBlueprintAttach
-{
-public:
-	float x;
-	float y;
-	int direction;
-
-	cBlueprintAttach() {
-		x = 0.00f;
-		y = 0.00f;
-		direction = DIRECTION_RIGHT;
-	}
-};
-
 class cBlueprint
 {
 public:
 	std::string name;
-	std::vector<cBlueprintAttach> attach;
+};
+
+class cMapTile
+{
+public:
+	int genStatus;
+
+	cMapTile() {
+		genStatus = CHUNK_UNDEFINED;
+	}
 };
 
 class cWorld
 {
 public:
 	std::vector<cBlueprint> blueprint;
+	cMapTile map[LIMIT_MAP][LIMIT_MAP];
 
 	void analyzeBlueprints();
-	sf::Vector2f applyBlueprint(sf::Vector2f position, int index, cBlueprintAttach *attach);
+	sf::Vector2f applyBlueprint(sf::Vector2f position, int index);
 	std::vector<cUnitEntry> getBlueprintUnitList(int index);
 
 	void genTaigaMini();
 	void genArena();
 	void genNormalWorld();
+	void genChunkPath(int val, sf::Vector2i pos);
 };

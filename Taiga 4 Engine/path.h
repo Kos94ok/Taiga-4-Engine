@@ -6,7 +6,6 @@ class cPath
 public:
 	int waypointCounter;
 	sf::Vector2f waypoint[LIMIT_ORDERS];
-	bool node[LIMIT_PATHNODE][LIMIT_PATHNODE];
 
 	void addWaypoint(sf::Vector2f loc);
 	void clear();

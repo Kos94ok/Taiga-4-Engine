@@ -12,8 +12,8 @@ void cUtil::detectVideoCard()
 		core.videoCard = VIDEO_NVIDIA;
 		cout << "[MAIN] Detected Nvidia video card" << endl;
 	}
-	else if (vendor == "AMD") { 
-		core.videoCard = VIDEO_AMD;
+	else if (vendor.substr(0, 3) == "ATI") { 
+		core.videoCard = VIDEO_ATI;
 		cout << "[MAIN] Detected AMD video card" << endl;
 	}
 	else {

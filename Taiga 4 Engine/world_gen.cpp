@@ -52,11 +52,117 @@ void cWorld::genArena()
 
 void cWorld::genNormalWorld()
 {
-	int random;
-	vec2 pos;
-	for (int i = 0; i < 10; i++)
+	// Settings initial state
+	for (int j = 0; j < LIMIT_MAP; j++)
 	{
-		
-		pos = applyBlueprint(pos, 0, &blueprint[0].attach[math.rand(0, 3)]);
+		for (int i = 0; i < LIMIT_MAP; i++)
+		{
+			map[i][j].genStatus = CHUNK_UNDEFINED;
+		}
 	}
+
+	// Generating spawn point
+	vec2i spawnPoint = vec2i(math.rand(7, 55), math.rand(7, 55));
+
+	// Generating paths
+	for (int i = 0; i < settings.wgStartingPath; i++)
+	{
+		genChunkPath(1, spawnPoint);
+	}
+
+	// Applying spawn point
+	map[spawnPoint.x][spawnPoint.y].genStatus = CHUNK_SPAWN;
+
+	// Creating a wall around the normal chunks
+	for (int j = 1; j < LIMIT_MAP - 1; j++)
+	{
+		for (int i = 1; i < LIMIT_MAP - 1; i++)
+		{
+			if (map[i][j].genStatus == CHUNK_UNDEFINED &&
+				(map[i + 1][j].genStatus == CHUNK_NORMAL || map[i + 1][j].genStatus == CHUNK_SPAWN
+				|| map[i + 1][j + 1].genStatus == CHUNK_NORMAL || map[i + 1][j + 1].genStatus == CHUNK_SPAWN
+				|| map[i][j + 1].genStatus == CHUNK_NORMAL || map[i][j + 1].genStatus == CHUNK_SPAWN
+				|| map[i - 1][j + 1].genStatus == CHUNK_NORMAL || map[i - 1][j + 1].genStatus == CHUNK_SPAWN
+				|| map[i - 1][j].genStatus == CHUNK_NORMAL || map[i - 1][j].genStatus == CHUNK_SPAWN
+				|| map[i - 1][j - 1].genStatus == CHUNK_NORMAL || map[i - 1][j - 1].genStatus == CHUNK_SPAWN
+				|| map[i][j - 1].genStatus == CHUNK_NORMAL || map[i][j - 1].genStatus == CHUNK_SPAWN
+				|| map[i + 1][j - 1].genStatus == CHUNK_NORMAL || map[i + 1][j - 1].genStatus == CHUNK_SPAWN))
+			{
+				map[i][j].genStatus = CHUNK_BLOCKED;
+			}
+		}
+	}
+
+	// Blocking the edges
+	for (int i = 0; i < LIMIT_MAP; i++)
+	{
+		map[i][0].genStatus = CHUNK_BLOCKED;
+		map[i][63].genStatus = CHUNK_BLOCKED;
+	}
+	for (int j = 0; j < LIMIT_MAP; j++)
+	{
+		map[0][j].genStatus = CHUNK_BLOCKED;
+		map[63][j].genStatus = CHUNK_BLOCKED;
+	}
+
+	ofstream file;
+	file.open("map.txt");
+	for (int j = 0; j < LIMIT_MAP; j++)
+	{
+		for (int i = 0; i < LIMIT_MAP; i++)
+		{
+			if (map[i][j].genStatus == CHUNK_UNDEFINED) { file << "? "; }
+			else if (map[i][j].genStatus == CHUNK_NORMAL) { file << "~ "; }
+			else if (map[i][j].genStatus == CHUNK_BLOCKED) { file << "X "; }
+			else if (map[i][j].genStatus == CHUNK_SPAWN) { file << "@ "; }
+			else if (map[i][j].genStatus == CHUNK_VILLAGE) { file << "& "; }
+		}
+		file << endl;
+	}
+	file.close();
+
+	// Temporary applying stuff
+	for (int j = 0; j < LIMIT_MAP; j++)
+	{
+		for (int i = 0; i < LIMIT_MAP; i++)
+		{
+			if (map[i][j].genStatus == CHUNK_NORMAL) {
+				applyBlueprint(vec2(i * LIMIT_CHUNKSIZE, j * LIMIT_CHUNKSIZE), 0);
+			}
+		}
+	}
+}
+
+void cWorld::genChunkPath(int val, vec2i pos)
+{
+	vec2i newPos;
+	int random = math.rand(0, 3), saver = 0;
+
+	// Looking for a non-claimed path
+	do
+	{
+		newPos = pos;
+		random = math.rand(0, 3);
+		if (random == 0) { newPos.x += 1; }
+		else if (random == 1) { newPos.y += 1; }
+		else if (random == 2) { newPos.x -= 1; }
+		else if (random == 3) { newPos.y -= 1; }
+		saver += 1;
+	}
+	while (saver < 10 && map[newPos.x][newPos.y].genStatus != CHUNK_UNDEFINED);
+
+	// If the path has found
+	if (saver < 10)
+	{
+		pos = newPos;
+		map[pos.x][pos.y].genStatus = CHUNK_NORMAL;
+
+		// Termination chance
+		if (math.rand(settings.wgMinimalPathLength, settings.wgMaximalPathLength) < val) { return; }
+			// Not terminated - continue
+		genChunkPath(val + 1, pos);
+			// Chance to fork
+		if (math.rand(0, 100) < settings.wgPathForkChance) { genChunkPath(val + 1, pos); }
+	}
+	else { return; }
 }

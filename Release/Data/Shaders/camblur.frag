@@ -19,7 +19,7 @@ void main()
 		{
 			//vec2 offset = vec2(-camVectorX, -camVectorY) * vec2(i, y) * sampleOffset;
 			vec2 offset = vec2(i, y) * sampleOffset * vecMod;
-			sum += texture(texture, gl_TexCoord[0].xy + offset);
+			sum += texture2D(texture, gl_TexCoord[0].xy + offset);
 		}
 	}
 

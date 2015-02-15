@@ -44,6 +44,15 @@ public:
 	// Sample modifier [Render resolution over display resolution]
 	float sampleMod;
 
+	// Starting path counter [Increases the open area close to spawn point]
+	int wgStartingPath;
+	// Minimal path length [Increases the total map size]
+	int wgMinimalPathLength;
+	// Maximum path length [Decreases the maximum map size]
+	int wgMaximalPathLength;
+	// Path fork chance [Increases the amount of paths on the map]
+	int wgPathForkChance;
+
 	// Hotkeys
 	sf::Keyboard::Key hkDebugMode;
 	sf::Keyboard::Key hkDebugAdvanced;

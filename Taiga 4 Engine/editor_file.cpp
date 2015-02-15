@@ -13,7 +13,7 @@ void cEditor::saveBlueprint(string name)
 	{
 		// Writing
 			// Amount of attach points
-		file << 4 << endl;
+		/*file << 4 << endl;
 		file << -300 << endl;
 		file << 0 << endl;
 		file << DIRECTION_LEFT << endl;
@@ -25,7 +25,7 @@ void cEditor::saveBlueprint(string name)
 		file << DIRECTION_UP << endl;
 		file << 0 << endl;
 		file << -300 << endl;
-		file << DIRECTION_DOWN << endl;
+		file << DIRECTION_DOWN << endl;*/
 			// Other objects
 		file << "[Units]" << endl;
 		for (int i = 0; i < game.unitCounter; i++)

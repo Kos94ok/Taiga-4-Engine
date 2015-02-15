@@ -28,6 +28,12 @@ void cSettings::setDefault()
 	this->antialiasingLevel = 0;			// 0 - Disabled, 1+ - AA level
 	this->sampleMod = 1.00f;				// 0.50 - Subsampling, 1.00 - Default, 2.00 - Supersampling
 
+	// World generation
+	this->wgStartingPath = 3;				// Amount of paths
+	this->wgMinimalPathLength = 10;			// Minimal amount of steps before termination
+	this->wgMaximalPathLength = 50;			// Maximum amount of steps before termination
+	this->wgPathForkChance = 10;			// Chance to create another path on every step (percentage)
+
 	// Hotkeys
 	this->hkInventory = sf::Keyboard::E;
 		// Buttons [1; LIMIT) reserved for the items / abilities

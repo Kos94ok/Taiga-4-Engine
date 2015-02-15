@@ -32,10 +32,11 @@
 #define LIMIT_UI_PRIORITY				16
 #define LIMIT_SERVER_PLAYERS			32
 #define LIMIT_SERVER_PACKETQUEUE		2048
-#define LIMIT_PATHNODE					256
+#define LIMIT_MAP						64
 #define LIMIT_BUTTONSPERCOLUMN			5
 #define LIMIT_ACTIVEBUTTONS				35
 #define LIMIT_SELECTION					64
+#define LIMIT_CHUNKSIZE					300
 
 #define STATE_UNDEFINED					-1
 #define STATE_MAINMENU					0
@@ -158,10 +159,16 @@
 
 #define VIDEO_INTEL						0
 #define VIDEO_NVIDIA					1
-#define VIDEO_AMD						2
+#define VIDEO_ATI						2
 #define VIDEO_OTHER						3
 
-#define DIRECTION_RIGHT					0
-#define DIRECTION_UP					1
-#define DIRECTION_LEFT					2
-#define DIRECTION_DOWN					3
+#define DIR_RIGHT						0
+#define DIR_UP							1
+#define DIR_LEFT						2
+#define DIR_DOWN						3
+
+#define CHUNK_UNDEFINED					0
+#define CHUNK_NORMAL					1
+#define CHUNK_BLOCKED					2
+#define CHUNK_SPAWN						3
+#define CHUNK_VILLAGE					4

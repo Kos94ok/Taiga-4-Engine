@@ -11,7 +11,7 @@ void main()
 	int sampleDiv = int(iSampleCount * iSampleCount);
 	int sampleCount = int(iSampleCount) - 1;
 	sampleCount = sampleCount / 2;
-	vec4 color = vec4(0, 0, 0, texture(texture, gl_TexCoord[0].xy).a);
+	vec4 color = vec4(0, 0, 0, texture2D(texture, gl_TexCoord[0].xy).a);
 	
 	int i, y;
 	vec4 sum = vec4(0);
@@ -20,7 +20,7 @@ void main()
 		for (y = -sampleCount; y <= sampleCount; y++)
 		{
 			vec2 offset = vec2(i, y) * sampleOffset;
-			sum += vec4(0, 0, 0, texture(texture, gl_TexCoord[0].xy + offset).a);
+			sum += vec4(0, 0, 0, texture2D(texture, gl_TexCoord[0].xy + offset).a);
 		}
 	}
 
