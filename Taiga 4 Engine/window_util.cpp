@@ -16,6 +16,9 @@ void cWindow::showWarning(int msg, bool critical)
 	else if (msg == MSG_SHADERCOMPILE_OTHER) {
 		message = "One or more shaders are failed to compile. Some effects may be lost";
 	}
+	else if (msg == MSG_TEXTURESIZE_LIMIT) {
+		message = "Maximum texture size reached. Resolution will be reduced.";
+	}
 	
 	// Windows routine
 #ifdef SYSTEM_WINDOWS
