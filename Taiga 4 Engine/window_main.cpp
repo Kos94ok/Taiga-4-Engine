@@ -20,9 +20,12 @@ void windowMain()
 	else if (settings.screenMode == 2) { screenMode = sf::Style::Fullscreen; }
 	// Checking the max texture size
 	bool resChanged = false;
-	if (GL_MAX_TEXTURE_SIZE < camera.res.x) { camera.res.x = GL_MAX_TEXTURE_SIZE; resChanged = true; }
-	if (GL_MAX_TEXTURE_SIZE < camera.res.y) { camera.res.y = GL_MAX_TEXTURE_SIZE; resChanged = true; }
-	if (resChanged) { window.showWarning(MSG_TEXTURESIZE_LIMIT); }
+	if (visual.maxTextureSize < camera.res.x) { camera.res.x = visual.maxTextureSize; resChanged = true; }
+	if (visual.maxTextureSize < camera.res.y) { camera.res.y = visual.maxTextureSize; resChanged = true; }
+	if (resChanged) {
+		window.showWarning(MSG_TEXTURESIZE_LIMIT);
+		if (settings.sampleMod > 1.00f) { settings.sampleMod = 1.00f; }
+	}
 	// Creating the window
 	window.winHandle.create(sf::VideoMode(camera.res.x, camera.res.y), "Taiga 4 Engine", screenMode, context);
 	// Creating the textures

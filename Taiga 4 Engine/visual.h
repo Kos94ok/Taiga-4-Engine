@@ -11,6 +11,8 @@ public:
 class cVisual
 {
 public:
+	int maxTextureSize;
+
 	int gameTexCounter;
 	cTexture gameTex[LIMIT_TEXTURE];
 
@@ -27,5 +29,6 @@ public:
 	cVisual() {
 		unitsPainted = 0;
 		gameTexCounter = 0;
+		maxTextureSize = sf::Texture::getMaximumSize();
 	}
 };

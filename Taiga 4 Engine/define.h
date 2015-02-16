@@ -161,7 +161,8 @@
 #define VIDEO_INTEL						0
 #define VIDEO_NVIDIA					1
 #define VIDEO_ATI						2
-#define VIDEO_OTHER						3
+#define VIDEO_MICROSOFT					3
+#define VIDEO_OTHER						4
 
 #define DIR_RIGHT						0
 #define DIR_UP							1

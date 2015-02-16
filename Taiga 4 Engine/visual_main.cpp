@@ -3,6 +3,8 @@
 
 void cVisual::init()
 {
+	// Initializing the constants
+	maxTextureSize = sf::Texture::getMaximumSize();
 	// Initializing the fonts
 	// Main font
 	if (!fontMain.loadFromFile("Data/Fonts/stylo.ttf"))
@@ -39,7 +41,14 @@ void cVisual::init()
 		if (!shader[SHADER_CAMBLUR].loadFromFile("Data/Shaders/camblur.frag", sf::Shader::Fragment)) { shaderFail += 1; }
 		if (shaderFail > 0) { window.showWarning(MSG_SHADERCOMPILE_OTHER); }
 	}
-	else { window.showWarning(MSG_NOSHADERSUPPORT); }
+	else
+	{
+		window.showWarning(MSG_NOSHADERSUPPORT);
+		settings.enableBetterShadows = 0;
+		settings.enableDynamicLight = 0;
+		settings.enableCameraBlur = 0;
+		settings.enableScreenShaders = 0;
+	}
 }
 
 int cVisual::addTexture(string name, bool ignoreFilter)

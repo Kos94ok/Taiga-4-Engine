@@ -16,6 +16,10 @@ void cUtil::detectVideoCard()
 		core.videoCard = VIDEO_ATI;
 		cout << "[MAIN] Detected AMD video card" << endl;
 	}
+	else if (vendor.substr(0, 9) == "Microsoft") {
+		core.videoCard = VIDEO_MICROSOFT;
+		cout << "[MAIN] Detected Microsoft video card" << endl;
+	}
 	else {
 		core.videoCard = VIDEO_OTHER;
 		cout << "[MAIN] Unknown video card: " << vendor << endl;
