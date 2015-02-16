@@ -82,7 +82,7 @@ cUnit& cGame::getUnit(int id)
 	if (id != -1) {
 		return unit[id];
 	}
-	cout << "[ERROR] Can't find the unit!" << endl;
+	cout << "[ERROR] Can't find the unit " << id << "!" << endl;
 	return database.unit[0];
 }
 
