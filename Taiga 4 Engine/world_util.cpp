@@ -1,58 +1,64 @@
 
 #include "main.h"
 
-vec2 cWorld::applyBlueprint(vec2 position, int index)
+void cWorld::applyBlueprint(vec2i position, int type)
 {
-	int attachIndex = -1;
-	vec2 anchor = position;
+	vector<int> correctBlueprints;
+	ifstream in;
+	ofstream out;
 
-	// Adding units
-	vector<cUnitEntry> unitList = getBlueprintUnitList(index);
-	for (int i = 0; i < (int)unitList.size(); i++)
+	// Getting all correct blueprints
+	for (int i = 0; i < (int)blueprint.size(); i++)
 	{
-		game.addUnit(unitList[i].type, anchor + unitList[i].pos);
+		if (blueprint[i].type == type) { correctBlueprints.push_back(i); }
 	}
-	// Returning position
-	return anchor;
+	if (correctBlueprints.size() > 0)
+	{
+		// Getting random correct blueprint
+		int bpIndex = correctBlueprints[math.rand(0, (int)correctBlueprints.size() - 1)];
+		map[position.x][position.y].blueprint = bpIndex;
+
+		in.open("Data//Blueprints//" + blueprint[bpIndex].name);
+		out.open("Savefiles//" + save.worldName + "//" + to_string(position.x) + "-" + to_string(position.y) + ".chunk");
+		out << in.rdbuf();
+	}
+	else { cout << "[ERROR] Can't apply blueprint type " << type << " to (" << position.x << "; " << position.y << ")!" << "\n"; }
 }
 
-vector<cUnitEntry> cWorld::getBlueprintUnitList(int index)
+bool cWorld::isChunkLoaded(vec2i pos)
 {
-	char buffer[256];
-	string buf;
-	cUnitEntry entry;
-	vector<cUnitEntry> retVal;
-	ifstream file;
-	file.open("Data//Blueprints//" + blueprint[index].name);
-	if (file.good())
+	return map[pos.x][pos.y].isLoaded;
+}
+
+bool cWorld::isChunkViable(vec2i pos)
+{
+	float viableDist = 1000.00f;
+	vec2 chunkCenter = getChunkCenter(pos);
+	// Local player
+	if (client.connected && math.getDistance(camera.pos + vec2(camera.res.x / 2, camera.res.y / 2), chunkCenter) < viableDist) {
+		return true;
+	}
+	// Remote players
+	if (core.localServer || core.serverMode)
 	{
-		// Skipping to unit lines
-		do
+		for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
 		{
-			file.getline(buffer, 256);
-			buf = buffer;
-		}
-		while (!file.eof() && buf != "[Units]");
-		// Reading units
-		while (!file.eof())
-		{
-			// Type
-			file.getline(buffer, 256);	buf = buffer;
-			if (buf.length() > 0)
+			if (server.player[i].connected && math.getDistance(server.player[i].camPos
+				+ vec2(server.player[i].camRes.x / 2, server.player[i].camRes.y / 2), chunkCenter) < viableDist)
 			{
-				entry.type = buffer;
-				// Pos X
-				file.getline(buffer, 256);	buf = buffer;
-				entry.pos.x = math.stringToInt(buffer);
-				// Pos Y
-				file.getline(buffer, 256);	buf = buffer;
-				entry.pos.y = math.stringToInt(buffer);
-				// Pusing to array
-				retVal.push_back(entry);
+				return true;
 			}
 		}
-		// Closing
-		file.close();
 	}
-	return retVal;
+	return false;
+}
+
+vec2i cWorld::getChunkInPos(vec2 pos)
+{
+	return vec2i(floor(pos.x / LIMIT_CHUNKSIZE), floor(pos.y / LIMIT_CHUNKSIZE));
+}
+
+vec2 cWorld::getChunkCenter(vec2i pos)
+{
+	return vec2((float)pos.x * LIMIT_CHUNKSIZE + LIMIT_CHUNKSIZE / 2, (float)pos.y * LIMIT_CHUNKSIZE + LIMIT_CHUNKSIZE / 2);
 }

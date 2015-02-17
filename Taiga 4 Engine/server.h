@@ -5,6 +5,8 @@ class cServerPlayer
 {
 public:
 	int unit;
+	sf::Vector2f camPos;
+	sf::Vector2i camRes;
 
 	int packet;
 
@@ -19,6 +21,7 @@ public:
 	void setMaxHealth(float maxHp);
 
 	cServerPlayer() {
+		unit = -1;
 		packet = 0;
 		connected = false;
 		socket.setBlocking(false);

@@ -120,17 +120,19 @@ void cWorld::genNormalWorld()
 			else if (map[i][j].genStatus == CHUNK_SPAWN) { file << "@ "; }
 			else if (map[i][j].genStatus == CHUNK_VILLAGE) { file << "& "; }
 		}
-		file << endl;
+		file << "\n";
 	}
 	file.close();
 
-	// Temporary applying stuff
+	// Copying blueprints to real positions
 	for (int j = 0; j < LIMIT_MAP; j++)
 	{
 		for (int i = 0; i < LIMIT_MAP; i++)
 		{
-			if (map[i][j].genStatus == CHUNK_NORMAL) {
-				applyBlueprint(vec2(i * LIMIT_CHUNKSIZE, j * LIMIT_CHUNKSIZE), 0);
+			if (map[i][j].genStatus != CHUNK_UNDEFINED)
+			//if (map[i][j].genStatus == CHUNK_NORMAL)
+			{
+				applyBlueprint(vec2i(i, j), map[i][j].genStatus);
 			}
 		}
 	}

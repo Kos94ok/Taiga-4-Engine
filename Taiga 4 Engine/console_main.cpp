@@ -192,7 +192,7 @@ bool cConsole::parseCommand(string cmd)
 				console.cmdFunc[i](args);
 			}
 			else {
-				cout << "[CMD] Only server can use this command!" << endl;
+				cout << "[CMD] Only server can use this command!" << "\n";
 			}
 		}
 	}
@@ -206,7 +206,7 @@ bool cConsole::parseCommand(string cmd)
 			if (cmd.substr(0, console.cmdWrong[i].length()) == console.cmdWrong[i] && console.cmdWrong[i].length() > 0)
 			{
 				commandParsed = true;
-				cout << "[CMD] " << console.cmdSyntax[i] << endl;
+				cout << "[CMD] " << console.cmdSyntax[i] << "\n";
 			}
 		}
 	}
@@ -214,7 +214,7 @@ bool cConsole::parseCommand(string cmd)
 	// Unknown command
 	if (!commandParsed)
 	{
-		cout << "[CMD] Can not parse the command!" << endl;
+		cout << "[CMD] Can not parse the command!" << "\n";
 	}
 
 	return true;
@@ -231,12 +231,12 @@ string cConsole::waitForCommand()
 // Console main function
 void consoleMain()
 {
-	cout << "[CMD] Console thread started" << endl;
-	cout << "[CMD] Waiting for commands" << endl;
+	cout << "[CMD] Console thread started" << "\n";
+	cout << "[CMD] Waiting for commands" << "\n";
 	while (!core.shutdown)
 	{
 		Sleep(100);
 		console.parseCommand(console.waitForCommand());
 	}
-	cout << "[CMD] Cleaning up" << endl;
+	cout << "[CMD] Cleaning up" << "\n";
 }

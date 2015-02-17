@@ -28,7 +28,7 @@ void cServer::introduce(int playerId)
 	{
 		for (int i = 0; i < game.unitCounter; i++)
 		{
-			data << MSG_UNIT_ADD << game.unit[i].globalId << game.unit[i].type << game.unit[i].pos.x << game.unit[i].pos.y << -1;
+			data << MSG_UNIT_ADD << game.unit[i].globalId << game.unit[i].type << game.unit[i].pos.x << game.unit[i].pos.y << -1 << -1;
 			sendPacket(playerId, data);
 			data.clear();
 			if (server.dataQueueCounter > 100) { Sleep(1); }

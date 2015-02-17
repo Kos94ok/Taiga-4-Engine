@@ -4,13 +4,13 @@
 // Server thread that waits for incoming connections
 void serverConnectMain()
 {
-	cout << "[SRV_CONNECT] Starting the server connect thread" << endl;
+	cout << "[SRV_CONNECT] Starting the server connect thread" << "\n";
 
 	sf::TcpListener listener;
 	listener.setBlocking(false);
 	if (listener.listen(21045) == sf::Socket::Done)
 	{
-		cout << "[SRV_CONNECT] Listening at port " << listener.getLocalPort() << "." << endl;
+		cout << "[SRV_CONNECT] Listening at port " << listener.getLocalPort() << ".\n";
 	}
 	while (!core.shutdown)
 	{
@@ -23,7 +23,7 @@ void serverConnectMain()
 					server.player[i].packet = 0;
 					server.player[i].connected = true;
 					cout << "[SRV_CONNECT] Connection from IP [" << server.player[i].socket.getRemoteAddress().toString()
-						<< "] assigned to slot " << i << "." << endl;
+						<< "] assigned to slot " << i << "." << "\n";
 					// Introducing the player
 					server.introduce(i);
 				}
@@ -32,7 +32,7 @@ void serverConnectMain()
 		}
 		Sleep(10);
 	}
-	cout << "[SRV_CONNECT] Cleaning up" << endl;
+	cout << "[SRV_CONNECT] Cleaning up" << "\n";
 	listener.close();
 	for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
 	{
@@ -43,7 +43,7 @@ void serverConnectMain()
 // Server thread that waits for incoming messages from clients
 void serverReceiveMain()
 {
-	cout << "[SRV_RECEIVE] Starting the server receive thread" << endl;
+	cout << "[SRV_RECEIVE] Starting the server receive thread" << "\n";
 	sf::Packet data;
 	int retVal = 0;
 	bool parsed = false;
@@ -66,21 +66,21 @@ void serverReceiveMain()
 				}
 				else if (retVal == sf::Socket::Disconnected)
 				{
-					cout << "[SRV_RECEIVE] Player " << i << " disconnected!" << endl;
+					cout << "[SRV_RECEIVE] Player " << i << " disconnected!" << "\n";
 					server.player[i].disconnect();
 				}
 			}
 		}
 	}
 
-	cout << "[SRV_RECEIVE] Cleaning up" << endl;
+	cout << "[SRV_RECEIVE] Cleaning up" << "\n";
 }
 
 // Server thread that sends messages to client from data queue
 void serverSendMain()
 {
 	sf::Packet localData;
-	cout << "[SRV_SEND] Starting the server send thread" << endl;
+	cout << "[SRV_SEND] Starting the server send thread" << "\n";
 	while (!core.shutdown)
 	{
 		if (server.dataQueueCounter > 0)
@@ -122,5 +122,5 @@ void serverSendMain()
 		else { Sleep(10); }
 	}
 
-	cout << "[SRV_SEND] Cleaning up" << endl;
+	cout << "[SRV_SEND] Cleaning up" << "\n";
 }

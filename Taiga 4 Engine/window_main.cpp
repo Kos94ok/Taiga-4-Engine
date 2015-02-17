@@ -5,7 +5,7 @@ void windowMain()
 {
 	if (core.serverMode) { return; }
 
-	cout << "[WND] Window thread started" << endl;
+	cout << "[WND] Window thread started" << "\n";
 	srand(time(0));
 	sf::Uint32 screenMode;
 	sf::ContextSettings context;
@@ -36,14 +36,14 @@ void windowMain()
 	window.winHandle.setVerticalSyncEnabled(math.intToBool(settings.enableVertSync));
 	window.updateAspectRatio();
 	
-	cout << "[WND] Starting the main loop" << endl;
+	cout << "[WND] Starting the main loop" << "\n";
 	while (!core.shutdown)
 	{
 		window.mainEvent();
 		window.mainPaint();
 	}
 	window.winHandle.close();
-	cout << "[WND] Cleaning up" << endl;
+	cout << "[WND] Cleaning up" << "\n";
 }
 
 sf::Vector2f cWindow::getMousePos(bool useMatrix)

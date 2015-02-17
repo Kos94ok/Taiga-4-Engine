@@ -83,6 +83,7 @@ extern cServer server;
 extern cClient client;
 extern cCamera camera;
 extern cSettings settings;
+extern cSave save;
 extern cWorld world;
 extern cEditor editor;
 extern cUtil util;

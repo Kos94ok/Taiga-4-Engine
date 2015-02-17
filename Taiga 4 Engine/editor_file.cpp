@@ -13,21 +13,21 @@ void cEditor::saveBlueprint(string name)
 	{
 		// Writing
 			// Other objects
-		file << "[Units]" << endl;
+		file << "[Units]" << "\n";
 		for (int i = 0; i < game.unitCounter; i++)
 		{
 			if (!game.unit[i].hasRef(REF_UNIT_NOSAVE))
 			{
-				file << game.unit[i].type << endl;
-				file << game.unit[i].pos.x << endl;
-				file << game.unit[i].pos.y << endl;
+				file << game.unit[i].type << "\n";
+				file << game.unit[i].pos.x << "\n";
+				file << game.unit[i].pos.y << "\n";
 			}
 		}
 
 		// Closing the file
 		file.close();
 	}
-	else { cout << "[ERROR] Can't create the file " << path << endl; }
+	else { cout << "[ERROR] Can't create the file " << path << "\n"; }
 }
 
 void cEditor::loadBlueprint(string name)

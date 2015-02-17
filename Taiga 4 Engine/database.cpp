@@ -57,6 +57,7 @@ void cDatabase::loadUnits()
 	unit[i].container.itemLimit = 1000;
 	unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
+	unit[i].addRef(REF_UNIT_NOUNLOAD);
 	i += 1;
 
 	// Trees

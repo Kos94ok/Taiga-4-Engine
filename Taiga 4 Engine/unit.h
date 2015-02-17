@@ -103,6 +103,8 @@ class cUnit : public cCharacter
 public:
 	int orderCounter;
 	cOrder order[LIMIT_ORDERS];
+	float actionTimer;
+	sf::Vector2i chunkPos;
 
 	int addOrder_moveto(sf::Vector2f target, bool overwrite = true);
 	int addOrder_moveto_path(sf::Vector2f target, bool overwrite = true);
@@ -118,8 +120,6 @@ public:
 	float movementSpeed;
 	cAnimDirection getCurrentAnimDirection();
 	cItemContainer container;
-
-	float actionTimer;
 
 	float resource;
 	void addResource(float d);

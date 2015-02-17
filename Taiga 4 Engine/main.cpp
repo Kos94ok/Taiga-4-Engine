@@ -15,6 +15,7 @@ cServer server;
 cClient client;
 cCamera camera;
 cSettings settings;
+cSave save;
 cWorld world;
 cEditor editor;
 cUtil util;
@@ -22,14 +23,14 @@ cAPI api;
 
 int main(int argc, char* argv[])
 {
-	cout << "[MAIN] Main thread started" << endl;
-	cout << "[MAIN] Parsing arguments [" << argc << "]" << endl;
+	cout << "[MAIN] Main thread started" << "\n";
+	cout << "[MAIN] Parsing arguments [" << argc << "]" << "\n";
 	for (int i = 0; i < argc; i++)
 	{
 		if (strcmp(argv[i], "-server") == 0) { core.serverMode = true; }
 	}
 	// Random initialization
-	cout << "[MAIN] Initializing" << endl;
+	cout << "[MAIN] Initializing" << "\n";
 	//setlocale(LC_ALL, "");
 	//setlocale(LC_ALL, "Russian"); 
 	srand(time(0));
@@ -38,7 +39,7 @@ int main(int argc, char* argv[])
 	util.detectVideoCard();
 
 	// Loading databases
-	cout << "[MAIN] Loading databases" << endl;
+	cout << "[MAIN] Loading databases" << "\n";
 	settings.setDefault();
 	settings.load();
 	database.init();
@@ -47,7 +48,7 @@ int main(int argc, char* argv[])
 	world.analyzeBlueprints();
 
 	// Starting the threads
-	cout << "[MAIN] Starting the threads" << endl;
+	cout << "[MAIN] Starting the threads\n";
 	thread threadWindow(windowMain);
 	Sleep(50);
 	thread threadServerWorld(serverWorldMain);
@@ -62,10 +63,12 @@ int main(int argc, char* argv[])
 	Sleep(50);
 	thread threadClientSend(clientSendMain);
 	Sleep(50);
+	thread threadWorldLoader(worldLoaderMain);
+	Sleep(50);
 	thread threadConsole(consoleMain);
 	Sleep(50);
 
-	cout << "[MAIN] Making some menu" << endl;
+	cout << "[MAIN] Making some menu" << "\n";
 	int id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f));
 	ui.element[ui.getElementId(id)].setText("Taiga Mini");
 	ui.element[ui.getElementId(id)].button.action = "start_taigaMini";
@@ -79,7 +82,7 @@ int main(int argc, char* argv[])
 	ui.element[ui.getElementId(id)].setText("88.85.144.209");
 	ui.element[ui.getElementId(id)].button.action = "connect_temp";
 
-	cout << "[MAIN] Overlooking the threads..." << endl;
+	cout << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();
 	while (!core.shutdown)
 	{
@@ -95,7 +98,7 @@ int main(int argc, char* argv[])
 	}
 
 	// Waiting for shutdown
-	cout << "[MAIN] Waiting for threads to finish..." << endl;
+	cout << "[MAIN] Waiting for threads to finish..." << "\n";
 	threadWindow.join();
 	threadServerWorld.join();
 	threadServerConnect.join();
@@ -103,11 +106,12 @@ int main(int argc, char* argv[])
 	threadServerSend.join();
 	threadClientReceive.join();
 	threadClientSend.join();
+	threadWorldLoader.join();
 	// Terminating the blocking threads
 	if (console.online) { TerminateThread(threadConsole.native_handle(), 0); }
 	threadConsole.join();
 
-	cout << "[MAIN] Cleaning up" << endl;
+	cout << "[MAIN] Cleaning up" << "\n";
 
 	// Cleaning up
 	return 0;

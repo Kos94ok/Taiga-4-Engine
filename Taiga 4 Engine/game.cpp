@@ -14,15 +14,16 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation)
 		unit[unitCounter] = database.getUnit(type);
 		unit[unitCounter].globalId = unitGlobalCounter++;
 		unit[unitCounter].pos = pos;
+		unit[unitCounter].chunkPos = world.getChunkInPos(pos);
 		unitCounter += 1;
 	}
-	else { cout << "[ERROR] Unit limit reached!" << endl; }
+	else { cout << "[ERROR] Unit limit reached!" << "\n"; }
 
 	// Server
 	if (core.serverMode || core.localServer)
 	{
 		sf::Packet data;
-		data << MSG_UNIT_ADD << unitGlobalCounter - 1 << type << pos.x << pos.y << owner;
+		data << MSG_UNIT_ADD << unitGlobalCounter - 1 << type << pos.x << pos.y << owner << variation;
 		server.sendPacket(PLAYERS_REMOTE, data);
 	}
 	return game.unitGlobalCounter - 1;
@@ -82,7 +83,7 @@ cUnit& cGame::getUnit(int id)
 	if (id != -1) {
 		return unit[id];
 	}
-	cout << "[ERROR] Can't find the unit " << id << "!" << endl;
+	cout << "[ERROR] Can't find the unit " << id << "!" << "\n";
 	return database.unit[0];
 }
 

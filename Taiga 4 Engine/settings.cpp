@@ -78,7 +78,7 @@ void cSettings::load()
 	cSettingsKey key;
 	ifstream file;
 	file.open("settings.ini");
-	if (!file.good()) { cout << "[ERROR] Can't open the settings file. Returning to default" << endl; return; }
+	if (!file.good()) { cout << "[ERROR] Can't open the settings file. Returning to default" << "\n"; return; }
 	
 	// Looking for values until the end of the file
 	while (retVal)
@@ -131,43 +131,43 @@ void cSettings::save()
 	file.open("settings.ini");
 	if (file.good())
 	{
-		file << "[Display]" << endl;
-		file << "screenMode = " << screenMode << endl;
-		file << "screenWidth = " << camera.res.x << endl;
-		file << "screenHeight = " << camera.res.y << endl;
-		file << "enableVertSync = " << enableVertSync << endl;
-		file << "sampleMod = " << math.round(sampleMod * 100.00f) << endl;
+		file << "[Display]" << "\n";
+		file << "screenMode = " << screenMode << "\n";
+		file << "screenWidth = " << camera.res.x << "\n";
+		file << "screenHeight = " << camera.res.y << "\n";
+		file << "enableVertSync = " << enableVertSync << "\n";
+		file << "sampleMod = " << math.round(sampleMod * 100.00f) << "\n";
 
-		file << endl << "[Visual]" << endl;
-		file << "enableScreenShaders = " << enableScreenShaders << endl;
-		file << "enableNightShadows = " << enableNightShadows << endl;
-		file << "enableBetterShadows = " << enableBetterShadows << endl;
-		file << "enableTextureSmoothing = " << enableTextureSmoothing << endl;
-		file << "enableCameraBlur = " << enableCameraBlur << endl;
-		file << "pixelization = " << math.round(pixelization) << endl;
-		file << "shadowBlur = " << shadowBlur << endl;
+		file << endl << "[Visual]" << "\n";
+		file << "enableScreenShaders = " << enableScreenShaders << "\n";
+		file << "enableNightShadows = " << enableNightShadows << "\n";
+		file << "enableBetterShadows = " << enableBetterShadows << "\n";
+		file << "enableTextureSmoothing = " << enableTextureSmoothing << "\n";
+		file << "enableCameraBlur = " << enableCameraBlur << "\n";
+		file << "pixelization = " << math.round(pixelization) << "\n";
+		file << "shadowBlur = " << shadowBlur << "\n";
 
-		file << endl << "[Gameplay]" << endl;
-		file << "enableQuickCast = " << enableQuickCast << endl;
+		file << endl << "[Gameplay]" << "\n";
+		file << "enableQuickCast = " << enableQuickCast << "\n";
 
-		file << endl << "[Keyboard]" << endl;
-		file << "hkInventory = " << hkInventory << endl;
-		file << "hkActiveItem01 = " << hkActiveItem[1] << endl;
-		file << "hkActiveItem02 = " << hkActiveItem[2] << endl;
-		file << "hkActiveItem03 = " << hkActiveItem[3] << endl;
-		file << "hkActiveItem04 = " << hkActiveItem[4] << endl;
-		file << "hkActiveItem05 = " << hkActiveItem[5] << endl;
-		file << "hkActiveItem06 = " << hkActiveItem[6] << endl;
-		file << "hkActiveItem07 = " << hkActiveItem[7] << endl;
-		file << "hkActiveItem08 = " << hkActiveItem[8] << endl;
-		file << "hkActiveItem09 = " << hkActiveItem[9] << endl;
-		file << "hkCamMoveUp = " << hkCamMove[0] << endl;
-		file << "hkCamMoveDown = " << hkCamMove[1] << endl;
-		file << "hkCamMoveLeft = " << hkCamMove[2] << endl;
-		file << "hkCamMoveRight = " << hkCamMove[3] << endl;
-		file << "hkDebugMode = " << hkDebugMode << endl;
-		file << "hkDebugAdvanced = " << hkDebugAdvanced << endl;
+		file << endl << "[Keyboard]" << "\n";
+		file << "hkInventory = " << hkInventory << "\n";
+		file << "hkActiveItem01 = " << hkActiveItem[1] << "\n";
+		file << "hkActiveItem02 = " << hkActiveItem[2] << "\n";
+		file << "hkActiveItem03 = " << hkActiveItem[3] << "\n";
+		file << "hkActiveItem04 = " << hkActiveItem[4] << "\n";
+		file << "hkActiveItem05 = " << hkActiveItem[5] << "\n";
+		file << "hkActiveItem06 = " << hkActiveItem[6] << "\n";
+		file << "hkActiveItem07 = " << hkActiveItem[7] << "\n";
+		file << "hkActiveItem08 = " << hkActiveItem[8] << "\n";
+		file << "hkActiveItem09 = " << hkActiveItem[9] << "\n";
+		file << "hkCamMoveUp = " << hkCamMove[0] << "\n";
+		file << "hkCamMoveDown = " << hkCamMove[1] << "\n";
+		file << "hkCamMoveLeft = " << hkCamMove[2] << "\n";
+		file << "hkCamMoveRight = " << hkCamMove[3] << "\n";
+		file << "hkDebugMode = " << hkDebugMode << "\n";
+		file << "hkDebugAdvanced = " << hkDebugAdvanced << "\n";
 	}
-	else { cout << "[ERROR] Can't save the settings file!" << endl; }
+	else { cout << "[ERROR] Can't save the settings file!" << "\n"; }
 	file.close();
 }

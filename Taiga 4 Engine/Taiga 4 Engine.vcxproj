@@ -149,6 +149,7 @@
     <ClCompile Include="window_util.cpp" />
     <ClCompile Include="world_gen.cpp" />
     <ClCompile Include="world_main.cpp" />
+    <ClCompile Include="world_save.cpp" />
     <ClCompile Include="world_util.cpp" />
   </ItemGroup>
   <ItemGroup>

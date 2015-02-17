@@ -15,14 +15,14 @@ bool cClient::msgUnit(sf::Packet input)
 	// Create unit
 	if (msg == MSG_UNIT_ADD)
 	{
-		input >> id >> type >> argf[0] >> argf[1] >> argi[2];
+		input >> id >> type >> argf[0] >> argf[1] >> argi[2] >> argi[3];
 		if (game.getUnitId(id) == -1)
 		{
-			game.addUnit(type, sf::Vector2f(argf[0], argf[1]));
+			game.addUnit(type, sf::Vector2f(argf[0], argf[1]), argi[2], argi[3]);
 			game.unit[game.unitCounter - 1].globalId = id;
 			game.unit[game.unitCounter - 1].owner = argi[2];
 		}
-		else { cout << "[CLIENT_RECEIVE] Duplicate create unit message. Ignoring" << endl; }
+		else { cout << "[CLIENT_RECEIVE] Duplicate create unit message. Ignoring" << "\n"; }
 		return true;
 	}
 	// ============================================
@@ -50,7 +50,7 @@ bool cClient::msgUnit(sf::Packet input)
 	{
 		input >> id >> argf[0];
 		game.unit[game.getUnitId(id)].setResource(argf[0]);
-		cout << argf[0] << endl;
+		cout << argf[0] << "\n";
 		return true;
 	}
 	// ============================================

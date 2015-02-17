@@ -3,7 +3,7 @@
 
 void clientReceiveMain()
 {
-	cout << "[CLIENT_RECEIVE] Starting the client receive thread" << endl;
+	cout << "[CLIENT_RECEIVE] Starting the client receive thread" << "\n";
 	sf::Packet data;
 	int retVal;
 	string cmd, type;
@@ -25,7 +25,7 @@ void clientReceiveMain()
 			}
 			else if (retVal == sf::Socket::Disconnected)
 			{
-				cout << "[CLIENT_RECEIVE] Connection to server lost!" << endl;
+				cout << "[CLIENT_RECEIVE] Connection to server lost!" << "\n";
 				client.disconnect();
 			}
 			else { Sleep(10); }
@@ -33,18 +33,18 @@ void clientReceiveMain()
 		else { Sleep(10); }
 	}
 
-	cout << "[CLIENT_RECEIVE] Cleaning up..." << endl;
+	cout << "[CLIENT_RECEIVE] Cleaning up..." << "\n";
 }
 
 void clientSendMain()
 {
-	cout << "[CLIENT_SEND] Starting the client send thread" << endl;
+	cout << "[CLIENT_SEND] Starting the client send thread" << "\n";
 
 	while (!core.shutdown)
 	{
 		if (client.connected && client.dataQueueCounter > 0)
 		{
-			//cout << "[CLIENT_SEND] Packet sent!" << endl;
+			//cout << "[CLIENT_SEND] Packet sent!" << "\n";
 			// Sending the data
 			client.socket.send(client.dataQueue[0].data);
 			// Moving the queue
@@ -57,5 +57,5 @@ void clientSendMain()
 		else { Sleep(10); }
 	}
 
-	cout << "[CLIENT_SEND] Cleaning up..." << endl;
+	cout << "[CLIENT_SEND] Cleaning up..." << "\n";
 }

@@ -355,7 +355,7 @@ void serverWorldUI(int elapsedTime)
 
 void serverWorldMain()
 {
-	cout << "[SRV_WORLD] Starting the server world thread" << endl;
+	cout << "[SRV_WORLD] Starting the server world thread" << "\n";
 	srand(time(0));
 	int elapsedTime, globalTime = 0;
 	while (!core.shutdown)
@@ -373,5 +373,5 @@ void serverWorldMain()
 		Sleep(1);
 	}
 
-	cout << "[SRV_WORLD] Cleaning up" << endl;
+	cout << "[SRV_WORLD] Cleaning up" << "\n";
 }

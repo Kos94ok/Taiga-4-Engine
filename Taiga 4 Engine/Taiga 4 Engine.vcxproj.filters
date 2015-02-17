@@ -198,6 +198,9 @@
     <ClCompile Include="editor_gen.cpp">
       <Filter>Файлы исходного кода\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="world_save.cpp">
+      <Filter>Файлы исходного кода\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
