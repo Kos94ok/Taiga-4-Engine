@@ -15,3 +15,7 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# Ignore VS .xml files
+"Taiga 4 Engine/Taiga 4 Engine.vcxproj" linguist-vendored=true
+"Taiga 4 Engine/Taiga 4 Engine.vcxproj.filters" linguist-vendored=true
