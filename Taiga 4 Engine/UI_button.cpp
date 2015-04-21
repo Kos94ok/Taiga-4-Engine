@@ -169,7 +169,7 @@ void cUIButton::callbackLeft(int parent)
 	}
 	else if (action == "connect_temp")
 	{
-		client.connect("127.0.0.1", 21045);
+		client.connect("84.50.50.87", 21045);
 		ui.updateFull();
 	}
 	else if (action == "invToggle")
