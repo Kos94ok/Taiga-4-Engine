@@ -14,10 +14,10 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool
 		if (unitCounter < LIMIT_UNIT - 1)
 		{
 			unit[unitCounter] = database.getUnit(type);
-			unit[unitCounter].globalId = unitGlobalCounter++;
 			unit[unitCounter].pos = pos;
 			unit[unitCounter].chunkPos = world.getChunkInPos(pos);
 			unit[unitCounter].owner = owner;
+			if (core.serverMode || core.localServer) { unit[unitCounter].globalId = unitGlobalCounter++; }
 			unitCounter += 1;
 		}
 		else { cout << "[ERROR] Unit limit reached!" << "\n"; }

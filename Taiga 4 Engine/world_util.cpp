@@ -46,12 +46,16 @@ bool cWorld::isChunkLoaded(vec2i pos)
 
 bool cWorld::isChunkViable(vec2i pos)
 {
+	int unitId;
 	float bufferArea = 500.00f;
 	sf::FloatRect camRect(vec2f(camera.pos.x - bufferArea, camera.pos.y - bufferArea), vec2f(camera.res.x + bufferArea * 2, camera.res.y + bufferArea * 2));
 	sf::FloatRect unitRect;
 	sf::FloatRect chunkRect(vec2f(pos.x * LIMIT_CHUNKSIZE, pos.y * LIMIT_CHUNKSIZE), vec2f(LIMIT_CHUNKSIZE, LIMIT_CHUNKSIZE));
 	if (client.unit != -1){
-		unitRect = sf::FloatRect(vec2f(game.getUnit(client.unit).pos.x - camera.res.x / 2, game.getUnit(client.unit).pos.y - camera.res.y / 2), vec2f(camera.res.x, camera.res.y));
+		unitId = game.getUnitId(client.unit);
+		if (unitId != -1) {
+			unitRect = sf::FloatRect(vec2f(game.unit[unitId].pos.x - camera.res.x / 2, game.unit[unitId].pos.y - camera.res.y / 2), vec2f(camera.res.x, camera.res.y));
+		}
 	}
 	// Local player
 	if (client.connected && (camRect.intersects(chunkRect) || unitRect.intersects(chunkRect)))
@@ -68,8 +72,12 @@ bool cWorld::isChunkViable(vec2i pos)
 				camRect = sf::FloatRect(vec2f(server.player[i].camPos.x - bufferArea, server.player[i].camPos.y - bufferArea),
 					vec2f(server.player[i].camRes.x + bufferArea * 2, server.player[i].camRes.y + bufferArea * 2));
 				if (server.player[i].unit != -1){
-					unitRect = sf::FloatRect(vec2f(game.getUnit(server.player[i].unit).pos.x - server.player[i].camRes.x / 2,
-						game.getUnit(server.player[i].unit).pos.y - server.player[i].camRes.y / 2), vec2f(server.player[i].camRes.x, server.player[i].camRes.y));
+					unitId = game.getUnitId(server.player[i].unit);
+					if (unitId != -1)
+					{
+						unitRect = sf::FloatRect(vec2f(game.unit[unitId].pos.x - server.player[i].camRes.x / 2,
+							game.unit[unitId].pos.y - server.player[i].camRes.y / 2), vec2f(server.player[i].camRes.x, server.player[i].camRes.y));
+					}
 				}
 				if (camRect.intersects(chunkRect) || unitRect.intersects(chunkRect))
 				{
