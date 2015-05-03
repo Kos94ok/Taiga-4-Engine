@@ -38,11 +38,16 @@ public:
 	void sendPacket(int target, sf::Packet data);
 
 	bool isLocalPlayer(int player);
+	void initialize();
 	void introduce(int playerId);
+	void sendChunkData(int playerId, int x, int y);
 
 	// Takes: Unit global id
 	// Returns: Controlling player id
 	int getController(int target);
+	// Takes: Player index, Data packet
+	// Returns: True, if packet is parsed successfully
+	bool msgRequest(int i, sf::Packet data);
 	// Takes: Player index, Data packet
 	// Returns: True, if packet is parsed successfully
 	bool msgControlUnit(int i, sf::Packet data);
@@ -52,6 +57,9 @@ public:
 	// Takes: Player index, Data packet
 	// Returns: True, if packet is parsed successfully
 	bool msgControlAbility(int i, sf::Packet data);
+	// Takes: Unit global id
+	// Returns: Unit data ready for transfer
+	sf::Packet packUnitData(int id, int variation = -1);
 
 	cServer()
 	{

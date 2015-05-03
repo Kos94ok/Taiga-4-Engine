@@ -3,11 +3,13 @@
 
 void clientReceiveMain()
 {
+	int threadId = 5;
 	cout << "[CLIENT_RECEIVE] Starting the client receive thread" << "\n";
 	sf::Packet data;
 	int retVal;
 	string cmd, type;
 	bool parsed = false;
+	int counter = 0;
 
 	while (!core.shutdown)
 	{
@@ -17,6 +19,7 @@ void clientReceiveMain()
 			retVal = client.socket.receive(data);
 			if (retVal == sf::Socket::Done)
 			{
+				//cout << "Received to client " << counter++ << endl;
 				parsed = client.msgUnit(data);
 				if (!parsed) { parsed = client.msgOrder(data); }
 				if (!parsed) { parsed = client.msgGame(data); }
@@ -31,6 +34,7 @@ void clientReceiveMain()
 			else { Sleep(10); }
 		}
 		else { Sleep(10); }
+		core.thread_antifreeze[threadId] = 0;
 	}
 
 	cout << "[CLIENT_RECEIVE] Cleaning up..." << "\n";
@@ -38,6 +42,7 @@ void clientReceiveMain()
 
 void clientSendMain()
 {
+	int threadId = 6;
 	cout << "[CLIENT_SEND] Starting the client send thread" << "\n";
 
 	while (!core.shutdown)
@@ -55,6 +60,7 @@ void clientSendMain()
 			client.dataQueueCounter -= 1;
 		}
 		else { Sleep(10); }
+		core.thread_antifreeze[threadId] = 0;
 	}
 
 	cout << "[CLIENT_SEND] Cleaning up..." << "\n";

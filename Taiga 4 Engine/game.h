@@ -33,10 +33,10 @@ public:
 
 	// Takes: Unit type, Unit position
 	// Returns: Unit global id
-	int addUnit(std::string type, sf::Vector2f pos, int owner = -1, int variation = -1);
+	int addUnit(std::string type, sf::Vector2f pos, int owner = -1, int variation = -1, bool sendData = true);
 	// Takes: Unit global id
 	// Returns: Nothing
-	void removeUnit(int id);
+	void removeUnit(int id, bool sendData = true);
 	// Takes: Nothing
 	// Returns: Nothing
 	void clearUnits();

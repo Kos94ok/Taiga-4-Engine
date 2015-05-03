@@ -13,6 +13,14 @@ void cClient::connect(string ip, short port)
 
 	disconnect();
 
+	/*
+	Connecting to 'localserver' means that we are connecting to the same instance
+	of the game. At the same time, '127.0.0.1' or 'localhost' will mean other
+	instance running on the same machine.
+	*/
+	bool localServer = false;
+	if (ip == "localserver") { localServer = true; ip = "127.0.0.1"; }
+
 	sf::IpAddress address(ip);
 	sf::Time timeout(sf::milliseconds(5000));
 
@@ -21,10 +29,7 @@ void cClient::connect(string ip, short port)
 	if (client.socket.connect(address, port, timeout) == sf::Socket::Done)
 	{
 		client.connected = true;
-		// Close the local server, if connected else where
-		if (client.socket.getRemoteAddress().toString() != "127.0.0.1") {
-			core.localServer = false;
-		}
+		core.localServer = localServer;
 		cout << "[CLIENT] Server found!" << "\n";
 	}
 	else

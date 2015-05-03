@@ -3,6 +3,7 @@
 
 void windowMain()
 {
+	int threadId = 0;
 	if (core.serverMode) { return; }
 
 	cout << "[WND] Window thread started" << "\n";
@@ -41,6 +42,7 @@ void windowMain()
 	{
 		window.mainEvent();
 		window.mainPaint();
+		core.thread_antifreeze[threadId] = 0;
 	}
 	window.winHandle.close();
 	cout << "[WND] Cleaning up" << "\n";

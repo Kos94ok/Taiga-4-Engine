@@ -59,7 +59,10 @@ bool cClient::msgUnit(sf::Packet input)
 	if (msg == MSG_UNIT_SETHEALTH)
 	{
 		input >> id >> argf[0];
-		game.unit[game.getUnitId(id)].setHealth(argf[0]);
+		id = game.getUnitId(id);
+		if (id != -1) {
+			game.unit[id].setHealth(argf[0]);
+		}
 		return true;
 	}
 	// ============================================
@@ -68,7 +71,10 @@ bool cClient::msgUnit(sf::Packet input)
 	if (msg == MSG_UNIT_SETMAXHEALTH)
 	{
 		input >> id >> argf[0];
-		game.unit[game.getUnitId(id)].setMaxHealth(argf[0]);
+		id = game.getUnitId(id);
+		if (id != -1) {
+			game.unit[id].setMaxHealth(argf[0]);
+		}
 		return true;
 	}
 	// ============================================
@@ -129,6 +135,19 @@ bool cClient::msgOrder(sf::Packet input)
 		if (id != -1)
 		{
 			game.unit[id].addOrder_moveto(sf::Vector2f(argf[0], argf[1]), argb[2]);
+		}
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Order unit to move with pathing
+	if (msg == MSG_ORDER_MOVETOPATH)
+	{
+		input >> id >> argf[0] >> argf[1] >> argb[2];
+		id = game.getUnitId(id);
+		if (id != -1)
+		{
+			game.unit[id].addOrder_moveto_path(sf::Vector2f(argf[0], argf[1]), argb[2]);
 		}
 		return true;
 	}

@@ -33,7 +33,7 @@ int cUnit::addOrder_moveto(sf::Vector2f target, bool overwrite)
 int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 {
 	// Only performed on server
-	if (!core.serverMode && !core.localServer) { return -1; }
+	//if (!core.serverMode && !core.localServer) { return -1; }
 
 	// If unit can not move, then ignore
 	if (movementSpeed <= 0.00f) { return -1; }
@@ -52,10 +52,14 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 		orderCounter += 1;
 
 		// Server
-		sf::Packet data;
+		/*sf::Packet data;
 		data << MSG_ORDER_MOVETO << globalId << path.waypoint[i].x << path.waypoint[i].y << (overwrite && i == 0);
-		server.sendPacket(PLAYERS_REMOTE, data);
+		server.sendPacket(PLAYERS_REMOTE, data);*/
 	}
+	// Server
+	sf::Packet data;
+	data << MSG_ORDER_MOVETOPATH << globalId << target.x << target.y << overwrite;
+	server.sendPacket(PLAYERS_REMOTE, data);
 	// Update info
 	updateFacing();
 	updateAction();

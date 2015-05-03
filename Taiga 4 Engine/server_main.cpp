@@ -4,6 +4,7 @@
 // Server thread that waits for incoming connections
 void serverConnectMain()
 {
+	int threadId = 2;
 	cout << "[SRV_CONNECT] Starting the server connect thread" << "\n";
 
 	sf::TcpListener listener;
@@ -30,6 +31,7 @@ void serverConnectMain()
 				i = LIMIT_SERVER_PLAYERS;
 			}
 		}
+		core.thread_antifreeze[threadId] = 0;
 		Sleep(10);
 	}
 	cout << "[SRV_CONNECT] Cleaning up" << "\n";
@@ -43,10 +45,12 @@ void serverConnectMain()
 // Server thread that waits for incoming messages from clients
 void serverReceiveMain()
 {
+	int threadId = 3;
 	cout << "[SRV_RECEIVE] Starting the server receive thread" << "\n";
 	sf::Packet data;
 	int retVal = 0;
 	bool parsed = false;
+	int counter = 0;
 
 	while (!core.shutdown)
 	{
@@ -58,7 +62,9 @@ void serverReceiveMain()
 				retVal = server.player[i].socket.receive(data);
 				if (retVal == sf::Socket::Done)
 				{
-					parsed = server.msgControlUnit(i, data);
+					//cout << "Received to server " << counter++ << endl;
+					parsed = server.msgRequest(i, data);
+					if (!parsed) { parsed = server.msgControlUnit(i, data); }
 					if (!parsed) { parsed = server.msgControlItem(i, data); }
 					if (!parsed) { parsed = server.msgControlAbility(i, data); }
 
@@ -71,6 +77,7 @@ void serverReceiveMain()
 				}
 			}
 		}
+		core.thread_antifreeze[threadId] = 0;
 	}
 
 	cout << "[SRV_RECEIVE] Cleaning up" << "\n";
@@ -79,6 +86,7 @@ void serverReceiveMain()
 // Server thread that sends messages to client from data queue
 void serverSendMain()
 {
+	int threadId = 4;
 	sf::Packet localData;
 	cout << "[SRV_SEND] Starting the server send thread" << "\n";
 	while (!core.shutdown)
@@ -120,6 +128,7 @@ void serverSendMain()
 			server.dataQueueCounter -= 1;
 		}
 		else { Sleep(10); }
+		core.thread_antifreeze[threadId] = 0;
 	}
 
 	cout << "[SRV_SEND] Cleaning up" << "\n";

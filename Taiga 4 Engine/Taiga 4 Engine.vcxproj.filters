@@ -207,6 +207,9 @@
     <ClCompile Include="saveload_util.cpp">
       <Filter>Файлы исходного кода\Saveload</Filter>
     </ClCompile>
+    <ClCompile Include="server_pack.cpp">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

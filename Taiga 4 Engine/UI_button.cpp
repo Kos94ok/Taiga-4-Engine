@@ -123,23 +123,23 @@ void cUIButton::callbackLeft(int parent)
 	{
 		world.genTaigaMini();
 		ui.updateFull();
-		client.connect("127.0.0.1", 21045);
+		client.connect("localserver", 21045);
 	}
 	else if (action == "start_editor")
 	{
 		editor.enable();
-		client.connect("127.0.0.1", 21045);
+		client.connect("localserver", 21045);
 		ui.updateFull();
 	}
 	else if (action == "start_arena")
 	{
 		world.genNormalWorld();
 		ui.updateFull();
-		client.connect("127.0.0.1", 21045);
+		client.connect("localserver", 21045);
 	}
 	else if (action == "connect_temp")
 	{
-		client.connect("88.85.144.209", 21045);
+		client.connect("127.0.0.1", 21045);
 		ui.updateFull();
 	}
 	else if (action == "invToggle")

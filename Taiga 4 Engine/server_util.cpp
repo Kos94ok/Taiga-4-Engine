@@ -17,6 +17,11 @@ void cServer::sendPacket(int target, sf::Packet data)
 	socketFree = true;
 }
 
+void cServer::initialize()
+{
+	world.genNormalWorld();
+}
+
 void cServer::introduce(int playerId)
 {
 	// Initializing
@@ -28,7 +33,8 @@ void cServer::introduce(int playerId)
 	{
 		for (int i = 0; i < game.unitCounter; i++)
 		{
-			data << MSG_UNIT_ADD << game.unit[i].globalId << game.unit[i].type << game.unit[i].pos.x << game.unit[i].pos.y << -1 << -1;
+			//data << MSG_UNIT_ADD << game.unit[i].globalId << game.unit[i].type << game.unit[i].pos.x << game.unit[i].pos.y << -1 << -1;
+			data = server.packUnitData(game.unit[i].globalId);
 			sendPacket(playerId, data);
 			data.clear();
 			if (server.dataQueueCounter > 100) { Sleep(1); }
@@ -82,6 +88,29 @@ void cServer::introduce(int playerId)
 	ui.updateInterface();
 }
 
+void cServer::sendChunkData(int playerId, int x, int y)
+{
+	sf::Packet data;
+	if (!world.map[x][y].isLoaded)
+	{
+		world.loadChunk(vec2i(x, y));
+	}
+
+	game.access.lock();
+	world.access.lock();
+	for (int i = 0; i < game.unitCounter; i++)
+	{
+		if (game.unit[i].chunkPos == vec2i(x, y))
+		{
+			data = packUnitData(game.unit[i].globalId);
+			sendPacket(playerId, data);
+			data.clear();
+		}
+	}
+	world.access.unlock();
+	game.access.unlock();
+}
+
 void cServerPlayer::disconnect()
 {
 	connected = false;
@@ -124,3 +153,4 @@ int cServer::getController(int target)
 	}
 	return -1;
 }
+

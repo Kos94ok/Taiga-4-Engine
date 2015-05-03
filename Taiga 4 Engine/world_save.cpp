@@ -35,6 +35,7 @@ void cWorld::saveChunk(vec2i pos)
 
 void cWorld::loadChunk(vec2i pos)
 {
+	cout << "Loading chunk" << endl;
 	/*
 	WARNING:
 	This function is only to be used on the server side!
@@ -50,7 +51,7 @@ void cWorld::loadChunk(vec2i pos)
 	vector<cUnitEntry> unitList = getChunkUnitList(pos);
 	for (int i = 0; i < (int)unitList.size(); i++)
 	{
-		int id = game.addUnit(unitList[i].type, anchor + unitList[i].pos);
+		int id = game.addUnit(unitList[i].type, anchor + unitList[i].pos, -1, -1, false);
 		// Assign global id if the object is loaded for the first time
 		if (unitList[i].globalId != -1) {
 			game.unit[game.getUnitId(id)].globalId = unitList[i].globalId;
@@ -72,7 +73,7 @@ void cWorld::unloadChunk(vec2i pos)
 	{
 		if (game.unit[i].chunkPos == pos && !game.unit[i].hasRef(REF_UNIT_NOUNLOAD))
 		{
-			game.removeUnit(game.unit[i].globalId);
+			game.removeUnit(game.unit[i].globalId, false);
 			i -= 1;
 		}
 	}

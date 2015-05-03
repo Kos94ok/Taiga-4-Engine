@@ -1,6 +1,29 @@
 
 #include "main.h"
 
+bool cServer::msgRequest(int i, sf::Packet input)
+{
+	int argi[] = { 0, 0, 0, 0 };
+	//float argf[] = { 0.00f, 0.00f, 0.00f, 0.00f };
+	//bool argb[] = { false, false, false, false };
+	int msg, id;
+	string cmd = "";
+	sf::Packet data;
+
+	input >> msg;
+	// =======================================================
+	// =======================================================
+	// Request for chunk data
+	if (msg == MSG_REQUEST_CHUNKDATA)
+	{
+		input >> argi[0] >> argi[1];
+		sendChunkData(i, argi[0], argi[1]);
+
+		return true;
+	}
+	return false;
+}
+
 bool cServer::msgControlUnit(int i, sf::Packet input)
 {
 	int argi[] = { 0, 0, 0, 0 };

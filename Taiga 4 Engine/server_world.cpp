@@ -355,6 +355,7 @@ void serverWorldUI(int elapsedTime)
 
 void serverWorldMain()
 {
+	int threadId = 1;
 	cout << "[SRV_WORLD] Starting the server world thread" << "\n";
 	srand(time(0));
 	int elapsedTime, globalTime = 0;
@@ -369,6 +370,7 @@ void serverWorldMain()
 			serverWorldAnim(elapsedTime);
 			serverWorldUI(elapsedTime);
 			core.thread_serverWorldTicks += 1;
+			core.thread_antifreeze[threadId] = 0;
 		}
 		Sleep(1);
 	}

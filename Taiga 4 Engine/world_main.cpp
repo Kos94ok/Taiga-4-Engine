@@ -59,8 +59,10 @@ void cWorld::analyzeBlueprints()
 
 void worldLoaderMain()
 {
+	int threadId = 7;
 	cout << "[WORLD_LOADER] Starting the world loader thread" << "\n";
 
+	sf::Packet data;
 	bool isViable;
 	while (!core.shutdown)
 	{
@@ -70,9 +72,9 @@ void worldLoaderMain()
 			{
 				for (int i = 0; i < LIMIT_MAP; i++)
 				{
-					if (world.map[i][y].genStatus != CHUNK_UNDEFINED)
+					//if (world.map[i][y].genStatus != CHUNK_UNDEFINED)
 					//if (world.map[i][y].genStatus == CHUNK_NORMAL)
-					{
+					//{
 						isViable = world.isChunkViable(vec2i(i, y));
 						// Loading
 						if (isViable && !world.isChunkLoaded(vec2i(i, y)))
@@ -80,13 +82,17 @@ void worldLoaderMain()
 							// Server-side routine
 							if (core.localServer || core.serverMode)
 							{
+								cout << core.localServer << " / " << core.serverMode << endl;
 								world.loadChunk(vec2i(i, y));
 							}
 							// Client-side routine
 							else if (client.connected)
 							{
-								// TODO: Client should ask server for chunk information. Also client should send his camera
-								// information, such as current position and resolution.
+								world.map[i][y].isLoaded = true;
+								// Politely ask the server for chunk (i; y)
+								data << MSG_REQUEST_CHUNKDATA << i << y;
+								client.sendPacket(data);
+								data.clear();
 							}
 						}
 						// Unloading
@@ -95,11 +101,12 @@ void worldLoaderMain()
 							if (core.localServer || core.serverMode) { world.saveChunk(vec2i(i, y)); }
 							world.unloadChunk(vec2i(i, y));
 						}
-					}
+					//}
 				}
 			}
 		}
-		Sleep(10);
+		Sleep(5);
+		core.thread_antifreeze[threadId] = 0;
 	}
 
 	cout << "[WORLD_LOADER] Cleaning up" << "\n";

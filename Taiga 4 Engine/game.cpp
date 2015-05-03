@@ -2,7 +2,7 @@
 #include "main.h"
 
 // Copy unit from database
-int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation)
+int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool sendData)
 {
 	if (variation == 0) { type += "a"; }
 	if (variation == 1) { type += "b"; }
@@ -20,7 +20,7 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation)
 	else { cout << "[ERROR] Unit limit reached!" << "\n"; }
 
 	// Server
-	if (core.serverMode || core.localServer)
+	if (sendData && (core.serverMode || core.localServer))
 	{
 		sf::Packet data;
 		data << MSG_UNIT_ADD << unitGlobalCounter - 1 << type << pos.x << pos.y << owner << variation;
@@ -30,10 +30,10 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation)
 }
 
 // Remove unit by global id
-void cGame::removeUnit(int id)
+void cGame::removeUnit(int id, bool sendData)
 {
 	// Server
-	if (core.serverMode || core.localServer)
+	if (sendData && (core.serverMode || core.localServer))
 	{
 		sf::Packet data;
 		data << MSG_UNIT_REMOVE << id;
