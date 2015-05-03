@@ -54,6 +54,7 @@ void cWindow::mainPaint()
 
 void cWindow::paintUnits()
 {
+	bool cameraIntersection;
 	float step = 20.00f;
 	sf::RenderStates renderState;
 	// Check step
@@ -67,7 +68,12 @@ void cWindow::paintUnits()
 	float cameraTop = camera.pos.y;
 	float cameraBot = camera.res.y + camera.pos.y;
 	// Render distance
-	if (settings.unitRenderDistance == 0)
+	if (core.advancedDebug)
+	{
+		cameraLeft -= 5000;	cameraRight += 5000;
+		cameraTop -= 5000;	cameraBot += 5000;
+	}
+	else if (settings.unitRenderDistance == 0)
 	{
 		cameraLeft -= 100;	cameraRight += 100;
 		cameraTop -= 50;	cameraBot += 350;
@@ -324,7 +330,8 @@ void cWindow::paintUnits()
 					if (game.unit[i].hasRef(REF_UNIT_ROTATE)) { brushRect.setRotation(-game.unit[i].facingAngle); }
 						// Last-minute check
 					objRect = brushRect.getGlobalBounds();
-					if (camRect.intersects(objRect))
+					cameraIntersection = camRect.intersects(objRect);
+					if (core.advancedDebug || cameraIntersection)
 					{
 						if (!settings.enableBetterShadows) { window.texHandle.draw(brushRect, window.matrixHandle); }
 						else
@@ -636,6 +643,20 @@ void cWindow::paintDebugInfo()
 		brushRect.setOutlineThickness(0.00f);
 	}
 
+	// Camera rect
+	if (core.advancedDebug)
+	{
+		brushRect.setPosition(camera.pos);
+		brushRect.setFillColor(sf::Color(0, 0, 0, 0));
+		brushRect.setOutlineColor(sf::Color(0, 255, 0, 255));
+		brushRect.setSize(vec2f(camera.res.x, camera.res.y));
+		brushRect.setOutlineThickness(-10.00f);
+		window.texHandleTop.draw(brushRect, window.matrixHandle);
+		brushRect.setScale(vec2f(1, 1));
+		brushRect.setOutlineThickness(0);
+	}
+
+	// Debug text
 	string text;
 	brushText.setCharacterSize(16);
 	brushText.setOrigin(0, 0);

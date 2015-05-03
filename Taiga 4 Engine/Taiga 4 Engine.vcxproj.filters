@@ -201,6 +201,12 @@
     <ClCompile Include="world_save.cpp">
       <Filter>Файлы исходного кода\World</Filter>
     </ClCompile>
+    <ClCompile Include="saveload.cpp">
+      <Filter>Файлы исходного кода\Saveload</Filter>
+    </ClCompile>
+    <ClCompile Include="saveload_util.cpp">
+      <Filter>Файлы исходного кода\Saveload</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

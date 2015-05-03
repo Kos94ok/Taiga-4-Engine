@@ -3,23 +3,60 @@
 
 void cWorld::saveChunk(vec2i pos)
 {
+	/*
+	WARNING:
+	This function is only to be used on the server side!
+	Client does not store any world data on the disk.
+	*/
+
+	cUnitEntry unitEntry;
+	vector<cUnitEntry> unitList;
+	vec2 anchor = getChunkCenter(pos);
+
 	access.lock();
+	game.access.lock();
+	int c = 0;
+
+	for (int i = 0; i < game.unitCounter; i++)
+	{
+		if (game.unit[i].chunkPos == pos && !game.unit[i].hasRef(REF_UNIT_NOUNLOAD))
+		{
+			unitEntry.pos = game.unit[i].pos - anchor;
+			unitEntry.type = game.unit[i].type;
+			unitEntry.globalId = game.unit[i].globalId;
+			unitList.push_back(unitEntry);
+		}
+	}
+	save.flushListToFile(unitList, save.getChunkFilePath(pos));
+
+	game.access.unlock();
 	access.unlock();
 }
 
 void cWorld::loadChunk(vec2i pos)
 {
+	/*
+	WARNING:
+	This function is only to be used on the server side!
+	Client must request the chunk update from the server.
+	*/
 	access.lock();
 	game.access.lock();
 	int attachIndex = -1;
 	vec2 anchor = getChunkCenter(pos);
 
 	// Adding units
+	int c = 0;
 	vector<cUnitEntry> unitList = getChunkUnitList(pos);
 	for (int i = 0; i < (int)unitList.size(); i++)
 	{
 		int id = game.addUnit(unitList[i].type, anchor + unitList[i].pos);
-		game.unit[id].chunkPos = pos;
+		// Assign global id if the object is loaded for the first time
+		if (unitList[i].globalId != -1) {
+			game.unit[game.getUnitId(id)].globalId = unitList[i].globalId;
+		}
+		// Tell unit to which chunk it belongs
+		game.unit[game.getUnitId(id)].chunkPos = pos;
 	}
 	map[pos.x][pos.y].isLoaded = true;
 	game.access.unlock();
@@ -28,8 +65,8 @@ void cWorld::loadChunk(vec2i pos)
 
 void cWorld::unloadChunk(vec2i pos)
 {
-	access.lock();
 	if (!map[pos.x][pos.y].isLoaded) { cout << "[ERROR] Chunk (" << pos.x << "; " << pos.y << ") is not loaded!"; return; }
+	access.lock();
 	game.access.lock();
 	for (int i = 0; i < game.unitCounter; i++)
 	{
@@ -46,83 +83,12 @@ void cWorld::unloadChunk(vec2i pos)
 
 vector<cUnitEntry> cWorld::getChunkUnitList(vec2i pos)
 {
-	vector<cUnitEntry> retVal;
-	char buffer[256];
-	string buf;
-	cUnitEntry entry;
-	ifstream file;
-	file.open("Savefiles//" + save.worldName + "//" + to_string(pos.x) + "-" + to_string(pos.y) + ".chunk");
-	if (file.good())
-	{
-		// Skipping to unit lines
-		do
-		{
-			file.getline(buffer, 256);
-			buf = buffer;
-		}
-		while (!file.eof() && buf != "[Units]");
-		// Reading units
-		while (!file.eof())
-		{
-			// Type
-			file.getline(buffer, 256);	buf = buffer;
-			if (buf.length() > 0)
-			{
-				entry.type = buffer;
-				// Pos X
-				file.getline(buffer, 256);	buf = buffer;
-				entry.pos.x = math.stringToInt(buffer);
-				// Pos Y
-				file.getline(buffer, 256);	buf = buffer;
-				entry.pos.y = math.stringToInt(buffer);
-				// Pusing to array
-				retVal.push_back(entry);
-			}
-		}
-		// Closing
-		file.close();
-	}
-	return retVal;
+	return save.getListFromFile(save.getChunkFilePath(pos));
 }
 
 vector<cUnitEntry> cWorld::getBlueprintUnitList(int index)
 {
 	vector<cUnitEntry> retVal;
 	if (index == -1) { cout << "[ERROR] Invalid blueprint id!" << "\n"; return retVal; }
-	char buffer[256];
-	string buf;
-	cUnitEntry entry;
-	ifstream file;
-	file.open("Data//Blueprints//" + blueprint[index].name);
-	if (file.good())
-	{
-		// Skipping to unit lines
-		do
-		{
-			file.getline(buffer, 256);
-			buf = buffer;
-		}
-		while (!file.eof() && buf != "[Units]");
-		// Reading units
-		while (!file.eof())
-		{
-			// Type
-			file.getline(buffer, 256);	buf = buffer;
-			if (buf.length() > 0)
-			{
-				entry.type = buffer;
-				// Pos X
-				file.getline(buffer, 256);	buf = buffer;
-				entry.pos.x = math.stringToInt(buffer);
-				// Pos Y
-				file.getline(buffer, 256);	buf = buffer;
-				entry.pos.y = math.stringToInt(buffer);
-				// Pusing to array
-				retVal.push_back(entry);
-			}
-		}
-		// Closing
-		file.close();
-	}
-	return retVal;
+	return save.getListFromFile("Data//Blueprints//" + blueprint[index].name);
 }

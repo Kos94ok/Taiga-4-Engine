@@ -3,31 +3,23 @@
 
 void cEditor::saveBlueprint(string name)
 {
+	cUnitEntry unitEntry;
+	vector<cUnitEntry> unitList;
 	// Looking for the path
 	string path = "Data//Blueprints//" + name;
 	if (path.substr(path.length() - 10) != ".blueprint") { path += ".blueprint"; }
-	// Opening file
-	ofstream file;
-	file.open(path);
-	if (file.good())
+	// Creating unit list
+	for (int i = 0; i < game.unitCounter; i++)
 	{
-		// Writing
-			// Other objects
-		file << "[Units]" << "\n";
-		for (int i = 0; i < game.unitCounter; i++)
+		if (!game.unit[i].hasRef(REF_UNIT_NOSAVE))
 		{
-			if (!game.unit[i].hasRef(REF_UNIT_NOSAVE))
-			{
-				file << game.unit[i].type << "\n";
-				file << game.unit[i].pos.x << "\n";
-				file << game.unit[i].pos.y << "\n";
-			}
+			unitEntry.pos = game.unit[i].pos;
+			unitEntry.type = game.unit[i].type;
+			unitEntry.globalId = game.unit[i].globalId;
+			unitList.push_back(unitEntry);
 		}
-
-		// Closing the file
-		file.close();
 	}
-	else { cout << "[ERROR] Can't create the file " << path << "\n"; }
+	save.flushListToFile(unitList, path);
 }
 
 void cEditor::loadBlueprint(string name)

@@ -128,6 +128,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="refSystem.cpp" />
+    <ClCompile Include="saveload.cpp" />
+    <ClCompile Include="saveload_util.cpp" />
     <ClCompile Include="server_main.cpp" />
     <ClCompile Include="server_message.cpp" />
     <ClCompile Include="server_util.cpp" />
