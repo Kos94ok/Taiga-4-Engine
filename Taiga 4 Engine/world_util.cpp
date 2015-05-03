@@ -3,6 +3,7 @@
 
 void cWorld::applyBlueprint(vec2i position, int type)
 {
+	string name;
 	vector<int> correctBlueprints;
 	ifstream in;
 	ofstream out;
@@ -18,11 +19,24 @@ void cWorld::applyBlueprint(vec2i position, int type)
 		int bpIndex = correctBlueprints[math.rand(0, (int)correctBlueprints.size() - 1)];
 		map[position.x][position.y].blueprint = bpIndex;
 
-		in.open("Data//Blueprints//" + blueprint[bpIndex].name);
-		out.open("Savefiles//" + save.worldName + "//" + to_string(position.x) + "-" + to_string(position.y) + ".chunk");
+		// Opening source file
+		name = "Data//Blueprints//" + blueprint[bpIndex].name;
+		in.open(name);
+		if (!in.good()) {
+			cout << "[ERROR] Can't open source chunk file [" + name + "]";
+			return;
+		}
+		// Opening target file
+		name = "Savefiles//" + save.worldName + "//" + to_string(position.x) + "-" + to_string(position.y) + ".chunk";
+		out.open(name);
+		if (!out.good()) {
+			cout << "[ERROR] Can't open target chunk file [" + name + "]" << endl;
+			return;
+		}
+		// Copying the content
 		out << in.rdbuf();
 	}
-	else { cout << "[ERROR] Can't apply blueprint type " << type << " to (" << position.x << "; " << position.y << ")!" << "\n"; }
+	else { cout << "[ERROR] No valid blueprints for type " << type << " at (" << position.x << "; " << position.y << ")!" << "\n"; }
 }
 
 bool cWorld::isChunkLoaded(vec2i pos)

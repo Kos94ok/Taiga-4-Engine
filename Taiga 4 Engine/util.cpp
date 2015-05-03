@@ -8,7 +8,7 @@ void cUtil::detectVideoCard()
 		core.videoCard = VIDEO_INTEL;
 		cout << "[MAIN] Detected Intel video card" << "\n";
 	}
-	else if (vendor == "Nvidia") {
+	else if (vendor.substr(0, 6) == "NVIDIA") {
 		core.videoCard = VIDEO_NVIDIA;
 		cout << "[MAIN] Detected Nvidia video card" << "\n";
 	}

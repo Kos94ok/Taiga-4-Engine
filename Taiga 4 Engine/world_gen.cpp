@@ -124,6 +124,10 @@ void cWorld::genNormalWorld()
 	}
 	file.close();
 
+	// Creating directory
+	string name = "Savefiles//" + save.worldName;
+	CreateDirectoryA("Savefiles", 0);
+	CreateDirectoryA(name.c_str(), 0);
 	// Copying blueprints to real positions
 	for (int j = 0; j < LIMIT_MAP; j++)
 	{

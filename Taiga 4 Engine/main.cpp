@@ -76,10 +76,10 @@ int main(int argc, char* argv[])
 	ui.element[ui.getElementId(id)].setText("Editor");
 	ui.element[ui.getElementId(id)].button.action = "start_editor";
 	id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 70.00f));
-	ui.element[ui.getElementId(id)].setText("Arena");
+	ui.element[ui.getElementId(id)].setText("Map Gen Test");
 	ui.element[ui.getElementId(id)].button.action = "start_arena";
 	id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 105.00f));
-	ui.element[ui.getElementId(id)].setText("88.85.144.209");
+	ui.element[ui.getElementId(id)].setText("Quick Connect");
 	ui.element[ui.getElementId(id)].button.action = "connect_temp";
 
 	cout << "[MAIN] Overlooking the threads..." << "\n";

@@ -40,7 +40,9 @@ void cCamera::setZoom(float zoom)
 void cCamera::adjustZoom(int delta)
 {
 	setZoom(zoomFactor + zoomFactor * 0.20f * delta);
-	if (zoomFactor > 7.00f) { setZoom(7.00f); }
-	//if (zoomFactor < 1.00f) { zoomFactor = 1.00f; }
-	if (zoomFactor < 0.05f) { zoomFactor = 0.05f; }
+	if (!core.advancedDebug)
+	{
+		if (zoomFactor > 7.00f) { setZoom(7.00f); }
+		if (zoomFactor < 1.00f) { zoomFactor = 1.00f; }
+	}
 }
