@@ -75,6 +75,9 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
+		// Hiding the console if needed
+		if (!console.displayed) { console.hide(); }
+		// Creating the menu
 		cout << "[MAIN] Making some menu" << "\n";
 		int id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f));
 		ui.element[ui.getElementId(id)].setText("Taiga Mini");

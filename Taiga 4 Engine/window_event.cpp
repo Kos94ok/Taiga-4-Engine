@@ -61,6 +61,7 @@ void cWindow::mainEvent()
 		if (eventPoll.type == sf::Event::KeyReleased)
 		{
 			// Global hotkeys
+			if (eventPoll.key.code == settings.hkConsole) { console.toggle(); }
 			if (eventPoll.key.code == settings.hkDebugMode) { core.debugMode = !core.debugMode; }
 			if (eventPoll.key.code == settings.hkDebugAdvanced) {
 				core.advancedDebug = !core.advancedDebug;

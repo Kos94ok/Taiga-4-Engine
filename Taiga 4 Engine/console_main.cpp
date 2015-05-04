@@ -7,6 +7,7 @@ cConsole::cConsole()
 	for (int i = 0; i < LIMIT_CMD; i++) { console.cmdServerOnly[i] = true; }
 
 	online = true;
+	displayed = true;
 	// Help command
 	int cmdID = 0;
 	console.cmdRegex[cmdID].assign("^help");

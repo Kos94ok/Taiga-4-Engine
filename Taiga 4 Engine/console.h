@@ -5,6 +5,7 @@ class cConsole
 {
 public:
 	bool online;
+	bool displayed;
 
 	bool parseCommand(std::string cmd);
 	std::string waitForCommand();
@@ -16,6 +17,9 @@ public:
 	std::function<void(std::string[])> cmdFunc[LIMIT_CMD];
 
 	cConsole();
+	void show();
+	void hide();
+	void toggle();
 };
 
 void consoleMain();

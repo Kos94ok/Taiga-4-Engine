@@ -35,7 +35,6 @@ void cWorld::saveChunk(vec2i pos)
 
 void cWorld::loadChunk(vec2i pos)
 {
-	cout << "Loading chunk" << endl;
 	/*
 	WARNING:
 	This function is only to be used on the server side!

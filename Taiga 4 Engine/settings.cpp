@@ -46,6 +46,7 @@ void cSettings::setDefault()
 	this->hkCamMove[1] = sf::Keyboard::S;
 	this->hkCamMove[2] = sf::Keyboard::A;
 	this->hkCamMove[3] = sf::Keyboard::D;
+	this->hkConsole = sf::Keyboard::Tilde;
 	this->hkDebugMode = sf::Keyboard::F3;
 	this->hkDebugAdvanced = sf::Keyboard::F4;
 

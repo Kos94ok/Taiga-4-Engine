@@ -1,14 +1,4 @@
 
-#ifdef _WIN32
-	#define SYSTEM_WINDOWS
-#elif defined __ANDROID__
-	#define SYSTEM_ANDROID
-#elif defined __linux__
-	#define SYSTEM_LINUX
-#else
-	#define SYSTEM_UNKNOWN
-#endif
-
 #define	LINESOFCODE_01_02_2015			6372
 
 #define LIMIT_CMD						64

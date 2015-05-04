@@ -95,7 +95,7 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 		input >> argi[0] >> argb[1];
 		id = game.getUnitId(server.player[i].unit);
 		int itemId = game.getUnitId(argi[0]);
-		if (id != -1) {
+		if (id != -1 && itemId != -1) {
 			cUnit* playerUnit = &game.unit[id];
 			cUnit* targetUnit = &game.unit[itemId];
 			// Check distance
@@ -111,6 +111,7 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 				game.unit[id].addOrder_harvest(argi[0], false);
 			}
 		}
+		else { cout << "[cServer::msgControlUnit / MSG_CONTROLS_HARVEST] Incorrect unit IDs!" << endl; }
 		return true;
 	}
 	return false;

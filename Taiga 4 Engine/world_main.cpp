@@ -82,7 +82,6 @@ void worldLoaderMain()
 							// Server-side routine
 							if (core.localServer || core.serverMode)
 							{
-								cout << core.localServer << " / " << core.serverMode << endl;
 								world.loadChunk(vec2i(i, y));
 							}
 							// Client-side routine
@@ -96,8 +95,9 @@ void worldLoaderMain()
 							}
 						}
 						// Unloading
-						else if (!isViable && world.isChunkLoaded(vec2i(i, y)))
+						else if (!isViable && world.isChunkLoaded(vec2i(i, y)) && !core.serverMode)
 						{
+							// TODO: Fix server chunk unloading
 							if (core.localServer || core.serverMode) { world.saveChunk(vec2i(i, y)); }
 							world.unloadChunk(vec2i(i, y));
 						}

@@ -54,6 +54,7 @@ public:
 	int wgPathForkChance;
 
 	// Hotkeys
+	sf::Keyboard::Key hkConsole;
 	sf::Keyboard::Key hkDebugMode;
 	sf::Keyboard::Key hkDebugAdvanced;
 	sf::Keyboard::Key hkInventory;
