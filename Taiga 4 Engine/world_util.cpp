@@ -46,10 +46,12 @@ bool cWorld::isChunkLoaded(vec2i pos)
 
 bool cWorld::isChunkViable(vec2i pos)
 {
-	float viableDist = 1000.00f;
-	vec2 chunkCenter = getChunkCenter(pos);
+	float bufferArea = 500.00f;
+	sf::FloatRect camRect(vec2f(camera.pos.x - bufferArea, camera.pos.y - bufferArea), vec2f(camera.res.x + bufferArea * 2, camera.res.y + bufferArea * 2));
+	sf::FloatRect chunkRect(vec2f(pos.x * LIMIT_CHUNKSIZE, pos.y * LIMIT_CHUNKSIZE), vec2f(LIMIT_CHUNKSIZE, LIMIT_CHUNKSIZE));
 	// Local player
-	if (client.connected && math.getDistance(camera.pos + vec2(camera.res.x / 2, camera.res.y / 2), chunkCenter) < viableDist) {
+	if (client.connected && camRect.intersects(chunkRect))
+	{
 		return true;
 	}
 	// Remote players
@@ -57,10 +59,14 @@ bool cWorld::isChunkViable(vec2i pos)
 	{
 		for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
 		{
-			if (server.player[i].connected && math.getDistance(server.player[i].camPos
-				+ vec2(server.player[i].camRes.x / 2, server.player[i].camRes.y / 2), chunkCenter) < viableDist)
+			if (server.player[i].connected)
 			{
-				return true;
+				camRect = sf::FloatRect(vec2f(server.player[i].camPos.x - bufferArea, server.player[i].camPos.y - bufferArea),
+					vec2f(server.player[i].camRes.x + bufferArea * 2, server.player[i].camRes.y + bufferArea * 2));
+				if (camRect.intersects(chunkRect))
+				{
+					return true;
+				}
 			}
 		}
 	}
@@ -75,4 +81,17 @@ vec2i cWorld::getChunkInPos(vec2 pos)
 vec2 cWorld::getChunkCenter(vec2i pos)
 {
 	return vec2((float)pos.x * LIMIT_CHUNKSIZE + LIMIT_CHUNKSIZE / 2, (float)pos.y * LIMIT_CHUNKSIZE + LIMIT_CHUNKSIZE / 2);
+}
+
+void cWorld::clearWorld()
+{
+	char* buf = new char[512];
+	for (int y = 0; y < LIMIT_MAP; y++)
+	{
+		for (int x = 0; x < LIMIT_MAP; x++)
+		{
+			sprintf_s(buf, 512, "Savefiles//%s//%i-%i.chunk", save.worldName.c_str(), x, y);
+			remove(buf);
+		}
+	}
 }

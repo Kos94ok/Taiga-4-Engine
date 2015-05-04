@@ -95,7 +95,7 @@ void cUIButton::callbackLeft(int parent)
 	else if (action == "invItem_dismantle")
 	{
 		stringstream(args[0]) >> id;
-		data << MSG_CONTROLS_DISMANTLE << id << 1;
+		data << MSG_CONTROLS_DISMANTLE << game.getUnit(client.unit).container.get(id).type << 1;
 		client.sendPacket(data);
 		data.clear();
 
@@ -104,7 +104,7 @@ void cUIButton::callbackLeft(int parent)
 	else if (action == "invItem_drop")
 	{
 		stringstream(args[0]) >> id;
-		data << MSG_CONTROLS_DROPITEM << id << 1;
+		data << MSG_CONTROLS_DROPITEM << game.getUnit(client.unit).container.get(id).type << 1;
 		client.sendPacket(data);
 		data.clear();
 

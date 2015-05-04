@@ -13,9 +13,8 @@ void cWorld::saveChunk(vec2i pos)
 	vector<cUnitEntry> unitList;
 	vec2 anchor = getChunkCenter(pos);
 
-	access.lock();
-	game.access.lock();
-	int c = 0;
+	//access.lock();
+	//game.access.lock();
 
 	for (int i = 0; i < game.unitCounter; i++)
 	{
@@ -29,8 +28,8 @@ void cWorld::saveChunk(vec2i pos)
 	}
 	save.flushListToFile(unitList, save.getChunkFilePath(pos));
 
-	game.access.unlock();
-	access.unlock();
+	//game.access.unlock();
+	//access.unlock();
 }
 
 void cWorld::loadChunk(vec2i pos)
@@ -40,34 +39,38 @@ void cWorld::loadChunk(vec2i pos)
 	This function is only to be used on the server side!
 	Client must request the chunk update from the server.
 	*/
-	access.lock();
-	game.access.lock();
+	//access.lock();
+	//game.access.lock();
+
 	int attachIndex = -1;
 	vec2 anchor = getChunkCenter(pos);
 
 	// Adding units
-	int c = 0;
+	int id = 0;
 	vector<cUnitEntry> unitList = getChunkUnitList(pos);
 	for (int i = 0; i < (int)unitList.size(); i++)
 	{
-		int id = game.addUnit(unitList[i].type, anchor + unitList[i].pos, -1, -1, false);
-		// Assign global id if the object is loaded for the first time
-		if (unitList[i].globalId != -1) {
-			game.unit[game.getUnitId(id)].globalId = unitList[i].globalId;
+		if (game.getUnitId(unitList[i].globalId) == -1)
+		{
+			id = game.addUnit(unitList[i].type, anchor + unitList[i].pos, -1, -1, false);
+			// Assign global id if the object is loaded for the first time
+			if (unitList[i].globalId != -1) {
+				game.unit[game.getUnitId(id)].globalId = unitList[i].globalId;
+			}
+			// Tell unit to which chunk it belongs
+			game.unit[game.getUnitId(id)].chunkPos = pos;
 		}
-		// Tell unit to which chunk it belongs
-		game.unit[game.getUnitId(id)].chunkPos = pos;
 	}
 	map[pos.x][pos.y].isLoaded = true;
-	game.access.unlock();
-	access.unlock();
+	//game.access.unlock();
+	//access.unlock();
 }
 
 void cWorld::unloadChunk(vec2i pos)
 {
 	if (!map[pos.x][pos.y].isLoaded) { cout << "[ERROR] Chunk (" << pos.x << "; " << pos.y << ") is not loaded!"; return; }
-	access.lock();
-	game.access.lock();
+	//access.lock();
+	//game.access.lock();
 	for (int i = 0; i < game.unitCounter; i++)
 	{
 		if (game.unit[i].chunkPos == pos && !game.unit[i].hasRef(REF_UNIT_NOUNLOAD))
@@ -77,8 +80,8 @@ void cWorld::unloadChunk(vec2i pos)
 		}
 	}
 	map[pos.x][pos.y].isLoaded = false;
-	game.access.unlock();
-	access.unlock();
+	//game.access.unlock();
+	//access.unlock();
 }
 
 vector<cUnitEntry> cWorld::getChunkUnitList(vec2i pos)

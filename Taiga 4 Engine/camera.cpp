@@ -10,14 +10,23 @@ void cCamera::move(sf::Vector2f offset)
 {
 	camera.pos += offset;
 
+	sf::Packet data;
+	// Camera position update
+	if (client.connected && !core.localServer)
+	{
+		data << MSG_CONTROLS_CAMERA << pos.x << pos.y;
+		client.sendPacket(data);
+		data.clear();
+	}
+	// Mouse hold order
 	if (client.connected && ui.mouseStateLMB == MOUSE_CONTROLS_MOVEMENT && moveUpdateTimer <= 0.00f)
 	{
 		moveUpdateTimer = 0.05f;
 		sf::Vector2f mousePos = window.getMousePos(true);
 		// Sending data to server
-		sf::Packet data;
 		data << MSG_CONTROLS_MOVETO << mousePos.x << mousePos.y << false;
 		client.sendPacket(data);
+		data.clear();
 	}
 }
 

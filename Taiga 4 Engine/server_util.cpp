@@ -19,6 +19,8 @@ void cServer::sendPacket(int target, sf::Packet data)
 
 void cServer::initialize()
 {
+	camera.res.x = 0;
+	camera.res.y = 0;
 	world.genNormalWorld();
 }
 
@@ -78,11 +80,11 @@ void cServer::introduce(int playerId)
 	server.player[playerId].setMaxHealth(100.00f);
 	if (!core.editorMode)
 	{
-		game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_ear", 100);
-		game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_arm", 50);
-		game.unit[game.getUnitId(server.player[playerId].unit)].container.add("human_leg", 70);
-		game.unit[game.getUnitId(server.player[playerId].unit)].container.add("weapon_rifle", 1);
-		game.unit[game.getUnitId(server.player[playerId].unit)].container.add("test_resourceManipulator", 1);
+		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("human_ear", 100);
+		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("human_arm", 50);
+		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("human_leg", 70);
+		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("weapon_rifle", 1);
+		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("test_resourceManipulator", 1);
 	}
 	else { editor.initialize(); }
 	ui.updateInterface();

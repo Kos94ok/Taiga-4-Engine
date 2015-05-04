@@ -200,6 +200,45 @@ void cUnit::setMaxHealth(float hp)
 	}
 }
 
+void cUnit::addItem(string type, int count)
+{
+	container.add(type, count);
+	// Broadcast the data
+	if (core.serverMode || core.localServer)
+	{
+		sf::Packet data;
+		data << MSG_UNIT_ADDITEM << globalId << type << count;
+		server.sendPacket(PLAYERS_REMOTE, data);
+		data.clear();
+	}
+}
+
+void cUnit::removeItem(string type, int count)
+{
+	container.remove(type, count);
+	// Broadcast the data
+	if (core.serverMode || core.localServer)
+	{
+		sf::Packet data;
+		data << MSG_UNIT_REMOVEITEM << globalId << type << count;
+		server.sendPacket(PLAYERS_REMOTE, data);
+		data.clear();
+	}
+}
+
+void cUnit::removeItem(int id, int count)
+{
+	container.remove(id, count);
+	// Broadcast the data
+	if (core.serverMode || core.localServer)
+	{
+		sf::Packet data;
+		data << MSG_UNIT_REMOVEITEM << globalId << container.get(id).type << count;
+		server.sendPacket(PLAYERS_REMOTE, data);
+		data.clear();
+	}
+}
+
 void cUnit::updateFacing()
 {
 	if (orderCounter == 0) { return; }

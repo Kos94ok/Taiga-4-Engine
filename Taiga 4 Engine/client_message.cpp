@@ -87,6 +87,7 @@ bool cClient::msgUnit(sf::Packet input)
 		if (id != -1) {
 			game.unit[id].container.add(type, argi[0]);
 		}
+		else { cout << "[cClient::msgUnit / MSG_UNIT_ADDITEM] Can't find target unit!\n"; }
 		return true;
 	}
 	// ============================================

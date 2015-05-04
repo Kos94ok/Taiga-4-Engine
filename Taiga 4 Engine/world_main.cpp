@@ -95,7 +95,7 @@ void worldLoaderMain()
 							}
 						}
 						// Unloading
-						else if (!isViable && world.isChunkLoaded(vec2i(i, y)) && !core.serverMode)
+						else if (!isViable && world.isChunkLoaded(vec2i(i, y)))
 						{
 							// TODO: Fix server chunk unloading
 							if (core.localServer || core.serverMode) { world.saveChunk(vec2i(i, y)); }

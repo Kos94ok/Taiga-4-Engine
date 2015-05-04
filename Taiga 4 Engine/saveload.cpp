@@ -7,7 +7,7 @@ void cSave::flushListToFile(vector<cUnitEntry> list, string filename)
 	file.open(filename);
 	if (!file.good()) { cout << "[ERROR] Can't open file " + filename << endl; return; }
 	// Writing data
-	file << 1 << "\n";
+	file << -1 << "\n";
 	file << "[Units]" << "\n";
 	for (int i = 0; i < (int)list.size(); i++)
 	{

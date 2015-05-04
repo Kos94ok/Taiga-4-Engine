@@ -130,6 +130,9 @@ public:
 	void addMaxHealth(float d);
 	void setHealth(float hp);
 	void setMaxHealth(float hp);
+	void addItem(std::string type, int count = 1);
+	void removeItem(std::string type, int count = -1);
+	void removeItem(int id, int count = -1);
 	void updateFacing();
 	void updateAction();
 	void updateAnimation();

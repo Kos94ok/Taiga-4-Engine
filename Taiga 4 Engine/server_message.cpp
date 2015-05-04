@@ -21,6 +21,16 @@ bool cServer::msgRequest(int i, sf::Packet input)
 
 		return true;
 	}
+	// =======================================================
+	// =======================================================
+	// Client screen resolution
+	if (msg == MSG_INFO_CAMRES)
+	{
+		input >> argi[0] >> argi[1];
+		player[i].camRes = vec2i(argi[0], argi[1]);
+
+		return true;
+	}
 	return false;
 }
 
@@ -69,7 +79,7 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 		input >> argi[0] >> argb[1];
 		id = game.getUnitId(server.player[i].unit);
 		int itemId = game.getUnitId(argi[0]);
-		if (id != -1) {
+		if (id != -1 && itemId != -1) {
 			cUnit* playerUnit = &game.unit[id];
 			cUnit* targetItem = &game.unit[itemId];
 			// Check distance
@@ -85,6 +95,7 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 				game.unit[id].addOrder_pickup(argi[0], false);
 			}
 		}
+		else { cout << "[cServer::msgControlUnit / MSG_CONTROLS_PICKUP] Incorrect unit IDs!" << endl; }
 		return true;
 	}
 	// =======================================================
@@ -94,10 +105,10 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 	{
 		input >> argi[0] >> argb[1];
 		id = game.getUnitId(server.player[i].unit);
-		int itemId = game.getUnitId(argi[0]);
-		if (id != -1 && itemId != -1) {
+		int targetId = game.getUnitId(argi[0]);
+		if (id != -1 && targetId != -1) {
 			cUnit* playerUnit = &game.unit[id];
-			cUnit* targetUnit = &game.unit[itemId];
+			cUnit* targetUnit = &game.unit[targetId];
 			// Check distance
 			if (math.getDistance(playerUnit, targetUnit) <= game.getUnitInteractDistance(*playerUnit, *targetUnit))
 			{
@@ -114,6 +125,14 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 		else { cout << "[cServer::msgControlUnit / MSG_CONTROLS_HARVEST] Incorrect unit IDs!" << endl; }
 		return true;
 	}
+	// =======================================================
+	// =======================================================
+	// Player moves the camera
+	if (msg == MSG_CONTROLS_CAMERA)
+	{
+		input >> argf[0] >> argf[1];
+		server.player[i].camPos = vec2f(argf[0], argf[1]);
+	}
 	return false;
 }
 
@@ -123,7 +142,7 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 	float argf[] = { 0.00f, 0.00f, 0.00f, 0.00f };
 	bool argb[] = { false, false, false, false };
 	int msg, id, unitId;
-	string cmd = "";
+	string cmd = "", type = "";
 	sf::Packet data;
 
 	input >> msg;
@@ -134,24 +153,13 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 	{
 		input >> argi[0] >> argi[1];
 		// Changing the items
-
 			// Add crafted item
-		game.getUnit(server.player[i].unit).container.add(
-			craft.recipe[argi[0]].result.type, craft.recipe[argi[0]].result.count * argi[1]);
-		data << MSG_UNIT_ADDITEM << server.player[i].unit << craft.recipe[argi[0]].result.type
-			<< craft.recipe[argi[0]].result.count * argi[1];
-		server.sendPacket(PLAYERS_REMOTE, data);
-		data.clear();
+		game.getUnit(server.player[i].unit).addItem(craft.recipe[argi[0]].result.type, craft.recipe[argi[0]].result.count * argi[1]);
 
 			// Remove ingridients
 		for (int y = 0; y < craft.recipe[argi[0]].ingrCount; y++)
 		{
-			game.getUnit(server.player[i].unit).container.remove(
-				craft.recipe[argi[0]].ingr[y].type, craft.recipe[argi[0]].ingr[y].count * argi[1]);
-			data << MSG_UNIT_REMOVEITEM << server.player[i].unit << craft.recipe[argi[0]].ingr[y].type
-				<< craft.recipe[argi[0]].ingr[y].count * argi[1];
-			server.sendPacket(PLAYERS_REMOTE, data);
-			data.clear();
+			game.getUnit(server.player[i].unit).removeItem(craft.recipe[argi[0]].ingr[y].type, craft.recipe[argi[0]].ingr[y].count * argi[1]);
 		}
 			// Remove resource
 		server.player[i].addResource(craft.recipe[argi[0]].resourceBalance * argi[1]);
@@ -167,21 +175,16 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 	if (msg == MSG_CONTROLS_DROPITEM)
 	{
 		// Remove item
-		input >> id >> argi[0];
-		string itemType = game.getUnit(server.player[i].unit).container.get(id).type;
-		game.getUnit(server.player[i].unit).container.remove(id, argi[0]);
+		input >> type >> argi[0];
 
-		if (itemType != "missingno")
+		if (type != "missingno")
 		{
+			// Remove item
+			game.getUnit(server.player[i].unit).removeItem(type, argi[0]);
 			// Create unit
 			unitId = game.addUnit("item_a", game.getUnit(server.player[i].unit).pos + sf::Vector2f(0.00f, 30.00f));
-			//unitId = game.getUnit(sf::Vector2f(0, 0)).globalId;
 			// Add item to unit
-			game.getUnit(unitId).container.add(itemType, argi[0]);
-			data.clear();
-			data << MSG_UNIT_ADDITEM << itemType << argi[0];
-			server.sendPacket(PLAYERS_REMOTE, data);
-			data.clear();
+			game.getUnit(unitId).addItem(type, argi[0]);
 		}
 
 		// Update UI
@@ -195,22 +198,16 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 	// Player dismantles an item
 	if (msg == MSG_CONTROLS_DISMANTLE)
 	{
-		input >> id >> argi[0];
-		cItemDismantle dismantleData = game.getUnit(server.player[i].unit).container.get(id).dismantle;
+		input >> type >> argi[0];
+		cItemDismantle dismantleData = game.getUnit(server.player[i].unit).container.get(type).dismantle;
 
 		// Add new items
 		for (int y = 0; y < dismantleData.itemCounter; y++)
 		{
-			game.getUnit(server.player[i].unit).container.add(dismantleData.item[y], dismantleData.amount[y] * argi[0]);
-			data << MSG_UNIT_ADDITEM << server.player[i].unit << dismantleData.item[y] << dismantleData.amount[y] * argi[0];
-			server.sendPacket(PLAYERS_REMOTE, data);
-			data.clear();
+			game.getUnit(server.player[i].unit).addItem(dismantleData.item[y], dismantleData.amount[y] * argi[0]);
 		}
 		// Remove old item
-		game.getUnit(server.player[i].unit).container.remove(id, argi[0]);
-		data << MSG_UNIT_REMOVEITEM << server.player[i].unit << game.getUnit(server.player[i].unit).container.get(id).type << argi[0];
-		server.sendPacket(PLAYERS_REMOTE, data);
-		data.clear();
+		game.getUnit(server.player[i].unit).removeItem(type, argi[0]);
 
 		// Update UI
 		data << MSG_UI_UPDATEITEMLIST;

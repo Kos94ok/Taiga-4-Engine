@@ -42,6 +42,7 @@ public:
 	void genArena();
 	void genNormalWorld();
 	void genChunkPath(int val, sf::Vector2i pos);
+	void clearWorld();
 
 	bool isChunkLoaded(sf::Vector2i pos);
 	bool isChunkViable(sf::Vector2i pos);

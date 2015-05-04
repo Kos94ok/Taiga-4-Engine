@@ -52,6 +52,8 @@ void cWorld::genArena()
 
 void cWorld::genNormalWorld()
 {
+	// Clearing the saved world data;
+	clearWorld();
 	// Settings initial state
 	for (int j = 0; j < LIMIT_MAP; j++)
 	{

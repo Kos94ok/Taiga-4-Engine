@@ -24,19 +24,25 @@ void cClient::connect(string ip, short port)
 	sf::IpAddress address(ip);
 	sf::Time timeout(sf::milliseconds(5000));
 
-	cout << "[CLIENT] Connecting to " << ip << ":" << port << "..." << "\n";
+	cout << "[cClient::connect] Connecting to " << ip << ":" << port << "..." << "\n";
 	client.socket.setBlocking(true);
 	if (client.socket.connect(address, port, timeout) == sf::Socket::Done)
 	{
 		client.connected = true;
 		core.localServer = localServer;
-		cout << "[CLIENT] Server found!" << "\n";
+		cout << "[cClient::connect] Server found!" << "\n";
 	}
 	else
 	{
-		cout << "[CLIENT] Can't reach the server!" << "\n";
+		cout << "[cClient::connect] Can't reach the server!" << "\n";
 	}
 	client.socket.setBlocking(false);
+
+	// Sending client info
+	sf::Packet data;
+	data << MSG_INFO_CAMRES << camera.res.x << camera.res.y;
+	client.sendPacket(data);
+	data.clear();
 }
 
 void cClient::disconnect()
