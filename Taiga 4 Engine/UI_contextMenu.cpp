@@ -263,7 +263,7 @@ void cUI::createContextMenuForUnit(int targetUnit)
 	ui.element[ui.getElementId(bgId)].priority = 9;
 
 	// Dummy button
-	int id = ui.addElement("button", mousePos + sf::Vector2f(-500.00f, -500.00f));
+	int id = ui.addElement("button", mousePos + sf::Vector2f(-5000.00f, -5000.00f));
 	ui.element[ui.getElementId(id)].size.y = buttonY;
 	ui.element[ui.getElementId(id)].ignoreOrigin = true;
 	ui.element[ui.getElementId(id)].setText("missingno");
