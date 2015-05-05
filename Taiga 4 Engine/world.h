@@ -5,6 +5,9 @@ void worldLoaderMain();
 
 class cBlueprint
 {
+	/*
+	cBlueprint is used to store the blueprint data in the memory.
+	*/
 public:
 	int type;
 	std::string name;
@@ -15,12 +18,12 @@ class cMapTile
 public:
 	int blueprint;
 	bool isLoaded;
-	int genStatus;
+	int type;
 
 	cMapTile() {
 		blueprint = -1;
 		isLoaded = false;
-		genStatus = CHUNK_UNDEFINED;
+		type = CHUNK_UNDEFINED;
 	}
 };
 

@@ -101,6 +101,7 @@ public:
 class cUnit : public cCharacter
 {
 public:
+	bool toRemove;
 	int orderCounter;
 	cOrder order[LIMIT_ORDERS];
 	float actionTimer;
@@ -138,6 +139,7 @@ public:
 	void updateAnimation();
 
 	cUnit() {
+		toRemove = false;
 		flyingHeight = 0.00f;
 		actionTimer = 0.00f;
 		resource = 0.00f;

@@ -26,7 +26,7 @@ void cWorld::saveChunk(vec2i pos)
 			unitList.push_back(unitEntry);
 		}
 	}
-	save.flushListToFile(unitList, save.getChunkFilePath(pos));
+	save.flushListToFile(map[pos.x][pos.y].type, unitList, save.getChunkFilePath(pos));
 
 	//game.access.unlock();
 	//access.unlock();
@@ -50,7 +50,7 @@ void cWorld::loadChunk(vec2i pos)
 	vector<cUnitEntry> unitList = getChunkUnitList(pos);
 	for (int i = 0; i < (int)unitList.size(); i++)
 	{
-		if (game.getUnitId(unitList[i].globalId) == -1)
+		if (game.getUnitId(unitList[i].globalId) == -1)// && )
 		{
 			id = game.addUnit(unitList[i].type, anchor + unitList[i].pos, -1, -1, false);
 			// Assign global id if the object is loaded for the first time
@@ -59,9 +59,15 @@ void cWorld::loadChunk(vec2i pos)
 			}
 			// Tell unit to which chunk it belongs
 			game.unit[game.getUnitId(id)].chunkPos = pos;
+			if (pos != world.getChunkInPos(anchor + unitList[i].pos))
+			{
+				cout << "ALARMA: " << pos.x << "; " << pos.y << " / " << world.getChunkInPos(game.unit[game.getUnitId(id)].pos).x << "; "
+					<< world.getChunkInPos(game.unit[game.getUnitId(id)].pos).y << endl;
+			}
 		}
 	}
 	map[pos.x][pos.y].isLoaded = true;
+
 	//game.access.unlock();
 	//access.unlock();
 }

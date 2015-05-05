@@ -10,6 +10,8 @@ namespace Taiga_Editor
 {
     public partial class Form1 : Form
     {
+        int selectionType = -1;
+        int selectionIndex = -1;
         // Initialization
         public cDatabase database = new cDatabase();
         public Form1()
@@ -33,15 +35,21 @@ namespace Taiga_Editor
                 tabControl1.Show();
                 if (treeView.SelectedNode.Parent.Name == "node_units")
                 {
+                    selectionType = 0;
+                    selectionIndex = treeView.SelectedNode.Index;
                     tabControl1.TabPages.Add(tab_unit);
                     text_unit_name.Text = "missingno";
                 }
                 else if (treeView.SelectedNode.Parent.Name == "node_items")
                 {
+                    selectionType = 1;
+                    selectionIndex = treeView.SelectedNode.Index;
                     tabControl1.TabPages.Add(tab_item);
                 }
                 else if (treeView.SelectedNode.Parent.Name == "node_ui")
                 {
+                    selectionType = 2;
+                    selectionIndex = treeView.SelectedNode.Index;
                     tabControl1.TabPages.Add(tab_ui);
                 }
             }
@@ -93,6 +101,15 @@ namespace Taiga_Editor
                 {
                     database.removeUIElementSel();
                 }
+            }
+        }
+
+        // Change unit name
+        private void text_unit_name_TextChanged(object sender, EventArgs e)
+        {
+            if (selectionType == 0) 
+            {
+                database.setUnitName(selectionIndex, text_unit_name.Text);
             }
         }
     }

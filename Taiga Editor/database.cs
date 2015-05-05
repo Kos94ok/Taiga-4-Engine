@@ -16,7 +16,7 @@ namespace Taiga_Editor
     }
     public class cUnit : cDBObject
     {
-
+        string name { get; set; }
     }
     public class cItem : cDBObject
     {
@@ -31,12 +31,12 @@ namespace Taiga_Editor
     {
         public Form1 parent;
 
-        int unitCount = 0;
-        cUnit[] unit = new cUnit[256];
-        int itemCount = 0;
-        cItem[] item = new cItem[256];
-        int uiElementCount = 0;
-        cUIElement[] uiElement = new cUIElement[256];
+        public int unitCount = 0;
+        public cUnit[] unit = new cUnit[256];
+        public int itemCount = 0;
+        public cItem[] item = new cItem[256];
+        public int uiElementCount = 0;
+        public cUIElement[] uiElement = new cUIElement[256];
 
         // Add object
         public int addUnit(string name)
@@ -118,6 +118,13 @@ namespace Taiga_Editor
             parent.treeView.Nodes.Remove(parent.treeView.SelectedNode);
 
             return true;
+        }
+
+        // Set object name
+        public void setUnitName(int id, string value)
+        {
+            unit[id].name = value;
+            parent.treeView.SelectedNode.Name = value;
         }
 
         // Constructor

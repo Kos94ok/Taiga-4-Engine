@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 	cout << "[MAIN] Initializing" << "\n";
 	//setlocale(LC_ALL, "");
 	//setlocale(LC_ALL, "Russian"); 
-	srand(time(0));
+	//srand(time(0));
 	timeBeginPeriod(5);
 	if (!core.serverMode) { core.localServer = true; }
 	util.detectVideoCard();

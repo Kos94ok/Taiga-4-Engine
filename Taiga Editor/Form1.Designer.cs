@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Units");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Items");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("UI");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Units");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Items");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("UI");
             this.treeView = new System.Windows.Forms.TreeView();
             this.btn_addElement = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -46,20 +46,22 @@
             // 
             // treeView
             // 
+            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.treeView.Location = new System.Drawing.Point(12, 12);
             this.treeView.MaximumSize = new System.Drawing.Size(300, 400);
             this.treeView.MinimumSize = new System.Drawing.Size(100, 400);
             this.treeView.Name = "treeView";
-            treeNode1.Name = "node_units";
-            treeNode1.Text = "Units";
-            treeNode2.Name = "node_items";
-            treeNode2.Text = "Items";
-            treeNode3.Name = "node_ui";
-            treeNode3.Text = "UI";
+            treeNode4.Name = "node_units";
+            treeNode4.Text = "Units";
+            treeNode5.Name = "node_items";
+            treeNode5.Text = "Items";
+            treeNode6.Name = "node_ui";
+            treeNode6.Text = "UI";
             this.treeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.treeView.Size = new System.Drawing.Size(143, 400);
             this.treeView.TabIndex = 0;
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -76,6 +78,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tab_unit);
             this.tabControl1.Controls.Add(this.tab_item);
             this.tabControl1.Controls.Add(this.tab_ui);
@@ -103,6 +108,7 @@
             this.text_unit_name.Name = "text_unit_name";
             this.text_unit_name.Size = new System.Drawing.Size(100, 20);
             this.text_unit_name.TabIndex = 1;
+            this.text_unit_name.TextChanged += new System.EventHandler(this.text_unit_name_TextChanged);
             // 
             // label1
             // 

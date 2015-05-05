@@ -7,7 +7,7 @@ void cSettings::setDefault()
 	// 1 - Medium
 	// 2 - High
 	// 3 - Ultra
-	this->unitDepthCheck = 3;				// Fixed value
+	this->unitDepthCheck = 2;				// Fixed value
 	this->unitRenderDistance = 2;			// Fixed value
 
 	// 0 - Low / Disabled
@@ -29,10 +29,34 @@ void cSettings::setDefault()
 	this->sampleMod = 1.00f;				// 0.50 - Subsampling, 1.00 - Default, 2.00 - Supersampling
 
 	// World generation
-	this->wgStartingPath = 1;				// Amount of paths
-	this->wgMinimalPathLength = 3;			// Minimal amount of steps before termination
-	this->wgMaximalPathLength = 10;			// Maximum amount of steps before termination
+	this->wgStartingPath = 3;				// Amount of paths
+	this->wgMinimalPathLength = 15;			// Minimal amount of steps before termination
+	this->wgMaximalPathLength = 100;		// Maximum amount of steps before termination
 	this->wgPathForkChance = 20;			// Chance to create another path on every step (percentage)
+	/*
+	Taiga Mini:
+	wgStartingPath = 1;
+	wgMinimalPathLength = 3;
+	wgMaximalPathLength = 10;
+	wgPathForkChance = 20;
+	Taiga Maxi:
+	wgStartingPath = 3;
+	wgMinimalPathLength = 15;
+	wgMaximalPathLength = 100;
+	wgPathForkChance = 20;
+	*/
+
+	// General world settings
+	this->wdDayNightSpeed = 1.00f / 72.00f;
+	this->wdNightChangeSpeed = 1.00f;
+	/*
+	Arcade mode (fast):
+	wdDayNightSpeed = 1.00f / 24.00f;
+	wdNightChangeSpeed = 3.00f;
+	Normal mode:
+	wdDayNightSpeed = 1.00f / 72.00f;
+	wdNightChangeSpeed = 1.00f;
+	*/
 
 	// Hotkeys
 	this->hkInventory = sf::Keyboard::E;

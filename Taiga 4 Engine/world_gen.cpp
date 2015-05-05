@@ -59,7 +59,7 @@ void cWorld::genNormalWorld()
 	{
 		for (int i = 0; i < LIMIT_MAP; i++)
 		{
-			map[i][j].genStatus = CHUNK_UNDEFINED;
+			map[i][j].type = CHUNK_UNDEFINED;
 		}
 	}
 
@@ -73,27 +73,27 @@ void cWorld::genNormalWorld()
 	}
 
 	// Writing global spawn point
-	spawnPoint = vec2(spawnPointI.x * LIMIT_CHUNKSIZE, spawnPointI.y * LIMIT_CHUNKSIZE);
+	spawnPoint = vec2(spawnPointI.x * LIMIT_CHUNKSIZE + LIMIT_CHUNKSIZE / 2, spawnPointI.y * LIMIT_CHUNKSIZE + LIMIT_CHUNKSIZE / 2);
 
 	// Applying spawn point
-	map[spawnPointI.x][spawnPointI.y].genStatus = CHUNK_SPAWN;
+	map[spawnPointI.x][spawnPointI.y].type = CHUNK_SPAWN;
 
 	// Creating a wall around the normal chunks
 	for (int j = 1; j < LIMIT_MAP - 1; j++)
 	{
 		for (int i = 1; i < LIMIT_MAP - 1; i++)
 		{
-			if (map[i][j].genStatus == CHUNK_UNDEFINED &&
-				(map[i + 1][j].genStatus == CHUNK_NORMAL || map[i + 1][j].genStatus == CHUNK_SPAWN
-				|| map[i + 1][j + 1].genStatus == CHUNK_NORMAL || map[i + 1][j + 1].genStatus == CHUNK_SPAWN
-				|| map[i][j + 1].genStatus == CHUNK_NORMAL || map[i][j + 1].genStatus == CHUNK_SPAWN
-				|| map[i - 1][j + 1].genStatus == CHUNK_NORMAL || map[i - 1][j + 1].genStatus == CHUNK_SPAWN
-				|| map[i - 1][j].genStatus == CHUNK_NORMAL || map[i - 1][j].genStatus == CHUNK_SPAWN
-				|| map[i - 1][j - 1].genStatus == CHUNK_NORMAL || map[i - 1][j - 1].genStatus == CHUNK_SPAWN
-				|| map[i][j - 1].genStatus == CHUNK_NORMAL || map[i][j - 1].genStatus == CHUNK_SPAWN
-				|| map[i + 1][j - 1].genStatus == CHUNK_NORMAL || map[i + 1][j - 1].genStatus == CHUNK_SPAWN))
+			if (map[i][j].type == CHUNK_UNDEFINED &&
+				(map[i + 1][j].type == CHUNK_NORMAL || map[i + 1][j].type == CHUNK_SPAWN
+				|| map[i + 1][j + 1].type == CHUNK_NORMAL || map[i + 1][j + 1].type == CHUNK_SPAWN
+				|| map[i][j + 1].type == CHUNK_NORMAL || map[i][j + 1].type == CHUNK_SPAWN
+				|| map[i - 1][j + 1].type == CHUNK_NORMAL || map[i - 1][j + 1].type == CHUNK_SPAWN
+				|| map[i - 1][j].type == CHUNK_NORMAL || map[i - 1][j].type == CHUNK_SPAWN
+				|| map[i - 1][j - 1].type == CHUNK_NORMAL || map[i - 1][j - 1].type == CHUNK_SPAWN
+				|| map[i][j - 1].type == CHUNK_NORMAL || map[i][j - 1].type == CHUNK_SPAWN
+				|| map[i + 1][j - 1].type == CHUNK_NORMAL || map[i + 1][j - 1].type == CHUNK_SPAWN))
 			{
-				map[i][j].genStatus = CHUNK_BLOCKED;
+				map[i][j].type = CHUNK_BLOCKED;
 			}
 		}
 	}
@@ -101,13 +101,13 @@ void cWorld::genNormalWorld()
 	// Blocking the edges
 	for (int i = 0; i < LIMIT_MAP; i++)
 	{
-		map[i][0].genStatus = CHUNK_BLOCKED;
-		map[i][63].genStatus = CHUNK_BLOCKED;
+		map[i][0].type = CHUNK_BLOCKED;
+		map[i][63].type = CHUNK_BLOCKED;
 	}
 	for (int j = 0; j < LIMIT_MAP; j++)
 	{
-		map[0][j].genStatus = CHUNK_BLOCKED;
-		map[63][j].genStatus = CHUNK_BLOCKED;
+		map[0][j].type = CHUNK_BLOCKED;
+		map[63][j].type = CHUNK_BLOCKED;
 	}
 
 	ofstream file;
@@ -116,11 +116,11 @@ void cWorld::genNormalWorld()
 	{
 		for (int i = 0; i < LIMIT_MAP; i++)
 		{
-			if (map[i][j].genStatus == CHUNK_UNDEFINED) { file << "? "; }
-			else if (map[i][j].genStatus == CHUNK_NORMAL) { file << "~ "; }
-			else if (map[i][j].genStatus == CHUNK_BLOCKED) { file << "X "; }
-			else if (map[i][j].genStatus == CHUNK_SPAWN) { file << "@ "; }
-			else if (map[i][j].genStatus == CHUNK_VILLAGE) { file << "& "; }
+			if (map[i][j].type == CHUNK_UNDEFINED) { file << "? "; }
+			else if (map[i][j].type == CHUNK_NORMAL) { file << "~ "; }
+			else if (map[i][j].type == CHUNK_BLOCKED) { file << "X "; }
+			else if (map[i][j].type == CHUNK_SPAWN) { file << "@ "; }
+			else if (map[i][j].type == CHUNK_VILLAGE) { file << "& "; }
 		}
 		file << "\n";
 	}
@@ -135,10 +135,10 @@ void cWorld::genNormalWorld()
 	{
 		for (int i = 0; i < LIMIT_MAP; i++)
 		{
-			if (map[i][j].genStatus != CHUNK_UNDEFINED)
-			//if (map[i][j].genStatus == CHUNK_NORMAL)
+			if (map[i][j].type != CHUNK_UNDEFINED)
+			//if (map[i][j].type == CHUNK_NORMAL)
 			{
-				applyBlueprint(vec2i(i, j), map[i][j].genStatus);
+				applyBlueprint(vec2i(i, j), map[i][j].type);
 			}
 		}
 	}
@@ -160,13 +160,13 @@ void cWorld::genChunkPath(int val, vec2i pos)
 		else if (random == 3) { newPos.y -= 1; }
 		saver += 1;
 	}
-	while (saver < 10 && map[newPos.x][newPos.y].genStatus != CHUNK_UNDEFINED);
+	while (saver < 10 && map[newPos.x][newPos.y].type != CHUNK_UNDEFINED);
 
 	// If the path has found
 	if (saver < 10)
 	{
 		pos = newPos;
-		map[pos.x][pos.y].genStatus = CHUNK_NORMAL;
+		map[pos.x][pos.y].type = CHUNK_NORMAL;
 
 		// Termination chance
 		if (math.rand(settings.wgMinimalPathLength, settings.wgMaximalPathLength) < val) { return; }

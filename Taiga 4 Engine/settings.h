@@ -53,6 +53,11 @@ public:
 	// Path fork chance [Increases the amount of paths on the map]
 	int wgPathForkChance;
 
+	// Day-night cycle speed
+	float wdDayNightSpeed;
+	// Night transition speed
+	float wdNightChangeSpeed;
+
 	// Hotkeys
 	sf::Keyboard::Key hkConsole;
 	sf::Keyboard::Key hkDebugMode;

@@ -7,7 +7,7 @@ void windowMain()
 	if (core.serverMode) { return; }
 
 	cout << "[WND] Window thread started" << "\n";
-	srand(time(0));
+	//srand(time(0));
 	sf::Uint32 screenMode;
 	sf::ContextSettings context;
 	context.antialiasingLevel = settings.antialiasingLevel;

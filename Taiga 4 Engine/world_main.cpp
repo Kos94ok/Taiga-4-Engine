@@ -23,34 +23,22 @@ vector<string> getBlueprintList()
 void cWorld::analyzeBlueprints()
 {
 	blueprint.clear();
-	bool printGood;
 	int countCorrect = 0, countWrong = 0, value = -1;
-	char buf[256];
 	cBlueprint print;
 	ifstream file;
+	cBlueprintHeader header;
 	vector<string> list = getBlueprintList();
 	for (int i = 0; i < (int)list.size(); i++)
 	{
 		print.name = list[i];
-		// Opening the file
-		file.open("Data//Blueprints//" + list[i]);
-		if (file.good())
+		// Getting the header
+		header = save.getHeaderFromFile("Data//Blueprints//" + list[i]);
+		// Checking the header
+		if (header.isValid && header.type > CHUNK_UNDEFINED && header.type <= CHUNK_VILLAGE)
 		{
-			printGood = true;
-			// Blueprint type
-			file.getline(buf, 256);
-			stringstream(buf) >> value;
-			print.type = value;
-			if (value < CHUNK_UNDEFINED || value > CHUNK_VILLAGE) { printGood = false; }
-			// Closing the file
-			file.close();
-			// Pushing to array
-			if (printGood)
-			{
-				blueprint.push_back(print);
-				countCorrect += 1;
-			}
-			else { countWrong += 1; }
+			countCorrect += 1;
+			print.type = header.type;
+			blueprint.push_back(print);
 		}
 		else { countWrong += 1; }
 	}
@@ -72,8 +60,8 @@ void worldLoaderMain()
 			{
 				for (int i = 0; i < LIMIT_MAP; i++)
 				{
-					//if (world.map[i][y].genStatus != CHUNK_UNDEFINED)
-					//if (world.map[i][y].genStatus == CHUNK_NORMAL)
+					//if (world.map[i][y].type != CHUNK_UNDEFINED)
+					//if (world.map[i][y].type == CHUNK_NORMAL)
 					//{
 						isViable = world.isChunkViable(vec2i(i, y));
 						// Loading
@@ -97,7 +85,6 @@ void worldLoaderMain()
 						// Unloading
 						else if (!isViable && world.isChunkLoaded(vec2i(i, y)))
 						{
-							// TODO: Fix server chunk unloading
 							if (core.localServer || core.serverMode) { world.saveChunk(vec2i(i, y)); }
 							world.unloadChunk(vec2i(i, y));
 						}

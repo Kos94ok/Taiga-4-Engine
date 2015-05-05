@@ -147,16 +147,16 @@ void serverWorldAnim(int elapsedTime)
 		}
 	}
 	// World anim
-	game.timeOfDay += timevar / 24.00f;
+	game.timeOfDay += timevar * settings.wdDayNightSpeed;
 	if (game.timeOfDay >= 24.00f) { game.timeOfDay = 0.00f; }
 	if (game.lightens() && game.ambientLight < game.ambientLightMax)
 	{
-		game.ambientLight += timevar * 3;
+		game.ambientLight += timevar * settings.wdNightChangeSpeed;
 		if (game.ambientLight > game.ambientLightMax) { game.ambientLight = game.ambientLightMax; }
 	}
 	else if (game.darkens() && game.ambientLight > game.ambientLightMin)
 	{
-		game.ambientLight -= timevar * 3;
+		game.ambientLight -= timevar * settings.wdNightChangeSpeed;
 		if (game.ambientLight < game.ambientLightMin) { game.ambientLight = game.ambientLightMin; }
 	}
 	game.access.unlock();
