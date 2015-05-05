@@ -110,6 +110,7 @@
 #define REF_UNIT_NOSAVE					6		// Unit is not saved
 #define REF_UNIT_NORENDER				7		// Unit is not displayed on the screen
 #define REF_UNIT_NOUNLOAD				8		// Unit is never unloaded from memory
+#define REF_UNIT_BESTPATHING			9		// Unit's position is validated before moving
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_NODROP					2		// Item can not be dropped

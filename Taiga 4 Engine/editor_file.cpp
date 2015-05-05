@@ -19,7 +19,7 @@ void cEditor::saveBlueprint(string name)
 			unitList.push_back(unitEntry);
 		}
 	}
-	save.flushListToFile(CHUNK_NORMAL, unitList, path);
+	save.flushListToFile(editor.autogenType, unitList, path);
 }
 
 void cEditor::loadBlueprint(string name)

@@ -32,13 +32,13 @@ int cUnit::addOrder_moveto(sf::Vector2f target, bool overwrite)
 
 int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 {
-	// Only performed on server
-	//if (!core.serverMode && !core.localServer) { return -1; }
-
 	// If unit can not move, then ignore
 	if (movementSpeed <= 0.00f) { return -1; }
 	// If target is too close, then ignore
 	if (math.getDistance(pos, target) < 10.00f) { return -1; }
+	// If clicked to the restricted area, then... you know
+	vec2i targetChunk = world.getChunkInPos(target);
+	if (world.map[targetChunk.x][targetChunk.y].type == CHUNK_UNDEFINED) { return -1; }
 
 	if (overwrite) { orderCounter = 0; actionTimer = 0.00f; }
 

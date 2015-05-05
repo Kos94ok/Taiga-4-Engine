@@ -32,8 +32,8 @@ int main(int argc, char* argv[])
 	// Random initialization
 	cout << "[MAIN] Initializing" << "\n";
 	//setlocale(LC_ALL, "");
-	//setlocale(LC_ALL, "Russian"); 
-	//srand(time(0));
+	//setlocale(LC_ALL, "Russian");
+	srand(time(0));
 	timeBeginPeriod(5);
 	if (!core.serverMode) { core.localServer = true; }
 	util.detectVideoCard();
@@ -82,12 +82,12 @@ int main(int argc, char* argv[])
 		int id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f));
 		ui.element[ui.getElementId(id)].setText("Taiga Mini");
 		ui.element[ui.getElementId(id)].button.action = "start_taigaMini";
+		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 70.00f));
+		ui.element[ui.getElementId(id)].setText("Taiga Maxi");
+		ui.element[ui.getElementId(id)].button.action = "start_taigaMaxi";
 		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 35.00f));
 		ui.element[ui.getElementId(id)].setText("Editor");
 		ui.element[ui.getElementId(id)].button.action = "start_editor";
-		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 70.00f));
-		ui.element[ui.getElementId(id)].setText("Map Gen Test");
-		ui.element[ui.getElementId(id)].button.action = "start_arena";
 		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 105.00f));
 		ui.element[ui.getElementId(id)].setText("Quick Connect");
 		ui.element[ui.getElementId(id)].button.action = "connect_temp";

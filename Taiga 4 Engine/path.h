@@ -11,5 +11,5 @@ public:
 	void clear();
 	bool isPointFree(sf::Vector2f loc, float dist, int unitId);
 	sf::Vector2f validatePoint(sf::Vector2f loc, float dist, int unitId);
-	void calculate(sf::Vector2f start, sf::Vector2f end, float collision, int unitId);
+	bool calculate(sf::Vector2f start, sf::Vector2f end, float collision, int unitId);
 };

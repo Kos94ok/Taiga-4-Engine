@@ -22,6 +22,8 @@ class cEditor
 public:
 	cEditorSelection sel;
 
+	int autogenType;
+
 	void enable();
 	void initialize();
 
@@ -29,8 +31,10 @@ public:
 	void loadBlueprint(std::string name);
 
 	void genBlueprint();
+	void genBlueprint_Normal();
+	void genBlueprint_Blocked();
 
 	cEditor() {
-		
+		autogenType = CHUNK_NORMAL;
 	}
 };

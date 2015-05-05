@@ -121,7 +121,12 @@ void cUIButton::callbackLeft(int parent)
 	}
 	else if (action == "start_taigaMini")
 	{
-		world.genTaigaMini();
+		settings.wgStartingPath = 1;
+		settings.wgMinimalPathLength = 3;
+		settings.wgMaximalPathLength = 10;
+		settings.wgPathForkChance = 20;
+		world.genNormalWorld();
+
 		ui.updateFull();
 		client.connect("localserver", 21045);
 	}
@@ -131,7 +136,7 @@ void cUIButton::callbackLeft(int parent)
 		client.connect("localserver", 21045);
 		ui.updateFull();
 	}
-	else if (action == "start_arena")
+	else if (action == "start_taigaMaxi")
 	{
 		world.genNormalWorld();
 		ui.updateFull();

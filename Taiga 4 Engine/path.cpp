@@ -1,11 +1,11 @@
 
 #include "main.h"
 
-void cPath::calculate(vec2 start, vec2 end, float collision, int unitId)
+bool cPath::calculate(vec2 start, vec2 end, float collision, int unitId)
 {
 	clear();
 
-	vec2 iter = start, step;
+	vec2 iter = start, step, oldIter;
 	bool objFound = true;
 	float localAngle;
 	// Validating the point
@@ -18,13 +18,14 @@ void cPath::calculate(vec2 start, vec2 end, float collision, int unitId)
 	else if (dist > 100.00f) { precision = 2.00f; }
 	else { precision = 1.00f; }
 
-	for (int i = 0; i < 100; i++)
+	int i = 0;
+	for (i = 0; i < 100; i++)
 	{
 		float angle = math.getAngle(iter, end);
 		localAngle = angle;
 		// Looking for path
 		objFound = true;
-		for (int u = 0; u < 35 && objFound; u++)
+		for (int u = 0; u < 18 && objFound; u++)
 		{
 			step = vec2(cos(localAngle * math.DEGTORAD) * precision, sin(localAngle * math.DEGTORAD) * precision);
 			objFound = false;
@@ -47,16 +48,15 @@ void cPath::calculate(vec2 start, vec2 end, float collision, int unitId)
 		// If good point found
 		if (!objFound)
 		{
-			if (math.getDistance(iter, end) < precision * 7.50f) { i = 100; }
+			if (math.getDistance(iter, end) < precision * 7.50f) { addWaypoint(end); return true; }
 			else {
 				iter = iter + step * 5.00f;
 				addWaypoint(iter);
 			}
 		}
-		else { i = 100; }
+		else { return false; }
 	}
-
-	addWaypoint(end);
+	return false;
 }
 
 vec2 cPath::validatePoint(vec2 loc, float dist, int unitId)

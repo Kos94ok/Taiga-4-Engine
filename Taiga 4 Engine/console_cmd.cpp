@@ -287,15 +287,25 @@ void cmd_editor_load(string args[])
 // Editor.autogen
 void cmd_editor_autogen(string args[])
 {
-	int count;
+	int count, startIndex = 0;
 	stringstream(args[0]) >> count;
-	
+	stringstream(args[1]) >> startIndex;
+
 	editor.genBlueprint();
 	for (int i = 0; i < count; i++)
 	{
-		editor.saveBlueprint("gen" + to_string(i));
+		editor.saveBlueprint("gen" + to_string(i + startIndex));
 		editor.genBlueprint();
 	}
+}
+
+// Editor.autogen.settype
+void cmd_editor_setgentype(string args[])
+{
+	int type;
+	stringstream(args[0]) >> type;
+
+	editor.autogenType = type;
 }
 
 // Exit command

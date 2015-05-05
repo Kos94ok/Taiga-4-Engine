@@ -118,7 +118,7 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 			else
 			{
 				// Unit needs to move closer
-				game.unit[id].addOrder_moveto(game.getUnitInteractPoint(*playerUnit, *targetUnit), !argb[1]);
+				game.unit[id].addOrder_moveto_path(game.getUnitInteractPoint(*playerUnit, *targetUnit), !argb[1]);
 				game.unit[id].addOrder_harvest(argi[0], false);
 			}
 		}

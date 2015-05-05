@@ -58,6 +58,7 @@ void cDatabase::loadUnits()
 	unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
 	unit[i].addRef(REF_UNIT_NOUNLOAD);
+	unit[i].addRef(REF_UNIT_BESTPATHING);
 	i += 1;
 
 	// Trees

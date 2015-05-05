@@ -36,8 +36,20 @@ void serverWorldOrders(int elapsedTime)
 						game.unit[i].removeOrder(0);
 					}
 					// Moving the unit to correct position
-					game.unit[i].pos.x += offsetX;
-					game.unit[i].pos.y += offsetY;
+						// Check unit ref
+					if (game.unit[i].hasRef(REF_UNIT_BESTPATHING))
+					{
+						// Validate the point before moving
+						vec2f newPoint = path.validatePoint(vec2f(game.unit[i].pos.x + offsetX, game.unit[i].pos.y + offsetY), game.unit[i].collisionDistance, game.unit[i].globalId);
+						game.unit[i].pos = newPoint;
+					}
+					else
+					{
+						// Just move the unit
+						game.unit[i].pos.x += offsetX;
+						game.unit[i].pos.y += offsetY;
+					}
+					// Check the camera status
 					if (game.unit[i].globalId == client.unit)
 					{
 						if (camera.lockedToCharacter) { camera.moveto(sf::Vector2f(game.unit[i].pos.x, game.unit[i].pos.y)); }
