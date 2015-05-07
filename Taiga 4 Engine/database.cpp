@@ -170,9 +170,14 @@ void cDatabase::loadItems()
 	item[i].addDescrLine("Some meat in the can. Good to win some time");
 	item[i].addDescrLine("against hunger.");
 	item[i].addDescrLine("");
-	item[i].addDescrLine("- Restores X health");
+	item[i].addDescrLine("- Restores 25 health");
 	item[i].addDescrLine("- Restores Y hunger");
 	item[i].addDescrLine("- Consumable");
+	item[i].dismantle.add("material_tin", 1);
+	item[i].consume.healthBalance = 25;
+	item[i].addRef(REF_ITEM_CONSUME);
+	item[i].addRef(REF_ITEM_EMPTIABLE);
+	item[i].addRef(REF_ITEM_DISMANTLE_ON_CONSUME);
 	item[i].category = CATEGORY_CONSUMABLES;
 	i += 1;
 
@@ -182,8 +187,10 @@ void cDatabase::loadItems()
 	item[i].addDescrLine("A bottle full of fresh water. Restores some");
 	item[i].addDescrLine("energy and gives more strength to survive.");
 	item[i].addDescrLine("");
-	item[i].addDescrLine("- Restores X health");
+	item[i].addDescrLine("- Restores 50 health");
 	item[i].addDescrLine("- Consumable");
+	item[i].consume.healthBalance = 50;
+	item[i].addRef(REF_ITEM_CONSUME);
 	item[i].category = CATEGORY_CONSUMABLES;
 	i += 1;
 
@@ -197,8 +204,15 @@ void cDatabase::loadItems()
 	item[i].category = CATEGORY_MATERIALS;
 	i += 1;
 
+		// Piece of Tin
+	item[i].type = "material_tin";
+	item[i].setName("Piece of Tin");
+	item[i].addDescrLine("A small piece of tin. Can be useful.");
+	item[i].category = CATEGORY_MATERIALS;
+	i += 1;
+
 	// Other
-	// Basic survival kit
+		// Basic survival kit
 	item[i].type = "survival_kit_basic";
 	item[i].setName("Basic Survival Kit");
 	item[i].addDescrLine("Contains some essential survival equipment.");
@@ -208,6 +222,7 @@ void cDatabase::loadItems()
 	item[i].dismantle.add("food_meat_canned", 5);
 	item[i].dismantle.add("food_water_bottle", 1);
 	item[i].dismantle.add("flint_basic", 3);
+	item[i].addRef(REF_ITEM_UNPACKABLE);
 	item[i].category = CATEGORY_OTHER;
 	i += 1;
 

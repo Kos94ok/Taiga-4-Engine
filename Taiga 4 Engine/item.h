@@ -18,6 +18,16 @@ public:
 	}
 };
 
+class cItemConsume
+{
+public:
+	int healthBalance;
+
+	cItemConsume(){
+		healthBalance = 0;
+	}
+};
+
 class cItem : public cReference
 {
 public:
@@ -30,6 +40,7 @@ public:
 
 	bool equipped;
 	float weight;
+	cItemConsume consume;
 	cItemDismantle dismantle;
 
 	void addDescrLine(std::string line);

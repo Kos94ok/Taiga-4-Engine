@@ -144,6 +144,8 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 	int msg, id, unitId;
 	string cmd = "", type = "";
 	sf::Packet data;
+	cItemConsume consumeData;
+	cItemDismantle dismantleData;
 
 	input >> msg;
 	// =======================================================
@@ -199,7 +201,7 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 	if (msg == MSG_CONTROLS_DISMANTLE)
 	{
 		input >> type >> argi[0];
-		cItemDismantle dismantleData = game.getUnit(server.player[i].unit).container.get(type).dismantle;
+		dismantleData = game.getUnit(server.player[i].unit).container.get(type).dismantle;
 
 		// Add new items
 		for (int y = 0; y < dismantleData.itemCounter; y++)
@@ -213,6 +215,36 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 		data << MSG_UI_UPDATEITEMLIST;
 		server.sendPacket(i, data);
 		data.clear();
+		return true;
+	}
+	// =======================================================
+	// =======================================================
+	// Player consumes an item
+	if (msg == MSG_CONTROLS_CONSUME)
+	{
+		input >> type >> argi[0];
+		cItem* target = &game.getUnit(server.player[i].unit).container.get(type);
+		consumeData = target->consume;
+
+		// Apply consume effect
+		game.getUnit(server.player[i].unit).addHealth(consumeData.healthBalance * argi[0]);
+		// Dismantle on consume
+		if (target->hasRef(REF_ITEM_DISMANTLE_ON_CONSUME))
+		{
+			// Get the data
+			dismantleData = target->dismantle;
+			// Add new items
+			for (int y = 0; y < dismantleData.itemCounter; y++) {
+				game.getUnit(server.player[i].unit).addItem(dismantleData.item[y], dismantleData.amount[y] * argi[0]);
+			}
+		}
+		// Remove item
+		game.getUnit(server.player[i].unit).removeItem(type, argi[0]);
+		// Update UI
+		data << MSG_UI_UPDATEITEMLIST;
+		server.sendPacket(i, data);
+		data.clear();
+
 		return true;
 	}
 	return false;

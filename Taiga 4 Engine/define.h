@@ -72,6 +72,7 @@
 #define MSG_CONTROLS_DISMANTLE			162
 #define MSG_CONTROLS_BLINK				170
 #define MSG_CONTROLS_RIFLE				171
+#define MSG_CONTROLS_CONSUME			172
 #define MSG_REQUEST_CHUNKDATA			180
 #define MSG_INFO_CAMRES					190
 
@@ -112,12 +113,15 @@
 #define REF_UNIT_BESTPATHING			9		// Unit's position is validated before moving
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
-#define REF_ITEM_NODROP					2		// Item can not be dropped
-#define REF_ITEM_NOCRAFT				3		// Item can not be used in crafting
-#define REF_ITEM_BLINK					4		// Item can teleport the user to target point
-#define REF_ITEM_RIFLE					5		// Item can shoot bullets
-#define REF_ITEM_EDITOR					6		// Item is editor-only
-#define REF_ITEM_NOCONSUME				7		// Item is not consumed when used for crafting
+#define REF_ITEM_CONSUME				2		// Item can be consumed
+#define REF_ITEM_NODROP					3		// Item can not be dropped
+#define REF_ITEM_NOCRAFT				4		// Item can not be used in crafting
+#define REF_ITEM_BLINK					5		// Item can teleport the user to target point
+#define REF_ITEM_RIFLE					6		// Item can shoot bullets
+#define REF_ITEM_EDITOR					7		// Item is editor-only
+#define REF_ITEM_UNPACKABLE				8		// Item context menu will display 'unpack' instead of 'dismantle'
+#define REF_ITEM_EMPTIABLE				9		// Item context menu will display 'empty' instead of 'dismantle'
+#define REF_ITEM_DISMANTLE_ON_CONSUME	10		// Item is dismantled when it is consumed
 
 #define TEX_UI_TOOLTIP					1
 #define TEX_WORLD_GROUND				2

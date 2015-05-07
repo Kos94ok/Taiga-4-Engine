@@ -51,11 +51,21 @@ void cUI::createContextMenuForItem(int targetItem)
 		ui.element[ui.getElementId(id)].button.action = "invItem_equip";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(targetItem);
 	}
-	// Dismantle
+	// Equip
+	if (item.hasRef(REF_ITEM_CONSUME))
+	{
+		id = ui.addElement(ui.element[ui.getElementId(id)], mousePos + sf::Vector2f(5.00f, 5.00f + 32.00f * buttonCount++));
+		ui.element[ui.getElementId(id)].setText("Consume");
+		ui.element[ui.getElementId(id)].button.action = "invItem_consume";
+		ui.element[ui.getElementId(id)].button.args[0] = to_string(targetItem);
+	}
+	// Dismantle / Unpack / Empty
 	if (item.dismantle.itemCounter > 0)
 	{
 		id = ui.addElement(ui.element[ui.getElementId(id)], mousePos + sf::Vector2f(5.00f, 5.00f + 32.00f * buttonCount++));
 		ui.element[ui.getElementId(id)].setText("Dismantle");
+		if (item.hasRef(REF_ITEM_EMPTIABLE)) { ui.element[ui.getElementId(id)].setText("Empty"); }
+		if (item.hasRef(REF_ITEM_UNPACKABLE)) { ui.element[ui.getElementId(id)].setText("Unpack"); }
 		ui.element[ui.getElementId(id)].button.action = "invItem_dismantle";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(targetItem);
 	}

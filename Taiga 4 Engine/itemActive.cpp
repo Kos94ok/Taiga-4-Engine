@@ -4,7 +4,7 @@
 void cItem::use()
 {
 	sf::Packet data;
-	if (!hasRef(REF_ITEM_ACTIVE)) { return; }
+	if (!hasRef(REF_ITEM_ACTIVE) && !(hasRef(REF_ITEM_CONSUME))) { return; }
 	// Remove all orders
 	data << MSG_CONTROLS_STOP;
 	client.sendPacket(data);
@@ -21,6 +21,13 @@ void cItem::use()
 	if (hasRef(REF_ITEM_RIFLE))
 	{
 		data << MSG_CONTROLS_RIFLE << window.getMousePos(true).x << window.getMousePos(true).y;
+		client.sendPacket(data);
+		data.clear();
+	}
+	// Consumable
+	if (hasRef(REF_ITEM_CONSUME))
+	{
+		data << MSG_CONTROLS_CONSUME << type << 1;
 		client.sendPacket(data);
 		data.clear();
 	}

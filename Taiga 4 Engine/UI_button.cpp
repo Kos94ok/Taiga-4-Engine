@@ -92,6 +92,22 @@ void cUIButton::callbackLeft(int parent)
 		ui.updateInterfaceEquipment();
 		ui.updateInterfaceItemList();
 	}
+	else if (action == "invItem_equip")
+	{
+		stringstream(args[0]) >> id;
+		id = game.unit[game.getUnitId(client.unit)].container.getId(id);
+		game.unit[game.getUnitId(client.unit)].container.item[id].equipped = !game.unit[game.getUnitId(client.unit)].container.item[id].equipped;
+		ui.clearContextMenu();
+		ui.updateInterfaceEquipment();
+		ui.updateInterfaceItemList();
+	}
+	else if (action == "invItem_consume")
+	{
+		stringstream(args[0]) >> id;
+		game.useItem(id);
+		ui.clearContextMenu();
+		ui.updateInterfaceItemList();
+	}
 	else if (action == "invItem_dismantle")
 	{
 		stringstream(args[0]) >> id;
@@ -109,15 +125,6 @@ void cUIButton::callbackLeft(int parent)
 		data.clear();
 
 		ui.clearContextMenu();
-	}
-	else if (action == "invItem_equip")
-	{
-		stringstream(args[0]) >> id;
-		id = game.unit[game.getUnitId(client.unit)].container.getId(id);
-		game.unit[game.getUnitId(client.unit)].container.item[id].equipped = !game.unit[game.getUnitId(client.unit)].container.item[id].equipped;
-		ui.clearContextMenu();
-		ui.updateInterfaceEquipment();
-		ui.updateInterfaceItemList();
 	}
 	else if (action == "start_taigaMini")
 	{
