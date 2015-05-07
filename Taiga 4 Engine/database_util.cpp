@@ -33,3 +33,12 @@ cUIElement& cDatabase::getUIElement(string type)
 	cout << "[ERROR] Can't find the UI element [" << type << "] in the database!" << "\n";
 	return uiElement[0];
 }
+
+bool cDatabase::isItemGood(string type)
+{
+	for (int i = 0; i < LIMIT_DB_ITEM; i++)
+	{
+		if (item[i].type == type) { return true; }
+	}
+	return false;
+}

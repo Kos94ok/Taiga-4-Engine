@@ -6,30 +6,48 @@ class cComponent
 public:
 	std::string type;
 	int count;
+	bool consume;
 
 	cComponent() {
 		type = "";
 		count = 1;
+		consume = true;
 	}
 
 	cComponent(std::string item) {
 		type = item;
 		count = 1;
+		consume = true;
+	}
+
+	cComponent(std::string item, bool toReturn) {
+		type = item;
+		count = 1;
+		consume = !toReturn;
 	}
 
 	cComponent(const char* item) {
 		type = item;
 		count = 1;
+		consume = true;
 	}
 
 	cComponent(std::string item, int amount) {
 		type = item;
 		count = amount;
+		consume = true;
+	}
+
+	cComponent(std::string item, int amount, bool toReturn) {
+		type = item;
+		count = amount;
+		consume = !toReturn;
 	}
 
 	cComponent& operator=(std::string item) {
 		type = item;
 		count = 1;
+		consume = true;
 		return *this;
 	}
 };

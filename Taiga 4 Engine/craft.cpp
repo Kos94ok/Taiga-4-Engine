@@ -9,14 +9,14 @@ void cCraft::addRecipe(cComponent result, int resBalance, cComponent ingrA,
 {
 	int ingrCount = 1;
 	recipe[recipeCounter].result = result;
-	recipe[recipeCounter].ingr[0] = ingrA;
-	if (ingrB.type != "") { recipe[recipeCounter].ingr[ingrCount++] = ingrB; }
-	if (ingrC.type != "") { recipe[recipeCounter].ingr[ingrCount++] = ingrC; }
-	if (ingrD.type != "") { recipe[recipeCounter].ingr[ingrCount++] = ingrD; }
-	if (ingrE.type != "") { recipe[recipeCounter].ingr[ingrCount++] = ingrE; }
-	if (ingrF.type != "") { recipe[recipeCounter].ingr[ingrCount++] = ingrF; }
-	if (ingrG.type != "") { recipe[recipeCounter].ingr[ingrCount++] = ingrG; }
-	if (ingrH.type != "") { recipe[recipeCounter].ingr[ingrCount++] = ingrH; }
+	if (database.isItemGood(ingrA.type)) recipe[recipeCounter].ingr[0] = ingrA;
+	if (ingrB.type != "") { if (database.isItemGood(ingrB.type)) recipe[recipeCounter].ingr[ingrCount++] = ingrB; }
+	if (ingrC.type != "") { if (database.isItemGood(ingrC.type)) recipe[recipeCounter].ingr[ingrCount++] = ingrC; }
+	if (ingrD.type != "") { if (database.isItemGood(ingrD.type)) recipe[recipeCounter].ingr[ingrCount++] = ingrD; }
+	if (ingrE.type != "") { if (database.isItemGood(ingrE.type)) recipe[recipeCounter].ingr[ingrCount++] = ingrE; }
+	if (ingrF.type != "") { if (database.isItemGood(ingrF.type)) recipe[recipeCounter].ingr[ingrCount++] = ingrF; }
+	if (ingrG.type != "") { if (database.isItemGood(ingrG.type)) recipe[recipeCounter].ingr[ingrCount++] = ingrG; }
+	if (ingrH.type != "") { if (database.isItemGood(ingrH.type)) recipe[recipeCounter].ingr[ingrCount++] = ingrH; }
 	recipe[recipeCounter].ingrCount = ingrCount;
 	recipe[recipeCounter].resourceBalance = resBalance;
 	recipeCounter += 1;
@@ -94,7 +94,8 @@ void cCraft::getResult(bool craftAll)
 	// Remove stuff
 	for (int i = 0; i < recipe[rec].ingrCount; i++)
 	{
-		cont.remove(recipe[rec].ingr[i].type, craft.recipe[rec].ingr[i].count * rpt);
+		// Only if item should be consumed
+		if (recipe[rec].ingr[i].consume) { cont.remove(recipe[rec].ingr[i].type, craft.recipe[rec].ingr[i].count * rpt); }
 	}
 	// Temporary remove the resource
 	game.unit[game.getUnitId(client.unit)].resource -= -craft.recipe[rec].resourceBalance * rpt;
@@ -139,4 +140,5 @@ void cCraft::loadRecipes()
 	addRecipe("voodoo_doll", -20, item("human_leg", 1), item("human_arm", 1), item("human_ear", 5));
 	addRecipe("test_catAll", 0, "test_catWeapons", "test_catArmor", "test_catMaterials", "test_catConsumables", "test_catOther");
 	addRecipe("test_resourceManipulator", 100, "test_resourceManipulator");
+	addRecipe("campfire_basic", -100, item("weapon_knife_steel", true), "flint_basic");
 }

@@ -146,6 +146,81 @@ void cDatabase::loadItems()
 	item[i].addRef(REF_ITEM_NOCRAFT);
 	i += 1;
 
+	// Weapons
+		// Hunting rifle
+	item[i].type = "weapon_rifle";
+	item[i].setName("Hunting Rifle");
+	item[i].category = CATEGORY_WEAPONS;
+	item[i].addRef(REF_ITEM_EQUIP);
+	item[i].addRef(REF_ITEM_ACTIVE);
+	item[i].addRef(REF_ITEM_RIFLE);
+	i += 1;
+
+		// Steel knife
+	item[i].type = "weapon_knife_steel";
+	item[i].setName("Steel Knife");
+	item[i].category = CATEGORY_WEAPONS;
+	item[i].addRef(REF_ITEM_EQUIP);
+	i += 1;
+
+	// Food
+		// Canned meat
+	item[i].type = "food_meat_canned";
+	item[i].setName("Canned Meat");
+	item[i].addDescrLine("Some meat in the can. Good to win some time");
+	item[i].addDescrLine("against hunger.");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Restores X health");
+	item[i].addDescrLine("- Restores Y hunger");
+	item[i].addDescrLine("- Consumable");
+	item[i].category = CATEGORY_CONSUMABLES;
+	i += 1;
+
+		// Bottle of water
+	item[i].type = "food_water_bottle";
+	item[i].setName("Bottle of Water");
+	item[i].addDescrLine("A bottle full of fresh water. Restores some");
+	item[i].addDescrLine("energy and gives more strength to survive.");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Restores X health");
+	item[i].addDescrLine("- Consumable");
+	item[i].category = CATEGORY_CONSUMABLES;
+	i += 1;
+
+	// Materials
+		// Flint
+	item[i].type = "flint_basic";
+	item[i].setName("Flint");
+	item[i].addDescrLine("A simple but powerful tool to start a fire in");
+	item[i].addDescrLine("the wilderness. Combine with the dagger to get");
+	item[i].addDescrLine("some sparks.");
+	item[i].category = CATEGORY_MATERIALS;
+	i += 1;
+
+	// Other
+	// Basic survival kit
+	item[i].type = "survival_kit_basic";
+	item[i].setName("Basic Survival Kit");
+	item[i].addDescrLine("Contains some essential survival equipment.");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Unpackable");
+	item[i].dismantle.add("weapon_knife_steel", 1);
+	item[i].dismantle.add("food_meat_canned", 5);
+	item[i].dismantle.add("food_water_bottle", 1);
+	item[i].dismantle.add("flint_basic", 3);
+	item[i].category = CATEGORY_OTHER;
+	i += 1;
+
+		// Campfire
+	item[i].type = "campfire_basic";
+	item[i].setName("Campfire");
+	item[i].addDescrLine("Incredibly valuable item during the long and cold");
+	item[i].addDescrLine("night in the wilds.");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Buildable");
+	item[i].category = CATEGORY_OTHER;
+	i += 1;
+
 	// Test - Voodoo items
 	item[i].type = "human_ear";
 	item[i].setName("Human ear");
@@ -172,15 +247,6 @@ void cDatabase::loadItems()
 	item[i].dismantle.add("human_leg", 1);
 	item[i].dismantle.add("human_arm", 1);
 	item[i].dismantle.add("human_ear", 5);
-	i += 1;
-
-	// Category test items
-	item[i].type = "weapon_rifle";
-	item[i].setName("Hunter Rifle");
-	item[i].category = CATEGORY_WEAPONS;
-	item[i].addRef(REF_ITEM_EQUIP);
-	item[i].addRef(REF_ITEM_ACTIVE);
-	item[i].addRef(REF_ITEM_RIFLE);
 	i += 1;
 
 	// Editor items

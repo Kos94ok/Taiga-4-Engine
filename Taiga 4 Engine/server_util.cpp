@@ -80,11 +80,12 @@ void cServer::introduce(int playerId)
 	server.player[playerId].setMaxHealth(100.00f);
 	if (!core.editorMode)
 	{
-		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("human_ear", 100);
-		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("human_arm", 50);
-		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("human_leg", 70);
+		//game.unit[game.getUnitId(server.player[playerId].unit)].addItem("human_ear", 100);
+		//game.unit[game.getUnitId(server.player[playerId].unit)].addItem("human_arm", 50);
+		//game.unit[game.getUnitId(server.player[playerId].unit)].addItem("human_leg", 70);
+		//game.unit[game.getUnitId(server.player[playerId].unit)].addItem("test_resourceManipulator", 1);
 		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("weapon_rifle", 1);
-		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("test_resourceManipulator", 1);
+		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("survival_kit_basic", 1);
 	}
 	else { editor.initialize(); }
 	ui.updateInterface();

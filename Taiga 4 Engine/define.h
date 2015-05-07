@@ -99,7 +99,6 @@
 #define REF_UI_HEALTHBAR				12
 #define REF_UI_INVENTORY_WEIGHT			13		// Object is a total weight description
 #define REF_UI_CONTEXTMENU				14		// Object belongs to the context menu
-
 #define REF_UI_ACTIVEITEM				15		// Object is one of the active equipped item buttons
 #define REF_UNIT_PICKUP					0		// Unit can be picked up as an item
 #define REF_UNIT_HARVESTABLE			1		// Unit can be harvested for the resource
@@ -118,6 +117,7 @@
 #define REF_ITEM_BLINK					4		// Item can teleport the user to target point
 #define REF_ITEM_RIFLE					5		// Item can shoot bullets
 #define REF_ITEM_EDITOR					6		// Item is editor-only
+#define REF_ITEM_NOCONSUME				7		// Item is not consumed when used for crafting
 
 #define TEX_UI_TOOLTIP					1
 #define TEX_WORLD_GROUND				2
