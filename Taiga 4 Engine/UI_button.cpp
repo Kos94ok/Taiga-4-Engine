@@ -136,6 +136,10 @@ void cUIButton::callbackLeft(int parent)
 
 		ui.updateFull();
 		client.connect("localserver", 21045);
+
+		/*id = ui.addElement("button_test", sf::Vector2f(150, 300));
+		ui.element[ui.getElementId(id)].setText("Taiga Mini");
+		ui.element[ui.getElementId(id)].button.action = "start_taigaMini";*/
 	}
 	else if (action == "start_editor")
 	{

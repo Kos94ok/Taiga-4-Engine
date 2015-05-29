@@ -3,7 +3,7 @@
 
 #define LIMIT_CMD						64
 #define LIMIT_TILEMAP					64
-#define LIMIT_TEXTURE					128
+#define LIMIT_TEXTURE					256
 #define LIMIT_ORDERS					128
 #define LIMIT_ANIMATIONS				16
 #define LIMIT_REFERENCE					64

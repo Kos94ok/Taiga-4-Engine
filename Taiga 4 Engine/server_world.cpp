@@ -312,7 +312,7 @@ void serverWorldUI(int elapsedTime)
 	{
 		bool isMoving = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(settings.hkCamMove[2])
-			|| window.getMousePos().x < 1.00f)
+			|| (settings.enableMouseScroll && window.getMousePos().x < 1.00f))
 		{
 			camera.move(sf::Vector2f(-camSpeed * timevar / core.timeModifier, 0.00f));
 			camera.moveVector.x -= 1.00f * timevar * camVecModIn;
@@ -320,7 +320,7 @@ void serverWorldUI(int elapsedTime)
 			isMoving = true;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(settings.hkCamMove[3])
-			|| window.getMousePos().x > camera.res.x - 2.00f)
+			|| (settings.enableMouseScroll && window.getMousePos().x > camera.res.x - 2.00f))
 		{
 			camera.move(sf::Vector2f(camSpeed * timevar / core.timeModifier, 0.00f));
 			camera.moveVector.x += 1.00f * timevar * camVecModIn;
@@ -328,7 +328,7 @@ void serverWorldUI(int elapsedTime)
 			isMoving = true;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(settings.hkCamMove[0])
-			|| window.getMousePos().y < 1.00f)
+			|| (settings.enableMouseScroll && window.getMousePos().y < 1.00f))
 		{
 			camera.move(sf::Vector2f(0.00f, -camSpeed * timevar / core.timeModifier));
 			camera.moveVector.y += 1.00f * timevar * camVecModIn;
@@ -336,7 +336,7 @@ void serverWorldUI(int elapsedTime)
 			isMoving = true;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(settings.hkCamMove[1])
-			|| window.getMousePos().y > camera.res.y - 2.00f)
+			|| (settings.enableMouseScroll && window.getMousePos().y > camera.res.y - 2.00f))
 		{
 			camera.move(sf::Vector2f(0.00f, camSpeed * timevar / core.timeModifier));
 			camera.moveVector.y -= 1.00f * timevar * camVecModIn;

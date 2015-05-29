@@ -208,6 +208,11 @@ void cWindow::mainEvent()
 		// =========================================================
 		// =========================================================
 		// Random
+			// Database reload
+		if (core.debugMode && eventPoll.type == sf::Event::KeyPressed && eventPoll.key.code == sf::Keyboard::R && eventPoll.key.alt && eventPoll.key.control)
+		{
+			cmd_database_reload(NULL);
+		}
 			// Any mouse action
 		if (eventPoll.type == sf::Event::MouseMoved)
 		{

@@ -114,6 +114,7 @@
     <ClCompile Include="console_util.cpp" />
     <ClCompile Include="craft.cpp" />
     <ClCompile Include="database.cpp" />
+    <ClCompile Include="database_external.cpp" />
     <ClCompile Include="database_util.cpp" />
     <ClCompile Include="editor_file.cpp" />
     <ClCompile Include="editor_gen.cpp" />

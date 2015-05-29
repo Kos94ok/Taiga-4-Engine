@@ -308,6 +308,25 @@ void cmd_editor_setgentype(string args[])
 	editor.autogenType = type;
 }
 
+// Database.reload
+void cmd_database_reload(string args[])
+{
+	database.loadExternal();
+
+	for (int y = 0; y < LIMIT_MAP; y++)
+	{
+		for (int x = 0; x < LIMIT_MAP; x++)
+		{
+			if (world.map[x][y].isLoaded)
+			{
+				world.saveChunk(vec2i(x, y));
+				world.unloadChunk(vec2i(x, y));
+				world.loadChunk(vec2i(x, y));
+			}
+		}
+	}
+}
+
 // Exit command
 void cmd_exit(string args[])
 {

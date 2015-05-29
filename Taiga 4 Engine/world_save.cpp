@@ -50,7 +50,7 @@ void cWorld::loadChunk(vec2i pos)
 	vector<cUnitEntry> unitList = getChunkUnitList(pos);
 	for (int i = 0; i < (int)unitList.size(); i++)
 	{
-		if (game.getUnitId(unitList[i].globalId) == -1)// && )
+		if (game.getUnitId(unitList[i].globalId) == -1)
 		{
 			id = game.addUnit(unitList[i].type, anchor + unitList[i].pos, -1, -1, false);
 			// Assign global id if the object is loaded for the first time

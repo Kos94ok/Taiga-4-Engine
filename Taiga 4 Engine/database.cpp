@@ -64,7 +64,7 @@ void cDatabase::loadUnits()
 	// Trees
 	unit[i].type = "tree_basic_a";
 	unit[i].size = vec2(100, 170);
-	unit[i].center = vec2(50, 165);
+	unit[i].center = vec2(50, 167);
 	unit[i].resource = 500.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_a_idle.png");
 	unit[i].interactDistance = 35.00f;
@@ -74,19 +74,57 @@ void cDatabase::loadUnits()
 
 	unit[i] = unit[i - 1];
 	unit[i].type = "tree_basic_b";
+	unit[i].center = vec2(52, 170);
+	unit[i].shadowOffset = vec2(0, -1);
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_b_idle.png");
 	i += 1;
 
 	unit[i] = unit[i - 1];
 	unit[i].type = "tree_basic_c";
+	unit[i].shadowOffset = vec2(0, 0);
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_c_idle.png");
 	i += 1;
 
 	unit[i] = unit[i - 1];
 	unit[i].type = "tree_basic_d";
+	unit[i].center = vec2(50, 160);
+	unit[i].shadowOffset = vec2(0, -10);
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_d_idle.png");
 	i += 1;
 
+	// Stones
+	unit[i].type = "stone_basic_a";
+	unit[i].size = vec2(70, 70);
+	unit[i].center = vec2(35, 50);
+	unit[i].shadowOffset = vec2(0, -5);
+	unit[i].resource = 500.00f;
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_a_idle.png");
+	unit[i].interactDistance = 35.00f;
+	unit[i].collisionDistance = 25.00f;
+	unit[i].addRef(REF_UNIT_HARVESTABLE);
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "stone_basic_b";
+	unit[i].center = vec2(35, 60);
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_b_idle.png");
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "stone_basic_c";
+	unit[i].center = vec2(35, 55);
+	unit[i].shadowOffset = vec2(0, -5);
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_c_idle.png");
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "stone_basic_d";
+	unit[i].center = vec2(35, 55);
+	unit[i].shadowOffset = vec2(0, -15);
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_d_idle.png");
+	i += 1;
+
+	// Campfire
 	unit[i].type = "campfire_full";
 	unit[i].size = vec2(40, 50);
 	unit[i].center = vec2(20, 45);
@@ -366,10 +404,5 @@ void cDatabase::loadTextures()
 {
 	database.texture[TEX_UI_TOOLTIP] = visual.addTexture("ui_tooltip.png");
 	database.texture[TEX_WORLD_GROUND] = visual.addTexture("bg_snow.jpg");
-}
-
-void cDatabase::loadExternal()
-{
-	// Not yet implemented
 }
 

@@ -213,6 +213,9 @@
     <ClCompile Include="console_util.cpp">
       <Filter>Файлы исходного кода\Console</Filter>
     </ClCompile>
+    <ClCompile Include="database_external.cpp">
+      <Filter>Файлы исходного кода\Database</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

@@ -19,7 +19,8 @@ void cSettings::setDefault()
 	this->enableTextureSmoothing = 0;
 	this->enableCameraBlur = 1;
 	this->enableVertSync = 1;
-	this->enableQuickCast = 1;
+	this->enableQuickCast = 1; 
+	this->enableMouseScroll = 0;
 
 	// Any value
 	this->screenMode = 1;					// 0 - Window, 1 - Borderless, 2 - Fullscreen

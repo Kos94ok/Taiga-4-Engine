@@ -3,9 +3,27 @@
 
 extern cVisual visual;
 
+class cDatabaseKey
+{
+public:
+	std::string name;
+	std::string value;
+};
+
+class cDatabaseExternal
+{
+public:
+	std::vector<std::string> fileList;
+	bool getFileList();
+
+	bool parseFile(int index);
+	bool getNextKey(std::ifstream *file, cDatabaseKey *key);
+};
+
 class cDatabase
 {
 public:
+	cDatabaseExternal ext;
 	cUnit unit[LIMIT_DB_UNIT];
 	cItem item[LIMIT_DB_ITEM];
 	cUIElement uiElement[LIMIT_DB_UIELEMENTS];
