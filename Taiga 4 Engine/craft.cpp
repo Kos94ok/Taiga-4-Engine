@@ -24,10 +24,12 @@ void cCraft::addRecipe(cComponent result, int resBalance, cComponent ingrA,
 
 int cCraft::getActiveRecipeId()
 {
+	int matchFound = 0;
 	int id = 0, amount = 0;
 	bool match = true;
 	for (int i = 0; i < recipeCounter; i++)
 	{
+		match = true;
 		if (cont.itemCounter == recipe[i].ingrCount)
 		{
 			for (int y = 0; y < recipe[i].ingrCount; y++)
@@ -37,7 +39,8 @@ int cCraft::getActiveRecipeId()
 				match = (id != -1 && amount >= recipe[i].ingr[y].count);
 				if (!match) { y = recipe[i].ingrCount; }
 			}
-			if (match) { return i; }
+			if (match && selectedRecipe == matchFound) { return i; }
+			else if (match) { matchFound += 1; }
 		}
 	}
 	return -1;
@@ -61,10 +64,39 @@ int cCraft::getActiveRecipeRepeats()
 	return amount;
 }
 
+int cCraft::getActiveRecipeCount()
+{
+	int retVal = 0;
+	int id = 0, amount = 0;
+	bool match = true;
+	for (int i = 0; i < recipeCounter; i++)
+	{
+		match = true;
+		if (cont.itemCounter == recipe[i].ingrCount)
+		{
+			for (int y = 0; y < recipe[i].ingrCount; y++)
+			{
+				id = cont.getId(recipe[i].ingr[y].type);
+				amount = cont.getAmount(recipe[i].ingr[y].type);
+				match = (id != -1 && amount >= recipe[i].ingr[y].count);
+				if (!match) { y = recipe[i].ingrCount; }
+			}
+			if (match) { retVal += 1; }
+		}
+	}
+	return retVal;
+}
+
 void cCraft::checkActiveRecipe()
 {
 	bool match = true;
 	int matchId = -1;
+
+	// Checking recipe index
+	int recCount = getActiveRecipeCount();
+	if (selectedRecipe < 0) { selectedRecipe = recCount - 1; }
+	if (selectedRecipe >= recCount) { selectedRecipe = 0; }
+
 	updateCraftAmounts();
 	matchId = getActiveRecipeId();
 	// If recipe found
@@ -141,4 +173,8 @@ void cCraft::loadRecipes()
 	addRecipe("test_catAll", 0, "test_catWeapons", "test_catArmor", "test_catMaterials", "test_catConsumables", "test_catOther");
 	addRecipe("test_resourceManipulator", 100, "test_resourceManipulator");
 	addRecipe("campfire_basic", -100, item("weapon_knife_steel", true), "flint_basic");
+	addRecipe("voodoo_doll", 100, "weapon_rifle");
+	addRecipe("campfire_basic", 100, "weapon_rifle");
+	addRecipe("weapon_rifle", -100, "weapon_rifle");
+	addRecipe("weapon_rifle", 500, "weapon_rifle");
 }

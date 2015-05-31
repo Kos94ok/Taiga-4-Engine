@@ -85,6 +85,7 @@ public:
 	cUIButton button;
 	cUITooltip tooltip;
 	cUIBar bar;
+	sf::FloatRect textRect;
 
 	bool hasText();
 	void setText(std::string txt);
@@ -118,6 +119,8 @@ public:
 	int mouseStateLMB;
 	int mouseStateRMB;
 	float mouseNotMoving;
+	int lastCalledElement;
+	int lastCalledElementId;
 	int lastCreatedElement;
 
 	cUIElement element[LIMIT_UI_ELEMENTS];
@@ -172,6 +175,7 @@ public:
 	void clearContextMenu();
 
 	cUI() {
+		lastCalledElementId = -1;
 		clickTimer = 0.00f;
 		invOpened = false;
 		inventoryPage = INV_FULL;

@@ -75,7 +75,10 @@ public:
 	int recipeCounter;
 	cRecipe recipe[LIMIT_RECIPES];
 
+	int selectedRecipe;
+
 	cCraft() {
+		selectedRecipe = 0;
 		recipeCounter = 0;
 		cont.itemLimit = LIMIT_COMPONENTS;
 		resultCont.itemLimit = 1;
@@ -90,4 +93,5 @@ public:
 	void getResult(bool craftAll);
 	int getActiveRecipeId();
 	int getActiveRecipeRepeats();
+	int getActiveRecipeCount();
 };

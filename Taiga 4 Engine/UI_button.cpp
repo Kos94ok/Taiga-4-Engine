@@ -126,6 +126,20 @@ void cUIButton::callbackLeft(int parent)
 
 		ui.clearContextMenu();
 	}
+	else if (action == "recipe_next")
+	{
+		craft.selectedRecipe += 1;
+		craft.checkActiveRecipe();
+		ui.updateInterfaceEquipment();
+		ui.updateInterfaceItemList();
+	}
+	else if (action == "recipe_prev")
+	{
+		craft.selectedRecipe -= 1;
+		craft.checkActiveRecipe();
+		ui.updateInterfaceEquipment();
+		ui.updateInterfaceItemList();
+	}
 	else if (action == "start_taigaMini")
 	{
 		settings.wgStartingPath = 1;

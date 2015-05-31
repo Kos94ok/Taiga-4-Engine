@@ -58,10 +58,16 @@ void cUI::removeElementsByRef(int ref)
 
 int cUI::getElementId(int id)
 {
+	if (id == lastCalledElementId) { return lastCalledElement; }
+	lastCalledElementId = id;
 	for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
 	{
-		if (element[i].isValid && element[i].globalId == id) { return i; }
+		if (element[i].isValid && element[i].globalId == id) {
+			lastCalledElement = i;
+			return i;
+		}
 	}
+	lastCalledElement = -1;
 	return -1;
 }
 

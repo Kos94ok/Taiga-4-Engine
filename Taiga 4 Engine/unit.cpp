@@ -38,7 +38,7 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 	if (math.getDistance(pos, target) < 10.00f) { return -1; }
 	// If clicked to the restricted area, then... you know
 	vec2i targetChunk = world.getChunkInPos(target);
-	if (world.map[targetChunk.x][targetChunk.y].type == CHUNK_UNDEFINED) { return -1; }
+	//if (world.map[targetChunk.x][targetChunk.y].type == CHUNK_UNDEFINED) { return -1; }
 
 	if (overwrite) { orderCounter = 0; actionTimer = 0.00f; }
 
@@ -252,8 +252,8 @@ void cUnit::updateAction()
 {
 	if (orderCounter == 0 || actionTimer > 0.00f) { return; }
 	
-	if (order[0].type == ORDER_PICKUP) { actionTimer = 3.00f; }
-	else if (order[0].type == ORDER_HARVEST) { actionTimer = 5.00f; }
+	if (order[0].type == ORDER_PICKUP) { actionTimer = 0.00f; }
+	else if (order[0].type == ORDER_HARVEST) { actionTimer = 3.00f; }
 }
 
 void cUnit::updateAnimation()

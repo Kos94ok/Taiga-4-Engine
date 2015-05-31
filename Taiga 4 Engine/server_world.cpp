@@ -75,11 +75,11 @@ void serverWorldOrders(int elapsedTime)
 				else if (game.unit[i].order[0].type == ORDER_PICKUP)
 				{
 					cUnit* target = &game.getUnit(game.unit[i].order[0].targetObject);
-					for (int y = 0; y < target->container.itemCounter; y++) {
-						game.unit[i].container.add(target->container.item[y], target->container.amount[y]);
-					}
 					if (core.serverMode || core.localServer) {
 						game.removeUnit(game.unit[i].order[0].targetObject);
+						for (int y = 0; y < target->container.itemCounter; y++) {
+							game.unit[i].addItem(target->container.item[y].type, target->container.amount[y]);
+						}
 					}
 					game.unit[i].removeOrder(0);
 					ui.updateInterfaceItemList();
@@ -178,7 +178,7 @@ void serverWorldUI(int elapsedTime)
 {
 	int id = -1;
 	int hoverHashSum = 0;
-	bool bindToMouse = settings.enableDynamicTooltips;
+	bool bindToMouse = math.intToBool(settings.enableDynamicTooltips);
 	bool isHovered = false;
 
 	float timevar = (float)elapsedTime / 1000;

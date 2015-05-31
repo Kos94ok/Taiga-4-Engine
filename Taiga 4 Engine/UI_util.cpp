@@ -125,6 +125,7 @@ int cUI::createText(sf::Vector2f pos, string str, string tip, int ref)
 	if (ref != -1) {
 		ui.element[ui.getElementId(id)].addRef(ref);
 	}
+	ui.element[ui.getElementId(id)].textRect = floatRect;
 	return id;
 }
 

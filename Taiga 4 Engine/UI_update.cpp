@@ -75,7 +75,7 @@ void cUI::updateInterfaceItemList()
 {
 	if (!invOpened) { return; }
 	access.lock();
-	int id;
+	int id, saveId;
 	string name, text;
 	float resModX = (float)camera.res.x / 1280.00f;
 	float resModY = (float)camera.res.y / 800.00f;
@@ -187,6 +187,7 @@ void cUI::updateInterfaceItemList()
 		ui.element[ui.getElementId(id)].button.action = "invItem_craftRemove";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(cont.item[i].globalId);
 		ui.element[ui.getElementId(id)].hoverAlpha = 0;
+		saveId = id;
 		// Icon
 		if (cont.item[i].icon != -1)
 		{
@@ -204,20 +205,22 @@ void cUI::updateInterfaceItemList()
 		float resBalance = craft.recipe[craft.getActiveRecipeId()].resourceBalance;
 		if (resBalance != 0.00f)
 		{
-			id = ui.addElement(ui.element[ui.getElementId(id)], sf::Vector2f(math.round(700.00f * resModX + 10.00f), math.round(500.00f * resModY + 10.00f + 26.00f * cont.itemCounter)));
+			id = ui.addElement(ui.element[ui.getElementId(saveId)], sf::Vector2f(math.round(700.00f * resModX + 10.00f), math.round(500.00f * resModY + 10.00f + 26.00f * cont.itemCounter)));
 			ui.element[ui.getElementId(id)].button.action = "-";
 			if (resBalance > 0.00f)
 			{
-				name = "- Resource (+" + to_string(math.round(resBalance * craft.getActiveRecipeRepeats()))
+				name = " Resource (+" + to_string(math.round(resBalance * craft.getActiveRecipeRepeats()))
 					+ " / " + to_string(math.round(resBalance)) + ")";
 				ui.element[ui.getElementId(id)].textColor = sf::Color(100, 255, 100);
+				ui.element[ui.getElementId(id)].textOffset.x = 0.00f;
 			}
 			else if (resBalance < 0.00f)
 			{
-				name = "- Resource (" + to_string(math.round(-resBalance * craft.getActiveRecipeRepeats()))
+				name = " Resource (" + to_string(math.round(-resBalance * craft.getActiveRecipeRepeats()))
 					+ " / " + to_string(math.round(-resBalance)) + ")";
 				if (game.getUnit(client.unit).resource < -resBalance) {
 					ui.element[ui.getElementId(id)].textColor = sf::Color(255, 100, 100);
+					ui.element[ui.getElementId(id)].textOffset.x = 0.00f;
 				}
 			}
 			ui.element[ui.getElementId(id)].setText(name);
@@ -231,7 +234,7 @@ void cUI::updateInterfaceItemList()
 		id = ui.addElement("button", sf::Vector2f(math.round(700.00f * resModX + 10.00f), math.round(750.00f * resModY - 50.00f)));
 		ui.element[ui.getElementId(id)].size = sf::Vector2f((550.00f * resModX - 60.00f - 20.00f), 26.00f);
 		ui.element[ui.getElementId(id)].textSize = 24;
-		name = "- " + cont.item[0].displayName + " x" + to_string(cont.amount[0]);
+		name = " " + cont.item[0].displayName + " x" + to_string(cont.amount[0]);
 		ui.element[ui.getElementId(id)].setText(name);
 		ui.element[ui.getElementId(id)].texture = visual.addTexture("alpha.png");
 		ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("black.png");
@@ -244,6 +247,37 @@ void cUI::updateInterfaceItemList()
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(cont.item[0].globalId);
 		ui.element[ui.getElementId(id)].hoverAlpha = 0;
 	}
+
+	// Craft recipe buttons
+		// Recipe count
+	text = to_string(craft.selectedRecipe + 1) + "/" + to_string(craft.getActiveRecipeCount());
+	if (craft.getActiveRecipeCount() == 0) { text = "- "; }
+	id = ui.createText(vec2f(1200.00f * resModX - 180.00f, 500.00f * resModY - 35.00f), text);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
+	sf::FloatRect textRect = ui.element[ui.getElementId(id)].textRect;
+		// Previous recipe
+	id = ui.addElement("button", vec2f(1200.00f * resModX - 210.00f, 500.00f * resModY - 20.00f));
+	ui.element[ui.getElementId(id)].size = vec2f(32, 32);
+	ui.element[ui.getElementId(id)].textOffset.y = -5.00f;
+	ui.element[ui.getElementId(id)].setText("<<");
+	ui.element[ui.getElementId(id)].textSize = 30;
+	ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("alpha.png");
+	ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 127, 0);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
+	ui.element[ui.getElementId(id)].button.action = "recipe_prev";
+		// Next recipe
+	id = ui.addElement("button", vec2f(1200.00f * resModX - 155.00f + textRect.width, 500.00f * resModY - 20.00f));
+	ui.element[ui.getElementId(id)].size = vec2f(32, 32);
+	ui.element[ui.getElementId(id)].textOffset.y = -5.00f;
+	ui.element[ui.getElementId(id)].setText(">>");
+	ui.element[ui.getElementId(id)].textSize = 30;
+	ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("alpha.png");
+	ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 127, 0);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
+	ui.element[ui.getElementId(id)].button.action = "recipe_next";
 
 	// Resource (total)
 	text = "Resource: " + to_string(math.round(game.getUnit(client.unit).resource));
