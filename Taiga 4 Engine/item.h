@@ -40,6 +40,7 @@ public:
 
 	bool equipped;
 	float weight;
+	cIcon icon;
 	cItemConsume consume;
 	cItemDismantle dismantle;
 
@@ -84,6 +85,8 @@ public:
 	int getId(int id);
 	// Get list number from item type
 	int getId(std::string type, int begin = 0);
+
+	void sort(int sortType);
 
 	cItemContainer() {
 		openable = false;

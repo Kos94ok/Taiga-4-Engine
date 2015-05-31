@@ -37,7 +37,6 @@ void cUI::openInventory()
 		ui.element[ui.getElementId(id)].tooltip.setText("Are you sure you need a tooltip here?");
 		ui.element[ui.getElementId(id)].tooltip.delay = 1.00f;
 		ui.element[ui.getElementId(id)].tooltip.offset.y = -5.00f;
-		//ui.element[ui.getElementId(id)].textSize = 30;
 		// Top line
 		ui.createLine(sf::Vector2f(35.00f, 80.00f), sf::Vector2f(camera.res.x - 35.00f, 80.00f), REF_UI_INVENTORY);
 

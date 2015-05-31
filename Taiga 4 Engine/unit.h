@@ -61,6 +61,12 @@ public:
 		flickerMod = 0.00f;
 		flickerCurTime = 0.00f;
 	}
+
+	cLightSource* operator=(int textureIndex)
+	{
+		texture = textureIndex;
+		return this;
+	}
 };
 
 class cShader

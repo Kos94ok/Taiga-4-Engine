@@ -12,6 +12,7 @@ typedef sf::Vector2i		vec2i;
 #include "console.h"
 #include "window.h"
 #include "visual.h"
+#include "icon.h"
 #include "refSystem.h"
 #include "item.h"
 #include "UI.h"

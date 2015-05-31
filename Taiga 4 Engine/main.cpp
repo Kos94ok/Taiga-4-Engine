@@ -23,6 +23,7 @@ cAPI api;
 
 int main(int argc, char* argv[])
 {
+	game.access.lock();
 	cout << "[MAIN] Main thread started" << "\n";
 	cout << "[MAIN] Parsing arguments [" << argc << "]" << "\n";
 	for (int i = 0; i < argc; i++)
@@ -79,19 +80,27 @@ int main(int argc, char* argv[])
 		if (!console.displayed) { console.hide(); }
 		// Creating the menu
 		cout << "[MAIN] Making some menu" << "\n";
-		int id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f));
+		//ui.element[ui.getElementId(id)].s
+		int id = ui.addElement("image", vec2f(camera.res.x / 2, camera.res.y / 2));
+		ui.element[ui.getElementId(id)].texture = visual.addTexture("bg_art.png");
+		ui.element[ui.getElementId(id)].size = vec2f(camera.res.x, camera.res.y);
+		id = ui.createText(vec2f(camera.res.x / 2, camera.res.y / 2 - 70), "Taiga Survival Indev 10", "That is a tooltip!");
+		ui.element[ui.getElementId(id)].ignoreOrigin = false;
+		//ui.element[ui.getElementId(id)].tooltip.pos
+		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f));
 		ui.element[ui.getElementId(id)].setText("Taiga Mini");
 		ui.element[ui.getElementId(id)].button.action = "start_taigaMini";
-		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 70.00f));
-		ui.element[ui.getElementId(id)].setText("Taiga Maxi");
-		ui.element[ui.getElementId(id)].button.action = "start_taigaMaxi";
 		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 35.00f));
 		ui.element[ui.getElementId(id)].setText("Editor");
 		ui.element[ui.getElementId(id)].button.action = "start_editor";
+		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 70.00f));
+		ui.element[ui.getElementId(id)].setText("Taiga Maxi");
+		ui.element[ui.getElementId(id)].button.action = "start_taigaMaxi";
 		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 105.00f));
 		ui.element[ui.getElementId(id)].setText("Quick Connect");
 		ui.element[ui.getElementId(id)].button.action = "connect_temp";
 	}
+	game.access.unlock();
 
 	cout << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();

@@ -107,9 +107,10 @@ void cUI::updateInterfaceItemList()
 				// Main button
 				id = ui.addElement("button", sf::Vector2f(70.00f, 240.00f + 26.00f * itemsFound));
 				ui.element[ui.getElementId(id)].size = sf::Vector2f(math.round(550.00f * resModX - 60.00f - 20.00f), 26.00f);
-				name = "- " + cont.item[i].displayName + " x" + to_string(cont.amount[i]);
+				name = " " + cont.item[i].displayName + " x" + to_string(cont.amount[i]);
 				ui.element[ui.getElementId(id)].setText(name);
 				ui.element[ui.getElementId(id)].textSize = 24;
+				if (cont.item[i].icon != -1) { ui.element[ui.getElementId(id)].textOffset.x = 20.00f; }
 				ui.element[ui.getElementId(id)].textOffset.y = -3.00f;
 				ui.element[ui.getElementId(id)].texture = visual.addTexture("alpha.png");
 				ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("black.png");
@@ -135,6 +136,17 @@ void cUI::updateInterfaceItemList()
 				ui.element[ui.getElementId(id)].textOffset.x = 420.00f * resModX - 20.00f;
 				ui.element[ui.getElementId(id)].setText(to_string(math.round(cont.item[i].weight * cont.amount[i])) + " kg");
 				ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("alpha.png");
+
+				// Icon
+				if (cont.item[i].icon != -1)
+				{
+					id = ui.addElement("icon", vec2f(70.00f + LIMIT_ICONSIZE / 2, 240.00f + 26.00f * itemsFound + LIMIT_ICONSIZE / 2));
+					ui.element[ui.getElementId(id)].size = vec2f(LIMIT_ICONSIZE, LIMIT_ICONSIZE);
+					ui.element[ui.getElementId(id)].texture = cont.item[i].icon.tex;
+					ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
+					ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
+				}
+
 				itemsFound += 1;
 			}
 		}
@@ -158,15 +170,16 @@ void cUI::updateInterfaceItemList()
 					y = craft.recipe[curRecipe].ingrCount;
 				}
 			}
-			name = "- " + cont.item[i].displayName + " x" + to_string(cont.amount[i]) + " / " + to_string(itemsNeeded);
+			name = " " + cont.item[i].displayName + " x" + to_string(cont.amount[i]) + " / " + to_string(itemsNeeded);
 		}
 		else {
-			name = "- " + cont.item[i].displayName + " x" + to_string(cont.amount[i]) + " / ?";
+			name = " " + cont.item[i].displayName + " x" + to_string(cont.amount[i]) + " / ?";
 		}
 		ui.element[ui.getElementId(id)].setText(name);
 		ui.element[ui.getElementId(id)].texture = visual.addTexture("alpha.png");
 		ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("black.png");
 		ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 127, 0);
+		if (cont.item[i].icon != -1) { ui.element[ui.getElementId(id)].textOffset.x = 20.00f; }
 		ui.element[ui.getElementId(id)].textOffset.y = -3.00f;
 		ui.element[ui.getElementId(id)].ignoreOrigin = true;
 		ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
@@ -174,6 +187,15 @@ void cUI::updateInterfaceItemList()
 		ui.element[ui.getElementId(id)].button.action = "invItem_craftRemove";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(cont.item[i].globalId);
 		ui.element[ui.getElementId(id)].hoverAlpha = 0;
+		// Icon
+		if (cont.item[i].icon != -1)
+		{
+			id = ui.addElement("icon", vec2f(math.round(700.00f * resModX + 10.00f) + LIMIT_ICONSIZE / 2, math.round(500.00f * resModY + 10.00f + 26.00f * i) + LIMIT_ICONSIZE / 2));
+			ui.element[ui.getElementId(id)].size = vec2f(LIMIT_ICONSIZE, LIMIT_ICONSIZE);
+			ui.element[ui.getElementId(id)].texture = cont.item[i].icon.tex;
+			ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
+			ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
+		}
 	}
 
 	// Amount of resource needed

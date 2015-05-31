@@ -21,6 +21,7 @@ void cSettings::setDefault()
 	this->enableVertSync = 1;
 	this->enableQuickCast = 1; 
 	this->enableMouseScroll = 0;
+	this->enableDynamicTooltips = 0;
 
 	// Any value
 	this->screenMode = 1;					// 0 - Window, 1 - Borderless, 2 - Fullscreen
@@ -118,6 +119,8 @@ void cSettings::load()
 		else if (key.name == "enableCameraBlur") { enableCameraBlur = math.stringToInt(key.value); }
 		else if (key.name == "enableVertSync") { enableVertSync = math.stringToInt(key.value); }
 		else if (key.name == "enableQuickCast") { enableQuickCast = math.stringToInt(key.value); }
+		else if (key.name == "enableMouseScroll") { enableMouseScroll = math.stringToInt(key.value); }
+		else if (key.name == "enableDynamicTooltips") { enableDynamicTooltips = math.stringToInt(key.value); }
 
 		else if (key.name == "screenMode") { screenMode = math.stringToInt(key.value); }
 		else if (key.name == "pixelization") { pixelization = (float)math.stringToInt(key.value); }

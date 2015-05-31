@@ -21,12 +21,12 @@ cConsole::cConsole()
 	console.cmdSyntax[cmdID] = "\"macro [str]\" - Load the [macro] script";
 	console.cmdFunc[cmdID] = cmd_macro;
 	cmdID += 1;
-	console.cmdRegex[cmdID].assign("^unit.add [a-zA-Z0-9]+");
+	console.cmdRegex[cmdID].assign("^unit.add [a-zA-Z0-9-]+");
 	console.cmdWrong[cmdID] = "unit.add";
 	console.cmdSyntax[cmdID] = "\"unit.add [str] (num) (num)\" - Create a unit from [type] at (X) (Y)";
 	console.cmdFunc[cmdID] = cmd_unit_add;
 	cmdID += 1;
-	console.cmdRegex[cmdID].assign("^unit.moveto [0-9]+ [0-9]+ [0-9]+");
+	console.cmdRegex[cmdID].assign("^unit.moveto [0-9]+ [0-9-]+ [0-9-]+");
 	console.cmdWrong[cmdID] = "unit.moveto";
 	console.cmdSyntax[cmdID] = "\"unit.moveto [num] [num] [num] (bool)\" - Move a unit with [global ID] to [X] [Y]";
 	console.cmdFunc[cmdID] = cmd_unit_moveto;
@@ -162,6 +162,11 @@ cConsole::cConsole()
 	console.cmdSyntax[cmdID] = "\"editor.setgentype [num]\" - Set [type] as autogen type";
 	console.cmdFunc[cmdID] = cmd_editor_setgentype;
 	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^database.getunitlist");
+	console.cmdWrong[cmdID] = "database.getunitlist";
+	console.cmdSyntax[cmdID] = "\"database.getunitlist\" - Get unit list from the database";
+	console.cmdFunc[cmdID] = cmd_database_getunitlist;
+	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^database.reload");
 	console.cmdWrong[cmdID] = "database.reload";
 	console.cmdSyntax[cmdID] = "\"database.reload\" - Reload the external database";
@@ -179,7 +184,7 @@ bool cConsole::parseCommand(string cmd)
 {
 	bool commandParsed = false;
 
-	regex arg_any(" [a-zA-Z0-9._]+");						// Regex for any command argument
+	regex arg_any(" [a-zA-Z0-9._-]+");						// Regex for any command argument
 	int argCounter = 0;										// Amount of found arguments
 	string args[] = { "0", "0", "0", "0" };					// Found arguments
 	sregex_iterator it(cmd.begin(), cmd.end(), arg_any);	// Regex iterator for cmd

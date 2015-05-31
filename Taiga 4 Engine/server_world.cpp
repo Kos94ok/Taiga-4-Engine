@@ -178,7 +178,7 @@ void serverWorldUI(int elapsedTime)
 {
 	int id = -1;
 	int hoverHashSum = 0;
-	bool bindToMouse = false;
+	bool bindToMouse = settings.enableDynamicTooltips;
 	bool isHovered = false;
 
 	float timevar = (float)elapsedTime / 1000;
@@ -241,7 +241,7 @@ void serverWorldUI(int elapsedTime)
 						ui.element[i].tooltip.pos = ui.element[i].pos + ui.element[i].tooltip.offset;
 					}
 					else if (ui.element[i].tooltip.delay <= 0.00 || ui.element[i].tooltip.alpha == 0.00f)  {
-						ui.element[i].tooltip.pos = sf::Vector2f(mousePos.x, mousePos.y);
+						ui.element[i].tooltip.pos = sf::Vector2f(mousePos.x, mousePos.y) + ui.element[i].tooltip.offset;
 					}
 					// Add alpha
 					ui.element[i].tooltip.alpha += timevar * 255 * 8;

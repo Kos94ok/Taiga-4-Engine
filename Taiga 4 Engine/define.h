@@ -27,6 +27,7 @@
 #define LIMIT_ACTIVEBUTTONS				35
 #define LIMIT_SELECTION					64
 #define LIMIT_CHUNKSIZE					500
+#define LIMIT_ICONSIZE					24
 
 #define STATE_UNDEFINED					-1
 #define STATE_MAINMENU					0
@@ -174,3 +175,6 @@
 #define CHUNK_BLOCKED					2
 #define CHUNK_SPAWN						3
 #define CHUNK_VILLAGE					4
+
+#define SORT_BYNAME						0
+#define SORT_BYTYPE						1

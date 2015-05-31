@@ -290,5 +290,8 @@
     <ClInclude Include="saveload.h">
       <Filter>Файлы исходного кода\Saveload</Filter>
     </ClInclude>
+    <ClInclude Include="icon.h">
+      <Filter>Файлы исходного кода\Visual</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

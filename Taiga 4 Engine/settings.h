@@ -32,8 +32,10 @@ public:
 	int enableVertSync;
 	// Quick cast [Active items trigger instantly]
 	int enableQuickCast;
-	// Mouse scroll [Mouse outside of the window moves the camera ]
+	// Mouse scroll [Mouse outside of the window moves the camera]
 	int enableMouseScroll;
+	// Dynamic tooltips [Tooltips are moving with the mouse]
+	int enableDynamicTooltips;
 
 	// Screen mode [Fullscreen / Window / Borderless]
 	int screenMode;

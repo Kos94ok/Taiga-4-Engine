@@ -138,6 +138,15 @@ void cDatabase::loadUnits()
 	unit[i].light.flickerTime = 0.25f;
 	i += 1;
 
+	// Tent
+	unit[i].type = "tent_basic";
+	unit[i].size = vec2(120, 100);
+	unit[i].center = vec2(60, 70);
+	unit[i].shadowOffset = vec2(0, -15);
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tent_basic.png");
+	unit[i].collisionDistance = 35.00f;
+	i += 1;
+
 	// Other
 	unit[i].type = "editor";
 	unit[i].size = vec2(0, 0);
@@ -192,6 +201,7 @@ void cDatabase::loadItems()
 	item[i].addRef(REF_ITEM_EQUIP);
 	item[i].addRef(REF_ITEM_ACTIVE);
 	item[i].addRef(REF_ITEM_RIFLE);
+	item[i].icon = visual.createIcon("icons_a.png", "icon_rifle", vec2i(7, 0), vec2f(0.125f, 0.125f));
 	i += 1;
 
 		// Steel knife

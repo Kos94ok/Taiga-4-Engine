@@ -167,6 +167,7 @@
     <ClInclude Include="craft.h" />
     <ClInclude Include="database.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="icon.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="math.h" />

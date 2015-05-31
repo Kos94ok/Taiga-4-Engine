@@ -25,6 +25,7 @@ public:
 
 	void init();
 	int addTexture(std::string name, bool ignoreFilter = false);
+	int createIcon(std::string filename, std::string iconName, vec2i pos, vec2f gridSize);
 
 	cVisual() {
 		unitsPainted = 0;

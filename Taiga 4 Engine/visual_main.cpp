@@ -67,3 +67,20 @@ int cVisual::addTexture(string name, bool ignoreFilter)
 	visual.gameTexCounter += 1;
 	return visual.gameTexCounter - 1;
 }
+
+int cVisual::createIcon(string filename, string iconName, vec2i pos, vec2f gridSize)
+{
+	// Looking for the texture
+	for (int i = 0; i < gameTexCounter; i++)
+	{
+		if (visual.gameTex[i].name == iconName) { return i; }
+	}
+	// Creating the new texture
+	string filepath = "Data\\Textures\\" + filename;
+	sf::Texture tempTexture;	tempTexture.loadFromFile(filepath);
+	vec2i gridSizeTex = vec2i(gridSize.x * tempTexture.getSize().x, gridSize.y * tempTexture.getSize().y);
+	visual.gameTex[visual.gameTexCounter].handle.loadFromFile(filepath, sf::IntRect(pos.x * gridSizeTex.x, pos.y * gridSizeTex.y, gridSizeTex.x, gridSizeTex.y));
+	visual.gameTex[visual.gameTexCounter].name = iconName;
+	visual.gameTexCounter += 1;
+	return visual.gameTexCounter - 1;
+}

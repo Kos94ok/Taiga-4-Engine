@@ -308,6 +308,19 @@ void cmd_editor_setgentype(string args[])
 	editor.autogenType = type;
 }
 
+// Database.getunitlist
+void cmd_database_getunitlist(string args[])
+{
+	cout << "[CMD] Type" << "\n";
+	for (int i = 0; i < LIMIT_DB_UNIT; i++)
+	{
+		if (database.unit[i].type.length() > 0)
+		{
+			cout << "- " << database.unit[i].type << endl;
+		}
+	}
+}
+
 // Database.reload
 void cmd_database_reload(string args[])
 {

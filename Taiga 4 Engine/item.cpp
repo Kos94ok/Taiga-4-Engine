@@ -19,6 +19,7 @@ int cItemContainer::add(cItem target, int count)
 	if (search != -1)
 	{
 		amount[search] += count;
+		sort(SORT_BYNAME);
 		return item[search].globalId;
 	}
 	else if (itemCounter < LIMIT_ITEMS && itemCounter < itemLimit)
@@ -27,6 +28,7 @@ int cItemContainer::add(cItem target, int count)
 		item[itemCounter].globalId = game.itemGlobalCounter++;
 		amount[itemCounter] = count;
 		itemCounter += 1;
+		sort(SORT_BYNAME);
 		return game.itemGlobalCounter - 1;
 	}
 	return -1;
@@ -109,4 +111,58 @@ int cItemContainer::getAmount(string type)
 	int id = getId(type);
 	if (id == -1) { return 0; }
 	return amount[id];
+}
+
+cItem ex_item[LIMIT_ITEMS];
+int ex_amount[LIMIT_ITEMS];
+bool ex_ignore[LIMIT_ITEMS];
+void cItemContainer::sort(int sortType)
+{
+	game.access.lock();
+	for (int i = 0; i < LIMIT_ITEMS; i++) { ex_ignore[i] = false; }
+	int itemsFound = 0, currentBestItem = -1;
+	int charValueA = 0, charValueB = 0, charValueC = 0;
+	int minCharValueA = 0, minCharValueB = 0, minCharValueC = 0;
+	do
+	{
+		currentBestItem = -1;
+		minCharValueA = 9999, minCharValueB = 9999, minCharValueC = 9999;
+		for (int i = 0; i < itemCounter; i++)
+		{
+			if (!ex_ignore[i])
+			{
+				if (sortType == SORT_BYNAME)
+				{
+					charValueA = (int)item[i].displayName.c_str()[0];
+					charValueB = (int)item[i].displayName.c_str()[1];
+					charValueC = (int)item[i].displayName.c_str()[2];
+					if (charValueA < minCharValueA) {
+						minCharValueA = charValueA;
+						currentBestItem = i;
+					}
+					else if (charValueA == minCharValueA && charValueB < minCharValueB) {
+						minCharValueB = charValueB;
+						currentBestItem = i;
+					}
+					else if (charValueA == minCharValueA && charValueB == minCharValueB && charValueC < minCharValueC) {
+						minCharValueC = charValueC;
+						currentBestItem = i;
+					}
+				}
+			}
+		}
+		if (currentBestItem != -1) {
+			ex_item[itemsFound] = item[currentBestItem];
+			ex_amount[itemsFound] = amount[currentBestItem];
+			ex_ignore[currentBestItem] = true;
+			itemsFound += 1;
+		}
+	} while (currentBestItem != -1);
+
+	for (int i = 0; i < itemCounter; i++)
+	{
+		item[i] = ex_item[i];
+		amount[i] = ex_amount[i];
+	}
+	game.access.unlock();
 }
