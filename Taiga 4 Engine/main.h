@@ -32,11 +32,6 @@ typedef sf::Vector2i		vec2i;
 
 using namespace std;
 
-/*
-TODO:
-- [Fix] Item pickup fails for remote players
-*/
-
 class cCore
 {
 public:

@@ -4,6 +4,7 @@
 void cItem::use()
 {
 	sf::Packet data;
+	int unitId;
 	if (!hasRef(REF_ITEM_ACTIVE) && !(hasRef(REF_ITEM_CONSUME))) { return; }
 	// Remove all orders
 	data << MSG_CONTROLS_STOP;
@@ -23,6 +24,28 @@ void cItem::use()
 		data << MSG_CONTROLS_RIFLE << window.getMousePos(true).x << window.getMousePos(true).y;
 		client.sendPacket(data);
 		data.clear();
+	}
+	// Axe
+	if (hasRef(REF_ITEM_AXE))
+	{
+		unitId = game.getUnitId(window.getMousePos(true), REF_UNIT_TREE);
+		if (unitId != -1)
+		{
+			data << MSG_CONTROLS_AXE << game.unit[unitId].globalId << true;
+			client.sendPacket(data);
+			data.clear();
+		}
+	}
+	// Pickaxe
+	if (hasRef(REF_ITEM_PICKAXE))
+	{
+		unitId = game.getUnitId(window.getMousePos(true), REF_UNIT_STONE);
+		if (unitId != -1)
+		{
+			data << MSG_CONTROLS_PICKAXE << game.unit[unitId].globalId << true;
+			client.sendPacket(data);
+			data.clear();
+		}
 	}
 	// Consumable
 	if (hasRef(REF_ITEM_CONSUME))

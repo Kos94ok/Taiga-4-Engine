@@ -6,6 +6,7 @@ class cOrder
 public:
 	int type;
 	int targetObject;
+	int paramA;
 	sf::Vector2f targetPos;
 };
 
@@ -83,6 +84,18 @@ public:
 	}
 };
 
+class cLifeTimer
+{
+public:
+	bool enabled;
+	float time;
+
+	cLifeTimer()
+	{
+		enabled = false;
+	}
+};
+
 class cCharacter : public cReference
 {
 public:
@@ -97,9 +110,10 @@ public:
 	float collisionDistance;
 	float flyingHeight;
 
+	bool animAvailable(int animType);
+
 	cCurrentAnim anim;
 	cAnimation animData[LIMIT_ANIMATIONS];
-
 	cLightSource light;
 	cShader shader;
 };
@@ -116,7 +130,8 @@ public:
 	int addOrder_moveto(sf::Vector2f target, bool overwrite = true);
 	int addOrder_moveto_path(sf::Vector2f target, bool overwrite = true);
 	int addOrder_pickup(int target, bool overwrite = true);
-	int addOrder_harvest(int target, bool overwrite = true);
+	int addOrder_harvest(int target, bool overwrite = true, bool useTool = false);
+	int addOrder_death(bool overwrite = true);
 	void removeOrder(int id);
 	void removeAllOrders();
 
@@ -125,7 +140,7 @@ public:
 	float maxHealth;
 	float facingAngle;
 	float movementSpeed;
-	cAnimDirection getCurrentAnimDirection();
+	cLifeTimer lifeTimer;
 	cItemContainer container;
 
 	float resource;
@@ -140,9 +155,13 @@ public:
 	void addItem(std::string type, int count = 1);
 	void removeItem(std::string type, int count = -1);
 	void removeItem(int id, int count = -1);
+	void setLifeTimer(float time);
+	void resetLifeTimer();
 	void updateFacing();
 	void updateAction();
 	void updateAnimation();
+
+	cAnimDirection getCurrentAnimDirection();
 
 	cUnit() {
 		toRemove = false;

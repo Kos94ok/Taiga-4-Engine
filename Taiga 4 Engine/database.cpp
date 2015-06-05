@@ -3,8 +3,8 @@
 
 void cDatabase::init()
 {
-	loadUnits();
 	loadItems();
+	loadUnits();
 	loadUI();
 	loadTextures();
 	loadExternal();
@@ -69,6 +69,10 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_a_idle.png");
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 10.00f;
+	// << ----- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	unit[i].addItem("material_wood"); // <<-- !!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// << ----- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	unit[i].addRef(REF_UNIT_TREE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;
 
@@ -101,6 +105,8 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_a_idle.png");
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 25.00f;
+	unit[i].addItem("material_stone");
+	unit[i].addRef(REF_UNIT_STONE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;
 
@@ -197,6 +203,9 @@ void cDatabase::loadItems()
 		// Hunting rifle
 	item[i].type = "weapon_rifle";
 	item[i].setName("Hunting Rifle");
+	item[i].addDescrLine("Этот текст все равно потом поменяется.");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Equippable");
 	item[i].category = CATEGORY_WEAPONS;
 	item[i].addRef(REF_ITEM_EQUIP);
 	item[i].addRef(REF_ITEM_ACTIVE);
@@ -207,8 +216,36 @@ void cDatabase::loadItems()
 		// Steel knife
 	item[i].type = "weapon_knife_steel";
 	item[i].setName("Steel Knife");
+	item[i].addDescrLine("Лень что-то писать :(");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Equippable");
 	item[i].category = CATEGORY_WEAPONS;
 	item[i].addRef(REF_ITEM_EQUIP);
+	i += 1;
+
+	// Tools
+		// Axe
+	item[i].type = "tool_axe_stone";
+	item[i].setName("Stone Axe");
+	item[i].addDescrLine("Used to chop some wood.");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Equippable");
+	item[i].category = CATEGORY_WEAPONS;
+	item[i].addRef(REF_ITEM_EQUIP);
+	item[i].addRef(REF_ITEM_ACTIVE);
+	item[i].addRef(REF_ITEM_AXE);
+	i += 1;
+
+		// Pickaxe
+	item[i].type = "tool_pickaxe_stone";
+	item[i].setName("Stone Pickaxe");
+	item[i].addDescrLine("Used to pick some stone.");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Equippable");
+	item[i].category = CATEGORY_WEAPONS;
+	item[i].addRef(REF_ITEM_EQUIP);
+	item[i].addRef(REF_ITEM_ACTIVE);
+	item[i].addRef(REF_ITEM_PICKAXE);
 	i += 1;
 
 	// Food
@@ -252,10 +289,24 @@ void cDatabase::loadItems()
 	item[i].category = CATEGORY_MATERIALS;
 	i += 1;
 
-		// Piece of Tin
+		// Tin
 	item[i].type = "material_tin";
-	item[i].setName("Piece of Tin");
+	item[i].setName("Tin");
 	item[i].addDescrLine("A small piece of tin. Can be useful.");
+	item[i].category = CATEGORY_MATERIALS;
+	i += 1;
+
+		// Wood
+	item[i].type = "material_wood";
+	item[i].setName("Wood");
+	item[i].addDescrLine("A wooden log.");
+	item[i].category = CATEGORY_MATERIALS;
+	i += 1;
+
+		// Stone
+	item[i].type = "material_stone";
+	item[i].setName("Stone");
+	item[i].addDescrLine("A big stone.");
 	item[i].category = CATEGORY_MATERIALS;
 	i += 1;
 

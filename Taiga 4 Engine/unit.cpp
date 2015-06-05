@@ -1,6 +1,11 @@
 
 #include "main.h"
 
+bool cCharacter::animAvailable(int animType)
+{
+	return (animData[animType].side.tex != -1);
+}
+
 int cUnit::addOrder_moveto(sf::Vector2f target, bool overwrite)
 {
 	// If unit can not move, then ignore
@@ -92,7 +97,7 @@ int cUnit::addOrder_pickup(int target, bool overwrite)
 	return orderCounter - 1;
 }
 
-int cUnit::addOrder_harvest(int target, bool overwrite)
+int cUnit::addOrder_harvest(int target, bool overwrite, bool useTool)
 {
 	// Clearing the order list
 	if (overwrite) { orderCounter = 0; }
@@ -101,6 +106,7 @@ int cUnit::addOrder_harvest(int target, bool overwrite)
 	// Adding new order
 	order[orderCounter].type = ORDER_HARVEST;
 	order[orderCounter].targetObject = target;
+	order[orderCounter].paramA = math.boolToInt(useTool);
 	orderCounter += 1;
 
 	// Update info
@@ -110,7 +116,30 @@ int cUnit::addOrder_harvest(int target, bool overwrite)
 
 	// Server
 	sf::Packet data;
-	data << MSG_ORDER_HARVEST << globalId << target << overwrite;
+	data << MSG_ORDER_HARVEST << globalId << target << overwrite << useTool;
+	server.sendPacket(PLAYERS_REMOTE, data);
+
+	return orderCounter - 1;
+}
+
+int cUnit::addOrder_death(bool overwrite)
+{
+	// Clearing the order list
+	if (overwrite) { orderCounter = 0; }
+	// Reset the action timer
+	if (orderCounter == 0) { actionTimer = 0.00f; }
+	// Adding new order
+	order[orderCounter].type = ORDER_DEATH;
+	orderCounter += 1;
+
+	// Update info
+	updateFacing();
+	updateAction();
+	updateAnimation();
+
+	// Server
+	sf::Packet data;
+	data << MSG_ORDER_DEATH << globalId << overwrite;
 	server.sendPacket(PLAYERS_REMOTE, data);
 
 	return orderCounter - 1;
@@ -239,6 +268,17 @@ void cUnit::removeItem(int id, int count)
 	}
 }
 
+void cUnit::setLifeTimer(float time)
+{
+	lifeTimer.enabled = true;
+	lifeTimer.time = time;
+}
+
+void cUnit::resetLifeTimer()
+{
+	lifeTimer.enabled = false;
+}
+
 void cUnit::updateFacing()
 {
 	if (orderCounter == 0) { return; }
@@ -254,6 +294,15 @@ void cUnit::updateAction()
 	
 	if (order[0].type == ORDER_PICKUP) { actionTimer = 0.00f; }
 	else if (order[0].type == ORDER_HARVEST) { actionTimer = 3.00f; }
+	else if (order[0].type == ORDER_DEATH)
+	{
+		if (animAvailable(ANIM_DEATH))
+		{
+			// Force the animation
+			anim.play(ANIM_DEATH);
+			actionTimer = getCurrentAnimDirection().frameCount * getCurrentAnimDirection().frameDelay;
+		}
+	}
 }
 
 void cUnit::updateAnimation()
@@ -261,8 +310,9 @@ void cUnit::updateAnimation()
 	if (orderCounter == 0) { anim.play(ANIM_IDLE); }
 	else
 	{
-		if (order[0].type == ORDER_MOVETO) { anim.play(ANIM_MOVE); }
-		else if (order[0].type == ORDER_PICKUP) { anim.play(ANIM_PICKUP); }
-		else if (order[0].type == ORDER_HARVEST) { anim.play(ANIM_WORK); }
+		if (order[0].type == ORDER_MOVETO && animAvailable(ANIM_MOVE)) { anim.play(ANIM_MOVE); }
+		else if (order[0].type == ORDER_PICKUP && animAvailable(ANIM_PICKUP)) { anim.play(ANIM_PICKUP); }
+		else if (order[0].type == ORDER_HARVEST && animAvailable(ANIM_WORK)) { anim.play(ANIM_WORK); }
+		else if (order[0].type == ORDER_DEATH && animAvailable(ANIM_DEATH)) { anim.play(ANIM_DEATH); }
 	}
 }

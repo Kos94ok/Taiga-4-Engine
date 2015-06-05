@@ -1,5 +1,6 @@
 
 #define	LINESOFCODE_01_02_2015			6372
+#define LINESOFCODE_31_05_2015			9050
 
 #define LIMIT_CMD						64
 #define LIMIT_TILEMAP					64
@@ -38,12 +39,14 @@
 #define ORDER_MOVETO					1
 #define ORDER_PICKUP					2
 #define ORDER_HARVEST					3
+#define ORDER_DEATH						4
 
 #define ANIM_IDLE						0
 #define ANIM_MOVE						1
 #define ANIM_ATTACK						2
 #define ANIM_WORK						3
 #define ANIM_PICKUP						4
+#define ANIM_DEATH						5
 
 #define MSG_CMD							1
 #define MSG_GAME_TIME					2
@@ -63,6 +66,7 @@
 #define MSG_ORDER_PICKUP				102
 #define MSG_ORDER_HARVEST				103
 #define MSG_ORDER_STOP					104
+#define MSG_ORDER_DEATH					105
 #define MSG_CONTROLS_MOVETO				150
 #define MSG_CONTROLS_PICKUP				151
 #define MSG_CONTROLS_HARVEST			152
@@ -73,7 +77,9 @@
 #define MSG_CONTROLS_DISMANTLE			162
 #define MSG_CONTROLS_BLINK				170
 #define MSG_CONTROLS_RIFLE				171
-#define MSG_CONTROLS_CONSUME			172
+#define MSG_CONTROLS_AXE				172
+#define MSG_CONTROLS_PICKAXE			173
+#define MSG_CONTROLS_CONSUME			174
 #define MSG_REQUEST_CHUNKDATA			180
 #define MSG_INFO_CAMRES					190
 
@@ -112,6 +118,8 @@
 #define REF_UNIT_NORENDER				7		// Unit is not displayed on the screen
 #define REF_UNIT_NOUNLOAD				8		// Unit is never unloaded from memory
 #define REF_UNIT_BESTPATHING			9		// Unit's position is validated before moving
+#define REF_UNIT_TREE					10		// Unit can be harvested with axe
+#define REF_UNIT_STONE					11		// Unit can be harvested with pickaxe
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_CONSUME				2		// Item can be consumed
@@ -119,10 +127,12 @@
 #define REF_ITEM_NOCRAFT				4		// Item can not be used in crafting
 #define REF_ITEM_BLINK					5		// Item can teleport the user to target point
 #define REF_ITEM_RIFLE					6		// Item can shoot bullets
-#define REF_ITEM_EDITOR					7		// Item is editor-only
-#define REF_ITEM_UNPACKABLE				8		// Item context menu will display 'unpack' instead of 'dismantle'
-#define REF_ITEM_EMPTIABLE				9		// Item context menu will display 'empty' instead of 'dismantle'
-#define REF_ITEM_DISMANTLE_ON_CONSUME	10		// Item is dismantled when it is consumed
+#define REF_ITEM_AXE					7		// Item can be used to chop wood
+#define REF_ITEM_PICKAXE				8		// Item can be used to chop stone
+#define REF_ITEM_EDITOR					9		// Item is editor-only
+#define REF_ITEM_UNPACKABLE				10		// Item context menu will display 'unpack' instead of 'dismantle'
+#define REF_ITEM_EMPTIABLE				11		// Item context menu will display 'empty' instead of 'dismantle'
+#define REF_ITEM_DISMANTLE_ON_CONSUME	12		// Item is dismantled when it is consumed
 
 #define TEX_UI_TOOLTIP					1
 #define TEX_WORLD_GROUND				2

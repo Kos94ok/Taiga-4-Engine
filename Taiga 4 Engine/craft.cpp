@@ -173,6 +173,10 @@ void cCraft::loadRecipes()
 	addRecipe("test_catAll", 0, "test_catWeapons", "test_catArmor", "test_catMaterials", "test_catConsumables", "test_catOther");
 	addRecipe("test_resourceManipulator", 100, "test_resourceManipulator");
 	addRecipe("campfire_basic", -100, item("weapon_knife_steel", true), "flint_basic");
+
+	addRecipe("tool_axe_stone", -300, item("weapon_knife_steel", true));
+	addRecipe("tool_pickaxe_stone", -350, item("weapon_knife_steel", true));
+
 	addRecipe("voodoo_doll", 100, "weapon_rifle");
 	addRecipe("campfire_basic", 100, "weapon_rifle");
 	addRecipe("weapon_rifle", -100, "weapon_rifle");

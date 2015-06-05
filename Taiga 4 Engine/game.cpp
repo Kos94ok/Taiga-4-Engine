@@ -52,6 +52,12 @@ void cGame::removeUnit(int id, bool sendData)
 	}
 }
 
+// Kill unit
+void cGame::killUnit(int id)
+{
+	game.getUnit(id).addOrder_death();
+}
+
 // Remove all units
 void cGame::clearUnits()
 {

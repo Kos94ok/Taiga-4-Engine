@@ -37,6 +37,9 @@ public:
 	// Takes: Unit global id
 	// Returns: Nothing
 	void removeUnit(int id, bool sendData = true);
+	// Takes: Unit global id
+	// Returns: Nothing
+	void killUnit(int id);
 	// Takes: Nothing
 	// Returns: Nothing
 	void clearUnits();

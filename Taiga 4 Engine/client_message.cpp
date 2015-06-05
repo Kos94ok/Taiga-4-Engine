@@ -170,11 +170,11 @@ bool cClient::msgOrder(sf::Packet input)
 	// Order unit to harvest resource from object
 	if (msg == MSG_ORDER_HARVEST)
 	{
-		input >> id >> argi[0] >> argb[1];
+		input >> id >> argi[0] >> argb[1] >> argb[2];
 		id = game.getUnitId(id);
 		if (id != -1)
 		{
-			game.unit[id].addOrder_harvest(argi[0], argb[1]);
+			game.unit[id].addOrder_harvest(argi[0], argb[1], argb[2]);
 		}
 		return true;
 	}
@@ -188,6 +188,19 @@ bool cClient::msgOrder(sf::Packet input)
 		if (id != -1)
 		{
 			game.unit[id].removeAllOrders();
+		}
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Order unit to die
+	if (msg == MSG_ORDER_DEATH)
+	{
+		input >> id >> argb[0];
+		id = game.getUnitId(id);
+		if (id != -1)
+		{
+			game.unit[id].addOrder_death(argb[0]);
 		}
 		return true;
 	}

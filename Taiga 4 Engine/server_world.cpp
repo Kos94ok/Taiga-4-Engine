@@ -4,11 +4,13 @@
 void serverWorldOrders(int elapsedTime)
 {
 	game.access.lock();
+	bool unitRemoved = false;
 	float timevar = (float)elapsedTime / 1000;
 	timevar *= core.timeModifier;
 	float angle, offsetX, offsetY;
 	for (int i = 0; i < game.unitCounter; i++)
 	{
+		unitRemoved = false;
 		if (game.unit[i].orderCounter > 0)
 		{
 			// Action timer
@@ -89,15 +91,51 @@ void serverWorldOrders(int elapsedTime)
 				{
 					float resFound = math.round(game.getUnit(game.unit[i].order[0].targetObject).resource * 0.20f);
 					cUnit* target = &game.getUnit(game.unit[i].order[0].targetObject);
-					if (core.serverMode || core.localServer) {
-						game.unit[i].addResource(resFound);
-						game.unit[game.getUnitId(game.unit[i].order[0].targetObject)].addResource(-resFound);
+					// If tool is used
+					if (game.unit[i].order[0].paramA != 0)
+					{
+						resFound = game.getUnit(game.unit[i].order[0].targetObject).resource;
+						if (core.serverMode || core.localServer) {
+							game.unit[i].addResource(resFound);
+							game.unit[game.getUnitId(game.unit[i].order[0].targetObject)].addOrder_death();
+						}
+					}
+					// No tools used
+					else
+					{
+						if (core.serverMode || core.localServer) {
+							game.unit[i].addResource(resFound);
+							game.unit[game.getUnitId(game.unit[i].order[0].targetObject)].addResource(-resFound);
+						}
 					}
 					game.unit[i].removeOrder(0);
 				}
-				game.unit[i].updateFacing();
-				game.unit[i].updateAction();
-				game.unit[i].updateAnimation();
+				// Death
+				else if (game.unit[i].order[0].type == ORDER_DEATH)
+				{
+					if (core.localServer || core.serverMode)
+					{
+						// Dropping loot
+						int itemId = game.addUnit("item_a", game.getUnit(game.unit[i].globalId).pos);
+						cItemContainer cont = game.getUnit(game.unit[i].globalId).container;
+						for (int a = 0; a < cont.itemCounter; a++)
+						{
+							game.getUnit(itemId).addItem(cont.item[a].type, cont.amount[a]);
+						}
+						// Removing the unit
+						unitRemoved = true;
+						game.removeUnit(game.unit[i].globalId);
+						i -= 1;
+					}
+				}
+
+				// If unit is not removed, update it
+				if (!unitRemoved)
+				{
+					game.unit[i].updateFacing();
+					game.unit[i].updateAction();
+					game.unit[i].updateAnimation();
+				}
 			}
 		}
 		// No orders
@@ -106,6 +144,19 @@ void serverWorldOrders(int elapsedTime)
 			// Projectile destruction
 			if (game.unit[i].hasRef(REF_UNIT_MISSILE))
 			{
+				unitRemoved = true;
+				game.removeUnit(game.unit[i].globalId);
+				i -= 1;
+			}
+		}
+		// Life timer
+		if (game.unit[i].lifeTimer.enabled)
+		{
+			game.unit[i].lifeTimer.time -= timevar;
+			// Your time has come...
+			if (game.unit[i].lifeTimer.time <= 0.00f)
+			{
+				unitRemoved = true;
 				game.removeUnit(game.unit[i].globalId);
 				i -= 1;
 			}

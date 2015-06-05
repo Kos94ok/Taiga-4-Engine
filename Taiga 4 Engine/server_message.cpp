@@ -284,5 +284,32 @@ bool cServer::msgControlAbility(int i, sf::Packet input)
 
 		return true;
 	}
+	// =======================================================
+	// =======================================================
+	// Player uses an axe
+	if (msg == MSG_CONTROLS_AXE || msg == MSG_CONTROLS_PICKAXE)
+	{
+		input >> argi[0] >> argb[1];
+		id = game.getUnitId(server.player[i].unit);
+		int targetId = game.getUnitId(argi[0]);
+		if (id != -1 && targetId != -1) {
+			cUnit* playerUnit = &game.unit[id];
+			cUnit* targetUnit = &game.unit[targetId];
+			// Check distance
+			if (math.getDistance(playerUnit, targetUnit) <= game.getUnitInteractDistance(*playerUnit, *targetUnit))
+			{
+				// Units are close enough
+				game.unit[id].addOrder_harvest(argi[0], true, argb[1]);
+			}
+			else
+			{
+				// Unit needs to move closer
+				game.unit[id].addOrder_moveto_path(game.getUnitInteractPoint(*playerUnit, *targetUnit), !argb[1]);
+				game.unit[id].addOrder_harvest(argi[0], false, argb[1]);
+			}
+		}
+		else { cout << "[cServer::msgControlUnit / MSG_CONTROLS_HARVEST] Incorrect unit IDs!" << endl; }
+		return true;
+	}
 	return false;
 }

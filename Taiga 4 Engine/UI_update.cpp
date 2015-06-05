@@ -321,7 +321,7 @@ void cUI::updateInterfaceEquipment()
 		int itemsFound = 0, id = 0;
 		for (int i = 0; i < cont.itemCounter; i++)
 		{
-			if (cont.item[i].equipped) {
+			if (cont.item[i].equipped && cont.item[i].hasRef(REF_ITEM_ACTIVE)) {
 				equip[itemsFound++] = cont.item[i];
 				if (itemsFound >= LIMIT_ACTIVEBUTTONS) { i = cont.itemCounter; }
 			}
