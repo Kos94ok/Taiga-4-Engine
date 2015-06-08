@@ -120,6 +120,7 @@
 #define REF_UNIT_BESTPATHING			9		// Unit's position is validated before moving
 #define REF_UNIT_TREE					10		// Unit can be harvested with axe
 #define REF_UNIT_STONE					11		// Unit can be harvested with pickaxe
+#define REF_UNIT_DAMAGE_RIFLE			12		// Unit deals the damage of the rifle on impact
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_CONSUME				2		// Item can be consumed
@@ -188,3 +189,5 @@
 
 #define SORT_BYNAME						0
 #define SORT_BYTYPE						1
+
+#define DAMAGE_RIFLE					10.00f

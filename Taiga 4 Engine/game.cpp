@@ -17,6 +17,7 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool
 			unit[unitCounter].globalId = unitGlobalCounter++;
 			unit[unitCounter].pos = pos;
 			unit[unitCounter].chunkPos = world.getChunkInPos(pos);
+			unit[unitCounter].owner = owner;
 			unitCounter += 1;
 		}
 		else { cout << "[ERROR] Unit limit reached!" << "\n"; }
@@ -62,6 +63,17 @@ void cGame::removeUnit(int id, bool sendData)
 void cGame::killUnit(int id)
 {
 	game.getUnit(id).addOrder_death();
+}
+
+// Damage unit
+void cGame::damageUnit(int id, float damage)
+{
+	int unitId = game.getUnitId(id);
+	game.unit[unitId].addHealth(-damage);
+	if (game.unit[unitId].health <= 0.00f)
+	{
+		killUnit(id);
+	}
 }
 
 // Remove all units

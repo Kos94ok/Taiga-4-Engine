@@ -23,6 +23,8 @@ public:
 class cDatabase
 {
 public:
+	sf::Mutex access;
+
 	cDatabaseExternal ext;
 	cUnit unit[LIMIT_DB_UNIT];
 	cItem item[LIMIT_DB_ITEM];

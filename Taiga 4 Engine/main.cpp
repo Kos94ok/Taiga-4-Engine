@@ -104,7 +104,8 @@ int main(int argc, char* argv[])
 	}
 	game.access.unlock();
 
-	script.execute(cScript::spawnEnemies, 0);
+	//script.execute(cScript::spawnEnemies, 0);
+
 	cout << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();
 	while (!core.shutdown)

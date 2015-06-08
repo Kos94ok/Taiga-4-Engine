@@ -22,6 +22,8 @@ void cDatabase::loadUnits()
 	unit[i].type = "player";
 	unit[i].size = vec2(64, 64);
 	unit[i].center = vec2(32, 52);
+	unit[i].health = 100.00f;
+	unit[i].maxHealth = 100.00f;
 	unit[i].movementSpeed = 75;
 	unit[i].animData[ANIM_IDLE].up.tex = visual.addTexture("player_idle_up.png");
 	unit[i].animData[ANIM_IDLE].upDiag.tex = visual.addTexture("player_idle_diagup.png");
@@ -64,6 +66,8 @@ void cDatabase::loadUnits()
 	unit[i].type = "enemy";
 	unit[i].size = vec2(64, 64);
 	unit[i].center = vec2(32, 32);
+	unit[i].health = 25.00f;
+	unit[i].maxHealth = 25.00f;
 	unit[i].movementSpeed = 75;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("enemy_idle_side.png");
 	unit[i].animData[ANIM_MOVE].side.tex = visual.addTexture("enemy_idle_side.png");
@@ -81,6 +85,9 @@ void cDatabase::loadUnits()
 	unit[i].center = vec2(50, 167);
 	unit[i].resource = 500.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_a_idle.png");
+	unit[i].animData[ANIM_DEATH].side.frameCount = 4;
+	unit[i].animData[ANIM_DEATH].side.frameDelay = 0.75f;
+	unit[i].animData[ANIM_DEATH].side.tex = visual.addTexture("tree_basic_a_death.png");
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 10.00f;
 	// << ----- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -194,6 +201,7 @@ void cDatabase::loadUnits()
 	unit[i].movementSpeed = 3500.00f;
 	unit[i].addRef(REF_UNIT_ROTATE);
 	unit[i].addRef(REF_UNIT_MISSILE);
+	unit[i].addRef(REF_UNIT_DAMAGE_RIFLE);
 	i += 1;
 
 	unit[i].type = "arena_wall";

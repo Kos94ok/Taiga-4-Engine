@@ -40,6 +40,9 @@ public:
 	// Takes: Unit global id
 	// Returns: Nothing
 	void killUnit(int id);
+	// Takes: Unit global id, Amount of damage
+	// Returns: Nothing
+	void damageUnit(int id, float damage);
 	// Takes: Nothing
 	// Returns: Nothing
 	void clearUnits();

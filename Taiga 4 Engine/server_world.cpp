@@ -64,8 +64,11 @@ void serverWorldOrders(int elapsedTime)
 						{
 							if (i != y && math.getDistance(&game.unit[i], &game.unit[y])
 								<= game.getUnitCollisionDistance(&game.unit[i], &game.unit[y])
-								&& game.unit[y].type != "player")
+								&& game.unit[i].owner != game.unit[y].globalId)
 							{
+								if (game.unit[i].hasRef(REF_UNIT_DAMAGE_RIFLE)) { game.damageUnit(game.unit[y].globalId, DAMAGE_RIFLE); }
+
+								unitRemoved = true;
 								game.removeUnit(game.unit[i].globalId);
 								y = game.unitCounter;
 								i -= 1;
@@ -116,11 +119,14 @@ void serverWorldOrders(int elapsedTime)
 					if (core.localServer || core.serverMode)
 					{
 						// Dropping loot
-						int itemId = game.addUnit("item_a", game.getUnit(game.unit[i].globalId).pos);
-						cItemContainer cont = game.getUnit(game.unit[i].globalId).container;
-						for (int a = 0; a < cont.itemCounter; a++)
+						if (game.unit[i].container.itemCounter > 0)
 						{
-							game.getUnit(itemId).addItem(cont.item[a].type, cont.amount[a]);
+							int itemId = game.addUnit("item_a", game.getUnit(game.unit[i].globalId).pos);
+							cItemContainer cont = game.getUnit(game.unit[i].globalId).container;
+							for (int a = 0; a < cont.itemCounter; a++)
+							{
+								game.getUnit(itemId).addItem(cont.item[a].type, cont.amount[a]);
+							}
 						}
 						// Removing the unit
 						unitRemoved = true;
@@ -416,6 +422,24 @@ void serverWorldUI(int elapsedTime)
 	}
 }
 
+void serverWorldUnits(int elapsedTime)
+{
+	float timevar = (float)elapsedTime / 1000;
+	timevar *= core.timeModifier;
+
+	for (int i = 0; i < game.unitCounter; i++)
+	{
+		// Checking max health
+		if (game.unit[i].health > game.unit[i].maxHealth) { game.unit[i].health = game.unit[i].maxHealth; }
+		// Checking for death
+		if (game.unit[i].maxHealth > 0.00 && game.unit[i].health <= 0.00f && game.unit[i].order[0].type != ORDER_DEATH)
+		{
+			game.killUnit(game.unit[i].globalId);
+		}
+	}
+}
+	
+
 void serverWorldMain()
 {
 	int threadId = 1;
@@ -432,6 +456,7 @@ void serverWorldMain()
 			serverWorldOrders(elapsedTime);
 			serverWorldAnim(elapsedTime);
 			serverWorldUI(elapsedTime);
+			serverWorldUnits(elapsedTime);
 			core.thread_serverWorldTicks += 1;
 			core.thread_antifreeze[threadId] = 0;
 		}

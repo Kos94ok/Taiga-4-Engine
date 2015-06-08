@@ -304,7 +304,7 @@ void cUnit::updateAction()
 		{
 			// Force the animation
 			anim.play(ANIM_DEATH);
-			actionTimer = getCurrentAnimDirection().frameCount * getCurrentAnimDirection().frameDelay;
+			actionTimer = (getCurrentAnimDirection().frameCount - 1) * getCurrentAnimDirection().frameDelay;
 		}
 	}
 }

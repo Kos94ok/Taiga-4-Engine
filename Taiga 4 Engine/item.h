@@ -91,7 +91,7 @@ public:
 	cItemContainer() {
 		openable = false;
 		resource = 0.00f;
-		itemLimit = 0;
+		itemLimit = 100;
 		itemCounter = 0;
 	}
 };

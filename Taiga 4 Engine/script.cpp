@@ -55,5 +55,10 @@ void cScript::threadMain(int index)
 
 void cScript::wait(int time)
 {
-	Sleep(time);
+	int timeSlept = 0;
+	while (timeSlept < time && !core.shutdown)
+	{
+		Sleep(10);
+		timeSlept += 10;
+	}
 }
