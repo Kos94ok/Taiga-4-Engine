@@ -59,7 +59,7 @@ void cDatabase::loadUnits()
 	unit[i].container.itemLimit = 1000;
 	unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
-	unit[i].addRef(REF_UNIT_NOUNLOAD);
+	//unit[i].addRef(REF_UNIT_NOUNLOAD);
 	unit[i].addRef(REF_UNIT_BESTPATHING);
 	i += 1;
 
@@ -75,7 +75,7 @@ void cDatabase::loadUnits()
 	unit[i].light.texture = visual.addTexture("light_whiteWeak.png");
 	unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
-	unit[i].addRef(REF_UNIT_NOUNLOAD);
+	//unit[i].addRef(REF_UNIT_NOUNLOAD);
 	unit[i].addRef(REF_UNIT_BESTPATHING);
 	i += 1;
 
@@ -90,9 +90,7 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_DEATH].side.tex = visual.addTexture("tree_basic_a_death.png");
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 10.00f;
-	// << ----- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	unit[i].addItem("material_wood"); // <<-- !!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// << ----- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//unit[i].addItem("material_wood");
 	unit[i].addRef(REF_UNIT_TREE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;
@@ -126,7 +124,7 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_a_idle.png");
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 25.00f;
-	unit[i].addItem("material_stone");
+	//unit[i].addItem("material_stone");
 	unit[i].addRef(REF_UNIT_STONE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;

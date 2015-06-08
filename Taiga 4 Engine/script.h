@@ -37,4 +37,5 @@ public:
 
 	// Script data
 	static void spawnEnemies(cArg args);
+	static void test_unitAddSystem(cArg args);
 };

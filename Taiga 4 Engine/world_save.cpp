@@ -3,11 +3,15 @@
 
 void cWorld::saveChunk(vec2i pos)
 {
+	//return;
 	/*
 	WARNING:
 	This function is only to be used on the server side!
 	Client does not store any world data on the disk.
 	*/
+
+	// Don't save undefined chunks
+	if (map[pos.x][pos.y].type == CHUNK_UNDEFINED) { return; }
 
 	cUnitEntry unitEntry;
 	vector<cUnitEntry> unitList;
@@ -55,10 +59,10 @@ void cWorld::loadChunk(vec2i pos)
 			id = game.addUnit(unitList[i].type, anchor + unitList[i].pos, -1, -1, false);
 			// Assign global id if the object is loaded for the first time
 			if (unitList[i].globalId != -1) {
-				game.unit[game.getUnitId(id)].globalId = unitList[i].globalId;
+				game.getUnit(id).globalId = unitList[i].globalId;
 			}
 			// Tell unit to which chunk it belongs
-			game.unit[game.getUnitId(id)].chunkPos = pos;
+			game.getUnit(id).chunkPos = pos;
 			if (pos != world.getChunkInPos(anchor + unitList[i].pos))
 			{
 				cout << "ALARMA: " << pos.x << "; " << pos.y << " / " << world.getChunkInPos(game.unit[game.getUnitId(id)].pos).x << "; "
