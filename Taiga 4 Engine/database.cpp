@@ -83,6 +83,8 @@ void cDatabase::loadUnits()
 	unit[i].type = "tree_basic_a";
 	unit[i].size = vec2(100, 170);
 	unit[i].center = vec2(50, 167);
+	unit[i].health = 5000.00f;
+	unit[i].maxHealth = 5000.00f;
 	unit[i].resource = 500.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_a_idle.png");
 	unit[i].animData[ANIM_DEATH].side.frameCount = 4;
@@ -120,6 +122,8 @@ void cDatabase::loadUnits()
 	unit[i].size = vec2(70, 70);
 	unit[i].center = vec2(35, 50);
 	unit[i].shadowOffset = vec2(0, -5);
+	unit[i].health = 5000.00f;
+	unit[i].maxHealth = 5000.00f;
 	unit[i].resource = 500.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_a_idle.png");
 	unit[i].interactDistance = 35.00f;
@@ -153,6 +157,8 @@ void cDatabase::loadUnits()
 	unit[i].type = "campfire_full";
 	unit[i].size = vec2(40, 50);
 	unit[i].center = vec2(20, 45);
+	unit[i].health = 5000.00f;
+	unit[i].maxHealth = 5000.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_idle.png");
 	unit[i].animData[ANIM_IDLE].side.frameCount = 4;
 	unit[i].animData[ANIM_IDLE].side.frameDelay = 0.20f;
@@ -168,6 +174,8 @@ void cDatabase::loadUnits()
 	unit[i].size = vec2(120, 100);
 	unit[i].center = vec2(60, 70);
 	unit[i].shadowOffset = vec2(0, -15);
+	unit[i].health = 5000.00f;
+	unit[i].maxHealth = 5000.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tent_basic.png");
 	unit[i].collisionDistance = 35.00f;
 	i += 1;
@@ -266,6 +274,7 @@ void cDatabase::loadItems()
 	item[i].addRef(REF_ITEM_EQUIP);
 	item[i].addRef(REF_ITEM_ACTIVE);
 	item[i].addRef(REF_ITEM_PICKAXE);
+	item[i].icon = visual.createIcon("icons_b.png", "icon_pickaxe", vec2i(0, 2), vec2f(0.125f, 0.125f));
 	i += 1;
 
 	// Food

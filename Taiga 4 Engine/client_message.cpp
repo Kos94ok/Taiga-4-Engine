@@ -18,7 +18,7 @@ bool cClient::msgUnit(sf::Packet input)
 		input >> id >> type >> argf[0] >> argf[1] >> argi[2] >> argi[3];
 		if (game.getUnitId(id) == -1)
 		{
-			game.addUnit(type, sf::Vector2f(argf[0], argf[1]), argi[2], argi[3]);
+			game.addUnit(type, sf::Vector2f(argf[0], argf[1]), argi[2], argi[3], false);
 			game.unit[game.unitCounter - 1].globalId = id;
 			game.unit[game.unitCounter - 1].owner = argi[2];
 		}
@@ -31,7 +31,7 @@ bool cClient::msgUnit(sf::Packet input)
 	if (msg == MSG_UNIT_REMOVE)
 	{
 		input >> id;
-		game.removeUnit(id);
+		game.removeUnit(id, false);
 		return true;
 	}
 	// ============================================

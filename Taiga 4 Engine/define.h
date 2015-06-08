@@ -51,7 +51,8 @@
 #define MSG_CMD							1
 #define MSG_GAME_TIME					2
 #define MSG_GAME_LIGHT					3
-#define MSG_UI_UPDATEITEMLIST			4
+#define MSG_WORLD_CHUNKDATA				4
+#define MSG_UI_UPDATEITEMLIST			5
 #define MSG_UNIT_HERO					50
 #define MSG_UNIT_ADD					51
 #define MSG_UNIT_REMOVE					52

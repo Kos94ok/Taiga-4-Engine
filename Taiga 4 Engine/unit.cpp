@@ -47,6 +47,11 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 
 	if (overwrite) { orderCounter = 0; actionTimer = 0.00f; }
 
+	// Checking if unit is stuck
+	if (hasRef(REF_UNIT_BESTPATHING))
+	{
+		pos = path.validatePoint(pos, collisionDistance, globalId);
+	}
 	// Calculating path
 	path.calculate(pos, target, collisionDistance, globalId);
 	// Adding orders
