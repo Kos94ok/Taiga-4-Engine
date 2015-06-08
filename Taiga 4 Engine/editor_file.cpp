@@ -24,7 +24,7 @@ void cEditor::saveBlueprint(string name)
 
 void cEditor::loadBlueprint(string name)
 {
-	char buffer[256];
+	//char buffer[256];
 	string buf, type;
 	vec2 position;
 	// Looking for the path

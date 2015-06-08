@@ -4,20 +4,23 @@
 // Copy unit from database
 int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool sendData)
 {
-	if (variation == 0) { type += "a"; }
-	if (variation == 1) { type += "b"; }
-	if (variation == 2) { type += "c"; }
-	if (variation == 3) { type += "d"; }
-	// Apply
-	if (unitCounter < LIMIT_UNIT - 1)
+	if (!sendData || core.serverMode || core.localServer)
 	{
-		unit[unitCounter] = database.getUnit(type);
-		unit[unitCounter].globalId = unitGlobalCounter++;
-		unit[unitCounter].pos = pos;
-		unit[unitCounter].chunkPos = world.getChunkInPos(pos);
-		unitCounter += 1;
+		if (variation == 0) { type += "a"; }
+		if (variation == 1) { type += "b"; }
+		if (variation == 2) { type += "c"; }
+		if (variation == 3) { type += "d"; }
+		// Apply
+		if (unitCounter < LIMIT_UNIT - 1)
+		{
+			unit[unitCounter] = database.getUnit(type);
+			unit[unitCounter].globalId = unitGlobalCounter++;
+			unit[unitCounter].pos = pos;
+			unit[unitCounter].chunkPos = world.getChunkInPos(pos);
+			unitCounter += 1;
+		}
+		else { cout << "[ERROR] Unit limit reached!" << "\n"; }
 	}
-	else { cout << "[ERROR] Unit limit reached!" << "\n"; }
 
 	// Server
 	if (sendData && (core.serverMode || core.localServer))
@@ -32,23 +35,26 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool
 // Remove unit by global id
 void cGame::removeUnit(int id, bool sendData)
 {
-	// Server
-	if (sendData && (core.serverMode || core.localServer))
+	if (!sendData || core.serverMode || core.localServer)
 	{
-		sf::Packet data;
-		data << MSG_UNIT_REMOVE << id;
-		server.sendPacket(PLAYERS_REMOTE, data);
-	}
-
-	// Apply
-	id = getUnitId(id);
-	if (id != -1)
-	{
-		for (int i = id; i < unitCounter - 1; i++)
+		// Server
+		if (sendData && (core.serverMode || core.localServer))
 		{
-			unit[i] = unit[i + 1];
+			sf::Packet data;
+			data << MSG_UNIT_REMOVE << id;
+			server.sendPacket(PLAYERS_REMOTE, data);
 		}
-		unitCounter -= 1;
+
+		// Apply
+		id = getUnitId(id);
+		if (id != -1)
+		{
+			for (int i = id; i < unitCounter - 1; i++)
+			{
+				unit[i] = unit[i + 1];
+			}
+			unitCounter -= 1;
+		}
 	}
 }
 

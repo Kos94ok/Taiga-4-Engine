@@ -6,7 +6,7 @@ bool cServer::msgRequest(int i, sf::Packet input)
 	int argi[] = { 0, 0, 0, 0 };
 	//float argf[] = { 0.00f, 0.00f, 0.00f, 0.00f };
 	//bool argb[] = { false, false, false, false };
-	int msg, id;
+	int msg;
 	string cmd = "";
 	sf::Packet data;
 
@@ -141,7 +141,7 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 	int argi[] = { 0, 0, 0, 0 };
 	float argf[] = { 0.00f, 0.00f, 0.00f, 0.00f };
 	bool argb[] = { false, false, false, false };
-	int msg, id, unitId;
+	int msg, unitId;
 	string cmd = "", type = "";
 	sf::Packet data;
 	cItemConsume consumeData;

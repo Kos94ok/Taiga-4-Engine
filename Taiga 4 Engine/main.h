@@ -28,6 +28,7 @@ typedef sf::Vector2i		vec2i;
 #include "saveload.h"
 #include "world.h"
 #include "editor.h"
+#include "script.h"
 #include "api.h"
 
 using namespace std;
@@ -90,4 +91,5 @@ extern cSave save;
 extern cWorld world;
 extern cEditor editor;
 extern cUtil util;
+extern cScript script;
 extern cAPI api;

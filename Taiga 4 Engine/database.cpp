@@ -61,6 +61,20 @@ void cDatabase::loadUnits()
 	unit[i].addRef(REF_UNIT_BESTPATHING);
 	i += 1;
 
+	unit[i].type = "enemy";
+	unit[i].size = vec2(64, 64);
+	unit[i].center = vec2(32, 32);
+	unit[i].movementSpeed = 75;
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("enemy_idle_side.png");
+	unit[i].animData[ANIM_MOVE].side.tex = visual.addTexture("enemy_idle_side.png");
+	unit[i].light.power = 320.00f;
+	unit[i].light.texture = visual.addTexture("light_whiteWeak.png");
+	unit[i].interactDistance = 20.00f;
+	unit[i].collisionDistance = 20.00f;
+	unit[i].addRef(REF_UNIT_NOUNLOAD);
+	unit[i].addRef(REF_UNIT_BESTPATHING);
+	i += 1;
+
 	// Trees
 	unit[i].type = "tree_basic_a";
 	unit[i].size = vec2(100, 170);

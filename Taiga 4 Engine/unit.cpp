@@ -124,25 +124,29 @@ int cUnit::addOrder_harvest(int target, bool overwrite, bool useTool)
 
 int cUnit::addOrder_death(bool overwrite)
 {
-	// Clearing the order list
-	if (overwrite) { orderCounter = 0; }
-	// Reset the action timer
-	if (orderCounter == 0) { actionTimer = 0.00f; }
-	// Adding new order
-	order[orderCounter].type = ORDER_DEATH;
-	orderCounter += 1;
+	if (core.serverMode || core.localServer)
+	{
+		// Clearing the order list
+		if (overwrite) { orderCounter = 0; }
+		// Reset the action timer
+		if (orderCounter == 0) { actionTimer = 0.00f; }
+		// Adding new order
+		order[orderCounter].type = ORDER_DEATH;
+		orderCounter += 1;
 
-	// Update info
-	updateFacing();
-	updateAction();
-	updateAnimation();
+		// Update info
+		updateFacing();
+		updateAction();
+		updateAnimation();
 
-	// Server
-	sf::Packet data;
-	data << MSG_ORDER_DEATH << globalId << overwrite;
-	server.sendPacket(PLAYERS_REMOTE, data);
+		// Server
+		sf::Packet data;
+		data << MSG_ORDER_DEATH << globalId << overwrite;
+		server.sendPacket(PLAYERS_REMOTE, data);
 
-	return orderCounter - 1;
+		return orderCounter - 1;
+	}
+	return -1;
 }
 
 void cUnit::removeOrder(int id)

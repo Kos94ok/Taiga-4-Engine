@@ -19,6 +19,7 @@ cSave save;
 cWorld world;
 cEditor editor;
 cUtil util;
+cScript script;
 cAPI api;
 
 int main(int argc, char* argv[])
@@ -68,6 +69,7 @@ int main(int argc, char* argv[])
 	Sleep(50);
 	thread threadConsole(consoleMain);
 	Sleep(50);
+	
 
 	// Initializing the server
 	if (core.serverMode)
@@ -102,6 +104,7 @@ int main(int argc, char* argv[])
 	}
 	game.access.unlock();
 
+	script.execute(cScript::spawnEnemies, 0);
 	cout << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();
 	while (!core.shutdown)
@@ -136,7 +139,13 @@ int main(int argc, char* argv[])
 	threadClientReceive.join();
 	threadClientSend.join();
 	threadWorldLoader.join();
+	cout << "[MAIN] Waiting for script threads to finish..." << "\n";
+	for (int i = 0; i < (int)script.threadVector.size(); i++)
+	{
+		script.threadVector[i].join();
+	}
 	// Terminating the blocking threads
+	cout << "[MAIN] Terminating blocking threads..." << "\n";
 	if (console.online) { TerminateThread(threadConsole.native_handle(), 0); }
 	threadConsole.join();
 

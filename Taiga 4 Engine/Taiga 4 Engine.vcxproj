@@ -132,6 +132,8 @@
     <ClCompile Include="refSystem.cpp" />
     <ClCompile Include="saveload.cpp" />
     <ClCompile Include="saveload_util.cpp" />
+    <ClCompile Include="script.cpp" />
+    <ClCompile Include="script_data.cpp" />
     <ClCompile Include="server_main.cpp" />
     <ClCompile Include="server_message.cpp" />
     <ClCompile Include="server_pack.cpp" />
@@ -175,6 +177,7 @@
     <ClInclude Include="precomp.h" />
     <ClInclude Include="refSystem.h" />
     <ClInclude Include="saveload.h" />
+    <ClInclude Include="script.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="settings.h" />
     <ClInclude Include="UI.h" />
