@@ -59,23 +59,24 @@ void cDatabase::loadUnits()
 	unit[i].container.itemLimit = 1000;
 	unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
-	//unit[i].addRef(REF_UNIT_NOUNLOAD);
+	unit[i].addRef(REF_UNIT_NOUNLOAD);
 	unit[i].addRef(REF_UNIT_BESTPATHING);
 	i += 1;
 
 	unit[i].type = "enemy";
 	unit[i].size = vec2(64, 64);
 	unit[i].center = vec2(32, 32);
-	unit[i].health = 25.00f;
-	unit[i].maxHealth = 25.00f;
-	unit[i].movementSpeed = 75;
+	unit[i].health = 10.00f;
+	unit[i].maxHealth = 10.00f;
+	unit[i].movementSpeed = 25;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("enemy_idle_side.png");
 	unit[i].animData[ANIM_MOVE].side.tex = visual.addTexture("enemy_idle_side.png");
 	unit[i].light.power = 320.00f;
 	unit[i].light.texture = visual.addTexture("light_whiteWeak.png");
 	unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
-	//unit[i].addRef(REF_UNIT_NOUNLOAD);
+	unit[i].ai = cAI::think_enemy;
+	unit[i].addRef(REF_UNIT_NOUNLOAD);
 	unit[i].addRef(REF_UNIT_BESTPATHING);
 	i += 1;
 
@@ -204,7 +205,7 @@ void cDatabase::loadUnits()
 	//unit[i].shadowOffset = vec2(30, -30);
 	unit[i].flyingHeight = 20.00f;
 	unit[i].animData[ANIM_MOVE].side.tex = visual.addTexture("missile_rifleNew.png");
-	unit[i].movementSpeed = 3500.00f;
+	unit[i].movementSpeed = 1500.00f;
 	unit[i].addRef(REF_UNIT_ROTATE);
 	unit[i].addRef(REF_UNIT_MISSILE);
 	unit[i].addRef(REF_UNIT_DAMAGE_RIFLE);

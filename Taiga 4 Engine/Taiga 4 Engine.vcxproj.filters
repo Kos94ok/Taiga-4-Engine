@@ -64,6 +64,9 @@
     <Filter Include="Файлы исходного кода\Script">
       <UniqueIdentifier>{95d9d2b8-b7eb-46bf-949c-fe590eb16695}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Character\AI">
+      <UniqueIdentifier>{f3cad088-6a38-49b2-bb98-a05b58546885}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -225,6 +228,12 @@
     <ClCompile Include="script_data.cpp">
       <Filter>Файлы исходного кода\Script</Filter>
     </ClCompile>
+    <ClCompile Include="ai.cpp">
+      <Filter>Файлы исходного кода\Character\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="ai_think.cpp">
+      <Filter>Файлы исходного кода\Character\AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -304,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="script.h">
       <Filter>Файлы исходного кода\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="ai.h">
+      <Filter>Файлы исходного кода\Character\AI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

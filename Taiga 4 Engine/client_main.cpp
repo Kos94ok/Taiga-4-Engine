@@ -4,7 +4,7 @@
 void clientReceiveMain()
 {
 	int threadId = 5;
-	cout << "[CLIENT_RECEIVE] Starting the client receive thread" << "\n";
+	cout << "[CLIENT_RECEIVE] Starting the client receive thread\n";
 	sf::Packet data;
 	int retVal;
 	string cmd, type;
@@ -37,13 +37,13 @@ void clientReceiveMain()
 		core.thread_antifreeze[threadId] = 0;
 	}
 
-	cout << "[CLIENT_RECEIVE] Cleaning up..." << "\n";
+	cout << "[CLIENT_RECEIVE] Cleaning up...\n";
 }
 
 void clientSendMain()
 {
 	int threadId = 6;
-	cout << "[CLIENT_SEND] Starting the client send thread" << "\n";
+	cout << "[CLIENT_SEND] Starting the client send thread\n";
 
 	while (!core.shutdown)
 	{
@@ -63,5 +63,5 @@ void clientSendMain()
 		core.thread_antifreeze[threadId] = 0;
 	}
 
-	cout << "[CLIENT_SEND] Cleaning up..." << "\n";
+	cout << "[CLIENT_SEND] Cleaning up...\n";
 }

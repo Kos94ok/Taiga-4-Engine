@@ -70,6 +70,12 @@ public:
 	// Takes: Unit A, Unit B
 	// Returns: Closest point where interact is possible
 	vec2f getUnitInteractPoint(cUnit unitA, cUnit unitB);
+	// Takes: Unit type
+	// Returns: Amount of units of that type
+	int getUnitCount(std::string type);
+	// Takes: Unit ref
+	// Returns: Amount of units with that ref
+	int getUnitCount(int refId);
 
 	// Takes: Item global id
 	// Returns: Nothing

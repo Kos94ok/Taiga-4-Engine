@@ -107,7 +107,7 @@ cUnit& cGame::getUnit(int id)
 	if (id != -1) {
 		return unit[id];
 	}
-	cout << "[cGame::getUnit] Can't find the unit " << id << "!" << "\n";
+	//cout << "[cGame::getUnit] Can't find the unit " << id << "!" << "\n";
 	return database.unit[0];
 }
 
@@ -148,6 +148,28 @@ float cGame::getUnitCollisionDistance(cUnit *unitA, cUnit *unitB) {
 // Get closest interact point
 vec2f cGame::getUnitInteractPoint(cUnit unitA, cUnit unitB) {
 	return math.polar(unitB.pos, unitA.interactDistance + unitB.interactDistance, math.getAngle(&unitB, &unitA));
+}
+
+// Get amount of units by type
+int cGame::getUnitCount(std::string type)
+{
+	int count = 0;
+	for (int i = 0; i < unitCounter; i++)
+	{
+		if (unit[i].type == type) { count += 1; }
+	}
+	return count;
+}
+
+// Get amount of units by ref
+int cGame::getUnitCount(int refId)
+{
+	int count = 0;
+	for (int i = 0; i < unitCounter; i++)
+	{
+		if (unit[i].hasRef(refId)) { count += 1; }
+	}
+	return count;
 }
 
 // Time checks

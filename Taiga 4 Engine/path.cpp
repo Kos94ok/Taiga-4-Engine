@@ -3,6 +3,7 @@
 
 bool cPath::calculate(vec2 start, vec2 end, float collision, int unitId)
 {
+	access.lock();
 	clear();
 
 	vec2 iter = start, step, oldIter;
@@ -48,14 +49,15 @@ bool cPath::calculate(vec2 start, vec2 end, float collision, int unitId)
 		// If good point found
 		if (!objFound)
 		{
-			if (math.getDistance(iter, end) < precision * 7.50f) { addWaypoint(end); return true; }
+			if (math.getDistance(iter, end) < precision * 7.50f) { addWaypoint(end); access.unlock(); return true; }
 			else {
 				iter = iter + step * 5.00f;
 				addWaypoint(iter);
 			}
 		}
-		else { return false; }
+		else { access.unlock(); return false; }
 	}
+	access.unlock();
 	return false;
 }
 

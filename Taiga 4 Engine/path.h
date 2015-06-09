@@ -4,6 +4,8 @@
 class cPath
 {
 public:
+	sf::Mutex access;
+
 	int waypointCounter;
 	sf::Vector2f waypoint[LIMIT_ORDERS];
 

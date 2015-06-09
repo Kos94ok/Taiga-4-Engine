@@ -20,6 +20,7 @@ cWorld world;
 cEditor editor;
 cUtil util;
 cScript script;
+cAI ai;
 cAPI api;
 
 int main(int argc, char* argv[])
@@ -52,25 +53,26 @@ int main(int argc, char* argv[])
 	// Starting the threads
 	cout << "[MAIN] Starting the threads\n";
 	thread threadWindow(windowMain);
-	Sleep(50);
+	Sleep(10);
 	thread threadServerWorld(serverWorldMain);
-	Sleep(50);
+	Sleep(10);
 	thread threadServerConnect(serverConnectMain);
-	Sleep(50);
+	Sleep(10);
 	thread threadServerReceive(serverReceiveMain);
-	Sleep(50);
+	Sleep(10);
 	thread threadServerSend(serverSendMain);
-	Sleep(50);
+	Sleep(10);
 	thread threadClientReceive(clientReceiveMain);
-	Sleep(50);
+	Sleep(10);
 	thread threadClientSend(clientSendMain);
-	Sleep(50);
+	Sleep(10);
 	thread threadWorldLoader(worldLoaderMain);
-	Sleep(50);
+	Sleep(10);
+	thread threadAICore(AICoreMain);
+	Sleep(10);
 	thread threadConsole(consoleMain);
-	Sleep(50);
+	Sleep(10);
 	
-
 	// Initializing the server
 	if (core.serverMode)
 	{
@@ -104,8 +106,9 @@ int main(int argc, char* argv[])
 	}
 	game.access.unlock();
 
-	//script.execute(cScript::spawnEnemies, 0);
-	script.execute(cScript::test_unitAddSystem, 0);
+	ai.enable();
+	script.execute(cScript::spawnEnemies, 0);
+	//script.execute(cScript::test_unitAddSystem, 0);
 
 	cout << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();
@@ -121,7 +124,7 @@ int main(int argc, char* argv[])
 			core.thread_serverWorldTicks = 0;
 		}
 		// Adding some antifreeze
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 9; i++) {
 			if (!(core.serverMode && i == 0)) { core.thread_antifreeze[i] += 1; }
 			if (core.thread_antifreeze[i] > 1000) {
 				core.thread_antifreeze[i] = 0;
@@ -141,6 +144,7 @@ int main(int argc, char* argv[])
 	threadClientReceive.join();
 	threadClientSend.join();
 	threadWorldLoader.join();
+	threadAICore.join();
 	cout << "[MAIN] Waiting for script threads to finish..." << "\n";
 	for (int i = 0; i < (int)script.threadVector.size(); i++)
 	{

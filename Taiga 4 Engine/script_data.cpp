@@ -3,17 +3,26 @@
 
 void cScript::spawnEnemies(cArg args)
 {
-	for (int i = 0; i < 10; i++)
+	// Only for server
+	if (!core.serverMode && !core.localServer) { return; }
+	// Waiting for player spawn
+	while (game.getUnitCount("player") == 0 && !core.shutdown) { Sleep(50); }
+	// Spawning the enemies constantly
+	while (!core.shutdown)
 	{
-		while (client.unit == -1 && !core.shutdown) { Sleep(50); }
-		game.addUnit("enemy", game.getUnit(client.unit).pos + vec2f(50.00f, 50.00f));
+		// Maximum enemy limit
+		if (game.getUnitCount("enemy") < 5)
+		{
+			// Create a unit
+			game.addUnit("enemy", world.spawnPoint + vec2f(math.randf(-500.00f, 500.00f), math.randf(-500.00f, 500.00f)));
+		}
+		// Wait
 		script.wait(1000);
 	}
 }
 
 void cScript::test_unitAddSystem(cArg args)
 {
-	return;
 	script.wait(5000);
 
 	const int count = 100;

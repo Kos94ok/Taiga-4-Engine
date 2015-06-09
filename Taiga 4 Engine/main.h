@@ -17,6 +17,7 @@ typedef sf::Vector2i		vec2i;
 #include "item.h"
 #include "UI.h"
 #include "path.h"
+#include "ai.h"
 #include "unit.h"
 #include "game.h"
 #include "database.h"
@@ -92,4 +93,5 @@ extern cWorld world;
 extern cEditor editor;
 extern cUtil util;
 extern cScript script;
+extern cAI ai;
 extern cAPI api;

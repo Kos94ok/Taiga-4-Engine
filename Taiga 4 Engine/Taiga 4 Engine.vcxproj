@@ -103,6 +103,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ai.cpp" />
+    <ClCompile Include="ai_think.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="api.cpp" />
     <ClCompile Include="camera.cpp" />
@@ -160,6 +162,7 @@
     <ClCompile Include="world_util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ai.h" />
     <ClInclude Include="api.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="editor.h" />

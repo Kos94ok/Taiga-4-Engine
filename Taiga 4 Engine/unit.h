@@ -140,6 +140,7 @@ public:
 	float maxHealth;
 	float facingAngle;
 	float movementSpeed;
+	cAIBrain ai;
 	cLifeTimer lifeTimer;
 	cItemContainer container;
 
