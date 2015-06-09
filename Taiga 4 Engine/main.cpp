@@ -2,6 +2,7 @@
 #include "main.h"
 
 cCore core;
+cValue value;
 cMath math;
 cConsole console;
 cWindow window;
@@ -22,6 +23,15 @@ cUtil util;
 cScript script;
 cAI ai;
 cAPI api;
+
+/*
+TODO:
+- Script message (event) system?
+- Multiple levels of enemies based on the Slender-style system
+- Stop time for Generic Shooter (at night)
+- Add light to enemies
+- Make enemies attack the hero
+*/
 
 int main(int argc, char* argv[])
 {
@@ -88,18 +98,18 @@ int main(int argc, char* argv[])
 		int id = ui.addElement("image", vec2f(camera.res.x / 2, camera.res.y / 2));
 		ui.element[ui.getElementId(id)].texture = visual.addTexture("bg_art.png");
 		ui.element[ui.getElementId(id)].size = vec2f(camera.res.x, camera.res.y);
-		id = ui.createText(vec2f(camera.res.x / 2, camera.res.y / 2 - 70), "Taiga Survival Indev", "That is a tooltip!");
+		id = ui.createText(vec2f(camera.res.x / 2, camera.res.y / 2 - 70), "Taiga Survival Alpha v0.10", "That is a tooltip!");
 		ui.element[ui.getElementId(id)].ignoreOrigin = false;
 		//ui.element[ui.getElementId(id)].tooltip.pos
-		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f));
+		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 0.00f));
 		ui.element[ui.getElementId(id)].setText("Taiga Mini");
-		ui.element[ui.getElementId(id)].button.action = "start_taigaMini";
+		ui.element[ui.getElementId(id)].button.action = "start_taigaMaxi";
 		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 35.00f));
+		ui.element[ui.getElementId(id)].setText("Generic Shooter");
+		ui.element[ui.getElementId(id)].button.action = "start_genericShooter";
+		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 70.00f));
 		ui.element[ui.getElementId(id)].setText("Editor");
 		ui.element[ui.getElementId(id)].button.action = "start_editor";
-		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 70.00f));
-		ui.element[ui.getElementId(id)].setText("Taiga Maxi");
-		ui.element[ui.getElementId(id)].button.action = "start_taigaMaxi";
 		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 105.00f));
 		ui.element[ui.getElementId(id)].setText("Quick Connect");
 		ui.element[ui.getElementId(id)].button.action = "connect_temp";
@@ -107,8 +117,6 @@ int main(int argc, char* argv[])
 	game.access.unlock();
 
 	ai.enable();
-	script.execute(cScript::spawnEnemies, 0);
-	//script.execute(cScript::test_unitAddSystem, 0);
 
 	cout << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();

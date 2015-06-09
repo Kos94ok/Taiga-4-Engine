@@ -140,32 +140,27 @@ void cUIButton::callbackLeft(int parent)
 		ui.updateInterfaceEquipment();
 		ui.updateInterfaceItemList();
 	}
-	else if (action == "start_taigaMini")
+	else if (action == "start_taigaMaxi")
 	{
-		settings.wgStartingPath = 1;
-		settings.wgMinimalPathLength = 3;
-		settings.wgMaximalPathLength = 10;
-		settings.wgPathForkChance = 20;
 		world.genNormalWorld();
-
+		ui.updateFull();
+		client.connect("localserver", 21045);
+	}
+	else if (action == "start_genericShooter")
+	{
+		world.genNormalWorld();
 		ui.updateFull();
 		client.connect("localserver", 21045);
 
-		/*id = ui.addElement("button_test", sf::Vector2f(150, 300));
-		ui.element[ui.getElementId(id)].setText("Taiga Mini");
-		ui.element[ui.getElementId(id)].button.action = "start_taigaMini";*/
+		game.timeOfDay = 24.00f;
+		game.ambientLight = 0.00f;
+		script.execute(cScript::shooter_spawnEnemies, 0);
 	}
 	else if (action == "start_editor")
 	{
 		editor.enable();
 		client.connect("localserver", 21045);
 		ui.updateFull();
-	}
-	else if (action == "start_taigaMaxi")
-	{
-		world.genNormalWorld();
-		ui.updateFull();
-		client.connect("localserver", 21045);
 	}
 	else if (action == "connect_temp")
 	{

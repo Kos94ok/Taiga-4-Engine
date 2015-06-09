@@ -75,6 +75,7 @@ public:
 };
 
 extern cCore core;
+extern cValue value;
 extern cMath math;
 extern cConsole console;
 extern cWindow window;

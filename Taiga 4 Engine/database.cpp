@@ -71,8 +71,8 @@ void cDatabase::loadUnits()
 	unit[i].movementSpeed = 25;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("enemy_idle_side.png");
 	unit[i].animData[ANIM_MOVE].side.tex = visual.addTexture("enemy_idle_side.png");
-	unit[i].light.power = 320.00f;
-	unit[i].light.texture = visual.addTexture("light_whiteWeak.png");
+	unit[i].light.power = 100.00f;
+	unit[i].light.texture = visual.addTexture("light_orange.png");
 	unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
 	unit[i].ai = cAI::think_enemy;
@@ -195,17 +195,19 @@ void cDatabase::loadUnits()
 	unit[i].center = unit[i].size / 2.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("itemWorld_idle.png");
 	unit[i].interactDistance = 15.00f;
-	unit[i].container.itemLimit = 1;
+	unit[i].light.power = 100.00f;
+	unit[i].light.texture = visual.addTexture("light_blueWeak.png");
 	unit[i].addRef(REF_UNIT_PICKUP);
 	i += 1;
 
 	unit[i].type = "proj_rifle";
 	unit[i].size = vec2(10, 2);
 	unit[i].center = unit[i].size / 2.00f;
-	//unit[i].shadowOffset = vec2(30, -30);
 	unit[i].flyingHeight = 20.00f;
 	unit[i].animData[ANIM_MOVE].side.tex = visual.addTexture("missile_rifleNew.png");
 	unit[i].movementSpeed = 1500.00f;
+	unit[i].light.power = 25.00f;
+	unit[i].light.texture = visual.addTexture("light_orange.png");
 	unit[i].addRef(REF_UNIT_ROTATE);
 	unit[i].addRef(REF_UNIT_MISSILE);
 	unit[i].addRef(REF_UNIT_DAMAGE_RIFLE);

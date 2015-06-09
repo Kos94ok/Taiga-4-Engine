@@ -13,7 +13,14 @@ void cAI::think_enemy(int globalId)
 			idList.push_back(game.unit[i].globalId);
 		}
 	}
-	int target = idList[math.rand(0, (int)idList.size() - 1)];
+	if (idList.size() > 0)
+	{
+		int target = idList[math.rand(0, (int)idList.size() - 1)];
 
-	me->addOrder_moveto_path(game.getUnit(target).pos);
+		if (math.getDistance(me, &game.getUnit(target)) < 50.00f)
+		{
+			game.getUnit(target).addHealth(-value.enemyDamage);
+		}
+		else { me->addOrder_moveto_path(game.getUnit(target).pos); }
+	}
 }

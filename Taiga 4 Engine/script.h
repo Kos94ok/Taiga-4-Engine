@@ -36,6 +36,6 @@ public:
 	void wait(int time);
 
 	// Script data
-	static void spawnEnemies(cArg args);
+	static void shooter_spawnEnemies(cArg args);
 	static void test_unitAddSystem(cArg args);
 };

@@ -66,7 +66,7 @@ void serverWorldOrders(int elapsedTime)
 								<= game.getUnitCollisionDistance(&game.unit[i], &game.unit[y])
 								&& game.unit[i].owner != game.unit[y].globalId)
 							{
-								if (game.unit[i].hasRef(REF_UNIT_DAMAGE_RIFLE)) { game.damageUnit(game.unit[y].globalId, DAMAGE_RIFLE); }
+								if (game.unit[i].hasRef(REF_UNIT_DAMAGE_RIFLE)) { game.damageUnit(game.unit[y].globalId, value.rifleDamage); }
 
 								unitRemoved = true;
 								game.removeUnit(game.unit[i].globalId);

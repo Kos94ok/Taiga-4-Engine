@@ -1,7 +1,7 @@
 
 #include "main.h"
 
-void cScript::spawnEnemies(cArg args)
+void cScript::shooter_spawnEnemies(cArg args)
 {
 	// Only for server
 	if (!core.serverMode && !core.localServer) { return; }

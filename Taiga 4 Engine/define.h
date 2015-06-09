@@ -190,5 +190,3 @@
 
 #define SORT_BYNAME						0
 #define SORT_BYTYPE						1
-
-#define DAMAGE_RIFLE					10.00f

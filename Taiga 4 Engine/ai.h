@@ -4,12 +4,17 @@ void AICoreMain();
 class cAIBrain
 {
 public:
+	// Core
 	bool enabled;
 	int thinkTimer;
 	std::function<void(int globalId)> thinkFunc;
 
+	// Intelligence
+	int intTarget;
+
 	// Constructors
 	cAIBrain() {
+		intTarget = -1;
 		thinkTimer = 0;
 		enabled = false;
 	}
