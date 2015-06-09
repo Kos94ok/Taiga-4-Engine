@@ -22,7 +22,7 @@ bool cClient::msgUnit(sf::Packet input)
 			game.unit[game.unitCounter - 1].globalId = id;
 			game.unit[game.unitCounter - 1].owner = argi[2];
 		}
-		else { cout << "[CLIENT_RECEIVE] Duplicate create unit message. Ignoring" << "\n"; }
+		//else { cout << "[CLIENT_RECEIVE] Duplicate create unit message. Ignoring" << "\n"; }
 		return true;
 	}
 	// ============================================
