@@ -36,3 +36,16 @@ public:
 
 	const float enemyDamage = 10.00f;
 };
+
+class cMutex
+{
+public:
+	sf::Mutex mutex;
+
+	void lock() {
+		mutex.lock();
+	}
+	void unlock() {
+		mutex.unlock();
+	}
+};

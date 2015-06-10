@@ -81,7 +81,7 @@ void worldLoaderMain()
 								client.sendPacket(data);
 								data.clear();
 							}
-						}
+ 						}
 						// Unloading
 						else if (!isViable && world.isChunkLoaded(vec2i(i, y)))
 						{

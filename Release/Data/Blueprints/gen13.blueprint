@@ -1,0 +1,32 @@
+Type: 1
+[Units]
+ID: -1
+Type: tree_basic_c
+X: -201
+Y: 233
+===
+ID: -1
+Type: tree_basic_b
+X: 63
+Y: -86
+===
+ID: -1
+Type: tree_basic_c
+X: -11
+Y: 199
+===
+ID: -1
+Type: stone_basic_a
+X: -44
+Y: 41
+===
+ID: -1
+Type: tree_basic_a
+X: -126
+Y: -176
+===
+ID: -1
+Type: tree_basic_d
+X: 165
+Y: -200
+===

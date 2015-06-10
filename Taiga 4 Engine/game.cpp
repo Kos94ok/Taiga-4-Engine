@@ -4,6 +4,7 @@
 // Copy unit from database
 int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool sendData)
 {
+	access.lock();
 	if (!sendData || core.serverMode || core.localServer)
 	{
 		if (variation == 0) { type += "a"; }
@@ -30,6 +31,7 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool
 		data << MSG_UNIT_ADD << unitGlobalCounter - 1 << type << pos.x << pos.y << owner << variation;
 		server.sendPacket(PLAYERS_REMOTE, data);
 	}
+	access.unlock();
 	return game.unitGlobalCounter - 1;
 }
 

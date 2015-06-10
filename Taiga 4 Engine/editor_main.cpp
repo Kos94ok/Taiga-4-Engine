@@ -4,9 +4,6 @@
 void cEditor::enable()
 {
 	cout << "[CMD] Enabled editor mode." << "\n";
-	cout << "[CMD] Editor mode is not yet implemented, expect random bugs." << "\n";
-	cout << "[CMD] Saving system is not yet available, all the changes are temporary." << "\n";
-
 	core.editorMode = true;
 }
 

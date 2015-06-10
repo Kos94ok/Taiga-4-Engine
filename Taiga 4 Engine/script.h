@@ -22,7 +22,7 @@ public:
 class cScript
 {
 public:
-	sf::Mutex access;
+	cMutex access;
 
 	std::vector<bool> threadReady;
 	std::vector<std::thread> threadVector;

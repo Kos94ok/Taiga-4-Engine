@@ -68,7 +68,7 @@ void cDatabase::loadUnits()
 	unit[i].center = vec2(32, 32);
 	unit[i].health = 10.00f;
 	unit[i].maxHealth = 10.00f;
-	unit[i].movementSpeed = 25;
+	unit[i].movementSpeed = 80;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("enemy_idle_side.png");
 	unit[i].animData[ANIM_MOVE].side.tex = visual.addTexture("enemy_idle_side.png");
 	unit[i].light.power = 100.00f;

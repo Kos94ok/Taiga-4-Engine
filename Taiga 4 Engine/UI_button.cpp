@@ -1,7 +1,6 @@
 
 #include "main.h"
 
-sf::Mutex test;
 void cUIButton::callbackLeft(int parent)
 {
 	int id;

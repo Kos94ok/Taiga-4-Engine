@@ -73,8 +73,6 @@ void cWorld::loadChunk(vec2i pos)
 				// Item data
 				for (int y = 0; y < (int)unitList[i].itemList.size(); y++)
 				{
-					if (unitList[i].itemList[y].type != "material_wood")
-					cout << "Adding " << unitList[i].itemList[y].count << " of " << unitList[i].itemList[y].type << " to " << id << endl;
 					game.getUnit(id).addItem(unitList[i].itemList[y].type, unitList[i].itemList[y].count);
 				}
 			}

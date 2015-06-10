@@ -2,36 +2,31 @@ Type: 1
 [Units]
 ID: -1
 Type: tree_basic_d
-X: 110.714
-Y: 71.7108
+X: 198
+Y: 150
 ===
 ID: -1
 Type: tree_basic_b
-X: -8.50703
-Y: 207.671
+X: 24
+Y: -56
 ===
 ID: -1
-Type: tree_basic_a
-X: -68.5522
-Y: -113.002
+Type: tree_basic_b
+X: -114
+Y: 47
 ===
 ID: -1
 Type: tree_basic_d
-X: 98.1552
-Y: -76.0445
+X: -105
+Y: -165
 ===
 ID: -1
 Type: tree_basic_c
-X: -76.3192
-Y: 53.3082
-===
-ID: -1
-Type: tree_basic_c
-X: 241.272
-Y: 66.2023
+X: 59
+Y: 169
 ===
 ID: -1
 Type: tree_basic_b
-X: -226.043
-Y: 71.2226
+X: -229
+Y: -31
 ===

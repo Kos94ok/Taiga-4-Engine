@@ -18,26 +18,18 @@ void cEditor::genBlueprint_Normal()
 			if (localDist < dist) { dist = localDist; }
 		}
 
-		if (dist > 125.00f) { game.addUnit("tree_basic_", pos, -1, math.rand(0, 3)); }
+		if (dist > 125.00f) {
+			if (math.randf(0.00f, 1.00f) < 0.80f) {
+				game.addUnit("tree_basic_", pos, -1, math.rand(0, 3));
+			}
+			else {
+				game.addUnit("stone_basic_", pos, -1, math.rand(0, 3));
+			}
+		}
 		else { i -= 1; }
 		total += 1;
 	}
 	total = 0;
-
-	// Stones
-	for (int i = 0; i < math.rand(5, 15) && total < 100; i++)
-	{
-		pos = vec2(math.randf(-LIMIT_CHUNKSIZE / 2, LIMIT_CHUNKSIZE / 2), math.randf(-LIMIT_CHUNKSIZE / 2, LIMIT_CHUNKSIZE / 2));
-		for (int y = 0; y < game.unitCounter; y++)
-		{
-			localDist = math.getDistance(game.unit[y].pos, pos);
-			if (localDist < dist) { dist = localDist; }
-		}
-
-		if (dist > 125.00f) { game.addUnit("stone_basic_", pos, -1, math.rand(0, 3)); }
-		else { i -= 1; }
-		total += 1;
-	}
 }
 
 void cEditor::genBlueprint_Blocked()

@@ -30,7 +30,7 @@ public:
 class cWorld
 {
 public:
-	sf::Mutex access;
+	cMutex access;
 
 	sf::Vector2f spawnPoint;
 	std::vector<cBlueprint> blueprint;

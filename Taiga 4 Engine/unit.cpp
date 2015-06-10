@@ -43,6 +43,7 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 	if (math.getDistance(pos, target) < 10.00f) { return -1; }
 	// If clicked to the restricted area, then... you know
 	vec2i targetChunk = world.getChunkInPos(target);
+	vec2f startingPos;
 	//if (world.map[targetChunk.x][targetChunk.y].type == CHUNK_UNDEFINED) { return -1; }
 
 	if (overwrite) { orderCounter = 0; actionTimer = 0.00f; }
@@ -52,8 +53,19 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 	{
 		pos = path.validatePoint(pos, collisionDistance, globalId);
 	}
+	// Looking for starting position
+	startingPos = pos;
+	if (orderCounter > 0)
+	{
+		if (order[orderCounter - 1].type == ORDER_MOVETO) {
+			startingPos = order[orderCounter - 1].targetPos;
+		}
+		else {
+			startingPos = path.validatePoint(game.getUnit(order[orderCounter - 1].targetObject).pos, collisionDistance, globalId);
+		}
+	}
 	// Calculating path
-	path.calculate(pos, target, collisionDistance, globalId);
+	path.calculate(startingPos, target, collisionDistance, globalId);
 	// Adding orders
 	for (int i = 0; i < path.waypointCounter; i++)
 	{
@@ -293,7 +305,12 @@ void cUnit::updateFacing()
 	if (orderCounter == 0) { return; }
 	float angle;
 
-	angle = math.getAngle(pos.x, pos.y, order[0].targetPos.x, order[0].targetPos.y);
+	if (order[0].type == ORDER_MOVETO) {
+		angle = math.getAngle(pos.x, pos.y, order[0].targetPos.x, order[0].targetPos.y);
+	}
+	else {
+		angle = math.getAngle(pos.x, pos.y, game.getUnit(order[0].targetObject).pos.x, game.getUnit(order[0].targetObject).pos.y);
+	}
 	facingAngle = math.convertAngle(angle);
 }
 

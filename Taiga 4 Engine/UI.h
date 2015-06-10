@@ -139,7 +139,7 @@ public:
 	int getElementId(int id);
 
 	// Update
-	sf::Mutex access;
+	cMutex access;
 		// Full clear and initialization
 	void updateFull();
 		// Update timers and values

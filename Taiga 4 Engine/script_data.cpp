@@ -11,13 +11,13 @@ void cScript::shooter_spawnEnemies(cArg args)
 	while (!core.shutdown)
 	{
 		// Maximum enemy limit
-		if (game.getUnitCount("enemy") < 5)
+		if (game.getUnitCount("enemy") < 50)
 		{
 			// Create a unit
-			game.addUnit("enemy", world.spawnPoint + vec2f(math.randf(-500.00f, 500.00f), math.randf(-500.00f, 500.00f)));
+			game.addUnit("enemy", world.spawnPoint + vec2f(math.randf(-1500.00f, 1500.00f), math.randf(-1500.00f, 1500.00f)));
 		}
 		// Wait
-		script.wait(1000);
+		script.wait(1500);
 	}
 }
 

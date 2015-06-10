@@ -2,36 +2,41 @@ Type: 1
 [Units]
 ID: -1
 Type: tree_basic_b
-X: 132
-Y: 181
+X: 161
+Y: -234
 ===
 ID: -1
-Type: tree_basic_d
-X: -208
-Y: 231
+Type: tree_basic_c
+X: -117
+Y: -209
+===
+ID: -1
+Type: tree_basic_c
+X: -8
+Y: -123
 ===
 ID: -1
 Type: tree_basic_b
-X: -46
-Y: 189
+X: 234
+Y: 98
 ===
 ID: -1
 Type: tree_basic_c
-X: 58
-Y: -249
+X: 53
+Y: 46
 ===
 ID: -1
 Type: tree_basic_c
-X: -80
-Y: -43
+X: -38
+Y: 157
 ===
 ID: -1
 Type: stone_basic_b
-X: 162
-Y: -92
+X: -131
+Y: 34
 ===
 ID: -1
 Type: tree_basic_b
-X: -206
-Y: -146
+X: 146
+Y: -106
 ===

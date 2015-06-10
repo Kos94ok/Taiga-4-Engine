@@ -1,37 +1,37 @@
 Type: 1
 [Units]
 ID: -1
-Type: tree_basic_c
-X: -153.348
-Y: 31.7927
-===
-ID: -1
 Type: tree_basic_b
-X: 123.302
-Y: 161.42
-===
-ID: -1
-Type: tree_basic_b
-X: 6.76749
-Y: 105.251
+X: 124
+Y: 66
 ===
 ID: -1
 Type: tree_basic_a
-X: -67.774
-Y: -204.299
-===
-ID: -1
-Type: tree_basic_a
-X: -27.1539
-Y: 244.263
-===
-ID: -1
-Type: tree_basic_b
-X: 81.5226
-Y: -166.883
+X: -150
+Y: 146
 ===
 ID: -1
 Type: tree_basic_c
-X: 249.847
-Y: 248.398
+X: -9
+Y: -53
+===
+ID: -1
+Type: tree_basic_a
+X: -221
+Y: -173
+===
+ID: -1
+Type: tree_basic_b
+X: 68
+Y: 241
+===
+ID: -1
+Type: tree_basic_b
+X: 209
+Y: -178
+===
+ID: -1
+Type: stone_basic_c
+X: 194
+Y: 187
 ===

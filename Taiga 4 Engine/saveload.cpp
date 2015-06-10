@@ -11,10 +11,6 @@ void cSave::flushListToFile(cBlueprintHeader header, vector<cUnitEntry> list, st
 	file << "[Units]" << "\n";
 	for (int i = 0; i < (int)list.size(); i++)
 	{
-		if (list[i].type == "item_a")
-		{
-			cout << "Item saved to " << filename << endl;
-		}
 		// Writing normal data
 		file << "ID: " << list[i].globalId << "\n";
 		file << "Type: " << list[i].type << "\n";
