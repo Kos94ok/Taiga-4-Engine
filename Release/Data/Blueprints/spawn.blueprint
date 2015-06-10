@@ -1,10 +1,18 @@
-Type = 3
+Type: 3
 [Units]
--1
-campfire_full
-50
-0
--1
-tent_basic
-100
--40
+ID: -1
+Type: campfire_full
+X: 50
+Y: 0
+Type_Item: material_wood
+Count_Item: 1
+---
+Type_Item: material_stone
+Count_Item: 1
+---
+===
+ID: -1
+Type: tent_basic
+X: 100
+Y: -40
+===

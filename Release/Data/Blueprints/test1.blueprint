@@ -1,6 +1,7 @@
-Type = 2
+Type: 2
 [Units]
--1
-tree_basic_a
-0
-0
+ID: -1
+Type: tree_basic_a
+X: 0
+Y: 0
+===

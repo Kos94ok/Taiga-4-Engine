@@ -81,10 +81,10 @@ void serverWorldOrders(int elapsedTime)
 				{
 					cUnit* target = &game.getUnit(game.unit[i].order[0].targetObject);
 					if (core.serverMode || core.localServer) {
-						game.removeUnit(game.unit[i].order[0].targetObject);
 						for (int y = 0; y < target->container.itemCounter; y++) {
 							game.unit[i].addItem(target->container.item[y].type, target->container.amount[y]);
 						}
+						game.removeUnit(game.unit[i].order[0].targetObject);
 					}
 					game.unit[i].removeOrder(0);
 					ui.updateInterfaceItemList();

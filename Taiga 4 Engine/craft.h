@@ -85,7 +85,7 @@ public:
 	}
 
 	void addRecipe(cComponent result, int resBalance,  cComponent ingrA,
-				cComponent ingrB = "", cComponent ingrC = "", cComponent ingrD = "",	 cComponent ingrE = "",
+				cComponent ingrB = "", cComponent ingrC = "", cComponent ingrD = "", cComponent ingrE = "",
 				cComponent ingrF = "", cComponent ingrG = "", cComponent ingrH = "", cComponent ingrI = "");
 	void checkActiveRecipe();
 	void updateCraftAmounts();

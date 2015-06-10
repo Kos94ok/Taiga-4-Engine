@@ -155,6 +155,8 @@ void cUIButton::callbackLeft(int parent)
 		game.timeOfDay = 24.00f;
 		game.ambientLight = 0.00f;
 		script.execute(cScript::shooter_spawnEnemies, 0);
+		script.execute(cScript::shooter_spawnItems, 0);
+		script.execute(cScript::shooter_respawnSystem, 0);
 	}
 	else if (action == "start_editor")
 	{

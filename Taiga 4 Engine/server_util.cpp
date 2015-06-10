@@ -66,16 +66,7 @@ void cServer::introduce(int playerId)
 	string playerType = "player";
 	if (core.editorMode) { playerType = "editor"; }
 
-	server.player[playerId].unit = game.addUnit(playerType, world.spawnPoint);
-	if (!server.isLocalPlayer(playerId))
-	{
-		data << MSG_UNIT_HERO << server.player[playerId].unit;
-		server.sendPacket(playerId, data);
-		data.clear();
-	}
-	else {
-		client.unit = server.player[playerId].unit;
-	}
+	server.assignUnit(playerId, game.addUnit(playerType, world.spawnPoint));
 	server.player[playerId].setHealth(100.00f);
 	server.player[playerId].setMaxHealth(100.00f);
 	if (!core.editorMode)
@@ -141,6 +132,21 @@ void cServerPlayer::setHealth(float hp)
 void cServerPlayer::setMaxHealth(float hp)
 {
 	game.unit[game.getUnitId(unit)].setMaxHealth(hp);
+}
+
+void cServer::assignUnit(int playerId, int unitId)
+{
+	sf::Packet data;
+	player[playerId].unit = unitId;
+	if (!isLocalPlayer(playerId))
+	{
+		data << MSG_UNIT_HERO << player[playerId].unit;
+		sendPacket(playerId, data);
+		data.clear();
+	}
+	else {
+		client.unit = player[playerId].unit;
+	}
 }
 
 bool cServer::isLocalPlayer(int player)

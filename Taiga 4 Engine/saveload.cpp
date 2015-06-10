@@ -7,14 +7,30 @@ void cSave::flushListToFile(cBlueprintHeader header, vector<cUnitEntry> list, st
 	file.open(filename);
 	if (!file.good()) { cout << "[cSave::flushListToFile] Can't open file " + filename << endl; return; }
 	// Writing data
-	file << "Type = " << header.type << "\n";
+	file << "Type: " << header.type << "\n";
 	file << "[Units]" << "\n";
 	for (int i = 0; i < (int)list.size(); i++)
 	{
-		file << list[i].globalId << "\n";
-		file << list[i].type << "\n";
-		file << list[i].pos.x << "\n";
-		file << list[i].pos.y << "\n";
+		if (list[i].type == "item_a")
+		{
+			cout << "Item saved to " << filename << endl;
+		}
+		// Writing normal data
+		file << "ID: " << list[i].globalId << "\n";
+		file << "Type: " << list[i].type << "\n";
+		file << "X: " << math.round(list[i].pos.x) << "\n";
+		file << "Y: " << math.round(list[i].pos.y) << "\n";
+		// Writing file data
+		for (int y = 0; y < (int)list[i].itemList.size(); y++)
+		{
+			// Normal data
+			file << "Type_Item: " << list[i].itemList[y].type << "\n";
+			file << "Count_Item: " << list[i].itemList[y].count << "\n";
+			// Item end line
+			file << "---" << "\n";
+		}
+		// Unit end line
+		file << "===" << "\n";
 	}
 	file.close();
 }
@@ -38,7 +54,7 @@ cBlueprintHeader cSave::getHeaderFromFile(string filename)
 			{
 				if (buf.substr(0, 4) == "Type")
 				{
-					retVal.type = math.stringToInt(buf.substr(7));
+					retVal.type = math.stringToInt(buf.substr(5));
 				}
 			}
 			else { cout << "[cSave::getHeaderFromFile] Unexpected end of file (" << filename << ")\n"; retVal.isValid = false; }
@@ -57,6 +73,7 @@ vector<cUnitEntry> cSave::getListFromFile(string filename)
 	char buffer[256];
 	string buf;
 	cUnitEntry entry;
+	cItemEntry itemEntry;
 	ifstream file;
 	file.open(filename);
 	if (file.good())
@@ -70,23 +87,28 @@ vector<cUnitEntry> cSave::getListFromFile(string filename)
 		// Reading units
 		while (!file.eof())
 		{
-			// Global Id
 			file.getline(buffer, 256);	buf = buffer;
-			if (buf.length() > 0)
-			{
-				entry.globalId = math.stringToInt(buffer);
-				// Type
-				file.getline(buffer, 256);	buf = buffer;
-				entry.type = buffer;
-				// Pos X
-				file.getline(buffer, 256);	buf = buffer;
-				entry.pos.x = math.stringToInt(buffer);
-				// Pos Y
-				file.getline(buffer, 256);	buf = buffer;
-				entry.pos.y = math.stringToInt(buffer);
-				// Pusing to array
-				retVal.push_back(entry);
+			// Global Id
+			if (buf.find("ID:") != -1) { entry.globalId = math.stringToInt(buf.substr(4)); }
+			// Type
+			else if (buf.find("Type:") != -1) { entry.type = buf.substr(6); }
+			// Pos X
+			else if (buf.find("X:") != -1) { entry.pos.x = math.stringToInt(buf.substr(3)); }
+			// Pos Y
+			else if (buf.find("Y:") != -1) { entry.pos.y = math.stringToInt(buf.substr(3)); }
+			// Item type
+			else if (buf.find("Type_Item:") != -1) {
+				itemEntry.type = buf.substr(11);
+				itemEntry.count = 1;
 			}
+			// Item count
+			else if (buf.find("Count_Item:") != -1) {
+				itemEntry.count = math.stringToInt(buf.substr(12));
+			}
+			// Pushing the item
+			else if (buf.find("---") != -1) { entry.itemList.push_back(itemEntry); }
+			// Pushing the unit
+			else if (buf.find("===") != -1) { retVal.push_back(entry); entry.itemList.clear(); }
 		}
 		// Closing
 		file.close();

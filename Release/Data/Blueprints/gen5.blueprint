@@ -1,30 +1,37 @@
-Type = 1
+Type: 1
 [Units]
--1
-tree_basic_b
-103.801
--44.8546
--1
-tree_basic_b
-211.913
--140.866
--1
-tree_basic_d
--244.858
-53.4303
--1
-tree_basic_a
-46.2279
-192.854
--1
-tree_basic_d
--47.2198
--137.768
--1
-tree_basic_c
--85.9172
--10.9638
--1
-tree_basic_a
-82.3618
--189.512
+ID: -1
+Type: tree_basic_b
+X: 103.801
+Y: -44.8546
+===
+ID: -1
+Type: tree_basic_b
+X: 211.913
+Y: -140.866
+===
+ID: -1
+Type: tree_basic_d
+X: -244.858
+Y: 53.4303
+===
+ID: -1
+Type: tree_basic_a
+X: 46.2279
+Y: 192.854
+===
+ID: -1
+Type: tree_basic_d
+X: -47.2198
+Y: -137.768
+===
+ID: -1
+Type: tree_basic_c
+X: -85.9172
+Y: -10.9638
+===
+ID: -1
+Type: tree_basic_a
+X: 82.3618
+Y: -189.512
+===

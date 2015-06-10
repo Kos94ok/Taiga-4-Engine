@@ -169,7 +169,7 @@ void cCraft::updateCraftAmounts()
 
 void cCraft::loadRecipes()
 {
-	addRecipe("voodoo_doll", -20, item("human_leg", 1), item("human_arm", 1), item("human_ear", 5));
+	addRecipe("voodoo_doll", 0, item("human_leg", 1), item("human_arm", 1), item("human_ear", 1), item("human_eye"));
 	addRecipe("test_catAll", 0, "test_catWeapons", "test_catArmor", "test_catMaterials", "test_catConsumables", "test_catOther");
 	addRecipe("test_resourceManipulator", 100, "test_resourceManipulator");
 	addRecipe("campfire_basic", -100, item("weapon_knife_steel", true), "flint_basic");

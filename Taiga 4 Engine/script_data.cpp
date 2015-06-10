@@ -21,6 +21,36 @@ void cScript::shooter_spawnEnemies(cArg args)
 	}
 }
 
+void cScript::shooter_respawnSystem(cArg args)
+{
+	// Only for server
+	if (!core.serverMode && !core.localServer) { return; }
+	// Loop
+	while (!core.shutdown)
+	{
+		script.wait(5000);
+		for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
+		{
+			if (server.player[i].connected && game.isUnitDead(server.player[i].unit))
+			{
+				server.assignUnit(i, game.addUnit("player", world.spawnPoint + vec2f(math.randf(-500.00f, 500.00f), math.randf(-500.00f, 500.00f))));
+			}
+		}
+	}
+}
+
+void cScript::shooter_spawnItems(cArg args)
+{
+	// Only for server
+	if (!core.serverMode && !core.localServer) { return; }
+	// Spawning stuff
+	game.createDrop(world.spawnPoint + vec2f(0.00f, -1000.00f), "human_eye");
+	game.createDrop(world.spawnPoint + vec2f(0.00f, 1000.00f), "human_arm");
+	game.createDrop(world.spawnPoint + vec2f(-1000.00f, 0.00f), "human_leg");
+	game.createDrop(world.spawnPoint + vec2f(1000.00f, 0.00f), "human_ear");
+	game.createDrop(world.spawnPoint + vec2f(-50.00f, 0.00f), "voodoo_recipe");
+}
+
 void cScript::test_unitAddSystem(cArg args)
 {
 	script.wait(5000);

@@ -93,7 +93,7 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_DEATH].side.tex = visual.addTexture("tree_basic_a_death.png");
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 10.00f;
-	//unit[i].addItem("material_wood");
+	unit[i].addItem("material_wood");
 	unit[i].addRef(REF_UNIT_TREE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;
@@ -129,7 +129,7 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_a_idle.png");
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 25.00f;
-	//unit[i].addItem("material_stone");
+	unit[i].addItem("material_stone");
 	unit[i].addRef(REF_UNIT_STONE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;
@@ -367,32 +367,50 @@ void cDatabase::loadItems()
 	item[i].category = CATEGORY_OTHER;
 	i += 1;
 
-	// Test - Voodoo items
+	// Regular Shooter - Story Mode
+	item[i].type = "human_eye";
+	item[i].setName("Human eye");
+	item[i].addDescrLine("It looks inside you...");
+	item[i].addDescrLine("Оно смотрит прямо в тебя...");
+	item[i].weight = 0.10f;
+	i += 1;
+
 	item[i].type = "human_ear";
 	item[i].setName("Human ear");
 	item[i].addDescrLine("Why do you even have this thing?!");
+	item[i].addDescrLine("Почему ЭТО у тебя в руках?!");
 	item[i].weight = 0.10f;
 	i += 1;
 
 	item[i].type = "human_arm";
 	item[i].setName("Human arm");
 	item[i].addDescrLine("Drop it! Drop it right now!!");
-	item[i].weight = 0.50f;
+	item[i].addDescrLine("Брось! Брось бяку быстро!");
+	item[i].weight = 5.00f;
 	i += 1;
 
 	item[i].type = "human_leg";
 	item[i].setName("Human leg");
 	item[i].addDescrLine("You are a terrible person...");
-	item[i].weight = 0.10f;
+	item[i].addDescrLine("Ты - ужасный человек...");
+	item[i].weight = 5.00f;
+	i += 1;
+
+	item[i].type = "voodoo_recipe";
+	item[i].setName("Voodoo Recipe");
+	item[i].addDescrLine("It says \"Use eyes, ears, arms and legs to");
+	item[i].addDescrLine("create a really powerful vooo-dooo doll\".");
+	item[i].addDescrLine("Тут написано \"Используй глаза, уши, руки");
+	item[i].addDescrLine("и ноги, чтобы сделать действительно крутую");
+	item[i].addDescrLine("куклу вуу-дуу.\".");
 	i += 1;
 
 	item[i].type = "voodoo_doll";
 	item[i].setName("Voodoo doll");
-	item[i].addDescrLine("The hell are you going to do with that?!");
+	item[i].addDescrLine("You can use it to summon some slender guys...");
+	item[i].addDescrLine("Используй эту штуку, чтобы вызвать что-нибудь");
+	item[i].addDescrLine("слендероподобное...");
 	item[i].weight = 1.50f;
-	item[i].dismantle.add("human_leg", 1);
-	item[i].dismantle.add("human_arm", 1);
-	item[i].dismantle.add("human_ear", 5);
 	i += 1;
 
 	// Editor items

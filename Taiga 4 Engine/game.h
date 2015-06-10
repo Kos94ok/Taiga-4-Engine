@@ -76,6 +76,18 @@ public:
 	// Takes: Unit ref
 	// Returns: Amount of units with that ref
 	int getUnitCount(int refId);
+	// Takes: Unit global id
+	// Returns: Is unit alive?
+	bool isUnitAlive(int globalId);
+	// Takes: Unit global id
+	// Returns: Is unit dead?
+	bool isUnitDead(int globalId);
+	// Takes: Position, Item list
+	// Returns: Created unit global id
+	int createDrop(sf::Vector2f pos, cItemDrop itemA, cItemDrop itemB = "", cItemDrop itemC = "", cItemDrop itemD = "");
+	// Takes: Position, Item vector
+	// Returns: Created unit global id
+	int createDrop(sf::Vector2f pos, std::vector<cItemDrop> itemList);
 
 	// Takes: Item global id
 	// Returns: Nothing

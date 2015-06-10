@@ -20,6 +20,8 @@ public:
 	void setHealth(float hp);
 	void setMaxHealth(float maxHp);
 
+	void assignUnit(int globalId);
+
 	cServerPlayer() {
 		unit = -1;
 		packet = 0;
@@ -41,6 +43,7 @@ public:
 	void initialize();
 	void introduce(int playerId);
 	void sendChunkData(int playerId, int x, int y);
+	void assignUnit(int playerId, int unitId);
 
 	// Takes: Unit global id
 	// Returns: Controlling player id

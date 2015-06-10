@@ -36,6 +36,7 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool
 // Remove unit by global id
 void cGame::removeUnit(int id, bool sendData)
 {
+	//access.lock();
 	if (!sendData || core.serverMode || core.localServer)
 	{
 		// Server
@@ -57,6 +58,7 @@ void cGame::removeUnit(int id, bool sendData)
 			unitCounter -= 1;
 		}
 	}
+	//access.unlock();
 }
 
 // Kill unit
@@ -182,4 +184,45 @@ bool cGame::darkens() { return !lightens(); }
 void cGame::useItem(int id)
 {
 	unit[getUnitId(client.unit)].container.get(id).use();
+}
+
+// Is unit alive checks
+bool cGame::isUnitAlive(int globalId)
+{
+	cUnit* foundUnit = &getUnit(globalId);
+	if (foundUnit->type == "missingno") { return false; }
+	if (foundUnit->health <= 0.00f && foundUnit->maxHealth > 0.00f) { return false; }
+	if (foundUnit->order[0].type == ORDER_DEATH) { return false; }
+	return true;
+}
+
+bool cGame::isUnitDead(int globalId) { return !isUnitAlive(globalId); }
+
+// Fast create drop
+int cGame::createDrop(vec2f pos, vector<cItemDrop> itemList)
+{
+	if (itemList.size() == 0) { cout << "[cGame::createDrop] Empty item list!" << endl; return -1; }
+
+	access.lock();
+	int unitId = addUnit("item_a", pos);
+	for (int i = 0; i < (int)itemList.size(); i++)
+	{
+		if (itemList[i].type.length() > 0)
+		{
+			getUnit(unitId).addItem(itemList[i].type, itemList[i].count);
+		}
+	}
+	access.unlock();
+
+	return unitId;
+}
+
+int cGame::createDrop(vec2f pos, cItemDrop itemA, cItemDrop itemB, cItemDrop itemC, cItemDrop itemD)
+{
+	vector<cItemDrop> itemList;
+	itemList.push_back(itemA);
+	itemList.push_back(itemB);
+	itemList.push_back(itemC);
+	itemList.push_back(itemD);
+	return createDrop(pos, itemList);
 }

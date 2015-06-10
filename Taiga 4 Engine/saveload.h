@@ -1,12 +1,20 @@
 
 #include "define.h"
 
+class cItemEntry
+{
+public:
+	std::string type;
+	int count;
+};
+
 class cUnitEntry
 {
 public:
 	int globalId;
 	std::string type;
 	sf::Vector2f pos;
+	std::vector<cItemEntry> itemList;
 
 	cUnitEntry() {
 		globalId = -1;

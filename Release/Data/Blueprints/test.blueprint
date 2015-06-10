@@ -1,38 +1,42 @@
-Type = 1
+Type: 1
 [Units]
--1
-tree_basic_a
--271
-58
--1
-tree_basic_a
-7
-138
--1
-tree_basic_b
-210
-18
--1
-tree_basic_b
-105
--89
--1
-tree_basic_c
--78
--136
--1
-tree_basic_c
--206
--166
--1
-tree_basic_d
--178
--60
--1
-tree_basic_d
--164
-52
--1
-campfire_full
--44
--49
+ID: -1
+Type: tree_basic_a
+X: 7
+Y: 138
+===
+ID: -1
+Type: tree_basic_b
+X: 210
+Y: 18
+===
+ID: -1
+Type: tree_basic_b
+X: 105
+Y: -89
+===
+ID: -1
+Type: tree_basic_c
+X: -78
+Y: -136
+===
+ID: -1
+Type: tree_basic_c
+X: -206
+Y: -166
+===
+ID: -1
+Type: tree_basic_d
+X: -178
+Y: -60
+===
+ID: -1
+Type: tree_basic_d
+X: -164
+Y: 52
+===
+ID: -1
+Type: campfire_full
+X: -44
+Y: -49
+===

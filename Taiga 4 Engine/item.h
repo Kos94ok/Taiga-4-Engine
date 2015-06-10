@@ -1,6 +1,39 @@
 
 #include "define.h"
 
+class cItemDrop
+{
+public:
+	std::string type;
+	int count;
+
+	cItemDrop() {
+		type = "";
+		count = 1;
+	}
+
+	cItemDrop(std::string item) {
+		type = item;
+		count = 1;
+	}
+
+	cItemDrop(const char* item) {
+		type = item;
+		count = 1;
+	}
+
+	cItemDrop(std::string item, int amount) {
+		type = item;
+		count = amount;
+	}
+
+	cItemDrop& operator=(std::string item) {
+		type = item;
+		count = 1;
+		return *this;
+	}
+};
+
 class cItemDismantle
 {
 public:
@@ -51,7 +84,7 @@ public:
 
 	cItem() {
 		equipped = false;
-		weight = 0.10f;
+		weight = 1.00f;
 		descrLinesUsed = 0;
 		category = CATEGORY_OTHER;
 	}

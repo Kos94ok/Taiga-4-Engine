@@ -47,30 +47,3 @@ void windowMain()
 	window.winHandle.close();
 	cout << "[WND] Cleaning up" << "\n";
 }
-
-sf::Vector2f cWindow::getMousePos(bool useMatrix)
-{
-	sf::Vector2i mousePosI = sf::Mouse::getPosition(winHandle);
-	sf::Vector2f mousePos(mousePosI.x, mousePosI.y);
-
-	// Screen resize fix
-	mousePos.x *= (float)camera.res.x / (float)winHandle.getSize().x;
-	mousePos.y *= (float)camera.res.y / (float)winHandle.getSize().y;
-
-	if (useMatrix)
-	{
-		// Sample mod fix
-		mousePos.x *= settings.sampleMod;
-		mousePos.y *= settings.sampleMod;
-		mousePos = matrixHandle.getInverse().transformPoint(mousePos);
-	}
-	return mousePos;
-}
-
-sf::Vector2f cWindow::getScreenSize()
-{
-	RECT desktop;
-	const HWND hDesktop = GetDesktopWindow();
-	GetWindowRect(hDesktop, &desktop);
-	return sf::Vector2f(desktop.right, desktop.bottom);
-}
