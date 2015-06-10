@@ -3,7 +3,6 @@
 
 void serverWorldOrders(int elapsedTime)
 {
-	game.access.lock();
 	bool unitRemoved = false;
 	float timevar = (float)elapsedTime / 1000;
 	timevar *= core.timeModifier;
@@ -168,7 +167,6 @@ void serverWorldOrders(int elapsedTime)
 			}
 		}
 	}
-	game.access.unlock();
 }
 
 void serverWorldAnim(int elapsedTime)

@@ -11,7 +11,7 @@ void cScript::shooter_spawnEnemies(cArg args)
 	while (!core.shutdown)
 	{
 		// Maximum enemy limit
-		if (game.getUnitCount("enemy") < 50)
+		if (game.getUnitCount("enemy") < 1)
 		{
 			// Create a unit
 			game.addUnit("enemy", world.spawnPoint + vec2f(math.randf(-1500.00f, 1500.00f), math.randf(-1500.00f, 1500.00f)));
@@ -73,4 +73,28 @@ void cScript::test_unitAddSystem(cArg args)
 		if (a % 2 == 0) { ui.openInventory(); }
 		else { ui.closeInventory(); }
 	}
+}
+
+void cScript::test_consoleSystem(cArg args)
+{
+	cout << "Starting console test..." << endl;
+	script.wait(1000);
+
+	int timer = timeGetTime();
+	for (int i = 0; i < 5000; i++)
+	{
+		cout << "teststring" << endl;
+	}
+	timer = timeGetTime() - timer;
+
+	int timerB = timeGetTime();
+	for (int i = 0; i < 5000; i++)
+	{
+		console << "teststring";
+	}
+	timerB = timeGetTime() - timerB;
+
+	cout << "Test results:" << endl;
+	cout << "- Normal output: " << timer << " ms" << endl;
+	cout << "- Improved output: " << timerB << " ms" << endl;
 }

@@ -4,6 +4,8 @@
 class cConsole
 {
 public:
+	cMutex access;
+
 	bool online;
 	bool displayed;
 
@@ -16,13 +18,22 @@ public:
 	std::string cmdSyntax[LIMIT_CMD];
 	std::function<void(std::string[])> cmdFunc[LIMIT_CMD];
 
+	std::string waitingQueue;
+	std::vector<std::string> outputQueue;
+
 	cConsole();
 	void show();
 	void hide();
 	void toggle();
+
+	void output(std::string str);
 };
 
+cConsole& operator << (cConsole& cmd, std::string str);
+cConsole& operator << (cConsole& cmd, int i);
+
 void consoleMain();
+void consoleOutputMain();
 
 void cmd_help(std::string args[]);
 void cmd_macro(std::string args[]);

@@ -80,6 +80,8 @@ int main(int argc, char* argv[])
 	Sleep(10);
 	thread threadAICore(AICoreMain);
 	Sleep(10);
+	thread threadConsoleOutput(consoleOutputMain);
+	Sleep(10);
 	thread threadConsole(consoleMain);
 	Sleep(10);
 	
@@ -117,6 +119,7 @@ int main(int argc, char* argv[])
 	game.access.unlock();
 
 	ai.enable();
+	script.execute(cScript::test_consoleSystem, 0);
 
 	cout << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();
@@ -132,7 +135,7 @@ int main(int argc, char* argv[])
 			core.thread_serverWorldTicks = 0;
 		}
 		// Adding some antifreeze
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 10; i++) {
 			if (!(core.serverMode && i == 0)) { core.thread_antifreeze[i] += 1; }
 			if (core.thread_antifreeze[i] > 1000) {
 				core.thread_antifreeze[i] = 0;
@@ -153,6 +156,7 @@ int main(int argc, char* argv[])
 	threadClientSend.join();
 	threadWorldLoader.join();
 	threadAICore.join();
+	threadConsoleOutput.join();
 	cout << "[MAIN] Waiting for script threads to finish..." << "\n";
 	for (int i = 0; i < (int)script.threadVector.size(); i++)
 	{

@@ -40,4 +40,5 @@ public:
 	static void shooter_respawnSystem(cArg args);
 	static void shooter_spawnItems(cArg args);
 	static void test_unitAddSystem(cArg args);
+	static void test_consoleSystem(cArg args);
 };

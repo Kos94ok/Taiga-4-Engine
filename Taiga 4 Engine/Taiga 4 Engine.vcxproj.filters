@@ -234,6 +234,9 @@
     <ClCompile Include="ai_think.cpp">
       <Filter>Файлы исходного кода\Character\AI</Filter>
     </ClCompile>
+    <ClCompile Include="console_io.cpp">
+      <Filter>Файлы исходного кода\Console</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

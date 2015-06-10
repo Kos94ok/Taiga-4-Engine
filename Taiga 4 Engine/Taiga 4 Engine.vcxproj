@@ -111,6 +111,7 @@
     <ClCompile Include="client_main.cpp" />
     <ClCompile Include="client_message.cpp" />
     <ClCompile Include="client_util.cpp" />
+    <ClCompile Include="console_io.cpp" />
     <ClCompile Include="console_main.cpp" />
     <ClCompile Include="console_cmd.cpp" />
     <ClCompile Include="console_util.cpp" />
