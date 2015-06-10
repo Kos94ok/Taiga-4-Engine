@@ -18,8 +18,11 @@ void cConsole::output(std::string str)
 	access.lock();
 
 	waitingQueue += str;
-	outputQueue.push_back(waitingQueue);
-	waitingQueue.clear();
+	if (str.length() >= 1 && str.substr(str.length() - 1) == "\n")
+	{
+		outputQueue.push_back(waitingQueue);
+		waitingQueue.clear();
+	}
 
 	access.unlock();
 }

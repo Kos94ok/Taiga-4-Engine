@@ -266,7 +266,7 @@ void consoleOutputMain()
 	{
 		if (console.outputQueue.size() > 0)
 		{
-			cout << console.outputQueue[0] << endl;
+			cout << console.outputQueue[0];
 			console.access.lock();
 			console.outputQueue.erase(console.outputQueue.begin());
 			console.access.unlock();

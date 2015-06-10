@@ -2,6 +2,8 @@
 #include "precomp.h"
 #include "define.h"
 
+#define endl	"\n"
+
 typedef sf::Vector2f		vec;
 typedef sf::Vector2f		vec2;
 typedef sf::Vector2f		vec2f;

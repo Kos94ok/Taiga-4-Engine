@@ -81,16 +81,16 @@ void cScript::test_consoleSystem(cArg args)
 	script.wait(1000);
 
 	int timer = timeGetTime();
-	for (int i = 0; i < 5000; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		cout << "teststring" << endl;
 	}
 	timer = timeGetTime() - timer;
 
 	int timerB = timeGetTime();
-	for (int i = 0; i < 5000; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		console << "teststring";
+		console << "teststring\n";
 	}
 	timerB = timeGetTime() - timerB;
 
