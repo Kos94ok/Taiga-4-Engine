@@ -105,7 +105,7 @@ void cSettings::load()
 	cSettingsKey key;
 	ifstream file;
 	file.open("settings.ini");
-	if (!file.good()) { cout << "[ERROR] Can't open the settings file. Returning to default" << "\n"; return; }
+	if (!file.good()) { console << "[ERROR] Can't open the settings file. Returning to default" << "\n"; return; }
 	
 	// Looking for values until the end of the file
 	while (retVal)
@@ -197,6 +197,6 @@ void cSettings::save()
 		file << "hkDebugMode = " << hkDebugMode << "\n";
 		file << "hkDebugAdvanced = " << hkDebugAdvanced << "\n";
 	}
-	else { cout << "[ERROR] Can't save the settings file!" << "\n"; }
+	else { console << "[ERROR] Can't save the settings file!" << "\n"; }
 	file.close();
 }

@@ -208,7 +208,7 @@ bool cConsole::parseCommand(string cmd)
 				console.cmdFunc[i](args);
 			}
 			else {
-				cout << "[CMD] Only server can use this command!" << "\n";
+				console << "[CMD] Only server can use this command!" << "\n";
 			}
 		}
 	}
@@ -222,7 +222,7 @@ bool cConsole::parseCommand(string cmd)
 			if (cmd.substr(0, console.cmdWrong[i].length()) == console.cmdWrong[i] && console.cmdWrong[i].length() > 0)
 			{
 				commandParsed = true;
-				cout << "[CMD] " << console.cmdSyntax[i] << "\n";
+				console << "[CMD] " << console.cmdSyntax[i] << "\n";
 			}
 		}
 	}
@@ -230,7 +230,7 @@ bool cConsole::parseCommand(string cmd)
 	// Unknown command
 	if (!commandParsed)
 	{
-		cout << "[CMD] Can not parse the command!" << "\n";
+		console << "[CMD] Can not parse the command!" << "\n";
 	}
 
 	return true;
@@ -247,21 +247,21 @@ string cConsole::waitForCommand()
 // Console main function
 void consoleMain()
 {
-	cout << "[CMD] Console thread started" << "\n";
-	cout << "[CMD] Waiting for commands" << "\n";
+	console << "[CMD] Console thread started" << "\n";
+	console << "[CMD] Waiting for commands" << "\n";
 	while (!core.shutdown)
 	{
 		Sleep(100);
 		console.parseCommand(console.waitForCommand());
 	}
-	cout << "[CMD] Cleaning up" << "\n";
+	console << "[CMD] Cleaning up" << "\n";
 }
 
 // Console main output function
 void consoleOutputMain()
 {
 	int threadId = 9;
-	cout << "[CMD_OUT] Console output thread started" << "\n";
+	console << "[CMD_OUT] Console output thread started" << "\n";
 	while (!core.shutdown)
 	{
 		if (console.outputQueue.size() > 0)
@@ -275,5 +275,5 @@ void consoleOutputMain()
 		core.thread_antifreeze[threadId] = 0;
 		Sleep(1);
 	}
-	cout << "[CMD_OUT] Cleaning up" << "\n";
+	console << "[CMD_OUT] Cleaning up" << "\n";
 }

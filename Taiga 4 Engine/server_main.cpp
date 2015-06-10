@@ -5,13 +5,13 @@
 void serverConnectMain()
 {
 	int threadId = 2;
-	cout << "[SRV_CONNECT] Starting the server connect thread\n";
+	console << "[SRV_CONNECT] Starting the server connect thread\n";
 
 	sf::TcpListener listener;
 	listener.setBlocking(false);
 	if (listener.listen(21045) == sf::Socket::Done)
 	{
-		cout << "[SRV_CONNECT] Listening at port " << listener.getLocalPort() << ".\n";
+		console << "[SRV_CONNECT] Listening at port " << listener.getLocalPort() << ".\n";
 	}
 	while (!core.shutdown)
 	{
@@ -23,7 +23,7 @@ void serverConnectMain()
 				{
 					server.player[i].packet = 0;
 					server.player[i].connected = true;
-					cout << "[SRV_CONNECT] Connection from IP [" << server.player[i].socket.getRemoteAddress().toString()
+					console << "[SRV_CONNECT] Connection from IP [" << server.player[i].socket.getRemoteAddress().toString()
 						<< "] assigned to slot " << i << "." << "\n";
 					// Introducing the player
 					server.introduce(i);
@@ -34,7 +34,7 @@ void serverConnectMain()
 		core.thread_antifreeze[threadId] = 0;
 		Sleep(10);
 	}
-	cout << "[SRV_CONNECT] Cleaning up\n";
+	console << "[SRV_CONNECT] Cleaning up\n";
 	listener.close();
 	for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
 	{
@@ -46,7 +46,7 @@ void serverConnectMain()
 void serverReceiveMain()
 {
 	int threadId = 3;
-	cout << "[SRV_RECEIVE] Starting the server receive thread\n";
+	console << "[SRV_RECEIVE] Starting the server receive thread\n";
 	sf::Packet data;
 	int retVal = 0;
 	bool parsed = false;
@@ -62,7 +62,7 @@ void serverReceiveMain()
 				retVal = server.player[i].socket.receive(data);
 				if (retVal == sf::Socket::Done)
 				{
-					//cout << "Received to server " << counter++ << endl;
+					//console << "Received to server " << counter++ << endl;
 					parsed = server.msgRequest(i, data);
 					if (!parsed) { parsed = server.msgControlUnit(i, data); }
 					if (!parsed) { parsed = server.msgControlItem(i, data); }
@@ -72,7 +72,7 @@ void serverReceiveMain()
 				}
 				else if (retVal == sf::Socket::Disconnected)
 				{
-					cout << "[SRV_RECEIVE] Player " << i << " disconnected!\n";
+					console << "[SRV_RECEIVE] Player " << i << " disconnected!\n";
 					server.player[i].disconnect();
 				}
 			}
@@ -80,7 +80,7 @@ void serverReceiveMain()
 		core.thread_antifreeze[threadId] = 0;
 	}
 
-	cout << "[SRV_RECEIVE] Cleaning up\n";
+	console << "[SRV_RECEIVE] Cleaning up\n";
 }
 
 // Server thread that sends messages to client from data queue
@@ -88,7 +88,7 @@ void serverSendMain()
 {
 	int threadId = 4;
 	sf::Packet localData;
-	cout << "[SRV_SEND] Starting the server send thread\n";
+	console << "[SRV_SEND] Starting the server send thread\n";
 	while (!core.shutdown)
 	{
 		if (server.dataQueueCounter > 0)
@@ -131,5 +131,5 @@ void serverSendMain()
 		core.thread_antifreeze[threadId] = 0;
 	}
 
-	cout << "[SRV_SEND] Cleaning up\n";
+	console << "[SRV_SEND] Cleaning up\n";
 }

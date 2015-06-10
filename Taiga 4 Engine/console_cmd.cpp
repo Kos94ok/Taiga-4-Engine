@@ -4,12 +4,12 @@
 // Help command
 void cmd_help(string args[])
 {
-	cout << "[CMD] Available commands:" << "\n";
+	console << "[CMD] Available commands:" << "\n";
 	for (int i = 0; i < LIMIT_CMD; i++)
 	{
 		if (console.cmdSyntax[i].length() > 0 && (!console.cmdServerOnly[i] || !client.connected || core.localServer))
 		{
-			cout << "[CMD] " << console.cmdSyntax[i] << "\n";
+			console << "[CMD] " << console.cmdSyntax[i] << "\n";
 		}
 	}
 }
@@ -66,10 +66,10 @@ void cmd_unit_remove(string args[])
 // Unit.getlist
 void cmd_unit_getlist(string args[])
 {
-	cout << "[CMD] [LocalId]: GlobalId / Type / PosX / PosY" << "\n";
+	console << "[CMD] [LocalId]: GlobalId / Type / PosX / PosY" << "\n";
 	for (int i = 0; i < game.unitCounter; i++)
 	{
-		cout << "[CMD] [" << i << "]: " << game.unit[i].globalId << " / " << game.unit[i].type << " / "
+		console << "[CMD] [" << i << "]: " << game.unit[i].globalId << " / " << game.unit[i].type << " / "
 			 << game.unit[i].pos.x << " / " << game.unit[i].pos.y << "\n";
 	}
 }
@@ -107,16 +107,16 @@ void cmd_unit_order_getlist(string args[])
 	stringstream(args[0]) >> id;
 	id = game.getUnitId(id);
 
-	cout << "[CMD] [Id]: Type / Args..." << "\n";
+	console << "[CMD] [Id]: Type / Args..." << "\n";
 	for (int i = 0; i < game.unit[id].orderCounter; i++)
 	{
 		if (game.unit[id].order[i].type == ORDER_IDLE) { order = "idle"; }
 		if (game.unit[id].order[i].type == ORDER_MOVETO) { order = "moveto"; }
 
-		cout << "[CMD] [" << i << "]: " << order << " / ";
+		console << "[CMD] [" << i << "]: " << order << " / ";
 		if (order == "moveto")
 		{
-			cout << game.unit[id].order[i].targetPos.x << " / " << game.unit[id].order[i].targetPos.y << "\n";
+			console << game.unit[id].order[i].targetPos.x << " / " << game.unit[id].order[i].targetPos.y << "\n";
 		}
 	}
 }
@@ -152,10 +152,10 @@ void cmd_unit_item_getlist(std::string args[])
 	stringstream(args[0]) >> unitId;
 	cItemContainer* cont = &game.getUnit(unitId).container;
 
-	cout << "[CMD] [Id]: Item type / Display name / Amount" << "\n";
+	console << "[CMD] [Id]: Item type / Display name / Amount" << "\n";
 	for (int i = 0; i < cont->itemCounter; i++)
 	{
-		cout << "[CMD] [" << i << "]: " << cont->item[i].type << " / " << cont->item[i].displayName << " / " << cont->amount[i] << "\n";
+		console << "[CMD] [" << i << "]: " << cont->item[i].type << " / " << cont->item[i].displayName << " / " << cont->amount[i] << "\n";
 	}
 }
 
@@ -208,7 +208,7 @@ void cmd_client_connect(string args[])
 // Client.disconnect
 void cmd_client_disconnect(string args[])
 {
-	cout << "[CMD] Connection to server closed" << "\n";
+	console << "[CMD] Connection to server closed" << "\n";
 	client.disconnect();
 }
 
@@ -216,8 +216,8 @@ void cmd_client_disconnect(string args[])
 void cmd_server_open(string args[])
 {
 	//core.localServer = true;
-	//cout << "[CMD] Local server operational" << "\n";
-	//cout << "[CMD] Warning: Local server is not really implemented yet. Expect random bugs." << "\n";
+	//console << "[CMD] Local server operational" << "\n";
+	//console << "[CMD] Warning: Local server is not really implemented yet. Expect random bugs." << "\n";
 }
 
 // Player.setunit
@@ -232,12 +232,12 @@ void cmd_player_setunit(string args[])
 // Player.getlist
 void cmd_player_getlist(string args[])
 {
-	cout << "[CMD] [Id]: Unit Id / Address" << "\n";
+	console << "[CMD] [Id]: Unit Id / Address" << "\n";
 	for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
 	{
 		if (server.player[i].connected)
 		{
-			cout << "[CMD] [" << i << "]: " << server.player[i].unit << " / " << server.player[i].socket.getRemoteAddress().toString() << "\n";
+			console << "[CMD] [" << i << "]: " << server.player[i].unit << " / " << server.player[i].socket.getRemoteAddress().toString() << "\n";
 		}
 	}
 }
@@ -248,19 +248,19 @@ void cmd_player_kick(string args[])
 	int id;
 	stringstream(args[0]) >> id;
 	// Closing the connection
-	cout << "[CMD] Player " << id << " kicked!" << "\n";
+	console << "[CMD] Player " << id << " kicked!" << "\n";
 	server.player[id].disconnect();
 }
 
 // Ui.getlist
 void cmd_ui_getlist(string args[])
 {
-	cout << "[CMD] [Id]: Local id / Type / Pos X / Pos Y / Action / Args[0]" << "\n";
+	console << "[CMD] [Id]: Local id / Type / Pos X / Pos Y / Action / Args[0]" << "\n";
 	for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
 	{
 		if (ui.element[i].isValid)
 		{
-			cout << "[CMD] [" << ui.element[i].globalId << "]: " << i << " / " << ui.element[i].type << " / " << ui.element[i].pos.x << " / " << 
+			console << "[CMD] [" << ui.element[i].globalId << "]: " << i << " / " << ui.element[i].type << " / " << ui.element[i].pos.x << " / " << 
 				ui.element[i].pos.y << " / " << ui.element[i].button.action << " / " << ui.element[i].button.args[0] << "\n";
 		}
 	}
@@ -311,12 +311,12 @@ void cmd_editor_setgentype(string args[])
 // Database.getunitlist
 void cmd_database_getunitlist(string args[])
 {
-	cout << "[CMD] Type" << "\n";
+	console << "[CMD] Type" << "\n";
 	for (int i = 0; i < LIMIT_DB_UNIT; i++)
 	{
 		if (database.unit[i].type.length() > 0)
 		{
-			cout << "- " << database.unit[i].type << endl;
+			console << "- " << database.unit[i].type << endl;
 		}
 	}
 }

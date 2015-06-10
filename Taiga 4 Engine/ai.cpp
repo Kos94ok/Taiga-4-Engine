@@ -8,7 +8,7 @@ void cAI::tick(int elapsedTime)
 
 	for (int i = 0; i < game.unitCounter; i++)
 	{
-		if (game.unit[i].ai.enabled && game.unit[i].ai.thinkTimer > 200)
+		if (game.unit[i].ai.enabled && game.unit[i].ai.thinkTimer > 1000)
 		{
 			game.unit[i].ai.thinkTimer = 0;
 			game.unit[i].ai.thinkFunc(game.unit[i].globalId);
@@ -20,7 +20,7 @@ void cAI::tick(int elapsedTime)
 void AICoreMain()
 {
 	int threadId = 8;
-	cout << "[AI_CORE] Starting the AI core thread" << "\n";
+	console << "[AI_CORE] Starting the AI core thread" << "\n";
 	srand(time(0));
 	int elapsedTime, globalTime = 0;
 	while (!core.shutdown)
@@ -39,5 +39,5 @@ void AICoreMain()
 		Sleep(1);
 	}
 
-	cout << "[AI_CORE] Cleaning up" << "\n";
+	console << "[AI_CORE] Cleaning up" << "\n";
 }

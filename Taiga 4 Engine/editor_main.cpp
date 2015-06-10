@@ -3,7 +3,7 @@
 
 void cEditor::enable()
 {
-	cout << "[CMD] Enabled editor mode." << "\n";
+	console << "[CMD] Enabled editor mode." << "\n";
 	core.editorMode = true;
 }
 

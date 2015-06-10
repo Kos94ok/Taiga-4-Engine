@@ -61,7 +61,7 @@ bool cDatabaseExternal::parseFile(int index)
 		file.close();
 		return true;
 	}
-	else { cout << "[cDatabaseExternal::parseFile] Can't read the file " << fileList[index] << endl; }
+	else { console << "[cDatabaseExternal::parseFile] Can't read the file " << fileList[index] << endl; }
 	return false;
 }
 

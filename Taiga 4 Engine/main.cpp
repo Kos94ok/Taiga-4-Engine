@@ -36,14 +36,14 @@ TODO:
 int main(int argc, char* argv[])
 {
 	game.access.lock();
-	cout << "[MAIN] Main thread started" << "\n";
-	cout << "[MAIN] Parsing arguments [" << argc << "]" << "\n";
+	console << "[MAIN] Main thread started" << "\n";
+	console << "[MAIN] Parsing arguments [" << argc << "]" << "\n";
 	for (int i = 0; i < argc; i++)
 	{
 		if (strcmp(argv[i], "-server") == 0) { core.serverMode = true; }
 	}
 	// Random initialization
-	cout << "[MAIN] Initializing" << "\n";
+	console << "[MAIN] Initializing" << "\n";
 	//setlocale(LC_ALL, "");
 	//setlocale(LC_ALL, "Russian");
 	srand(time(0));
@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 	util.detectVideoCard();
 
 	// Loading databases
-	cout << "[MAIN] Loading databases" << "\n";
+	console << "[MAIN] Loading databases" << "\n";
 	settings.setDefault();
 	settings.load();
 	database.init();
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 	world.analyzeBlueprints();
 
 	// Starting the threads
-	cout << "[MAIN] Starting the threads\n";
+	console << "[MAIN] Starting the threads\n";
 	thread threadWindow(windowMain);
 	Sleep(10);
 	thread threadServerWorld(serverWorldMain);
@@ -95,7 +95,7 @@ int main(int argc, char* argv[])
 		// Hiding the console if needed
 		if (!console.displayed) { console.hide(); }
 		// Creating the menu
-		cout << "[MAIN] Making some menu" << "\n";
+		console << "[MAIN] Making some menu" << "\n";
 		//ui.element[ui.getElementId(id)].s
 		int id = ui.addElement("image", vec2f(camera.res.x / 2, camera.res.y / 2));
 		ui.element[ui.getElementId(id)].texture = visual.addTexture("bg_art.png");
@@ -119,9 +119,8 @@ int main(int argc, char* argv[])
 	game.access.unlock();
 
 	ai.enable();
-	script.execute(cScript::test_consoleSystem, 0);
 
-	cout << "[MAIN] Overlooking the threads..." << "\n";
+	console << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();
 	while (!core.shutdown)
 	{
@@ -139,14 +138,14 @@ int main(int argc, char* argv[])
 			if (!(core.serverMode && i == 0)) { core.thread_antifreeze[i] += 1; }
 			if (core.thread_antifreeze[i] > 1000) {
 				core.thread_antifreeze[i] = 0;
-				cout << "[MAIN] Thread " << i << " appears to be frozen..." << endl;
+				console << "[MAIN] Thread " << i << " appears to be frozen..." << endl;
 			}
 		}
 		Sleep(1);
 	}
 
 	// Waiting for shutdown
-	cout << "[MAIN] Waiting for threads to finish..." << "\n";
+	console << "[MAIN] Waiting for threads to finish..." << "\n";
 	threadWindow.join();
 	threadServerWorld.join();
 	threadServerConnect.join();
@@ -157,17 +156,17 @@ int main(int argc, char* argv[])
 	threadWorldLoader.join();
 	threadAICore.join();
 	threadConsoleOutput.join();
-	cout << "[MAIN] Waiting for script threads to finish..." << "\n";
+	console << "[MAIN] Waiting for script threads to finish..." << "\n";
 	for (int i = 0; i < (int)script.threadVector.size(); i++)
 	{
 		script.threadVector[i].join();
 	}
 	// Terminating the blocking threads
-	cout << "[MAIN] Terminating blocking threads..." << "\n";
+	console << "[MAIN] Terminating blocking threads..." << "\n";
 	if (console.online) { TerminateThread(threadConsole.native_handle(), 0); }
 	threadConsole.join();
 
-	cout << "[MAIN] Cleaning up" << "\n";
+	console << "[MAIN] Cleaning up" << "\n";
 
 	// Cleaning up
 	return 0;

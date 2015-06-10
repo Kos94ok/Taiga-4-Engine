@@ -6,7 +6,7 @@ void windowMain()
 	int threadId = 0;
 	if (core.serverMode) { return; }
 
-	cout << "[WND] Window thread started" << "\n";
+	console << "[WND] Window thread started" << "\n";
 	srand(time(0));
 	sf::Uint32 screenMode;
 	sf::ContextSettings context;
@@ -37,7 +37,7 @@ void windowMain()
 	window.winHandle.setVerticalSyncEnabled(math.intToBool(settings.enableVertSync));
 	window.updateAspectRatio();
 	
-	cout << "[WND] Starting the main loop" << "\n";
+	console << "[WND] Starting the main loop" << "\n";
 	while (!core.shutdown)
 	{
 		window.mainEvent();
@@ -45,5 +45,5 @@ void windowMain()
 		core.thread_antifreeze[threadId] = 0;
 	}
 	window.winHandle.close();
-	cout << "[WND] Cleaning up" << "\n";
+	console << "[WND] Cleaning up" << "\n";
 }

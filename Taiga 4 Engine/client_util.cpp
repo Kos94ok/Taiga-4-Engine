@@ -24,17 +24,17 @@ void cClient::connect(string ip, short port)
 	sf::IpAddress address(ip);
 	sf::Time timeout(sf::milliseconds(5000));
 
-	cout << "[cClient::connect] Connecting to " << ip << ":" << port << "..." << "\n";
+	console << "[cClient::connect] Connecting to " << ip << ":" << port << "..." << "\n";
 	client.socket.setBlocking(true);
 	if (client.socket.connect(address, port, timeout) == sf::Socket::Done)
 	{
 		client.connected = true;
 		core.localServer = localServer;
-		cout << "[cClient::connect] Server found!" << "\n";
+		console << "[cClient::connect] Server found!" << "\n";
 	}
 	else
 	{
-		cout << "[cClient::connect] Can't reach the server!" << "\n";
+		console << "[cClient::connect] Can't reach the server!" << "\n";
 	}
 	client.socket.setBlocking(false);
 

@@ -49,5 +49,5 @@ void cEditor::genBlueprint()
 {
 	if (autogenType == CHUNK_NORMAL) { genBlueprint_Normal(); }
 	else if (autogenType == CHUNK_BLOCKED) { genBlueprint_Blocked(); }
-	else { cout << "[cEditor::genBlueprint] Unknown autogenType (" << autogenType << ")\n"; }
+	else { console << "[cEditor::genBlueprint] Unknown autogenType (" << autogenType << ")\n"; }
 }

@@ -22,6 +22,7 @@ void serverWorldOrders(int elapsedTime)
 				// Move to point order
 				if (game.unit[i].order[0].type == ORDER_MOVETO)
 				{
+					game.access.lock();
 					// Calculating the point
 					if (math.getDistance(game.unit[i].pos.x, game.unit[i].pos.y, game.unit[i].order[0].targetPos.x, game.unit[i].order[0].targetPos.y)
 						> game.unit[i].movementSpeed * timevar)
@@ -56,6 +57,7 @@ void serverWorldOrders(int elapsedTime)
 						if (camera.lockedToCharacter) { camera.moveto(sf::Vector2f(game.unit[i].pos.x, game.unit[i].pos.y)); }
 						else if (camera.moveWithCharacter) { camera.move(sf::Vector2f(offsetX, offsetY)); }
 					}
+					game.access.unlock();
 					// Missile collision check
 					if (game.unit[i].hasRef(REF_UNIT_MISSILE))
 					{
@@ -441,7 +443,7 @@ void serverWorldUnits(int elapsedTime)
 void serverWorldMain()
 {
 	int threadId = 1;
-	cout << "[SRV_WORLD] Starting the server world thread" << "\n";
+	console << "[SRV_WORLD] Starting the server world thread" << "\n";
 	srand(time(0));
 	int elapsedTime, globalTime = 0;
 	while (!core.shutdown)
@@ -461,5 +463,5 @@ void serverWorldMain()
 		Sleep(1);
 	}
 
-	cout << "[SRV_WORLD] Cleaning up" << "\n";
+	console << "[SRV_WORLD] Cleaning up" << "\n";
 }

@@ -21,7 +21,7 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool
 			if (core.serverMode || core.localServer) { unit[unitCounter].globalId = unitGlobalCounter++; }
 			unitCounter += 1;
 		}
-		else { cout << "[ERROR] Unit limit reached!" << "\n"; }
+		else { console << "[ERROR] Unit limit reached!" << "\n"; }
 	}
 
 	// Server
@@ -111,7 +111,7 @@ cUnit& cGame::getUnit(int id)
 	if (id != -1) {
 		return unit[id];
 	}
-	//cout << "[cGame::getUnit] Can't find the unit " << id << "!" << "\n";
+	//console << "[cGame::getUnit] Can't find the unit " << id << "!" << "\n";
 	return database.unit[0];
 }
 
@@ -203,7 +203,7 @@ bool cGame::isUnitDead(int globalId) { return !isUnitAlive(globalId); }
 // Fast create drop
 int cGame::createDrop(vec2f pos, vector<cItemDrop> itemList)
 {
-	if (itemList.size() == 0) { cout << "[cGame::createDrop] Empty item list!" << endl; return -1; }
+	if (itemList.size() == 0) { console << "[cGame::createDrop] Empty item list!" << endl; return -1; }
 
 	access.lock();
 	int unitId = addUnit("item_a", pos);

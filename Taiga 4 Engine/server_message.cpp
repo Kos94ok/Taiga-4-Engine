@@ -95,7 +95,7 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 				game.unit[id].addOrder_pickup(argi[0], false);
 			}
 		}
-		else { cout << "[cServer::msgControlUnit / MSG_CONTROLS_PICKUP] Incorrect unit IDs!" << endl; }
+		else { console << "[cServer::msgControlUnit / MSG_CONTROLS_PICKUP] Incorrect unit IDs!" << endl; }
 		return true;
 	}
 	// =======================================================
@@ -122,7 +122,7 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 				game.unit[id].addOrder_harvest(argi[0], false);
 			}
 		}
-		else { cout << "[cServer::msgControlUnit / MSG_CONTROLS_HARVEST] Incorrect unit IDs!" << endl; }
+		else { console << "[cServer::msgControlUnit / MSG_CONTROLS_HARVEST] Incorrect unit IDs!" << endl; }
 		return true;
 	}
 	// =======================================================
@@ -308,7 +308,7 @@ bool cServer::msgControlAbility(int i, sf::Packet input)
 				game.unit[id].addOrder_harvest(argi[0], false, argb[1]);
 			}
 		}
-		else { cout << "[cServer::msgControlUnit / MSG_CONTROLS_HARVEST] Incorrect unit IDs!" << endl; }
+		else { console << "[cServer::msgControlUnit / MSG_CONTROLS_HARVEST] Incorrect unit IDs!" << endl; }
 		return true;
 	}
 	return false;

@@ -80,7 +80,7 @@ void cWorld::loadChunk(vec2i pos)
 			game.getUnit(id).chunkPos = pos;
 			if (pos != world.getChunkInPos(anchor + unitList[i].pos))
 			{
-				cout << "ALARMA: " << pos.x << "; " << pos.y << " / " << world.getChunkInPos(game.unit[game.getUnitId(id)].pos).x << "; "
+				console << "ALARMA: " << pos.x << "; " << pos.y << " / " << world.getChunkInPos(game.unit[game.getUnitId(id)].pos).x << "; "
 					<< world.getChunkInPos(game.unit[game.getUnitId(id)].pos).y << endl;
 			}
 		}
@@ -93,7 +93,7 @@ void cWorld::loadChunk(vec2i pos)
 
 void cWorld::unloadChunk(vec2i pos)
 {
-	if (!map[pos.x][pos.y].isLoaded) { cout << "[ERROR] Chunk (" << pos.x << "; " << pos.y << ") is not loaded!"; return; }
+	if (!map[pos.x][pos.y].isLoaded) { console << "[ERROR] Chunk (" << pos.x << "; " << pos.y << ") is not loaded!"; return; }
 	//access.lock();
 	//game.access.lock();
 	for (int i = 0; i < game.unitCounter; i++)
@@ -117,6 +117,6 @@ vector<cUnitEntry> cWorld::getChunkUnitList(vec2i pos)
 vector<cUnitEntry> cWorld::getBlueprintUnitList(int index)
 {
 	vector<cUnitEntry> retVal;
-	if (index == -1) { cout << "[ERROR] Invalid blueprint id!" << "\n"; return retVal; }
+	if (index == -1) { console << "[ERROR] Invalid blueprint id!" << "\n"; return retVal; }
 	return save.getListFromFile("Data//Blueprints//" + blueprint[index].name);
 }

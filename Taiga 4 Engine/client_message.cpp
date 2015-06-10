@@ -22,7 +22,7 @@ bool cClient::msgUnit(sf::Packet input)
 			game.unit[game.unitCounter - 1].globalId = id;
 			game.unit[game.unitCounter - 1].owner = argi[2];
 		}
-		//else { cout << "[CLIENT_RECEIVE] Duplicate create unit message. Ignoring" << "\n"; }
+		//else { console << "[CLIENT_RECEIVE] Duplicate create unit message. Ignoring" << "\n"; }
 		return true;
 	}
 	// ============================================
@@ -50,7 +50,7 @@ bool cClient::msgUnit(sf::Packet input)
 	{
 		input >> id >> argf[0];
 		game.unit[game.getUnitId(id)].setResource(argf[0]);
-		cout << argf[0] << "\n";
+		console << argf[0] << "\n";
 		return true;
 	}
 	// ============================================
@@ -87,7 +87,7 @@ bool cClient::msgUnit(sf::Packet input)
 		if (id != -1) {
 			game.unit[id].container.add(type, argi[0]);
 		}
-		else { cout << "[cClient::msgUnit / MSG_UNIT_ADDITEM] Can't find target unit!\n"; }
+		else { console << "[cClient::msgUnit / MSG_UNIT_ADDITEM] Can't find target unit!\n"; }
 		return true;
 	}
 	// ============================================

@@ -5,7 +5,7 @@ void cSave::flushListToFile(cBlueprintHeader header, vector<cUnitEntry> list, st
 {
 	ofstream file;
 	file.open(filename);
-	if (!file.good()) { cout << "[cSave::flushListToFile] Can't open file " + filename << endl; return; }
+	if (!file.good()) { console << "[cSave::flushListToFile] Can't open file " + filename << endl; return; }
 	// Writing data
 	file << "Type: " << header.type << "\n";
 	file << "[Units]" << "\n";
@@ -53,7 +53,7 @@ cBlueprintHeader cSave::getHeaderFromFile(string filename)
 					retVal.type = math.stringToInt(buf.substr(5));
 				}
 			}
-			else { cout << "[cSave::getHeaderFromFile] Unexpected end of file (" << filename << ")\n"; retVal.isValid = false; }
+			else { console << "[cSave::getHeaderFromFile] Unexpected end of file (" << filename << ")\n"; retVal.isValid = false; }
 			// Reading the next line
 			file.getline(buffer, 256);	buf = buffer;
 		}

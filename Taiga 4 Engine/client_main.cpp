@@ -4,7 +4,7 @@
 void clientReceiveMain()
 {
 	int threadId = 5;
-	cout << "[CLIENT_RECEIVE] Starting the client receive thread\n";
+	console << "[CLIENT_RECEIVE] Starting the client receive thread\n";
 	sf::Packet data;
 	int retVal;
 	string cmd, type;
@@ -19,7 +19,7 @@ void clientReceiveMain()
 			retVal = client.socket.receive(data);
 			if (retVal == sf::Socket::Done)
 			{
-				//cout << "Received to client " << counter++ << endl;
+				//console << "Received to client " << counter++ << endl;
 				parsed = client.msgUnit(data);
 				if (!parsed) { parsed = client.msgOrder(data); }
 				if (!parsed) { parsed = client.msgGame(data); }
@@ -28,7 +28,7 @@ void clientReceiveMain()
 			}
 			else if (retVal == sf::Socket::Disconnected)
 			{
-				cout << "[CLIENT_RECEIVE] Connection to server lost!" << "\n";
+				console << "[CLIENT_RECEIVE] Connection to server lost!" << "\n";
 				client.disconnect();
 			}
 			else { Sleep(10); }
@@ -37,19 +37,19 @@ void clientReceiveMain()
 		core.thread_antifreeze[threadId] = 0;
 	}
 
-	cout << "[CLIENT_RECEIVE] Cleaning up...\n";
+	console << "[CLIENT_RECEIVE] Cleaning up...\n";
 }
 
 void clientSendMain()
 {
 	int threadId = 6;
-	cout << "[CLIENT_SEND] Starting the client send thread\n";
+	console << "[CLIENT_SEND] Starting the client send thread\n";
 
 	while (!core.shutdown)
 	{
 		if (client.connected && client.dataQueueCounter > 0)
 		{
-			//cout << "[CLIENT_SEND] Packet sent!" << "\n";
+			//console << "[CLIENT_SEND] Packet sent!" << "\n";
 			// Sending the data
 			client.socket.send(client.dataQueue[0].data);
 			// Moving the queue
@@ -63,5 +63,5 @@ void clientSendMain()
 		core.thread_antifreeze[threadId] = 0;
 	}
 
-	cout << "[CLIENT_SEND] Cleaning up...\n";
+	console << "[CLIENT_SEND] Cleaning up...\n";
 }

@@ -42,13 +42,13 @@ void cWorld::analyzeBlueprints()
 		}
 		else { countWrong += 1; }
 	}
-	cout << "[MAIN] Blueprints analyzed: " << (int)list.size() << ". Correct: " << countCorrect << ", Wrong: " << countWrong << "\n";
+	console << "[MAIN] Blueprints analyzed: " << (int)list.size() << ". Correct: " << countCorrect << ", Wrong: " << countWrong << "\n";
 }
 
 void worldLoaderMain()
 {
 	int threadId = 7;
-	cout << "[WORLD_LOADER] Starting the world loader thread" << "\n";
+	console << "[WORLD_LOADER] Starting the world loader thread" << "\n";
 
 	sf::Packet data;
 	bool isViable;
@@ -96,5 +96,5 @@ void worldLoaderMain()
 		core.thread_antifreeze[threadId] = 0;
 	}
 
-	cout << "[WORLD_LOADER] Cleaning up" << "\n";
+	console << "[WORLD_LOADER] Cleaning up" << "\n";
 }
