@@ -21,7 +21,7 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool
 			if (core.serverMode || core.localServer) { unit[unitCounter].globalId = unitGlobalCounter++; }
 			unitCounter += 1;
 		}
-		else { console << "[ERROR] Unit limit reached!" << "\n"; }
+		else { console.error << "[ERROR] Unit limit reached!" << "\n"; }
 	}
 
 	// Server

@@ -4,16 +4,23 @@
 // Help command
 void cmd_help(string args[])
 {
-	console << "[CMD] Available commands:" << "\n";
+	console.echo << "[CMD] Available commands:" << "\n";
 	for (int i = 0; i < LIMIT_CMD; i++)
 	{
 		if (console.cmdSyntax[i].length() > 0 && (!console.cmdServerOnly[i] || !client.connected || core.localServer))
 		{
-			console << "[CMD] " << console.cmdSyntax[i] << "\n";
+			console.echo << "[CMD] " << console.cmdSyntax[i] << "\n";
 		}
 	}
 }
 
+// Echo
+void cmd_echo(string args[])
+{
+	console.echo << args[0] << endl;
+}
+
+// Macro command
 void cmd_macro(string args[])
 {
 }
@@ -66,10 +73,10 @@ void cmd_unit_remove(string args[])
 // Unit.getlist
 void cmd_unit_getlist(string args[])
 {
-	console << "[CMD] [LocalId]: GlobalId / Type / PosX / PosY" << "\n";
+	console.echo << "[CMD] [LocalId]: GlobalId / Type / PosX / PosY" << "\n";
 	for (int i = 0; i < game.unitCounter; i++)
 	{
-		console << "[CMD] [" << i << "]: " << game.unit[i].globalId << " / " << game.unit[i].type << " / "
+		console.echo << "[CMD] [" << i << "]: " << game.unit[i].globalId << " / " << game.unit[i].type << " / "
 			 << game.unit[i].pos.x << " / " << game.unit[i].pos.y << "\n";
 	}
 }
@@ -107,16 +114,16 @@ void cmd_unit_order_getlist(string args[])
 	stringstream(args[0]) >> id;
 	id = game.getUnitId(id);
 
-	console << "[CMD] [Id]: Type / Args..." << "\n";
+	console.echo << "[CMD] [Id]: Type / Args..." << "\n";
 	for (int i = 0; i < game.unit[id].orderCounter; i++)
 	{
 		if (game.unit[id].order[i].type == ORDER_IDLE) { order = "idle"; }
 		if (game.unit[id].order[i].type == ORDER_MOVETO) { order = "moveto"; }
 
-		console << "[CMD] [" << i << "]: " << order << " / ";
+		console.echo << "[CMD] [" << i << "]: " << order << " / ";
 		if (order == "moveto")
 		{
-			console << game.unit[id].order[i].targetPos.x << " / " << game.unit[id].order[i].targetPos.y << "\n";
+			console.echo << game.unit[id].order[i].targetPos.x << " / " << game.unit[id].order[i].targetPos.y << "\n";
 		}
 	}
 }
@@ -152,10 +159,10 @@ void cmd_unit_item_getlist(std::string args[])
 	stringstream(args[0]) >> unitId;
 	cItemContainer* cont = &game.getUnit(unitId).container;
 
-	console << "[CMD] [Id]: Item type / Display name / Amount" << "\n";
+	console.echo << "[CMD] [Id]: Item type / Display name / Amount" << "\n";
 	for (int i = 0; i < cont->itemCounter; i++)
 	{
-		console << "[CMD] [" << i << "]: " << cont->item[i].type << " / " << cont->item[i].displayName << " / " << cont->amount[i] << "\n";
+		console.echo << "[CMD] [" << i << "]: " << cont->item[i].type << " / " << cont->item[i].displayName << " / " << cont->amount[i] << "\n";
 	}
 }
 
@@ -208,7 +215,7 @@ void cmd_client_connect(string args[])
 // Client.disconnect
 void cmd_client_disconnect(string args[])
 {
-	console << "[CMD] Connection to server closed" << "\n";
+	console.echo << "[CMD] Connection to server closed" << "\n";
 	client.disconnect();
 }
 
@@ -232,12 +239,12 @@ void cmd_player_setunit(string args[])
 // Player.getlist
 void cmd_player_getlist(string args[])
 {
-	console << "[CMD] [Id]: Unit Id / Address" << "\n";
+	console.echo << "[CMD] [Id]: Unit Id / Address" << "\n";
 	for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
 	{
 		if (server.player[i].connected)
 		{
-			console << "[CMD] [" << i << "]: " << server.player[i].unit << " / " << server.player[i].socket.getRemoteAddress().toString() << "\n";
+			console.echo << "[CMD] [" << i << "]: " << server.player[i].unit << " / " << server.player[i].socket.getRemoteAddress().toString() << "\n";
 		}
 	}
 }
@@ -248,19 +255,19 @@ void cmd_player_kick(string args[])
 	int id;
 	stringstream(args[0]) >> id;
 	// Closing the connection
-	console << "[CMD] Player " << id << " kicked!" << "\n";
+	console.echo << "[CMD] Player " << id << " kicked!" << "\n";
 	server.player[id].disconnect();
 }
 
 // Ui.getlist
 void cmd_ui_getlist(string args[])
 {
-	console << "[CMD] [Id]: Local id / Type / Pos X / Pos Y / Action / Args[0]" << "\n";
+	console.echo << "[CMD] [Id]: Local id / Type / Pos X / Pos Y / Action / Args[0]" << "\n";
 	for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
 	{
 		if (ui.element[i].isValid)
 		{
-			console << "[CMD] [" << ui.element[i].globalId << "]: " << i << " / " << ui.element[i].type << " / " << ui.element[i].pos.x << " / " << 
+			console.echo << "[CMD] [" << ui.element[i].globalId << "]: " << i << " / " << ui.element[i].type << " / " << ui.element[i].pos.x << " / " <<
 				ui.element[i].pos.y << " / " << ui.element[i].button.action << " / " << ui.element[i].button.args[0] << "\n";
 		}
 	}
@@ -311,7 +318,7 @@ void cmd_editor_setgentype(string args[])
 // Database.getunitlist
 void cmd_database_getunitlist(string args[])
 {
-	console << "[CMD] Type" << "\n";
+	console.echo << "[CMD] Type" << "\n";
 	for (int i = 0; i < LIMIT_DB_UNIT; i++)
 	{
 		if (database.unit[i].type.length() > 0)

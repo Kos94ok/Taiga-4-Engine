@@ -6,7 +6,7 @@ void cUIButton::callbackLeft(int parent)
 	int id;
 	sf::Packet data;
 	if (action == "noAction") {
-		console << "[ERROR] Button has no action assigned!" << "\n";
+		console.error << "[ERROR] Button has no action assigned!" << "\n";
 	}
 	else if (action == "contextMenu_close")
 	{
@@ -195,7 +195,7 @@ void cUIButton::callbackRight(int parent)
 {
 	int id;
 	if (action == "noAction") {
-		console << "[ERROR] Button has no action assigned!" << "\n";
+		console.error << "[ERROR] Button has no action assigned!" << "\n";
 	}
 	else if (action == "button_test") {
 		ui.removeElement(ui.getElementId(parent));

@@ -20,6 +20,7 @@ public:
 	void paintPostFX();
 	void paintUI();
 	void paintDebugInfo();
+	void paintConsole();
 
 	void updateAspectRatio();
 	void showWarning(int msg, bool critical = false);

@@ -3,7 +3,7 @@
 
 void cEditor::enable()
 {
-	console << "[CMD] Enabled editor mode." << "\n";
+	console.echo << "[CMD] Enabled editor mode." << "\n";
 	core.editorMode = true;
 }
 

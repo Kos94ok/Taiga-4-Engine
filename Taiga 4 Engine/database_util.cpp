@@ -9,7 +9,7 @@ cUnit& cDatabase::getUnit(string type)
 		if (unit[i].type == type) { access.unlock(); return unit[i]; }
 	}
 	// Return error-unit
-	console << "[ERROR] Can't find the unit [" << type << "] in the database!" << "\n";
+	console.error << "[ERROR] Can't find the unit [" << type << "] in the database!" << "\n";
 	access.unlock();
 	return unit[0];
 }
@@ -22,7 +22,7 @@ cItem& cDatabase::getItem(string type)
 		if (item[i].type == type) { access.unlock(); return item[i]; }
 	}
 	// Return error-unit
-	console << "[ERROR] Can't find the item [" << type << "] in the database!" << "\n";
+	console.error << "[ERROR] Can't find the item [" << type << "] in the database!" << "\n";
 	access.unlock();
 	return item[0];
 }
@@ -35,7 +35,7 @@ cUIElement& cDatabase::getUIElement(string type)
 		if (uiElement[i].type == type) { access.unlock(); return uiElement[i]; }
 	}
 	// Return error-unit
-	console << "[ERROR] Can't find the UI element [" << type << "] in the database!" << "\n";
+	console.error << "[ERROR] Can't find the UI element [" << type << "] in the database!" << "\n";
 	access.unlock();
 	return uiElement[0];
 }

@@ -28,9 +28,6 @@ cAPI api;
 TODO:
 - Script message (event) system?
 - Multiple levels of enemies based on the Slender-style system
-- Stop time for Generic Shooter (at night)
-- Add light to enemies
-- Make enemies attack the hero
 */
 
 int main(int argc, char* argv[])
@@ -82,8 +79,6 @@ int main(int argc, char* argv[])
 	Sleep(10);
 	thread threadConsoleOutput(consoleOutputMain);
 	Sleep(10);
-	thread threadConsole(consoleMain);
-	Sleep(10);
 	
 	// Initializing the server
 	if (core.serverMode)
@@ -92,8 +87,6 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		// Hiding the console if needed
-		if (!console.displayed) { console.hide(); }
 		// Creating the menu
 		console << "[MAIN] Making some menu" << "\n";
 		//ui.element[ui.getElementId(id)].s
@@ -119,6 +112,7 @@ int main(int argc, char* argv[])
 	game.access.unlock();
 
 	ai.enable();
+	script.execute(cScript::test_consoleSystem);
 
 	console << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();
@@ -138,7 +132,7 @@ int main(int argc, char* argv[])
 			if (!(core.serverMode && i == 0)) { core.thread_antifreeze[i] += 1; }
 			if (core.thread_antifreeze[i] > 1000) {
 				core.thread_antifreeze[i] = 0;
-				console << "[MAIN] Thread " << i << " appears to be frozen..." << endl;
+				console.error << "[MAIN] Thread " << i << " appears to be frozen..." << endl;
 			}
 		}
 		Sleep(1);
@@ -161,10 +155,6 @@ int main(int argc, char* argv[])
 	{
 		script.threadVector[i].join();
 	}
-	// Terminating the blocking threads
-	console << "[MAIN] Terminating blocking threads..." << "\n";
-	if (console.online) { TerminateThread(threadConsole.native_handle(), 0); }
-	threadConsole.join();
 
 	console << "[MAIN] Cleaning up" << "\n";
 

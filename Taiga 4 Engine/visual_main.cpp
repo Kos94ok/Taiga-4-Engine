@@ -19,6 +19,8 @@ void cVisual::init()
 	{
 		fontDescr.loadFromFile("C:/Windows/Fonts/times.ttf");
 	}
+	// Console font
+	fontConsole.loadFromFile("C:/Windows/Fonts/lucon.ttf");
 	// Loading the shaders
 	if (sf::Shader::isAvailable())
 	{

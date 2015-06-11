@@ -1,6 +1,12 @@
 
 #include "define.h"
 
+class cSubConsole
+{
+public:
+	int type;
+};
+
 class cConsole
 {
 public:
@@ -8,9 +14,10 @@ public:
 
 	bool online;
 	bool displayed;
+	int displayedPage;
+	int scrollOffset;
 
 	bool parseCommand(std::string cmd);
-	std::string waitForCommand();
 
 	bool cmdServerOnly[LIMIT_CMD];
 	std::regex cmdRegex[LIMIT_CMD];
@@ -18,24 +25,41 @@ public:
 	std::string cmdSyntax[LIMIT_CMD];
 	std::function<void(std::string[])> cmdFunc[LIMIT_CMD];
 
+	cSubConsole info;
+	cSubConsole echo;
+	cSubConsole error;
+	cSubConsole debug;
+	std::string input;
+	sf::String inputDisplay;
 	std::string waitingQueue;
 	std::vector<std::string> outputQueue;
+	std::vector<sf::String> history[5];
 
 	cConsole();
 	void show();
 	void hide();
 	void toggle();
+	int getLineCount();
+	void scroll(int dir);
+	void resetScroll();
+	void addToInput(sf::String str);
+	void removeLastFromInput();
+	void flushInput();
+	void clearInput();
 
-	void output(std::string str);
+	void output(std::string str, int subConsole = SUBCMD_INFO);
 };
 
 cConsole& operator << (cConsole& cmd, std::string str);
 cConsole& operator << (cConsole& cmd, int i);
+cSubConsole& operator << (cSubConsole& cmd, std::string str);
+cSubConsole& operator << (cSubConsole& cmd, int i);
 
 void consoleMain();
 void consoleOutputMain();
 
 void cmd_help(std::string args[]);
+void cmd_echo(std::string args[]);
 void cmd_macro(std::string args[]);
 void cmd_unit_add(std::string args[]);
 void cmd_unit_moveto(std::string args[]);

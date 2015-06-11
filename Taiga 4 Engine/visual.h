@@ -18,6 +18,7 @@ public:
 
 	sf::Font fontMain;
 	sf::Font fontDescr;
+	sf::Font fontConsole;
 	sf::Shader shader[LIMIT_SHADERS];
 
 	float shadowBrightness;

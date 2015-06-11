@@ -62,6 +62,13 @@ public:
 	// Night transition speed
 	float wdNightChangeSpeed;
 
+	// Console scroll speed
+	int consoleScrollSpeed;
+	// Console font size
+	int consoleFontSize;
+	// Console line spacing
+	int consoleLineSpacing;
+
 	// Hotkeys
 	sf::Keyboard::Key hkConsole;
 	sf::Keyboard::Key hkDebugMode;

@@ -77,25 +77,13 @@ void cScript::test_unitAddSystem(cArg args)
 
 void cScript::test_consoleSystem(cArg args)
 {
-	console << "Starting console test..." << endl;
-	script.wait(3000);
+	return;
+	console.debug << "Starting console test..." << endl;
+	script.wait(5000);
 
-	int timer = timeGetTime();
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 100; i++)
 	{
-		cout << "teststring" << endl;
+		console.debug << "[SCRIPT] Console test string " << i << endl;
+		script.wait(200);
 	}
-	timer = timeGetTime() - timer;
-
-	int timerB = timeGetTime();
-	for (int i = 0; i < 500; i++)
-	{
-		console << "teststring" << endl;
-	}
-	timerB = timeGetTime() - timerB;
-
-	script.wait(3000);
-	console << "Test results:" << endl;
-	console << "- Normal output: " << timer << " ms" << endl;
-	console << "- Improved output: " << timerB << " ms" << endl;
 }

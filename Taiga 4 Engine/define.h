@@ -190,3 +190,9 @@
 
 #define SORT_BYNAME						0
 #define SORT_BYTYPE						1
+
+#define SUBCMD_ALL						0
+#define SUBCMD_INFO						1
+#define SUBCMD_ECHO						2
+#define SUBCMD_ERROR					3
+#define SUBCMD_DEBUG					4

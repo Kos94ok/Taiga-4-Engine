@@ -60,6 +60,11 @@ void cSettings::setDefault()
 	wdNightChangeSpeed = 1.00f;
 	*/
 
+	// Console settings
+	this->consoleScrollSpeed = 3;
+	this->consoleFontSize = 14;
+	this->consoleLineSpacing = 0;
+
 	// Hotkeys
 	this->hkInventory = sf::Keyboard::E;
 		// Buttons [1; LIMIT) reserved for the items / abilities
@@ -105,28 +110,36 @@ void cSettings::load()
 	cSettingsKey key;
 	ifstream file;
 	file.open("settings.ini");
-	if (!file.good()) { console << "[ERROR] Can't open the settings file. Returning to default" << "\n"; return; }
+	if (!file.good()) { console.error << "[ERROR] Can't open the settings file. Returning to default" << "\n"; return; }
 	
 	// Looking for values until the end of the file
 	while (retVal)
 	{
 		retVal = getNextKey(&file, &key);
 		// Matching the values
-		if (key.name == "enableScreenShaders") { enableScreenShaders = math.stringToInt(key.value); }
+			// Display
+		if (key.name == "screenMode") { screenMode = math.stringToInt(key.value); }
+		else if (key.name == "screenWidth") { camera.res.x = math.stringToInt(key.value); }
+		else if (key.name == "screenHeight") { camera.res.y = math.stringToInt(key.value); }
+		else if (key.name == "enableVertSync") { enableVertSync = math.stringToInt(key.value); }
+		else if (key.name == "sampleMod") { sampleMod = (float)math.stringToInt(key.value) / 100.00f; }
+			// Visual
+		else if (key.name == "enableScreenShaders") { enableScreenShaders = math.stringToInt(key.value); }
 		else if (key.name == "enableNightShadows") { enableNightShadows = math.stringToInt(key.value); }
 		else if (key.name == "enableBetterShadows") { enableBetterShadows = math.stringToInt(key.value); }
 		else if (key.name == "enableTextureSmoothing") { enableTextureSmoothing = math.stringToInt(key.value); }
 		else if (key.name == "enableCameraBlur") { enableCameraBlur = math.stringToInt(key.value); }
-		else if (key.name == "enableVertSync") { enableVertSync = math.stringToInt(key.value); }
+		else if (key.name == "pixelization") { pixelization = (float)math.stringToInt(key.value); }
+		else if (key.name == "shadowBlur") { shadowBlur = math.stringToInt(key.value); }
+			// Gameplay
 		else if (key.name == "enableQuickCast") { enableQuickCast = math.stringToInt(key.value); }
 		else if (key.name == "enableMouseScroll") { enableMouseScroll = math.stringToInt(key.value); }
 		else if (key.name == "enableDynamicTooltips") { enableDynamicTooltips = math.stringToInt(key.value); }
-
-		else if (key.name == "screenMode") { screenMode = math.stringToInt(key.value); }
-		else if (key.name == "pixelization") { pixelization = (float)math.stringToInt(key.value); }
-		else if (key.name == "shadowBlur") { shadowBlur = math.stringToInt(key.value); }
-		else if (key.name == "sampleMod") { sampleMod = (float)math.stringToInt(key.value) / 100.00f; }
-
+			// Console
+		else if (key.name == "consoleFontSize") { consoleFontSize = math.stringToInt(key.value); }
+		else if (key.name == "consoleLineSpacing") { consoleLineSpacing = math.stringToInt(key.value); }
+		else if (key.name == "consoleScrollSpeed") { consoleScrollSpeed = math.stringToInt(key.value); }
+			// Keyboard
 		else if (key.name == "hkInventory") { hkInventory = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkActiveItem01") { hkActiveItem[1] = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkActiveItem02") { hkActiveItem[2] = sf::Keyboard::Key(math.stringToInt(key.value)); }
@@ -141,11 +154,10 @@ void cSettings::load()
 		else if (key.name == "hkCamMoveDown") { hkCamMove[1] = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkCamMoveLeft") { hkCamMove[2] = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkCamMoveRight") { hkCamMove[3] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkConsole") { hkConsole = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkDebugMode") { hkDebugMode = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkDebugAdvanced") { hkDebugAdvanced = sf::Keyboard::Key(math.stringToInt(key.value)); }
 
-		else if (key.name == "screenWidth") { camera.res.x = math.stringToInt(key.value); }
-		else if (key.name == "screenHeight") { camera.res.y = math.stringToInt(key.value); }
 	}
 
 	// Fix the dependancies
@@ -178,6 +190,13 @@ void cSettings::save()
 
 		file << endl << "[Gameplay]" << "\n";
 		file << "enableQuickCast = " << enableQuickCast << "\n";
+		file << "enableMouseScroll = " << enableMouseScroll << "\n";
+		file << "enableDynamicTooltips = " << enableDynamicTooltips << "\n";
+
+		file << endl << "[Console]" << "\n";
+		file << "consoleFontSize = " << consoleFontSize << "\n";
+		file << "consoleLineSpacing = " << consoleLineSpacing << "\n";
+		file << "consoleScrollSpeed = " << consoleScrollSpeed << "\n";
 
 		file << endl << "[Keyboard]" << "\n";
 		file << "hkInventory = " << hkInventory << "\n";
@@ -194,9 +213,10 @@ void cSettings::save()
 		file << "hkCamMoveDown = " << hkCamMove[1] << "\n";
 		file << "hkCamMoveLeft = " << hkCamMove[2] << "\n";
 		file << "hkCamMoveRight = " << hkCamMove[3] << "\n";
+		file << "hkConsole = " << hkConsole << "\n";
 		file << "hkDebugMode = " << hkDebugMode << "\n";
 		file << "hkDebugAdvanced = " << hkDebugAdvanced << "\n";
 	}
-	else { console << "[ERROR] Can't save the settings file!" << "\n"; }
+	else { console.error << "[ERROR] Can't save the settings file!" << "\n"; }
 	file.close();
 }

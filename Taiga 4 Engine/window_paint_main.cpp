@@ -34,6 +34,7 @@ void cWindow::mainPaint()
 	}
 	window.paintUI();
 	window.paintDebugInfo();
+	window.paintConsole();
 	sf::Sprite buffer;
 
 	// Flushing the buffer
@@ -688,6 +689,38 @@ void cWindow::paintDebugInfo()
 	text = "Units: " + to_string(visual.unitsPainted) + " / " + to_string(game.unitCounter);
 	brushText.setString(text);
 	window.texHandleTop.draw(brushText, miniMatrix);
+}
+
+void cWindow::paintConsole()
+{
+	if (!console.displayed) { return; }
+	sf::Transform miniMatrix;
+	miniMatrix.scale(sf::Vector2f(settings.sampleMod, settings.sampleMod));
+
+	brushRect.setOrigin(0, 0);
+	brushRect.setPosition(0, 0);
+	brushRect.setSize(vec2f(camera.res.x, camera.res.y));
+	brushRect.setTexture(0);
+	brushRect.setFillColor(sf::Color(0, 0, 0, 235));
+	window.texHandleTop.draw(brushRect, miniMatrix);
+
+	brushText.setFont(visual.fontConsole);
+	brushText.setCharacterSize(settings.consoleFontSize);
+	brushText.setColor(sf::Color(0, 255, 0));
+	brushText.setPosition(vec2f(5.00f, camera.res.y - settings.consoleFontSize - 5));
+	brushText.setOrigin(vec2f(0.00f, 0.00f));
+	brushText.setString("> " + console.inputDisplay + "_");
+	window.texHandleTop.draw(brushText, miniMatrix);
+
+	for (int i = max(0, (int)console.history[console.displayedPage].size() - console.getLineCount() - console.scrollOffset); i < (int)console.history[console.displayedPage].size() - max(0, console.scrollOffset); i++)
+	{
+		console.access.lock();
+		brushText.setPosition(vec2f(5.00f, (i - max(0, (int)console.history[console.displayedPage].size() - console.getLineCount()) + console.scrollOffset) * 
+			(settings.consoleFontSize + settings.consoleLineSpacing) ));
+		brushText.setString(console.history[console.displayedPage][i]);
+		window.texHandleTop.draw(brushText, miniMatrix);
+		console.access.unlock();
+	}
 }
 
 void cUITooltip::display()

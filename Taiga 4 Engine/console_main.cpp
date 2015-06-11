@@ -5,9 +5,26 @@
 cConsole::cConsole()
 {
 	for (int i = 0; i < LIMIT_CMD; i++) { console.cmdServerOnly[i] = true; }
+	info.type = SUBCMD_INFO;
+	echo.type = SUBCMD_ECHO;
+	error.type = SUBCMD_ERROR;
+	debug.type = SUBCMD_DEBUG;
+	history[SUBCMD_ALL].push_back("[CONSOLE] All Messages Tab");
+	history[SUBCMD_ALL].push_back("============================");
+	history[SUBCMD_INFO].push_back("[CONSOLE] Info Messages Tab");
+	history[SUBCMD_INFO].push_back("============================");
+	history[SUBCMD_ECHO].push_back("[CONSOLE] Echo Messages Tab");
+	history[SUBCMD_ECHO].push_back("============================");
+	history[SUBCMD_ERROR].push_back("[CONSOLE] Error Messages Tab");
+	history[SUBCMD_ERROR].push_back("============================");
+	history[SUBCMD_DEBUG].push_back("[CONSOLE] Debug Messages Tab");
+	history[SUBCMD_DEBUG].push_back("============================");
 
 	online = true;
-	displayed = true;
+	displayed = false;
+	scrollOffset = 0;
+	displayedPage = SUBCMD_ALL;
+	clearInput();
 	// Help command
 	int cmdID = 0;
 	console.cmdRegex[cmdID].assign("^help");
@@ -15,6 +32,11 @@ cConsole::cConsole()
 	console.cmdSyntax[cmdID] = "\"help\" - Display available commands";
 	console.cmdFunc[cmdID] = cmd_help;
 	console.cmdServerOnly[cmdID] = false;
+	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^echo *");
+	console.cmdWrong[cmdID] = "echo";
+	console.cmdSyntax[cmdID] = "\"echo [str]\" - Echo the [string]";
+	console.cmdFunc[cmdID] = cmd_echo;
 	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^macro [a-zA-Z0-9]+");
 	console.cmdWrong[cmdID] = "macro";
@@ -208,7 +230,7 @@ bool cConsole::parseCommand(string cmd)
 				console.cmdFunc[i](args);
 			}
 			else {
-				console << "[CMD] Only server can use this command!" << "\n";
+				console.echo << "[CMD] Only server can use this command!" << "\n";
 			}
 		}
 	}
@@ -222,7 +244,7 @@ bool cConsole::parseCommand(string cmd)
 			if (cmd.substr(0, console.cmdWrong[i].length()) == console.cmdWrong[i] && console.cmdWrong[i].length() > 0)
 			{
 				commandParsed = true;
-				console << "[CMD] " << console.cmdSyntax[i] << "\n";
+				console.echo << "[CMD] " << console.cmdSyntax[i] << "\n";
 			}
 		}
 	}
@@ -230,31 +252,16 @@ bool cConsole::parseCommand(string cmd)
 	// Unknown command
 	if (!commandParsed)
 	{
-		console << "[CMD] Can not parse the command!" << "\n";
+		console.echo << "[CMD] Can not parse the command!" << "\n";
 	}
 
 	return true;
 }
 
-// Console thread waits for another command from user
-string cConsole::waitForCommand()
-{
-	string cmd = "";
-	getline(cin, cmd);
-	return cmd;
-}
-
 // Console main function
 void consoleMain()
 {
-	console << "[CMD] Console thread started" << "\n";
-	console << "[CMD] Waiting for commands" << "\n";
-	while (!core.shutdown)
-	{
-		Sleep(100);
-		console.parseCommand(console.waitForCommand());
-	}
-	console << "[CMD] Cleaning up" << "\n";
+	//console.parseCommand(console.waitForCommand());
 }
 
 // Console main output function

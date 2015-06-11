@@ -38,6 +38,5 @@ void AICoreMain()
 		}
 		Sleep(1);
 	}
-
 	console << "[AI_CORE] Cleaning up" << "\n";
 }

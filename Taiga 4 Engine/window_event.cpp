@@ -6,6 +6,8 @@ void cWindow::mainEvent()
 	sf::Event eventPoll;
 	sf::Packet data;
 	sf::Vector2f mousePos;
+	string buf;
+	wstring wbuf;
 	while (window.winHandle.pollEvent(eventPoll))
 	{
 		// Interface
@@ -60,40 +62,60 @@ void cWindow::mainEvent()
 		// Hotkeys
 		if (eventPoll.type == sf::Event::KeyReleased)
 		{
-			// Global hotkeys
+			// Console
 			if (eventPoll.key.code == settings.hkConsole) { console.toggle(); }
-			if (eventPoll.key.code == settings.hkDebugMode) { core.debugMode = !core.debugMode; }
-			if (eventPoll.key.code == settings.hkDebugAdvanced) {
-				core.advancedDebug = !core.advancedDebug;
-				if (core.advancedDebug) { core.debugMode = true; }
-			}
-			// Escape
-			if (eventPoll.key.code == sf::Keyboard::Escape && ui.contextMenuTarget != CONTEXTMENU_NOTHING) { ui.clearContextMenu(); }
-			else if (eventPoll.key.code == sf::Keyboard::Escape && ui.invOpened) { ui.closeInventory(); }
-			// UI Element hotkeys
-			for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
+			// Global hotkeys
+			if (!console.displayed)
 			{
-				// Regular buttons
-				if (ui.element[i].hasRef(REF_UI_INVENTORY_BUTTON) && eventPoll.key.code == settings.hkInventory)
-				{
-					// Quick cast or normal hotkey
-					if (settings.enableQuickCast || !ui.element[i].hasRef(REF_UI_ACTIVEITEM))
-					{
-						ui.element[i].button.callbackLeft(i);
-						i = LIMIT_UI_ELEMENTS;
-					}
+				if (eventPoll.key.code == settings.hkDebugMode) { core.debugMode = !core.debugMode; }
+				if (eventPoll.key.code == settings.hkDebugAdvanced) {
+					core.advancedDebug = !core.advancedDebug;
+					if (core.advancedDebug) { core.debugMode = true; }
 				}
-				// Quick cast for active items
-				if (settings.enableQuickCast)
+				// Escape
+				if (eventPoll.key.code == sf::Keyboard::Escape && ui.contextMenuTarget != CONTEXTMENU_NOTHING) { ui.clearContextMenu(); }
+				else if (eventPoll.key.code == sf::Keyboard::Escape && ui.invOpened) { ui.closeInventory(); }
+				// UI Element hotkeys
+				for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
 				{
-					for (int y = 1; y < LIMIT_ACTIVEBUTTONS; y++)
+					// Regular buttons
+					if (ui.element[i].hasRef(REF_UI_INVENTORY_BUTTON) && eventPoll.key.code == settings.hkInventory)
 					{
-						if (ui.element[i].hasRef(REF_UI_ACTIVEITEM + y) && eventPoll.key.code == settings.hkActiveItem[y])
+						// Quick cast or normal hotkey
+						if (settings.enableQuickCast || !ui.element[i].hasRef(REF_UI_ACTIVEITEM))
 						{
 							ui.element[i].button.callbackLeft(i);
 							i = LIMIT_UI_ELEMENTS;
 						}
 					}
+					// Quick cast for active items
+					if (settings.enableQuickCast)
+					{
+						for (int y = 1; y < LIMIT_ACTIVEBUTTONS; y++)
+						{
+							if (ui.element[i].hasRef(REF_UI_ACTIVEITEM + y) && eventPoll.key.code == settings.hkActiveItem[y])
+							{
+								ui.element[i].button.callbackLeft(i);
+								i = LIMIT_UI_ELEMENTS;
+							}
+						}
+					}
+				}
+			}
+		}
+		// Text input
+		else if (eventPoll.type == sf::Event::TextEntered)
+		{
+			if (console.displayed)
+			{
+				// Enter
+				if (eventPoll.text.unicode == 13) { console.flushInput(); }
+				// Backspace
+				else if (eventPoll.text.unicode == 8) { console.removeLastFromInput(); }
+				// Other
+				else {
+					sf::String convert(eventPoll.text.unicode);
+					console.addToInput(convert);
 				}
 			}
 		}
@@ -196,14 +218,24 @@ void cWindow::mainEvent()
 			camera.moveVector.y = 0.50f;
 		}
 			// Camera zoom
-		if (eventPoll.type == sf::Event::MouseWheelMoved)
+		if (eventPoll.type == sf::Event::MouseWheelMoved && !console.displayed)
 		{
 			camera.adjustZoom(eventPoll.mouseWheel.delta);
 		}
+			// Console scroll
+		else if (eventPoll.type == sf::Event::MouseWheelMoved && console.displayed)
+		{
+			console.scroll(eventPoll.mouseWheel.delta);
+		}
 			// Reset camera zoom
-		if (eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Middle)
+		if (eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Middle && !console.displayed)
 		{
 			camera.setZoom(1.00f);
+		}
+			// Reset console position
+		else if (eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Middle && console.displayed)
+		{
+			console.resetScroll();
 		}
 		// =========================================================
 		// =========================================================

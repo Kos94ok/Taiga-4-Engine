@@ -29,7 +29,7 @@ public:
 	std::vector<std::function<void(cArg)>> functionQueue;
 	std::vector<cArg> functionArgs;
 
-	void execute(std::function<void(cArg)> scriptFunc, cArg args);
+	void execute(std::function<void(cArg)> scriptFunc, cArg args = 0);
 	int getFreeThread();
 
 	static void threadMain(int index);
