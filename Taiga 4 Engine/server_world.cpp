@@ -365,7 +365,7 @@ void serverWorldUI(int elapsedTime)
 	float camVecModIn = 2.00f;
 	float camVecModOut = 5.00f;
 	//camera.moveVector = vec2(0.00f, 0.00f);
-	if (GetForegroundWindow() == window.winHandle.getSystemHandle())
+	if (GetForegroundWindow() == window.winHandle.getSystemHandle() && !console.displayed)
 	{
 		bool isMoving = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(settings.hkCamMove[2])

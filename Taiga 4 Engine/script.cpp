@@ -7,12 +7,12 @@ void cScript::execute(std::function<void(cArg)> scriptFunc, cArg args)
 
 	functionQueue.push_back(scriptFunc);
 	functionArgs.push_back(args);
-	int freeThread = getFreeThread();
+	/*int freeThread = getFreeThread();
 	if (freeThread == -1)
 	{
 		threadReady.push_back(false);
 		threadVector.push_back(std::thread(cScript::threadMain, threadReady.size() - 1));
-	}
+	}*/
 	access.unlock();
 }
 

@@ -64,6 +64,11 @@ void cWindow::mainEvent()
 		{
 			// Console
 			if (eventPoll.key.code == settings.hkConsole) { console.toggle(); }
+			else if (console.displayed)
+			{
+				if (eventPoll.key.code == sf::Keyboard::Up) { console.scrollHistory(-1); }
+				else if (eventPoll.key.code == sf::Keyboard::Down) { console.scrollHistory(1); }
+			}
 			// Global hotkeys
 			if (!console.displayed)
 			{

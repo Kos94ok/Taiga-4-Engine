@@ -21,11 +21,11 @@ void cConsole::hide()
 void cConsole::toggle()
 {
 	if (!displayed) { show(); displayedPage = SUBCMD_ALL; }
-	else if (displayedPage == SUBCMD_ALL && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) { displayedPage = SUBCMD_INFO; }
-	else if (displayedPage == SUBCMD_INFO && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) { displayedPage = SUBCMD_ECHO; }
-	else if (displayedPage == SUBCMD_ECHO && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) { displayedPage = SUBCMD_ERROR; }
-	else if (displayedPage == SUBCMD_ERROR && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) { displayedPage = SUBCMD_DEBUG; }
-	else if (displayedPage == SUBCMD_DEBUG && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) { displayedPage = SUBCMD_ALL; }
+	else if (displayedPage == SUBCMD_ALL && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) { displayedPage = SUBCMD_INFO; }
+	else if (displayedPage == SUBCMD_INFO && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) { displayedPage = SUBCMD_ECHO; }
+	else if (displayedPage == SUBCMD_ECHO && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) { displayedPage = SUBCMD_ERROR; }
+	else if (displayedPage == SUBCMD_ERROR && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) { displayedPage = SUBCMD_DEBUG; }
+	else if (displayedPage == SUBCMD_DEBUG && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) { displayedPage = SUBCMD_ALL; }
 	else { hide(); }
 	scrollOffset = 0;
 }
@@ -47,4 +47,35 @@ void cConsole::scroll(int direction)
 void cConsole::resetScroll()
 {
 	scrollOffset = 0;
+}
+
+void cConsole::clear()
+{
+	history[console.displayedPage].clear();
+	resetScroll();
+	if (displayedPage == SUBCMD_ALL)
+	{
+		history[SUBCMD_ALL].push_back("[CONSOLE] All Messages Tab");
+		history[SUBCMD_ALL].push_back("============================");
+	}
+	else if (displayedPage == SUBCMD_INFO)
+	{
+		history[SUBCMD_INFO].push_back("[CONSOLE] Info Messages Tab");
+		history[SUBCMD_INFO].push_back("============================");
+	}
+	else if (displayedPage == SUBCMD_ECHO)
+	{
+		history[SUBCMD_ECHO].push_back("[CONSOLE] Echo Messages Tab");
+		history[SUBCMD_ECHO].push_back("============================");
+	}
+	else if (displayedPage == SUBCMD_ERROR)
+	{
+		history[SUBCMD_ERROR].push_back("[CONSOLE] Error Messages Tab");
+		history[SUBCMD_ERROR].push_back("============================");
+	}
+	else if (displayedPage == SUBCMD_DEBUG)
+	{
+		history[SUBCMD_DEBUG].push_back("[CONSOLE] Debug Messages Tab");
+		history[SUBCMD_DEBUG].push_back("============================");
+	}
 }

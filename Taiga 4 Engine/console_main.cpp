@@ -23,13 +23,14 @@ cConsole::cConsole()
 	online = true;
 	displayed = false;
 	scrollOffset = 0;
+	cmdHistoryPos = 0;
 	displayedPage = SUBCMD_ALL;
 	clearInput();
 	// Help command
 	int cmdID = 0;
-	console.cmdRegex[cmdID].assign("^help");
+	console.cmdRegex[cmdID].assign("^help *");
 	console.cmdWrong[cmdID] = "help";
-	console.cmdSyntax[cmdID] = "\"help\" - Display available commands";
+	console.cmdSyntax[cmdID] = "\"help (str)\" - Display available commands with (filter)";
 	console.cmdFunc[cmdID] = cmd_help;
 	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
@@ -37,6 +38,13 @@ cConsole::cConsole()
 	console.cmdWrong[cmdID] = "echo";
 	console.cmdSyntax[cmdID] = "\"echo [str]\" - Echo the [string]";
 	console.cmdFunc[cmdID] = cmd_echo;
+	console.cmdServerOnly[cmdID] = false;
+	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^clear");
+	console.cmdWrong[cmdID] = "clear";
+	console.cmdSyntax[cmdID] = "\"clear\" - Clear the console";
+	console.cmdFunc[cmdID] = cmd_clear;
+	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^macro [a-zA-Z0-9]+");
 	console.cmdWrong[cmdID] = "macro";
@@ -65,7 +73,7 @@ cConsole::cConsole()
 	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^unit.getlist");
 	console.cmdWrong[cmdID] = "unit.getlist";
-	console.cmdSyntax[cmdID] = "\"unit.getlist\" - Get the full list of units in memory";
+	console.cmdSyntax[cmdID] = "\"unit.getlist (str)\" - Display list of units of (type)";
 	console.cmdFunc[cmdID] = cmd_unit_getlist;
 	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
@@ -78,15 +86,16 @@ cConsole::cConsole()
 	console.cmdWrong[cmdID] = "unit.order.getlist";
 	console.cmdSyntax[cmdID] = "\"unit.order.getlist [num]\" - Get the list of orders for [unit]";
 	console.cmdFunc[cmdID] = cmd_unit_order_getlist;
+	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^unit.item.add [0-9]+ [a-zA-Z0-9]+");
 	console.cmdWrong[cmdID] = "unit.item.add";
-	console.cmdSyntax[cmdID] = "\"unit.item.add [num] [str] (amount)\" - Give [unit] one [item] (amount) times";
+	console.cmdSyntax[cmdID] = "\"unit.item.add [num] [str] (num)\" - Give [unit] one [item] (amount) times";
 	console.cmdFunc[cmdID] = cmd_unit_item_add;
 	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^unit.item.remove [0-9]+ [a-zA-Z0-9]+");
 	console.cmdWrong[cmdID] = "unit.item.remove";
-	console.cmdSyntax[cmdID] = "\"unit.item.remove [num] [str] (amount)\" - Remove from [unit] one [item] (amount) times";
+	console.cmdSyntax[cmdID] = "\"unit.item.remove [num] [str] (num)\" - Remove from [unit] one [item] (amount) times";
 	console.cmdFunc[cmdID] = cmd_unit_item_remove;
 	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^unit.item.getlist [0-9]+");
@@ -98,11 +107,13 @@ cConsole::cConsole()
 	console.cmdWrong[cmdID] = "camera.attach";
 	console.cmdSyntax[cmdID] = "\"camera.attach\" - Attach the camera to controlled unit";
 	console.cmdFunc[cmdID] = cmd_camera_attach;
+	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^camera.lock");
 	console.cmdWrong[cmdID] = "camera.lock";
 	console.cmdSyntax[cmdID] = "\"camera.lock\" - Lock the camera to controlled unit";
 	console.cmdFunc[cmdID] = cmd_camera_lock;
+	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^game.timemod [0-9]+");
 	console.cmdWrong[cmdID] = "game.timemod";
@@ -152,9 +163,9 @@ cConsole::cConsole()
 	console.cmdSyntax[cmdID] = "\"player.getlist\" - Display the list of players on local server";
 	console.cmdFunc[cmdID] = cmd_player_getlist;
 	cmdID += 1;
-	console.cmdRegex[cmdID].assign("^ui.getlist");
+	console.cmdRegex[cmdID].assign("^ui.getlist *");
 	console.cmdWrong[cmdID] = "ui.getlist";
-	console.cmdSyntax[cmdID] = "\"ui.getlist\" - Display the list of ui elements";
+	console.cmdSyntax[cmdID] = "\"ui.getlist (str)\" - Display the list of ui elements with (filter)";
 	console.cmdFunc[cmdID] = cmd_ui_getlist;
 	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
@@ -184,10 +195,11 @@ cConsole::cConsole()
 	console.cmdSyntax[cmdID] = "\"editor.setgentype [num]\" - Set [type] as autogen type";
 	console.cmdFunc[cmdID] = cmd_editor_setgentype;
 	cmdID += 1;
-	console.cmdRegex[cmdID].assign("^database.getunitlist");
+	console.cmdRegex[cmdID].assign("^database.getunitlist *");
 	console.cmdWrong[cmdID] = "database.getunitlist";
-	console.cmdSyntax[cmdID] = "\"database.getunitlist\" - Get unit list from the database";
+	console.cmdSyntax[cmdID] = "\"database.getunitlist (str)\" - Get unit list from the database with (filter)";
 	console.cmdFunc[cmdID] = cmd_database_getunitlist;
+	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^database.reload");
 	console.cmdWrong[cmdID] = "database.reload";
@@ -212,11 +224,19 @@ bool cConsole::parseCommand(string cmd)
 	sregex_iterator it(cmd.begin(), cmd.end(), arg_any);	// Regex iterator for cmd
 	sregex_iterator it_end;									// Iterator end condition
 
-	// Getting arguments
-	while (it != it_end && argCounter < 4)
+	// Echo
+	if (cmd.substr(0, 4) == "echo" && cmd.length() >= 5) {
+		args[argCounter++] = cmd.substr(5);
+	}
+	// Other
+	else
 	{
-		args[argCounter++] = it->str().substr(1);	// Removing the first character (whitespace)
-		++it;
+		// Getting arguments
+		while (it != it_end && argCounter < 4)
+		{
+			args[argCounter++] = it->str().substr(1);	// Removing the first character (whitespace)
+			++it;
+		}
 	}
 
 	// Parsing commands

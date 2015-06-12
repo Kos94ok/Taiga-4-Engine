@@ -7,7 +7,8 @@ void cmd_help(string args[])
 	console.echo << "[CMD] Available commands:" << "\n";
 	for (int i = 0; i < LIMIT_CMD; i++)
 	{
-		if (console.cmdSyntax[i].length() > 0 && (!console.cmdServerOnly[i] || !client.connected || core.localServer))
+		if (console.cmdSyntax[i].length() > 0 && (!console.cmdServerOnly[i] || !client.connected || core.localServer)
+			&& (args[0] == "0" || console.cmdSyntax[i].find(args[0]) != -1))
 		{
 			console.echo << "[CMD] " << console.cmdSyntax[i] << "\n";
 		}
@@ -18,6 +19,12 @@ void cmd_help(string args[])
 void cmd_echo(string args[])
 {
 	console.echo << args[0] << endl;
+}
+
+// Clear
+void cmd_clear(string args[])
+{
+	console.clear();
 }
 
 // Macro command
@@ -73,11 +80,16 @@ void cmd_unit_remove(string args[])
 // Unit.getlist
 void cmd_unit_getlist(string args[])
 {
+	string type;
+	stringstream(args[0]) >> type;
 	console.echo << "[CMD] [LocalId]: GlobalId / Type / PosX / PosY" << "\n";
 	for (int i = 0; i < game.unitCounter; i++)
 	{
-		console.echo << "[CMD] [" << i << "]: " << game.unit[i].globalId << " / " << game.unit[i].type << " / "
-			 << game.unit[i].pos.x << " / " << game.unit[i].pos.y << "\n";
+		if (type == "0" || game.unit[i].type.find(type) != -1)
+		{
+			console.echo << "[CMD] [" << i << "]: " << game.unit[i].globalId << " / " << game.unit[i].type << " / "
+				<< game.unit[i].pos.x << " / " << game.unit[i].pos.y << "\n";
+		}
 	}
 }
 
@@ -262,10 +274,12 @@ void cmd_player_kick(string args[])
 // Ui.getlist
 void cmd_ui_getlist(string args[])
 {
+	string type;
+	stringstream(args[0]) >> type;
 	console.echo << "[CMD] [Id]: Local id / Type / Pos X / Pos Y / Action / Args[0]" << "\n";
 	for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
 	{
-		if (ui.element[i].isValid)
+		if (ui.element[i].isValid && (type == "0" || ui.element[i].type.find(type) != -1))
 		{
 			console.echo << "[CMD] [" << ui.element[i].globalId << "]: " << i << " / " << ui.element[i].type << " / " << ui.element[i].pos.x << " / " <<
 				ui.element[i].pos.y << " / " << ui.element[i].button.action << " / " << ui.element[i].button.args[0] << "\n";
@@ -318,10 +332,12 @@ void cmd_editor_setgentype(string args[])
 // Database.getunitlist
 void cmd_database_getunitlist(string args[])
 {
+	string type;
+	stringstream(args[0]) >> type;
 	console.echo << "[CMD] Type" << "\n";
 	for (int i = 0; i < LIMIT_DB_UNIT; i++)
 	{
-		if (database.unit[i].type.length() > 0)
+		if (database.unit[i].type.length() > 0 && (type == "0" || database.unit[i].type.find(type) != -1))
 		{
 			console << "- " << database.unit[i].type << endl;
 		}

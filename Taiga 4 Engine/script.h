@@ -35,6 +35,15 @@ public:
 	static void threadMain(int index);
 	void wait(int time);
 
+	cScript() 
+	{
+		for (int i = 0; i < LIMIT_SCRIPTCOUNT; i++)
+		{
+			threadReady.push_back(false);
+			threadVector.push_back(std::thread(cScript::threadMain, i));
+		}
+	}
+
 	// Script data
 	static void shooter_spawnEnemies(cArg args);
 	static void shooter_respawnSystem(cArg args);

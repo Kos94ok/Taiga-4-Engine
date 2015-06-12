@@ -16,6 +16,7 @@ public:
 	bool displayed;
 	int displayedPage;
 	int scrollOffset;
+	int cmdHistoryPos;
 
 	bool parseCommand(std::string cmd);
 
@@ -34,6 +35,7 @@ public:
 	std::string waitingQueue;
 	std::vector<std::string> outputQueue;
 	std::vector<sf::String> history[5];
+	std::vector<std::string> cmdHistory;
 
 	cConsole();
 	void show();
@@ -46,6 +48,8 @@ public:
 	void removeLastFromInput();
 	void flushInput();
 	void clearInput();
+	void scrollHistory(int dir);
+	void clear();
 
 	void output(std::string str, int subConsole = SUBCMD_INFO);
 };
@@ -60,6 +64,7 @@ void consoleOutputMain();
 
 void cmd_help(std::string args[]);
 void cmd_echo(std::string args[]);
+void cmd_clear(std::string args[]);
 void cmd_macro(std::string args[]);
 void cmd_unit_add(std::string args[]);
 void cmd_unit_moveto(std::string args[]);

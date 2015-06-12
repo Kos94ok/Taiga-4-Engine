@@ -61,6 +61,10 @@ void cConsole::removeLastFromInput()
 void cConsole::flushInput()
 {
 	console.echo << "> " << input << endl;
+	if (input.length() == 0) { return; }
+	cmdHistory.push_back(input);
+	cmdHistoryPos = (int)cmdHistory.size();
+
 	parseCommand(input);
 
 	clearInput();
@@ -70,4 +74,21 @@ void cConsole::clearInput()
 {
 	input.clear();
 	inputDisplay.clear();
+}
+
+void cConsole::scrollHistory(int dir)
+{
+	// Changing position
+	cmdHistoryPos += dir;
+	if (cmdHistoryPos > (int)cmdHistory.size()) { cmdHistoryPos = (int)cmdHistory.size(); }
+	else if (cmdHistoryPos < 0) { cmdHistoryPos = 0; }
+
+	// Adding the command from history
+	if (cmdHistoryPos < (int)cmdHistory.size() + 1)
+	{
+		clearInput();
+		if (cmdHistoryPos < (int)cmdHistory.size()) {
+			addToInput(cmdHistory[cmdHistoryPos]);
+		}
+	}
 }
