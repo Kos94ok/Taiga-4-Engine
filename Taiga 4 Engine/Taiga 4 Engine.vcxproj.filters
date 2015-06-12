@@ -237,6 +237,12 @@
     <ClCompile Include="console_io.cpp">
       <Filter>Файлы исходного кода\Console</Filter>
     </ClCompile>
+    <ClCompile Include="game_get.cpp">
+      <Filter>Файлы исходного кода\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="game_check.cpp">
+      <Filter>Файлы исходного кода\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

@@ -52,7 +52,7 @@ void worldLoaderMain()
 
 	sf::Packet data;
 	bool isViable;
-	while (!core.shutdown)
+	while (!core.thread_shutdown[threadId])
 	{
 		if (!core.editorMode)
 		{

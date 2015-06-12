@@ -69,6 +69,7 @@ void cServer::introduce(int playerId)
 	server.assignUnit(playerId, game.addUnit(playerType, world.spawnPoint));
 	server.player[playerId].setHealth(100.00f);
 	server.player[playerId].setMaxHealth(100.00f);
+	server.player[playerId].moveCamera(world.spawnPoint);
 	if (!core.editorMode)
 	{
 		//game.unit[game.getUnitId(server.player[playerId].unit)].addItem("human_ear", 100);
@@ -134,6 +135,14 @@ void cServerPlayer::setMaxHealth(float hp)
 	game.unit[game.getUnitId(unit)].setMaxHealth(hp);
 }
 
+void cServerPlayer::moveCamera(vec2f target)
+{
+	sf::Packet data;
+	data << MSG_CAMERA_MOVETO << target.x << target.y;
+	server.sendPacket(myId, data);
+	data.clear();
+}
+
 void cServer::assignUnit(int playerId, int unitId)
 {
 	sf::Packet data;
@@ -163,3 +172,7 @@ int cServer::getController(int target)
 	return -1;
 }
 
+void cServer::sendEcho(string str)
+{
+
+}

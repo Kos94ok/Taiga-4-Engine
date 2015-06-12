@@ -3,11 +3,24 @@
 
 void cDatabase::init()
 {
+	// Locking the access
+	access.lock();
+	// Clearing everything
+	database.clear();
+	// Loading assets
+	console << "[DATABASE] Loading Items" << endl;
 	loadItems();
+	console << "[DATABASE] Loading Units" << endl;
 	loadUnits();
+	console << "[DATABASE] Loading UI" << endl;
 	loadUI();
+	console << "[DATABASE] Loading Textures" << endl;
 	loadTextures();
+	console << "[DATABASE] Loading External" << endl;
 	loadExternal();
+	console << "[DATABASE] Main database ready" << endl;
+	// Releasing the lock 
+	access.unlock();
 }
 
 void cDatabase::loadUnits()

@@ -59,9 +59,6 @@ cConsole& operator << (cConsole& cmd, int i);
 cSubConsole& operator << (cSubConsole& cmd, std::string str);
 cSubConsole& operator << (cSubConsole& cmd, int i);
 
-void consoleMain();
-void consoleOutputMain();
-
 void cmd_help(std::string args[]);
 void cmd_echo(std::string args[]);
 void cmd_clear(std::string args[]);

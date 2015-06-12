@@ -13,7 +13,7 @@ void serverConnectMain()
 	{
 		console << "[SRV_CONNECT] Listening at port " << listener.getLocalPort() << ".\n";
 	}
-	while (!core.shutdown)
+	while (!core.thread_shutdown[threadId])
 	{
 		for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
 		{
@@ -52,7 +52,7 @@ void serverReceiveMain()
 	bool parsed = false;
 	int counter = 0;
 
-	while (!core.shutdown)
+	while (!core.thread_shutdown[threadId])
 	{
 		// Looking for data to be received
 		for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
@@ -89,7 +89,7 @@ void serverSendMain()
 	int threadId = 4;
 	sf::Packet localData;
 	console << "[SRV_SEND] Starting the server send thread\n";
-	while (!core.shutdown)
+	while (!core.thread_shutdown[threadId])
 	{
 		if (server.dataQueueCounter > 0)
 		{

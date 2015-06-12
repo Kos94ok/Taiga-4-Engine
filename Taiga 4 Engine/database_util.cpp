@@ -48,3 +48,16 @@ bool cDatabase::isItemGood(string type)
 	}
 	return false;
 }
+
+void cDatabase::clear()
+{
+	for (int i = 0; i < LIMIT_DB_ITEM; i++)
+	{
+		item[i].descrLinesUsed = 0;
+		item[i].dismantle.itemCounter = 0;
+	}
+	for (int i = 0; i < LIMIT_DB_UNIT; i++)
+	{
+		unit[i].container.itemCounter = 0;
+	}
+}

@@ -23,7 +23,7 @@ void AICoreMain()
 	console << "[AI_CORE] Starting the AI core thread" << "\n";
 	srand(time(0));
 	int elapsedTime, globalTime = 0;
-	while (!core.shutdown)
+	while (!core.thread_shutdown[threadId])
 	{
 		elapsedTime = timeGetTime() - globalTime;
 		globalTime = timeGetTime();

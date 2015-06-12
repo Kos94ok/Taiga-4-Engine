@@ -11,7 +11,7 @@ void clientReceiveMain()
 	bool parsed = false;
 	int counter = 0;
 
-	while (!core.shutdown)
+	while (!core.thread_shutdown[threadId])
 	{
 		if (client.connected && !core.serverMode)
 		{
@@ -37,7 +37,7 @@ void clientReceiveMain()
 		core.thread_antifreeze[threadId] = 0;
 	}
 
-	console << "[CLIENT_RECEIVE] Cleaning up...\n";
+	console << "[CLIENT_RECEIVE] Cleaning up\n";
 }
 
 void clientSendMain()
@@ -45,7 +45,7 @@ void clientSendMain()
 	int threadId = 6;
 	console << "[CLIENT_SEND] Starting the client send thread\n";
 
-	while (!core.shutdown)
+	while (!core.thread_shutdown[threadId])
 	{
 		if (client.connected && client.dataQueueCounter > 0)
 		{
@@ -63,5 +63,5 @@ void clientSendMain()
 		core.thread_antifreeze[threadId] = 0;
 	}
 
-	console << "[CLIENT_SEND] Cleaning up...\n";
+	console << "[CLIENT_SEND] Cleaning up\n";
 }

@@ -28,6 +28,7 @@ void windowMain()
 		if (settings.sampleMod > 1.00f) { settings.sampleMod = 1.00f; }
 	}
 	// Creating the window
+	console << "[WND] Creating " << camera.res.x << "x" << camera.res.y << " window rendering at " << camera.res.x * settings.sampleMod << "x" << camera.res.y * settings.sampleMod << endl;
 	window.winHandle.create(sf::VideoMode(camera.res.x, camera.res.y), "Taiga 4 Engine", screenMode, context);
 	// Creating the textures
 	window.texHandle.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);
@@ -38,7 +39,7 @@ void windowMain()
 	window.updateAspectRatio();
 	
 	console << "[WND] Starting the main loop" << "\n";
-	while (!core.shutdown)
+	while (!core.thread_shutdown[threadId])
 	{
 		window.mainEvent();
 		window.mainPaint();

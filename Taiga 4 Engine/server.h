@@ -19,8 +19,7 @@ public:
 	void setResource(float value);
 	void setHealth(float hp);
 	void setMaxHealth(float maxHp);
-
-	void assignUnit(int globalId);
+	void moveCamera(sf::Vector2f target);
 
 	cServerPlayer() {
 		unit = -1;
@@ -44,6 +43,8 @@ public:
 	void introduce(int playerId);
 	void sendChunkData(int playerId, int x, int y);
 	void assignUnit(int playerId, int unitId);
+
+	void sendEcho(std::string str);
 
 	// Takes: Unit global id
 	// Returns: Controlling player id

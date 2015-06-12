@@ -37,6 +37,7 @@ public:
 	void loadUI();
 	void loadTextures();
 	void loadExternal();
+	void clear();
 
 	cUnit& getUnit(std::string type);
 	cItem& getItem(std::string type);

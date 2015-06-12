@@ -52,6 +52,7 @@ public:
 	bool editorMode;
 
 	int thread_antifreeze[16];
+	bool thread_shutdown[16];
 	int thread_windowTicks;
 	int thread_serverWorldTicks;
 	int thread_windowTicksPerSec;
@@ -72,7 +73,7 @@ public:
 
 		thread_windowTicks = 0;
 		thread_serverWorldTicks = 0;
-		for (int i = 0; i < 16; i++) { thread_antifreeze[i] = 0; }
+		for (int i = 0; i < 16; i++) { thread_shutdown[i] = false; thread_antifreeze[i] = 0; }
 	}
 };
 

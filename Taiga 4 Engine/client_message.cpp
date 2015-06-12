@@ -252,5 +252,14 @@ bool cClient::msgGame(sf::Packet input)
 		game.ambientLight = argf[0];
 		return true;
 	}
+	// ============================================
+	// ============================================
+	// Move camera
+	if (msg == MSG_CAMERA_MOVETO)
+	{
+		input >> argf[0] >> argf[1];
+		camera.moveto(vec2f(argf[0], argf[1]));
+		return true;
+	}
 	return false;
 }

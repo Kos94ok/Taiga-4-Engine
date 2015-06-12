@@ -77,8 +77,6 @@ int main(int argc, char* argv[])
 	Sleep(10);
 	thread threadAICore(AICoreMain);
 	Sleep(10);
-	thread threadConsoleOutput(consoleOutputMain);
-	Sleep(10);
 	
 	// Initializing the server
 	if (core.serverMode)
@@ -128,7 +126,7 @@ int main(int argc, char* argv[])
 			core.thread_serverWorldTicks = 0;
 		}
 		// Adding some antifreeze
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 9; i++) {
 			if (!(core.serverMode && i == 0)) { core.thread_antifreeze[i] += 1; }
 			if (core.thread_antifreeze[i] > 1000) {
 				core.thread_antifreeze[i] = 0;
@@ -139,25 +137,23 @@ int main(int argc, char* argv[])
 	}
 
 	// Waiting for shutdown
-	console << "[MAIN] Waiting for threads to finish..." << "\n";
-	threadWindow.join();
-	threadServerWorld.join();
-	threadServerConnect.join();
-	threadServerReceive.join();
-	threadServerSend.join();
-	threadClientReceive.join();
-	threadClientSend.join();
-	threadWorldLoader.join();
-	threadAICore.join();
-	threadConsoleOutput.join();
 	console << "[MAIN] Waiting for script threads to finish..." << "\n";
 	for (int i = 0; i < (int)script.threadVector.size(); i++)
 	{
 		script.threadVector[i].join();
 	}
+	console << "[MAIN] Waiting for core threads to finish..." << "\n";
+	core.thread_shutdown[8] = true;		threadAICore.join();
+	core.thread_shutdown[7] = true;		threadWorldLoader.join();
+	core.thread_shutdown[6] = true;		threadClientSend.join();
+	core.thread_shutdown[5] = true;		threadClientReceive.join();
+	core.thread_shutdown[4] = true;		threadServerSend.join();
+	core.thread_shutdown[3] = true;		threadServerReceive.join();
+	core.thread_shutdown[2] = true;		threadServerConnect.join();
+	core.thread_shutdown[1] = true;		threadServerWorld.join();
+	core.thread_shutdown[0] = true;		threadWindow.join();
 
 	console << "[MAIN] Cleaning up" << "\n";
-
 	// Cleaning up
 	return 0;
 }

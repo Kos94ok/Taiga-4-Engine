@@ -88,6 +88,12 @@ public:
 	// Takes: Position, Item vector
 	// Returns: Created unit global id
 	int createDrop(sf::Vector2f pos, std::vector<cItemDrop> itemList);
+	// Takes: Time (24-hour format)
+	// Returns: Nothing
+	void setTimeOfDay(float time);
+	// Takes: Light level
+	// Returns: Nothing
+	void setAmbientLight(float light);
 
 	// Takes: Item global id
 	// Returns: Nothing

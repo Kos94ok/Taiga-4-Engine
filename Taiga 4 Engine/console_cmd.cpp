@@ -204,7 +204,7 @@ void cmd_game_settime(string args[])
 {
 	float time = 12.00f;
 	stringstream(args[0]) >> time;
-	game.timeOfDay = time;
+	game.setTimeOfDay(time);
 }
 
 // Game.setlight
@@ -212,7 +212,7 @@ void cmd_game_setlight(string args[])
 {
 	float light = 255.00f;
 	stringstream(args[0]) >> light;
-	game.ambientLight = light;
+	game.setAmbientLight(light);
 }
 
 // Client.connect
@@ -347,7 +347,7 @@ void cmd_database_getunitlist(string args[])
 // Database.reload
 void cmd_database_reload(string args[])
 {
-	database.loadExternal();
+	database.init();
 
 	for (int y = 0; y < LIMIT_MAP; y++)
 	{

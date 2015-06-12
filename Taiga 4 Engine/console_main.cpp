@@ -277,30 +277,3 @@ bool cConsole::parseCommand(string cmd)
 
 	return true;
 }
-
-// Console main function
-void consoleMain()
-{
-	//console.parseCommand(console.waitForCommand());
-}
-
-// Console main output function
-void consoleOutputMain()
-{
-	int threadId = 9;
-	console << "[CMD_OUT] Console output thread started" << "\n";
-	while (!core.shutdown)
-	{
-		if (console.outputQueue.size() > 0)
-		{
-			cout << console.outputQueue[0];
-			console.access.lock();
-			console.outputQueue.erase(console.outputQueue.begin());
-			console.access.unlock();
-		}
-
-		core.thread_antifreeze[threadId] = 0;
-		Sleep(1);
-	}
-	console << "[CMD_OUT] Cleaning up" << "\n";
-}
