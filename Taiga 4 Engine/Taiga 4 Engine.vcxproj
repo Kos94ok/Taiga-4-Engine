@@ -167,6 +167,7 @@
   <ItemGroup>
     <ClInclude Include="ai.h" />
     <ClInclude Include="api.h" />
+    <ClInclude Include="audio.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="editor.h" />
     <ClInclude Include="game.h" />

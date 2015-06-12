@@ -1378,3 +1378,180 @@ ALARMA: 19; 43 / 19; 44
 [SRV_WORLD] Cleaning up
 [WND] Cleaning up
 [MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[MAIN] Making some menu
+[WND] Starting the main loop
+[MAIN] Overlooking the threads...
+[MAIN] Thread 0 appears to be frozen...
+[cClient::connect] Connecting to 127.0.0.1:21045...
+[cClient::connect] Server found!
+[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
+ALARMA: 10; 11 / 10; 12
+ALARMA: 8; 14 / 8; 15
+ALARMA: 12; 14 / 12; 15
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[MAIN] Making some menu
+[WND] Starting the main loop
+[MAIN] Overlooking the threads...
+[MAIN] Thread 0 appears to be frozen...
+[cClient::connect] Connecting to 127.0.0.1:21045...
+[cClient::connect] Server found!
+[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[MAIN] Making some menu
+[WND] Starting the main loop
+[MAIN] Overlooking the threads...
+[cClient::connect] Connecting to 127.0.0.1:21045...
+[cClient::connect] Server found!
+[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
+ALARMA: 9; 51 / 9; 52
+ALARMA: 11; 51 / 11; 52
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[MAIN] Making some menu
+[WND] Starting the main loop
+[MAIN] Overlooking the threads...
+[MAIN] Thread 0 appears to be frozen...
+[cClient::connect] Connecting to 127.0.0.1:21045...
+[cClient::connect] Server found!
+[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
+ALARMA: 46; 53 / 46; 54
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up

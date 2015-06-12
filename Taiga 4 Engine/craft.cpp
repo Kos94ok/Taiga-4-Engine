@@ -185,12 +185,6 @@ void cCraft::loadRecipes()
 	addRecipe("test_resourceManipulator", 100, "test_resourceManipulator");
 	addRecipe("campfire_basic", -100, item("weapon_knife_steel", true), "flint_basic");
 
-	addRecipe("tool_axe_stone", -300, item("weapon_knife_steel", true));
-	addRecipe("tool_pickaxe_stone", -350, item("weapon_knife_steel", true));
-
-	addRecipe("tool_axe_stone", 100, "weapon_rifle", "weapon_knife_steel", "voodoo_doll");
-	addRecipe("voodoo_doll", 100, "weapon_rifle", "weapon_knife_steel");
-	addRecipe("campfire_basic", 100, "weapon_rifle", "weapon_knife_steel");
-	addRecipe("weapon_rifle", -100, "weapon_rifle");
-	addRecipe("weapon_rifle", 500, "weapon_rifle");
+	addRecipe("tool_axe_stone", -100, item("weapon_knife_steel", true));
+	addRecipe("tool_pickaxe_stone", -100, item("weapon_knife_steel", true));
 }

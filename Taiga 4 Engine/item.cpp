@@ -19,7 +19,7 @@ int cItemContainer::add(cItem target, int count)
 	if (search != -1)
 	{
 		amount[search] += count;
-		sort(SORT_BYNAME);
+		//sort(SORT_BYNAME);
 		return search;
 	}
 	else if (itemCounter < LIMIT_ITEMS && itemCounter < itemLimit)
@@ -28,7 +28,7 @@ int cItemContainer::add(cItem target, int count)
 		item[itemCounter].globalId = game.itemGlobalCounter++;
 		amount[itemCounter] = count;
 		itemCounter += 1;
-		sort(SORT_BYNAME);
+		//sort(SORT_BYNAME);
 		return itemCounter - 1;
 	}
 	return -1;

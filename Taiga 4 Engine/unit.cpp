@@ -253,6 +253,7 @@ void cUnit::setMaxHealth(float hp)
 void cUnit::addItem(string type, int count)
 {
 	container.add(type, count);
+	container.sort(SORT_BYNAME);
 	// Broadcast the data
 	if (core.serverMode || core.localServer)
 	{

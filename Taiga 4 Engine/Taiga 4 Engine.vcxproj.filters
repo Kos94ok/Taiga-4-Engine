@@ -34,9 +34,6 @@
     <Filter Include="Файлы исходного кода\Visual">
       <UniqueIdentifier>{59b95d4c-2557-4c96-8a84-5a8a95b530e2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы исходного кода\Character\Item">
-      <UniqueIdentifier>{74a79a1a-b012-455f-a977-377e2dc7811b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы исходного кода\Util">
       <UniqueIdentifier>{baf90401-aa11-4bd6-9694-63789c1d2e0b}</UniqueIdentifier>
     </Filter>
@@ -66,6 +63,12 @@
     </Filter>
     <Filter Include="Файлы исходного кода\Character\AI">
       <UniqueIdentifier>{f3cad088-6a38-49b2-bb98-a05b58546885}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Audio">
+      <UniqueIdentifier>{723d8f76-a778-4e11-934b-e4c6a28c62ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Character\Item">
+      <UniqueIdentifier>{74a79a1a-b012-455f-a977-377e2dc7811b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="ai.h">
       <Filter>Файлы исходного кода\Character\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.h">
+      <Filter>Файлы исходного кода\Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
