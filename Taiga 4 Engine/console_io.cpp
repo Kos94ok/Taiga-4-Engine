@@ -32,6 +32,11 @@ void cConsole::output(std::string str, int subConsole)
 	waitingQueue += str;
 	if (str.length() >= 1 && str.substr(str.length() - 1) == "\n")
 	{
+		ofstream file;
+		file.open("log.txt", ios::app);
+		file << waitingQueue;
+		file.close();
+
 		outputQueue.push_back(waitingQueue);
 		history[SUBCMD_ALL].push_back(sf::String(waitingQueue, locale("russian")));
 		history[subConsole].push_back(sf::String(waitingQueue, locale("russian")));

@@ -20,7 +20,7 @@ int cItemContainer::add(cItem target, int count)
 	{
 		amount[search] += count;
 		sort(SORT_BYNAME);
-		return item[search].globalId;
+		return search;
 	}
 	else if (itemCounter < LIMIT_ITEMS && itemCounter < itemLimit)
 	{
@@ -29,7 +29,7 @@ int cItemContainer::add(cItem target, int count)
 		amount[itemCounter] = count;
 		itemCounter += 1;
 		sort(SORT_BYNAME);
-		return game.itemGlobalCounter - 1;
+		return itemCounter - 1;
 	}
 	return -1;
 }
@@ -92,7 +92,7 @@ int cItemContainer::getId(int id)
 {
 	for (int i = 0; i < itemCounter; i++)
 	{
-		if (item[i].globalId == id) { return i; }
+		if (item[i].globalId == id && !item[i].hasRef(REF_ITEM_GHOST)) { return i; }
 	}
 	return -1;
 }
@@ -101,7 +101,7 @@ int cItemContainer::getId(string id, int begin)
 {
 	for (int i = begin; i < itemCounter; i++)
 	{
-		if (item[i].type == id) { return i; }
+		if (item[i].type == id && !item[i].hasRef(REF_ITEM_GHOST)) { return i; }
 	}
 	return -1;
 }

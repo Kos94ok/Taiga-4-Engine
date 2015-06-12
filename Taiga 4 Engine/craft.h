@@ -91,7 +91,9 @@ public:
 	void updateCraftAmounts();
 	void loadRecipes();
 	void getResult(bool craftAll);
+	void clearGhostItems();
 	int getActiveRecipeId();
-	int getActiveRecipeRepeats();
+	int getActiveRecipeRepeats(bool ignoreResource = false);
 	int getActiveRecipeCount();
+	bool isItemInRecipe(int recId, std::string type);
 };

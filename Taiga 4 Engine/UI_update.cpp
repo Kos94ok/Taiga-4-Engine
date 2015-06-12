@@ -152,6 +152,8 @@ void cUI::updateInterfaceItemList()
 		}
 	}
 	// Inventory craft list
+	int invButtonsAdded = 0;
+
 	cont = craft.cont;
 	int curRecipe = craft.getActiveRecipeId();
 	int itemsNeeded = 0;
@@ -159,7 +161,7 @@ void cUI::updateInterfaceItemList()
 	for (int i = 0; i < cont.itemCounter; i++)
 	{
 		// Main button
-		id = ui.addElement("button", sf::Vector2f(math.round(700.00f * resModX + 10.00f), math.round(500.00f * resModY + 10.00f + 26.00f * i)));
+		id = ui.addElement("button", sf::Vector2f(math.round(700.00f * resModX + 10.00f), math.round(500.00f * resModY + 10.00f + 26.00f * invButtonsAdded++)));
 		ui.element[ui.getElementId(id)].size = sf::Vector2f((550.00f * resModX - 60.00f - 20.00f), 26.00f);
 		ui.element[ui.getElementId(id)].textSize = 24;
 		if (curRecipe != -1) {
@@ -191,7 +193,7 @@ void cUI::updateInterfaceItemList()
 		// Icon
 		if (cont.item[i].icon != -1)
 		{
-			id = ui.addElement("icon", vec2f(math.round(700.00f * resModX + 10.00f) + LIMIT_ICONSIZE / 2, math.round(500.00f * resModY + 10.00f + 26.00f * i) + LIMIT_ICONSIZE / 2));
+			id = ui.addElement("icon", vec2f(math.round(700.00f * resModX + 10.00f) + LIMIT_ICONSIZE / 2, math.round(500.00f * resModY + 10.00f + 26.00f * (invButtonsAdded - 1)) + LIMIT_ICONSIZE / 2));
 			ui.element[ui.getElementId(id)].size = vec2f(LIMIT_ICONSIZE, LIMIT_ICONSIZE);
 			ui.element[ui.getElementId(id)].texture = cont.item[i].icon.tex;
 			ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
@@ -199,13 +201,46 @@ void cUI::updateInterfaceItemList()
 		}
 	}
 
+	// Ghost items
+	if (curRecipe != -1 && cont.itemCounter > 0)
+	{
+		for (int i = 0; i < craft.recipe[curRecipe].ingrCount; i++)
+		{
+			if (cont.getId(craft.recipe[curRecipe].ingr[i].type) == -1)
+			{
+				// Main button
+				id = ui.addElement(ui.element[ui.getElementId(saveId)], sf::Vector2f(math.round(700.00f * resModX + 10.00f),
+					math.round(500.00f * resModY + 10.00f + 26.00f * invButtonsAdded++)));
+				// Name
+				name = " " + database.getItem(craft.recipe[curRecipe].ingr[i].type).displayName + " x0 / " + to_string(craft.recipe[curRecipe].ingr[i].count);
+				ui.element[ui.getElementId(id)].setText(name);
+
+				ui.element[ui.getElementId(id)].textColor = sf::Color(100, 100, 100);
+				//ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 200, 150);
+				ui.element[ui.getElementId(id)].textOffset.x = 0.00f;
+				if (database.getItem(craft.recipe[curRecipe].ingr[i].type).icon != -1) { ui.element[ui.getElementId(id)].textOffset.x = 20.00f; }
+				ui.element[ui.getElementId(id)].button.action = "invItem_craftRemoveGhost";
+				// Icon
+				if (database.getItem(craft.recipe[curRecipe].ingr[i].type).icon != -1)
+				{
+					id = ui.addElement("icon", vec2f(math.round(700.00f * resModX + 10.00f) + LIMIT_ICONSIZE / 2, math.round(500.00f * resModY + 10.00f + 26.00f * 
+						(invButtonsAdded - 1)) + LIMIT_ICONSIZE / 2));
+					ui.element[ui.getElementId(id)].size = vec2f(LIMIT_ICONSIZE, LIMIT_ICONSIZE);
+					ui.element[ui.getElementId(id)].texture = database.getItem(craft.recipe[curRecipe].ingr[i].type).icon.tex;
+					ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
+					ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
+				}
+			}
+		}
+	}
+
 	// Amount of resource needed
-	if (craft.getActiveRecipeId() != -1)
+	if (craft.getActiveRecipeId() != -1 && craft.getActiveRecipeRepeats(true) > 0)
 	{
 		float resBalance = craft.recipe[craft.getActiveRecipeId()].resourceBalance;
 		if (resBalance != 0.00f)
 		{
-			id = ui.addElement(ui.element[ui.getElementId(saveId)], sf::Vector2f(math.round(700.00f * resModX + 10.00f), math.round(500.00f * resModY + 10.00f + 26.00f * cont.itemCounter)));
+			id = ui.addElement(ui.element[ui.getElementId(saveId)], sf::Vector2f(math.round(700.00f * resModX + 10.00f), math.round(500.00f * resModY + 10.00f + 26.00f * invButtonsAdded++)));
 			ui.element[ui.getElementId(id)].button.action = "-";
 			if (resBalance > 0.00f)
 			{

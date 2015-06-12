@@ -27,26 +27,25 @@ int cCraft::getActiveRecipeId()
 	int matchFound = 0;
 	int id = 0, amount = 0;
 	bool match = true;
+	if (cont.itemCounter == 0) { return -1; }
 	for (int i = 0; i < recipeCounter; i++)
 	{
 		match = true;
-		if (cont.itemCounter == recipe[i].ingrCount)
+		for (int y = 0; y < cont.itemCounter; y++)
 		{
-			for (int y = 0; y < recipe[i].ingrCount; y++)
+			if (!isItemInRecipe(i, cont.item[y].type))
 			{
-				id = cont.getId(recipe[i].ingr[y].type);
-				amount = cont.getAmount(recipe[i].ingr[y].type);
-				match = (id != -1 && amount >= recipe[i].ingr[y].count);
-				if (!match) { y = recipe[i].ingrCount; }
+				match = false;
+				y = cont.itemCounter;
 			}
-			if (match && selectedRecipe == matchFound) { return i; }
-			else if (match) { matchFound += 1; }
 		}
+		if (match && selectedRecipe == matchFound) { return i; }
+		else if (match) { matchFound += 1; }
 	}
 	return -1;
 }
 
-int cCraft::getActiveRecipeRepeats()
+int cCraft::getActiveRecipeRepeats(bool ignoreResource)
 {
 	bool match = true;
 	int i = getActiveRecipeId();
@@ -57,7 +56,7 @@ int cCraft::getActiveRecipeRepeats()
 		amount = min(amount, craft.cont.getAmount(recipe[i].ingr[y].type) / recipe[i].ingr[y].count);
 	}
 	// Amount of resource
-	if (recipe[i].resourceBalance < 0.00f)
+	if (recipe[i].resourceBalance < 0.00f && !ignoreResource)
 	{
 		amount = min(amount, math.round(game.getUnit(client.unit).resource / -recipe[i].resourceBalance));
 	}
@@ -66,43 +65,43 @@ int cCraft::getActiveRecipeRepeats()
 
 int cCraft::getActiveRecipeCount()
 {
-	int retVal = 0;
+	int matchFound = 0;
 	int id = 0, amount = 0;
 	bool match = true;
+	if (cont.itemCounter == 0) { return 0; }
 	for (int i = 0; i < recipeCounter; i++)
 	{
 		match = true;
-		if (cont.itemCounter == recipe[i].ingrCount)
+		for (int y = 0; y < cont.itemCounter; y++)
 		{
-			for (int y = 0; y < recipe[i].ingrCount; y++)
+			if (!isItemInRecipe(i, cont.item[y].type))
 			{
-				id = cont.getId(recipe[i].ingr[y].type);
-				amount = cont.getAmount(recipe[i].ingr[y].type);
-				match = (id != -1 && amount >= recipe[i].ingr[y].count);
-				if (!match) { y = recipe[i].ingrCount; }
+				match = false;
+				y = cont.itemCounter;
 			}
-			if (match) { retVal += 1; }
 		}
+		if (match) { matchFound += 1; }
 	}
-	return retVal;
+	return matchFound;
 }
 
 void cCraft::checkActiveRecipe()
 {
 	bool match = true;
-	int matchId = -1;
+	int matchId = -1, id = -1;
 
 	// Checking recipe index
 	int recCount = getActiveRecipeCount();
 	if (selectedRecipe < 0) { selectedRecipe = recCount - 1; }
 	if (selectedRecipe >= recCount) { selectedRecipe = 0; }
 
-	updateCraftAmounts();
+	// Searching for the active recipe
 	matchId = getActiveRecipeId();
 	// If recipe found
 	if (match)
 	{
 		int rpt = getActiveRecipeRepeats();
+		// Adding the recipe result
 		resultCont.itemCounter = 0;
 		resultCont.add(recipe[matchId].result.type, recipe[matchId].result.count * rpt);
 	}
@@ -154,15 +153,27 @@ void cCraft::getResult(bool craftAll)
 void cCraft::updateCraftAmounts()
 {
 	return;
-	for (int i = 0; i < craft.cont.itemCounter; i++)
+}
+
+bool cCraft::isItemInRecipe(int recId, string itemType)
+{
+	for (int i = 0; i < recipe[recId].ingrCount; i++)
 	{
-		if (craft.cont.amount[i] > game.unit[game.getUnitId(client.unit)].container.getAmount(craft.cont.item[i].type))
+		if (recipe[recId].ingr[i].type == itemType) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void cCraft::clearGhostItems()
+{
+	for (int i = 0; i < cont.itemCounter; i++)
+	{
+		if (cont.item[i].hasRef(REF_ITEM_GHOST))
 		{
-			craft.cont.amount[i] = game.unit[game.getUnitId(client.unit)].container.getAmount(craft.cont.item[i].type);
-			if (craft.cont.amount[i] == 0) {
-				craft.cont.remove(craft.cont.item[i].type);
-				i -= 1;
-			}
+			cont.remove(i);
+			i -= 1;
 		}
 	}
 }
@@ -177,8 +188,9 @@ void cCraft::loadRecipes()
 	addRecipe("tool_axe_stone", -300, item("weapon_knife_steel", true));
 	addRecipe("tool_pickaxe_stone", -350, item("weapon_knife_steel", true));
 
-	addRecipe("voodoo_doll", 100, "weapon_rifle");
-	addRecipe("campfire_basic", 100, "weapon_rifle");
+	addRecipe("tool_axe_stone", 100, "weapon_rifle", "weapon_knife_steel", "voodoo_doll");
+	addRecipe("voodoo_doll", 100, "weapon_rifle", "weapon_knife_steel");
+	addRecipe("campfire_basic", 100, "weapon_rifle", "weapon_knife_steel");
 	addRecipe("weapon_rifle", -100, "weapon_rifle");
 	addRecipe("weapon_rifle", 500, "weapon_rifle");
 }

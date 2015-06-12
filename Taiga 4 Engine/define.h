@@ -137,6 +137,7 @@
 #define REF_ITEM_UNPACKABLE				10		// Item context menu will display 'unpack' instead of 'dismantle'
 #define REF_ITEM_EMPTIABLE				11		// Item context menu will display 'empty' instead of 'dismantle'
 #define REF_ITEM_DISMANTLE_ON_CONSUME	12		// Item is dismantled when it is consumed
+#define REF_ITEM_GHOST					13		// Item is a non-interactive ghost item
 
 #define TEX_UI_TOOLTIP					1
 #define TEX_WORLD_GROUND				2
