@@ -19,8 +19,7 @@ void cServer::sendPacket(int target, sf::Packet data)
 
 void cServer::initialize()
 {
-	camera.res.x = 0;
-	camera.res.y = 0;
+	console.displayed = true;
 	world.genNormalWorld();
 }
 

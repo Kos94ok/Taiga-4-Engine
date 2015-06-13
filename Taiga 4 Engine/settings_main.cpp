@@ -119,8 +119,10 @@ void cSettings::load()
 		// Matching the values
 			// Display
 		if (key.name == "screenMode") { screenMode = math.stringToInt(key.value); }
-		else if (key.name == "screenWidth") { camera.res.x = math.stringToInt(key.value); }
-		else if (key.name == "screenHeight") { camera.res.y = math.stringToInt(key.value); }
+		else if (key.name == "screenWidth" && !core.serverMode) { camera.res.x = math.stringToInt(key.value); }
+		else if (key.name == "screenHeight" && !core.serverMode) { camera.res.y = math.stringToInt(key.value); }
+		else if (key.name == "consoleWidth" && core.serverMode) { camera.res.x = math.stringToInt(key.value); }
+		else if (key.name == "consoleHeight" && core.serverMode) { camera.res.y = math.stringToInt(key.value); }
 		else if (key.name == "enableVertSync") { enableVertSync = math.stringToInt(key.value); }
 		else if (key.name == "sampleMod") { sampleMod = (float)math.stringToInt(key.value) / 100.00f; }
 			// Visual

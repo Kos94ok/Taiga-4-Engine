@@ -25,15 +25,18 @@ void cWindow::mainPaint()
 	window.matrixHandle.translate(-camera.pos);
 	//window.matrixHandle.translate(sf::Vector2f(math.round(-camera.pos.x * prec) / prec, math.round(-camera.pos.y * prec) / prec));
 	// Painting the game data
-	if (core.menuState == STATE_GAME)
+	if (!core.serverMode)
 	{
-		window.paintTileMap();
-		window.paintUnits();
-		window.paintLighting();
-		window.paintPostFX();
+		if (core.menuState == STATE_GAME)
+		{
+			window.paintTileMap();
+			window.paintUnits();
+			window.paintLighting();
+			window.paintPostFX();
+		}
+		window.paintUI();
+		window.paintDebugInfo();
 	}
-	window.paintUI();
-	window.paintDebugInfo();
 	window.paintConsole();
 	sf::Sprite buffer;
 

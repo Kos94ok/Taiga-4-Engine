@@ -110,7 +110,6 @@ int main(int argc, char* argv[])
 	game.access.unlock();
 
 	ai.enable();
-	script.execute(cScript::test_consoleSystem);
 
 	console << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();
@@ -127,7 +126,7 @@ int main(int argc, char* argv[])
 		}
 		// Adding some antifreeze
 		for (int i = 0; i < 9; i++) {
-			if (!(core.serverMode && i == 0)) { core.thread_antifreeze[i] += 1; }
+			if (!(core.serverMode && (i == 5 || i == 6))) { core.thread_antifreeze[i] += 1; }
 			if (core.thread_antifreeze[i] > 1000) {
 				core.thread_antifreeze[i] = 0;
 				console.error << "[MAIN] Thread " << i << " appears to be frozen..." << endl;
@@ -153,7 +152,7 @@ int main(int argc, char* argv[])
 	core.thread_shutdown[1] = true;		threadServerWorld.join();
 	core.thread_shutdown[0] = true;		threadWindow.join();
 
-	console << "[MAIN] Cleaning up" << "\n";
+	console << "[MAIN] Cleaning up" << endl << endl << endl;
 	// Cleaning up
 	return 0;
 }

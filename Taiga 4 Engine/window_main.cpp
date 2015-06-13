@@ -4,8 +4,6 @@
 void windowMain()
 {
 	int threadId = 0;
-	if (core.serverMode) { return; }
-
 	console << "[WND] Window thread started" << "\n";
 	srand(time(0));
 	sf::Uint32 screenMode;
@@ -33,6 +31,10 @@ void windowMain()
 	sf::Image icon;
 	icon.loadFromFile("Data//Textures//icon32.png");
 	window.winHandle.setIcon(32, 32, icon.getPixelsPtr());
+	if (core.serverMode) {
+		window.winHandle.setFramerateLimit(30);
+		window.winHandle.setTitle("Taiga Server v0.10");
+	}
 	// Creating the textures
 	window.texHandle.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);
 	window.texHandleShadow.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);

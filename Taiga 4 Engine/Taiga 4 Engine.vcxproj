@@ -95,6 +95,7 @@
       <AdditionalDependencies>sfml-system.lib;sfml-main.lib;sfml-window.lib;sfml-network.lib;sfml-graphics.lib;sfml-audio.lib;Winmm.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <StackReserveSize>
       </StackReserveSize>
+      <ProgramDatabaseFile>$(MSBuildProjectDirectory)/$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release 3|Win32'">

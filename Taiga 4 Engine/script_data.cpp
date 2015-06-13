@@ -77,7 +77,6 @@ void cScript::test_unitAddSystem(cArg args)
 
 void cScript::test_consoleSystem(cArg args)
 {
-	return;
 	console.debug << "Starting console test..." << endl;
 	script.wait(5000);
 
