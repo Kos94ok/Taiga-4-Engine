@@ -103,11 +103,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ai.cpp" />
+    <ClCompile Include="ai_main.cpp" />
     <ClCompile Include="ai_think.cpp" />
-    <ClCompile Include="animation.cpp" />
-    <ClCompile Include="api.cpp" />
-    <ClCompile Include="camera.cpp" />
+    <ClCompile Include="animation_main.cpp" />
+    <ClCompile Include="api_main.cpp" />
+    <ClCompile Include="audio_main.cpp" />
+    <ClCompile Include="camera_main.cpp" />
     <ClCompile Include="client_main.cpp" />
     <ClCompile Include="client_message.cpp" />
     <ClCompile Include="client_util.cpp" />
@@ -115,36 +116,36 @@
     <ClCompile Include="console_main.cpp" />
     <ClCompile Include="console_cmd.cpp" />
     <ClCompile Include="console_util.cpp" />
-    <ClCompile Include="craft.cpp" />
-    <ClCompile Include="database.cpp" />
+    <ClCompile Include="craft_main.cpp" />
+    <ClCompile Include="database_main.cpp" />
     <ClCompile Include="database_external.cpp" />
     <ClCompile Include="database_util.cpp" />
     <ClCompile Include="editor_file.cpp" />
     <ClCompile Include="editor_gen.cpp" />
     <ClCompile Include="editor_main.cpp" />
     <ClCompile Include="editor_util.cpp" />
-    <ClCompile Include="game.cpp" />
+    <ClCompile Include="game_main.cpp" />
     <ClCompile Include="game_check.cpp" />
     <ClCompile Include="game_get.cpp" />
-    <ClCompile Include="item.cpp" />
-    <ClCompile Include="itemActive.cpp" />
+    <ClCompile Include="item_main.cpp" />
+    <ClCompile Include="item_active.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math.cpp" />
-    <ClCompile Include="path.cpp" />
+    <ClCompile Include="path_main.cpp" />
     <ClCompile Include="precomp.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="refSystem.cpp" />
-    <ClCompile Include="saveload.cpp" />
+    <ClCompile Include="refSystem_main.cpp" />
+    <ClCompile Include="saveload_main.cpp" />
     <ClCompile Include="saveload_util.cpp" />
-    <ClCompile Include="script.cpp" />
+    <ClCompile Include="script_main.cpp" />
     <ClCompile Include="script_data.cpp" />
     <ClCompile Include="server_main.cpp" />
     <ClCompile Include="server_message.cpp" />
     <ClCompile Include="server_pack.cpp" />
     <ClCompile Include="server_util.cpp" />
     <ClCompile Include="server_world.cpp" />
-    <ClCompile Include="settings.cpp" />
+    <ClCompile Include="settings_main.cpp" />
     <ClCompile Include="settings_util.cpp" />
     <ClCompile Include="UI_button.cpp" />
     <ClCompile Include="UI_contextMenu.cpp" />
@@ -152,7 +153,7 @@
     <ClCompile Include="UI_main.cpp" />
     <ClCompile Include="UI_update.cpp" />
     <ClCompile Include="UI_util.cpp" />
-    <ClCompile Include="unit.cpp" />
+    <ClCompile Include="unit_main.cpp" />
     <ClCompile Include="util.cpp" />
     <ClCompile Include="visual_main.cpp" />
     <ClCompile Include="window_event.cpp" />
@@ -166,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ai.h" />
+    <ClInclude Include="animation.h" />
     <ClInclude Include="api.h" />
     <ClInclude Include="audio.h" />
     <ClInclude Include="camera.h" />
@@ -183,6 +185,7 @@
     <ClInclude Include="path.h" />
     <ClInclude Include="precomp.h" />
     <ClInclude Include="refSystem.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="saveload.h" />
     <ClInclude Include="script.h" />
     <ClInclude Include="server.h" />
@@ -193,6 +196,12 @@
     <ClInclude Include="visual.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="world.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Release\icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

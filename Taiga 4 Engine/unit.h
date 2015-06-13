@@ -10,42 +10,6 @@ public:
 	sf::Vector2f targetPos;
 };
 
-class cAnimDirection
-{
-public:
-	int tex;
-	int frameCount;
-	float frameDelay;
-
-	cAnimDirection() {
-		tex = -1;
-		frameCount = 1;
-		frameDelay = 0.25f;
-	}
-};
-
-class cAnimation
-{
-public:
-	cAnimDirection up;
-	cAnimDirection upDiag;
-	cAnimDirection side;
-	cAnimDirection downDiag;
-	cAnimDirection down;
-};
-
-class cCurrentAnim
-{
-public:
-	int type;
-	int curFrame;
-	float curFrameTimer;
-
-	cCurrentAnim();
-	void play(int animType, bool forceInterrupt = false);
-	void reset();
-};
-
 class cLightSource
 {
 public:
@@ -162,7 +126,7 @@ public:
 	void updateAction();
 	void updateAnimation();
 
-	cAnimDirection getCurrentAnimDirection();
+	cAnimDisplay getCurrentAnimDirection();
 
 	cUnit() {
 		toRemove = false;

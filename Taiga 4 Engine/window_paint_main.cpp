@@ -58,6 +58,7 @@ void cWindow::paintUnits()
 	bool cameraIntersection;
 	float step = 20.00f;
 	sf::RenderStates renderState;
+	cAnimDisplay animDisplay;
 	// Check step
 	if (settings.unitDepthCheck == 0) { step = 10.00f; }
 	else if (settings.unitDepthCheck == 1) { step = 5.00f; }
@@ -120,100 +121,22 @@ void cWindow::paintUnits()
 					|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE) && y == cameraTop) )) 
 				{
 					// Animation
+					animDisplay = game.unit[i].getCurrentAnimDirection();
+
 					int anim = game.unit[i].anim.type;
 					int curFrame = game.unit[i].anim.curFrame;
 					int texWidth, texHeight, frameWidth;
 
-					bool upDownAvailable = (game.unit[i].animData[anim].up.tex != -1 && game.unit[i].animData[anim].down.tex != -1);
-					bool diagAvailable = (game.unit[i].animData[anim].upDiag.tex != -1 && game.unit[i].animData[anim].downDiag.tex != -1);
+					texWidth = visual.gameTex[animDisplay.data.tex].handle.getSize().x;
+					texHeight = visual.gameTex[animDisplay.data.tex].handle.getSize().y;
+					frameWidth = texWidth / animDisplay.data.frameCount;
 
-					// Right
-					if (game.unit[i].hasRef(REF_UNIT_ROTATE)
-						|| ((diagAvailable && (game.unit[i].facingAngle >= 337.50f || game.unit[i].facingAngle < 22.50f))
-						|| (upDownAvailable && !diagAvailable && (game.unit[i].facingAngle >= 315.00f || game.unit[i].facingAngle < 45.00f))
-						|| (!upDownAvailable && (game.unit[i].facingAngle >= 270.00 || game.unit[i].facingAngle < 90.00f))))
-					{
-						texWidth = visual.gameTex[game.unit[i].animData[anim].side.tex].handle.getSize().x;
-						texHeight = visual.gameTex[game.unit[i].animData[anim].side.tex].handle.getSize().y;
-						frameWidth = texWidth / game.unit[i].animData[anim].side.frameCount;
-
-						brushRect.setTexture(&visual.gameTex[game.unit[i].animData[anim].side.tex].handle);
+					brushRect.setTexture(&visual.gameTex[animDisplay.data.tex].handle);
+					if (animDisplay.texMod == 1) {
 						brushRect.setTextureRect(sf::IntRect(curFrame * frameWidth, 0, frameWidth, texHeight));
 					}
-					// Up diagonal right
-					else if (diagAvailable && (game.unit[i].facingAngle >= 22.50f && game.unit[i].facingAngle < 67.50f))
-					{
-						texWidth = visual.gameTex[game.unit[i].animData[anim].upDiag.tex].handle.getSize().x;
-						texHeight = visual.gameTex[game.unit[i].animData[anim].upDiag.tex].handle.getSize().y;
-						frameWidth = texWidth / game.unit[i].animData[anim].upDiag.frameCount;
-
-						brushRect.setTexture(&visual.gameTex[game.unit[i].animData[anim].upDiag.tex].handle);
-						brushRect.setTextureRect(sf::IntRect(curFrame * frameWidth, 0, frameWidth, texHeight));
-					}
-					// Up
-					else if ((diagAvailable && (game.unit[i].facingAngle >= 67.50f && game.unit[i].facingAngle < 112.50f))
-						|| (upDownAvailable && !diagAvailable && (game.unit[i].facingAngle >= 45.00f && game.unit[i].facingAngle < 135.00f)))
-					{
-						texWidth = visual.gameTex[game.unit[i].animData[anim].up.tex].handle.getSize().x;
-						texHeight = visual.gameTex[game.unit[i].animData[anim].up.tex].handle.getSize().y;
-						frameWidth = texWidth / game.unit[i].animData[anim].up.frameCount;
-
-						brushRect.setTexture(&visual.gameTex[game.unit[i].animData[anim].up.tex].handle);
-						brushRect.setTextureRect(sf::IntRect(curFrame * frameWidth, 0, frameWidth, texHeight));
-					}
-					// Up diagonal left
-					else if (diagAvailable && (game.unit[i].facingAngle >= 112.50f && game.unit[i].facingAngle < 157.50f))
-					{
-						texWidth = visual.gameTex[game.unit[i].animData[anim].upDiag.tex].handle.getSize().x;
-						texHeight = visual.gameTex[game.unit[i].animData[anim].upDiag.tex].handle.getSize().y;
-						frameWidth = texWidth / game.unit[i].animData[anim].upDiag.frameCount;
-
-						brushRect.setTexture(&visual.gameTex[game.unit[i].animData[anim].upDiag.tex].handle);
+					else {
 						brushRect.setTextureRect(sf::IntRect((curFrame + 1) * frameWidth, 0, -frameWidth, texHeight));
-					}
-					// Left
-					else if ((diagAvailable && (game.unit[i].facingAngle >= 157.50f && game.unit[i].facingAngle < 202.50f))
-						|| (upDownAvailable && !diagAvailable && (game.unit[i].facingAngle >= 135.00f && game.unit[i].facingAngle < 225.00f))
-						|| (!upDownAvailable && (game.unit[i].facingAngle >= 90.00f || game.unit[i].facingAngle < 270.00f)))
-					{
-						texWidth = visual.gameTex[game.unit[i].animData[anim].side.tex].handle.getSize().x;
-						texHeight = visual.gameTex[game.unit[i].animData[anim].side.tex].handle.getSize().y;
-						frameWidth = texWidth / game.unit[i].animData[anim].side.frameCount;
-
-						brushRect.setTexture(&visual.gameTex[game.unit[i].animData[anim].side.tex].handle);
-						brushRect.setTextureRect(sf::IntRect((curFrame + 1) * frameWidth, 0, -frameWidth, texHeight));
-					}
-					// Down diagonal left
-					else if (diagAvailable && (game.unit[i].facingAngle >= 202.50f && game.unit[i].facingAngle < 247.50f))
-					{
-						texWidth = visual.gameTex[game.unit[i].animData[anim].downDiag.tex].handle.getSize().x;
-						texHeight = visual.gameTex[game.unit[i].animData[anim].downDiag.tex].handle.getSize().y;
-						frameWidth = texWidth / game.unit[i].animData[anim].downDiag.frameCount;
-
-						brushRect.setTexture(&visual.gameTex[game.unit[i].animData[anim].downDiag.tex].handle);
-						//brushRect.setTextureRect(sf::IntRect(curFrame * frameWidth, 0, frameWidth, texHeight));
-						brushRect.setTextureRect(sf::IntRect((curFrame + 1) * frameWidth, 0, -frameWidth, texHeight));
-					}
-					// Down
-					else if ((diagAvailable && (game.unit[i].facingAngle >= 247.50f && game.unit[i].facingAngle < 292.50f))
-						|| (upDownAvailable && !diagAvailable && (game.unit[i].facingAngle >= 225.00f && game.unit[i].facingAngle < 315.00f)))
-					{
-						texWidth = visual.gameTex[game.unit[i].animData[anim].down.tex].handle.getSize().x;
-						texHeight = visual.gameTex[game.unit[i].animData[anim].down.tex].handle.getSize().y;
-						frameWidth = texWidth / game.unit[i].animData[anim].down.frameCount;
-
-						brushRect.setTexture(&visual.gameTex[game.unit[i].animData[anim].down.tex].handle);
-						brushRect.setTextureRect(sf::IntRect(curFrame * frameWidth, 0, frameWidth, texHeight));
-					}
-					// Down diagonal right
-					else if (diagAvailable && (game.unit[i].facingAngle >= 292.50f && game.unit[i].facingAngle < 337.50f))
-					{
-						texWidth = visual.gameTex[game.unit[i].animData[anim].downDiag.tex].handle.getSize().x;
-						texHeight = visual.gameTex[game.unit[i].animData[anim].downDiag.tex].handle.getSize().y;
-						frameWidth = texWidth / game.unit[i].animData[anim].downDiag.frameCount;
-
-						brushRect.setTexture(&visual.gameTex[game.unit[i].animData[anim].downDiag.tex].handle);
-						brushRect.setTextureRect(sf::IntRect(curFrame * frameWidth, 0, frameWidth, texHeight));
 					}
 
 					// Shadow (day)
@@ -246,9 +169,14 @@ void cWindow::paintUnits()
 							brushRect.setSize(sf::Vector2f(game.unit[i].size.x, game.unit[i].size.y));
 							brushRect.setScale(1.00f, shadowScale);
 							brushRect.setRotation(shadowAngle);
+							// Rotatable unit
 							if (game.unit[i].hasRef(REF_UNIT_ROTATE)) {
 								brushRect.setRotation(math.convertAngle(shadowAngle) - game.unit[i].facingAngle);
 								brushRect.setScale(1.00f, 1.00f);
+							}
+							// Shadow texture override
+							if (animDisplay.data.texShadow != -1) {
+								brushRect.setTexture(&visual.gameTex[animDisplay.data.texShadow].handle);
 							}
 
 							// Last-minute check
@@ -292,9 +220,14 @@ void cWindow::paintUnits()
 							brushRect.setSize(sf::Vector2f(game.unit[i].size.x, game.unit[i].size.y));
 							brushRect.setScale(1.00f, shadowScale);
 							brushRect.setRotation(shadowAngle);
+							// Rotatable unit
 							if (game.unit[i].hasRef(REF_UNIT_ROTATE)) {
 								brushRect.setRotation(math.convertAngle(shadowAngle) - game.unit[i].facingAngle);
 								brushRect.setScale(1.00f, 1.00f);
+							}
+							// Shadow texture override
+							if (animDisplay.data.texShadow != -1) {
+								brushRect.setTexture(&visual.gameTex[animDisplay.data.texShadow].handle);
 							}
 							renderState.transform = window.matrixHandle;
 
@@ -328,7 +261,12 @@ void cWindow::paintUnits()
 					brushRect.setSize(sf::Vector2f(game.unit[i].size.x, game.unit[i].size.y));
 						// Editor selection
 					if (editor.sel.isSelected(game.unit[i].globalId)) { brushRect.setOutlineThickness(-1.00f); }
+						// Rotatable unit
 					if (game.unit[i].hasRef(REF_UNIT_ROTATE)) { brushRect.setRotation(-game.unit[i].facingAngle); }
+						// Shadow texture reset
+					if (animDisplay.data.texShadow != -1) {
+						brushRect.setTexture(&visual.gameTex[animDisplay.data.tex].handle);
+					}
 						// Last-minute check
 					objRect = brushRect.getGlobalBounds();
 					cameraIntersection = camRect.intersects(objRect);

@@ -179,7 +179,7 @@ void serverWorldAnim(int elapsedTime)
 	// Unit animations
 	for (int i = 0; i < game.unitCounter; i++)
 	{
-		cAnimDirection animDir = game.unit[i].getCurrentAnimDirection();
+		cAnimDirection animDir = game.unit[i].getCurrentAnimDirection().data;
 		// Sprite animation
 		game.unit[i].anim.curFrameTimer += timevar;
 		if (game.unit[i].anim.curFrameTimer >= animDir.frameDelay)

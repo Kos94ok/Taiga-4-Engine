@@ -25,34 +25,61 @@
 [MAIN] Making some menu
 [WND] Starting the main loop
 [MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 35; 25 / 35; 26
-ALARMA: 34; 28 / 34; 29
-ALARMA: 38; 28 / 38; 29
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
-[MAIN] Thread 0 appears to be frozen...
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
 [MAIN] Main thread started
 [MAIN] Parsing arguments [1]
 [MAIN] Initializing
@@ -80,10 +107,6 @@ ALARMA: 38; 28 / 38; 29
 [MAIN] Making some menu
 [WND] Starting the main loop
 [MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 39; 28 / 39; 29
 [MAIN] Waiting for script threads to finish...
 [MAIN] Waiting for core threads to finish...
 [AI_CORE] Cleaning up
@@ -123,46 +146,6 @@ ALARMA: 39; 28 / 39; 29
 [MAIN] Making some menu
 [WND] Starting the main loop
 [MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 11; 29 / 11; 30
-ALARMA: 10; 31 / 10; 32
-ALARMA: 11; 28 / 11; 29
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 33; 30 / 33; 31
-ALARMA: 33; 28 / 33; 29
-[ERROR] Can't find the item [test_catAll] in the database!
-[ERROR] Can't find the item [test_catAll] in the database!
 [MAIN] Waiting for script threads to finish...
 [MAIN] Waiting for core threads to finish...
 [AI_CORE] Cleaning up
@@ -202,371 +185,6 @@ ALARMA: 33; 28 / 33; 29
 [MAIN] Making some menu
 [WND] Starting the main loop
 [MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 10; 28 / 10; 29
-ALARMA: 8; 29 / 8; 30
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[WND] Starting the main loop
-[MAIN] Making some menu
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 9; 31 / 9; 32
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[WND] Starting the main loop
-[MAIN] Making some menu
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 40; 30 / 40; 31
-ALARMA: 36; 32 / 36; 33
--1
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[WND] Starting the main loop
-[MAIN] Making some menu
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_CONNECT] Listening at port [SRV_SEND] Starting the server send thread
-21045.
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 26; 33 / 26; 34
-ALARMA: 27; 32 / 27; 33
-1132789760
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-1132789760
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 10; 36 / 10; 37
-78
-78
-78
-78
-94
-94
-94
-109
-109
-109
-124
-124
-139
-139
 [MAIN] Waiting for script threads to finish...
 [MAIN] Waiting for core threads to finish...
 [AI_CORE] Cleaning up
@@ -606,24 +224,6 @@ ALARMA: 10; 36 / 10; 37
 [MAIN] Making some menu
 [WND] Starting the main loop
 [MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-[cClient::connect] Server found!
-ALARMA: 48; 34 / 48; 35
-ALARMA: 52; 36 / 52; 37
-75
-75
-75
-75
-91
-91
-91
-106
-106
-106
-121
-121
 [MAIN] Waiting for script threads to finish...
 [MAIN] Waiting for core threads to finish...
 [AI_CORE] Cleaning up
@@ -655,6 +255,127 @@ ALARMA: 52; 36 / 52; 37
 [SRV_CONNECT] Starting the server connect thread
 [SRV_CONNECT] Listening at port 21045.
 [SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[MAIN] Making some menu
+[WND] Starting the main loop
+[MAIN] Overlooking the threads...
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[MAIN] Making some menu
+[WND] Starting the main loop
+[MAIN] Overlooking the threads...
+[cClient::connect] Connecting to 127.0.0.1:21045...
+[cClient::connect] Server found!
+[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
+ALARMA: 33; 18 / 33; 19
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[MAIN] Making some menu
+[WND] Starting the main loop
+[MAIN] Overlooking the threads...
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_CONNECT] Listening at port 21045.
 [SRV_SEND] Starting the server send thread
 [CLIENT_RECEIVE] Starting the client receive thread
 [CLIENT_SEND] Starting the client send thread
@@ -701,16 +422,21 @@ ALARMA: 52; 36 / 52; 37
 [CLIENT_RECEIVE] Starting the client receive thread
 [CLIENT_SEND] Starting the client send thread
 [WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
 [WND] Starting the main loop
+[AI_CORE] Starting the AI core thread
 [MAIN] Making some menu
 [MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
 [cClient::connect] Connecting to 127.0.0.1:21045...
 [cClient::connect] Server found!
 [SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 55; 37 / 55; 38
-ALARMA: 51; 34 / 51; 35
+ALARMA: 51; 30 / 51; 31
+ALARMA: 54; 32 / 54; 33
+ALARMA: 55; 32 / 55; 33
+ALARMA: 54; 32 / 54; 33
+ALARMA: 55; 32 / 55; 33
+ALARMA: 55; 32 / 55; 33
+ALARMA: 55; 32 / 55; 33
+ALARMA: 55; 32 / 55; 33
 [MAIN] Waiting for script threads to finish...
 [MAIN] Waiting for core threads to finish...
 [AI_CORE] Cleaning up
@@ -750,14 +476,14 @@ ALARMA: 51; 34 / 51; 35
 [MAIN] Making some menu
 [WND] Starting the main loop
 [MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
 [cClient::connect] Connecting to 127.0.0.1:21045...
 [cClient::connect] Server found!
 [SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 51; 35 / 51; 36
-ALARMA: 49; 36 / 49; 37
-ALARMA: 51; 37 / 51; 38
-ALARMA: 50; 34 / 50; 35
+ALARMA: 44; 30 / 44; 31
+ALARMA: 44; 28 / 44; 29
+ALARMA: 42; 26 / 42; 27
+ALARMA: 42; 26 / 42; 27
+ALARMA: 44; 28 / 44; 29
 [MAIN] Waiting for script threads to finish...
 [MAIN] Waiting for core threads to finish...
 [AI_CORE] Cleaning up
@@ -797,11 +523,184 @@ ALARMA: 50; 34 / 50; 35
 [MAIN] Making some menu
 [WND] Starting the main loop
 [MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
 [cClient::connect] Connecting to 127.0.0.1:21045...
 [cClient::connect] Server found!
 [SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 46; 38 / 46; 39
+ALARMA: 13; 33 / 13; 34
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[MAIN] Making some menu
+[WND] Starting the main loop
+[MAIN] Overlooking the threads...
+[cClient::connect] Connecting to 127.0.0.1:21045...
+[cClient::connect] Server found!
+[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
+ALARMA: 31; 30 / 31; 31
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[MAIN] Making some menu
+[WND] Starting the main loop
+[MAIN] Overlooking the threads...
+[cClient::connect] Connecting to 127.0.0.1:21045...
+[cClient::connect] Server found!
+[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
+ALARMA: 29; 32 / 29; 33
+ALARMA: 30; 34 / 30; 35
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[MAIN] Making some menu
+[WND] Starting the main loop
+[MAIN] Overlooking the threads...
+[cClient::connect] Connecting to 127.0.0.1:21045...
+[cClient::connect] Server found!
+[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
+ALARMA: 20; 32 / 20; 33
+ALARMA: 19; 31 / 19; 32
+[MAIN] Waiting for script threads to finish...
+[MAIN] Waiting for core threads to finish...
+[AI_CORE] Cleaning up
+[WORLD_LOADER] Cleaning up
+[CLIENT_SEND] Cleaning up
+[CLIENT_RECEIVE] Cleaning up
+[SRV_SEND] Cleaning up
+[SRV_RECEIVE] Cleaning up
+[SRV_CONNECT] Cleaning up
+[SRV_WORLD] Cleaning up
+[WND] Cleaning up
+[MAIN] Cleaning up
+[MAIN] Main thread started
+[MAIN] Parsing arguments [1]
+[MAIN] Initializing
+[MAIN] Detected Nvidia video card
+[MAIN] Loading databases
+[DATABASE] Loading Items
+[DATABASE] Loading Units
+[DATABASE] Loading UI
+[DATABASE] Loading Textures
+[DATABASE] Loading External
+[DATABASE] Main database ready
+[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
+[MAIN] Starting the threads
+[WND] Window thread started
+[WND] Creating 1600x900 window rendering at 1600x900
+[SRV_WORLD] Starting the server world thread
+[SRV_CONNECT] Starting the server connect thread
+[SRV_CONNECT] Listening at port 21045.
+[SRV_RECEIVE] Starting the server receive thread
+[SRV_SEND] Starting the server send thread
+[CLIENT_RECEIVE] Starting the client receive thread
+[CLIENT_SEND] Starting the client send thread
+[WORLD_LOADER] Starting the world loader thread
+[AI_CORE] Starting the AI core thread
+[WND] Starting the main loop
+[MAIN] Making some menu
+[MAIN] Overlooking the threads...
+[cClient::connect] Connecting to 127.0.0.1:21045...
+[cClient::connect] Server found!
+[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
+ALARMA: 13; 31 / 13; 32
 [MAIN] Waiting for script threads to finish...
 [MAIN] Waiting for core threads to finish...
 [AI_CORE] Cleaning up
@@ -841,12 +740,9 @@ ALARMA: 46; 38 / 46; 39
 [MAIN] Making some menu
 [WND] Starting the main loop
 [MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
 [cClient::connect] Connecting to 127.0.0.1:21045...
 [cClient::connect] Server found!
 [SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 16; 37 / 16; 38
-ALARMA: 22; 39 / 22; 40
 [MAIN] Waiting for script threads to finish...
 [MAIN] Waiting for core threads to finish...
 [AI_CORE] Cleaning up
@@ -918,94 +814,8 @@ ALARMA: 22; 39 / 22; 40
 [WND] Creating 1600x900 window rendering at 1600x900
 [SRV_WORLD] Starting the server world thread
 [SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
 [SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
 [SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-[cClient::connect] Server found!
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
 [SRV_SEND] Starting the server send thread
 [CLIENT_RECEIVE] Starting the client receive thread
 [CLIENT_SEND] Starting the client send thread
@@ -1017,311 +827,33 @@ ALARMA: 22; 39 / 22; 40
 [cClient::connect] Connecting to 127.0.0.1:21045...
 [cClient::connect] Server found!
 [SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 51; 39 / 51; 40
-ALARMA: 53; 40 / 53; 41
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[WND] Starting the main loop
-[MAIN] Making some menu
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 43; 38 / 43; 39
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[WND] Starting the main loop
-[MAIN] Making some menu
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 6; 41 / 6; 42
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[WND] Starting the main loop
-[MAIN] Making some menu
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 8; 38 / 8; 39
-ALARMA: 7; 39 / 7; 40
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 19; 39 / 19; 40
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 12; 41 / 12; 42
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-[cClient::connect] Server found!
-[ERROR] Can't find the item [test_catAll] in the database!
+ALARMA: 34; 33 / 34; 34
+ALARMA: 28; 34 / 28; 35
+> game.settime 18
+> game.settime 15
+ALARMA: 28; 34 / 28; 35
+ALARMA: 34; 33 / 34; 34
+ALARMA: 28; 34 / 28; 35
+ALARMA: 34; 33 / 34; 34
+ALARMA: 28; 34 / 28; 35
+ALARMA: 28; 34 / 28; 35
+ALARMA: 34; 33 / 34; 34
+ALARMA: 34; 33 / 34; 34
+ALARMA: 34; 33 / 34; 34
+ALARMA: 28; 34 / 28; 35
+ALARMA: 28; 34 / 28; 35
+ALARMA: 28; 34 / 28; 35
+ALARMA: 34; 33 / 34; 34
+ALARMA: 28; 34 / 28; 35
+ALARMA: 28; 34 / 28; 35
+ALARMA: 28; 34 / 28; 35
+ALARMA: 34; 33 / 34; 34
+ALARMA: 34; 33 / 34; 34
+ALARMA: 28; 34 / 28; 35
+ALARMA: 34; 33 / 34; 34
+ALARMA: 28; 34 / 28; 35
+ALARMA: 34; 33 / 34; 34
+ALARMA: 28; 34 / 28; 35
 [MAIN] Waiting for script threads to finish...
 [MAIN] Waiting for core threads to finish...
 [AI_CORE] Cleaning up
@@ -1361,188 +893,9 @@ ALARMA: 12; 41 / 12; 42
 [MAIN] Making some menu
 [WND] Starting the main loop
 [MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
 [cClient::connect] Connecting to 127.0.0.1:21045...
 [cClient::connect] Server found!
 [SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 19; 43 / 19; 44
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 10; 11 / 10; 12
-ALARMA: 8; 14 / 8; 15
-ALARMA: 12; 14 / 12; 15
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 9; 51 / 9; 52
-ALARMA: 11; 51 / 11; 52
-[MAIN] Waiting for script threads to finish...
-[MAIN] Waiting for core threads to finish...
-[AI_CORE] Cleaning up
-[WORLD_LOADER] Cleaning up
-[CLIENT_SEND] Cleaning up
-[CLIENT_RECEIVE] Cleaning up
-[SRV_SEND] Cleaning up
-[SRV_RECEIVE] Cleaning up
-[SRV_CONNECT] Cleaning up
-[SRV_WORLD] Cleaning up
-[WND] Cleaning up
-[MAIN] Cleaning up
-[MAIN] Main thread started
-[MAIN] Parsing arguments [1]
-[MAIN] Initializing
-[MAIN] Detected Nvidia video card
-[MAIN] Loading databases
-[DATABASE] Loading Items
-[DATABASE] Loading Units
-[DATABASE] Loading UI
-[DATABASE] Loading Textures
-[DATABASE] Loading External
-[DATABASE] Main database ready
-[MAIN] Blueprints analyzed: 28. Correct: 28, Wrong: 0
-[MAIN] Starting the threads
-[WND] Window thread started
-[WND] Creating 1600x900 window rendering at 1600x900
-[SRV_WORLD] Starting the server world thread
-[SRV_CONNECT] Starting the server connect thread
-[SRV_CONNECT] Listening at port 21045.
-[SRV_RECEIVE] Starting the server receive thread
-[SRV_SEND] Starting the server send thread
-[CLIENT_RECEIVE] Starting the client receive thread
-[CLIENT_SEND] Starting the client send thread
-[WORLD_LOADER] Starting the world loader thread
-[AI_CORE] Starting the AI core thread
-[MAIN] Making some menu
-[WND] Starting the main loop
-[MAIN] Overlooking the threads...
-[MAIN] Thread 0 appears to be frozen...
-[cClient::connect] Connecting to 127.0.0.1:21045...
-[cClient::connect] Server found!
-[SRV_CONNECT] Connection from IP [127.0.0.1] assigned to slot 0.
-ALARMA: 46; 53 / 46; 54
 [MAIN] Waiting for script threads to finish...
 [MAIN] Waiting for core threads to finish...
 [AI_CORE] Cleaning up

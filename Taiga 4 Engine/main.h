@@ -20,6 +20,7 @@ typedef sf::Vector2i		vec2i;
 #include "UI.h"
 #include "path.h"
 #include "ai.h"
+#include "animation.h"
 #include "unit.h"
 #include "game.h"
 #include "database.h"

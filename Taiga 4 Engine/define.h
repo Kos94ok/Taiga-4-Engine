@@ -141,6 +141,7 @@
 
 #define TEX_UI_TOOLTIP					1
 #define TEX_WORLD_GROUND				2
+#define TEX_ICON_MAIN					3
 
 #define SHADER_FULLSCREEN				1
 #define SHADER_BLOOM					2

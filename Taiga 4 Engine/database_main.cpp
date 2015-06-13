@@ -174,6 +174,7 @@ void cDatabase::loadUnits()
 	unit[i].health = 5000.00f;
 	unit[i].maxHealth = 5000.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_idle.png");
+	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("campfire_idle_shadow.png");
 	unit[i].animData[ANIM_IDLE].side.frameCount = 4;
 	unit[i].animData[ANIM_IDLE].side.frameDelay = 0.20f;
 	unit[i].collisionDistance = 20.00f;
@@ -528,5 +529,6 @@ void cDatabase::loadTextures()
 {
 	database.texture[TEX_UI_TOOLTIP] = visual.addTexture("ui_tooltip.png");
 	database.texture[TEX_WORLD_GROUND] = visual.addTexture("bg_snow.jpg");
+	database.texture[TEX_ICON_MAIN] = visual.addTexture("icon_main.ico");
 }
 

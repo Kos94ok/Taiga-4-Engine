@@ -29,7 +29,10 @@ void windowMain()
 	}
 	// Creating the window
 	console << "[WND] Creating " << camera.res.x << "x" << camera.res.y << " window rendering at " << camera.res.x * settings.sampleMod << "x" << camera.res.y * settings.sampleMod << endl;
-	window.winHandle.create(sf::VideoMode(camera.res.x, camera.res.y), "Taiga 4 Engine", screenMode, context);
+	window.winHandle.create(sf::VideoMode(camera.res.x, camera.res.y), "Taiga Survival v0.10 [Taiga 4 Engine]", screenMode, context);
+	sf::Image icon;
+	icon.loadFromFile("Data//Textures//icon32.png");
+	window.winHandle.setIcon(32, 32, icon.getPixelsPtr());
 	// Creating the textures
 	window.texHandle.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);
 	window.texHandleShadow.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);
