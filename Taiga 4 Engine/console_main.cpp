@@ -26,6 +26,7 @@ cConsole::cConsole()
 	cmdHistoryPos = 0;
 	displayedPage = SUBCMD_ALL;
 	clearInput();
+	CreateDirectoryA("Logs", 0);
 	// Help command
 	int cmdID = 0;
 	console.cmdRegex[cmdID].assign("^help *");

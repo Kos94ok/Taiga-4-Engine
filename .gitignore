@@ -9,6 +9,8 @@
 
 # Savefiles
 Release/Savefiles/*
+# Logs
+Release/Logs/*
 
 # Build results
 [Dd]ebug/
@@ -233,5 +235,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-Release/map.txt
-Release/log.txt

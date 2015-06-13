@@ -33,12 +33,12 @@ TODO:
 int main(int argc, char* argv[])
 {
 	game.access.lock();
-	console << "[MAIN] Main thread started" << "\n";
-	console << "[MAIN] Parsing arguments [" << argc << "]" << "\n";
 	for (int i = 0; i < argc; i++)
 	{
 		if (strcmp(argv[i], "-server") == 0) { core.serverMode = true; }
 	}
+	console << "[MAIN] Main thread started" << "\n";
+	console << "[MAIN] Parsed [" << argc << "] arguments" << "\n";
 	// Random initialization
 	console << "[MAIN] Initializing" << "\n";
 	//setlocale(LC_ALL, "");

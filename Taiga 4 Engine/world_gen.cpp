@@ -52,6 +52,7 @@ void cWorld::genArena()
 
 void cWorld::genNormalWorld()
 {
+	console << "[cWorld::genNormalWorld] Starting the generation" << endl;
 	// Clearing the saved world data;
 	clearWorld();
 	// Settings initial state
@@ -111,7 +112,7 @@ void cWorld::genNormalWorld()
 	}
 
 	ofstream file;
-	file.open("map.txt");
+	file.open("Logs//map.txt");
 	for (int j = 0; j < LIMIT_MAP; j++)
 	{
 		for (int i = 0; i < LIMIT_MAP; i++)
@@ -136,12 +137,12 @@ void cWorld::genNormalWorld()
 		for (int i = 0; i < LIMIT_MAP; i++)
 		{
 			if (map[i][j].type != CHUNK_UNDEFINED)
-			//if (map[i][j].type == CHUNK_NORMAL)
 			{
 				applyBlueprint(vec2i(i, j), map[i][j].type);
 			}
 		}
 	}
+	console << "[cWorld::genNormalWorld] World generated" << endl;
 }
 
 void cWorld::genChunkPath(int val, vec2i pos)

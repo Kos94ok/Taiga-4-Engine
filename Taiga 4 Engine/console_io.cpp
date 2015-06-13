@@ -33,7 +33,8 @@ void cConsole::output(std::string str, int subConsole)
 	if (str.length() >= 1 && str.substr(str.length() - 1) == "\n")
 	{
 		ofstream file;
-		file.open("log.txt", ios::app);
+		if (!core.serverMode) { file.open("Logs//game.txt", ios::app); }
+		else { file.open("Logs//server.txt", ios::app); }
 		file << waitingQueue;
 		file.close();
 
