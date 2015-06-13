@@ -234,3 +234,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 Release/map.txt
+Release/log.txt

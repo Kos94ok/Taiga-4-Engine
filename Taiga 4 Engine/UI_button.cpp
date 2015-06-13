@@ -53,6 +53,7 @@ void cUIButton::callbackLeft(int parent)
 	{
 		stringstream(args[0]) >> id;
 		game.unit[game.getUnitId(client.unit)].container.add(craft.cont.get(id), 1);
+		game.unit[game.getUnitId(client.unit)].container.sort(util.getInventorySortingType());
 		craft.cont.remove(id, 1);
 		craft.checkActiveRecipe();
 		ui.clearContextMenu();
@@ -63,6 +64,7 @@ void cUIButton::callbackLeft(int parent)
 	{
 		stringstream(args[0]) >> id;
 		game.unit[game.getUnitId(client.unit)].container.add(craft.cont.get(id), craft.cont.getAmount(craft.cont.get(id).type));
+		game.unit[game.getUnitId(client.unit)].container.sort(util.getInventorySortingType());
 		craft.cont.remove(id);
 		craft.checkActiveRecipe();
 		ui.clearContextMenu();
@@ -85,6 +87,7 @@ void cUIButton::callbackLeft(int parent)
 		{
 			game.unit[game.getUnitId(client.unit)].container.add(craft.cont.item[i], craft.cont.amount[i]);
 		}
+		game.unit[game.getUnitId(client.unit)].container.sort(util.getInventorySortingType());
 		craft.cont.itemCounter = 0;
 		craft.checkActiveRecipe();
 		ui.clearContextMenu();

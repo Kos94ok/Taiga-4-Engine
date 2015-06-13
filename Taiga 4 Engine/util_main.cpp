@@ -25,3 +25,8 @@ void cUtil::detectVideoCard()
 		console << "[MAIN] Unknown video card: " << vendor << "\n";
 	}
 }
+
+int cUtil::getInventorySortingType()
+{
+	return SORT_BYNAME;
+}

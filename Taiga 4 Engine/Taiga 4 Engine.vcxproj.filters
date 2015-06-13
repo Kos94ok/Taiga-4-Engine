@@ -96,9 +96,6 @@
     <ClCompile Include="server_main.cpp">
       <Filter>Файлы исходного кода\Network</Filter>
     </ClCompile>
-    <ClCompile Include="math.cpp">
-      <Filter>Файлы исходного кода\Util</Filter>
-    </ClCompile>
     <ClCompile Include="UI_main.cpp">
       <Filter>Файлы исходного кода\UI</Filter>
     </ClCompile>
@@ -126,9 +123,6 @@
     <ClCompile Include="UI_contextMenu.cpp">
       <Filter>Файлы исходного кода\UI</Filter>
     </ClCompile>
-    <ClCompile Include="precomp.cpp">
-      <Filter>Файлы исходного кода\Util</Filter>
-    </ClCompile>
     <ClCompile Include="database_util.cpp">
       <Filter>Файлы исходного кода\Database</Filter>
     </ClCompile>
@@ -149,9 +143,6 @@
     </ClCompile>
     <ClCompile Include="window_util.cpp">
       <Filter>Файлы исходного кода\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="util.cpp">
-      <Filter>Файлы исходного кода\Util</Filter>
     </ClCompile>
     <ClCompile Include="settings_util.cpp">
       <Filter>Файлы исходного кода\Core</Filter>
@@ -248,6 +239,15 @@
     </ClCompile>
     <ClCompile Include="animation_main.cpp">
       <Filter>Файлы исходного кода\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="precomp.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="util_main.cpp">
+      <Filter>Файлы исходного кода\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="math_main.cpp">
+      <Filter>Файлы исходного кода\Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

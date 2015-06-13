@@ -26,6 +26,7 @@ class cUtil
 {
 public:
 	void detectVideoCard();
+	int getInventorySortingType();
 };
 
 class cValue

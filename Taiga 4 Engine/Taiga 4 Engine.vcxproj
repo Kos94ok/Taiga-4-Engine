@@ -130,7 +130,7 @@
     <ClCompile Include="item_main.cpp" />
     <ClCompile Include="item_active.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="math.cpp" />
+    <ClCompile Include="math_main.cpp" />
     <ClCompile Include="path_main.cpp" />
     <ClCompile Include="precomp.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -154,7 +154,7 @@
     <ClCompile Include="UI_update.cpp" />
     <ClCompile Include="UI_util.cpp" />
     <ClCompile Include="unit_main.cpp" />
-    <ClCompile Include="util.cpp" />
+    <ClCompile Include="util_main.cpp" />
     <ClCompile Include="visual_main.cpp" />
     <ClCompile Include="window_event.cpp" />
     <ClCompile Include="window_main.cpp" />
