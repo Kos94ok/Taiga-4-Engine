@@ -127,6 +127,10 @@ void serverSendMain()
 			}
 			server.dataQueueCounter -= 1;
 		}
+		else if (server.pingTimer > 500) {
+			server.pingPlayers();
+			server.pingTimer = 0;
+		}
 		else { Sleep(10); }
 		core.thread_antifreeze[threadId] = 0;
 	}

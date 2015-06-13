@@ -46,6 +46,7 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 	vec2f startingPos;
 	//if (world.map[targetChunk.x][targetChunk.y].type == CHUNK_UNDEFINED) { return -1; }
 
+	game.access.lock();
 	if (overwrite) { orderCounter = 0; actionTimer = 0.00f; }
 
 	// Checking if unit is stuck
@@ -72,20 +73,20 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 		order[orderCounter].type = ORDER_MOVETO;
 		order[orderCounter].targetPos = path.waypoint[i];
 		orderCounter += 1;
-
-		// Server
-		/*sf::Packet data;
-		data << MSG_ORDER_MOVETO << globalId << path.waypoint[i].x << path.waypoint[i].y << (overwrite && i == 0);
-		server.sendPacket(PLAYERS_REMOTE, data);*/
 	}
 	// Server
-	sf::Packet data;
-	data << MSG_ORDER_MOVETOPATH << globalId << target.x << target.y << overwrite;
-	server.sendPacket(PLAYERS_REMOTE, data);
+	if (core.serverMode || core.localServer)
+	{
+		sf::Packet data;
+		data << MSG_ORDER_MOVETOPATH << globalId << target.x << target.y << overwrite;
+		server.sendPacket(PLAYERS_REMOTE, data);
+		data.clear();
+	}
 	// Update info
 	updateFacing();
 	updateAction();
 	updateAnimation();
+	game.access.unlock();
 
 	return orderCounter - 1;
 }

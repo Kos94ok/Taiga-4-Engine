@@ -61,6 +61,10 @@ void clientSendMain()
 			}
 			client.dataQueueCounter -= 1;
 		}
+		else if (client.pingTimer > 500) {
+			client.pingServer();
+			client.pingTimer = 0;
+		}
 		else { Sleep(10); }
 		core.thread_antifreeze[threadId] = 0;
 	}

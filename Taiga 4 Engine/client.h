@@ -19,7 +19,12 @@ public:
 	int packet;
 	bool connected;
 	sf::TcpSocket socket;
+	int ping;
+	int pingTimer;
+	int lastPingTime;
+	int lastPongTime;
 
+	void sendEcho(std::string str);
 	void sendPacket(sf::Packet data);
 	void connect(std::string ip, short port);
 	void disconnect();
@@ -27,12 +32,15 @@ public:
 	bool msgUnit(sf::Packet data);
 	bool msgOrder(sf::Packet data);
 	bool msgGame(sf::Packet data);
+	void pingServer();
 
 	cClient() {
 		unit = -1;
+		ping = -1;
 		packet = 0;
 		connected = false;
 		socket.setBlocking(false);
+		pingTimer = 0;
 
 		dataQueueCounter = 0;
 	}

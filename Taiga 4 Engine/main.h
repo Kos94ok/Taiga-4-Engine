@@ -16,6 +16,7 @@ typedef sf::Vector2i		vec2i;
 #include "visual.h"
 #include "icon.h"
 #include "refSystem.h"
+#include "audio.h"
 #include "item.h"
 #include "UI.h"
 #include "path.h"
@@ -84,6 +85,7 @@ extern cMath math;
 extern cConsole console;
 extern cWindow window;
 extern cVisual visual;
+extern cAudio audio;
 extern cUI ui;
 extern cPath path;
 extern cGame game;

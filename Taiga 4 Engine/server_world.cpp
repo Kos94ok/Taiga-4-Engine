@@ -457,6 +457,8 @@ void serverWorldMain()
 			serverWorldAnim(elapsedTime);
 			serverWorldUI(elapsedTime);
 			serverWorldUnits(elapsedTime);
+			client.pingTimer += elapsedTime;
+			server.pingTimer += elapsedTime;
 			core.thread_serverWorldTicks += 1;
 			core.thread_antifreeze[threadId] = 0;
 		}

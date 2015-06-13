@@ -19,6 +19,12 @@ void cmd_help(string args[])
 void cmd_echo(string args[])
 {
 	console.echo << args[0] << endl;
+	if (core.serverMode || core.localServer) {
+		server.sendEcho(-1, args[0]);
+	}
+	else if (client.connected) {
+		client.sendEcho(args[0]);
+	}
 }
 
 // Clear
@@ -251,12 +257,13 @@ void cmd_player_setunit(string args[])
 // Player.getlist
 void cmd_player_getlist(string args[])
 {
-	console.echo << "[CMD] [Id]: Unit Id / Address" << "\n";
+	console.echo << "[CMD] [Id]: Unit Id / Address / Ping" << "\n";
 	for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
 	{
 		if (server.player[i].connected)
 		{
-			console.echo << "[CMD] [" << i << "]: " << server.player[i].unit << " / " << server.player[i].socket.getRemoteAddress().toString() << "\n";
+			console.echo << "[CMD] [" << i << "]: " << server.player[i].unit << " / " << server.player[i].socket.getRemoteAddress().toString() 
+				<< " / " << server.player[i].ping << " ms" << "\n";
 		}
 	}
 }

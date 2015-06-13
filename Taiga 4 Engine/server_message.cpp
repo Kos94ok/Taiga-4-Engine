@@ -7,17 +7,51 @@ bool cServer::msgRequest(int i, sf::Packet input)
 	//float argf[] = { 0.00f, 0.00f, 0.00f, 0.00f };
 	//bool argb[] = { false, false, false, false };
 	int msg;
-	string cmd = "";
+	string cmd = "", argStr;
 	sf::Packet data;
 
 	input >> msg;
+	// =======================================================
+	// =======================================================
+	// Echo
+	if (msg == MSG_ECHO)
+	{
+		input >> argStr;
+		console.echo << "[ECHO] Player " << i << ": " << argStr << endl;
+		sendEcho(i, argStr);
+
+		return true;
+	}
+	// =======================================================
+	// =======================================================
+	// Ping
+	if (msg == MSG_PING)
+	{
+		data.clear();
+		data << MSG_PONG;
+		sendPacket(i, data);
+		data.clear();
+
+		return true;
+	}
+	// =======================================================
+	// =======================================================
+	// Pong
+	if (msg == MSG_PONG)
+	{
+		player[i].lastPongTime = timeGetTime();
+		player[i].ping = player[i].lastPongTime - player[i].lastPingTime;
+
+		return true;
+	}
 	// =======================================================
 	// =======================================================
 	// Request for chunk data
 	if (msg == MSG_REQUEST_CHUNKDATA)
 	{
 		input >> argi[0] >> argi[1];
-		sendChunkData(i, argi[0], argi[1]);
+		script.execute(cScript::server_sendChunkData, cArg(to_string(i), to_string(argi[0]), to_string(argi[1])));
+		//sendChunkData(i, argi[0], argi[1]);
 
 		return true;
 	}

@@ -50,4 +50,6 @@ public:
 	static void shooter_spawnItems(cArg args);
 	static void test_unitAddSystem(cArg args);
 	static void test_consoleSystem(cArg args);
+
+	static void server_sendChunkData(cArg args);
 };

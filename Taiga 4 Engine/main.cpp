@@ -7,6 +7,7 @@ cMath math;
 cConsole console;
 cWindow window;
 cVisual visual;
+cAudio audio;
 cUI ui;
 cPath path;
 cGame game;

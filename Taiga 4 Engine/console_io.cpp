@@ -66,6 +66,7 @@ void cConsole::removeLastFromInput()
 
 void cConsole::flushInput()
 {
+	console.scrollOffset = 0;
 	console.echo << "> " << input << endl;
 	if (input.length() == 0) { return; }
 	cmdHistory.push_back(input);

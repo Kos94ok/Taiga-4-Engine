@@ -13,6 +13,9 @@ public:
 	int myId;
 	bool connected;
 	sf::TcpSocket socket;
+	int ping;
+	int lastPingTime;
+	int lastPongTime;
 
 	void disconnect();
 	void addResource(float value);
@@ -23,6 +26,7 @@ public:
 
 	cServerPlayer() {
 		unit = -1;
+		ping = -1;
 		packet = 0;
 		connected = false;
 		socket.setBlocking(false);
@@ -44,7 +48,10 @@ public:
 	void sendChunkData(int playerId, int x, int y);
 	void assignUnit(int playerId, int unitId);
 
-	void sendEcho(std::string str);
+	void sendEcho(int source, std::string str);
+
+	int pingTimer;
+	void pingPlayers();
 
 	// Takes: Unit global id
 	// Returns: Controlling player id
@@ -67,6 +74,7 @@ public:
 
 	cServer()
 	{
+		pingTimer = 0;
 		dataQueueCounter = 0;
 		for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++) {
 			player[i].myId = i;

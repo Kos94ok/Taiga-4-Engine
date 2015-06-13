@@ -86,3 +86,12 @@ void cScript::test_consoleSystem(cArg args)
 		script.wait(200);
 	}
 }
+
+void cScript::server_sendChunkData(cArg args)
+{
+	int i, arg0, arg1;
+	stringstream(args[0]) >> i;
+	stringstream(args[1]) >> arg0;
+	stringstream(args[2]) >> arg1;
+	server.sendChunkData(i, arg0, arg1);
+}

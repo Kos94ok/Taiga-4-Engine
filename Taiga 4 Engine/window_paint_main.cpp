@@ -608,7 +608,7 @@ void cWindow::paintDebugInfo()
 	// Overlay
 	brushRect.setOrigin(0, 0);
 	brushRect.setPosition(0, 0);
-	brushRect.setSize(sf::Vector2f(150, 70));
+	brushRect.setSize(sf::Vector2f(150, 90));
 	brushRect.setTexture(0);
 	brushRect.setFillColor(sf::Color(0, 0, 0, 150));
 	window.texHandleTop.draw(brushRect, miniMatrix);
@@ -625,8 +625,14 @@ void cWindow::paintDebugInfo()
 	brushText.setString(text);
 	window.texHandleTop.draw(brushText, miniMatrix);
 
+	// Server ping
+	brushText.setPosition(5, 40);
+	text = "Ping: " + to_string(client.ping) + " ms";
+	brushText.setString(text);
+	window.texHandleTop.draw(brushText, miniMatrix);
+
 	// Units
-	brushText.setPosition(5, 50);
+	brushText.setPosition(5, 70);
 	text = "Units: " + to_string(visual.unitsPainted) + " / " + to_string(game.unitCounter);
 	brushText.setString(text);
 	window.texHandleTop.draw(brushText, miniMatrix);

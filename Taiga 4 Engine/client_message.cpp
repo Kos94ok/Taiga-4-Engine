@@ -22,7 +22,7 @@ bool cClient::msgUnit(sf::Packet input)
 			game.unit[game.unitCounter - 1].globalId = id;
 			game.unit[game.unitCounter - 1].owner = argi[2];
 		}
-		//else { console << "[CLIENT_RECEIVE] Duplicate create unit message. Ignoring" << "\n"; }
+		else { console.error << "[cClient::msgUnit / MSG_UNIT_ADD] Duplicate create unit message. Ignoring" << "\n"; }
 		return true;
 	}
 	// ============================================
@@ -87,7 +87,7 @@ bool cClient::msgUnit(sf::Packet input)
 		if (id != -1) {
 			game.unit[id].container.add(type, argi[0]);
 		}
-		else { console << "[cClient::msgUnit / MSG_UNIT_ADDITEM] Can't find target unit!\n"; }
+		else { console.error << "[cClient::msgUnit / MSG_UNIT_ADDITEM] Can't find target unit!\n"; }
 		return true;
 	}
 	// ============================================
@@ -213,9 +213,46 @@ bool cClient::msgGame(sf::Packet input)
 	float argf[] = { 0.00f, 0.00f, 0.00f, 0.00f };
 	bool argb[] = { false, false, false, false };
 	int msg;
-	string cmd, type;
+	string cmd, type, argStr;
 
 	input >> msg;
+	// ============================================
+	// ============================================
+	// Echo
+	if (msg == MSG_ECHO)
+	{
+		input >> argi[0] >> argStr;
+		if (argi[0] == -1) {
+			console.echo << "[ECHO] Server: " << argStr << endl;
+		}
+		else {
+			console.echo << "[ECHO] Player " << argi[0] << ": " << argStr << endl;
+		}
+
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Ping
+	if (msg == MSG_PING)
+	{
+		input.clear();
+		input << MSG_PONG;
+		sendPacket(input);
+		input.clear();
+
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Pong
+	if (msg == MSG_PONG)
+	{
+		client.lastPongTime = timeGetTime();
+		client.ping = client.lastPongTime - client.lastPingTime;
+
+		return true;
+	}
 	// ============================================
 	// ============================================
 	// Console command

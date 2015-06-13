@@ -171,7 +171,25 @@ int cServer::getController(int target)
 	return -1;
 }
 
-void cServer::sendEcho(string str)
+void cServer::sendEcho(int source, string str)
 {
+	sf::Packet data;
+	data << MSG_ECHO << source << str;
+	sendPacket(PLAYERS_REMOTE, data);
+	data.clear();
+}
 
+void cServer::pingPlayers()
+{
+	sf::Packet data;
+	data << MSG_PING;
+	sendPacket(PLAYERS_ALL, data);
+	for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
+	{
+		if (player[i].connected)
+		{
+			player[i].lastPingTime = timeGetTime();
+		}
+	}
+	data.clear();
 }

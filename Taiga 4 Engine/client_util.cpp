@@ -54,3 +54,20 @@ void cClient::disconnect()
 	client.connected = false;
 	client.socket.disconnect();
 }
+
+void cClient::sendEcho(string str)
+{
+	sf::Packet data;
+	data << MSG_ECHO << str;
+	sendPacket(data);
+	data.clear();
+}
+
+void cClient::pingServer()
+{
+	sf::Packet data;
+	data << MSG_PING;
+	sendPacket(data);
+	lastPingTime = timeGetTime();
+	data.clear();
+}
