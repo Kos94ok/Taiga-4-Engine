@@ -1,6 +1,12 @@
 
 #include "define.h"
 
+class cUnitSoundbank
+{
+public:
+	cSound idle;
+};
+
 class cOrder
 {
 public:
@@ -107,6 +113,7 @@ public:
 	cAIBrain ai;
 	cLifeTimer lifeTimer;
 	cItemContainer container;
+	cUnitSoundbank sound;
 
 	float resource;
 	void addResource(float d);

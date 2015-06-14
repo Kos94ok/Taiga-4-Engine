@@ -182,6 +182,7 @@ void cDatabase::loadUnits()
 	unit[i].light.texture = visual.addTexture("light_orange.png");
 	unit[i].light.flickerMod = 0.04f;
 	unit[i].light.flickerTime = 0.25f;
+	unit[i].sound.idle = cSound("fire2.ogg", 50.00f, 0.20f, 100.00f, 300.00f);
 	i += 1;
 
 	// Tent

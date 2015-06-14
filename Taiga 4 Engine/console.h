@@ -56,8 +56,10 @@ public:
 
 cConsole& operator << (cConsole& cmd, std::string str);
 cConsole& operator << (cConsole& cmd, int i);
+cConsole& operator << (cConsole& cmd, float f);
 cSubConsole& operator << (cSubConsole& cmd, std::string str);
 cSubConsole& operator << (cSubConsole& cmd, int i);
+cSubConsole& operator << (cSubConsole& cmd, float f);
 
 void cmd_help(std::string args[]);
 void cmd_echo(std::string args[]);

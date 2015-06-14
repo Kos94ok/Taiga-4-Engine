@@ -29,8 +29,10 @@ void cWindow::mainPaint()
 	{
 		if (core.menuState == STATE_GAME)
 		{
+			//game.access.lock();
 			window.paintTileMap();
 			window.paintUnits();
+			//game.access.unlock();
 			window.paintLighting();
 			window.paintPostFX();
 		}
@@ -56,12 +58,12 @@ void cWindow::mainPaint()
 	core.thread_windowTicks += 1;
 }
 
+cAnimDisplay animDisplay;
 void cWindow::paintUnits()
 {
 	bool cameraIntersection;
 	float step = 20.00f;
 	sf::RenderStates renderState;
-	cAnimDisplay animDisplay;
 	// Check step
 	if (settings.unitDepthCheck == 0) { step = 10.00f; }
 	else if (settings.unitDepthCheck == 1) { step = 5.00f; }
@@ -259,7 +261,7 @@ void cWindow::paintUnits()
 							min(game.ambientLight, 255.0f),
 							min(game.ambientLight, 255.0f)));
 					}
-					brushRect.setPosition(game.unit[i].pos.x, game.unit[i].pos.y);
+					brushRect.setPosition((game.unit[i].pos.x), (game.unit[i].pos.y));
 					brushRect.setOrigin(game.unit[i].center.x, game.unit[i].center.y);
 					brushRect.setSize(sf::Vector2f(game.unit[i].size.x, game.unit[i].size.y));
 						// Editor selection
@@ -292,10 +294,11 @@ void cWindow::paintUnits()
 	game.access.unlock();
 }
 
+sf::FloatRect tileRect, tileRectTex;
+sf::IntRect intRectTex;
 void cWindow::paintTileMap()
 {
 	sf::Vector2u texSize = visual.gameTex[database.texture[TEX_WORLD_GROUND]].handle.getSize();
-	sf::FloatRect tileRect, tileRectTex;
 	sf::Transform miniMatrix;
 	miniMatrix.scale(sf::Vector2f(settings.sampleMod, settings.sampleMod));
 
@@ -314,8 +317,12 @@ void cWindow::paintTileMap()
 			min(game.ambientLight, 255.0f),
 			min(game.ambientLight, 255.0f)));
 	}
-	brushRect.setPosition(tileRect.left, tileRect.top);
-	brushRect.setTextureRect(sf::IntRect(tileRectTex));
+	intRectTex = sf::IntRect(tileRectTex.left, tileRectTex.top, tileRectTex.width, tileRectTex.height);
+	brushRect.setPosition((float)intRectTex.left - tileRectTex.left, (float)intRectTex.top - tileRectTex.top);
+	brushRect.setTextureRect(intRectTex);
+
+	/*brushRect.setPosition(0.00f, 0.00f);
+	brushRect.setTextureRect(sf::IntRect(tileRectTex));*/
 	window.texHandle.draw(brushRect);
 	if (settings.enableBetterShadows) { window.texHandleShadow.draw(brushRect); }
 }

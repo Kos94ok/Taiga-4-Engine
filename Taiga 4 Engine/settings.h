@@ -57,6 +57,21 @@ public:
 	// Path fork chance [Increases the amount of paths on the map]
 	int wgPathForkChance;
 
+	// Camera listener [Positional sound is calculated from camera position]
+	int enableCameraListener;
+	// Master volume
+	float volMaster;
+	// Music volume
+	float volMusic;
+	// Special effect volume
+	float volEffects;
+	// Ambient sound volume
+	float volAmbient;
+	// Weather sound volume
+	float volWeather;
+	// Footstep volume
+	float volFootsteps;
+
 	// Day-night cycle speed
 	float wdDayNightSpeed;
 	// Night transition speed

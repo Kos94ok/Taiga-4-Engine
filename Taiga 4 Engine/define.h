@@ -30,6 +30,7 @@
 #define LIMIT_CHUNKSIZE					500
 #define LIMIT_ICONSIZE					24
 #define LIMIT_SCRIPTCOUNT				64
+#define LIMIT_SOUND						64
 
 #define STATE_UNDEFINED					-1
 #define STATE_MAINMENU					0

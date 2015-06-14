@@ -19,6 +19,11 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool
 			unit[unitCounter].chunkPos = world.getChunkInPos(pos);
 			unit[unitCounter].owner = owner;
 			if (core.serverMode || core.localServer) { unit[unitCounter].globalId = unitGlobalCounter++; }
+			// Playing the sound
+			if (unit[unitCounter].sound.idle.name != "") {
+				audio.playSound(cSoundQueue(unit[unitCounter].sound.idle, unit[unitCounter].globalId, true));
+			}
+			// Incrementing
 			unitCounter += 1;
 		}
 		else { console.error << "[ERROR] Unit limit reached!" << "\n"; }

@@ -30,3 +30,39 @@ int cUtil::getInventorySortingType()
 {
 	return SORT_BYNAME;
 }
+
+void cUtil::checkLogFiles()
+{
+	int fileSize;
+	ifstream file;
+	ofstream clr;
+
+	// Game log
+	if (!core.serverMode)
+	{
+		file.open("Logs//game.txt");
+		file.seekg(0, file.end);
+		fileSize = (int)file.tellg();
+		file.close();
+		// Filesize is more than a megabyte
+		if (fileSize > 1000000) {
+			ofstream clr;
+			clr.open("Logs//game.txt");
+			clr.close();
+		}
+	}
+	// Server mode
+	else
+	{
+		file.open("Logs//server.txt");
+		file.seekg(0, file.end);
+		fileSize = (int)file.tellg();
+		file.close();
+		// Filesize is more than a megabyte
+		if (fileSize > 1000000) {
+			ofstream clr;
+			clr.open("Logs//server.txt");
+			clr.close();
+		}
+	}
+}

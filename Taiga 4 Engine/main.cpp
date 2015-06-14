@@ -38,12 +38,11 @@ int main(int argc, char* argv[])
 	{
 		if (strcmp(argv[i], "-server") == 0) { core.serverMode = true; }
 	}
+	util.checkLogFiles();
 	console << "[MAIN] Main thread started" << "\n";
 	console << "[MAIN] Parsed [" << argc << "] arguments" << "\n";
 	// Random initialization
 	console << "[MAIN] Initializing" << "\n";
-	//setlocale(LC_ALL, "");
-	//setlocale(LC_ALL, "Russian");
 	srand(time(0));
 	timeBeginPeriod(5);
 	if (!core.serverMode) { core.localServer = true; }
@@ -60,53 +59,24 @@ int main(int argc, char* argv[])
 
 	// Starting the threads
 	console << "[MAIN] Starting the threads\n";
-	thread threadWindow(windowMain);
-	Sleep(10);
-	thread threadServerWorld(serverWorldMain);
-	Sleep(10);
-	thread threadServerConnect(serverConnectMain);
-	Sleep(10);
-	thread threadServerReceive(serverReceiveMain);
-	Sleep(10);
-	thread threadServerSend(serverSendMain);
-	Sleep(10);
-	thread threadClientReceive(clientReceiveMain);
-	Sleep(10);
-	thread threadClientSend(clientSendMain);
-	Sleep(10);
-	thread threadWorldLoader(worldLoaderMain);
-	Sleep(10);
-	thread threadAICore(AICoreMain);
-	Sleep(10);
+	thread threadWindow(windowMain);					Sleep(10);
+	thread threadServerWorld(serverWorldMain);			Sleep(10);
+	thread threadServerConnect(serverConnectMain);		Sleep(10);
+	thread threadServerReceive(serverReceiveMain);		Sleep(10);
+	thread threadServerSend(serverSendMain);			Sleep(10);
+	thread threadClientReceive(clientReceiveMain);		Sleep(10);
+	thread threadClientSend(clientSendMain);			Sleep(10);
+	thread threadWorldLoader(worldLoaderMain);			Sleep(10);
+	thread threadAICore(AICoreMain);					Sleep(10);
+	thread threadAudio(audioMain);						Sleep(10);
 	
 	// Initializing the server
-	if (core.serverMode)
-	{
+	if (core.serverMode) {
 		server.initialize();
 	}
-	else
-	{
-		// Creating the menu
-		console << "[MAIN] Making some menu" << "\n";
-		//ui.element[ui.getElementId(id)].s
-		int id = ui.addElement("image", vec2f(camera.res.x / 2, camera.res.y / 2));
-		ui.element[ui.getElementId(id)].texture = visual.addTexture("bg_art.png");
-		ui.element[ui.getElementId(id)].size = vec2f(camera.res.x, camera.res.y);
-		id = ui.createText(vec2f(camera.res.x / 2, camera.res.y / 2 - 70), "Taiga Survival Alpha v0.10", "That is a tooltip!");
-		ui.element[ui.getElementId(id)].ignoreOrigin = false;
-		//ui.element[ui.getElementId(id)].tooltip.pos
-		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 0.00f));
-		ui.element[ui.getElementId(id)].setText("Taiga Mini");
-		ui.element[ui.getElementId(id)].button.action = "start_taigaMaxi";
-		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 35.00f));
-		ui.element[ui.getElementId(id)].setText("Generic Shooter");
-		ui.element[ui.getElementId(id)].button.action = "start_genericShooter";
-		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 70.00f));
-		ui.element[ui.getElementId(id)].setText("Editor");
-		ui.element[ui.getElementId(id)].button.action = "start_editor";
-		id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 105.00f));
-		ui.element[ui.getElementId(id)].setText("Quick Connect");
-		ui.element[ui.getElementId(id)].button.action = "connect_temp";
+	// Creating the menu
+	else {
+		script.ui_initialMenu(0);
 	}
 	game.access.unlock();
 
@@ -126,8 +96,8 @@ int main(int argc, char* argv[])
 			core.thread_serverWorldTicks = 0;
 		}
 		// Adding some antifreeze
-		for (int i = 0; i < 9; i++) {
-			if (!(core.serverMode && (i == 5 || i == 6))) { core.thread_antifreeze[i] += 1; }
+		for (int i = 0; i < 10; i++) {
+			if (!(core.serverMode && (i == 5 || i == 6 || i == 9))) { core.thread_antifreeze[i] += 1; }
 			if (core.thread_antifreeze[i] > 1000) {
 				core.thread_antifreeze[i] = 0;
 				console.error << "[MAIN] Thread " << i << " appears to be frozen..." << endl;
@@ -143,6 +113,7 @@ int main(int argc, char* argv[])
 		script.threadVector[i].join();
 	}
 	console << "[MAIN] Waiting for core threads to finish..." << "\n";
+	core.thread_shutdown[9] = true;		threadAudio.join();
 	core.thread_shutdown[8] = true;		threadAICore.join();
 	core.thread_shutdown[7] = true;		threadWorldLoader.join();
 	core.thread_shutdown[6] = true;		threadClientSend.join();

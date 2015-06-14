@@ -27,6 +27,7 @@ class cUtil
 public:
 	void detectVideoCard();
 	int getInventorySortingType();
+	void checkLogFiles();
 };
 
 class cValue

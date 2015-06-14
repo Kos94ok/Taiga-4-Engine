@@ -109,6 +109,7 @@
     <ClCompile Include="animation_main.cpp" />
     <ClCompile Include="api_main.cpp" />
     <ClCompile Include="audio_main.cpp" />
+    <ClCompile Include="audio_util.cpp" />
     <ClCompile Include="camera_main.cpp" />
     <ClCompile Include="client_main.cpp" />
     <ClCompile Include="client_message.cpp" />

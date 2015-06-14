@@ -51,5 +51,6 @@ public:
 	static void test_unitAddSystem(cArg args);
 	static void test_consoleSystem(cArg args);
 
+	static void ui_initialMenu(cArg args);
 	static void server_sendChunkData(cArg args);
 };

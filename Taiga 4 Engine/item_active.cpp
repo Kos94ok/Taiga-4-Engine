@@ -31,7 +31,7 @@ void cItem::use()
 		unitId = game.getUnitId(window.getMousePos(true), REF_UNIT_TREE);
 		if (unitId != -1)
 		{
-			data << MSG_CONTROLS_AXE << game.unit[unitId].globalId << true;
+			data << MSG_CONTROLS_AXE << unitId << true;
 			client.sendPacket(data);
 			data.clear();
 		}
@@ -42,7 +42,7 @@ void cItem::use()
 		unitId = game.getUnitId(window.getMousePos(true), REF_UNIT_STONE);
 		if (unitId != -1)
 		{
-			data << MSG_CONTROLS_PICKAXE << game.unit[unitId].globalId << true;
+			data << MSG_CONTROLS_PICKAXE << unitId << true;
 			client.sendPacket(data);
 			data.clear();
 		}

@@ -65,6 +65,15 @@ void cSettings::setDefault()
 	this->consoleFontSize = 14;
 	this->consoleLineSpacing = 0;
 
+	// Audio settings
+	this->enableCameraListener = 1;
+	this->volMaster = 1.00f;
+	this->volMusic = 1.00f;
+	this->volEffects = 1.00f;
+	this->volAmbient = 1.00f;
+	this->volWeather = 1.00f;
+	this->volFootsteps = 1.00f;
+
 	// Hotkeys
 	this->hkInventory = sf::Keyboard::E;
 		// Buttons [1; LIMIT) reserved for the items / abilities
@@ -141,6 +150,14 @@ void cSettings::load()
 		else if (key.name == "consoleFontSize") { consoleFontSize = math.stringToInt(key.value); }
 		else if (key.name == "consoleLineSpacing") { consoleLineSpacing = math.stringToInt(key.value); }
 		else if (key.name == "consoleScrollSpeed") { consoleScrollSpeed = math.stringToInt(key.value); }
+			// Audio
+		else if (key.name == "enableCameraListener") { enableCameraListener = math.stringToInt(key.value); }
+		else if (key.name == "volumeMaster") { volMaster = (float)math.stringToInt(key.value) / 100.00f; }
+		else if (key.name == "volumeMusic") { volMusic = (float)math.stringToInt(key.value) / 100.00f; }
+		else if (key.name == "volumeEffects") { volEffects = (float)math.stringToInt(key.value) / 100.00f; }
+		else if (key.name == "volumeAmbient") { volAmbient = (float)math.stringToInt(key.value) / 100.00f; }
+		else if (key.name == "volumeWeather") { volWeather = (float)math.stringToInt(key.value) / 100.00f; }
+		else if (key.name == "volumeFootsteps") { volFootsteps = (float)math.stringToInt(key.value) / 100.00f; }
 			// Keyboard
 		else if (key.name == "hkInventory") { hkInventory = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkActiveItem01") { hkActiveItem[1] = sf::Keyboard::Key(math.stringToInt(key.value)); }
@@ -199,6 +216,15 @@ void cSettings::save()
 		file << "consoleFontSize = " << consoleFontSize << "\n";
 		file << "consoleLineSpacing = " << consoleLineSpacing << "\n";
 		file << "consoleScrollSpeed = " << consoleScrollSpeed << "\n";
+
+		file << endl << "[Audio]" << "\n";
+		file << "enableCameraListener = " << enableCameraListener << "\n";
+		file << "volumeMaster = " << math.round(volMaster * 100.00f) << "\n";
+		file << "volumeMusic = " << math.round(volMusic * 100.00f) << "\n";
+		file << "volumeEffects = " << math.round(volEffects * 100.00f) << "\n";
+		file << "volumeAmbient = " << math.round(volAmbient * 100.00f) << "\n";
+		file << "volumeWeather = " << math.round(volWeather * 100.00f) << "\n";
+		file << "volumeFootsteps = " << math.round(volFootsteps * 100.00f) << "\n";
 
 		file << endl << "[Keyboard]" << "\n";
 		file << "hkInventory = " << hkInventory << "\n";

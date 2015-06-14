@@ -87,6 +87,29 @@ void cScript::test_consoleSystem(cArg args)
 	}
 }
 
+void cScript::ui_initialMenu(cArg args)
+{
+	console << "[MAIN] Making some menu" << "\n";
+	int id = ui.addElement("image", vec2f(camera.res.x / 2, camera.res.y / 2));
+	ui.element[ui.getElementId(id)].texture = visual.addTexture("bg_art.png");
+	ui.element[ui.getElementId(id)].size = vec2f(camera.res.x, camera.res.y);
+	id = ui.createText(vec2f(camera.res.x / 2, camera.res.y / 2 - 70), "Taiga Survival Alpha v0.10", "That is a tooltip!");
+	ui.element[ui.getElementId(id)].ignoreOrigin = false;
+	//ui.element[ui.getElementId(id)].tooltip.pos
+	id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 0.00f));
+	ui.element[ui.getElementId(id)].setText("Taiga Mini");
+	ui.element[ui.getElementId(id)].button.action = "start_taigaMaxi";
+	id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 35.00f));
+	ui.element[ui.getElementId(id)].setText("Generic Shooter");
+	ui.element[ui.getElementId(id)].button.action = "start_genericShooter";
+	id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 70.00f));
+	ui.element[ui.getElementId(id)].setText("Editor");
+	ui.element[ui.getElementId(id)].button.action = "start_editor";
+	id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 105.00f));
+	ui.element[ui.getElementId(id)].setText("Quick Connect");
+	ui.element[ui.getElementId(id)].button.action = "connect_temp";
+}
+
 void cScript::server_sendChunkData(cArg args)
 {
 	int i, arg0, arg1;

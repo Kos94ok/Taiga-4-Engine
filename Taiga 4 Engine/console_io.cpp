@@ -1,27 +1,33 @@
 
 #include "main.h"
 
-cConsole& operator << (cConsole& cmd, std::string str)
-{
+cConsole& operator << (cConsole& cmd, std::string str) {
 	cmd.output(str);
 	return cmd;
 }
 
-cConsole& operator << (cConsole& cmd, int i)
-{
+cConsole& operator << (cConsole& cmd, int i) {
 	cmd.output(to_string(i));
 	return cmd;
 }
 
-cSubConsole& operator << (cSubConsole& cmd, std::string str)
-{
+cConsole& operator << (cConsole& cmd, float f) {
+	cmd.output(to_string(f));
+	return cmd;
+}
+
+cSubConsole& operator << (cSubConsole& cmd, std::string str) {
 	console.output(str, cmd.type);
 	return cmd;
 }
 
-cSubConsole& operator << (cSubConsole& cmd, int i)
-{
+cSubConsole& operator << (cSubConsole& cmd, int i) {
 	console.output(to_string(i), cmd.type);
+	return cmd;
+}
+
+cSubConsole& operator << (cSubConsole& cmd, float f) {
+	console.output(to_string(f), cmd.type);
 	return cmd;
 }
 

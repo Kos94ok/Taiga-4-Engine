@@ -249,6 +249,9 @@
     <ClCompile Include="math_main.cpp">
       <Filter>Файлы исходного кода\Util</Filter>
     </ClCompile>
+    <ClCompile Include="audio_util.cpp">
+      <Filter>Файлы исходного кода\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
