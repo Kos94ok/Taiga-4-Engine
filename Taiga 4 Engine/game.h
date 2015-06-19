@@ -31,9 +31,12 @@ public:
 		itemGlobalCounter = 0;
 	}
 
-	// Takes: Unit type, Unit position
+	// Takes: Unit type, Unit position, Owner, Variation, Data send flag, Global Id
 	// Returns: Unit global id
-	int addUnit(std::string type, sf::Vector2f pos, int owner = -1, int variation = -1, bool sendData = true);
+	int addUnit(std::string type, sf::Vector2f pos, int owner = -1, int variation = -1, bool sendData = true, int overrideGlobalId = -1);
+	// Takes: Unit type, Unit position, Unit Global Id
+	// Returns: Unit global id
+	int addUnitID(std::string type, sf::Vector2f pos, int globalId = -1);
 	// Takes: Unit global id
 	// Returns: Nothing
 	void removeUnit(int id, bool sendData = true);

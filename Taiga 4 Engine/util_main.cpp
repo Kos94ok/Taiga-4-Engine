@@ -66,3 +66,12 @@ void cUtil::checkLogFiles()
 		}
 	}
 }
+
+bool cUtil::intersects(vec2f pos, vec2f rectPos, vec2f rectSize)
+{
+	if (pos.x < rectPos.x) { return false; }
+	if (pos.y < rectPos.y) { return false; }
+	if (pos.x > rectPos.x + rectSize.x) { return false; }
+	if (pos.y > rectPos.y + rectSize.y) { return false; }
+	return true;
+}

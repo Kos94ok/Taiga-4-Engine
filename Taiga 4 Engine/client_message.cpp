@@ -18,9 +18,7 @@ bool cClient::msgUnit(sf::Packet input)
 		input >> id >> type >> argf[0] >> argf[1] >> argi[2] >> argi[3];
 		if (game.getUnitId(id) == -1)
 		{
-			game.addUnit(type, sf::Vector2f(argf[0], argf[1]), argi[2], argi[3], false);
-			game.unit[game.unitCounter - 1].globalId = id;
-			game.unit[game.unitCounter - 1].owner = argi[2];
+			game.addUnit(type, sf::Vector2f(argf[0], argf[1]), argi[2], argi[3], false, id);
 		}
 		else { console.error << "[cClient::msgUnit / MSG_UNIT_ADD] Duplicate create unit message. Ignoring" << "\n"; }
 		return true;

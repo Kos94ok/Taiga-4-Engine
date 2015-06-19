@@ -2,8 +2,9 @@
 #include "main.h"
 
 // Copy unit from database
-int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool sendData)
+int cGame::addUnit(string type, vec2f pos, int owner, int variation, bool sendData, int overrideGlobalId)
 {
+	int globalId;
 	access.lock();
 	if (!sendData || core.serverMode || core.localServer)
 	{
@@ -18,10 +19,13 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool
 			unit[unitCounter].pos = pos;
 			unit[unitCounter].chunkPos = world.getChunkInPos(pos);
 			unit[unitCounter].owner = owner;
-			if (core.serverMode || core.localServer) { unit[unitCounter].globalId = unitGlobalCounter++; }
+			// Looking for global id
+			if (overrideGlobalId != -1) { globalId = overrideGlobalId; }
+			else if (core.localServer || core.serverMode) { globalId = unitGlobalCounter++; }
+			unit[unitCounter].globalId = globalId;
 			// Playing the sound
 			if (unit[unitCounter].sound.idle.name != "") {
-				audio.playSound(cSoundQueue(unit[unitCounter].sound.idle, unit[unitCounter].globalId, true));
+				audio.playSound(cSoundQueue(unit[unitCounter].sound.idle, globalId, true));
 			}
 			// Incrementing
 			unitCounter += 1;
@@ -33,11 +37,17 @@ int cGame::addUnit(string type, sf::Vector2f pos, int owner, int variation, bool
 	if (sendData && (core.serverMode || core.localServer))
 	{
 		sf::Packet data;
-		data << MSG_UNIT_ADD << unitGlobalCounter - 1 << type << pos.x << pos.y << owner << variation;
+		data << MSG_UNIT_ADD << globalId << type << pos.x << pos.y << owner << variation;
 		server.sendPacket(PLAYERS_REMOTE, data);
 	}
 	access.unlock();
-	return game.unitGlobalCounter - 1;
+	return globalId;
+}
+
+// Add unit - simple version
+int cGame::addUnitID(string type, vec2f pos, int globalId)
+{
+	return addUnit(type, pos, -1, -1, true, globalId);
 }
 
 // Remove unit by global id

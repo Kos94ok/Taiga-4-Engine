@@ -64,7 +64,7 @@ void cWorld::loadChunk(vec2i pos)
 	{
 		if (game.getUnitId(unitList[i].globalId) == -1)
 		{
-			id = game.addUnit(unitList[i].type, anchor + unitList[i].pos, -1, -1, false);
+			id = game.addUnit(unitList[i].type, anchor + unitList[i].pos, -1, -1, false, unitList[i].globalId);
 			// If the object has global id assigned, load additional information
 			if (unitList[i].globalId != -1) {
 				// Global Id
@@ -80,8 +80,8 @@ void cWorld::loadChunk(vec2i pos)
 			game.getUnit(id).chunkPos = pos;
 			if (pos != world.getChunkInPos(anchor + unitList[i].pos))
 			{
-				console.error << "ALARMA: " << pos.x << "; " << pos.y << " / " << world.getChunkInPos(game.unit[game.getUnitId(id)].pos).x << "; "
-					<< world.getChunkInPos(game.unit[game.getUnitId(id)].pos).y << endl;
+				console.error << "[ERROR] Unit located at the wrong chunk. Expected: " << pos.x << "; " << pos.y << " / Real: "
+					<< world.getChunkInPos(game.unit[game.getUnitId(id)].pos).x << "; " << world.getChunkInPos(game.unit[game.getUnitId(id)].pos).y << endl;
 			}
 		}
 	}

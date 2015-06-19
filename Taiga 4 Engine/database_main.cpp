@@ -70,8 +70,9 @@ void cDatabase::loadUnits()
 	unit[i].light.power = 320.00f;
 	unit[i].light.texture = visual.addTexture("light_whiteWeak.png");
 	unit[i].container.itemLimit = 1000;
-	unit[i].interactDistance = 20.00f;
+	//unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
+	unit[i].selectionOffset = vec2f(-1.50f, -7.00f);
 	unit[i].addRef(REF_UNIT_NOUNLOAD);
 	unit[i].addRef(REF_UNIT_BESTPATHING);
 	i += 1;
@@ -104,8 +105,10 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_DEATH].side.frameCount = 4;
 	unit[i].animData[ANIM_DEATH].side.frameDelay = 0.75f;
 	unit[i].animData[ANIM_DEATH].side.tex = visual.addTexture("tree_basic_a_death.png");
-	unit[i].interactDistance = 35.00f;
+	unit[i].interactDistance = 15.00f;
 	unit[i].collisionDistance = 10.00f;
+	unit[i].selectionOffset.x = -1.00f;
+	unit[i].selectionOffset.y = -3.00f;
 	unit[i].addItem("material_wood");
 	unit[i].addRef(REF_UNIT_TREE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
@@ -116,12 +119,16 @@ void cDatabase::loadUnits()
 	unit[i].center = vec2(52, 170);
 	unit[i].shadowOffset = vec2(0, -1);
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_b_idle.png");
+	unit[i].selectionOffset.x = 0.00f;
+	unit[i].selectionOffset.y = -3.00f;
 	i += 1;
 
 	unit[i] = unit[i - 1];
 	unit[i].type = "tree_basic_c";
 	unit[i].shadowOffset = vec2(0, 0);
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_c_idle.png");
+	unit[i].selectionOffset.x = -3.00f;
+	unit[i].selectionOffset.y = -8.00f;
 	i += 1;
 
 	unit[i] = unit[i - 1];
@@ -129,6 +136,8 @@ void cDatabase::loadUnits()
 	unit[i].center = vec2(50, 160);
 	unit[i].shadowOffset = vec2(0, -10);
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_d_idle.png");
+	unit[i].selectionOffset.x = 0.00f;
+	unit[i].selectionOffset.y = 0.00f;
 	i += 1;
 
 	// Stones
@@ -142,6 +151,7 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_a_idle.png");
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 25.00f;
+	unit[i].selectionOffset.y = -10.00f;
 	unit[i].addItem("material_stone");
 	unit[i].addRef(REF_UNIT_STONE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
@@ -177,7 +187,9 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("campfire_idle_shadow.png");
 	unit[i].animData[ANIM_IDLE].side.frameCount = 4;
 	unit[i].animData[ANIM_IDLE].side.frameDelay = 0.20f;
+	unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
+	unit[i].selectionOffset = vec2f(0.00f, -10.00f);
 	unit[i].light.power = 700.00f;
 	unit[i].light.texture = visual.addTexture("light_orange.png");
 	unit[i].light.flickerMod = 0.04f;
@@ -193,7 +205,9 @@ void cDatabase::loadUnits()
 	unit[i].health = 5000.00f;
 	unit[i].maxHealth = 5000.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tent_basic.png");
+	unit[i].interactDistance = 42.00f;
 	unit[i].collisionDistance = 35.00f;
+	unit[i].selectionOffset = vec2f(2.50f, -13.00f);
 	i += 1;
 
 	// Other
@@ -530,6 +544,7 @@ void cDatabase::loadTextures()
 {
 	database.texture[TEX_UI_TOOLTIP] = visual.addTexture("ui_tooltip.png");
 	database.texture[TEX_WORLD_GROUND] = visual.addTexture("bg_snow.jpg");
-	database.texture[TEX_ICON_MAIN] = visual.addTexture("icon_main.ico");
+	database.texture[TEX_ICON_WINDOW] = visual.addTexture("icon_main.ico");
+	database.texture[TEX_SELECTION_CIRCLE] = visual.addTexture("selectionWhite512.png");
 }
 

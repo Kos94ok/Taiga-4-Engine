@@ -28,6 +28,8 @@ public:
 	void detectVideoCard();
 	int getInventorySortingType();
 	void checkLogFiles();
+	
+	bool intersects(sf::Vector2f pos, sf::Vector2f rectPos, sf::Vector2f rectSize);
 };
 
 class cValue

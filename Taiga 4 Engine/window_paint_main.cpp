@@ -101,6 +101,7 @@ void cWindow::paintUnits()
 		cameraTop -= 150;	cameraBot += 750;
 	}
 
+	// Random initialization
 	float unitLeft, unitRight;
 	sf::FloatRect camRect(camera.pos.x, camera.pos.y, camera.res.x, camera.res.y);
 	sf::FloatRect objRect;
@@ -125,7 +126,27 @@ void cWindow::paintUnits()
 					&& ( (game.unit[i].pos.y >= y && game.unit[i].pos.y < y + step && unitRight >= cameraLeft && unitLeft <= cameraRight)
 					|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE) && y == cameraTop) )) 
 				{
-					// Animation
+					// Display the selection circle
+					if (visual.hoveredUnit == game.unit[i].globalId)
+					{
+						brushRect.setRotation(0.00f);
+						brushRect.setScale(1.00f, 1.00f);
+						brushRect.setFillColor(sf::Color(255, 127, 0));
+						brushRect.setPosition(game.unit[i].pos + game.unit[i].selectionOffset);
+						brushRect.setOrigin(game.unit[i].interactDistance, game.unit[i].interactDistance);
+						brushRect.setSize(vec2f(game.unit[i].interactDistance * 2, game.unit[i].interactDistance * 2));
+						brushRect.setTexture(&visual.gameTex[database.texture[TEX_SELECTION_CIRCLE]].handle, true);
+
+						// Last-minute check
+						if (!settings.enableBetterShadows) { window.texHandle.draw(brushRect, window.matrixHandle); }
+						else
+						{
+							if (u == 0) { window.texHandle.draw(brushRect, window.matrixHandle); }
+							else { window.texHandleShadow.draw(brushRect, window.matrixHandle); }
+						}
+					}
+
+					// Unit animation
 					animDisplay = game.unit[i].getCurrentAnimDirection();
 
 					int anim = game.unit[i].anim.type;
@@ -256,6 +277,9 @@ void cWindow::paintUnits()
 					brushRect.setRotation(0.00f);
 					brushRect.setScale(1.00f, 1.00f);
 					brushRect.setFillColor(sf::Color(255, 255, 255));
+					if (visual.hoveredUnit == game.unit[i].globalId) {
+						//brushRect.setFillColor(sf::Color(255, 230, 200));
+					}
 					if (!settings.enableDynamicLight) { brushRect.setFillColor(sf::Color(
 							min(game.ambientLight, 255.0f),
 							min(game.ambientLight, 255.0f),

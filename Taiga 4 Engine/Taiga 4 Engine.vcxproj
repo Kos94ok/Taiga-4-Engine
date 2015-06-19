@@ -157,6 +157,7 @@
     <ClCompile Include="UI_util.cpp" />
     <ClCompile Include="unit_main.cpp" />
     <ClCompile Include="util_main.cpp" />
+    <ClCompile Include="visual_gen.cpp" />
     <ClCompile Include="visual_main.cpp" />
     <ClCompile Include="window_event.cpp" />
     <ClCompile Include="window_main.cpp" />

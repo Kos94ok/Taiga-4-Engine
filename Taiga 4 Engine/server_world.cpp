@@ -228,6 +228,19 @@ void serverWorldAnim(int elapsedTime)
 		game.ambientLight -= timevar * settings.wdNightChangeSpeed;
 		if (game.ambientLight < game.ambientLightMin) { game.ambientLight = game.ambientLightMin; }
 	}
+
+	// Hovered unit
+	int oldHover = visual.hoveredUnit;
+	visual.hoveredUnit = -1;
+	vec2f mousePos = window.getMousePos(true);
+	for (int i = 0; i < game.unitCounter; i++)
+	{
+		if (util.intersects(mousePos, game.unit[i].pos - game.unit[i].center, game.unit[i].size)
+			&& (visual.hoveredUnit == -1 || game.unit[i].globalId == oldHover)) {
+			visual.hoveredUnit = game.unit[i].globalId;
+		}
+	}
+
 	game.access.unlock();
 }
 
@@ -437,8 +450,7 @@ void serverWorldUnits(int elapsedTime)
 			game.killUnit(game.unit[i].globalId);
 		}
 	}
-}
-	
+}	
 
 void serverWorldMain()
 {

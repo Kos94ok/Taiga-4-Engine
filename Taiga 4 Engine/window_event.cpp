@@ -216,7 +216,7 @@ void cWindow::mainEvent()
 		// =========================================================
 		// Camera
 			// Snap camera to character
-		if (eventPoll.type == sf::Event::KeyPressed && eventPoll.key.code == sf::Keyboard::Space)
+		if (eventPoll.type == sf::Event::KeyPressed && eventPoll.key.code == sf::Keyboard::Space && !console.displayed)
 		{
 			camera.moveto(game.unit[game.getUnitId(client.unit)].pos);
 			camera.moveVector.x = 0.50f;

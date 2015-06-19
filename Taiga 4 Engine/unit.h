@@ -76,6 +76,7 @@ public:
 	sf::Vector2f center;
 	sf::Vector2f size;
 	sf::Vector2f shadowOffset;
+	sf::Vector2f selectionOffset;
 	float interactDistance;
 	float collisionDistance;
 	float flyingHeight;
