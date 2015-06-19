@@ -28,6 +28,7 @@ public:
 	void detectVideoCard();
 	int getInventorySortingType();
 	void checkLogFiles();
+	std::string getCurrentTimeString();
 	
 	bool intersects(sf::Vector2f pos, sf::Vector2f rectPos, sf::Vector2f rectSize);
 };

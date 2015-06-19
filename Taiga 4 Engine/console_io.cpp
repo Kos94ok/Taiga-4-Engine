@@ -38,12 +38,17 @@ void cConsole::output(std::string str, int subConsole)
 	waitingQueue += str;
 	if (str.length() >= 1 && str.substr(str.length() - 1) == "\n")
 	{
+		// Adding time string
+		waitingQueue = util.getCurrentTimeString() + " - " + waitingQueue;
+
+		// Flushing to file
 		ofstream file;
 		if (!core.serverMode) { file.open("Logs//game.txt", ios::app); }
 		else { file.open("Logs//server.txt", ios::app); }
 		file << waitingQueue;
 		file.close();
 
+		// Flushing to console
 		outputQueue.push_back(waitingQueue);
 		history[SUBCMD_ALL].push_back(sf::String(waitingQueue, locale("russian")));
 		history[subConsole].push_back(sf::String(waitingQueue, locale("russian")));

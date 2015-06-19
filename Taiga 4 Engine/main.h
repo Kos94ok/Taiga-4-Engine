@@ -8,6 +8,8 @@ typedef sf::Vector2f		vec;
 typedef sf::Vector2f		vec2;
 typedef sf::Vector2f		vec2f;
 typedef sf::Vector2i		vec2i;
+typedef std::string			str;
+typedef sf::Color			color;
 
 #include "math.h"
 #include "util.h"

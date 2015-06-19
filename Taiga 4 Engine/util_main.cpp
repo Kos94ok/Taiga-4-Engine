@@ -67,6 +67,32 @@ void cUtil::checkLogFiles()
 	}
 }
 
+string cUtil::getCurrentTimeString()
+{
+	time_t t = time(0);
+	struct tm time;
+	localtime_s(&time, &t);
+	string retVal = "";
+	// Hours
+	if (time.tm_hour < 10) {
+		retVal += "0";
+	}
+	retVal += to_string(time.tm_hour);
+	retVal += ":";
+	// Minutes
+	if (time.tm_min < 10) {
+		retVal += "0";
+	}
+	retVal += to_string(time.tm_min);
+	retVal += ":";
+	// Seconds
+	if (time.tm_sec < 10) {
+		retVal += "0";
+	}
+	retVal += to_string(time.tm_sec);
+	return retVal;
+}
+
 bool cUtil::intersects(vec2f pos, vec2f rectPos, vec2f rectSize)
 {
 	if (pos.x < rectPos.x) { return false; }

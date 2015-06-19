@@ -51,11 +51,10 @@ void audioMain()
 					audio.sound[slot].setVolume(data.volume);
 				}
 				else {
-					audio.sound[slot].setVolume(100.00f);
+					audio.sound[slot].setVolume(0.00f);
 				}
 				audio.sound[slot].setLoop(audio.soundData[slot].loop);
 				audio.sound[slot].play();
-				console.debug << "[DEBUG] Execute sound!" << endl;
 			}
 			// Sound not found
 			else {
@@ -92,8 +91,6 @@ void audioMain()
 					// Stopping if the unit does not exist
 					else if (unit->type == "missingno") {
 						audio.sound[i].stop();
-						console.debug << "[DEBUG] Unit Id: " << audio.soundData[i].unitId << endl;
-						console.debug << "[DEBUG] Stopping sound!" << endl;
 					}
 				}
 			}
