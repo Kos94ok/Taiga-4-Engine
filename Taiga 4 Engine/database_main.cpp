@@ -249,6 +249,14 @@ void cDatabase::loadUnits()
 	unit[i].addRef(REF_UNIT_NOSHADOW);
 	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE);
 	i += 1;
+
+	unit[i].type = "fogofwar";
+	unit[i].size = vec2(500.00f, 500.00f);
+	unit[i].center = unit[i].size / 2.00f;
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("grey.png");
+	unit[i].addRef(REF_UNIT_NOSHADOW);
+	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE);
+	i += 1;
 }
 
 void cDatabase::loadItems()
@@ -544,7 +552,6 @@ void cDatabase::loadTextures()
 {
 	database.texture[TEX_UI_TOOLTIP] = visual.addTexture("ui_tooltip.png");
 	database.texture[TEX_WORLD_GROUND] = visual.addTexture("bg_snow.jpg");
-	database.texture[TEX_ICON_WINDOW] = visual.addTexture("icon_main.ico");
 	database.texture[TEX_SELECTION_CIRCLE] = visual.addTexture("selectionWhite512.png");
 }
 

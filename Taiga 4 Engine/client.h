@@ -29,6 +29,7 @@ public:
 	void connect(std::string ip, short port);
 	void disconnect();
 
+	bool msgBig(sf::Packet data);
 	bool msgUnit(sf::Packet data);
 	bool msgOrder(sf::Packet data);
 	bool msgGame(sf::Packet data);

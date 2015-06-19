@@ -77,6 +77,7 @@ void cServer::introduce(int playerId)
 		//game.unit[game.getUnitId(server.player[playerId].unit)].addItem("test_resourceManipulator", 1);
 		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("weapon_rifle", 1);
 		game.unit[game.getUnitId(server.player[playerId].unit)].addItem("survival_kit_basic", 1);
+		server.sendWorldData(playerId);
 	}
 	else { editor.initialize(); }
 	ui.updateInterface();
@@ -92,17 +93,35 @@ void cServer::sendChunkData(int playerId, int x, int y)
 
 	game.access.lock();
 	world.access.lock();
+
+	data << MSG_BIG_WORLD_ONECHUNK;
 	for (int i = 0; i < game.unitCounter; i++)
 	{
 		if (game.unit[i].chunkPos == vec2i(x, y))
 		{
-			data = packUnitData(game.unit[i].globalId);
-			sendPacket(playerId, data);
-			data.clear();
+			addUnitData(&data, &game.unit[i]);
 		}
 	}
+	server.sendPacket(playerId, data);
+
 	world.access.unlock();
 	game.access.unlock();
+}
+
+void cServer::sendWorldData(int playerId)
+{
+	sf::Packet data;
+	data << MSG_BIG_WORLD_ALLCHUNKS << LIMIT_MAP;
+
+	for (int y = 0; y < LIMIT_MAP; y++)
+	{
+		for (int x = 0; x < LIMIT_MAP; x++)
+		{
+			data << world.map[x][y].type;
+		}
+	}
+	sendPacket(playerId, data);
+	data.clear();
 }
 
 void cServerPlayer::disconnect()

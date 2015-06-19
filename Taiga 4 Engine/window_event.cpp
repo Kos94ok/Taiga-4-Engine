@@ -150,11 +150,12 @@ void cWindow::mainEvent()
 			// Regular mode
 			else
 			{
-				search = game.getUnitId(mousePos, REF_UNIT_PICKUP);
+				//search = game.getUnitId(mousePos, REF_UNIT_PICKUP);
+				search = visual.hoveredUnit;
+				cUnit* target = &game.getUnit(search);
 				// Item on the ground
-				if (search != -1)
+				if (search != -1 && target->hasRef(REF_UNIT_PICKUP))
 				{
-					matchFound = true;
 					if (eventPoll.mouseButton.button == sf::Mouse::Left) {
 						ui.mouseStateLMB = MOUSE_CONTROLS_UNITCLICK;
 						data << MSG_CONTROLS_PICKUP << search << sf::Keyboard::isKeyPressed(sf::Keyboard::LShift);
@@ -167,10 +168,8 @@ void cWindow::mainEvent()
 					}
 				}
 				// Harvestable object
-				search = game.getUnitId(mousePos, REF_UNIT_HARVESTABLE);
-				if (!matchFound && search != -1)
+				else if (search != -1 && target->hasRef(REF_UNIT_HARVESTABLE))
 				{
-					matchFound = true;
 					if (eventPoll.mouseButton.button == sf::Mouse::Left) {
 						ui.mouseStateLMB = MOUSE_CONTROLS_UNITCLICK;
 						data << MSG_CONTROLS_HARVEST << search << sf::Keyboard::isKeyPressed(sf::Keyboard::LShift);
@@ -183,7 +182,7 @@ void cWindow::mainEvent()
 					}
 				}
 				// Ground click
-				if (!matchFound)
+				else
 				{
 					if (eventPoll.mouseButton.button == sf::Mouse::Left)
 					{
@@ -216,7 +215,7 @@ void cWindow::mainEvent()
 		// =========================================================
 		// Camera
 			// Snap camera to character
-		if (eventPoll.type == sf::Event::KeyPressed && eventPoll.key.code == sf::Keyboard::Space && !console.displayed)
+		if (eventPoll.type == sf::Event::KeyPressed && eventPoll.key.code == settings.hkCamToHero && !console.displayed)
 		{
 			camera.moveto(game.unit[game.getUnitId(client.unit)].pos);
 			camera.moveVector.x = 0.50f;

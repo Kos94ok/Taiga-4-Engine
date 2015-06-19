@@ -133,6 +133,7 @@
     <ClCompile Include="item_active.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math_main.cpp" />
+    <ClCompile Include="overworld_main.cpp" />
     <ClCompile Include="path_main.cpp" />
     <ClCompile Include="precomp.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -185,6 +186,7 @@
     <ClInclude Include="item.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="math.h" />
+    <ClInclude Include="overworld.h" />
     <ClInclude Include="path.h" />
     <ClInclude Include="precomp.h" />
     <ClInclude Include="refSystem.h" />

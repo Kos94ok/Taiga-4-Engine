@@ -215,6 +215,8 @@ void serverWorldAnim(int elapsedTime)
 			}
 		}
 	}
+	game.access.unlock();
+
 	// World anim
 	game.timeOfDay += timevar * settings.wdDayNightSpeed;
 	if (game.timeOfDay >= 24.00f) { game.timeOfDay = 0.00f; }
@@ -240,8 +242,6 @@ void serverWorldAnim(int elapsedTime)
 			visual.hoveredUnit = game.unit[i].globalId;
 		}
 	}
-
-	game.access.unlock();
 }
 
 void serverWorldUI(int elapsedTime)
@@ -474,7 +474,7 @@ void serverWorldMain()
 			core.thread_serverWorldTicks += 1;
 			core.thread_antifreeze[threadId] = 0;
 		}
-		Sleep(1);
+		Sleep(3);
 	}
 
 	console << "[SRV_WORLD] Cleaning up" << "\n";

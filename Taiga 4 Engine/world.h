@@ -40,6 +40,7 @@ public:
 	void applyBlueprint(sf::Vector2i position, int type);
 	std::vector<cUnitEntry> getBlueprintUnitList(int index);
 	std::vector<cUnitEntry> getChunkUnitList(sf::Vector2i pos);
+	std::vector<int> unloadVector;
 
 	void genTaigaMini();
 	void genArena();
@@ -52,6 +53,9 @@ public:
 	void saveChunk(sf::Vector2i pos);
 	void loadChunk(sf::Vector2i pos);
 	void unloadChunk(sf::Vector2i pos);
+	void saveAll();
+	void unloadAll();
+	void applyUnload();
 	sf::Vector2i getChunkInPos(sf::Vector2f pos);
 	sf::Vector2f getChunkCenter(sf::Vector2i pos);
 };

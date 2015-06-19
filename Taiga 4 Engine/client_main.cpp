@@ -21,7 +21,8 @@ void clientReceiveMain()
 			if (retVal == sf::Socket::Done)
 			{
 				//console << "Received to client " << counter++ << endl;
-				parsed = client.msgUnit(data);
+				parsed = client.msgBig(data);
+				if (!parsed) { parsed = client.msgUnit(data); }
 				if (!parsed) { parsed = client.msgOrder(data); }
 				if (!parsed) { parsed = client.msgGame(data); }
 

@@ -68,10 +68,11 @@ void cGame::removeUnit(int id, bool sendData)
 		id = getUnitId(id);
 		if (id != -1)
 		{
-			for (int i = id; i < unitCounter - 1; i++)
+			unit[id] = unit[unitCounter - 1];
+			/*for (int i = id; i < unitCounter - 1; i++)
 			{
 				unit[i] = unit[i + 1];
-			}
+			}*/
 			unitCounter -= 1;
 		}
 	}

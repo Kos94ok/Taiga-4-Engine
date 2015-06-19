@@ -123,7 +123,7 @@ void cWindow::paintUnits()
 				unitRight = unitLeft + game.unit[i].size.x;
 
 				if (!game.unit[i].hasRef(REF_UNIT_NORENDER)
-					&& ( (game.unit[i].pos.y >= y && game.unit[i].pos.y < y + step && unitRight >= cameraLeft && unitLeft <= cameraRight)
+					&& ((game.unit[i].pos.y >= y && game.unit[i].pos.y < y + step && unitRight >= cameraLeft && unitLeft <= cameraRight && !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE))
 					|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE) && y == cameraTop) )) 
 				{
 					// Display the selection circle
@@ -420,7 +420,7 @@ void cWindow::paintPostFX()
 	{
 		buffer = sf::Sprite(window.texHandle.getTexture());
 		shader = &visual.shader[SHADER_LIGHT];
-		shader->setParameter("texture", sf::Shader::CurrentTexture);
+		shader->setParameter("tex_main", sf::Shader::CurrentTexture);
 		shader->setParameter("tex_light", window.texHandleLight.getTexture());
 		bufferReady = true;
 		window.texHandleTop.draw(buffer, shader);
@@ -680,6 +680,7 @@ void cWindow::paintConsole()
 	brushRect.setSize(vec2f(camera.res.x, camera.res.y));
 	brushRect.setTexture(0);
 	brushRect.setFillColor(sf::Color(0, 0, 0, 235));
+	if (core.serverMode) { brushRect.setFillColor(sf::Color(0, 0, 0, 255)); }
 	window.texHandleTop.draw(brushRect, miniMatrix);
 
 	brushText.setFont(visual.fontConsole);

@@ -19,6 +19,7 @@ cCamera camera;
 cSettings settings;
 cSave save;
 cWorld world;
+cOverworld overworld;
 cEditor editor;
 cUtil util;
 cScript script;
@@ -76,7 +77,7 @@ int main(int argc, char* argv[])
 	}
 	// Creating the menu
 	else {
-		script.ui_initialMenu(0);
+		script.ui_initialMenu(NULL);
 	}
 	game.access.unlock();
 

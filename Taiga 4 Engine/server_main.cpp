@@ -105,6 +105,7 @@ void serverSendMain()
 						//localData << server.player[i].packet++;
 						localData.append(server.dataQueue[0].data.getData(), server.dataQueue[0].data.getDataSize());
 						server.player[i].socket.send(localData);
+						//console.debug << "[DEBUG] Sending " << (int)localData.getDataSize() << " byte packet, " << server.dataQueueCounter << " packets in queue." << endl;
 						localData.clear();
 					}
 				}
@@ -117,6 +118,7 @@ void serverSendMain()
 					//localData << server.player[server.dataQueue[0].target].packet++;
 					localData.append(server.dataQueue[0].data.getData(), server.dataQueue[0].data.getDataSize());
 					server.player[server.dataQueue[0].target].socket.send(localData);
+					//console.debug << "[DEBUG] Sending " << (int)localData.getDataSize() << " byte packet, " << server.dataQueueCounter << " packets in queue." << endl;
 					localData.clear();
 				}
 			}

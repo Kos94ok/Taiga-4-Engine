@@ -7,8 +7,8 @@ void cSettings::setDefault()
 	// 1 - Medium
 	// 2 - High
 	// 3 - Ultra
-	this->unitDepthCheck = 2;				// Fixed value
-	this->unitRenderDistance = 2;			// Fixed value
+	this->unitDepthCheck = 1;				// Fixed value
+	this->unitRenderDistance = 1;			// Fixed value
 
 	// 0 - Low / Disabled
 	// 1 - High / Enabled
@@ -61,6 +61,7 @@ void cSettings::setDefault()
 	*/
 
 	// Console settings
+	this->enableConsoleTimestamps = 0;
 	this->consoleScrollSpeed = 3;
 	this->consoleFontSize = 14;
 	this->consoleLineSpacing = 0;
@@ -86,6 +87,7 @@ void cSettings::setDefault()
 	this->hkCamMove[1] = sf::Keyboard::S;
 	this->hkCamMove[2] = sf::Keyboard::A;
 	this->hkCamMove[3] = sf::Keyboard::D;
+	this->hkCamToHero = sf::Keyboard::Space;
 	this->hkConsole = sf::Keyboard::Tilde;
 	this->hkDebugMode = sf::Keyboard::F3;
 	this->hkDebugAdvanced = sf::Keyboard::F4;
@@ -147,6 +149,7 @@ void cSettings::load()
 		else if (key.name == "enableMouseScroll") { enableMouseScroll = math.stringToInt(key.value); }
 		else if (key.name == "enableDynamicTooltips") { enableDynamicTooltips = math.stringToInt(key.value); }
 			// Console
+		else if (key.name == "enableConsoleTimestamps") { enableConsoleTimestamps = math.stringToInt(key.value); }
 		else if (key.name == "consoleFontSize") { consoleFontSize = math.stringToInt(key.value); }
 		else if (key.name == "consoleLineSpacing") { consoleLineSpacing = math.stringToInt(key.value); }
 		else if (key.name == "consoleScrollSpeed") { consoleScrollSpeed = math.stringToInt(key.value); }
@@ -173,10 +176,10 @@ void cSettings::load()
 		else if (key.name == "hkCamMoveDown") { hkCamMove[1] = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkCamMoveLeft") { hkCamMove[2] = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkCamMoveRight") { hkCamMove[3] = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkCamToHero") { hkCamToHero = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkConsole") { hkConsole = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkDebugMode") { hkDebugMode = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkDebugAdvanced") { hkDebugAdvanced = sf::Keyboard::Key(math.stringToInt(key.value)); }
-
 	}
 
 	// Fix the dependancies
@@ -213,6 +216,7 @@ void cSettings::save()
 		file << "enableDynamicTooltips = " << enableDynamicTooltips << "\n";
 
 		file << endl << "[Console]" << "\n";
+		file << "enableConsoleTimestamps = " << enableConsoleTimestamps << "\n";
 		file << "consoleFontSize = " << consoleFontSize << "\n";
 		file << "consoleLineSpacing = " << consoleLineSpacing << "\n";
 		file << "consoleScrollSpeed = " << consoleScrollSpeed << "\n";
@@ -241,6 +245,7 @@ void cSettings::save()
 		file << "hkCamMoveDown = " << hkCamMove[1] << "\n";
 		file << "hkCamMoveLeft = " << hkCamMove[2] << "\n";
 		file << "hkCamMoveRight = " << hkCamMove[3] << "\n";
+		file << "hkCamToHero = " << hkCamToHero << "\n";
 		file << "hkConsole = " << hkConsole << "\n";
 		file << "hkDebugMode = " << hkDebugMode << "\n";
 		file << "hkDebugAdvanced = " << hkDebugAdvanced << "\n";

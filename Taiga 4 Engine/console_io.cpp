@@ -34,12 +34,16 @@ cSubConsole& operator << (cSubConsole& cmd, float f) {
 void cConsole::output(std::string str, int subConsole)
 {
 	access.lock();
+	string backup;
 
 	waitingQueue += str;
 	if (str.length() >= 1 && str.substr(str.length() - 1) == "\n")
 	{
+		backup = waitingQueue;
 		// Adding time string
-		waitingQueue = util.getCurrentTimeString() + " - " + waitingQueue;
+		if (waitingQueue.length() > 1) {
+			waitingQueue = util.getCurrentTimeString() + " - " + waitingQueue;
+		}
 
 		// Flushing to file
 		ofstream file;
@@ -47,6 +51,11 @@ void cConsole::output(std::string str, int subConsole)
 		else { file.open("Logs//server.txt", ios::app); }
 		file << waitingQueue;
 		file.close();
+
+		// Returning to backup if no timestamp is needed
+		if (!settings.enableConsoleTimestamps) {
+			waitingQueue = backup;
+		}
 
 		// Flushing to console
 		outputQueue.push_back(waitingQueue);

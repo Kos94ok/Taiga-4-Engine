@@ -1,6 +1,53 @@
 
 #include "main.h"
 
+bool cClient::msgBig(sf::Packet input)
+{
+	int msg, size, id;
+	int argi[] = { 0, 0, 0, 0 };
+	float argf[] = { 0.00f, 0.00f, 0.00f, 0.00f };
+	string type;
+
+	input >> msg;
+	// ============================================
+	// ============================================
+	// World chunk data packet
+	if (msg == MSG_BIG_WORLD_ALLCHUNKS)
+	{
+		input >> size;
+		for (int y = 0; y < size; y++)
+		{
+			for (int x = 0; x < size; x++)
+			{
+				input >> argi[0];
+				world.map[x][y].type = argi[0];
+			}
+		}
+	}
+	// ============================================
+	// ============================================
+	// Units in chunk
+	if (msg == MSG_BIG_WORLD_ONECHUNK)
+	{
+		game.access.lock();
+		int count = 0, dup = 0;
+		while (!input.endOfPacket())
+		{
+			input >> id >> type >> argf[0] >> argf[1] >> argi[2] >> argi[3];
+			if (game.getUnitId(id) == -1)
+			{
+				game.addUnit(type, sf::Vector2f(argf[0], argf[1]), argi[2], argi[3], false, id);
+				count += 1;
+			}
+			else { dup += 1; }
+		}
+		game.access.unlock();
+		//console.debug << "[DEBUG] Units added: " << count << ", duplicated: " << dup << endl;
+	}
+
+	return false;
+}
+
 bool cClient::msgUnit(sf::Packet input)
 {
 	int argi[] = { 0, 0, 0, 0 };
@@ -81,11 +128,11 @@ bool cClient::msgUnit(sf::Packet input)
 	if (msg == MSG_UNIT_ADDITEM)
 	{
 		input >> id >> type >> argi[0];
-		id = game.getUnitId(id);
-		if (id != -1) {
-			game.unit[id].container.add(type, argi[0]);
+		int changeId = game.getUnitId(id);
+		if (changeId != -1) {
+			game.unit[changeId].container.add(type, argi[0]);
 		}
-		else { console.error << "[cClient::msgUnit / MSG_UNIT_ADDITEM] Can't find target unit!\n"; }
+		//else { console.error << "[cClient::msgUnit / MSG_UNIT_ADDITEM] Can't find target unit (" << id << ")!\n"; }
 		return true;
 	}
 	// ============================================

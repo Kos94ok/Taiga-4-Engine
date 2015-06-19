@@ -27,7 +27,7 @@ void cWorld::applyBlueprint(vec2i position, int type)
 			return;
 		}
 		// Opening target file
-		name = "Savefiles//" + save.worldName + "//" + to_string(position.x) + "-" + to_string(position.y) + ".chunk";
+		name = "Savefiles//" + save.savefileName + "//" + save.worldName + "//" + to_string(position.x) + "-" + to_string(position.y) + ".chunk";
 		out.open(name);
 		if (!out.good()) {
 			console.error << "[ERROR] Can't open target chunk file [" + name + "]" << endl;
@@ -106,8 +106,39 @@ void cWorld::clearWorld()
 	{
 		for (int x = 0; x < LIMIT_MAP; x++)
 		{
-			sprintf_s(buf, 512, "Savefiles//%s//%i-%i.chunk", save.worldName.c_str(), x, y);
+			sprintf_s(buf, 512, "Savefiles//%s//%s//%i-%i.chunk", save.savefileName.c_str(), save.worldName.c_str(), x, y);
 			remove(buf);
+		}
+	}
+	delete[] buf;
+}
+
+void cWorld::applyUnload()
+{
+	int active = -1;
+	bool detected;
+
+	while ((int)unloadVector.size() > 0)
+	{
+		// Getting the first value
+		active = unloadVector[0];
+		unloadVector.erase(unloadVector.begin());
+		// Searching for the replacement
+		for (int i = game.unitCounter - 1; i > 0; i--)
+		{
+			detected = false;
+			// Making sure that the unit should not be removed
+			for (int y = 0; y < (int)unloadVector.size(); y++)
+			{
+				if (unloadVector[y] == i) { detected = true; y = (int)unloadVector.size(); }
+			}
+			// Not detected, applying
+			if (!detected)
+			{
+				game.unit[active] = game.unit[i];
+				game.unitCounter -= 1;
+				i = 0;
+			}
 		}
 	}
 }

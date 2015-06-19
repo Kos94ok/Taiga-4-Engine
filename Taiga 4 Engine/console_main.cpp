@@ -103,6 +103,7 @@ cConsole::cConsole()
 	console.cmdWrong[cmdID] = "unit.item.getlist";
 	console.cmdSyntax[cmdID] = "\"unit.item.getlist [num]\" - Get the list of items for [unit]";
 	console.cmdFunc[cmdID] = cmd_unit_item_getlist;
+	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^camera.attach");
 	console.cmdWrong[cmdID] = "camera.attach";

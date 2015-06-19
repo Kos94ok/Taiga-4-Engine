@@ -32,8 +32,8 @@ void windowMain()
 	icon.loadFromFile("Data//Textures//icon32.png");
 	window.winHandle.setIcon(32, 32, icon.getPixelsPtr());
 	if (core.serverMode) {
-		window.winHandle.setFramerateLimit(30);
-		window.winHandle.setTitle("Taiga Server v0.10");
+		window.winHandle.setFramerateLimit(10);
+		window.winHandle.setTitle("Taiga Survival Server v0.10 [Taiga 4 Engine]");
 	}
 	// Creating the textures
 	window.texHandle.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);

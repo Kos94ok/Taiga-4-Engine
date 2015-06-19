@@ -70,6 +70,9 @@
     <Filter Include="Файлы исходного кода\Character\Item">
       <UniqueIdentifier>{74a79a1a-b012-455f-a977-377e2dc7811b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\World\Overworld">
+      <UniqueIdentifier>{26d3276e-a470-4295-be81-bec72b6ce79c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -255,6 +258,9 @@
     <ClCompile Include="visual_gen.cpp">
       <Filter>Файлы исходного кода\Visual</Filter>
     </ClCompile>
+    <ClCompile Include="overworld_main.cpp">
+      <Filter>Файлы исходного кода\World\Overworld</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -346,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="animation.h">
       <Filter>Файлы исходного кода\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="overworld.h">
+      <Filter>Файлы исходного кода\World\Overworld</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

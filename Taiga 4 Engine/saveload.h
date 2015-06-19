@@ -44,6 +44,7 @@ public:
 class cSave
 {
 public:
+	std::string savefileName;
 	std::string worldName;
 
 	std::string getChunkFilePath(sf::Vector2i pos);
@@ -53,5 +54,6 @@ public:
 
 	cSave() {
 		worldName = "world";
+		savefileName = "temp";
 	}
 };

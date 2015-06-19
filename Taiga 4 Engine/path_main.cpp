@@ -78,6 +78,10 @@ vec2 cPath::validatePoint(vec2 loc, float dist, int unitId)
 
 bool cPath::isPointFree(vec2 loc, float dist, int unitId)
 {
+	vec2i chunk = world.getChunkInPos(loc);
+	// Checking for bad chunks
+	if (world.map[chunk.x][chunk.y].type == CHUNK_UNDEFINED || world.map[chunk.x][chunk.y].type == CHUNK_BLOCKED) { return false; }
+	// Checking for unit collision
 	for (int i = 0; i < game.unitCounter; i++)
 	{
 		if (math.getDistance(game.unit[i].pos, loc) <= game.unit[i].collisionDistance + dist && game.unit[i].globalId != unitId)

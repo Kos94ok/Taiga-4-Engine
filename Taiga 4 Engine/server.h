@@ -46,6 +46,7 @@ public:
 	void initialize();
 	void introduce(int playerId);
 	void sendChunkData(int playerId, int x, int y);
+	void sendWorldData(int playerId);
 	void assignUnit(int playerId, int unitId);
 
 	void sendEcho(int source, std::string str);
@@ -68,7 +69,10 @@ public:
 	// Takes: Player index, Data packet
 	// Returns: True, if packet is parsed successfully
 	bool msgControlAbility(int i, sf::Packet data);
-	// Takes: Unit global id
+	// Takes: Unit global id, Unit variation
+	// Returns: Nothing
+	void addUnitData(sf::Packet* data, cUnit* unit, int variation = -1);
+	// Takes: Unit global id, Unit variation
 	// Returns: Unit data ready for transfer
 	sf::Packet packUnitData(int id, int variation = -1);
 

@@ -34,6 +34,7 @@ typedef sf::Color			color;
 #include "settings.h"
 #include "saveload.h"
 #include "world.h"
+#include "overworld.h"
 #include "editor.h"
 #include "script.h"
 #include "api.h"
@@ -99,6 +100,7 @@ extern cCamera camera;
 extern cSettings settings;
 extern cSave save;
 extern cWorld world;
+extern cOverworld overworld;
 extern cEditor editor;
 extern cUtil util;
 extern cScript script;

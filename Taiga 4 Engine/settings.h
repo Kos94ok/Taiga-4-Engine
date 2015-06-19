@@ -77,6 +77,8 @@ public:
 	// Night transition speed
 	float wdNightChangeSpeed;
 
+	// Enable console timestamps
+	int enableConsoleTimestamps;
 	// Console scroll speed
 	int consoleScrollSpeed;
 	// Console font size
@@ -91,6 +93,7 @@ public:
 	sf::Keyboard::Key hkInventory;
 	sf::Keyboard::Key hkActiveItem[LIMIT_ACTIVEBUTTONS];
 	sf::Keyboard::Key hkCamMove[4];
+	sf::Keyboard::Key hkCamToHero;
 
 	void load();
 	void save();

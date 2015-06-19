@@ -109,6 +109,32 @@ void cWorld::unloadChunk(vec2i pos)
 	//access.unlock();
 }
 
+void cWorld::saveAll()
+{
+	for (int y = 0; y < LIMIT_MAP; y++)
+	{
+		for (int x = 0; x < LIMIT_MAP; x++)
+		{
+			if (map[x][y].isLoaded) {
+				saveChunk(vec2i(x, y));
+			}
+		}
+	}
+}
+
+void cWorld::unloadAll()
+{
+	for (int y = 0; y < LIMIT_MAP; y++)
+	{
+		for (int x = 0; x < LIMIT_MAP; x++)
+		{
+			if (map[x][y].isLoaded) {
+				unloadChunk(vec2i(x, y));
+			}
+		}
+	}
+}
+
 vector<cUnitEntry> cWorld::getChunkUnitList(vec2i pos)
 {
 	return save.getListFromFile(save.getChunkFilePath(pos));
