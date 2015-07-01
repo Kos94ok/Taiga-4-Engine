@@ -93,21 +93,20 @@ void serverWorldOrders(int elapsedTime)
 				// Resource harvest
 				else if (game.unit[i].order[0].type == ORDER_HARVEST)
 				{
-					float resFound = math.round(game.getUnit(game.unit[i].order[0].targetObject).resource * 0.20f);
-					cUnit* target = &game.getUnit(game.unit[i].order[0].targetObject);
-					// If tool is used
-					if (game.unit[i].order[0].paramA != 0)
+					if (core.serverSide())
 					{
-						resFound = game.getUnit(game.unit[i].order[0].targetObject).resource;
-						if (core.serverMode || core.localServer) {
+						float resFound = math.round(game.getUnit(game.unit[i].order[0].targetObject).resource * 0.20f);
+						cUnit* target = &game.getUnit(game.unit[i].order[0].targetObject);
+						// If at least some tool is used
+						if (game.unit[i].order[0].paramA > 0)
+						{
+							resFound = game.getUnit(game.unit[i].order[0].targetObject).resource;
 							game.unit[i].addResource(resFound);
 							game.unit[game.getUnitId(game.unit[i].order[0].targetObject)].addOrder_death();
 						}
-					}
-					// No tools used
-					else
-					{
-						if (core.serverMode || core.localServer) {
+						// No tools used
+						else
+						{
 							game.unit[i].addResource(resFound);
 							game.unit[game.getUnitId(game.unit[i].order[0].targetObject)].addResource(-resFound);
 						}
@@ -115,25 +114,22 @@ void serverWorldOrders(int elapsedTime)
 					game.unit[i].removeOrder(0);
 				}
 				// Death
-				else if (game.unit[i].order[0].type == ORDER_DEATH)
+				else if (game.unit[i].order[0].type == ORDER_DEATH && core.serverSide())
 				{
-					if (core.localServer || core.serverMode)
+					// Dropping loot
+					if (game.unit[i].container.itemCounter > 0)
 					{
-						// Dropping loot
-						if (game.unit[i].container.itemCounter > 0)
+						int itemId = game.addUnit("item_a", game.getUnit(game.unit[i].globalId).pos);
+						cItemContainer cont = game.getUnit(game.unit[i].globalId).container;
+						for (int a = 0; a < cont.itemCounter; a++)
 						{
-							int itemId = game.addUnit("item_a", game.getUnit(game.unit[i].globalId).pos);
-							cItemContainer cont = game.getUnit(game.unit[i].globalId).container;
-							for (int a = 0; a < cont.itemCounter; a++)
-							{
-								game.getUnit(itemId).addItem(cont.item[a].type, cont.amount[a]);
-							}
+							game.getUnit(itemId).addItem(cont.item[a].type, cont.amount[a]);
 						}
-						// Removing the unit
-						unitRemoved = true;
-						game.removeUnit(game.unit[i].globalId);
-						i -= 1;
 					}
+					// Removing the unit
+					unitRemoved = true;
+					game.removeUnit(game.unit[i].globalId);
+					i -= 1;
 				}
 
 				// If unit is not removed, update it

@@ -80,6 +80,11 @@ public:
 		thread_serverWorldTicks = 0;
 		for (int i = 0; i < 16; i++) { thread_shutdown[i] = false; thread_antifreeze[i] = 0; }
 	}
+
+	// Some functions
+	bool serverSide() {
+		return (serverMode || localServer);
+	}
 };
 
 extern cCore core;

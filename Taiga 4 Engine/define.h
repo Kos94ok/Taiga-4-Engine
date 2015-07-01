@@ -198,6 +198,10 @@
 #define CHUNK_BLOCKED					2
 #define CHUNK_SPAWN						3
 #define CHUNK_VILLAGE					4
+#define CHUNK_LOOT_COMMON				5
+#define CHUNK_LOOT_GOOD					6
+#define CHUNK_LOOT_RARE					7
+#define CHUNK_LOOT_PERFECT				8
 
 #define SORT_BYNAME						0
 #define SORT_BYTYPE						1
@@ -207,3 +211,9 @@
 #define SUBCMD_ECHO						2
 #define SUBCMD_ERROR					3
 #define SUBCMD_DEBUG					4
+
+#define POWER_HAND						0
+#define POWER_STONE						1
+#define POWER_FLINT						2
+#define POWER_IRON						3
+#define POWER_STEEL						4

@@ -73,6 +73,7 @@ public:
 
 	bool equipped;
 	float weight;
+	int powerLevel;
 	cIcon icon;
 	cItemConsume consume;
 	cItemDismantle dismantle;
@@ -83,6 +84,7 @@ public:
 	void use();
 
 	cItem() {
+		powerLevel = 0;
 		equipped = false;
 		weight = 1.00f;
 		descrLinesUsed = 0;

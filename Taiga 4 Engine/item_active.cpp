@@ -31,7 +31,7 @@ void cItem::use()
 		unitId = game.getUnitId(window.getMousePos(true), REF_UNIT_TREE);
 		if (unitId != -1)
 		{
-			data << MSG_CONTROLS_AXE << unitId << true;
+			data << MSG_CONTROLS_AXE << unitId << powerLevel;
 			client.sendPacket(data);
 			data.clear();
 		}
@@ -42,7 +42,7 @@ void cItem::use()
 		unitId = game.getUnitId(window.getMousePos(true), REF_UNIT_STONE);
 		if (unitId != -1)
 		{
-			data << MSG_CONTROLS_PICKAXE << unitId << true;
+			data << MSG_CONTROLS_PICKAXE << unitId << powerLevel;
 			client.sendPacket(data);
 			data.clear();
 		}

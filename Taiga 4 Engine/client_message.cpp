@@ -215,11 +215,11 @@ bool cClient::msgOrder(sf::Packet input)
 	// Order unit to harvest resource from object
 	if (msg == MSG_ORDER_HARVEST)
 	{
-		input >> id >> argi[0] >> argb[1] >> argb[2];
+		input >> id >> argi[0] >> argb[1] >> argi[2];
 		id = game.getUnitId(id);
 		if (id != -1)
 		{
-			game.unit[id].addOrder_harvest(argi[0], argb[1], argb[2]);
+			game.unit[id].addOrder_harvest(argi[0], argb[1], argi[2]);
 		}
 		return true;
 	}

@@ -292,29 +292,69 @@ void cDatabase::loadItems()
 	i += 1;
 
 	// Tools
-		// Axe
+		// Axes
+		// Stone
 	item[i].type = "tool_axe_stone";
 	item[i].setName("Stone Axe");
 	item[i].addDescrLine("Used to chop some wood.");
 	item[i].addDescrLine("");
 	item[i].addDescrLine("- Equippable");
+	item[i].powerLevel = POWER_STONE;
 	item[i].category = CATEGORY_WEAPONS;
 	item[i].addRef(REF_ITEM_EQUIP);
 	item[i].addRef(REF_ITEM_ACTIVE);
 	item[i].addRef(REF_ITEM_AXE);
 	i += 1;
+		// Flint
+	item[i] = item[i - 1];
+	item[i].type = "tool_axe_flint";
+	item[i].setName("Flint Axe");
+	item[i].powerLevel = POWER_FLINT;
+	i += 1;
+		// Iron
+	item[i] = item[i - 1];
+	item[i].type = "tool_axe_iron";
+	item[i].setName("Iron Axe");
+	item[i].powerLevel = POWER_IRON;
+	i += 1;
+		// Steel
+	item[i] = item[i - 1];
+	item[i].type = "tool_axe_steel";
+	item[i].setName("Steel Axe");
+	item[i].powerLevel = POWER_STEEL;
+	i += 1;
 
-		// Pickaxe
+		// Pickaxes
+		// Stone
 	item[i].type = "tool_pickaxe_stone";
 	item[i].setName("Stone Pickaxe");
 	item[i].addDescrLine("Used to pick some stone.");
 	item[i].addDescrLine("");
 	item[i].addDescrLine("- Equippable");
+	item[i].powerLevel = POWER_STONE;
 	item[i].category = CATEGORY_WEAPONS;
 	item[i].addRef(REF_ITEM_EQUIP);
 	item[i].addRef(REF_ITEM_ACTIVE);
 	item[i].addRef(REF_ITEM_PICKAXE);
 	item[i].icon = visual.createIcon("icons_b.png", "icon_pickaxe", vec2i(0, 2), vec2f(0.125f, 0.125f));
+	i += 1;
+		// Flint
+	item[i] = item[i - 1];
+	item[i].type = "tool_pickaxe_flint";
+	item[i].setName("Flint Pickaxe");
+	item[i].powerLevel = POWER_FLINT;
+	i += 1;
+		// Iron
+	item[i] = item[i - 1];
+	item[i].type = "tool_pickaxe_iron";
+	item[i].setName("Iron Pickaxe");
+	item[i].powerLevel = POWER_IRON;
+	i += 1;
+		// Steel
+	item[i] = item[i - 1];
+	item[i].type = "tool_pickaxe_steel";
+	item[i].setName("Steel Pickaxe");
+	item[i].powerLevel = POWER_STEEL;
 	i += 1;
 
 	// Food
@@ -352,7 +392,7 @@ void cDatabase::loadItems()
 		// Flint
 	item[i].type = "flint_basic";
 	item[i].setName("Flint");
-	item[i].addDescrLine("A simple but powerful tool to start a fire in");
+	item[i].addDescrLine("A simple yet powerful tool to start a fire in");
 	item[i].addDescrLine("the wilderness. Combine with the dagger to get");
 	item[i].addDescrLine("some sparks.");
 	item[i].category = CATEGORY_MATERIALS;
@@ -554,4 +594,3 @@ void cDatabase::loadTextures()
 	database.texture[TEX_WORLD_GROUND] = visual.addTexture("bg_snow.jpg");
 	database.texture[TEX_SELECTION_CIRCLE] = visual.addTexture("selectionWhite512.png");
 }
-

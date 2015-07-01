@@ -147,6 +147,7 @@ void cUIButton::callbackLeft(int parent)
 		world.genNormalWorld();
 		ui.updateFull();
 		client.connect("localserver", 21045);
+		script.execute(cScript::shooter_respawnSystem, 0);
 	}
 	else if (action == "start_genericShooter")
 	{

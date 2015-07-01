@@ -115,7 +115,7 @@ int cUnit::addOrder_pickup(int target, bool overwrite)
 	return orderCounter - 1;
 }
 
-int cUnit::addOrder_harvest(int target, bool overwrite, bool useTool)
+int cUnit::addOrder_harvest(int target, bool overwrite, int powerLevel)
 {
 	// Clearing the order list
 	if (overwrite) { orderCounter = 0; }
@@ -124,7 +124,7 @@ int cUnit::addOrder_harvest(int target, bool overwrite, bool useTool)
 	// Adding new order
 	order[orderCounter].type = ORDER_HARVEST;
 	order[orderCounter].targetObject = target;
-	order[orderCounter].paramA = math.boolToInt(useTool);
+	order[orderCounter].paramA = powerLevel;
 	orderCounter += 1;
 
 	// Update info
@@ -134,7 +134,7 @@ int cUnit::addOrder_harvest(int target, bool overwrite, bool useTool)
 
 	// Server
 	sf::Packet data;
-	data << MSG_ORDER_HARVEST << globalId << target << overwrite << useTool;
+	data << MSG_ORDER_HARVEST << globalId << target << overwrite << powerLevel;
 	server.sendPacket(PLAYERS_REMOTE, data);
 
 	return orderCounter - 1;
