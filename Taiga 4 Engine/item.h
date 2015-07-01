@@ -51,6 +51,24 @@ public:
 	}
 };
 
+class cDropContainer
+{
+public:
+	int itemCounter;
+	std::string item[LIMIT_DROP];
+	int amount[LIMIT_DROP];
+	float chance[LIMIT_DROP];
+	int powerLevel[LIMIT_DROP];
+
+	void add(std::string type, int count = 1, float chance = 1.00f, int powerLevel = POWER_HAND);
+	int flush(int unitId, int usedPowerLevel = POWER_IMBA);
+	int flush(sf::Vector2f pos, int usedPowerLevel = POWER_IMBA);
+
+	cDropContainer() {
+		itemCounter = 0;
+	}
+};
+
 class cItemConsume
 {
 public:

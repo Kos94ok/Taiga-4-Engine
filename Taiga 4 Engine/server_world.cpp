@@ -103,6 +103,7 @@ void serverWorldOrders(int elapsedTime)
 							resFound = game.getUnit(game.unit[i].order[0].targetObject).resource;
 							game.unit[i].addResource(resFound);
 							game.unit[game.getUnitId(game.unit[i].order[0].targetObject)].addOrder_death();
+							game.unit[game.getUnitId(game.unit[i].order[0].targetObject)].order[0].paramA = game.unit[i].order[0].paramA;
 						}
 						// No tools used
 						else
@@ -116,14 +117,20 @@ void serverWorldOrders(int elapsedTime)
 				// Death
 				else if (game.unit[i].order[0].type == ORDER_DEATH && core.serverSide())
 				{
-					// Dropping loot
-					if (game.unit[i].container.itemCounter > 0)
+					int usedPowerLevel = game.unit[i].order[0].paramA;
+					// Dropping container items
+					if (game.unit[i].container.itemCounter > 0 || game.unit[i].drop.itemCounter > 0)
 					{
 						int itemId = game.addUnit("item_a", game.getUnit(game.unit[i].globalId).pos);
 						cItemContainer cont = game.getUnit(game.unit[i].globalId).container;
 						for (int a = 0; a < cont.itemCounter; a++)
 						{
 							game.getUnit(itemId).addItem(cont.item[a].type, cont.amount[a]);
+						}
+						game.unit[i].drop.flush(itemId, usedPowerLevel);
+						// If nothing dropped, remove the unit
+						if (game.getUnit(itemId).container.itemCounter == 0) {
+							game.removeUnit(itemId);
 						}
 					}
 					// Removing the unit

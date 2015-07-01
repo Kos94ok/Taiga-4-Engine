@@ -166,3 +166,44 @@ void cItemContainer::sort(int sortType)
 	}
 	game.access.unlock();
 }
+
+void cDropContainer::add(std::string type, int count, float chance, int powerLevel)
+{
+	this->item[itemCounter] = type;
+	this->amount[itemCounter] = count;
+	this->chance[itemCounter] = chance;
+	this->powerLevel[itemCounter] = powerLevel;
+	itemCounter += 1;
+}
+
+int cDropContainer::flush(int unitId, int usedPowerLevel)
+{
+	cItemDrop drop;
+	std::vector<cItemDrop> dropList;
+	for (int i = 0; i < itemCounter; i++)
+	{
+		if (usedPowerLevel >= powerLevel[i] && math.randf(0.00f, 1.00f) <= chance[i])
+		{
+			drop.type = item[i];
+			drop.count = amount[i];
+			dropList.push_back(drop);
+		}
+	}
+	return game.createDrop(vec2f(0.00f, 0.00f), dropList, unitId);
+}
+
+int cDropContainer::flush(vec2f pos, int usedPowerLevel)
+{
+	cItemDrop drop;
+	std::vector<cItemDrop> dropList;
+	for (int i = 0; i < itemCounter; i++)
+	{
+		if (usedPowerLevel >= powerLevel[i] && math.randf(0.00f, 1.00f) <= chance[i])
+		{
+			drop.type = item[i];
+			drop.count = amount[i];
+			dropList.push_back(drop);
+		}
+	}
+	return game.createDrop(pos, dropList);
+}

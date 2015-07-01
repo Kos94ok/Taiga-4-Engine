@@ -14,6 +14,7 @@
 #define LIMIT_DISMANTLE					4
 #define LIMIT_RECIPES					64
 #define LIMIT_ITEMS						128
+#define LIMIT_DROP						8
 #define LIMIT_UNIT						2048
 #define LIMIT_DB_UNIT					32
 #define LIMIT_DB_ITEM					32
@@ -217,3 +218,4 @@
 #define POWER_FLINT						2
 #define POWER_IRON						3
 #define POWER_STEEL						4
+#define POWER_IMBA						5

@@ -109,12 +109,12 @@ void cGame::useItem(int id)
 }
 
 // Quick create drop
-int cGame::createDrop(vec2f pos, vector<cItemDrop> itemList)
+int cGame::createDrop(vec2f pos, vector<cItemDrop> itemList, int unitId)
 {
 	if (itemList.size() == 0) { console << "[cGame::createDrop] Empty item list!" << endl; return -1; }
 
 	access.lock();
-	int unitId = addUnit("item_a", pos);
+	if (unitId == -1) { unitId = addUnit("item_a", pos); }
 	for (int i = 0; i < (int)itemList.size(); i++)
 	{
 		if (itemList[i].type.length() > 0)
@@ -127,14 +127,14 @@ int cGame::createDrop(vec2f pos, vector<cItemDrop> itemList)
 	return unitId;
 }
 
-int cGame::createDrop(vec2f pos, cItemDrop itemA, cItemDrop itemB, cItemDrop itemC, cItemDrop itemD)
+int cGame::createDrop(vec2f pos, cItemDrop itemA, cItemDrop itemB, cItemDrop itemC, cItemDrop itemD, int unitId)
 {
 	vector<cItemDrop> itemList;
 	itemList.push_back(itemA);
 	itemList.push_back(itemB);
 	itemList.push_back(itemC);
 	itemList.push_back(itemD);
-	return createDrop(pos, itemList);
+	return createDrop(pos, itemList, unitId);
 }
 
 // Manipulate game world data

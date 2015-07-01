@@ -114,6 +114,7 @@ public:
 	cAIBrain ai;
 	cLifeTimer lifeTimer;
 	cItemContainer container;
+	cDropContainer drop;
 	cUnitSoundbank sound;
 
 	float resource;

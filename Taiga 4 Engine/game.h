@@ -87,10 +87,10 @@ public:
 	bool isUnitDead(int globalId);
 	// Takes: Position, Item list
 	// Returns: Created unit global id
-	int createDrop(sf::Vector2f pos, cItemDrop itemA, cItemDrop itemB = "", cItemDrop itemC = "", cItemDrop itemD = "");
+	int createDrop(sf::Vector2f pos, cItemDrop itemA, cItemDrop itemB = "", cItemDrop itemC = "", cItemDrop itemD = "", int unitId = -1);
 	// Takes: Position, Item vector
 	// Returns: Created unit global id
-	int createDrop(sf::Vector2f pos, std::vector<cItemDrop> itemList);
+	int createDrop(sf::Vector2f pos, std::vector<cItemDrop> itemList, int unitId = -1);
 	// Takes: Time (24-hour format)
 	// Returns: Nothing
 	void setTimeOfDay(float time);

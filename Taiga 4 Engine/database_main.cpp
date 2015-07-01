@@ -153,6 +153,7 @@ void cDatabase::loadUnits()
 	unit[i].collisionDistance = 25.00f;
 	unit[i].selectionOffset.y = -10.00f;
 	unit[i].addItem("material_stone");
+	//unit[i].drop.add("material_stone");
 	unit[i].addRef(REF_UNIT_STONE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;
