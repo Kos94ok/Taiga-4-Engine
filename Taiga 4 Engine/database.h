@@ -1,7 +1,7 @@
 
 #include "define.h"
 
-extern cVisual visual;
+//extern cVisual visual;
 
 class cDatabaseKey
 {

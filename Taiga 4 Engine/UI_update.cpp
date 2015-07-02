@@ -235,7 +235,7 @@ void cUI::updateInterfaceItemList()
 	}
 
 	// Amount of resource needed
-	if (craft.getActiveRecipeId() != -1 && craft.getActiveRecipeRepeats(true) > 0)
+	if (craft.getActiveRecipeId() != -1)
 	{
 		float resBalance = craft.recipe[craft.getActiveRecipeId()].resourceBalance;
 		if (resBalance != 0.00f)
@@ -280,6 +280,7 @@ void cUI::updateInterfaceItemList()
 		ui.element[ui.getElementId(id)].texture = visual.addTexture("alpha.png");
 		ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("black.png");
 		ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 127, 0);
+		if (cont.item[0].icon != -1) { ui.element[ui.getElementId(id)].textOffset.x = 20.00f; }
 		ui.element[ui.getElementId(id)].textOffset.y = -3.00f;
 		ui.element[ui.getElementId(id)].ignoreOrigin = true;
 		ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
@@ -287,6 +288,15 @@ void cUI::updateInterfaceItemList()
 		ui.element[ui.getElementId(id)].button.action = "invItem_craftResult";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(cont.item[0].globalId);
 		ui.element[ui.getElementId(id)].hoverAlpha = 0;
+
+		if (cont.item[0].icon != -1)
+		{
+			id = ui.addElement("icon", vec2f(math.round(700.00f * resModX + 10.00f) + LIMIT_ICONSIZE / 2, math.round(750.00f * resModY - 50.00f) + LIMIT_ICONSIZE / 2));
+			ui.element[ui.getElementId(id)].size = vec2f(LIMIT_ICONSIZE, LIMIT_ICONSIZE);
+			ui.element[ui.getElementId(id)].texture = cont.item[0].icon.tex;
+			ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
+			ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
+		}
 	}
 
 	// Craft recipe buttons

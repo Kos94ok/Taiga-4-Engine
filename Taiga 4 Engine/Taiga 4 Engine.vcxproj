@@ -197,6 +197,7 @@
     <ClInclude Include="script.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="settings.h" />
+    <ClInclude Include="target.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="unit.h" />
     <ClInclude Include="util.h" />

@@ -191,8 +191,8 @@ void cCraft::loadRecipes()
 	addRecipe("material_iron_cast", 0, item("material_iron_raw", 2), "material_charcoal", item("furnace_basic", true));
 	addRecipe("material_iron_cast", 0, item("material_iron_raw", 2), "material_charcoal", item("furnace_industrial", true));
 	addRecipe("material_steel", 0, item("material_iron_raw", 3), item("material_charcoal", 4), item("furnace_industrial", true));
-	addRecipe("material_stone_construction", 50, item("material_stone", 5), item("tool_pickaxe_flint", true));
-	addRecipe("material_stone_construction", 50, item("material_stone", 5), item("tool_pickaxe_iron", true));
+	addRecipe("material_stone_construction", 50, item("material_stone", 1), item("tool_pickaxe_flint", true));
+	addRecipe("material_stone_construction", 50, item("material_stone", 1), item("tool_pickaxe_iron", true));
 
 	// Tools
 	addRecipe("tool_axe_stone", -100, item("weapon_knife_steel", true));
@@ -201,13 +201,13 @@ void cCraft::loadRecipes()
 	addRecipe("tool_axe_flint", -200, item("material_flint", 3));
 	addRecipe("tool_pickaxe_flint", -200, item("material_flint", 3));
 
-	addRecipe("tool_axe_iron", -300, item("material_iron_cast", 3), "charcoal", item("furnace_basic", true));
-	addRecipe("tool_axe_iron", -300, item("material_iron_cast", 3), "charcoal", item("furnace_industrial", true));
-	addRecipe("tool_pickaxe_iron", -300, item("material_iron_cast", 3), "charcoal", item("furnace_basic", true));
-	addRecipe("tool_pickaxe_iron", -300, item("material_iron_cast", 3), "charcoal", item("furnace_industrial", true));
+	addRecipe("tool_axe_iron", -300, item("material_iron_cast", 3), "material_charcoal", item("furnace_basic", true));
+	addRecipe("tool_axe_iron", -300, item("material_iron_cast", 3), "material_charcoal", item("furnace_industrial", true));
+	addRecipe("tool_pickaxe_iron", -300, item("material_iron_cast", 3), "material_charcoal", item("furnace_basic", true));
+	addRecipe("tool_pickaxe_iron", -300, item("material_iron_cast", 3), "material_charcoal", item("furnace_industrial", true));
 
-	addRecipe("tool_axe_steel", -400, item("material_steel", 3), "charcoal", item("furnace_industrial", true));
-	addRecipe("tool_pickaxe_steel", -400, item("material_steel", 3), "charcoal", item("furnace_industrial", true));
+	addRecipe("tool_axe_steel", -400, item("material_steel", 3), "material_charcoal", item("furnace_industrial", true));
+	addRecipe("tool_pickaxe_steel", -400, item("material_steel", 3), "material_charcoal", item("furnace_industrial", true));
 
 	// Furnace
 	addRecipe("furnace_basic", -1000, item("material_stone_construction", 10));

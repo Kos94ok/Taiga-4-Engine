@@ -65,7 +65,7 @@ void cWorld::genNormalWorld()
 	}
 
 	// Generating spawn point
-	vec2i spawnPointI = vec2i(math.rand(7, 55), math.rand(7, 55));
+	vec2i spawnPointI = vec2i(LIMIT_MAP / 2, LIMIT_MAP / 2);
 
 	// Generating paths
 	for (int i = 0; i < settings.wgStartingPath; i++)
@@ -100,7 +100,7 @@ void cWorld::genNormalWorld()
 	}
 
 	// Blocking the edges
-	for (int i = 0; i < LIMIT_MAP; i++)
+	/*for (int i = 0; i < LIMIT_MAP; i++)
 	{
 		map[i][0].type = CHUNK_BLOCKED;
 		map[i][63].type = CHUNK_BLOCKED;
@@ -109,7 +109,7 @@ void cWorld::genNormalWorld()
 	{
 		map[0][j].type = CHUNK_BLOCKED;
 		map[63][j].type = CHUNK_BLOCKED;
-	}
+	}*/
 
 	ofstream file;
 	file.open("Logs//map.txt");

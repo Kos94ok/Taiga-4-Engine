@@ -73,6 +73,9 @@
     <Filter Include="Файлы исходного кода\World\Overworld">
       <UniqueIdentifier>{26d3276e-a470-4295-be81-bec72b6ce79c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Util\Targeting">
+      <UniqueIdentifier>{76469b24-f368-44a9-a7db-1214313055a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -361,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="overworld.h">
       <Filter>Файлы исходного кода\World\Overworld</Filter>
+    </ClInclude>
+    <ClInclude Include="target.h">
+      <Filter>Файлы исходного кода\Util\Targeting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

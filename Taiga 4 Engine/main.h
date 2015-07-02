@@ -1,6 +1,5 @@
 
 #include "precomp.h"
-#include "define.h"
 
 #define endl	"\n"
 
@@ -11,6 +10,9 @@ typedef sf::Vector2i		vec2i;
 typedef std::string			str;
 typedef sf::Color			color;
 
+using namespace std;
+
+#include "define.h"
 #include "math.h"
 #include "util.h"
 #include "console.h"
@@ -38,8 +40,6 @@ typedef sf::Color			color;
 #include "editor.h"
 #include "script.h"
 #include "api.h"
-
-using namespace std;
 
 class cCore
 {

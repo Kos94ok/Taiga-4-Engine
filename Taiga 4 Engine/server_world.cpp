@@ -95,7 +95,7 @@ void serverWorldOrders(int elapsedTime)
 				{
 					if (core.serverSide())
 					{
-						float resFound = math.round(game.getUnit(game.unit[i].order[0].targetObject).resource * 0.20f);
+						float resFound;
 						cUnit* target = &game.getUnit(game.unit[i].order[0].targetObject);
 						// If at least some tool is used
 						if (game.unit[i].order[0].paramA > 0)
@@ -108,6 +108,15 @@ void serverWorldOrders(int elapsedTime)
 						// No tools used
 						else
 						{
+							resFound = math.round(game.getUnit(game.unit[i].order[0].targetObject).resource);
+							if (resFound == 275) { resFound = 75; }
+							else if (resFound == 200) { resFound = 50; }
+							else if (resFound == 150) { resFound = 30; }
+							else if (resFound == 120) { resFound = 25; }
+							else if (resFound == 95) { resFound = 20; }
+							else if (resFound == 75) { resFound = 15; }
+							else if (resFound >= 10) { resFound = 10; }
+							else { resFound = 0; }
 							game.unit[i].addResource(resFound);
 							game.unit[game.getUnitId(game.unit[i].order[0].targetObject)].addResource(-resFound);
 						}
@@ -236,13 +245,17 @@ void serverWorldAnim(int elapsedTime)
 
 	// Hovered unit
 	int oldHover = visual.hoveredUnit;
+	int oldPriority = -1;
 	visual.hoveredUnit = -1;
 	vec2f mousePos = window.getMousePos(true);
 	for (int i = 0; i < game.unitCounter; i++)
 	{
-		if (util.intersects(mousePos, game.unit[i].pos - game.unit[i].center, game.unit[i].size)
-			&& (visual.hoveredUnit == -1 || game.unit[i].globalId == oldHover)) {
+		if (!game.unit[i].hasRef(REF_UNIT_NOSELECTION)
+			&& util.intersects(mousePos, game.unit[i].pos - game.unit[i].center, game.unit[i].size)
+			&& (visual.hoveredUnit == -1 || game.unit[i].globalId == oldHover || game.unit[i].selectionPriority >= oldPriority))
+		{
 			visual.hoveredUnit = game.unit[i].globalId;
+			oldPriority = game.unit[i].selectionPriority;
 		}
 	}
 }

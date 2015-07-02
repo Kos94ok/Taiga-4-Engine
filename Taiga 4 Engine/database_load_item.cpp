@@ -46,24 +46,28 @@ void cDatabase::loadItems()
 	item[i].addRef(REF_ITEM_EQUIP);
 	item[i].addRef(REF_ITEM_ACTIVE);
 	item[i].addRef(REF_ITEM_AXE);
+	item[i].icon = visual.createIcon("icons_b.png", "icon_axe_stone", vec2i(1, 0), vec2f(0.125f, 0.125f));
 	i += 1;
 	// Flint
 	item[i] = item[i - 1];
 	item[i].type = "tool_axe_flint";
 	item[i].setName("Flint Axe");
 	item[i].powerLevel = POWER_FLINT;
+	item[i].icon = visual.createIcon("icons_b.png", "icon_axe_flint", vec2i(1, 1), vec2f(0.125f, 0.125f));
 	i += 1;
 	// Iron
 	item[i] = item[i - 1];
 	item[i].type = "tool_axe_iron";
 	item[i].setName("Iron Axe");
 	item[i].powerLevel = POWER_IRON;
+	item[i].icon = visual.createIcon("icons_b.png", "icon_axe_iron", vec2i(1, 2), vec2f(0.125f, 0.125f));
 	i += 1;
 	// Steel
 	item[i] = item[i - 1];
 	item[i].type = "tool_axe_steel";
 	item[i].setName("Steel Axe");
 	item[i].powerLevel = POWER_STEEL;
+	item[i].icon = visual.createIcon("icons_b.png", "icon_axe_iron", vec2i(1, 2), vec2f(0.125f, 0.125f));
 	i += 1;
 
 	// Pickaxes
@@ -78,25 +82,28 @@ void cDatabase::loadItems()
 	item[i].addRef(REF_ITEM_EQUIP);
 	item[i].addRef(REF_ITEM_ACTIVE);
 	item[i].addRef(REF_ITEM_PICKAXE);
-	item[i].icon = visual.createIcon("icons_b.png", "icon_pickaxe", vec2i(0, 2), vec2f(0.125f, 0.125f));
+	item[i].icon = visual.createIcon("icons_b.png", "icon_pickaxe_stone", vec2i(0, 0), vec2f(0.125f, 0.125f));
 	i += 1;
 	// Flint
 	item[i] = item[i - 1];
 	item[i].type = "tool_pickaxe_flint";
 	item[i].setName("Flint Pickaxe");
 	item[i].powerLevel = POWER_FLINT;
+	item[i].icon = visual.createIcon("icons_b.png", "icon_pickaxe_flint", vec2i(0, 1), vec2f(0.125f, 0.125f));
 	i += 1;
 	// Iron
 	item[i] = item[i - 1];
 	item[i].type = "tool_pickaxe_iron";
 	item[i].setName("Iron Pickaxe");
 	item[i].powerLevel = POWER_IRON;
+	item[i].icon = visual.createIcon("icons_b.png", "icon_pickaxe_iron", vec2i(0, 2), vec2f(0.125f, 0.125f));
 	i += 1;
 	// Steel
 	item[i] = item[i - 1];
 	item[i].type = "tool_pickaxe_steel";
 	item[i].setName("Steel Pickaxe");
 	item[i].powerLevel = POWER_STEEL;
+	item[i].icon = visual.createIcon("icons_b.png", "icon_pickaxe_iron", vec2i(0, 2), vec2f(0.125f, 0.125f));
 	i += 1;
 
 	// Food
@@ -215,8 +222,6 @@ void cDatabase::loadItems()
 	item[i].dismantle.add("food_meat_canned", 5);
 	item[i].dismantle.add("food_water_bottle", 1);
 	item[i].dismantle.add("material_flint", 3);
-	item[i].dismantle.add("tool_axe_stone", 1);
-	item[i].dismantle.add("tool_pickaxe_stone", 1);
 	item[i].addRef(REF_ITEM_UNPACKABLE);
 	item[i].category = CATEGORY_OTHER;
 	i += 1;

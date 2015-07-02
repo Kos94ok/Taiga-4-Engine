@@ -80,6 +80,7 @@ public:
 	float interactDistance;
 	float collisionDistance;
 	float flyingHeight;
+	int selectionPriority;
 
 	bool animAvailable(int animType);
 
@@ -150,5 +151,6 @@ public:
 		displayHealth = health;
 		maxHealth = 100.00f;
 		owner = -1;
+		selectionPriority = 0;
 	}
 };

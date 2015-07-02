@@ -121,14 +121,11 @@ void cItemContainer::sort(int sortType)
 	game.access.lock();
 	for (int i = 0; i < LIMIT_ITEMS; i++) { ex_ignore[i] = false; }
 	int itemsFound = 0, currentBestItem = -1;
-	int charValueA = 0, charValueB = 0, charValueC = 0;
-	int minCharValueA = 0, minCharValueB = 0, minCharValueC = 0;
 	string bestName, name;
 	do
 	{
 		currentBestItem = -1;
 		bestName = "zzzzzzzzzzzzzz";
-		minCharValueA = 9999, minCharValueB = 9999, minCharValueC = 9999;
 		// Checking all the item names
 		for (int i = 0; i < itemCounter; i++)
 		{
@@ -137,7 +134,7 @@ void cItemContainer::sort(int sortType)
 				if (sortType == SORT_BYNAME)
 				{
 					name = item[i].displayName;
-					for (int y = 0; y < min(name.length(), bestName.length()); y++)
+					for (int y = 0; y < (int)min(name.length(), bestName.length()); y++)
 					{
 						// New name is better
 						if ((int)name.c_str()[y] < (int)bestName.c_str()[y])
@@ -152,22 +149,6 @@ void cItemContainer::sort(int sortType)
 							break;
 						}
 					}
-
-					/*charValueA = (int)item[i].displayName.c_str()[0];
-					charValueB = (int)item[i].displayName.c_str()[1];
-					charValueC = (int)item[i].displayName.c_str()[2];
-					if (charValueA < minCharValueA) {
-						minCharValueA = charValueA;
-						currentBestItem = i;
-					}
-					else if (charValueA == minCharValueA && charValueB < minCharValueB) {
-						minCharValueB = charValueB;
-						currentBestItem = i;
-					}
-					else if (charValueA == minCharValueA && charValueB == minCharValueB && charValueC < minCharValueC) {
-						minCharValueC = charValueC;
-						currentBestItem = i;
-					}*/
 				}
 			}
 		}

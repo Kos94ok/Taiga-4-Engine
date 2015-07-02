@@ -76,9 +76,9 @@ void cDatabase::loadUnits()
 	unit[i].type = "tree_basic_a";
 	unit[i].size = vec2(100, 170);
 	unit[i].center = vec2(50, 167);
-	unit[i].health = 5000.00f;
-	unit[i].maxHealth = 5000.00f;
-	unit[i].resource = 500.00f;
+	unit[i].health = 500.00f;
+	unit[i].maxHealth = 500.00f;
+	unit[i].resource = 275.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_a_idle.png");
 	unit[i].animData[ANIM_DEATH].side.frameCount = 4;
 	unit[i].animData[ANIM_DEATH].side.frameDelay = 0.75f;
@@ -123,9 +123,9 @@ void cDatabase::loadUnits()
 	unit[i].size = vec2(70, 70);
 	unit[i].center = vec2(35, 50);
 	unit[i].shadowOffset = vec2(0, -5);
-	unit[i].health = 5000.00f;
-	unit[i].maxHealth = 5000.00f;
-	unit[i].resource = 500.00f;
+	unit[i].health = 500.00f;
+	unit[i].maxHealth = 500.00f;
+	unit[i].resource = 275.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_a_idle.png");
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 25.00f;
@@ -179,7 +179,7 @@ void cDatabase::loadUnits()
 	unit[i].light.texture = visual.addTexture("light_orange.png");
 	unit[i].light.flickerMod = 0.04f;
 	unit[i].light.flickerTime = 0.25f;
-	unit[i].sound.idle = cSound("fire2.ogg", 50.00f, 0.20f, 100.00f, 300.00f);
+	unit[i].sound.idle = cSound("fire2.ogg", 50.00f, 100.00f, 700.00f);
 	i += 1;
 
 	// Tent
@@ -211,6 +211,7 @@ void cDatabase::loadUnits()
 	unit[i].interactDistance = 15.00f;
 	unit[i].light.power = 100.00f;
 	unit[i].light.texture = visual.addTexture("light_blueWeak.png");
+	unit[i].selectionPriority = 3;
 	unit[i].addRef(REF_UNIT_PICKUP);
 	i += 1;
 
@@ -224,6 +225,7 @@ void cDatabase::loadUnits()
 	unit[i].light.texture = visual.addTexture("light_orange.png");
 	unit[i].addRef(REF_UNIT_ROTATE);
 	unit[i].addRef(REF_UNIT_MISSILE);
+	unit[i].addRef(REF_UNIT_NOSELECTION);
 	unit[i].addRef(REF_UNIT_DAMAGE_RIFLE);
 	i += 1;
 
@@ -240,6 +242,7 @@ void cDatabase::loadUnits()
 	unit[i].center = unit[i].size / 2.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("grey.png");
 	unit[i].addRef(REF_UNIT_NOSHADOW);
+	unit[i].addRef(REF_UNIT_NOSELECTION);
 	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE);
 	i += 1;
 }

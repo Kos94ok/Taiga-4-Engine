@@ -1,4 +1,5 @@
 
+#pragma once
 #ifdef _WIN32
 	#define SYSTEM_WINDOWS
 #elif defined __ANDROID__
@@ -29,3 +30,4 @@
 #ifdef SYSTEM_WINDOWS
 	#include <Windows.h>
 #endif
+

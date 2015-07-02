@@ -730,10 +730,10 @@ void cUITooltip::display()
 	brushRect.setPosition(floatRect.left - 3, floatRect.top - 3);
 	brushRect.setOrigin(0, 0);
 	brushRect.setSize(sf::Vector2f(floatRect.width + 6, floatRect.height + 6));
-	brushRect.setFillColor(sf::Color(0, 0, 0, alpha / 1.50f));
+	brushRect.setFillColor(sf::Color(0, 0, 0, alpha));
 	brushRect.setTexture(0);
-	brushRect.setOutlineColor(sf::Color(190, 190, 190, alpha / 2.00f));
-	brushRect.setOutlineThickness(-2.00f);
+	brushRect.setOutlineColor(sf::Color(190, 190, 190, alpha));
+	brushRect.setOutlineThickness(-1.00f);
 	//brushRect.setTexture(&visual.gameTex[database.texture[TEX_UI_TOOLTIP]].handle);
 	/*brushRect.setTextureRect(sf::IntRect(0, 0, visual.gameTex[database.texture[TEX_UI_TOOLTIP]].handle.getSize().x,
 		visual.gameTex[database.texture[TEX_UI_TOOLTIP]].handle.getSize().y));*/

@@ -98,7 +98,28 @@ sf::Color cUtil::convertUnitHighlightColor(int code)
 	switch (code)
 	{
 	case 0:
-		return sf::Color(255, 255, 255);
+		return parseOldschoolColorCode("bbffcc");
+		break;
+	case 1:
+		return parseOldschoolColorCode("00ffff");
+		break;
+	case 2:
+		return parseOldschoolColorCode("00ff55");
+		break;
+	case 3:
+		return parseOldschoolColorCode("ffff99");
+		break;
+	case 4:
+		return parseOldschoolColorCode("ffcc99");
+		break;
+	case 5:
+		return parseOldschoolColorCode("ffbbcc");
+		break;
+	case 6:
+		return parseOldschoolColorCode("cccccc");
+		break;
+	case 7:
+		return parseOldschoolColorCode("bbffff");
 		break;
 	}
 	return sf::Color(255, 200, 50);
