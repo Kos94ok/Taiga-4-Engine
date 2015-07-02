@@ -1,5 +1,9 @@
 
 #include "main.h"
+#include "settings.h"
+#include "camera.h"
+#include "window.h"
+#include "math.h"
 
 void cSettings::setDefault()
 {

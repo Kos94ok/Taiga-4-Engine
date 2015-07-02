@@ -1,5 +1,6 @@
 
 #include "main.h"
+#include "database.h"
 
 cUnit& cDatabase::getUnit(string type)
 {

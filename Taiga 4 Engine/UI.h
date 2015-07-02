@@ -1,5 +1,7 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
+#include "refSystem.h"
 
 class cUIButton
 {
@@ -187,3 +189,5 @@ public:
 		contextMenuTarget = CONTEXTMENU_NOTHING;
 	}
 };
+
+extern cUI ui;

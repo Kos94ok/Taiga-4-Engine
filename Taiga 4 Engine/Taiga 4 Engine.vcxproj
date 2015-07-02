@@ -152,6 +152,7 @@
     <ClCompile Include="server_world.cpp" />
     <ClCompile Include="settings_main.cpp" />
     <ClCompile Include="settings_util.cpp" />
+    <ClCompile Include="target_main.cpp" />
     <ClCompile Include="UI_button.cpp" />
     <ClCompile Include="UI_contextMenu.cpp" />
     <ClCompile Include="UI_inventory.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="UI_update.cpp" />
     <ClCompile Include="UI_util.cpp" />
     <ClCompile Include="unit_main.cpp" />
+    <ClCompile Include="unit_order.cpp" />
     <ClCompile Include="util_main.cpp" />
     <ClCompile Include="visual_gen.cpp" />
     <ClCompile Include="visual_main.cpp" />

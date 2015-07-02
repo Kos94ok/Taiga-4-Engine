@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "console.h"
+#include "settings.h"
 
 cConsole& operator << (cConsole& cmd, std::string str) {
 	cmd.output(str);

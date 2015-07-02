@@ -1,5 +1,6 @@
 
 #include "main.h"
+#include "settings.h"
 
 bool cSettings::getNextKey(ifstream *file, cSettingsKey *key)
 {

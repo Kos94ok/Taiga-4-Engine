@@ -1,5 +1,8 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
+#include "game.h"
+#include "util.h"
 
 class cServerPlayer
 {
@@ -85,6 +88,8 @@ public:
 		}
 	}
 };
+
+extern cServer server;
 
 void serverWorldMain();
 void serverConnectMain();

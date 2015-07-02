@@ -1,5 +1,9 @@
 
 #include "main.h"
+#include "path.h"
+#include "game.h"
+#include "math.h"
+#include "world.h"
 
 bool cPath::calculate(vec2 start, vec2 end, float collision, int unitId)
 {

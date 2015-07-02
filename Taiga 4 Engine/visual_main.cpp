@@ -1,5 +1,10 @@
 
 #include "main.h"
+#include "visual.h"
+#include "settings.h"
+#include "game.h"
+#include "window.h"
+#include "math.h"
 
 void cVisual::init()
 {

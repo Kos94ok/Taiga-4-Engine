@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "saveload.h"
+#include "math.h"
 
 void cSave::flushListToFile(cBlueprintHeader header, vector<cUnitEntry> list, string filename)
 {

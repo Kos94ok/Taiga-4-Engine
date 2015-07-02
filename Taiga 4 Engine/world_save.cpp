@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "world.h"
+#include "game.h"
 
 void cWorld::saveChunk(vec2i pos)
 {

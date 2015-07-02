@@ -1,5 +1,6 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
 
 class cUnit;
 
@@ -36,3 +37,5 @@ public:
 		DEGTORAD = PI / 180.00f;
 	}
 };
+
+extern cMath math;

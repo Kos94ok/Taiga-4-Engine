@@ -1,4 +1,7 @@
 
+#pragma once
+#include "util.h"
+
 class cArg
 {
 public:
@@ -54,3 +57,5 @@ public:
 	static void ui_initialMenu(cArg args);
 	static void server_sendChunkData(cArg args);
 };
+
+extern cScript script;

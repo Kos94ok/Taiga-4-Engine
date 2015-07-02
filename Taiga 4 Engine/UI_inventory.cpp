@@ -1,5 +1,9 @@
 
 #include "main.h"
+#include "UI.h"
+#include "game.h"
+#include "camera.h"
+#include "visual.h"
 
 void cUI::openInventory()
 {

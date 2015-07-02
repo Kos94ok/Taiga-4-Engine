@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "client.h"
+#include "server.h"
 
 // Server thread that waits for incoming connections
 void serverConnectMain()

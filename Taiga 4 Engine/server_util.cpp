@@ -1,5 +1,10 @@
 
 #include "main.h"
+#include "server.h"
+#include "client.h"
+#include "world.h"
+#include "editor.h"
+#include "UI.h"
 
 bool socketFree = true;
 

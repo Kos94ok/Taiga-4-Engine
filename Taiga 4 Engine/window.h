@@ -1,5 +1,6 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
 
 class cWindow
 {
@@ -28,5 +29,7 @@ public:
 	sf::Vector2f getMousePos(bool useMatrix = false);
 	sf::Vector2f getScreenSize();
 };
+
+extern cWindow window;
 
 void windowMain();

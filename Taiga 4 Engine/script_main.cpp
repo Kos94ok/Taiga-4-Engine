@@ -1,5 +1,6 @@
 
 #include "main.h"
+#include "script.h"
 
 void cScript::execute(std::function<void(cArg)> scriptFunc, cArg args)
 {

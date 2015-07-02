@@ -1,5 +1,9 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
+#include "unit.h"
+#include "util.h"
+#include "item.h"
 
 class cGame
 {
@@ -102,3 +106,5 @@ public:
 	// Returns: Nothing
 	void useItem(int id);
 };
+
+extern cGame game;

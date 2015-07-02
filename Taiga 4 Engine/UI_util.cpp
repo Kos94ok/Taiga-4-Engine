@@ -1,5 +1,8 @@
 
 #include "main.h"
+#include "UI.h"
+#include "visual.h"
+#include "math.h"
 
 //sf::Text brushText;
 

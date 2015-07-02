@@ -1,5 +1,8 @@
 
 #include "main.h"
+#include "editor.h"
+#include "game.h"
+#include "math.h"
 
 void cEditor::genBlueprint_Normal()
 {

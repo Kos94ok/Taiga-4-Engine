@@ -1,5 +1,12 @@
 
 #include "main.h"
+#include "unit.h"
+#include "audio.h"
+#include "settings.h"
+#include "camera.h"
+#include "game.h"
+#include "client.h"
+#include "math.h"
 
 void cAudio::playSound(cSound data)
 {

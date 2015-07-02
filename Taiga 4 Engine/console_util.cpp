@@ -1,5 +1,8 @@
 
 #include "main.h"
+#include "console.h"
+#include "camera.h"
+#include "settings.h"
 
 void cConsole::show()
 {

@@ -1,46 +1,6 @@
 
 #include "precomp.h"
 
-#define endl	"\n"
-
-typedef sf::Vector2f		vec;
-typedef sf::Vector2f		vec2;
-typedef sf::Vector2f		vec2f;
-typedef sf::Vector2i		vec2i;
-typedef std::string			str;
-typedef sf::Color			color;
-
-using namespace std;
-
-#include "define.h"
-#include "math.h"
-#include "util.h"
-#include "console.h"
-#include "window.h"
-#include "visual.h"
-#include "icon.h"
-#include "refSystem.h"
-#include "audio.h"
-#include "item.h"
-#include "UI.h"
-#include "path.h"
-#include "ai.h"
-#include "animation.h"
-#include "unit.h"
-#include "game.h"
-#include "database.h"
-#include "craft.h"
-#include "client.h"
-#include "server.h"
-#include "camera.h"
-#include "settings.h"
-#include "saveload.h"
-#include "world.h"
-#include "overworld.h"
-#include "editor.h"
-#include "script.h"
-#include "api.h"
-
 class cCore
 {
 public:
@@ -88,26 +48,3 @@ public:
 };
 
 extern cCore core;
-extern cValue value;
-extern cMath math;
-extern cConsole console;
-extern cWindow window;
-extern cVisual visual;
-extern cAudio audio;
-extern cUI ui;
-extern cPath path;
-extern cGame game;
-extern cDatabase database;
-extern cCraft craft;
-extern cServer server;
-extern cClient client;
-extern cCamera camera;
-extern cSettings settings;
-extern cSave save;
-extern cWorld world;
-extern cOverworld overworld;
-extern cEditor editor;
-extern cUtil util;
-extern cScript script;
-extern cAI ai;
-extern cAPI api;

@@ -1,5 +1,13 @@
 
 #include "main.h"
+#include "window.h"
+#include "game.h"
+#include "settings.h"
+#include "UI.h"
+#include "editor.h"
+#include "visual.h"
+#include "client.h"
+#include "camera.h"
 
 void cWindow::mainEvent()
 {

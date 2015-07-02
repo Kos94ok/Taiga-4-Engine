@@ -1,5 +1,13 @@
 
 #include "main.h"
+#include "script.h"
+#include "game.h"
+#include "world.h"
+#include "UI.h"
+#include "math.h"
+#include "server.h"
+#include "camera.h"
+#include "visual.h"
 
 void cScript::shooter_spawnEnemies(cArg args)
 {

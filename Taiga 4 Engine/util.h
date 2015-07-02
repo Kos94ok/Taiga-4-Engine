@@ -1,4 +1,14 @@
 
+#pragma once
+#include "precomp.h"
+
+class cPacketQueue
+{
+public:
+	int target;
+	sf::Packet data;
+};
+
 class cColor
 {
 public:
@@ -36,6 +46,8 @@ public:
 	bool intersects(sf::Vector2f pos, sf::Vector2f rectPos, sf::Vector2f rectSize);
 };
 
+extern cUtil util;
+
 class cValue
 {
 public:
@@ -44,6 +56,8 @@ public:
 
 	const float enemyDamage = 10.00f;
 };
+
+extern cValue value;
 
 class cMutex
 {

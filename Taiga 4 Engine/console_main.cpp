@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "console.h"
+#include "client.h"
 
 // Initializing the console class
 cConsole::cConsole()

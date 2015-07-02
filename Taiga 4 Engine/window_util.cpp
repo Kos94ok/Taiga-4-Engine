@@ -1,5 +1,8 @@
 
 #include "main.h"
+#include "window.h"
+#include "camera.h"
+#include "settings.h"
 
 void cWindow::showWarning(int msg, bool critical)
 {

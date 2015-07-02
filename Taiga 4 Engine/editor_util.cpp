@@ -1,5 +1,6 @@
 
 #include "main.h"
+#include "editor.h"
 
 void cEditorSelection::add(int target)
 {

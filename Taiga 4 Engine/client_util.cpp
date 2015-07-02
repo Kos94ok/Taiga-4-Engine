@@ -1,5 +1,8 @@
 
 #include "main.h"
+#include "client.h"
+#include "camera.h"
+#include "game.h"
 
 void cClient::sendPacket(sf::Packet data)
 {

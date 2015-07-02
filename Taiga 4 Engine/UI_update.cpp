@@ -1,5 +1,13 @@
 
 #include "main.h"
+#include "UI.h"
+#include "game.h"
+#include "craft.h"
+#include "client.h"
+#include "camera.h"
+#include "math.h"
+#include "visual.h"
+#include "database.h"
 
 void cUI::updateInterface()
 {

@@ -1,5 +1,9 @@
 
 #include "main.h"
+#include "craft.h"
+#include "database.h"
+#include "game.h"
+#include "client.h"
 
 typedef cComponent item;
 

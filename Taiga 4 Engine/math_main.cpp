@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "math.h"
+#include "game.h"
 
 int cMath::round(float num) {
 	return num < 0 ? num - 0.5 : num + 0.5;

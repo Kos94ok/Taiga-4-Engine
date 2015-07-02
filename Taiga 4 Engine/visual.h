@@ -1,5 +1,6 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
 
 class cTexture
 {
@@ -38,3 +39,5 @@ public:
 		maxTextureSize = sf::Texture::getMaximumSize();
 	}
 };
+
+extern cVisual visual;

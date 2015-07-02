@@ -1,4 +1,5 @@
 
+#pragma once
 void AICoreMain();
 
 class cAIBrain
@@ -53,3 +54,5 @@ public:
 		localTime = 0;
 	}
 };
+
+extern cAI ai;

@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "database.h"
+#include "math.h"
 
 bool cDatabaseExternal::getFileList()
 {

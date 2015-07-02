@@ -1,5 +1,8 @@
 
 #include "main.h"
+#include "ai.h"
+#include "game.h"
+#include "math.h"
 
 void cAI::think_enemy(int globalId)
 {

@@ -1,5 +1,12 @@
 
 #include "main.h"
+#include "UI.h"
+#include "game.h"
+#include "craft.h"
+#include "script.h"
+#include "client.h"
+#include "world.h"
+#include "editor.h"
 
 void cUIButton::callbackLeft(int parent)
 {

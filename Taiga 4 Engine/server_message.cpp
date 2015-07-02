@@ -1,5 +1,9 @@
 
 #include "main.h"
+#include "server.h"
+#include "script.h"
+#include "craft.h"
+#include "math.h"
 
 bool cServer::msgRequest(int i, sf::Packet input)
 {

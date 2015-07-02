@@ -1,5 +1,11 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
+#include "audio.h"
+#include "refSystem.h"
+#include "ai.h"
+#include "item.h"
+#include "animation.h"
 
 class cUnitSoundbank
 {

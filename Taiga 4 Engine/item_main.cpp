@@ -1,5 +1,9 @@
 
 #include "main.h"
+#include "item.h"
+#include "game.h"
+#include "database.h"
+#include "math.h"
 
 void cItem::setName(string txt)
 {

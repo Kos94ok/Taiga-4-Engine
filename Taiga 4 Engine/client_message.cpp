@@ -1,5 +1,10 @@
 
 #include "main.h"
+#include "client.h"
+#include "game.h"
+#include "world.h"
+#include "camera.h"
+#include "UI.h"
 
 bool cClient::msgBig(sf::Packet input)
 {

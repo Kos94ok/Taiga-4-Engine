@@ -1,5 +1,7 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
+#include "item.h"
 
 class cComponent
 {
@@ -97,3 +99,5 @@ public:
 	int getActiveRecipeCount();
 	bool isItemInRecipe(int recId, std::string type);
 };
+
+extern cCraft craft;

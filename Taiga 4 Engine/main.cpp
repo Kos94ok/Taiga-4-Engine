@@ -1,6 +1,35 @@
 
 #include "main.h"
 
+#include "math.h"
+#include "util.h"
+#include "console.h"
+#include "window.h"
+#include "visual.h"
+#include "icon.h"
+#include "refSystem.h"
+#include "audio.h"
+#include "item.h"
+#include "UI.h"
+#include "target.h"
+#include "path.h"
+#include "ai.h"
+#include "animation.h"
+#include "unit.h"
+#include "game.h"
+#include "database.h"
+#include "craft.h"
+#include "client.h"
+#include "server.h"
+#include "camera.h"
+#include "settings.h"
+#include "saveload.h"
+#include "world.h"
+#include "overworld.h"
+#include "editor.h"
+#include "script.h"
+#include "api.h"
+
 cCore core;
 cValue value;
 cMath math;
@@ -9,6 +38,7 @@ cWindow window;
 cVisual visual;
 cAudio audio;
 cUI ui;
+cTarget target;
 cPath path;
 cGame game;
 cDatabase database;

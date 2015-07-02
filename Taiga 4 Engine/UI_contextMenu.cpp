@@ -1,5 +1,12 @@
 
 #include "main.h"
+#include "UI.h"
+#include "game.h"
+#include "craft.h"
+#include "window.h"
+#include "client.h"
+#include "visual.h"
+#include "camera.h"
 
 void cUI::createContextMenuForItem(int targetItem)
 {

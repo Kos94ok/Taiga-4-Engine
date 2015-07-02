@@ -1,5 +1,8 @@
 
 #include "main.h"
+#include "api.h"
+#include "database.h"
+#include "client.h"
 
 cUnit& cAPI::unitHandle(int id, bool isGlobal)
 {

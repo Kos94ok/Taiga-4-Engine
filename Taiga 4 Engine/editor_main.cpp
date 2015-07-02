@@ -1,5 +1,9 @@
 
 #include "main.h"
+#include "editor.h"
+#include "game.h"
+#include "client.h"
+#include "UI.h"
 
 void cEditor::enable()
 {

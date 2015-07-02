@@ -1,5 +1,8 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
+#include "util.h"
+#include "saveload.h"
 
 void worldLoaderMain();
 
@@ -59,3 +62,5 @@ public:
 	sf::Vector2i getChunkInPos(sf::Vector2f pos);
 	sf::Vector2f getChunkCenter(sf::Vector2i pos);
 };
+
+extern cWorld world;

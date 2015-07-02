@@ -1,4 +1,5 @@
 
+#pragma once
 void audioMain();
 
 class cSound
@@ -71,3 +72,5 @@ public:
 
 	}
 };
+
+extern cAudio audio;

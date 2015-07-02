@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "unit.h"
+#include "animation.h"
 
 cAnimDisplay cUnit::getCurrentAnimDirection()
 {

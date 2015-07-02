@@ -1,12 +1,7 @@
 
-#include "define.h"
-
-class cPacketQueue
-{
-public:
-	int target;
-	sf::Packet data;
-};
+#pragma once
+#include "precomp.h"
+#include "util.h"
 
 class cClient
 {
@@ -46,6 +41,8 @@ public:
 		dataQueueCounter = 0;
 	}
 };
+
+extern cClient client;
 
 void clientReceiveMain();
 void clientSendMain();

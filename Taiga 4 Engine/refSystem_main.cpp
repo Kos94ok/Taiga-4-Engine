@@ -1,5 +1,6 @@
 
 #include "main.h"
+#include "refSystem.h"
 
 void cReference::addRef(int id) {
 	if (id < 0 || id > LIMIT_REFERENCE) { return; }

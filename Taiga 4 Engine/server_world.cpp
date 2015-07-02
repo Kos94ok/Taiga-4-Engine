@@ -1,5 +1,14 @@
 
 #include "main.h"
+#include "server.h"
+#include "settings.h"
+#include "camera.h"
+#include "UI.h"
+#include "window.h"
+#include "visual.h"
+#include "client.h"
+#include "math.h"
+#include "path.h"
 
 void serverWorldOrders(int elapsedTime)
 {

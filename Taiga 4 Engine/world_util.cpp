@@ -1,5 +1,11 @@
 
 #include "main.h"
+#include "world.h"
+#include "game.h"
+#include "camera.h"
+#include "client.h"
+#include "server.h"
+#include "math.h"
 
 void cWorld::applyBlueprint(vec2i position, int type)
 {

@@ -1,5 +1,12 @@
 
 #include "main.h"
+#include "world.h"
+#include "game.h"
+#include "database.h"
+#include "settings.h"
+#include "math.h"
+#include "camera.h"
+#include "visual.h"
 
 void cWorld::genTaigaMini()
 {

@@ -1,5 +1,15 @@
 
 #include "main.h"
+#include "window.h"
+#include "game.h"
+#include "settings.h"
+#include "UI.h"
+#include "database.h"
+#include "camera.h"
+#include "visual.h"
+#include "math.h"
+#include "editor.h"
+#include "client.h"
 
 sf::RectangleShape brushRect;
 sf::CircleShape brushCircle;

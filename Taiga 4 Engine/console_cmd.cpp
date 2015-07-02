@@ -1,5 +1,14 @@
 
 #include "main.h"
+#include "console.h"
+#include "server.h"
+#include "client.h"
+#include "game.h"
+#include "camera.h"
+#include "UI.h"
+#include "editor.h"
+#include "database.h"
+#include "world.h"
 
 // Help command
 void cmd_help(string args[])

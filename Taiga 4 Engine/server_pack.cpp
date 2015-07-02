@@ -1,5 +1,6 @@
 
 #include "main.h"
+#include "server.h"
 
 void cServer::addUnitData(sf::Packet* data, cUnit* unit, int variation)
 {

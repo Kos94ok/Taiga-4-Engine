@@ -1,5 +1,6 @@
 
 #include "main.h"
+#include "game.h"
 
 // Time checks
 bool cGame::isDay() { return (timeOfDay > 6.00f && timeOfDay < 18.00f); }

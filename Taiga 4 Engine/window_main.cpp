@@ -1,5 +1,10 @@
 
 #include "main.h"
+#include "window.h"
+#include "settings.h"
+#include "math.h"
+#include "camera.h"
+#include "visual.h"
 
 void windowMain()
 {

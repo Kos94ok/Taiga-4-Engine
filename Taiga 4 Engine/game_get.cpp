@@ -1,5 +1,8 @@
 
 #include "main.h"
+#include "game.h"
+#include "database.h"
+#include "math.h"
 
 // Convert global id to local id
 int cGame::getUnitId(int globalId)

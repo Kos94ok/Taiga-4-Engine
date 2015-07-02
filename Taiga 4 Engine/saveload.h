@@ -1,5 +1,6 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
 
 class cItemEntry
 {
@@ -57,3 +58,5 @@ public:
 		savefileName = "temp";
 	}
 };
+
+extern cSave save;

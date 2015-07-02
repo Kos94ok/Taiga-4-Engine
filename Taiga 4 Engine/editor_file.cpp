@@ -1,5 +1,8 @@
 
 #include "main.h"
+#include "editor.h"
+#include "game.h"
+#include "saveload.h"
 
 void cEditor::saveBlueprint(string name)
 {

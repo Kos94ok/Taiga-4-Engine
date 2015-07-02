@@ -1,4 +1,7 @@
 
+#pragma once
+#include "precomp.h"
+
 class cOverworldMap
 {
 	sf::Vector2f pos;

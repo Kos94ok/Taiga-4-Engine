@@ -1,5 +1,10 @@
 
 #include "main.h"
+#include "item.h"
+#include "client.h"
+#include "window.h"
+#include "game.h"
+#include "visual.h"
 
 void cItem::use()
 {

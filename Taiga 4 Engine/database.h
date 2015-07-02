@@ -1,5 +1,10 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
+#include "unit.h"
+#include "item.h"
+#include "UI.h"
+#include "util.h"
 
 //extern cVisual visual;
 
@@ -45,3 +50,5 @@ public:
 
 	bool isItemGood(std::string type);
 };
+
+extern cDatabase database;

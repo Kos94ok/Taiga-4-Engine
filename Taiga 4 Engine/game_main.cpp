@@ -1,5 +1,10 @@
 
 #include "main.h"
+#include "game.h"
+#include "server.h"
+#include "client.h"
+#include "database.h"
+#include "world.h"
 
 // Copy unit from database
 int cGame::addUnit(string type, vec2f pos, int owner, int variation, bool sendData, int overrideGlobalId)

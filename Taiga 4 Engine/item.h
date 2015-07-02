@@ -1,5 +1,8 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
+#include "refSystem.h"
+#include "icon.h"
 
 class cItemDrop
 {

@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "ai.h"
+#include "game.h"
 
 void cAI::tick(int elapsedTime)
 {

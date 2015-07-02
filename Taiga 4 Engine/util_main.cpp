@@ -1,5 +1,6 @@
 
 #include "main.h"
+#include "util.h"
 
 void cUtil::detectVideoCard()
 {

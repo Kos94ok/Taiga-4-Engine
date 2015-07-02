@@ -1,5 +1,7 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
+#include "util.h"
 
 class cSubConsole
 {
@@ -53,6 +55,8 @@ public:
 
 	void output(std::string str, int subConsole = SUBCMD_INFO);
 };
+
+extern cConsole console;
 
 cConsole& operator << (cConsole& cmd, std::string str);
 cConsole& operator << (cConsole& cmd, int i);

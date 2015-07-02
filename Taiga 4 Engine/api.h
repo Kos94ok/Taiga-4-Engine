@@ -1,5 +1,8 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
+#include "game.h"
+#include "UI.h"
 
 class cAPI
 {
@@ -57,3 +60,5 @@ public:
 	*/
 	cUIElement& lastCreatedElement();
 };
+
+extern cAPI api;

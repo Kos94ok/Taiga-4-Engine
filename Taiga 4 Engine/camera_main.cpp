@@ -1,5 +1,9 @@
 
 #include "main.h"
+#include "camera.h"
+#include "client.h"
+#include "UI.h"
+#include "window.h"
 
 bool cCamera::isMoving()
 {

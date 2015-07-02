@@ -1,5 +1,6 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
 
 class cSettingsKey
 {
@@ -107,3 +108,5 @@ public:
 	// Graphics presets
 	void setUltra();
 };
+
+extern cSettings settings;

@@ -1,5 +1,6 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
 
 class cCamera
 {
@@ -28,3 +29,5 @@ public:
 		lockedToCharacter = false;
 	}
 };
+
+extern cCamera camera;

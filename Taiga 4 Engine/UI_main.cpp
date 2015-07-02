@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "UI.h"
+#include "database.h"
 
 int cUI::addElement(string type, sf::Vector2f pos)
 {

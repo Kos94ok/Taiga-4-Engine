@@ -1,5 +1,6 @@
 
-#include "define.h"
+#pragma once
+#include "precomp.h"
 
 class cEditorSelection
 {
@@ -38,3 +39,5 @@ public:
 		autogenType = CHUNK_NORMAL;
 	}
 };
+
+extern cEditor editor;

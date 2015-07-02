@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "world.h"
+#include "client.h"
 
 vector<string> getBlueprintList()
 {

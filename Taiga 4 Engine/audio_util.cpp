@@ -1,5 +1,6 @@
 
 #include "main.h"
+#include "audio.h"
 
 int cAudio::getFreeSound()
 {

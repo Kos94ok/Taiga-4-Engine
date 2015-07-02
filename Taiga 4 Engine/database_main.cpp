@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "database.h"
+#include "visual.h"
 
 void cDatabase::init()
 {
