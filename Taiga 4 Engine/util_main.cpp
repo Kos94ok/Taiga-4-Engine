@@ -93,6 +93,54 @@ string cUtil::getCurrentTimeString()
 	return retVal;
 }
 
+sf::Color cUtil::convertUnitHighlightColor(int code)
+{
+	switch (code)
+	{
+	case 0:
+		return sf::Color(255, 255, 255);
+		break;
+	}
+	return sf::Color(255, 200, 50);
+}
+
+sf::Color cUtil::parseOldschoolColorCode(string code)
+{
+	sf::Color retVal;
+	string val;
+	int value, converted;
+	for (int i = 0; i < 3; i++)
+	{
+		// First digit
+		val = code.substr(i * 2, 1);
+		value = 0;
+		if (val == "a") { value += 16 * 10; }
+		else if (val == "b") { value += 16 * 11; }
+		else if (val == "c") { value += 16 * 12; }
+		else if (val == "d") { value += 16 * 13; }
+		else if (val == "e") { value += 16 * 14; }
+		else if (val == "f") { value += 16 * 15; }
+		else { stringstream(val) >> converted; value += converted * 16; }
+
+		// Second digit
+		val = code.substr(i * 2 + 1, 1);
+		if (val == "a") { value += 10; }
+		else if (val == "b") { value += 11; }
+		else if (val == "c") { value += 12; }
+		else if (val == "d") { value += 13; }
+		else if (val == "e") { value += 14; }
+		else if (val == "f") { value += 15; }
+		else { stringstream(val) >> converted; value += converted; }
+
+		// Flushing
+		if (i == 0) { retVal.r = value; console.debug << "[DEBUG] Red: " << value << endl; }
+		if (i == 1) { retVal.g = value; console.debug << "[DEBUG] Green: " << value << endl; }
+		if (i == 2) { retVal.b = value; console.debug << "[DEBUG] Blue: " << value << endl; }
+	}
+
+	return retVal;
+}
+
 bool cUtil::intersects(vec2f pos, vec2f rectPos, vec2f rectSize)
 {
 	if (pos.x < rectPos.x) { return false; }

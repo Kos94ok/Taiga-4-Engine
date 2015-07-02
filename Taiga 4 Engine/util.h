@@ -30,6 +30,9 @@ public:
 	void checkLogFiles();
 	std::string getCurrentTimeString();
 	
+	sf::Color convertUnitHighlightColor(int code);
+	sf::Color parseOldschoolColorCode(std::string code);
+	
 	bool intersects(sf::Vector2f pos, sf::Vector2f rectPos, sf::Vector2f rectSize);
 };
 

@@ -261,6 +261,12 @@
     <ClCompile Include="overworld_main.cpp">
       <Filter>Файлы исходного кода\World\Overworld</Filter>
     </ClCompile>
+    <ClCompile Include="database_load_item.cpp">
+      <Filter>Файлы исходного кода\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="database_load_unit.cpp">
+      <Filter>Файлы исходного кода\Database</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

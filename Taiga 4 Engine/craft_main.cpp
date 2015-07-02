@@ -58,7 +58,7 @@ int cCraft::getActiveRecipeRepeats(bool ignoreResource)
 	// Amount of resource
 	if (recipe[i].resourceBalance < 0.00f && !ignoreResource)
 	{
-		amount = min(amount, math.round(game.getUnit(client.unit).resource / -recipe[i].resourceBalance));
+		amount = min((float)amount, floor(game.getUnit(client.unit).resource / -recipe[i].resourceBalance));
 	}
 	return amount;
 }
@@ -183,8 +183,33 @@ void cCraft::loadRecipes()
 	addRecipe("voodoo_doll", 0, item("human_leg", 1), item("human_arm", 1), item("human_ear", 1), item("human_eye"));
 	addRecipe("test_catAll", 0, "test_catWeapons", "test_catArmor", "test_catMaterials", "test_catConsumables", "test_catOther");
 	addRecipe("test_resourceManipulator", 100, "test_resourceManipulator");
-	addRecipe("campfire_basic", -100, item("weapon_knife_steel", true), "flint_basic");
+	addRecipe("campfire_basic", -100, item("weapon_knife_steel", true), "material_flint");
 
+	// Materials
+	addRecipe("material_charcoal", 0, item("material_wood", 2), item("furnace_basic", true));
+	addRecipe("material_charcoal", 0, "material_wood", item("furnace_industrial", true));
+	addRecipe("material_iron_cast", 0, item("material_iron_raw", 2), "material_charcoal", item("furnace_basic", true));
+	addRecipe("material_iron_cast", 0, item("material_iron_raw", 2), "material_charcoal", item("furnace_industrial", true));
+	addRecipe("material_steel", 0, item("material_iron_raw", 3), item("material_charcoal", 4), item("furnace_industrial", true));
+	addRecipe("material_stone_construction", 50, item("material_stone", 5), item("tool_pickaxe_flint", true));
+	addRecipe("material_stone_construction", 50, item("material_stone", 5), item("tool_pickaxe_iron", true));
+
+	// Tools
 	addRecipe("tool_axe_stone", -100, item("weapon_knife_steel", true));
 	addRecipe("tool_pickaxe_stone", -100, item("weapon_knife_steel", true));
+
+	addRecipe("tool_axe_flint", -200, item("material_flint", 3));
+	addRecipe("tool_pickaxe_flint", -200, item("material_flint", 3));
+
+	addRecipe("tool_axe_iron", -300, item("material_iron_cast", 3), "charcoal", item("furnace_basic", true));
+	addRecipe("tool_axe_iron", -300, item("material_iron_cast", 3), "charcoal", item("furnace_industrial", true));
+	addRecipe("tool_pickaxe_iron", -300, item("material_iron_cast", 3), "charcoal", item("furnace_basic", true));
+	addRecipe("tool_pickaxe_iron", -300, item("material_iron_cast", 3), "charcoal", item("furnace_industrial", true));
+
+	addRecipe("tool_axe_steel", -400, item("material_steel", 3), "charcoal", item("furnace_industrial", true));
+	addRecipe("tool_pickaxe_steel", -400, item("material_steel", 3), "charcoal", item("furnace_industrial", true));
+
+	// Furnace
+	addRecipe("furnace_basic", -1000, item("material_stone_construction", 10));
+	addRecipe("furnace_industrial", -1000, item("material_stone_construction", 10), item("material_iron_cast", 10));
 }

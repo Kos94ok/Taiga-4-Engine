@@ -93,6 +93,7 @@ void cSettings::setDefault()
 	this->hkDebugAdvanced = sf::Keyboard::F4;
 
 	// Garbage
+	visualUnitHoverColor = sf::Color(255, 200, 50);
 	camera.res.x = window.getScreenSize().x;
 	camera.res.y = window.getScreenSize().y;
 }
@@ -144,6 +145,8 @@ void cSettings::load()
 		else if (key.name == "enableCameraBlur") { enableCameraBlur = math.stringToInt(key.value); }
 		else if (key.name == "pixelization") { pixelization = (float)math.stringToInt(key.value); }
 		else if (key.name == "shadowBlur") { shadowBlur = math.stringToInt(key.value); }
+		else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
+		else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
 			// Gameplay
 		else if (key.name == "enableQuickCast") { enableQuickCast = math.stringToInt(key.value); }
 		else if (key.name == "enableMouseScroll") { enableMouseScroll = math.stringToInt(key.value); }

@@ -11,13 +11,13 @@
 #define LIMIT_SHADERS					32
 #define LIMIT_DESCR						8
 #define LIMIT_COMPONENTS				8
-#define LIMIT_DISMANTLE					4
+#define LIMIT_DISMANTLE					8
 #define LIMIT_RECIPES					64
 #define LIMIT_ITEMS						128
-#define LIMIT_DROP						8
+#define LIMIT_DROP						16
 #define LIMIT_UNIT						2048
-#define LIMIT_DB_UNIT					32
-#define LIMIT_DB_ITEM					32
+#define LIMIT_DB_UNIT					64
+#define LIMIT_DB_ITEM					64
 #define LIMIT_DB_UIELEMENTS				32
 #define LIMIT_DB_TEXTURES				32
 #define LIMIT_UI_ELEMENTS				128

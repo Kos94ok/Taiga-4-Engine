@@ -4,7 +4,6 @@
 void cItem::use()
 {
 	sf::Packet data;
-	int unitId;
 	if (!hasRef(REF_ITEM_ACTIVE) && !(hasRef(REF_ITEM_CONSUME))) { return; }
 	// Remove all orders
 	data << MSG_CONTROLS_STOP;
@@ -28,10 +27,9 @@ void cItem::use()
 	// Axe
 	if (hasRef(REF_ITEM_AXE))
 	{
-		unitId = game.getUnitId(window.getMousePos(true), REF_UNIT_TREE);
-		if (unitId != -1)
+		if (visual.hoveredUnit != -1 && game.getUnit(visual.hoveredUnit).hasRef(REF_UNIT_TREE))
 		{
-			data << MSG_CONTROLS_AXE << unitId << powerLevel;
+			data << MSG_CONTROLS_AXE << visual.hoveredUnit << powerLevel;
 			client.sendPacket(data);
 			data.clear();
 		}
@@ -39,10 +37,9 @@ void cItem::use()
 	// Pickaxe
 	if (hasRef(REF_ITEM_PICKAXE))
 	{
-		unitId = game.getUnitId(window.getMousePos(true), REF_UNIT_STONE);
-		if (unitId != -1)
+		if (visual.hoveredUnit != -1 && game.getUnit(visual.hoveredUnit).hasRef(REF_UNIT_STONE))
 		{
-			data << MSG_CONTROLS_PICKAXE << unitId << powerLevel;
+			data << MSG_CONTROLS_PICKAXE << visual.hoveredUnit << powerLevel;
 			client.sendPacket(data);
 			data.clear();
 		}

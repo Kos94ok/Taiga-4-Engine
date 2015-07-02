@@ -242,19 +242,25 @@ void cUI::updateInterfaceItemList()
 		{
 			id = ui.addElement(ui.element[ui.getElementId(saveId)], sf::Vector2f(math.round(700.00f * resModX + 10.00f), math.round(500.00f * resModY + 10.00f + 26.00f * invButtonsAdded++)));
 			ui.element[ui.getElementId(id)].button.action = "-";
+			// Positive balance - green text
 			if (resBalance > 0.00f)
 			{
 				name = " Resource (+" + to_string(math.round(resBalance * craft.getActiveRecipeRepeats()))
 					+ " / " + to_string(math.round(resBalance)) + ")";
-				ui.element[ui.getElementId(id)].textColor = sf::Color(100, 255, 100);
+				ui.element[ui.getElementId(id)].textColor = sf::Color(50, 255, 50);
 				ui.element[ui.getElementId(id)].textOffset.x = 0.00f;
 			}
+			// Negative balance - red or white text
 			else if (resBalance < 0.00f)
 			{
 				name = " Resource (" + to_string(math.round(-resBalance * craft.getActiveRecipeRepeats()))
 					+ " / " + to_string(math.round(-resBalance)) + ")";
+				// Not enough resource - red text
 				if (game.getUnit(client.unit).resource < -resBalance) {
-					ui.element[ui.getElementId(id)].textColor = sf::Color(255, 100, 100);
+					name = " Resource (" + to_string(math.round(game.getUnit(client.unit).resource))
+						+ " / " + to_string(math.round(-resBalance)) + ")";
+
+					ui.element[ui.getElementId(id)].textColor = sf::Color(255, 50, 50);
 					ui.element[ui.getElementId(id)].textOffset.x = 0.00f;
 				}
 			}

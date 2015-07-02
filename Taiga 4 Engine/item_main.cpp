@@ -123,17 +123,37 @@ void cItemContainer::sort(int sortType)
 	int itemsFound = 0, currentBestItem = -1;
 	int charValueA = 0, charValueB = 0, charValueC = 0;
 	int minCharValueA = 0, minCharValueB = 0, minCharValueC = 0;
+	string bestName, name;
 	do
 	{
 		currentBestItem = -1;
+		bestName = "zzzzzzzzzzzzzz";
 		minCharValueA = 9999, minCharValueB = 9999, minCharValueC = 9999;
+		// Checking all the item names
 		for (int i = 0; i < itemCounter; i++)
 		{
 			if (!ex_ignore[i])
 			{
 				if (sortType == SORT_BYNAME)
 				{
-					charValueA = (int)item[i].displayName.c_str()[0];
+					name = item[i].displayName;
+					for (int y = 0; y < min(name.length(), bestName.length()); y++)
+					{
+						// New name is better
+						if ((int)name.c_str()[y] < (int)bestName.c_str()[y])
+						{
+							bestName = name;
+							currentBestItem = i;
+							break;
+						}
+						// Best name is still the best
+						else if ((int)name.c_str()[y] > (int)bestName.c_str()[y])
+						{
+							break;
+						}
+					}
+
+					/*charValueA = (int)item[i].displayName.c_str()[0];
 					charValueB = (int)item[i].displayName.c_str()[1];
 					charValueC = (int)item[i].displayName.c_str()[2];
 					if (charValueA < minCharValueA) {
@@ -147,7 +167,7 @@ void cItemContainer::sort(int sortType)
 					else if (charValueA == minCharValueA && charValueB == minCharValueB && charValueC < minCharValueC) {
 						minCharValueC = charValueC;
 						currentBestItem = i;
-					}
+					}*/
 				}
 			}
 		}

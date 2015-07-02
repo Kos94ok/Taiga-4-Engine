@@ -86,6 +86,9 @@ public:
 	// Console line spacing
 	int consoleLineSpacing;
 
+	// Unit highlight color
+	sf::Color visualUnitHoverColor;
+
 	// Hotkeys
 	sf::Keyboard::Key hkConsole;
 	sf::Keyboard::Key hkDebugMode;

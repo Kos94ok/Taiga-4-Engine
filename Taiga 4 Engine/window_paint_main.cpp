@@ -127,7 +127,7 @@ void cWindow::paintUnits()
 					|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE) && y == cameraTop) )) 
 				{
 					// Display the selection circle
-					if (visual.hoveredUnit == game.unit[i].globalId)
+					/*if (visual.hoveredUnit == game.unit[i].globalId)
 					{
 						brushRect.setRotation(0.00f);
 						brushRect.setScale(1.00f, 1.00f);
@@ -144,7 +144,7 @@ void cWindow::paintUnits()
 							if (u == 0) { window.texHandle.draw(brushRect, window.matrixHandle); }
 							else { window.texHandleShadow.draw(brushRect, window.matrixHandle); }
 						}
-					}
+					}*/
 
 					// Unit animation
 					animDisplay = game.unit[i].getCurrentAnimDirection();
@@ -278,7 +278,7 @@ void cWindow::paintUnits()
 					brushRect.setScale(1.00f, 1.00f);
 					brushRect.setFillColor(sf::Color(255, 255, 255));
 					if (visual.hoveredUnit == game.unit[i].globalId) {
-						//brushRect.setFillColor(sf::Color(255, 230, 200));
+						brushRect.setFillColor(settings.visualUnitHoverColor);
 					}
 					if (!settings.enableDynamicLight) { brushRect.setFillColor(sf::Color(
 							min(game.ambientLight, 255.0f),
