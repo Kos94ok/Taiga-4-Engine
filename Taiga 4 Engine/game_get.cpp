@@ -57,6 +57,18 @@ cUnit& cGame::getUnitPhys(vec2f &pos, int refFilter)
 	return database.unit[0];
 }
 
+// Find unit by ref
+cUnit& cGame::getUnitByRef(int refFilter)
+{
+	for (int i = 0; i < unitCounter; i++)
+	{
+		if (unit[i].hasRef(refFilter)) {
+			return unit[i];
+		}
+	}
+	return database.unit[0];
+}
+
 // Get the distance required for interact
 float cGame::getUnitInteractDistance(cUnit unitA, cUnit unitB) {
 	return (unitA.interactDistance + unitB.interactDistance);

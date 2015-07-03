@@ -68,6 +68,9 @@ public:
 	// Takes: World location
 	// Returns: Pointer to first found unit (using physical distance)
 	cUnit& getUnitPhys(sf::Vector2f &pos, int refFilter = -1);
+	// Takes: Reference
+	// Returts: Pointer to first found unit
+	cUnit& getUnitByRef(int refFilter);
 	// Takes: Unit A, Unit B
 	// Returns: Minimum required interact distance
 	float getUnitInteractDistance(cUnit unitA, cUnit unitB);

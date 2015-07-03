@@ -23,8 +23,9 @@ void cSettings::setDefault()
 	this->enableTextureSmoothing = 0;
 	this->enableCameraBlur = 1;
 	this->enableVertSync = 1;
-	this->enableQuickCast = 1; 
-	this->enableMouseScroll = 0;
+	this->enableQuickCast = 0; 
+	this->enableLazyCast = 0;
+	this->enableMouseScroll = 1;
 	this->enableDynamicTooltips = 0;
 
 	// Any value
@@ -153,6 +154,7 @@ void cSettings::load()
 		else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
 			// Gameplay
 		else if (key.name == "enableQuickCast") { enableQuickCast = math.stringToInt(key.value); }
+		else if (key.name == "enableLazyCast") { enableLazyCast = math.stringToInt(key.value); }
 		else if (key.name == "enableMouseScroll") { enableMouseScroll = math.stringToInt(key.value); }
 		else if (key.name == "enableDynamicTooltips") { enableDynamicTooltips = math.stringToInt(key.value); }
 			// Console

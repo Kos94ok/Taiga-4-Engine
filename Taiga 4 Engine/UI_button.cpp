@@ -7,6 +7,7 @@
 #include "client.h"
 #include "world.h"
 #include "editor.h"
+#include "target.h"
 
 void cUIButton::callbackLeft(int parent)
 {
@@ -109,6 +110,20 @@ void cUIButton::callbackLeft(int parent)
 		ui.clearContextMenu();
 		ui.updateInterfaceEquipment();
 		ui.updateInterfaceItemList();
+	}
+	else if (action == "invItem_build")
+	{
+		stringstream(args[0]) >> id;
+		cUnit* owner = &game.unit[game.getUnitId(client.unit)];
+		id = owner->container.getId(id);
+		if (owner->container.item[id].hasRef(REF_ITEM_BUILD_CAMPFIRE)) {
+			target.enable_building("campfire_full", REF_ITEM_BUILD_CAMPFIRE);
+		}
+		else if (owner->container.item[id].hasRef(REF_ITEM_BUILD_FURNACEBASIC)) {
+			//target.enable_building("campfire_full");
+		}
+		ui.clearContextMenu();
+		ui.closeInventory();
 	}
 	else if (action == "invItem_consume")
 	{

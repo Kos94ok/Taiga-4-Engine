@@ -88,6 +88,7 @@
 #define MSG_CONTROLS_AXE				172
 #define MSG_CONTROLS_PICKAXE			173
 #define MSG_CONTROLS_CONSUME			174
+#define MSG_CONTROLS_BUILD				175
 #define MSG_REQUEST_CHUNKDATA			180
 #define MSG_INFO_CAMRES					190
 #define MSG_BIG_WORLD_ONECHUNK			500
@@ -132,6 +133,7 @@
 #define REF_UNIT_STONE					11		// Unit can be harvested with pickaxe
 #define REF_UNIT_DAMAGE_RIFLE			12		// Unit deals the damage of the rifle on impact
 #define REF_UNIT_NOSELECTION			13		// Unit is not selectable
+#define REF_UNIT_TARGET					14		// Unit is mousebound target pointer
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_CONSUME				2		// Item can be consumed
@@ -146,11 +148,15 @@
 #define REF_ITEM_EMPTIABLE				11		// Item context menu will display 'empty' instead of 'dismantle'
 #define REF_ITEM_DISMANTLE_ON_CONSUME	12		// Item is dismantled when it is consumed
 #define REF_ITEM_GHOST					13		// Item is a non-interactive ghost item
+#define REF_ITEM_BUILD				14		// Item is a buildable object
+#define REF_ITEM_BUILD_CAMPFIRE			15		// Item is a buildable campfire
+#define REF_ITEM_BUILD_FURNACEBASIC		16		// Item is a buildable basic furnace
 
 #define TEX_UI_TOOLTIP					1
 #define TEX_WORLD_GROUND				2
 #define TEX_ICON_WINDOW					3
 #define TEX_SELECTION_CIRCLE			4
+#define TEX_MOUSE_TARGET				5
 
 #define SHADER_FULLSCREEN				1
 #define SHADER_BLOOM					2
@@ -220,3 +226,9 @@
 #define POWER_IRON						3
 #define POWER_STEEL						4
 #define POWER_IMBA						5
+
+#define ID_TEMP							-10
+
+#define MODE_NONE						-1
+#define MODE_TARGET_BUTTON				0
+#define MODE_TARGET_BUILDING			1

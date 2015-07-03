@@ -10,6 +10,7 @@
 #include "math.h"
 #include "editor.h"
 #include "client.h"
+#include "target.h"
 
 sf::RectangleShape brushRect;
 sf::CircleShape brushCircle;
@@ -473,6 +474,7 @@ void cWindow::paintUI()
 	brushText.setCharacterSize(16);
 	sf::Transform miniMatrix;
 	miniMatrix.scale(sf::Vector2f(settings.sampleMod, settings.sampleMod));
+	// UI Elements
 	for (int y = 0; y < LIMIT_UI_PRIORITY; y++)
 	{
 		for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
@@ -558,6 +560,16 @@ void cWindow::paintUI()
 				ui.element[i].tooltip.display();
 			}
 		}
+	}
+	// Targeting
+	if (target.active)
+	{
+		brushRect.setTexture(&visual.gameTex[database.texture[TEX_MOUSE_TARGET]].handle, true);
+		brushRect.setSize(vec2f(40, 40));
+		brushRect.setOrigin(vec2f(20, 20));
+		brushRect.setPosition(window.getMousePos(false));
+		brushRect.setFillColor(color(255, 255, 255));
+		window.texHandleTop.draw(brushRect);
 	}
 	ui.access.unlock();
 }

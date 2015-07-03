@@ -223,6 +223,7 @@ void cDatabase::loadItems()
 	item[i].dismantle.add("weapon_knife_steel", 1);
 	item[i].dismantle.add("food_meat_canned", 5);
 	item[i].dismantle.add("food_water_bottle", 1);
+	item[i].dismantle.add("campfire_basic", 1);
 	item[i].dismantle.add("material_flint", 3);
 	item[i].addRef(REF_ITEM_UNPACKABLE);
 	item[i].category = CATEGORY_OTHER;
@@ -235,6 +236,10 @@ void cDatabase::loadItems()
 	item[i].addDescrLine("night in the wilds.");
 	item[i].addDescrLine("");
 	item[i].addDescrLine("- Buildable");
+	item[i].addRef(REF_ITEM_BUILD);
+	item[i].addRef(REF_ITEM_BUILD_CAMPFIRE);
+	item[i].addRef(REF_ITEM_EQUIP);
+	item[i].addRef(REF_ITEM_ACTIVE);
 	item[i].category = CATEGORY_OTHER;
 	i += 1;
 
@@ -245,6 +250,8 @@ void cDatabase::loadItems()
 	item[i].addDescrLine("iron equipment.");
 	item[i].addDescrLine("");
 	item[i].addDescrLine("- Buildable");
+	item[i].addRef(REF_ITEM_BUILD);
+	item[i].addRef(REF_ITEM_BUILD_FURNACEBASIC);
 	item[i].category = CATEGORY_OTHER;
 	i += 1;
 

@@ -91,4 +91,5 @@ void cDatabase::loadTextures()
 	database.texture[TEX_UI_TOOLTIP] = visual.addTexture("ui_tooltip.png");
 	database.texture[TEX_WORLD_GROUND] = visual.addTexture("bg_snow.jpg");
 	database.texture[TEX_SELECTION_CIRCLE] = visual.addTexture("selectionWhite512.png");
+	database.texture[TEX_MOUSE_TARGET] = visual.addTexture("mouse_target40.png");
 }

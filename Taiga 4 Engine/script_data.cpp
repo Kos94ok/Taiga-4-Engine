@@ -8,6 +8,8 @@
 #include "server.h"
 #include "camera.h"
 #include "visual.h"
+#include "window.h"
+#include "target.h"
 
 void cScript::shooter_spawnEnemies(cArg args)
 {
@@ -101,7 +103,7 @@ void cScript::ui_initialMenu(cArg args)
 	int id = ui.addElement("image", vec2f(camera.res.x / 2, camera.res.y / 2));
 	ui.element[ui.getElementId(id)].texture = visual.addTexture("bg_art.png");
 	ui.element[ui.getElementId(id)].size = vec2f(camera.res.x, camera.res.y);
-	id = ui.createText(vec2f(camera.res.x / 2, camera.res.y / 2 - 70), "Taiga Survival Alpha v0.10", "That is a tooltip!");
+	id = ui.createText(vec2f(camera.res.x / 2, camera.res.y / 2 - 70), "Taiga Survival Alpha v0.10", "Its a tooltip!");
 	ui.element[ui.getElementId(id)].ignoreOrigin = false;
 	//ui.element[ui.getElementId(id)].tooltip.pos
 	id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 0.00f));
@@ -125,4 +127,20 @@ void cScript::server_sendChunkData(cArg args)
 	stringstream(args[1]) >> arg0;
 	stringstream(args[2]) >> arg1;
 	server.sendChunkData(i, arg0, arg1);
+}
+
+void cScript::unit_bindToMouse(cArg args)
+{
+	// Arguments: Unique unit reference
+	int ref;
+	stringstream(args[0]) >> ref;
+	while (!core.shutdown && target.activeBuild)
+	{
+		cUnit* target = &game.getUnitByRef(ref);
+		if (target->type != "missingno")
+		{
+			target->pos = window.getMousePos(true);
+		}
+		Sleep(5);
+	}
 }

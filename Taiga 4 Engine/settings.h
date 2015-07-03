@@ -31,8 +31,10 @@ public:
 	int enableCameraBlur;
 	// Vertical sync [Fixes the image tearing]
 	int enableVertSync;
-	// Quick cast [Active items trigger instantly]
+	// Quick cast [Active items trigger on button release]
 	int enableQuickCast;
+	// Lazy cast [Active items trigger on mouse click]
+	int enableLazyCast;
 	// Mouse scroll [Mouse outside of the window moves the camera]
 	int enableMouseScroll;
 	// Dynamic tooltips [Tooltips are moving with the mouse]

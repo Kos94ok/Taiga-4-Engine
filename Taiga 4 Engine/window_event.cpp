@@ -8,6 +8,7 @@
 #include "visual.h"
 #include "client.h"
 #include "camera.h"
+#include "target.h"
 
 void cWindow::mainEvent()
 {
@@ -18,6 +19,19 @@ void cWindow::mainEvent()
 	wstring wbuf;
 	while (window.winHandle.pollEvent(eventPoll))
 	{
+		// Targeting
+			// Use
+		if (target.active && eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Left)
+		{
+			target.apply();
+			ui.mouseStateLMB = MOUSE_BUSY;
+		}
+			// Reset
+		if (target.active && eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Right)
+		{
+			target.reset();
+			ui.mouseStateRMB = MOUSE_BUSY;
+		}
 		// Interface
 			// Interface button click
 		if (eventPoll.type == sf::Event::MouseButtonPressed && (eventPoll.mouseButton.button == sf::Mouse::Left
@@ -38,7 +52,19 @@ void cWindow::mainEvent()
 							if (ui.element[i].button.action == "-") { toMarkLeft = true; }
 							else { ui.mouseStateLMB = MOUSE_UI_BUTTON; }
 
-							if (ui.clickTimer <= 0.00f) { ui.element[i].button.callbackLeft(ui.element[i].globalId); }
+							if (ui.clickTimer <= 0.00f)
+							{
+								// Force lazy cast if the mouse is on the button
+								if (ui.element[i].hasRef(REF_UI_ACTIVEITEM) && util.intersects(window.getMousePos(), ui.element[i].pos - ui.element[i].size / 2.00f, ui.element[i].size))
+								{
+									target.enable_forButton(ui.element[i].globalId);
+								}
+								// Don't allow hold and click if lazy cast is enabled
+								else if (!ui.element[i].hasRef(REF_UI_ACTIVEITEM) || !settings.enableLazyCast)
+								{
+									ui.element[i].button.callbackLeft(ui.element[i].globalId);
+								}
+							}
 						}
 						else if (eventPoll.mouseButton.button == sf::Mouse::Right && ui.mouseStateRMB == MOUSE_FREE)
 						{
@@ -101,16 +127,18 @@ void cWindow::mainEvent()
 							i = LIMIT_UI_ELEMENTS;
 						}
 					}
-					// Quick cast for active items
-					if (settings.enableQuickCast)
+					// Active items
+					for (int y = 1; y < LIMIT_ACTIVEBUTTONS; y++)
 					{
-						for (int y = 1; y < LIMIT_ACTIVEBUTTONS; y++)
+						if (ui.element[i].hasRef(REF_UI_ACTIVEITEM + y) && eventPoll.key.code == settings.hkActiveItem[y])
 						{
-							if (ui.element[i].hasRef(REF_UI_ACTIVEITEM + y) && eventPoll.key.code == settings.hkActiveItem[y])
-							{
+							if (settings.enableQuickCast) {
 								ui.element[i].button.callbackLeft(i);
-								i = LIMIT_UI_ELEMENTS;
 							}
+							else if (settings.enableLazyCast) {
+								target.enable_forButton(ui.element[i].globalId);
+							}
+							i = LIMIT_UI_ELEMENTS;
 						}
 					}
 				}

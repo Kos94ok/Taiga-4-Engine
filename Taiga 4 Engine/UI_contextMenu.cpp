@@ -58,7 +58,15 @@ void cUI::createContextMenuForItem(int targetItem)
 		ui.element[ui.getElementId(id)].button.action = "invItem_equip";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(targetItem);
 	}
-	// Equip
+	// Build
+	if (item.hasRef(REF_ITEM_BUILD))
+	{
+		id = ui.addElement(ui.element[ui.getElementId(id)], mousePos + sf::Vector2f(5.00f, 5.00f + 32.00f * buttonCount++));
+		ui.element[ui.getElementId(id)].setText("Build");
+		ui.element[ui.getElementId(id)].button.action = "invItem_build";
+		ui.element[ui.getElementId(id)].button.args[0] = to_string(targetItem);
+	}
+	// Consume
 	if (item.hasRef(REF_ITEM_CONSUME))
 	{
 		id = ui.addElement(ui.element[ui.getElementId(id)], mousePos + sf::Vector2f(5.00f, 5.00f + 32.00f * buttonCount++));
