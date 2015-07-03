@@ -42,6 +42,9 @@ public:
 	
 	sf::Color convertUnitHighlightColor(int code);
 	sf::Color parseOldschoolColorCode(std::string code);
+
+	std::string buildRefToType(int ref);
+	int typeToBuildRef(std::string str);
 	
 	bool intersects(sf::Vector2f pos, sf::Vector2f rectPos, sf::Vector2f rectSize);
 };

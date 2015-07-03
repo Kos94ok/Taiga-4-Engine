@@ -12,7 +12,7 @@ public:
 	int forButton;
 
 	void enable_forButton(int elementId);
-	void enable_building(std::string type, int ref);
+	void enable_building(int ref);
 	void apply();
 	void reset();
 	

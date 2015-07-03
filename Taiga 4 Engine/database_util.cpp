@@ -28,6 +28,21 @@ cItem& cDatabase::getItem(string type)
 	return item[0];
 }
 
+cItem& cDatabase::findItem(int ref)
+{
+	access.lock();
+	int retVal = 0;
+	for (int i = 0; i < LIMIT_DB_ITEM; i++)
+	{
+		if (item[i].hasRef(ref) && retVal == 0) { retVal = i; }
+		else if (item[i].hasRef(ref) && retVal != 0) { console.error << "[WARNING] Item with ref [" << ref << "] not unique in the database [" << item[i].type << "]!" << endl; }
+	}
+	// Return
+	if (retVal == 0) { console.error << "[ERROR] Can't find any items with ref [" << ref << "] in the database!" << "\n"; }
+	access.unlock();
+	return item[retVal];
+}
+
 cUIElement& cDatabase::getUIElement(string type)
 {
 	access.lock();

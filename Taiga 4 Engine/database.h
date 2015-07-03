@@ -46,6 +46,7 @@ public:
 
 	cUnit& getUnit(std::string type);
 	cItem& getItem(std::string type);
+	cItem& findItem(int ref);
 	cUIElement& getUIElement(std::string type);
 
 	bool isItemGood(std::string type);

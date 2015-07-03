@@ -238,8 +238,6 @@ void cDatabase::loadItems()
 	item[i].addDescrLine("- Buildable");
 	item[i].addRef(REF_ITEM_BUILD);
 	item[i].addRef(REF_ITEM_BUILD_CAMPFIRE);
-	item[i].addRef(REF_ITEM_EQUIP);
-	item[i].addRef(REF_ITEM_ACTIVE);
 	item[i].category = CATEGORY_OTHER;
 	i += 1;
 

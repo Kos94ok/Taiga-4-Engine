@@ -117,10 +117,10 @@ void cUIButton::callbackLeft(int parent)
 		cUnit* owner = &game.unit[game.getUnitId(client.unit)];
 		id = owner->container.getId(id);
 		if (owner->container.item[id].hasRef(REF_ITEM_BUILD_CAMPFIRE)) {
-			target.enable_building("campfire_full", REF_ITEM_BUILD_CAMPFIRE);
+			target.enable_building(REF_ITEM_BUILD_CAMPFIRE);
 		}
 		else if (owner->container.item[id].hasRef(REF_ITEM_BUILD_FURNACEBASIC)) {
-			//target.enable_building("campfire_full");
+			target.enable_building(REF_ITEM_BUILD_FURNACEBASIC);
 		}
 		ui.clearContextMenu();
 		ui.closeInventory();

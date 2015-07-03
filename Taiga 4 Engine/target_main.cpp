@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "script.h"
 #include "client.h"
+#include "window.h"
 
 void cTarget::enable_forButton(int elementId)
 {
@@ -22,15 +23,20 @@ void cTarget::enable_forButton(int elementId)
 	forButton = elementId;
 }
 
-void cTarget::enable_building(string type, int ref)
+void cTarget::enable_building(int ref)
 {
 	reset();
+	string type = util.buildRefToType(ref);
+	if (type == "missingno") { console.error << "[cTarget::enable_building] Incorrect item reference!" << endl; return; }
 	mode = MODE_TARGET_BUILDING;
+	buildRef = ref;
 	// Adding the new unit
 	game.access.lock();
 	game.addUnit(type, vec2f(0.00f, 0.00f), -1, -1, false, ID_TEMP);
 	game.getUnit(ID_TEMP).addRef(REF_UNIT_TARGET);
+	game.getUnit(ID_TEMP).addRef(REF_UNIT_NOSHADOW);
 	game.getUnit(ID_TEMP).addRef(REF_UNIT_NOSELECTION);
+	game.getUnit(ID_TEMP).addRef(REF_UNIT_PLACEHOLDER);
 	game.access.unlock();
 
 	// Activating the script
@@ -44,6 +50,7 @@ void cTarget::enable_building(string type, int ref)
 void cTarget::apply()
 {
 	sf::Packet data;
+	vec2f mousePos = window.getMousePos(true);
 	if (mode == MODE_TARGET_BUTTON)
 	{
 		int id = ui.getElementId(forButton);
@@ -53,7 +60,9 @@ void cTarget::apply()
 	}
 	else if (mode == MODE_TARGET_BUILDING)
 	{
-		data << MSG_CONTROLS_BUILD << 
+		data << MSG_CONTROLS_BUILD << buildRef << mousePos.x << mousePos.y;
+		client.sendPacket(data);
+		data.clear();
 	}
 	reset();
 }

@@ -134,6 +134,7 @@
 #define REF_UNIT_DAMAGE_RIFLE			12		// Unit deals the damage of the rifle on impact
 #define REF_UNIT_NOSELECTION			13		// Unit is not selectable
 #define REF_UNIT_TARGET					14		// Unit is mousebound target pointer
+#define REF_UNIT_PLACEHOLDER			15		// Unit is a buildable object placeholder
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_CONSUME				2		// Item can be consumed

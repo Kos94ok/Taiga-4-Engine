@@ -288,13 +288,19 @@ void cWindow::paintUnits()
 					brushRect.setRotation(0.00f);
 					brushRect.setScale(1.00f, 1.00f);
 					brushRect.setFillColor(sf::Color(255, 255, 255));
+					// Hover
 					if (visual.hoveredUnit == game.unit[i].globalId) {
 						brushRect.setFillColor(settings.visualUnitHoverColor);
 					}
+					// No light
 					if (!settings.enableDynamicLight) { brushRect.setFillColor(sf::Color(
 							min(game.ambientLight, 255.0f),
 							min(game.ambientLight, 255.0f),
 							min(game.ambientLight, 255.0f)));
+					}
+					// Placeholder
+					if (game.unit[i].hasRef(REF_UNIT_PLACEHOLDER)) {
+						brushRect.setFillColor(sf::Color(0, 255, 0, 127));
 					}
 					brushRect.setPosition((game.unit[i].pos.x), (game.unit[i].pos.y));
 					brushRect.setOrigin(game.unit[i].center.x, game.unit[i].center.y);
@@ -562,7 +568,7 @@ void cWindow::paintUI()
 		}
 	}
 	// Targeting
-	if (target.active)
+	if (target.active && !target.activeBuild)
 	{
 		brushRect.setTexture(&visual.gameTex[database.texture[TEX_MOUSE_TARGET]].handle, true);
 		brushRect.setSize(vec2f(40, 40));

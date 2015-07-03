@@ -4,6 +4,7 @@
 #include "script.h"
 #include "craft.h"
 #include "math.h"
+#include "database.h"
 
 bool cServer::msgRequest(int i, sf::Packet input)
 {
@@ -282,6 +283,21 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 		data << MSG_UI_UPDATEITEMLIST;
 		server.sendPacket(i, data);
 		data.clear();
+
+		return true;
+	}
+	// =======================================================
+	// =======================================================
+	// Player builds an object
+	if (msg == MSG_CONTROLS_BUILD)
+	{
+		input >> argi[0] >> argf[1] >> argf[2];
+
+		type = util.buildRefToType(argi[0]);
+		if (type != "missingno") {
+			game.addUnit(type, vec2f(argf[1], argf[2]));
+			game.getUnit(server.player[i].unit).removeItem(database.findItem(argi[0]).type, 1);
+		}
 
 		return true;
 	}
