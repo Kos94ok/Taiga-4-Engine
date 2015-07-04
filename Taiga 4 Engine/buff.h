@@ -22,6 +22,7 @@ public:
 
 	void add(int type, float duration = -1.00f, int power = 1);
 	void remove(int type);
+	void removeById(int id);
 	int getPower(int type);
 	float getDuration(int type);
 };

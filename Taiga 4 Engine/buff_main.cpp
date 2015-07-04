@@ -20,6 +20,11 @@ void cBuffList::remove(int type)
 	}
 }
 
+void cBuffList::removeById(int id)
+{
+	list.erase(list.begin() + id);
+}
+
 int cBuffList::getPower(int type)
 {
 	int retVal = 0;

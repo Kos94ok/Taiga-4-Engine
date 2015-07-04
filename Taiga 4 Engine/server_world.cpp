@@ -467,6 +467,16 @@ void serverWorldUnits(int elapsedTime)
 
 	for (int i = 0; i < game.unitCounter; i++)
 	{
+		// Checking buffs
+		for (int y = 0; y < (int)game.unit[i].buff.list.size(); y++)
+		{
+			if (game.unit[i].buff.list[y].duration > 0.00f) {
+				game.unit[i].buff.list[y].duration -= timevar;
+				if (game.unit[i].buff.list[y].duration <= 0.00f) {
+					game.unit[i].buff.removeById(y);
+				}
+			}
+		}
 		// Checking max health
 		if (game.unit[i].health > game.unit[i].maxHealth) { game.unit[i].health = game.unit[i].maxHealth; }
 		// Checking for death
