@@ -6,6 +6,7 @@
 #include "ai.h"
 #include "item.h"
 #include "animation.h"
+#include "buff.h"
 
 class cUnitSoundbank
 {
@@ -28,6 +29,7 @@ public:
 	float power;
 	int texture;
 
+	bool directional;
 	float flickerMod;
 	float flickerTime;
 	float flickerCurTime;
@@ -37,6 +39,7 @@ public:
 		texture = -1;
 		flickerMod = 0.00f;
 		flickerCurTime = 0.00f;
+		directional = false;
 	}
 
 	cLightSource* operator=(int textureIndex)
@@ -119,6 +122,7 @@ public:
 	float facingAngle;
 	float movementSpeed;
 	cAIBrain ai;
+	cBuffList buff;
 	cLifeTimer lifeTimer;
 	cItemContainer container;
 	cDropContainer drop;
@@ -129,6 +133,7 @@ public:
 	void setResource(float value);
 
 	void moveTo(sf::Vector2f newPos);
+	void rotateTo(float newAngle);
 	void addHealth(float d);
 	void addMaxHealth(float d);
 	void setHealth(float hp);
@@ -136,6 +141,9 @@ public:
 	void addItem(std::string type, int count = 1);
 	void removeItem(std::string type, int count = -1);
 	void removeItem(int id, int count = -1);
+	void addBuff(int type, float duration = -1.00f, int power = 1);
+	void removeBuff(int type);
+	bool hasBuff(int type);
 	void setLifeTimer(float time);
 	void resetLifeTimer();
 	void updateFacing();

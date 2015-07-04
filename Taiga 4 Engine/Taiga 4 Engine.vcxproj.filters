@@ -76,6 +76,9 @@
     <Filter Include="Файлы исходного кода\Util\Targeting">
       <UniqueIdentifier>{76469b24-f368-44a9-a7db-1214313055a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Util\Buff">
+      <UniqueIdentifier>{a5c7dc7d-d786-4140-8988-eebe78704e17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -276,6 +279,12 @@
     <ClCompile Include="target_main.cpp">
       <Filter>Файлы исходного кода\Util\Targeting</Filter>
     </ClCompile>
+    <ClCompile Include="server_players.cpp">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="buff_main.cpp">
+      <Filter>Файлы исходного кода\Util\Buff</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -373,6 +382,9 @@
     </ClInclude>
     <ClInclude Include="target.h">
       <Filter>Файлы исходного кода\Util\Targeting</Filter>
+    </ClInclude>
+    <ClInclude Include="buff.h">
+      <Filter>Файлы исходного кода\Util\Buff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

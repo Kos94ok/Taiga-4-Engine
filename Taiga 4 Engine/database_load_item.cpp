@@ -36,6 +36,17 @@ void cDatabase::loadItems()
 	i += 1;
 
 	// Tools
+	// Flashlight
+	item[i].type = "tool_flashlight";
+	item[i].setName("Flashlight");
+	item[i].addDescrLine("Just a cool flashlight from Starbound");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Equippable");
+	item[i].category = CATEGORY_WEAPONS;
+	item[i].addRef(REF_ITEM_EQUIP);
+	item[i].addRef(REF_ITEM_FLASHLIGHT);
+	i += 1;
+
 	// Axes
 	// Stone
 	item[i].type = "tool_axe_stone";
@@ -224,6 +235,7 @@ void cDatabase::loadItems()
 	item[i].dismantle.add("food_meat_canned", 5);
 	item[i].dismantle.add("food_water_bottle", 1);
 	item[i].dismantle.add("campfire_basic", 1);
+	item[i].dismantle.add("tool_flashlight", 1);
 	item[i].dismantle.add("material_flint", 3);
 	item[i].addRef(REF_ITEM_UNPACKABLE);
 	item[i].category = CATEGORY_OTHER;

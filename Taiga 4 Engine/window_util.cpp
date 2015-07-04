@@ -3,6 +3,7 @@
 #include "window.h"
 #include "camera.h"
 #include "settings.h"
+#include "game.h"
 
 void cWindow::showWarning(int msg, bool critical)
 {
@@ -53,7 +54,9 @@ sf::Vector2f cWindow::getMousePos(bool useMatrix)
 		// Sample mod fix
 		mousePos.x *= settings.sampleMod;
 		mousePos.y *= settings.sampleMod;
+		mutex.mainMatrix.lock();
 		mousePos = matrixHandle.getInverse().transformPoint(mousePos);
+		mutex.mainMatrix.unlock();
 	}
 	return mousePos;
 }

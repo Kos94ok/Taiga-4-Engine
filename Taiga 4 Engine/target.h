@@ -7,6 +7,7 @@ class cTarget
 public:
 	bool active;
 	bool activeBuild;
+	bool isBuildGood;
 	int mode;
 	int buildRef;
 	int forButton;

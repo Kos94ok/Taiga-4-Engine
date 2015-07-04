@@ -55,6 +55,7 @@ cUtil util;
 cScript script;
 cAI ai;
 cAPI api;
+cMutexGlobal mutex;
 
 /*
 TODO:

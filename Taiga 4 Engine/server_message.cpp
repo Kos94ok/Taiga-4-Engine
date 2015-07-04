@@ -9,7 +9,7 @@
 bool cServer::msgRequest(int i, sf::Packet input)
 {
 	int argi[] = { 0, 0, 0, 0 };
-	//float argf[] = { 0.00f, 0.00f, 0.00f, 0.00f };
+	float argf[] = { 0.00f, 0.00f, 0.00f, 0.00f };
 	//bool argb[] = { false, false, false, false };
 	int msg;
 	string cmd = "", argStr;
@@ -67,6 +67,16 @@ bool cServer::msgRequest(int i, sf::Packet input)
 	{
 		input >> argi[0] >> argi[1];
 		player[i].camRes = vec2i(argi[0], argi[1]);
+
+		return true;
+	}
+	// =======================================================
+	// =======================================================
+	// Client mouse position
+	if (msg == MSG_INFO_MOUSEPOS)
+	{
+		input >> argf[0] >> argf[1];
+		player[i].mousePos = vec2f(argf[0], argf[1]);
 
 		return true;
 	}
@@ -298,6 +308,25 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 			game.addUnit(type, vec2f(argf[1], argf[2]));
 			game.getUnit(server.player[i].unit).removeItem(database.findItem(argi[0]).type, 1);
 		}
+
+		return true;
+	}
+	// =======================================================
+	// =======================================================
+	// Player uses a flashlight
+	if (msg == MSG_CONTROLS_FLASHLIGHT_ON)
+	{
+		if (player[i].hasItem(database.findItem(REF_ITEM_FLASHLIGHT).type))
+		{
+			player[i].addBuff(BUFF_FLASHLIGHT);
+			int id = game.addUnit("dummy_flashlight", vec2f(0.00f, 0.00f));
+			script.execute(cScript::unit_flashlight, cArg(to_string(id), to_string(i)));
+		}
+		return true;
+	}
+	else if (msg == MSG_CONTROLS_FLASHLIGHT_OFF)
+	{
+		player[i].removeBuff(BUFF_FLASHLIGHT);
 
 		return true;
 	}

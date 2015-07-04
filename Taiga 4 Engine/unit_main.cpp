@@ -40,6 +40,18 @@ void cUnit::moveTo(vec2 newPos)
 	}
 }
 
+void cUnit::rotateTo(float newAngle)
+{
+	facingAngle = newAngle;
+
+	if (core.serverMode || core.localServer)
+	{
+		sf::Packet data;
+		data << MSG_UNIT_ROTATETO << globalId << newAngle;
+		server.sendPacket(PLAYERS_REMOTE, data);
+	}
+}
+
 void cUnit::addHealth(float d) { setHealth(health + d); }
 void cUnit::addMaxHealth(float d) { setMaxHealth(maxHealth + d); }
 
@@ -109,6 +121,37 @@ void cUnit::removeItem(int id, int count)
 		server.sendPacket(PLAYERS_REMOTE, data);
 		data.clear();
 	}
+}
+
+void cUnit::addBuff(int type, float duration, int power)
+{
+	buff.add(type, duration, power);
+	// Broadcast the data
+	if (core.serverMode || core.localServer)
+	{
+		sf::Packet data;
+		data << MSG_UNIT_ADDBUFF << globalId << type << duration << power;
+		server.sendPacket(PLAYERS_REMOTE, data);
+		data.clear();
+	}
+}
+
+void cUnit::removeBuff(int type)
+{
+	buff.remove(type);
+	// Broadcast the data
+	if (core.serverMode || core.localServer)
+	{
+		sf::Packet data;
+		data << MSG_UNIT_REMOVEBUFF << globalId << type;
+		server.sendPacket(PLAYERS_REMOTE, data);
+		data.clear();
+	}
+}
+
+bool cUnit::hasBuff(int type)
+{
+	return buff.getPower(type) > 0;
 }
 
 void cUnit::setLifeTimer(float time)

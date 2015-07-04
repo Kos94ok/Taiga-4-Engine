@@ -10,6 +10,7 @@ public:
 	int unit;
 	sf::Vector2f camPos;
 	sf::Vector2i camRes;
+	sf::Vector2f mousePos;
 
 	int packet;
 
@@ -25,7 +26,11 @@ public:
 	void setResource(float value);
 	void setHealth(float hp);
 	void setMaxHealth(float maxHp);
+	void addItem(std::string type, int count = 1);
+	bool hasItem(std::string type, int count = 1);
 	void moveCamera(sf::Vector2f target);
+	void addBuff(int type, float duration = -1.00f, int power = 1);
+	void removeBuff(int type);
 
 	cServerPlayer() {
 		unit = -1;

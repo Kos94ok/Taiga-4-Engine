@@ -10,6 +10,7 @@
 #include "visual.h"
 #include "window.h"
 #include "target.h"
+#include "path.h"
 
 void cScript::shooter_spawnEnemies(cArg args)
 {
@@ -129,6 +130,41 @@ void cScript::server_sendChunkData(cArg args)
 	server.sendChunkData(i, arg0, arg1);
 }
 
+void cScript::unit_flashlight(cArg args)
+{
+	// Only for server
+	if (!core.serverMode && !core.localServer) { return; }
+	// Arguments: Flashlight unit id, Player index
+	int unitId, playerId;
+	stringstream(args[0]) >> unitId;
+	stringstream(args[1]) >> playerId;
+
+	while (!core.shutdown)
+	{
+		game.access.lock();
+		cUnit* targetUnit = &game.getUnit(unitId);
+		cUnit* ownerUnit = &game.getUnit(server.player[playerId].unit);
+		if (targetUnit->type == "missingno") { game.access.unlock(); return; }
+		else if (ownerUnit->type == "missingno" || !ownerUnit->hasBuff(BUFF_FLASHLIGHT)) {
+			game.removeUnit(unitId);
+			game.access.unlock();
+			return;
+		}
+		
+		targetUnit->moveTo(ownerUnit->pos);
+		targetUnit->rotateTo(math.getAngle(targetUnit->pos, server.player[playerId].mousePos));
+		//console.debug << "[DEBUG] X: " << mousePos.x << " / Y: " << mousePos.y << endl;
+		if (targetUnit->facingAngle < 0.00f) {
+			console.debug << "[DEBUG] Rotation: " << targetUnit->facingAngle << endl;
+			console.debug << "[DEBUG] Unit pos: " << targetUnit->pos.x << " / " << targetUnit->pos.y << endl;
+			console.debug << "[DEBUG] Mouse pos: " << server.player[playerId].mousePos.x << " / " << server.player[playerId].mousePos.y << endl;
+		}
+		game.access.unlock();
+
+		Sleep(3);
+	}
+}
+
 void cScript::unit_bindToMouse(cArg args)
 {
 	// Arguments: Unique unit reference
@@ -136,10 +172,12 @@ void cScript::unit_bindToMouse(cArg args)
 	stringstream(args[0]) >> ref;
 	while (!core.shutdown && target.activeBuild)
 	{
-		cUnit* target = &game.getUnitByRef(ref);
-		if (target->type != "missingno")
-		{
-			target->pos = window.getMousePos(true);
+		cUnit* targetUnit = &game.getUnitByRef(ref);
+		if (targetUnit->type != "missingno") {
+			game.access.lock();
+			targetUnit->pos = window.getMousePos(true);
+			game.access.unlock();
+			target.isBuildGood = path.isPointFree(targetUnit->pos, targetUnit->collisionDistance, targetUnit->globalId);
 		}
 		Sleep(5);
 	}

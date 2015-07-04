@@ -103,6 +103,7 @@ public:
 	void setName(std::string txt);
 
 	void use();
+	void equip();
 
 	cItem() {
 		powerLevel = 0;

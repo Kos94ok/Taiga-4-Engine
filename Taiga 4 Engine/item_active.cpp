@@ -62,3 +62,24 @@ void cItem::use()
 		game.addUnit(type, window.getMousePos(true));
 	}
 }
+
+void cItem::equip()
+{
+	sf::Packet data;
+	if (!hasRef(REF_ITEM_EQUIP)) { return; }
+
+	equipped = !equipped;
+	// Flashlight
+	if (hasRef(REF_ITEM_FLASHLIGHT) && equipped)
+	{
+		data << MSG_CONTROLS_FLASHLIGHT_ON;
+		client.sendPacket(data);
+		data.clear();
+	}
+	else if (hasRef(REF_ITEM_FLASHLIGHT) && !equipped)
+	{
+		data << MSG_CONTROLS_FLASHLIGHT_OFF;
+		client.sendPacket(data);
+		data.clear();
+	}
+}

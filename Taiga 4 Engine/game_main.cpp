@@ -29,7 +29,7 @@ int cGame::addUnit(string type, vec2f pos, int owner, int variation, bool sendDa
 			else if (core.localServer || core.serverMode) { globalId = unitGlobalCounter++; }
 			unit[unitCounter].globalId = globalId;
 			// Playing the sound
-			if (unit[unitCounter].sound.idle.name != "") {
+			if (unit[unitCounter].sound.idle.name != "" && globalId != ID_TEMP) {
 				audio.playSound(cSoundQueue(unit[unitCounter].sound.idle, globalId, true));
 			}
 			// Incrementing

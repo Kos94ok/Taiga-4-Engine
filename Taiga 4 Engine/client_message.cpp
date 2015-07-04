@@ -160,7 +160,43 @@ bool cClient::msgUnit(sf::Packet input)
 		input >> id >> argf[0] >> argf[1];
 		id = game.getUnitId(id);
 		if (id != -1) {
-			game.unit[id].moveTo(vec2(argf[0], argf[1]));
+			game.unit[id].moveTo(vec2f(argf[0], argf[1]));
+		}
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Set unit rotation to angle
+	if (msg == MSG_UNIT_ROTATETO)
+	{
+		input >> id >> argf[0];
+		id = game.getUnitId(id);
+		if (id != -1) {
+			game.unit[id].rotateTo(argf[0]);
+		}
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Add buff
+	if (msg == MSG_UNIT_ADDBUFF)
+	{
+		input >> id >> argi[0] >> argf[1] >> argi[2];
+		id = game.getUnitId(id);
+		if (id != -1) {
+			game.unit[id].addBuff(argi[0], argf[1], argi[2]);
+		}
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Remove buff
+	if (msg == MSG_UNIT_REMOVEBUFF)
+	{
+		input >> id >> argi[0];
+		id = game.getUnitId(id);
+		if (id != -1) {
+			game.unit[id].removeBuff(argi[0]);
 		}
 		return true;
 	}

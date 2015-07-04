@@ -110,6 +110,7 @@
     <ClCompile Include="api_main.cpp" />
     <ClCompile Include="audio_main.cpp" />
     <ClCompile Include="audio_util.cpp" />
+    <ClCompile Include="buff_main.cpp" />
     <ClCompile Include="camera_main.cpp" />
     <ClCompile Include="client_main.cpp" />
     <ClCompile Include="client_message.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="server_main.cpp" />
     <ClCompile Include="server_message.cpp" />
     <ClCompile Include="server_pack.cpp" />
+    <ClCompile Include="server_players.cpp" />
     <ClCompile Include="server_util.cpp" />
     <ClCompile Include="server_world.cpp" />
     <ClCompile Include="settings_main.cpp" />
@@ -178,6 +180,7 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="api.h" />
     <ClInclude Include="audio.h" />
+    <ClInclude Include="buff.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="editor.h" />
     <ClInclude Include="game.h" />

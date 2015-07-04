@@ -129,43 +129,6 @@ void cServer::sendWorldData(int playerId)
 	data.clear();
 }
 
-void cServerPlayer::disconnect()
-{
-	connected = false;
-	socket.disconnect();
-	// Removing the unit
-	game.removeUnit(unit);
-	unit = -1;
-}
-
-void cServerPlayer::addResource(float d)
-{
-	game.unit[game.getUnitId(unit)].addResource(d);
-}
-
-void cServerPlayer::setResource(float value)
-{
-	game.unit[game.getUnitId(unit)].setResource(value);
-}
-
-void cServerPlayer::setHealth(float hp)
-{
-	game.unit[game.getUnitId(unit)].setHealth(hp);
-}
-
-void cServerPlayer::setMaxHealth(float hp)
-{
-	game.unit[game.getUnitId(unit)].setMaxHealth(hp);
-}
-
-void cServerPlayer::moveCamera(vec2f target)
-{
-	sf::Packet data;
-	data << MSG_CAMERA_MOVETO << target.x << target.y;
-	server.sendPacket(myId, data);
-	data.clear();
-}
-
 void cServer::assignUnit(int playerId, int unitId)
 {
 	sf::Packet data;

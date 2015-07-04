@@ -198,6 +198,19 @@ void cDatabase::loadUnits()
 	i += 1;
 
 	// Other
+	unit[i].type = "dummy_flashlight";
+	unit[i].size = vec2(0, 0);
+	unit[i].health = 5000.00f;
+	unit[i].maxHealth = 5000.00f;
+	unit[i].collisionDistance = 0.00f;
+	unit[i].light.power = 500.00f;
+	unit[i].light.texture = visual.addTexture("lightdir_white.png");
+	unit[i].light.directional = true;
+	unit[i].addRef(REF_UNIT_NOSAVE);
+	unit[i].addRef(REF_UNIT_NORENDER);
+	unit[i].addRef(REF_UNIT_NOCOLLISION);
+	i += 1;
+
 	unit[i].type = "editor";
 	unit[i].size = vec2(0, 0);
 	unit[i].center = vec2(0, 0);

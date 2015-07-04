@@ -74,3 +74,12 @@ public:
 		mutex.unlock();
 	}
 };
+
+class cMutexGlobal
+{
+public:
+	cMutex render;
+	cMutex mainMatrix;
+};
+
+extern cMutexGlobal mutex;

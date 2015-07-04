@@ -88,7 +88,7 @@ bool cPath::isPointFree(vec2 loc, float dist, int unitId)
 	// Checking for unit collision
 	for (int i = 0; i < game.unitCounter; i++)
 	{
-		if (math.getDistance(game.unit[i].pos, loc) <= game.unit[i].collisionDistance + dist && game.unit[i].globalId != unitId)
+		if (!game.unit[i].hasRef(REF_UNIT_NOCOLLISION) && math.getDistance(game.unit[i].pos, loc) <= game.unit[i].collisionDistance + dist && game.unit[i].globalId != unitId)
 		{
 			return false;
 		}

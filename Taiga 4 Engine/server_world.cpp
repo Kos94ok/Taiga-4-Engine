@@ -475,7 +475,29 @@ void serverWorldUnits(int elapsedTime)
 			game.killUnit(game.unit[i].globalId);
 		}
 	}
-}	
+}
+
+void serverWorldConnection(int elapsedTime)
+{
+	sf::Packet data;
+	// Ping
+	client.pingTimer += elapsedTime;
+	server.pingTimer += elapsedTime;
+	
+	// Sending the mouse position
+	vec2f mousePos = window.getMousePos(true);
+	if (client.connected && mousePos != client.lastMousePos && client.mousePosTimer >= 10)
+	{
+		client.mousePosTimer = 0;
+		client.lastMousePos = mousePos;
+		data << MSG_INFO_MOUSEPOS << mousePos.x << mousePos.y;
+		console.debug << "[DEBUG] Sending mouse pos: " << mousePos.x << " / " << mousePos.y << endl;
+		client.sendPacket(data);
+	}
+	else if (client.mousePosTimer < 10) {
+		client.mousePosTimer += elapsedTime;
+	}
+}
 
 void serverWorldMain()
 {
@@ -494,8 +516,7 @@ void serverWorldMain()
 			serverWorldAnim(elapsedTime);
 			serverWorldUI(elapsedTime);
 			serverWorldUnits(elapsedTime);
-			client.pingTimer += elapsedTime;
-			server.pingTimer += elapsedTime;
+			serverWorldConnection(elapsedTime);
 			core.thread_serverWorldTicks += 1;
 			core.thread_antifreeze[threadId] = 0;
 		}

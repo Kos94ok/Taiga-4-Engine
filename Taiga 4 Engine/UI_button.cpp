@@ -106,7 +106,8 @@ void cUIButton::callbackLeft(int parent)
 	{
 		stringstream(args[0]) >> id;
 		id = game.unit[game.getUnitId(client.unit)].container.getId(id);
-		game.unit[game.getUnitId(client.unit)].container.item[id].equipped = !game.unit[game.getUnitId(client.unit)].container.item[id].equipped;
+		//game.unit[game.getUnitId(client.unit)].container.item[id].equipped = !game.unit[game.getUnitId(client.unit)].container.item[id].equipped;
+		game.unit[game.getUnitId(client.unit)].container.item[id].equip();
 		ui.clearContextMenu();
 		ui.updateInterfaceEquipment();
 		ui.updateInterfaceItemList();

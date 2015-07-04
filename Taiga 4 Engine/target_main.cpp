@@ -6,6 +6,7 @@
 #include "script.h"
 #include "client.h"
 #include "window.h"
+#include "path.h"
 
 void cTarget::enable_forButton(int elementId)
 {
@@ -37,6 +38,8 @@ void cTarget::enable_building(int ref)
 	game.getUnit(ID_TEMP).addRef(REF_UNIT_NOSHADOW);
 	game.getUnit(ID_TEMP).addRef(REF_UNIT_NOSELECTION);
 	game.getUnit(ID_TEMP).addRef(REF_UNIT_PLACEHOLDER);
+	game.getUnit(ID_TEMP).addRef(REF_UNIT_NOCOLLISION);
+	game.getUnit(ID_TEMP).light.power = 0.00f;
 	game.access.unlock();
 
 	// Activating the script

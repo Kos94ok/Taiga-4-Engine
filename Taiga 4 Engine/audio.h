@@ -15,6 +15,9 @@ public:
 		minDist = 0.00f;
 		maxDist = 300.00f;
 	}
+	cSound(int null) {
+		cSound();
+	}
 	cSound(std::string data, float maxVolume = 100.00f, float minDistance = 0.00f, float maxDistance = 300.00f) {
 		name = data;
 		volume = maxVolume;

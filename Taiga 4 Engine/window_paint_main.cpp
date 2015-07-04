@@ -30,14 +30,17 @@ void cWindow::mainPaint()
 	brushText.setFont(visual.fontMain);
 	// Loading the matrix
 	float prec = 1.00f;
+	mutex.mainMatrix.lock();
 	window.matrixHandle = sf::Transform::Identity;
 	window.matrixHandle.scale(vec2(settings.sampleMod, settings.sampleMod));
 	window.matrixHandle.scale(vec2(camera.zoomFactor, camera.zoomFactor), vec2(camera.res.x / 2, camera.res.y / 2));
 	window.matrixHandle.translate(-camera.pos);
+	mutex.mainMatrix.unlock();
 	//window.matrixHandle.translate(sf::Vector2f(math.round(-camera.pos.x * prec) / prec, math.round(-camera.pos.y * prec) / prec));
 	// Painting the game data
 	if (!core.serverMode)
 	{
+		mutex.render.lock();
 		if (core.menuState == STATE_GAME)
 		{
 			//game.access.lock();
@@ -49,6 +52,7 @@ void cWindow::mainPaint()
 		}
 		window.paintUI();
 		window.paintDebugInfo();
+		mutex.render.unlock();
 	}
 	window.paintConsole();
 	sf::Sprite buffer;
@@ -298,9 +302,10 @@ void cWindow::paintUnits()
 							min(game.ambientLight, 255.0f),
 							min(game.ambientLight, 255.0f)));
 					}
-					// Placeholder
-					if (game.unit[i].hasRef(REF_UNIT_PLACEHOLDER)) {
-						brushRect.setFillColor(sf::Color(0, 255, 0, 127));
+					// Placeholder for building
+					if (game.unit[i].hasRef(REF_UNIT_PLACEHOLDER) && target.activeBuild) {
+						if (target.isBuildGood) { brushRect.setFillColor(sf::Color(0, 255, 0, 127)); }
+						else { brushRect.setFillColor(sf::Color(255, 0, 0, 127)); }
 					}
 					brushRect.setPosition((game.unit[i].pos.x), (game.unit[i].pos.y));
 					brushRect.setOrigin(game.unit[i].center.x, game.unit[i].center.y);
@@ -392,10 +397,16 @@ void cWindow::paintLighting()
 			}
 			brushRect.setOrigin(sf::Vector2f(power, power));
 			brushRect.setSize(sf::Vector2f(power * 2.00f, power * 2.00f));
+			// Directional
+			brushRect.setRotation(0.00f);
+			if (game.unit[i].light.directional) {
+				brushRect.setRotation(game.unit[i].facingAngle);
+			}
 			if (settings.enableDynamicLight) { window.texHandleLight.draw(brushRect, window.matrixHandle); }
 			else { window.texHandle.draw(brushRect, window.matrixHandle); }
 		}
 	}
+	brushRect.setRotation(0.00f);
 	window.texHandleLight.display();
 }
 
