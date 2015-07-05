@@ -184,6 +184,6 @@ void cGame::packUnitToItem(int id)
 		removeUnit(unit[id].globalId);
 	}
 	else {
-		console.error << "[cGame::packUnitToItem] Unit " << unit[id].type << " is not packable!" << endl;
+		console.error << "[cGame::packUnitToItem] Unit \"" << unit[id].type << "\" is not packable!" << endl;
 	}
 }

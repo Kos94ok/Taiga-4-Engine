@@ -90,6 +90,16 @@ void serverWorldOrders(int elapsedTime)
 						}
 					}
 				}
+				// Unit pack order
+				else if (game.unit[i].order[0].type == ORDER_PACKUNIT)
+				{
+					cUnit* target = &game.getUnit(game.unit[i].order[0].targetObject);
+					if (core.serverMode || core.localServer) {
+						game.packUnitToItem(target->globalId);
+					}
+					game.unit[i].removeOrder(0);
+					ui.updateInterfaceItemList();
+				}
 				// Unit pickup order
 				else if (game.unit[i].order[0].type == ORDER_PICKUP)
 				{

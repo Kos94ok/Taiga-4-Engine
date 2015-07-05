@@ -157,6 +157,34 @@ int cUnit::addOrder_harvest(int target, bool overwrite, int powerLevel)
 	return orderCounter - 1;
 }
 
+int cUnit::addOrder_packunit(int target, bool overwrite)
+{
+	// Clearing the order list
+	if (overwrite) { orderCounter = 0; }
+	// Reset the action timer
+	if (orderCounter == 0) { actionTimer = 0.00f; }
+	// Check order limit
+	if (orderCounter >= LIMIT_ORDERS - 1) {
+		console.error << "[cUnit::addOrder_packunit] Order limit reached!" << endl;
+	}
+	// Adding new order
+	order[orderCounter].type = ORDER_PACKUNIT;
+	order[orderCounter].targetObject = target;
+	orderCounter += 1;
+
+	// Update info
+	updateFacing();
+	updateAction();
+	updateAnimation();
+
+	// Server
+	sf::Packet data;
+	data << MSG_ORDER_PACKUNIT << globalId << target << overwrite;
+	server.sendPacket(PLAYERS_REMOTE, data);
+
+	return orderCounter - 1;
+}
+
 int cUnit::addOrder_death(bool overwrite)
 {
 	if (core.serverMode || core.localServer)

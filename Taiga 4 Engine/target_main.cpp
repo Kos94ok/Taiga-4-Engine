@@ -7,6 +7,7 @@
 #include "client.h"
 #include "window.h"
 #include "path.h"
+#include "math.h"
 
 void cTarget::enable_forButton(int elementId)
 {
@@ -97,4 +98,15 @@ void cTarget::reset()
 	if (oldUnit->type != "missingno") {
 		game.removeUnit(oldUnit->globalId, false);
 	}
+}
+
+void cTarget::updateBuildStatus(int unitId)
+{
+	cUnit* targetUnit = &game.getUnit(unitId);
+	if (targetUnit->type == "missingno") {
+		console.error << "[cTarget::updateBuildStatus] Incorrect unit id! [" << unitId << "]" << endl;
+		return;
+	}
+	isBuildGood = (math.getDistance(targetUnit->pos, game.getUnit(client.unit).pos) < value.maxBuildDist
+		&& path.isPointFree(targetUnit->pos, targetUnit->collisionDistance, targetUnit->globalId));
 }

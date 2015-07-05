@@ -57,6 +57,8 @@ public:
 	const float rifleDamage = 10.00f;
 	const float rifleMaxDistance = 1750.00f;
 
+	const float maxBuildDist = 200.00f;
+
 	const float enemyDamage = 10.00f;
 };
 

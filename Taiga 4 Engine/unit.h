@@ -114,6 +114,7 @@ public:
 	int addOrder_moveto_path(sf::Vector2f target, bool overwrite = true);
 	int addOrder_pickup(int target, bool overwrite = true);
 	int addOrder_harvest(int target, bool overwrite = true, int powerLevel = POWER_HAND);
+	int addOrder_packunit(int target, bool overwrite = true);
 	int addOrder_death(bool overwrite = true);
 	void removeOrder(int id);
 	void removeAllOrders();

@@ -176,6 +176,33 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 	}
 	// =======================================================
 	// =======================================================
+	// Player wants to pack the object
+	if (msg == MSG_CONTROLS_PACK)
+	{
+		input >> argi[0] >> argb[1];
+		id = game.getUnitId(server.player[i].unit);
+		int targetId = game.getUnitId(argi[0]);
+		if (id != -1 && targetId != -1) {
+			cUnit* playerUnit = &game.unit[id];
+			cUnit* targetUnit = &game.unit[targetId];
+			// Check distance
+			if (math.getDistance(playerUnit, targetUnit) <= game.getUnitInteractDistance(*playerUnit, *targetUnit))
+			{
+				// Units are close enough
+				game.unit[id].addOrder_packunit(argi[0], !argb[1]);
+			}
+			else
+			{
+				// Unit needs to move closer
+				game.unit[id].addOrder_moveto_path(game.getUnitInteractPoint(*playerUnit, *targetUnit), !argb[1]);
+				game.unit[id].addOrder_packunit(argi[0], false);
+			}
+		}
+		else { console << "[cServer::msgControlUnit / MSG_CONTROLS_PACK] Incorrect unit IDs!" << endl; }
+		return true;
+	}
+	// =======================================================
+	// =======================================================
 	// Player moves the camera
 	if (msg == MSG_CONTROLS_CAMERA)
 	{
@@ -308,17 +335,6 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 			game.addUnit(type, vec2f(argf[1], argf[2]));
 			game.getUnit(server.player[i].unit).removeItem(database.findItem(argi[0]).type, 1);
 		}
-
-		return true;
-	}
-	// =======================================================
-	// =======================================================
-	// Player packs some object
-	if (msg == MSG_CONTROLS_PACK)
-	{
-		input >> argi[0];
-
-		game.packUnitToItem(argi[0]);
 
 		return true;
 	}

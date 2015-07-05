@@ -305,8 +305,8 @@ void cWindow::paintUnits()
 					}
 					// Placeholder for building
 					if (game.unit[i].hasRef(REF_UNIT_PLACEHOLDER) && target.activeBuild) {
-						if (target.isBuildGood) { brushRect.setFillColor(sf::Color(0, 255, 0, 127)); }
-						else { brushRect.setFillColor(sf::Color(255, 0, 0, 127)); }
+						if (target.isBuildGood) { brushRect.setFillColor(sf::Color(0, 255, 0, 175)); }
+						else { brushRect.setFillColor(sf::Color(255, 0, 0, 175)); }
 					}
 					brushRect.setPosition((game.unit[i].pos.x), (game.unit[i].pos.y));
 					brushRect.setOrigin(game.unit[i].center.x, game.unit[i].center.y);

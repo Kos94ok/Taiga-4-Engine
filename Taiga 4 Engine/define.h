@@ -49,7 +49,8 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 #define ORDER_MOVETO					1
 #define ORDER_PICKUP					2
 #define ORDER_HARVEST					3
-#define ORDER_DEATH						4
+#define ORDER_PACKUNIT					4
+#define ORDER_DEATH						5
 
 #define ANIM_IDLE						0
 #define ANIM_MOVE						1
@@ -84,7 +85,8 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 #define MSG_ORDER_PICKUP				102
 #define MSG_ORDER_HARVEST				103
 #define MSG_ORDER_STOP					104
-#define MSG_ORDER_DEATH					105
+#define MSG_ORDER_PACKUNIT				105
+#define MSG_ORDER_DEATH					106
 #define MSG_CONTROLS_MOVETO				150
 #define MSG_CONTROLS_PICKUP				151
 #define MSG_CONTROLS_HARVEST			152

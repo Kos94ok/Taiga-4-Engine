@@ -185,6 +185,7 @@ void cUnit::updateAction()
 	
 	if (order[0].type == ORDER_PICKUP) { actionTimer = 0.00f; }
 	else if (order[0].type == ORDER_HARVEST) { actionTimer = 3.00f; }
+	else if (order[0].type == ORDER_PACKUNIT) { actionTimer = 6.00f; }
 	else if (order[0].type == ORDER_DEATH)
 	{
 		if (animAvailable(ANIM_DEATH))
@@ -202,7 +203,8 @@ void cUnit::updateAnimation()
 	else
 	{
 		if (order[0].type == ORDER_MOVETO && animAvailable(ANIM_MOVE)) { anim.play(ANIM_MOVE); }
-		else if (order[0].type == ORDER_PICKUP && animAvailable(ANIM_PICKUP)) { anim.play(ANIM_PICKUP); }
+		else if (order[0].type == ORDER_PICKUP && animAvailable(ANIM_WORK)) { anim.play(ANIM_WORK); }
+		else if (order[0].type == ORDER_PACKUNIT && animAvailable(ANIM_WORK)) { anim.play(ANIM_WORK); }
 		else if (order[0].type == ORDER_HARVEST && animAvailable(ANIM_WORK)) { anim.play(ANIM_WORK); }
 		else if (order[0].type == ORDER_DEATH && animAvailable(ANIM_DEATH)) { anim.play(ANIM_DEATH); }
 	}

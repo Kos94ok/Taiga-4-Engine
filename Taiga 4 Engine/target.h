@@ -18,6 +18,7 @@ public:
 	void enable_building(cItem* item);
 	void apply();
 	void reset();
+	void updateBuildStatus(int unitId);
 	
 	cTarget() {
 		active = false;

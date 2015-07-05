@@ -253,6 +253,19 @@ bool cClient::msgOrder(sf::Packet input)
 	}
 	// ============================================
 	// ============================================
+	// Order unit to pack the item
+	if (msg == MSG_ORDER_PACKUNIT)
+	{
+		input >> id >> argi[0] >> argb[1];
+		id = game.getUnitId(id);
+		if (id != -1)
+		{
+			game.unit[id].addOrder_packunit(argi[0], argb[1]);
+		}
+		return true;
+	}
+	// ============================================
+	// ============================================
 	// Order unit to harvest resource from object
 	if (msg == MSG_ORDER_HARVEST)
 	{

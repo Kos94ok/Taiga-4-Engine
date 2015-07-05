@@ -11,6 +11,7 @@
 #include "window.h"
 #include "target.h"
 #include "path.h"
+#include "client.h"
 
 void cScript::shooter_spawnEnemies(cArg args)
 {
@@ -196,10 +197,10 @@ void cScript::unit_bindToMouse(cArg args)
 	{
 		cUnit* targetUnit = &game.getUnitByRef(ref);
 		if (targetUnit->type != "missingno") {
-			game.access.lock();
+			mutex.renderUnits.lock();
 			targetUnit->pos = window.getMousePos(true);
-			game.access.unlock();
-			target.isBuildGood = path.isPointFree(targetUnit->pos, targetUnit->collisionDistance, targetUnit->globalId);
+			mutex.renderUnits.unlock();
+			target.updateBuildStatus(targetUnit->globalId);
 		}
 		Sleep(5);
 	}
