@@ -47,6 +47,17 @@ void cDatabase::loadItems()
 	item[i].addRef(REF_ITEM_FLASHLIGHT);
 	i += 1;
 
+	// Torch
+	item[i].type = "tool_torch";
+	item[i].setName("Torch");
+	item[i].addDescrLine("Some torch action?");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Equippable");
+	item[i].category = CATEGORY_WEAPONS;
+	item[i].addRef(REF_ITEM_EQUIP);
+	item[i].addRef(REF_ITEM_TORCH);
+	i += 1;
+
 	// Axes
 	// Stone
 	item[i].type = "tool_axe_stone";
@@ -236,6 +247,7 @@ void cDatabase::loadItems()
 	item[i].dismantle.add("food_water_bottle", 1);
 	item[i].dismantle.add("campfire_basic", 1);
 	item[i].dismantle.add("tool_flashlight", 1);
+	item[i].dismantle.add("tool_torch", 1);
 	item[i].dismantle.add("material_flint", 3);
 	item[i].addRef(REF_ITEM_UNPACKABLE);
 	item[i].category = CATEGORY_OTHER;
@@ -272,7 +284,20 @@ void cDatabase::loadItems()
 	item[i].addDescrLine("iron and steel equipment.");
 	item[i].addDescrLine("");
 	item[i].addDescrLine("- Buildable");
+	item[i].addRef(REF_ITEM_BUILD);
+	item[i].addRef(REF_ITEM_BUILD_FURNACEIND);
 	item[i].category = CATEGORY_OTHER;
+	i += 1;
+
+	// Tent
+	item[i].type = "tent_basic";
+	item[i].setName("Camping Tent");
+	item[i].addDescrLine("Just a tent. Nothing special.");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Buildable");
+	item[i].category = CATEGORY_OTHER;
+	item[i].addRef(REF_ITEM_BUILD);
+	item[i].addRef(REF_ITEM_BUILD_TENT);
 	i += 1;
 
 	// Regular Shooter - Story Mode

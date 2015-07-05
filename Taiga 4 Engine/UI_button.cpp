@@ -20,6 +20,14 @@ void cUIButton::callbackLeft(int parent)
 	{
 		ui.clearContextMenu();
 	}
+	else if (action == "unit_pack")
+	{
+		ui.clearContextMenu();
+		stringstream(args[0]) >> id;
+		data << MSG_CONTROLS_PACK << id;
+		client.sendPacket(data);
+		data.clear();
+	}
 	else if (action == "unit_pickup")
 	{
 		ui.clearContextMenu();
@@ -116,13 +124,8 @@ void cUIButton::callbackLeft(int parent)
 	{
 		stringstream(args[0]) >> id;
 		cUnit* owner = &game.unit[game.getUnitId(client.unit)];
-		id = owner->container.getId(id);
-		if (owner->container.item[id].hasRef(REF_ITEM_BUILD_CAMPFIRE)) {
-			target.enable_building(REF_ITEM_BUILD_CAMPFIRE);
-		}
-		else if (owner->container.item[id].hasRef(REF_ITEM_BUILD_FURNACEBASIC)) {
-			target.enable_building(REF_ITEM_BUILD_FURNACEBASIC);
-		}
+		target.enable_building(&owner->container.get(id));
+		
 		ui.clearContextMenu();
 		ui.closeInventory();
 	}

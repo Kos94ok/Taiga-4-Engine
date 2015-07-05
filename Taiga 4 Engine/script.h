@@ -56,6 +56,7 @@ public:
 
 	static void ui_initialMenu(cArg args);
 	static void server_sendChunkData(cArg args);
+	static void unit_torch(cArg args);
 	static void unit_flashlight(cArg args);
 	static void unit_bindToMouse(cArg args);
 };

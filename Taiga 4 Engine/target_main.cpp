@@ -50,6 +50,22 @@ void cTarget::enable_building(int ref)
 	activeBuild = true;
 }
 
+void cTarget::enable_building(cItem* item)
+{
+	if (item->hasRef(REF_ITEM_BUILD_CAMPFIRE)) {
+		enable_building(REF_ITEM_BUILD_CAMPFIRE);
+	}
+	else if (item->hasRef(REF_ITEM_BUILD_FURNACEBASIC)) {
+		enable_building(REF_ITEM_BUILD_FURNACEBASIC);
+	}
+	else if (item->hasRef(REF_ITEM_BUILD_FURNACEIND)) {
+		enable_building(REF_ITEM_BUILD_FURNACEIND);
+	}
+	else if (item->hasRef(REF_ITEM_BUILD_TENT)) {
+		enable_building(REF_ITEM_BUILD_TENT);
+	}
+}
+
 void cTarget::apply()
 {
 	sf::Packet data;
@@ -60,14 +76,15 @@ void cTarget::apply()
 		if (id != -1) {
 			ui.element[id].button.callbackLeft(forButton);
 		}
+		reset();
 	}
-	else if (mode == MODE_TARGET_BUILDING)
+	else if (mode == MODE_TARGET_BUILDING && isBuildGood)
 	{
 		data << MSG_CONTROLS_BUILD << buildRef << mousePos.x << mousePos.y;
 		client.sendPacket(data);
 		data.clear();
+		reset();
 	}
-	reset();
 }
 
 void cTarget::reset()

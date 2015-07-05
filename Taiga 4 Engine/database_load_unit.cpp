@@ -18,6 +18,7 @@ void cDatabase::loadUnits()
 	unit[i].health = 100.00f;
 	unit[i].maxHealth = 100.00f;
 	unit[i].movementSpeed = 75;
+	unit[i].rotateSpeed = 360.00f;
 	unit[i].animData[ANIM_IDLE].up.tex = visual.addTexture("player_idle_up.png");
 	unit[i].animData[ANIM_IDLE].upDiag.tex = visual.addTexture("player_idle_diagup.png");
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("player_idle_side.png");
@@ -195,22 +196,41 @@ void cDatabase::loadUnits()
 	unit[i].interactDistance = 42.00f;
 	unit[i].collisionDistance = 35.00f;
 	unit[i].selectionOffset = vec2f(2.50f, -13.00f);
+	unit[i].addRef(REF_UNIT_PACK);
+	unit[i].addRef(REF_UNIT_PACK_TENT);
 	i += 1;
 
-	// Other
+	// Dummy units
 	unit[i].type = "dummy_flashlight";
 	unit[i].size = vec2(0, 0);
 	unit[i].health = 5000.00f;
 	unit[i].maxHealth = 5000.00f;
+	unit[i].rotateSpeed = 720.00f;
 	unit[i].collisionDistance = 0.00f;
 	unit[i].light.power = 500.00f;
 	unit[i].light.texture = visual.addTexture("lightdir_white.png");
 	unit[i].light.directional = true;
+	unit[i].light.priority = 1;
 	unit[i].addRef(REF_UNIT_NOSAVE);
 	unit[i].addRef(REF_UNIT_NORENDER);
 	unit[i].addRef(REF_UNIT_NOCOLLISION);
 	i += 1;
 
+	unit[i].type = "dummy_torch";
+	unit[i].size = vec2(0, 0);
+	unit[i].health = 5000.00f;
+	unit[i].maxHealth = 5000.00f;
+	unit[i].collisionDistance = 0.00f;
+	unit[i].light.power = 300.00f;
+	unit[i].light.texture = visual.addTexture("light_orange.png");
+	unit[i].light.flickerMod = 0.04f;
+	unit[i].light.flickerTime = 0.25f;
+	unit[i].addRef(REF_UNIT_NOSAVE);
+	unit[i].addRef(REF_UNIT_NORENDER);
+	unit[i].addRef(REF_UNIT_NOCOLLISION);
+	i += 1;
+
+	// Other
 	unit[i].type = "editor";
 	unit[i].size = vec2(0, 0);
 	unit[i].center = vec2(0, 0);

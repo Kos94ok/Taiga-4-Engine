@@ -107,12 +107,6 @@ void cGame::clearUnits()
 	unitCounter = 0;
 }
 
-// Using items
-void cGame::useItem(int id)
-{
-	unit[getUnitId(client.unit)].container.get(id).use();
-}
-
 // Quick create drop
 int cGame::createDrop(vec2f pos, vector<cItemDrop> itemList, int unitId)
 {
@@ -170,5 +164,26 @@ void cGame::setAmbientLight(float light)
 		data << MSG_GAME_LIGHT << ambientLight;
 		server.sendPacket(PLAYERS_REMOTE, data);
 		data.clear();
+	}
+}
+
+// Using items
+void cGame::useItem(int id)
+{
+	unit[getUnitId(client.unit)].container.get(id).use();
+}
+
+// Packing units
+void cGame::packUnitToItem(int id)
+{
+	id = getUnitId(id);
+	if (id == -1) { console.error << "[cGame::packUnitToItem] Incorrect unit id!" << endl; }
+
+	if (unit[id].hasRef(REF_UNIT_PACK_TENT)) {
+		createDrop(unit[id].pos, "tent_basic");
+		removeUnit(unit[id].globalId);
+	}
+	else {
+		console.error << "[cGame::packUnitToItem] Unit " << unit[id].type << " is not packable!" << endl;
 	}
 }

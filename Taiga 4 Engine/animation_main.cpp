@@ -67,6 +67,7 @@ cAnimDisplay cUnit::getCurrentAnimDirection()
 		animDisplay.data = animData[animId].downDiag;
 		animDisplay.texMod = 1;
 	}
+
 	return animDisplay;
 }
 

@@ -302,6 +302,14 @@ void cUI::createContextMenuForUnit(int targetUnit)
 	ui.element[ui.getElementId(id)].textColor = sf::Color(175, 175, 175);
 	ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 127, 0);
 	ui.element[ui.getElementId(id)].priority = 10;
+	// Pack
+	if (game.getUnit(targetUnit).hasRef(REF_UNIT_PACK))
+	{
+		id = ui.addElement(ui.element[ui.getElementId(id)], mousePos + sf::Vector2f(5.00f, 5.00f + (buttonY + buttonDist) * buttonCount++));
+		ui.element[ui.getElementId(id)].setText("Pack");
+		ui.element[ui.getElementId(id)].button.action = "unit_pack";
+		ui.element[ui.getElementId(id)].button.args[0] = to_string(targetUnit);
+	}
 	// Pick up
 	if (game.getUnit(targetUnit).hasRef(REF_UNIT_PICKUP))
 	{

@@ -40,7 +40,7 @@ void cWindow::mainPaint()
 	// Painting the game data
 	if (!core.serverMode)
 	{
-		mutex.render.lock();
+		mutex.renderMain.lock();
 		if (core.menuState == STATE_GAME)
 		{
 			//game.access.lock();
@@ -52,7 +52,7 @@ void cWindow::mainPaint()
 		}
 		window.paintUI();
 		window.paintDebugInfo();
-		mutex.render.unlock();
+		mutex.renderMain.unlock();
 	}
 	window.paintConsole();
 	sf::Sprite buffer;
@@ -128,6 +128,7 @@ void cWindow::paintUnits()
 	visual.unitsPainted = 0;
 	int repeats = 1;
 	if (settings.enableBetterShadows) { repeats += 1; }
+	mutex.renderUnits.lock();
 	for (int u = 0; u < repeats; u++)
 	{
 		for (float y = cameraTop; y < cameraBot; y += step)
@@ -337,6 +338,7 @@ void cWindow::paintUnits()
 			}
 		}
 	}
+	mutex.renderUnits.unlock();
 	game.access.unlock();
 }
 
@@ -377,34 +379,41 @@ void cWindow::paintLighting()
 {
 	float power;
 	int tex;
-	for (int i = 0; i < game.unitCounter; i++)
+	int lightsDisplayed = 0;
+	int priority = 0;
+
+	while (priority < LIMIT_PRIORITY_LIGHT && lightsDisplayed < game.unitCounter)
 	{
-		if (game.unit[i].light.power > 0 && game.unit[i].light.texture != -1)
+		for (int i = 0; i < game.unitCounter; i++)
 		{
-			tex = game.unit[i].light.texture;
-			brushRect.setTexture(&visual.gameTex[tex].handle);
-			brushRect.setPosition(game.unit[i].pos);
-			brushRect.setFillColor(sf::Color(255, 255, 255, max(0.00f, min(255.00f, 300.00f - game.ambientLight))));
-			if (!settings.enableDynamicLight) {
-				brushRect.setTexture(&visual.gameTex[visual.addTexture("light_white.png")].handle);
-				brushRect.setFillColor(sf::Color(255, 255, 255, 50.00f));
+			if (game.unit[i].light.priority == priority && game.unit[i].light.power > 0 && game.unit[i].light.texture != -1)
+			{
+				tex = game.unit[i].light.texture;
+				brushRect.setTexture(&visual.gameTex[tex].handle);
+				brushRect.setPosition(game.unit[i].pos);
+				brushRect.setFillColor(sf::Color(255, 255, 255, max(0.00f, min(255.00f, 300.00f - game.ambientLight))));
+				if (!settings.enableDynamicLight) {
+					brushRect.setTexture(&visual.gameTex[visual.addTexture("light_white.png")].handle);
+					brushRect.setFillColor(sf::Color(255, 255, 255, 50.00f));
+				}
+				brushRect.setTextureRect(sf::IntRect(0, 0, visual.gameTex[tex].handle.getSize().x, visual.gameTex[tex].handle.getSize().y));
+				power = game.unit[i].light.power;
+				if (game.unit[i].light.flickerMod != 0.00f) {
+					power += power * (game.unit[i].light.flickerMod * abs(game.unit[i].light.flickerCurTime / game.unit[i].light.flickerTime - 1.00f));
+					power += math.randf(-5.00f, 5.00f);
+				}
+				brushRect.setOrigin(sf::Vector2f(power, power));
+				brushRect.setSize(sf::Vector2f(power * 2.00f, power * 2.00f));
+				// Directional
+				brushRect.setRotation(0.00f);
+				if (game.unit[i].light.directional) {
+					brushRect.setRotation(-game.unit[i].facingAngle);
+				}
+				if (settings.enableDynamicLight) { window.texHandleLight.draw(brushRect, window.matrixHandle); }
+				else { window.texHandle.draw(brushRect, window.matrixHandle); }
 			}
-			brushRect.setTextureRect(sf::IntRect(0, 0, visual.gameTex[tex].handle.getSize().x, visual.gameTex[tex].handle.getSize().y));
-			power = game.unit[i].light.power;
-			if (game.unit[i].light.flickerMod != 0.00f) {
-				power += power * (game.unit[i].light.flickerMod * abs(game.unit[i].light.flickerCurTime / game.unit[i].light.flickerTime - 1.00f));
-				power += math.randf(-5.00f, 5.00f);
-			}
-			brushRect.setOrigin(sf::Vector2f(power, power));
-			brushRect.setSize(sf::Vector2f(power * 2.00f, power * 2.00f));
-			// Directional
-			brushRect.setRotation(0.00f);
-			if (game.unit[i].light.directional) {
-				brushRect.setRotation(game.unit[i].facingAngle);
-			}
-			if (settings.enableDynamicLight) { window.texHandleLight.draw(brushRect, window.matrixHandle); }
-			else { window.texHandle.draw(brushRect, window.matrixHandle); }
 		}
+		priority += 1;
 	}
 	brushRect.setRotation(0.00f);
 	window.texHandleLight.display();
@@ -492,7 +501,7 @@ void cWindow::paintUI()
 	sf::Transform miniMatrix;
 	miniMatrix.scale(sf::Vector2f(settings.sampleMod, settings.sampleMod));
 	// UI Elements
-	for (int y = 0; y < LIMIT_UI_PRIORITY; y++)
+	for (int y = 0; y < LIMIT_PRIORITY_UI; y++)
 	{
 		for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
 		{

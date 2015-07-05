@@ -104,7 +104,7 @@ void cScript::ui_initialMenu(cArg args)
 	int id = ui.addElement("image", vec2f(camera.res.x / 2, camera.res.y / 2));
 	ui.element[ui.getElementId(id)].texture = visual.addTexture("bg_art.png");
 	ui.element[ui.getElementId(id)].size = vec2f(camera.res.x, camera.res.y);
-	id = ui.createText(vec2f(camera.res.x / 2, camera.res.y / 2 - 70), "Taiga Survival Alpha v0.10", "Its a tooltip!");
+	id = ui.createText(vec2f(camera.res.x / 2, camera.res.y / 2 - 70), NAME_FULL + " " + NAME_VERSION_FULL, "Its a tooltip!");
 	ui.element[ui.getElementId(id)].ignoreOrigin = false;
 	//ui.element[ui.getElementId(id)].tooltip.pos
 	id = ui.addElement("button_test", sf::Vector2f(camera.res.x / 2.00f, camera.res.y / 2.00f + 0.00f));
@@ -130,6 +130,34 @@ void cScript::server_sendChunkData(cArg args)
 	server.sendChunkData(i, arg0, arg1);
 }
 
+void cScript::unit_torch(cArg args)
+{
+	// Only for server
+	if (!core.serverMode && !core.localServer) { return; }
+	// Arguments: Flashlight unit id, Player index
+	int unitId, playerId;
+	stringstream(args[0]) >> unitId;
+	stringstream(args[1]) >> playerId;
+
+	while (!core.shutdown)
+	{
+		game.access.lock();
+		cUnit* targetUnit = &game.getUnit(unitId);
+		cUnit* ownerUnit = &game.getUnit(server.player[playerId].unit);
+		if (targetUnit->type == "missingno") { game.access.unlock(); return; }
+		else if (ownerUnit->type == "missingno" || !ownerUnit->hasBuff(BUFF_TORCH)) {
+			game.removeUnit(unitId);
+			game.access.unlock();
+			return;
+		}
+
+		targetUnit->moveTo(ownerUnit->pos);
+		game.access.unlock();
+
+		Sleep(3);
+	}
+}
+
 void cScript::unit_flashlight(cArg args)
 {
 	// Only for server
@@ -152,13 +180,7 @@ void cScript::unit_flashlight(cArg args)
 		}
 		
 		targetUnit->moveTo(ownerUnit->pos);
-		targetUnit->rotateTo(math.getAngle(targetUnit->pos, server.player[playerId].mousePos));
-		//console.debug << "[DEBUG] X: " << mousePos.x << " / Y: " << mousePos.y << endl;
-		if (targetUnit->facingAngle < 0.00f) {
-			console.debug << "[DEBUG] Rotation: " << targetUnit->facingAngle << endl;
-			console.debug << "[DEBUG] Unit pos: " << targetUnit->pos.x << " / " << targetUnit->pos.y << endl;
-			console.debug << "[DEBUG] Mouse pos: " << server.player[playerId].mousePos.x << " / " << server.player[playerId].mousePos.y << endl;
-		}
+		targetUnit->rotateTo(math.convertAngle(math.getAngle(targetUnit->pos, server.player[playerId].mousePos)));
 		game.access.unlock();
 
 		Sleep(3);

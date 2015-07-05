@@ -313,6 +313,17 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 	}
 	// =======================================================
 	// =======================================================
+	// Player packs some object
+	if (msg == MSG_CONTROLS_PACK)
+	{
+		input >> argi[0];
+
+		game.packUnitToItem(argi[0]);
+
+		return true;
+	}
+	// =======================================================
+	// =======================================================
 	// Player uses a flashlight
 	if (msg == MSG_CONTROLS_FLASHLIGHT_ON)
 	{
@@ -327,6 +338,25 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 	else if (msg == MSG_CONTROLS_FLASHLIGHT_OFF)
 	{
 		player[i].removeBuff(BUFF_FLASHLIGHT);
+
+		return true;
+	}
+	// =======================================================
+	// =======================================================
+	// Player uses a torch
+	if (msg == MSG_CONTROLS_TORCH_ON)
+	{
+		if (player[i].hasItem(database.findItem(REF_ITEM_TORCH).type))
+		{
+			player[i].addBuff(BUFF_TORCH);
+			int id = game.addUnit("dummy_torch", vec2f(0.00f, 0.00f));
+			script.execute(cScript::unit_torch, cArg(to_string(id), to_string(i)));
+		}
+		return true;
+	}
+	else if (msg == MSG_CONTROLS_TORCH_OFF)
+	{
+		player[i].removeBuff(BUFF_TORCH);
 
 		return true;
 	}

@@ -17,6 +17,10 @@ int cUnit::addOrder_moveto(sf::Vector2f target, bool overwrite)
 	if (overwrite) { orderCounter = 0; }
 	// Reset the action timer
 	if (orderCounter == 0) { actionTimer = 0.00f; }
+	// Check order limit
+	if (orderCounter >= LIMIT_ORDERS - 1) {
+		console.error << "[cUnit::addOrder_moveto] Order limit reached!" << endl;
+	}
 	// Adding new order
 	order[orderCounter].type = ORDER_MOVETO;
 	order[orderCounter].targetPos = target;
@@ -67,6 +71,11 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 	}
 	// Calculating path
 	path.calculate(startingPos, target, collisionDistance, globalId);
+	// Check order limit
+	if (orderCounter + path.waypointCounter >= LIMIT_ORDERS - 1) {
+		console.error << "[cUnit::addOrder_moveto_path] Order limit reached!" << endl;
+		path.waypointCounter = LIMIT_ORDERS - orderCounter;
+	}
 	// Adding orders
 	for (int i = 0; i < path.waypointCounter; i++)
 	{
@@ -97,6 +106,10 @@ int cUnit::addOrder_pickup(int target, bool overwrite)
 	if (overwrite) { orderCounter = 0; }
 	// Reset the action timer
 	if (orderCounter == 0) { actionTimer = 0.00f; }
+	// Check order limit
+	if (orderCounter >= LIMIT_ORDERS - 1) {
+		console.error << "[cUnit::addOrder_pickup] Order limit reached!" << endl;
+	}
 	// Adding new order
 	order[orderCounter].type = ORDER_PICKUP;
 	order[orderCounter].targetObject = target;
@@ -121,6 +134,10 @@ int cUnit::addOrder_harvest(int target, bool overwrite, int powerLevel)
 	if (overwrite) { orderCounter = 0; }
 	// Reset the action timer
 	if (orderCounter == 0) { actionTimer = 0.00f; }
+	// Check order limit
+	if (orderCounter >= LIMIT_ORDERS - 1) {
+		console.error << "[cUnit::addOrder_harvest] Order limit reached!" << endl;
+	}
 	// Adding new order
 	order[orderCounter].type = ORDER_HARVEST;
 	order[orderCounter].targetObject = target;
@@ -148,6 +165,10 @@ int cUnit::addOrder_death(bool overwrite)
 		if (overwrite) { orderCounter = 0; }
 		// Reset the action timer
 		if (orderCounter == 0) { actionTimer = 0.00f; }
+		// Check order limit
+		if (orderCounter >= LIMIT_ORDERS - 1) {
+			console.error << "[cUnit::addOrder_death] Order limit reached!" << endl;
+		}
 		// Adding new order
 		order[orderCounter].type = ORDER_DEATH;
 		orderCounter += 1;

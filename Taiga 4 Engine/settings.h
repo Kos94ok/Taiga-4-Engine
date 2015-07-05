@@ -50,6 +50,8 @@ public:
 	int antialiasingLevel;
 	// Sample modifier [Render resolution over display resolution]
 	float sampleMod;
+	// Framerate limit [Maximum allowed framerate]
+	int framerateLimit;
 
 	// Starting path counter [Increases the open area close to spawn point]
 	int wgStartingPath;

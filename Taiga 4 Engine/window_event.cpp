@@ -217,6 +217,15 @@ void cWindow::mainEvent()
 						ui.createContextMenuForUnit(search);
 					}
 				}
+				// Some other object
+				else if (search != -1)
+				{
+					if (eventPoll.mouseButton.button == sf::Mouse::Right)
+					{
+						ui.mouseStateRMB = MOUSE_UI_BUTTON;
+						ui.createContextMenuForUnit(search);
+					}
+				}
 				// Ground click
 				else
 				{
@@ -237,7 +246,7 @@ void cWindow::mainEvent()
 			}
 		}
 		// Mouse dragging (move order)
-		if (eventPoll.type == sf::Event::MouseMoved && sf::Mouse::isButtonPressed(sf::Mouse::Left)
+		/*if (eventPoll.type == sf::Event::MouseMoved && sf::Mouse::isButtonPressed(sf::Mouse::Left)
 			&& !sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && ui.mouseStateLMB == MOUSE_CONTROLS_MOVEMENT)
 		{
 			mousePos = window.getMousePos(true);
@@ -246,7 +255,7 @@ void cWindow::mainEvent()
 				data << MSG_CONTROLS_MOVETO << mousePos.x << mousePos.y << false;
 				client.sendPacket(data);
 			}
-		}
+		}*/
 		// =========================================================
 		// =========================================================
 		// Camera

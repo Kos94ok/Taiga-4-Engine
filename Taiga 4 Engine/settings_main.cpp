@@ -98,9 +98,10 @@ void cSettings::setDefault()
 	this->hkDebugAdvanced = sf::Keyboard::F4;
 
 	// Garbage
-	visualUnitHoverColor = sf::Color(255, 200, 50);
+	framerateLimit = 0;
 	camera.res.x = window.getScreenSize().x;
 	camera.res.y = window.getScreenSize().y;
+	visualUnitHoverColor = sf::Color(255, 200, 50);
 }
 
 void cSettings::setUltra()
@@ -142,6 +143,7 @@ void cSettings::load()
 		else if (key.name == "consoleHeight" && core.serverMode) { camera.res.y = math.stringToInt(key.value); }
 		else if (key.name == "enableVertSync") { enableVertSync = math.stringToInt(key.value); }
 		else if (key.name == "sampleMod") { sampleMod = (float)math.stringToInt(key.value) / 100.00f; }
+		else if (key.name == "framerateLimit") { framerateLimit = math.stringToInt(key.value); }
 			// Visual
 		else if (key.name == "enableScreenShaders") { enableScreenShaders = math.stringToInt(key.value); }
 		else if (key.name == "enableNightShadows") { enableNightShadows = math.stringToInt(key.value); }
@@ -153,8 +155,8 @@ void cSettings::load()
 		else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
 		else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
 			// Gameplay
-		else if (key.name == "enableQuickCast") { enableQuickCast = math.stringToInt(key.value); }
 		else if (key.name == "enableLazyCast") { enableLazyCast = math.stringToInt(key.value); }
+		else if (key.name == "enableQuickCast") { enableQuickCast = math.stringToInt(key.value); }
 		else if (key.name == "enableMouseScroll") { enableMouseScroll = math.stringToInt(key.value); }
 		else if (key.name == "enableDynamicTooltips") { enableDynamicTooltips = math.stringToInt(key.value); }
 			// Console
@@ -209,6 +211,7 @@ void cSettings::save()
 		file << "screenHeight = " << camera.res.y << "\n";
 		file << "enableVertSync = " << enableVertSync << "\n";
 		file << "sampleMod = " << math.round(sampleMod * 100.00f) << "\n";
+		file << "framerateLimit = " << framerateLimit << "\n";
 
 		file << endl << "[Visual]" << "\n";
 		file << "enableScreenShaders = " << enableScreenShaders << "\n";
@@ -220,6 +223,7 @@ void cSettings::save()
 		file << "shadowBlur = " << shadowBlur << "\n";
 
 		file << endl << "[Gameplay]" << "\n";
+		file << "enableLazyCast = " << enableLazyCast << "\n";
 		file << "enableQuickCast = " << enableQuickCast << "\n";
 		file << "enableMouseScroll = " << enableMouseScroll << "\n";
 		file << "enableDynamicTooltips = " << enableDynamicTooltips << "\n";

@@ -82,4 +82,17 @@ void cItem::equip()
 		client.sendPacket(data);
 		data.clear();
 	}
+	// Torch
+	if (hasRef(REF_ITEM_TORCH) && equipped)
+	{
+		data << MSG_CONTROLS_TORCH_ON;
+		client.sendPacket(data);
+		data.clear();
+	}
+	else if (hasRef(REF_ITEM_TORCH) && !equipped)
+	{
+		data << MSG_CONTROLS_TORCH_OFF;
+		client.sendPacket(data);
+		data.clear();
+	}
 }

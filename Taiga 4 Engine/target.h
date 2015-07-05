@@ -1,6 +1,7 @@
 
 #pragma once
 #include "precomp.h"
+#include "item.h"
 
 class cTarget
 {
@@ -14,6 +15,7 @@ public:
 
 	void enable_forButton(int elementId);
 	void enable_building(int ref);
+	void enable_building(cItem* item);
 	void apply();
 	void reset();
 	

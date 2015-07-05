@@ -1,11 +1,17 @@
 
+const std::string NAME_SHORT = "Taiga";
+const std::string NAME_FULL = "Taiga Survival";
+const std::string NAME_ENGINE = "Taiga 4 Engine";
+const std::string NAME_VERSION = "v0.10";
+const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
+
 #define	LINESOFCODE_01_02_2015			6372
 #define LINESOFCODE_31_05_2015			9050
 
 #define LIMIT_CMD						64
 #define LIMIT_TILEMAP					64
 #define LIMIT_TEXTURE					256
-#define LIMIT_ORDERS					128
+#define LIMIT_ORDERS					256
 #define LIMIT_ANIMATIONS				16
 #define LIMIT_REFERENCE					64
 #define LIMIT_SHADERS					32
@@ -21,7 +27,6 @@
 #define LIMIT_DB_UIELEMENTS				32
 #define LIMIT_DB_TEXTURES				32
 #define LIMIT_UI_ELEMENTS				128
-#define LIMIT_UI_PRIORITY				16
 #define LIMIT_SERVER_PLAYERS			32
 #define LIMIT_SERVER_PACKETQUEUE		2048
 #define LIMIT_MAP						64
@@ -32,6 +37,8 @@
 #define LIMIT_ICONSIZE					24
 #define LIMIT_SCRIPTCOUNT				64
 #define LIMIT_SOUND						64
+#define LIMIT_PRIORITY_UI				16
+#define LIMIT_PRIORITY_LIGHT			8
 
 #define STATE_UNDEFINED					-1
 #define STATE_MAINMENU					0
@@ -86,14 +93,17 @@
 #define MSG_CONTROLS_CRAFTITEM			160
 #define MSG_CONTROLS_DROPITEM			161
 #define MSG_CONTROLS_DISMANTLE			162
+#define MSG_CONTROLS_FLASHLIGHT_ON		163
+#define MSG_CONTROLS_FLASHLIGHT_OFF		164
+#define MSG_CONTROLS_TORCH_ON			165
+#define MSG_CONTROLS_TORCH_OFF			166
 #define MSG_CONTROLS_BLINK				170
 #define MSG_CONTROLS_RIFLE				171
 #define MSG_CONTROLS_AXE				172
 #define MSG_CONTROLS_PICKAXE			173
 #define MSG_CONTROLS_CONSUME			174
 #define MSG_CONTROLS_BUILD				175
-#define MSG_CONTROLS_FLASHLIGHT_ON		176
-#define MSG_CONTROLS_FLASHLIGHT_OFF		177
+#define MSG_CONTROLS_PACK				176
 #define MSG_REQUEST_CHUNKDATA			180
 #define MSG_INFO_CAMRES					190
 #define MSG_INFO_MOUSEPOS				191
@@ -142,6 +152,8 @@
 #define REF_UNIT_TARGET					14		// Unit is mousebound target pointer
 #define REF_UNIT_PLACEHOLDER			15		// Unit is a buildable object placeholder
 #define REF_UNIT_NOCOLLISION			16		// Unit is not considered an obstacle
+#define REF_UNIT_PACK					17		// Unit can be packed
+#define REF_UNIT_PACK_TENT				18		// Unit is a packable tent
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_CONSUME				2		// Item can be consumed
@@ -159,7 +171,10 @@
 #define REF_ITEM_BUILD					14		// Item is a buildable object
 #define REF_ITEM_BUILD_CAMPFIRE			15		// Item is a buildable campfire
 #define REF_ITEM_BUILD_FURNACEBASIC		16		// Item is a buildable basic furnace
-#define REF_ITEM_FLASHLIGHT				17		// Item is a flashlight
+#define REF_ITEM_BUILD_FURNACEIND		17		// Item is an industrial furnace
+#define REF_ITEM_BUILD_TENT				18		// Item is a buildable tent
+#define REF_ITEM_FLASHLIGHT				19		// Item is a flashlight
+#define REF_ITEM_TORCH					20		// Item is a torch
 
 #define TEX_UI_TOOLTIP					1
 #define TEX_WORLD_GROUND				2
@@ -243,3 +258,4 @@
 #define MODE_TARGET_BUILDING			1
 
 #define BUFF_FLASHLIGHT					0
+#define BUFF_TORCH						1

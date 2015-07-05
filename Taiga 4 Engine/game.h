@@ -108,6 +108,9 @@ public:
 	// Takes: Item global id
 	// Returns: Nothing
 	void useItem(int id);
+	// Takes: Unit global id
+	// Returns: Nothing
+	void packUnitToItem(int id);
 };
 
 extern cGame game;

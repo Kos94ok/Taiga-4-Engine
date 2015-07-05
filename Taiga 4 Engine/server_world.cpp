@@ -32,13 +32,17 @@ void serverWorldOrders(int elapsedTime)
 				if (game.unit[i].order[0].type == ORDER_MOVETO)
 				{
 					game.access.lock();
+					// Calculating the movement speed
+					float moveSpeed = game.unit[i].movementSpeed;
+					angle = math.convertAngle(math.getAngle(game.unit[i].pos, game.unit[i].order[0].targetPos));
+					moveSpeed *= abs(cos((game.unit[i].facingAngle - angle) / 2.00f * math.DEGTORAD));
 					// Calculating the point
 					if (math.getDistance(game.unit[i].pos.x, game.unit[i].pos.y, game.unit[i].order[0].targetPos.x, game.unit[i].order[0].targetPos.y)
-						> game.unit[i].movementSpeed * timevar)
+						> moveSpeed * timevar)
 					{
 						angle = math.getAngle(game.unit[i].pos.x, game.unit[i].pos.y, game.unit[i].order[0].targetPos.x, game.unit[i].order[0].targetPos.y);
-						offsetX = game.unit[i].movementSpeed * timevar * cos(angle * math.DEGTORAD);
-						offsetY = game.unit[i].movementSpeed * timevar * sin(angle * math.DEGTORAD);
+						offsetX = moveSpeed * timevar * cos(angle * math.DEGTORAD);
+						offsetY = moveSpeed * timevar * sin(angle * math.DEGTORAD);
 					}
 					else
 					{
@@ -194,7 +198,8 @@ void serverWorldOrders(int elapsedTime)
 
 void serverWorldAnim(int elapsedTime)
 {
-	game.access.lock();
+	//game.access.lock();
+	mutex.renderUnits.lock();
 	float timevar = (float)elapsedTime / 1000;
 	timevar *= core.timeModifier;
 	// Unit animations
@@ -236,7 +241,8 @@ void serverWorldAnim(int elapsedTime)
 			}
 		}
 	}
-	game.access.unlock();
+	mutex.renderUnits.unlock();
+	//game.access.unlock();
 
 	// World anim
 	game.timeOfDay += timevar * settings.wdDayNightSpeed;
@@ -253,6 +259,7 @@ void serverWorldAnim(int elapsedTime)
 	}
 
 	// Hovered unit
+	mutex.renderMain.lock();
 	int oldHover = visual.hoveredUnit;
 	int oldPriority = -1;
 	visual.hoveredUnit = -1;
@@ -261,12 +268,13 @@ void serverWorldAnim(int elapsedTime)
 	{
 		if (!game.unit[i].hasRef(REF_UNIT_NOSELECTION)
 			&& util.intersects(mousePos, game.unit[i].pos - game.unit[i].center, game.unit[i].size)
-			&& (visual.hoveredUnit == -1 || game.unit[i].globalId == oldHover || game.unit[i].selectionPriority >= oldPriority))
+			&& (visual.hoveredUnit == -1 || game.unit[i].globalId == oldHover || game.unit[i].selectionPriority > oldPriority))
 		{
 			visual.hoveredUnit = game.unit[i].globalId;
 			oldPriority = game.unit[i].selectionPriority;
 		}
 	}
+	mutex.renderMain.unlock();
 }
 
 void serverWorldUI(int elapsedTime)
@@ -275,6 +283,7 @@ void serverWorldUI(int elapsedTime)
 	int hoverHashSum = 0;
 	bool bindToMouse = math.intToBool(settings.enableDynamicTooltips);
 	bool isHovered = false;
+	sf::Packet data;
 
 	float timevar = (float)elapsedTime / 1000;
 	timevar *= core.timeModifier;
@@ -467,6 +476,24 @@ void serverWorldUnits(int elapsedTime)
 
 	for (int i = 0; i < game.unitCounter; i++)
 	{
+		// Checking rotation
+		if (abs(game.unit[i].facingAngle - game.unit[i].targetFacingAngle) > 0.50f) {
+			float realAngle = game.unit[i].facingAngle;
+			float targetAngle = game.unit[i].targetFacingAngle;
+			//if (abs(targetAngle - realAngle) >) { realAngle += 360.00f; }
+			//console.debug << "[DEBUG] Current: " << game.unit[i].facingAngle << ", Target: " << game.unit[i].targetFacingAngle << ", Speed: " << game.unit[i].rotateSpeed << endl;
+			if (abs(realAngle - targetAngle) <= game.unit[i].rotateSpeed * timevar) {
+				game.unit[i].facingAngle = game.unit[i].targetFacingAngle;
+			}
+			else {
+				if (targetAngle - realAngle > 180.00f) { game.unit[i].facingAngle -= game.unit[i].rotateSpeed * timevar; }
+				else if (realAngle < targetAngle || realAngle - targetAngle > 180.00f) { game.unit[i].facingAngle += game.unit[i].rotateSpeed * timevar; }
+				else { game.unit[i].facingAngle -= game.unit[i].rotateSpeed * timevar; }
+			}
+			// No overshoot
+			if (game.unit[i].facingAngle > 360.00f) { game.unit[i].facingAngle -= 360.00f; }
+			else if (game.unit[i].facingAngle < 0.00f) { game.unit[i].facingAngle += 360.00f; }
+		}
 		// Checking buffs
 		for (int y = 0; y < (int)game.unit[i].buff.list.size(); y++)
 		{
@@ -500,12 +527,27 @@ void serverWorldConnection(int elapsedTime)
 	{
 		client.mousePosTimer = 0;
 		client.lastMousePos = mousePos;
+		// Sending mouse position
 		data << MSG_INFO_MOUSEPOS << mousePos.x << mousePos.y;
-		console.debug << "[DEBUG] Sending mouse pos: " << mousePos.x << " / " << mousePos.y << endl;
 		client.sendPacket(data);
+		data.clear();
 	}
 	else if (client.mousePosTimer < 10) {
 		client.mousePosTimer += elapsedTime;
+	}
+
+	// Mouse dragging move order
+	if (client.connected && mousePos != client.lastMoveOrderPos && client.moveOrderTimer >= 50 && ui.mouseStateLMB == MOUSE_CONTROLS_MOVEMENT)
+	{
+		client.moveOrderTimer = 0;
+		client.lastMoveOrderPos = mousePos;
+		// Sending the packet
+		data << MSG_CONTROLS_MOVETO << mousePos.x << mousePos.y << false;
+		client.sendPacket(data);
+		data.clear();
+	}
+	else if (client.mousePosTimer < 50) {
+		client.moveOrderTimer += elapsedTime;
 	}
 }
 

@@ -78,7 +78,9 @@ public:
 class cMutexGlobal
 {
 public:
-	cMutex render;
+	cMutex animation;
+	cMutex renderMain;
+	cMutex renderUnits;
 	cMutex mainMatrix;
 };
 

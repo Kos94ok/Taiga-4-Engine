@@ -42,7 +42,7 @@ void cUnit::moveTo(vec2 newPos)
 
 void cUnit::rotateTo(float newAngle)
 {
-	facingAngle = newAngle;
+	targetFacingAngle = newAngle;
 
 	if (core.serverMode || core.localServer)
 	{
@@ -176,7 +176,7 @@ void cUnit::updateFacing()
 	else {
 		angle = math.getAngle(pos.x, pos.y, game.getUnit(order[0].targetObject).pos.x, game.getUnit(order[0].targetObject).pos.y);
 	}
-	facingAngle = math.convertAngle(angle);
+	rotateTo(math.convertAngle(angle));
 }
 
 void cUnit::updateAction()

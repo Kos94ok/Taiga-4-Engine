@@ -19,7 +19,9 @@ public:
 	int lastPingTime;
 	int lastPongTime;
 	int mousePosTimer;
+	int moveOrderTimer;
 	sf::Vector2f lastMousePos;
+	sf::Vector2f lastMoveOrderPos;
 
 	void sendEcho(std::string str);
 	void sendPacket(sf::Packet data);

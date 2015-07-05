@@ -29,12 +29,14 @@ public:
 	float power;
 	int texture;
 
+	int priority;
 	bool directional;
 	float flickerMod;
 	float flickerTime;
 	float flickerCurTime;
 
 	cLightSource() {
+		priority = 0;
 		power = 0.00f;
 		texture = -1;
 		flickerMod = 0.00f;
@@ -120,6 +122,8 @@ public:
 	float displayHealth;
 	float maxHealth;
 	float facingAngle;
+	float targetFacingAngle;
+	float rotateSpeed;
 	float movementSpeed;
 	cAIBrain ai;
 	cBuffList buff;
@@ -161,10 +165,12 @@ public:
 		collisionDistance = 0.00f;
 		orderCounter = 0;
 		facingAngle = 0.00f;
+		targetFacingAngle = facingAngle;
 		health = 50.00f;
 		displayHealth = health;
 		maxHealth = 100.00f;
 		owner = -1;
 		selectionPriority = 0;
+		rotateSpeed = 360.00f;
 	}
 };
