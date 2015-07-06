@@ -25,6 +25,7 @@ void cWindow::mainPaint()
 	window.texHandle.clear(sf::Color(127, 127, 127));
 	window.texHandleShadow.clear(sf::Color(255, 255, 255));
 	window.texHandleLight.clear(sf::Color(min(255.00f, game.ambientLight), min(255.00f, game.ambientLight), min(255.00f, game.ambientLight)));
+	window.texHandleLightMult.clear(sf::Color(0, 0, 0, 0));
 	window.texHandleTop.clear(sf::Color(127, 127, 127));
 	// Initializing the brushes
 	brushText.setFont(visual.fontMain);
@@ -382,41 +383,49 @@ void cWindow::paintLighting()
 	int lightsDisplayed = 0;
 	int priority = 0;
 
-	while (priority < LIMIT_PRIORITY_LIGHT && lightsDisplayed < game.unitCounter)
+	for (int a = 0; a < 2; a++)
 	{
-		for (int i = 0; i < game.unitCounter; i++)
+		priority = 0;
+		while (priority < LIMIT_PRIORITY_LIGHT && lightsDisplayed < game.unitCounter)
 		{
-			if (game.unit[i].light.priority == priority && game.unit[i].light.power > 0 && game.unit[i].light.texture != -1)
+			for (int i = 0; i < game.unitCounter; i++)
 			{
-				tex = game.unit[i].light.texture;
-				brushRect.setTexture(&visual.gameTex[tex].handle);
-				brushRect.setPosition(game.unit[i].pos);
-				brushRect.setFillColor(sf::Color(255, 255, 255, max(0.00f, min(255.00f, 300.00f - game.ambientLight))));
-				if (!settings.enableDynamicLight) {
-					brushRect.setTexture(&visual.gameTex[visual.addTexture("light_white.png")].handle);
-					brushRect.setFillColor(sf::Color(255, 255, 255, 50.00f));
+				if (game.unit[i].light.priority == priority && game.unit[i].light.power > 0 && game.unit[i].light.texture != -1)
+				{
+					tex = game.unit[i].light.texture;
+					brushRect.setTexture(&visual.gameTex[tex].handle);
+					brushRect.setPosition(game.unit[i].pos);
+					brushRect.setFillColor(sf::Color(255, 255, 255, max(0.00f, min(255.00f, 300.00f - game.ambientLight))));
+					if (!settings.enableDynamicLight) {
+						brushRect.setTexture(&visual.gameTex[visual.addTexture("light_white.png")].handle);
+						brushRect.setFillColor(sf::Color(255, 255, 255, 50.00f));
+					}
+					brushRect.setTextureRect(sf::IntRect(0, 0, visual.gameTex[tex].handle.getSize().x, visual.gameTex[tex].handle.getSize().y));
+					power = game.unit[i].light.power;
+					if (game.unit[i].light.flickerMod != 0.00f) {
+						power += power * (game.unit[i].light.flickerMod * abs(game.unit[i].light.flickerCurTime / game.unit[i].light.flickerTime - 1.00f));
+						power += math.randf(-5.00f, 5.00f);
+					}
+					brushRect.setOrigin(sf::Vector2f(power, power));
+					brushRect.setSize(sf::Vector2f(power * 2.00f, power * 2.00f));
+					// Directional
+					brushRect.setRotation(0.00f);
+					if (game.unit[i].light.directional) {
+						brushRect.setRotation(-game.unit[i].facingAngle);
+					}
+					// Painting to two textures
+					if (settings.enableDynamicLight && a == 0) { window.texHandleLight.draw(brushRect, window.matrixHandle); }
+					else if (settings.enableDynamicLight && a == 1) { window.texHandleLightMult.draw(brushRect, window.matrixHandle); }
+					else { window.texHandle.draw(brushRect, window.matrixHandle); }
 				}
-				brushRect.setTextureRect(sf::IntRect(0, 0, visual.gameTex[tex].handle.getSize().x, visual.gameTex[tex].handle.getSize().y));
-				power = game.unit[i].light.power;
-				if (game.unit[i].light.flickerMod != 0.00f) {
-					power += power * (game.unit[i].light.flickerMod * abs(game.unit[i].light.flickerCurTime / game.unit[i].light.flickerTime - 1.00f));
-					power += math.randf(-5.00f, 5.00f);
-				}
-				brushRect.setOrigin(sf::Vector2f(power, power));
-				brushRect.setSize(sf::Vector2f(power * 2.00f, power * 2.00f));
-				// Directional
-				brushRect.setRotation(0.00f);
-				if (game.unit[i].light.directional) {
-					brushRect.setRotation(-game.unit[i].facingAngle);
-				}
-				if (settings.enableDynamicLight) { window.texHandleLight.draw(brushRect, window.matrixHandle); }
-				else { window.texHandle.draw(brushRect, window.matrixHandle); }
 			}
+			priority += 1;
 		}
-		priority += 1;
+		if (!math.intToBool(settings.enableBetterLight)) { break; }
 	}
 	brushRect.setRotation(0.00f);
 	window.texHandleLight.display();
+	if (settings.enableBetterLight) { window.texHandleLightMult.display(); }
 }
 
 void cWindow::paintPostFX()
@@ -439,9 +448,14 @@ void cWindow::paintPostFX()
 		shader->setParameter("boostR", boost);
 		shader->setParameter("boostG", boost);
 		shader->setParameter("boostB", boost);
-		shader->setParameter("pixelFactor", settings.pixelization);
 		shader->setParameter("texLight", window.texHandleLight.getTexture());
+		shader->setParameter("texLightMult", window.texHandleLightMult.getTexture());
 		shader->setParameter("ambientLight", game.ambientLight / 255.00f);
+		if (settings.enableBetterLight)
+		{
+			shader->setParameter("enableBetterLight", 1.00f);
+		}
+		else { shader->setParameter("enableBetterLight", 0.00f); }
 		if (settings.enableBetterShadows)
 		{
 			shader->setParameter("checkForShadow", 1.00f);
@@ -495,6 +509,7 @@ void cWindow::paintUI()
 {
 	ui.access.lock();
 
+	float fade;
 	string text;
 	sf::FloatRect floatRect;
 	brushText.setCharacterSize(16);
@@ -507,11 +522,12 @@ void cWindow::paintUI()
 		{
 			if (ui.element[i].isValid && ui.element[i].priority == y)
 			{
+				fade = ui.element[i].getFade();
 				// Textured body
 				// Normal
 				if (ui.element[i].texture != -1)
 				{
-					brushRect.setFillColor(sf::Color(255, 255, 255, ui.element[i].alpha));
+					brushRect.setFillColor(sf::Color(255, 255, 255, ui.element[i].alpha * fade));
 					brushRect.setOrigin(0.00f, 0.00f);
 					if (!ui.element[i].ignoreOrigin) { brushRect.setOrigin(ui.element[i].size.x / 2, ui.element[i].size.y / 2); }
 					brushRect.setPosition(ui.element[i].pos.x, ui.element[i].pos.y);
@@ -523,7 +539,7 @@ void cWindow::paintUI()
 				// Hover
 				if (ui.element[i].hoverAlpha > 0 && ui.element[i].textureHovered != -1)
 				{
-					brushRect.setFillColor(sf::Color(255, 255, 255, (float)ui.element[i].hoverAlpha * ((float)ui.element[i].alpha / 255.00f)));
+					brushRect.setFillColor(sf::Color(255, 255, 255, min(255.00f, (float)ui.element[i].hoverAlpha * ((float)ui.element[i].alpha / 255.00f)) * fade));
 					brushRect.setOrigin(0.00f, 0.00f);
 					if (!ui.element[i].ignoreOrigin) { brushRect.setOrigin(ui.element[i].size.x / 2, ui.element[i].size.y / 2); }
 					brushRect.setPosition(ui.element[i].pos.x, ui.element[i].pos.y);
@@ -535,7 +551,7 @@ void cWindow::paintUI()
 				// Bar
 				if (ui.element[i].bar.texture != -1)
 				{
-					brushRect.setFillColor(sf::Color(255, 255, 255, ui.element[i].alpha));
+					brushRect.setFillColor(sf::Color(255, 255, 255, ui.element[i].alpha * fade));
 					brushRect.setOrigin(0.00f, 0.00f);
 					if (!ui.element[i].ignoreOrigin) { brushRect.setOrigin(ui.element[i].size.x / 2, ui.element[i].size.y / 2); }
 					brushRect.setTexture(&visual.gameTex[ui.element[i].bar.texture].handle);
@@ -566,7 +582,7 @@ void cWindow::paintUI()
 				// Text
 				if (ui.element[i].hasText())
 				{
-					float textAlpha = (float)ui.element[i].hoverAlpha / 255;
+					float textAlpha = (float)ui.element[i].hoverAlpha / 255.00f;
 					if (ui.element[i].textFont == FONT_DESCR) { brushText.setFont(visual.fontDescr); }
 					else { brushText.setFont(visual.fontMain); }
 					brushText.setCharacterSize(ui.element[i].textSize);
@@ -574,7 +590,7 @@ void cWindow::paintUI()
 						ui.element[i].textColor.r * (1.00f - textAlpha) + ui.element[i].textColorHover.r * textAlpha,
 						ui.element[i].textColor.g * (1.00f - textAlpha) + ui.element[i].textColorHover.g * textAlpha,
 						ui.element[i].textColor.b * (1.00f - textAlpha) + ui.element[i].textColorHover.b * textAlpha,
-						255.00f));
+						255.00f * fade));
 					brushText.setString(ui.element[i].textDisplay);
 					floatRect = brushText.getGlobalBounds();
 					brushText.setOrigin(0.00f, 0.00f);

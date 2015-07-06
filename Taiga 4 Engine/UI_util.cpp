@@ -144,3 +144,36 @@ int cUI::createBackground(sf::Vector2f begin, sf::Vector2f end, int alpha, int r
 	ui.element[ui.getElementId(id)].ignoreOrigin = true;
 	return id;
 }
+
+void cUIElement::setFadeTimer(float time, int type)
+{
+	fadeType = type;
+	fadeTimerMax = time;
+	if (type == FADE_IN) { fadeTimer = 0.00f; }
+	else if (type == FADE_OUT) { fadeTimer = time; }
+}
+
+void cUIElement::resetFadeTimer()
+{
+	fadeType = FADE_STOP;
+	fadeTimer = 0.00f;
+	fadeTimerMax = 0.00f;
+}
+
+float cUIElement::getFade()
+{
+	if (fadeTimerMax <= 0.00f) { return 1.00f; }
+	if (fadeTimer <= 0.00f) { return 0.00f; }
+	return fadeTimer / fadeTimerMax;
+}
+
+void cUI::setFadeTimeByRef(int ref, float time, int type)
+{
+	for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
+	{
+		if (element[i].isValid && element[i].hasRef(ref))
+		{
+			element[i].setFadeTimer(time, type);
+		}
+	}
+}

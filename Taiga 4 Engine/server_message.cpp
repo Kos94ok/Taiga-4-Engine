@@ -409,6 +409,7 @@ bool cServer::msgControlAbility(int i, sf::Packet input)
 		vec2 unitPos = game.getUnit(server.player[i].unit).pos;
 		vec2 target = math.polar(unitPos, value.rifleMaxDistance, math.getAngle(unitPos, vec2(argf[0], argf[1])));
 		id = game.addUnit("proj_rifle", unitPos, server.player[i].unit);
+		game.getUnit(id).facingAngle = math.convertAngle(math.getAngle(unitPos, target));
 		game.getUnit(id).addOrder_moveto(target);
 
 		return true;

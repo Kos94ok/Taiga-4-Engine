@@ -7,14 +7,13 @@ precision highp float;
 uniform sampler2D texMain;
 uniform sampler2D texLight;
 uniform sampler2D texShadow;
-uniform sampler2D texLightMult;
 uniform float boostR;
 uniform float boostG;
 uniform float boostB;
+uniform float pixelFactor;
 uniform float checkForShadow;
 uniform float shadowBrightness;
 uniform float ambientLight;
-uniform float enableBetterLight;
 
 void main()
 {
@@ -31,25 +30,28 @@ void main()
 
 	float lightLevel = max(texture(texLight, coord).r, max(texture(texLight, coord).g, texture(texLight, coord).b)) * 0.80;
 	
-	finalColor = vec4(texR, texG, texB, 1.00);
-
-	// Apply light
-	if (enableBetterLight == 1.0)
+	// Pixelization
+	if (pixelFactor < 5000)
 	{
-		finalColor = finalColor * 1.0 * (texture(texLight, coord) + texture(texLightMult, coord) * (ambientLight + 0.50));
+		// Adding pixelization
+		vec2 pos = floor(gl_TexCoord[0].xy * pixelFactor + 0.5) / pixelFactor;
+		finalColor = texture(texMain, pos) * gl_Color * boost;
 	}
 	else
 	{
-		finalColor = finalColor * 1.0 * texture(texLight, coord);
+		// No pixelization
+		finalColor = vec4(texR, texG, texB, 1.00);		
 	}
+	// Apply light
+	finalColor = finalColor * 1.0 * texture(texLight, coord);
 	
 	// Better shadows
 	if (checkForShadow == 1.00)
 	{
 		vec4 texColor = texture(texMain, gl_TexCoord[0].xy);
 		vec4 shadColor = texture(texShadow, gl_TexCoord[0].xy);
-		if (abs(texColor.r - shadColor.r) > 0.02 || abs(texColor.g - shadColor.g) > 0.02 || abs(texColor.b - shadColor.b) > 0.02)
-		//if (shadColor.r <= 0.20 && shadColor.g <= 0.20 && shadColor.b <= 0.20)
+		//if (abs(texColor.r - shadColor.r) > 0.02 || abs(texColor.g - shadColor.g) > 0.02 || abs(texColor.b - shadColor.b) > 0.02)
+		if (shadColor.r <= 0.20 && shadColor.g <= 0.20 && shadColor.b <= 0.20)
 		{
 			float md = max(0.0, min(1.0, lightLevel - ambientLight));
 			float tr = min(1.0, shadowBrightness * 1.2 + md);

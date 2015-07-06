@@ -35,7 +35,6 @@ public:
 	std::string input;
 	sf::String inputDisplay;
 	std::string waitingQueue;
-	std::vector<std::string> outputQueue;
 	std::vector<sf::String> history[5];
 	std::vector<std::string> cmdHistory;
 

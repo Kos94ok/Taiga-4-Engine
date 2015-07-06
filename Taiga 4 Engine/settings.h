@@ -25,6 +25,8 @@ public:
 	int enableBetterShadows;
 	// Dynamic lighting [Enables realistic lighting system]
 	int enableDynamicLight;
+	// Better lighting [Enables brighter lights]
+	int enableBetterLight;
 	// Texture filtering [Reduces image pixelization]
 	int enableTextureSmoothing;
 	// Camera blur [Game world is blurred when the camera is moving]
@@ -42,8 +44,6 @@ public:
 
 	// Screen mode [Fullscreen / Window / Borderless]
 	int screenMode;
-	// Pixelization [Uses shaders to visually decrease resolution]
-	float pixelization;
 	// Shadow blur [Uses shaders to make shadows look more realistic]
 	int shadowBlur;
 	// Antialiasing [Hardware-dependant type of AA, improves image quality]
@@ -102,6 +102,7 @@ public:
 	sf::Keyboard::Key hkActiveItem[LIMIT_ACTIVEBUTTONS];
 	sf::Keyboard::Key hkCamMove[4];
 	sf::Keyboard::Key hkCamToHero;
+	sf::Keyboard::Key hkChat;
 
 	void load();
 	void save();

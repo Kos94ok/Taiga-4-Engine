@@ -88,7 +88,7 @@
       <ForcedIncludeFiles>precomp.h%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
@@ -112,6 +112,8 @@
     <ClCompile Include="audio_util.cpp" />
     <ClCompile Include="buff_main.cpp" />
     <ClCompile Include="camera_main.cpp" />
+    <ClCompile Include="chat_main.cpp" />
+    <ClCompile Include="chat_util.cpp" />
     <ClCompile Include="client_main.cpp" />
     <ClCompile Include="client_message.cpp" />
     <ClCompile Include="client_util.cpp" />
@@ -156,6 +158,7 @@
     <ClCompile Include="settings_util.cpp" />
     <ClCompile Include="target_main.cpp" />
     <ClCompile Include="UI_button.cpp" />
+    <ClCompile Include="UI_chat.cpp" />
     <ClCompile Include="UI_contextMenu.cpp" />
     <ClCompile Include="UI_inventory.cpp" />
     <ClCompile Include="UI_main.cpp" />
@@ -182,6 +185,7 @@
     <ClInclude Include="audio.h" />
     <ClInclude Include="buff.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="chat.h" />
     <ClInclude Include="editor.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="client.h" />

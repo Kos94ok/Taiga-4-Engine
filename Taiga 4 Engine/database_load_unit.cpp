@@ -187,8 +187,8 @@ void cDatabase::loadUnits()
 
 	// Tent
 	unit[i].type = "tent_basic";
-	unit[i].size = vec2(120, 100);
-	unit[i].center = vec2(60, 70);
+	unit[i].size = vec2(94, 84);
+	unit[i].center = vec2(47, 70);
 	unit[i].shadowOffset = vec2(0, -15);
 	unit[i].health = 5000.00f;
 	unit[i].maxHealth = 5000.00f;
@@ -255,6 +255,7 @@ void cDatabase::loadUnits()
 	unit[i].center = unit[i].size / 2.00f;
 	unit[i].flyingHeight = 20.00f;
 	unit[i].animData[ANIM_MOVE].side.tex = visual.addTexture("missile_rifleNew.png");
+	unit[i].rotateSpeed = 5760.00f;
 	unit[i].movementSpeed = 1500.00f;
 	unit[i].light.power = 25.00f;
 	unit[i].light.texture = visual.addTexture("light_orange.png");

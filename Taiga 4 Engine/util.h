@@ -37,6 +37,7 @@ class cUtil
 public:
 	void detectVideoCard();
 	int getInventorySortingType();
+	void checkLog(std::string filename);
 	void checkLogFiles();
 	std::string getCurrentTimeString();
 	

@@ -37,23 +37,24 @@ int cUI::addElement(cUIElement elem, sf::Vector2f pos)
 	return -1;
 }
 
-void cUI::removeElement(int id)
+void cUI::removeElement(int id, float time)
 {
 	id = getElementId(id);
 	if (id != -1)
 	{
-		element[id].isValid = false;
+		if (time <= 0.00f) { element[id].isValid = false; element[id].resetFadeTimer(); }
+		else { element[id].setFadeTimer(time, FADE_OUT); }
 	}
 }
 
-void cUI::removeElementsByRef(int ref)
+void cUI::removeElementsByRef(int ref, float time)
 {
 	for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
 	{
 		if (element[i].hasRef(ref))
 		{
-			//removeElement(element[i].globalId);
-			element[i].isValid = false;
+			if (time <= 0.00f) { element[i].isValid = false; element[i].resetFadeTimer(); }
+			else { element[i].setFadeTimer(time, FADE_OUT); }
 		}
 	}
 }

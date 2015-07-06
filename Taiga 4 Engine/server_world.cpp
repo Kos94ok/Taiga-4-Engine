@@ -311,7 +311,7 @@ void serverWorldUI(int elapsedTime)
 		if (ui.clickTimer < 0.00f) { ui.clickTimer = 0.00f; }
 	}
 	
-	// Tooltip timers
+	// Elements
 	for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
 	{
 		if (ui.element[i].isValid)
@@ -342,6 +342,19 @@ void serverWorldUI(int elapsedTime)
 					isHovered = math.isPointInRect(mousePos.x, mousePos.y, ui.element[i].pos.x - ui.element[i].size.x / 2,
 						ui.element[i].pos.y - ui.element[i].size.y / 2, ui.element[i].size.x, ui.element[i].size.y);
 				}	
+			}
+
+			// Fadeout timers
+			if (ui.element[i].fadeTimerMax > 0.00f && ui.element[i].fadeType != FADE_STOP)
+			{
+				ui.element[i].fadeTimer += timevar * ui.element[i].fadeType;
+				if (ui.element[i].fadeTimer >= ui.element[i].fadeTimerMax && ui.element[i].fadeType == FADE_IN) {
+					ui.element[i].fadeTimer = ui.element[i].fadeTimerMax;
+					ui.element[i].fadeType = FADE_STOP;
+				}
+				else if (ui.element[i].fadeTimer <= 0.00f && ui.element[i].fadeType == FADE_OUT) {
+					ui.removeElement(ui.element[i].globalId);
+				}
 			}
 
 			// Tooltips

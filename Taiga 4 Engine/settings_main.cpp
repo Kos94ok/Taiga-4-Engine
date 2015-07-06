@@ -20,6 +20,7 @@ void cSettings::setDefault()
 	this->enableNightShadows = 1;
 	this->enableBetterShadows = 1;
 	this->enableDynamicLight = 1;			// Only disabled if shaders are not supported
+	this->enableBetterLight = 1;
 	this->enableTextureSmoothing = 0;
 	this->enableCameraBlur = 1;
 	this->enableVertSync = 1;
@@ -30,7 +31,6 @@ void cSettings::setDefault()
 
 	// Any value
 	this->screenMode = 1;					// 0 - Window, 1 - Borderless, 2 - Fullscreen
-	this->pixelization = 5000.00f;			// 5000+ - Disabled
 	this->shadowBlur = 1;					// 1 - Disabled, 2+ - Shadow sample count	[Incompatible with better shadows]
 	this->antialiasingLevel = 0;			// 0 - Disabled, 1+ - AA level
 	this->sampleMod = 1.00f;				// 0.50 - Subsampling, 1.00 - Default, 2.00 - Supersampling
@@ -93,6 +93,7 @@ void cSettings::setDefault()
 	this->hkCamMove[2] = sf::Keyboard::A;
 	this->hkCamMove[3] = sf::Keyboard::D;
 	this->hkCamToHero = sf::Keyboard::Space;
+	this->hkChat = sf::Keyboard::Return;
 	this->hkConsole = sf::Keyboard::Tilde;
 	this->hkDebugMode = sf::Keyboard::F3;
 	this->hkDebugAdvanced = sf::Keyboard::F4;
@@ -116,7 +117,6 @@ void cSettings::setUltra()
 
 	// Any value
 	this->screenMode = 0;
-	this->pixelization = 5000.00f;
 	this->shadowBlur = 5;
 	this->antialiasingLevel = 16;
 	this->sampleMod = 2.00f;
@@ -148,9 +148,9 @@ void cSettings::load()
 		else if (key.name == "enableScreenShaders") { enableScreenShaders = math.stringToInt(key.value); }
 		else if (key.name == "enableNightShadows") { enableNightShadows = math.stringToInt(key.value); }
 		else if (key.name == "enableBetterShadows") { enableBetterShadows = math.stringToInt(key.value); }
+		else if (key.name == "enableBetterLight") { enableBetterLight = math.stringToInt(key.value); }
 		else if (key.name == "enableTextureSmoothing") { enableTextureSmoothing = math.stringToInt(key.value); }
 		else if (key.name == "enableCameraBlur") { enableCameraBlur = math.stringToInt(key.value); }
-		else if (key.name == "pixelization") { pixelization = (float)math.stringToInt(key.value); }
 		else if (key.name == "shadowBlur") { shadowBlur = math.stringToInt(key.value); }
 		else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
 		else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
@@ -188,6 +188,7 @@ void cSettings::load()
 		else if (key.name == "hkCamMoveLeft") { hkCamMove[2] = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkCamMoveRight") { hkCamMove[3] = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkCamToHero") { hkCamToHero = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkChat") { hkChat = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkConsole") { hkConsole = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkDebugMode") { hkDebugMode = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkDebugAdvanced") { hkDebugAdvanced = sf::Keyboard::Key(math.stringToInt(key.value)); }
@@ -217,9 +218,9 @@ void cSettings::save()
 		file << "enableScreenShaders = " << enableScreenShaders << "\n";
 		file << "enableNightShadows = " << enableNightShadows << "\n";
 		file << "enableBetterShadows = " << enableBetterShadows << "\n";
+		file << "enableBetterLight = " << enableBetterLight << "\n";
 		file << "enableTextureSmoothing = " << enableTextureSmoothing << "\n";
 		file << "enableCameraBlur = " << enableCameraBlur << "\n";
-		file << "pixelization = " << math.round(pixelization) << "\n";
 		file << "shadowBlur = " << shadowBlur << "\n";
 
 		file << endl << "[Gameplay]" << "\n";
@@ -259,6 +260,7 @@ void cSettings::save()
 		file << "hkCamMoveLeft = " << hkCamMove[2] << "\n";
 		file << "hkCamMoveRight = " << hkCamMove[3] << "\n";
 		file << "hkCamToHero = " << hkCamToHero << "\n";
+		file << "hkChat = " << hkChat << "\n";
 		file << "hkConsole = " << hkConsole << "\n";
 		file << "hkDebugMode = " << hkDebugMode << "\n";
 		file << "hkDebugAdvanced = " << hkDebugAdvanced << "\n";

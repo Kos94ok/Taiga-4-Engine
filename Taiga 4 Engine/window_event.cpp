@@ -9,6 +9,7 @@
 #include "client.h"
 #include "camera.h"
 #include "target.h"
+#include "chat.h"
 
 void cWindow::mainEvent()
 {
@@ -106,11 +107,14 @@ void cWindow::mainEvent()
 			// Global hotkeys
 			if (!console.displayed)
 			{
+				// Debug
 				if (eventPoll.key.code == settings.hkDebugMode) { core.debugMode = !core.debugMode; }
 				if (eventPoll.key.code == settings.hkDebugAdvanced) {
 					core.advancedDebug = !core.advancedDebug;
 					if (core.advancedDebug) { core.debugMode = true; }
 				}
+				// Chat
+				if (eventPoll.key.code == settings.hkChat) { chat.toggle(); }
 				// Escape
 				if (eventPoll.key.code == sf::Keyboard::Escape && ui.contextMenuTarget != CONTEXTMENU_NOTHING) { ui.clearContextMenu(); }
 				else if (eventPoll.key.code == sf::Keyboard::Escape && ui.invOpened) { ui.closeInventory(); }

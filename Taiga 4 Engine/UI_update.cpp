@@ -59,6 +59,7 @@ void cUI::updateInterfaceItemDescr()
 		ui.element[ui.getElementId(id)].textColor = sf::Color(255, 255, 255);
 		ui.element[ui.getElementId(id)].textSize = 24;
 		ui.element[ui.getElementId(id)].textFont = FONT_DESCR;
+		ui.element[ui.getElementId(id)].priority = 6;
 		for (int i = 0; i < LIMIT_DESCR; i++)
 		{
 			txt = item.description[i];
@@ -72,6 +73,7 @@ void cUI::updateInterfaceItemDescr()
 				ui.element[ui.getElementId(id)].textColor = sf::Color(255, 255, 255);
 				ui.element[ui.getElementId(id)].textSize = 16;
 				ui.element[ui.getElementId(id)].textFont = FONT_DESCR;
+				ui.element[ui.getElementId(id)].priority = 6;
 			}
 		}
 	}
@@ -99,7 +101,8 @@ void cUI::updateInterfaceItemList()
 	else if (inventoryCategory == CATEGORY_CONSUMABLES) { text = "Consumables:"; }
 	else if (inventoryCategory == CATEGORY_OTHER) { text = "Other:"; }
 	id = createText(sf::Vector2f(90.00f, 180.00f), text, "", REF_UI_INVENTORY);
-	element[getElementId(id)].addRef(REF_UI_INVENTORY_WEIGHT);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_WEIGHT);
+	ui.element[ui.getElementId(id)].priority = 6;
 
 	int itemsFound = 0;
 	// Inventory item list
@@ -406,7 +409,7 @@ void cUI::updateInterfaceEquipment()
 		for (int i = 0; i < itemsFound; i++)
 		{
 			id = ui.addElement(ui.element[ui.getElementId(baseId)], vec2(20.00f + 40.00f * floor(i / (LIMIT_BUTTONSPERCOLUMN)),
-							550.00f * resModY + 40.00f * (i % (LIMIT_BUTTONSPERCOLUMN)) ) );
+							250.00f * resModY + 40.00f * (i % (LIMIT_BUTTONSPERCOLUMN)) ) );
 
 			ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + i + 1);
 			ui.element[ui.getElementId(id)].button.action = "activeItem";
@@ -421,7 +424,7 @@ void cUI::updateInterfaceEquipment()
 void cUI::updateFull()
 {
 	access.lock();
-	removeElementsByRef(-1);
+	removeElementsByRef(-1, 0.50f);
 
 	int id;
 	if (!core.editorMode)

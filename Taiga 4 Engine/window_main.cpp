@@ -47,6 +47,7 @@ void windowMain()
 	window.texHandle.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);
 	window.texHandleShadow.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);
 	window.texHandleLight.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);
+	window.texHandleLightMult.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);
 	window.texHandleTop.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);
 	window.winHandle.setVerticalSyncEnabled(math.intToBool(settings.enableVertSync));
 	window.updateAspectRatio();

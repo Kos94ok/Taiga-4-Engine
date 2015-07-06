@@ -9,6 +9,7 @@ public:
 	sf::RenderTexture texHandle;
 	sf::RenderTexture texHandleShadow;
 	sf::RenderTexture texHandleLight;
+	sf::RenderTexture texHandleLightMult;
 	sf::RenderTexture texHandleTop;
 	sf::Transform matrixHandle;
 

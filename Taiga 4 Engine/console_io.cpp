@@ -60,7 +60,6 @@ void cConsole::output(std::string str, int subConsole)
 		}
 
 		// Flushing to console
-		outputQueue.push_back(waitingQueue);
 		history[SUBCMD_ALL].push_back(sf::String(waitingQueue, locale("russian")));
 		history[subConsole].push_back(sf::String(waitingQueue, locale("russian")));
 		waitingQueue.clear();

@@ -3,6 +3,7 @@
 
 #include "math.h"
 #include "util.h"
+#include "chat.h"
 #include "console.h"
 #include "window.h"
 #include "visual.h"
@@ -33,6 +34,7 @@
 cCore core;
 cValue value;
 cMath math;
+cChat chat;
 cConsole console;
 cWindow window;
 cVisual visual;

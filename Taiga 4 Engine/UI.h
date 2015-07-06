@@ -92,11 +92,22 @@ public:
 	bool hasText();
 	void setText(std::string txt);
 
+	int fadeType;
+	float fadeTimer;
+	float fadeTimerMax;
+	void setFadeTimer(float time, int type);
+	void resetFadeTimer();
+	float getFade();
+
 	cUIElement() {
 		isValid = false;
 		size = sf::Vector2f(20, 20);
 		ignoreOrigin = false;
 		priority = 5;
+
+		fadeType = FADE_STOP;
+		fadeTimer = 0.00f;
+		fadeTimerMax = 0.00f;
 
 		refCounter = 0;
 		for (int i = 0; i < LIMIT_REFERENCE; i++) { ref[i] = false; }
@@ -113,6 +124,13 @@ public:
 		texture = -1;
 		textureHovered = -1;
 	}
+};
+
+class cUIChat
+{
+public:
+	void open();
+	void close();
 };
 
 class cUI
@@ -136,8 +154,9 @@ public:
 	int addElement(std::string type, sf::Vector2f pos);
 	int addElement(cUIElement elem, sf::Vector2f pos);
 	int findByRef(int ref);
-	void removeElement(int id);
-	void removeElementsByRef(int ref);
+	void removeElement(int id, float time = 0.00f);
+	void removeElementsByRef(int ref, float time = 0.00f);
+	void setFadeTimeByRef(int ref, float time, int type);
 	int getElementId(int id);
 
 	// Update
@@ -159,6 +178,8 @@ public:
 	int inventoryCategory;
 	void openInventory();
 	void closeInventory();
+	// Chat
+	cUIChat chat;
 
 	// Util
 	void createLine(sf::Vector2f begin, sf::Vector2f end, int ref = -1, int priority = 5);
