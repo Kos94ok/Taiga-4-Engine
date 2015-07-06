@@ -2,26 +2,6 @@
 #pragma once
 #include "util.h"
 
-class cArg
-{
-public:
-	std::string data[4];
-
-	cArg(std::string a = "0", std::string b = "0", std::string c = "0", std::string d = "0") {
-		data[0] = a;
-		data[1] = b;
-		data[2] = c;
-		data[3] = d;
-	}
-
-	cArg(int i) {
-		cArg();
-	}
-
-	std::string operator [](int i) const { return data[i]; }
-	std::string & operator [](int i) { return data[i]; }
-};
-
 class cScript
 {
 public:

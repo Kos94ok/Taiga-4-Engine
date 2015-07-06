@@ -28,7 +28,7 @@ public:
 	cGame() {
 		ambientLight = 255.00f;
 		ambientLightMin = 0.00f;
-		ambientLightMax = 300.00f;
+		ambientLightMax = 255.00f;
 		timeOfDay = 12.00f;
 		unitCounter = 0;
 		unitGlobalCounter = 0;

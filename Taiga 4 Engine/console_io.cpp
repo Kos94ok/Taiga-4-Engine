@@ -44,7 +44,7 @@ void cConsole::output(std::string str, int subConsole)
 		backup = waitingQueue;
 		// Adding time string
 		if (waitingQueue.length() > 1) {
-			waitingQueue = util.getCurrentTimeString() + " - " + waitingQueue;
+			waitingQueue = util.getCurrentTimeString() + " " + waitingQueue;
 		}
 
 		// Flushing to file

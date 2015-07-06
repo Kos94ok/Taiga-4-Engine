@@ -131,6 +131,7 @@ class cUIChat
 public:
 	void open();
 	void close();
+	void update();
 };
 
 class cUI
@@ -171,6 +172,8 @@ public:
 	void updateInterfaceItemList();
 		// Clear and rebuild active item buttons
 	void updateInterfaceEquipment();
+		// Clear and rebuild chat window
+	void updateChatWindow();
 
 	// Inventory
 	bool invOpened;
@@ -179,7 +182,7 @@ public:
 	void openInventory();
 	void closeInventory();
 	// Chat
-	cUIChat chat;
+	cUIChat wndChat;
 
 	// Util
 	void createLine(sf::Vector2f begin, sf::Vector2f end, int ref = -1, int priority = 5);

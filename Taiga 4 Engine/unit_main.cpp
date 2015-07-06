@@ -5,6 +5,8 @@
 #include "UI.h"
 #include "server.h"
 #include "math.h"
+#include "chat.h"
+#include "client.h"
 
 bool cCharacter::animAvailable(int animType)
 {
@@ -95,6 +97,10 @@ void cUnit::addItem(string type, int count)
 		server.sendPacket(PLAYERS_REMOTE, data);
 		data.clear();
 	}
+	// Add to chat log
+	if (globalId == client.unit) {
+		chat.logMessage(LOGMSG_ITEM_ADD, cArg(type, to_string(count)));
+	}
 }
 
 void cUnit::removeItem(string type, int count)
@@ -107,6 +113,10 @@ void cUnit::removeItem(string type, int count)
 		data << MSG_UNIT_REMOVEITEM << globalId << type << count;
 		server.sendPacket(PLAYERS_REMOTE, data);
 		data.clear();
+	}
+	// Add to chat log
+	if (globalId == client.unit) {
+		chat.logMessage(LOGMSG_ITEM_REMOVE, cArg(type, to_string(count)));
 	}
 }
 

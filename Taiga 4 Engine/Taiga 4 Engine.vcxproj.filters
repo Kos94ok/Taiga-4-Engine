@@ -82,7 +82,7 @@
     <Filter Include="Файлы исходного кода\Chat">
       <UniqueIdentifier>{ae070c1d-e4c4-4ca8-98c0-b60b0b9f8f0f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы исходного кода\UI\Interfaces">
+    <Filter Include="Файлы исходного кода\UI\Windows">
       <UniqueIdentifier>{9d68e313-af4b-4a57-a605-f5d53a81770e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -295,10 +295,13 @@
       <Filter>Файлы исходного кода\Chat</Filter>
     </ClCompile>
     <ClCompile Include="UI_chat.cpp">
-      <Filter>Файлы исходного кода\UI\Interfaces</Filter>
+      <Filter>Файлы исходного кода\UI\Windows</Filter>
     </ClCompile>
     <ClCompile Include="UI_inventory.cpp">
-      <Filter>Файлы исходного кода\UI\Interfaces</Filter>
+      <Filter>Файлы исходного кода\UI\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="chat_log.cpp">
+      <Filter>Файлы исходного кода\Chat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

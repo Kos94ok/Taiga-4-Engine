@@ -114,7 +114,10 @@ void cWindow::mainEvent()
 					if (core.advancedDebug) { core.debugMode = true; }
 				}
 				// Chat
-				if (eventPoll.key.code == settings.hkChat) { chat.toggle(); }
+				if (eventPoll.key.code == settings.hkChat) {
+					if (!chat.inFocus) { chat.show(true); }
+					else { chat.flushInput(); chat.hide(); }
+				}
 				// Escape
 				if (eventPoll.key.code == sf::Keyboard::Escape && ui.contextMenuTarget != CONTEXTMENU_NOTHING) { ui.clearContextMenu(); }
 				else if (eventPoll.key.code == sf::Keyboard::Escape && ui.invOpened) { ui.closeInventory(); }

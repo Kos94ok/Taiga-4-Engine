@@ -4,15 +4,17 @@
 #include "settings.h"
 #include "ui.h"
 
-void cChat::show()
+void cChat::show(bool focus)
 {
-	ui.chat.open();
+	inFocus = focus;
 	displayed = true;
+	ui.wndChat.open();
+	if (!inFocus) { noFocusTimer = 2.00f; }
 }
 
 void cChat::hide()
 {
-	ui.chat.close();
+	ui.wndChat.close();
 	inFocus = false;
 	displayed = false;
 	clearInput();
@@ -20,7 +22,7 @@ void cChat::hide()
 
 void cChat::toggle()
 {
-	if (!displayed) { show(); displayedPage = CHATTAB_MAIN; }
+	if (!displayed) { show(false); displayedPage = CHATTAB_ALL; }
 	/*else if (displayedPage == SUBCMD_ALL && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) { displayedPage = SUBCMD_INFO; }
 	else if (displayedPage == SUBCMD_INFO && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) { displayedPage = SUBCMD_ECHO; }
 	else if (displayedPage == SUBCMD_ECHO && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) { displayedPage = SUBCMD_ERROR; }
@@ -76,4 +78,40 @@ void cChat::clear()
 		history[SUBCMD_DEBUG].push_back("[CONSOLE] Debug Messages Tab");
 		history[SUBCMD_DEBUG].push_back("============================");
 	}
+}
+
+cChat& operator << (cChat& target, std::string str)
+{
+	target.output(str);
+	return target;
+}
+
+cChat& operator << (cChat& target, int i)
+{
+	target.output(to_string(i));
+	return target;
+}
+
+cChat& operator << (cChat& target, float f)
+{
+	target.output(to_string(f));
+	return target;
+}
+
+cChatTab& operator << (cChatTab& target, std::string str)
+{
+	chat.output(str, target.type);
+	return target;
+}
+
+cChatTab& operator << (cChatTab& target, int i)
+{
+	chat.output(to_string(i), target.type);
+	return target;
+}
+
+cChatTab& operator << (cChatTab& target, float f)
+{
+	chat.output(to_string(f), target.type);
+	return target;
 }

@@ -9,6 +9,7 @@
 #include "client.h"
 #include "math.h"
 #include "path.h"
+#include "chat.h"
 
 void serverWorldOrders(int elapsedTime)
 {
@@ -104,6 +105,7 @@ void serverWorldOrders(int elapsedTime)
 				else if (game.unit[i].order[0].type == ORDER_PICKUP)
 				{
 					cUnit* target = &game.getUnit(game.unit[i].order[0].targetObject);
+					
 					if (core.serverMode || core.localServer) {
 						for (int y = 0; y < target->container.itemCounter; y++) {
 							game.unit[i].addItem(target->container.item[y].type, target->container.amount[y]);
@@ -488,6 +490,14 @@ void serverWorldUI(int elapsedTime)
 				camera.moveVector.y += 1.00f * timevar * camVecModOut;
 				if (camera.moveVector.y > 0.00f) { camera.moveVector.y = 0.00f; }
 			}
+		}
+	}
+	// Chat auto hide
+	if (chat.displayed && !chat.inFocus)
+	{
+		chat.noFocusTimer -= timevar;
+		if (chat.noFocusTimer <= 0.00f) {
+			chat.hide();
 		}
 	}
 }

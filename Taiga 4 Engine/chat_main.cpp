@@ -1,44 +1,19 @@
 
 #include "chat.h"
 #include "main.h"
+#include "UI.h"
 
-cChat& operator << (cChat& target, std::string str)
+cChat::cChat()
 {
-	target.output(str);
-	return target;
+	main.type = CHATTAB_ALL;
+	players.type = CHATTAB_PLAYERS;
+	log.type = CHATTAB_LOG;
+
+	inFocus = false;
+	displayed = false;
 }
 
-cChat& operator << (cChat& target, int i)
-{
-	target.output(to_string(i));
-	return target;
-}
-
-cChat& operator << (cChat& target, float f)
-{
-	target.output(to_string(f));
-	return target;
-}
-
-cChatTab& operator << (cChatTab& target, std::string str)
-{
-	chat.output(str, target.type);
-	return target;
-}
-
-cChatTab& operator << (cChatTab& target, int i)
-{
-	chat.output(to_string(i), target.type);
-	return target;
-}
-
-cChatTab& operator << (cChatTab& target, float f)
-{
-	chat.output(to_string(f), target.type);
-	return target;
-}
-
-void cChat::output(std::string str, int subConsole)
+void cChat::output(std::string str, int chatTab)
 {
 	string backup;
 
@@ -58,18 +33,23 @@ void cChat::output(std::string str, int subConsole)
 		file.close();
 
 		// Returning to backup if no timestamp is needed
-		/*if (!settings.enableConsoleTimestamps) {
+		if (chatTab == CHATTAB_LOG) {
 			waitingQueue = backup;
-		}*/
+		}
 
 		// Flushing to console
-		history[SUBCMD_ALL].push_back(sf::String(waitingQueue, locale("russian")));
-		history[subConsole].push_back(sf::String(waitingQueue, locale("russian")));
+		history[CHATTAB_ALL].push_back(sf::String(waitingQueue, locale("russian")));
+		history[chatTab].push_back(sf::String(waitingQueue, locale("russian")));
 		waitingQueue.clear();
-		if (scrollOffset != 0 && (int)history[SUBCMD_ALL].size() > getLineCount())
+		if (scrollOffset != 0 && (int)history[CHATTAB_ALL].size() > getLineCount())
 		{
 			scrollOffset += 1;
 		}
+
+		// Update UI
+		//if (displayed) { ui.wndChat.update(); }
+		//else { show(false); }
+		ui.updateChatWindow();
 	}
 }
 
@@ -101,10 +81,4 @@ void cChat::clearInput()
 {
 	input.clear();
 	inputDisplay.clear();
-}
-
-cChat::cChat()
-{
-	inFocus = false;
-	displayed = false;
 }

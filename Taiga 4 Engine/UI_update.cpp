@@ -8,6 +8,7 @@
 #include "math.h"
 #include "visual.h"
 #include "database.h"
+#include "chat.h"
 
 void cUI::updateInterface()
 {
@@ -130,6 +131,7 @@ void cUI::updateInterfaceItemList()
 				ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
 				ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
 				ui.element[ui.getElementId(id)].button.action = "invItem_list";
+				ui.element[ui.getElementId(id)].priority = 6;
 				// For editor mode default action is equip
 				if (core.editorMode) { ui.element[ui.getElementId(id)].button.action = "invItem_equip"; }
 
@@ -156,6 +158,7 @@ void cUI::updateInterfaceItemList()
 					ui.element[ui.getElementId(id)].texture = cont.item[i].icon.tex;
 					ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
 					ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
+					ui.element[ui.getElementId(id)].priority = 7;
 				}
 
 				itemsFound += 1;
@@ -200,6 +203,7 @@ void cUI::updateInterfaceItemList()
 		ui.element[ui.getElementId(id)].button.action = "invItem_craftRemove";
 		ui.element[ui.getElementId(id)].button.args[0] = to_string(cont.item[i].globalId);
 		ui.element[ui.getElementId(id)].hoverAlpha = 0;
+		ui.element[ui.getElementId(id)].priority = 6;
 		saveId = id;
 		// Icon
 		if (cont.item[i].icon != -1)
@@ -209,6 +213,7 @@ void cUI::updateInterfaceItemList()
 			ui.element[ui.getElementId(id)].texture = cont.item[i].icon.tex;
 			ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY);
 			ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_ITEM);
+			ui.element[ui.getElementId(id)].priority = 7;
 		}
 	}
 
@@ -419,6 +424,17 @@ void cUI::updateInterfaceEquipment()
 		}
 	}
 	access.unlock();
+}
+
+void cUI::updateChatWindow()
+{
+	if (chat.displayed) {
+		wndChat.update();
+	}
+	else {
+		chat.show(false);
+	}
+	if (!chat.inFocus) { chat.noFocusTimer = 1.50f; }
 }
 
 void cUI::updateFull()

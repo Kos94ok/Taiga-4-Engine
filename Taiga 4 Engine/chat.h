@@ -1,5 +1,6 @@
 
 #include "precomp.h"
+#include "util.h"
 
 class cChatTab
 {
@@ -15,6 +16,8 @@ public:
 	int displayedPage;
 	int scrollOffset;
 
+	float noFocusTimer;
+
 	cChatTab main;
 	cChatTab players;
 	cChatTab log;
@@ -24,7 +27,7 @@ public:
 	std::vector<sf::String> history[3];
 
 	cChat();
-	void show();
+	void show(bool focus);
 	void hide();
 	void toggle();
 	void scroll(int dir);
@@ -36,7 +39,9 @@ public:
 	void clearInput();
 	void clear();
 
-	void output(std::string str, int chatTab = CHATTAB_MAIN);
+	void logMessage(int message, cArg args);
+
+	void output(std::string str, int chatTab = CHATTAB_LOG);
 };
 
 extern cChat chat;

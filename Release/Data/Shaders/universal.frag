@@ -29,27 +29,32 @@ void main()
 	vec4 finalColor;
 	vec4 shadowColor = vec4(0, 0, 0, 0);
 
-	float lightLevel = max(texture(texLight, coord).r, max(texture(texLight, coord).g, texture(texLight, coord).b)) * 0.80;
+	vec4 lightColor = texture(texLight, coord);
+	float lightLevel = max(lightColor.r, max(lightColor.g, lightColor.b)) * 0.80;
 	
 	finalColor = vec4(texR, texG, texB, 1.00);
 
 	// Apply light
+	vec4 advLight;
 	if (enableBetterLight == 1.0)
 	{
-		finalColor = finalColor * 1.0 * (texture(texLight, coord) + texture(texLightMult, coord) * (ambientLight + 0.50));
+		advLight = texture(texLightMult, coord) * (ambientLight + 0.50);
+		finalColor = finalColor * 1.0 * (texture(texLight, coord) + advLight);
 	}
 	else
 	{
+		advLight = vec4(0.0, 0.0, 0.0, 0.0);
 		finalColor = finalColor * 1.0 * texture(texLight, coord);
 	}
+	lightLevel += max(advLight.r, max(advLight.g, advLight.b));
 	
 	// Better shadows
 	if (checkForShadow == 1.00)
 	{
 		vec4 texColor = texture(texMain, gl_TexCoord[0].xy);
 		vec4 shadColor = texture(texShadow, gl_TexCoord[0].xy);
-		if (abs(texColor.r - shadColor.r) > 0.02 || abs(texColor.g - shadColor.g) > 0.02 || abs(texColor.b - shadColor.b) > 0.02)
-		//if (shadColor.r <= 0.20 && shadColor.g <= 0.20 && shadColor.b <= 0.20)
+		//if (abs(texColor.r - shadColor.r) > 0.02 || abs(texColor.g - shadColor.g) > 0.02 || abs(texColor.b - shadColor.b) > 0.02)
+		if (shadColor.r <= 0.25 && shadColor.g <= 0.25 && shadColor.b <= 0.25)
 		{
 			float md = max(0.0, min(1.0, lightLevel - ambientLight));
 			float tr = min(1.0, shadowBrightness * 1.2 + md);
