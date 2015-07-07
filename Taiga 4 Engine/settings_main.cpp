@@ -65,6 +65,16 @@ void cSettings::setDefault()
 	wdNightChangeSpeed = 1.00f;
 	*/
 
+	// Chat settings
+	this->chatPosX = 0;
+	this->chatPosY = -50;
+	this->chatSizeX = 400;
+	this->chatSizeY = 250;
+	this->chatFontSize = 16;
+	this->chatLineSpacing = 1;
+	this->chatScrollSpeed = 1;
+	this->enableChatTimestamps = 0;
+
 	// Console settings
 	this->enableConsoleTimestamps = 0;
 	this->consoleScrollSpeed = 3;
@@ -97,6 +107,7 @@ void cSettings::setDefault()
 	this->hkConsole = sf::Keyboard::Tilde;
 	this->hkDebugMode = sf::Keyboard::F3;
 	this->hkDebugAdvanced = sf::Keyboard::F4;
+	this->hkScreenshot = sf::Keyboard::F12;
 
 	// Garbage
 	framerateLimit = 0;
@@ -159,6 +170,15 @@ void cSettings::load()
 		else if (key.name == "enableQuickCast") { enableQuickCast = math.stringToInt(key.value); }
 		else if (key.name == "enableMouseScroll") { enableMouseScroll = math.stringToInt(key.value); }
 		else if (key.name == "enableDynamicTooltips") { enableDynamicTooltips = math.stringToInt(key.value); }
+			// Chat
+		else if (key.name == "chatPosX") { chatPosX = math.stringToInt(key.value); }
+		else if (key.name == "chatPosY") { chatPosY = math.stringToInt(key.value); }
+		else if (key.name == "chatSizeX") { chatSizeX = math.stringToInt(key.value); }
+		else if (key.name == "chatSizeY") { chatSizeY = math.stringToInt(key.value); }
+		else if (key.name == "chatFontSize") { chatFontSize = math.stringToInt(key.value); }
+		else if (key.name == "chatLineSpacing") { chatLineSpacing = math.stringToInt(key.value); }
+		else if (key.name == "chatScrollSpeed") { chatScrollSpeed = math.stringToInt(key.value); }
+		else if (key.name == "enableChatTimestamps") { enableChatTimestamps = math.stringToInt(key.value); }
 			// Console
 		else if (key.name == "enableConsoleTimestamps") { enableConsoleTimestamps = math.stringToInt(key.value); }
 		else if (key.name == "consoleFontSize") { consoleFontSize = math.stringToInt(key.value); }
@@ -192,6 +212,7 @@ void cSettings::load()
 		else if (key.name == "hkConsole") { hkConsole = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkDebugMode") { hkDebugMode = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkDebugAdvanced") { hkDebugAdvanced = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkScreenshot") { hkScreenshot = sf::Keyboard::Key(math.stringToInt(key.value)); }
 	}
 
 	// Fix the dependancies
@@ -229,11 +250,21 @@ void cSettings::save()
 		file << "enableMouseScroll = " << enableMouseScroll << "\n";
 		file << "enableDynamicTooltips = " << enableDynamicTooltips << "\n";
 
+		file << endl << "[Chat]" << "\n";
+		file << "chatPosX = " << chatPosX << "\n";
+		file << "chatPosY = " << chatPosY << "\n";
+		file << "chatSizeX = " << chatSizeX << "\n";
+		file << "chatSizeY = " << chatSizeY << "\n";
+		file << "chatFontSize = " << chatFontSize << "\n";
+		file << "chatLineSpacing = " << chatLineSpacing << "\n";
+		file << "chatScrollSpeed = " << chatScrollSpeed << "\n";
+		file << "enableChatTimestamps = " << enableChatTimestamps << "\n";
+
 		file << endl << "[Console]" << "\n";
-		file << "enableConsoleTimestamps = " << enableConsoleTimestamps << "\n";
 		file << "consoleFontSize = " << consoleFontSize << "\n";
 		file << "consoleLineSpacing = " << consoleLineSpacing << "\n";
 		file << "consoleScrollSpeed = " << consoleScrollSpeed << "\n";
+		file << "enableConsoleTimestamps = " << enableConsoleTimestamps << "\n";
 
 		file << endl << "[Audio]" << "\n";
 		file << "enableCameraListener = " << enableCameraListener << "\n";
@@ -264,6 +295,7 @@ void cSettings::save()
 		file << "hkConsole = " << hkConsole << "\n";
 		file << "hkDebugMode = " << hkDebugMode << "\n";
 		file << "hkDebugAdvanced = " << hkDebugAdvanced << "\n";
+		file << "hkScreenshot = " << hkScreenshot << "\n";
 	}
 	else { console.error << "[ERROR] Can't save the settings file!" << "\n"; }
 	file.close();

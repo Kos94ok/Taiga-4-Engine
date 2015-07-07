@@ -34,14 +34,33 @@ void cChat::toggle()
 
 int cChat::getLineCount()
 {
-	return floor((camera.res.y - (float)settings.consoleFontSize * 1.50) / (settings.consoleFontSize + settings.consoleLineSpacing));
+	vec2f chatPos = chat.getPos();
+	vec2f chatSize = chat.getSize();
+
+	return floor((chatSize.y - (float)settings.chatFontSize * 1.50) / (settings.chatFontSize + settings.chatLineSpacing));
+}
+
+vec2f cChat::getPos()
+{
+	vec2f chatPos = vec2f(settings.chatPosX, settings.chatPosY);
+	// Negative position
+	if (chatPos.x < 0) { chatPos.x += camera.res.x - settings.chatSizeX; }
+	if (chatPos.y < 0) { chatPos.y += camera.res.y - settings.chatSizeY; }
+	return chatPos;
+}
+
+vec2f cChat::getSize()
+{
+	vec2f chatSize = vec2f(settings.chatSizeX, settings.chatSizeY);
+	return chatSize;
 }
 
 void cChat::scroll(int direction)
 {
-	scrollOffset += direction * settings.consoleScrollSpeed;
+	scrollOffset += direction * settings.chatScrollSpeed;
 	if (scrollOffset < 0) { scrollOffset = 0; }
 	if (scrollOffset > max(0, (int)history[displayedPage].size() - getLineCount())) { scrollOffset = max(0, (int)history[displayedPage].size() - getLineCount()); }
+	ui.updateChatWindow();
 }
 
 void cChat::resetScroll()

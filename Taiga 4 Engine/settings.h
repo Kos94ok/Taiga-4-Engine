@@ -82,6 +82,23 @@ public:
 	// Night transition speed
 	float wdNightChangeSpeed;
 
+	// Chat size X
+	int chatSizeX;
+	// Chat size Y
+	int chatSizeY;
+	// Chat position X
+	int chatPosX;
+	// Chat position Y
+	int chatPosY;
+	// Chat font size
+	int chatFontSize;
+	// Chat line spacing
+	int chatLineSpacing;
+	// Chat scroll speed
+	int chatScrollSpeed;
+	// Enable chat timestamps
+	int enableChatTimestamps;
+
 	// Enable console timestamps
 	int enableConsoleTimestamps;
 	// Console scroll speed
@@ -103,6 +120,7 @@ public:
 	sf::Keyboard::Key hkCamMove[4];
 	sf::Keyboard::Key hkCamToHero;
 	sf::Keyboard::Key hkChat;
+	sf::Keyboard::Key hkScreenshot;
 
 	void load();
 	void save();

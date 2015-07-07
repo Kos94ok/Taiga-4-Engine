@@ -69,24 +69,43 @@ void cUtil::checkLogFiles()
 	}
 }
 
-string cUtil::getCurrentTimeString()
+string cUtil::getCurrentTimeString(bool removeSemi, bool includeDay)
 {
 	time_t t = time(0);
 	struct tm time;
 	localtime_s(&time, &t);
 	string retVal = "";
+	if (includeDay)
+	{
+		// Day
+		if (time.tm_mday < 10) {
+			retVal += "0";
+		}
+		retVal += to_string(time.tm_mday);
+		if (!removeSemi) { retVal += ":"; }
+		// Month
+		if (time.tm_mon < 9) {
+			retVal += "0";
+		}
+		retVal += to_string(time.tm_mon + 1);
+		if (!removeSemi) { retVal += ":"; }
+		// Year
+		retVal += to_string(time.tm_year - 100);
+		// Divider
+		retVal += "_";
+	}
 	// Hours
 	if (time.tm_hour < 10) {
 		retVal += "0";
 	}
 	retVal += to_string(time.tm_hour);
-	retVal += ":";
+	if (!removeSemi) { retVal += ":"; }
 	// Minutes
 	if (time.tm_min < 10) {
 		retVal += "0";
 	}
 	retVal += to_string(time.tm_min);
-	retVal += ":";
+	if (!removeSemi) { retVal += ":"; }
 	// Seconds
 	if (time.tm_sec < 10) {
 		retVal += "0";
@@ -189,4 +208,8 @@ bool cUtil::intersects(vec2f pos, vec2f rectPos, vec2f rectSize)
 	if (pos.x > rectPos.x + rectSize.x) { return false; }
 	if (pos.y > rectPos.y + rectSize.y) { return false; }
 	return true;
+}
+
+void cUtil::makeScreenshot() {
+	screenshotRequested = true;
 }

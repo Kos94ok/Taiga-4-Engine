@@ -11,6 +11,7 @@
 #include "editor.h"
 #include "client.h"
 #include "target.h"
+#include "saveload.h"
 
 sf::RectangleShape brushRect;
 sf::CircleShape brushCircle;
@@ -69,6 +70,12 @@ void cWindow::mainPaint()
 	//buffer = sf::Sprite(window.texHandleLight.getTexture());
 	//window.texHandleShadow.display();
 	//buffer = sf::Sprite(window.texHandleShadow.getTexture());
+
+	// Capturing screenshot
+	if (util.screenshotRequested) {
+		save.saveScreenshot(window.texHandleTop.getTexture().copyToImage());
+	}
+
 	window.winHandle.draw(buffer);
 	window.winHandle.display();
 	core.thread_windowTicks += 1;

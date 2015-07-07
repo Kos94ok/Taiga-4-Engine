@@ -53,6 +53,8 @@ public:
 	std::vector<cUnitEntry> getListFromFile(std::string filename);
 	void flushListToFile(cBlueprintHeader header, std::vector<cUnitEntry> list, std::string filename);
 
+	void saveScreenshot(sf::Image img);
+
 	cSave() {
 		worldName = "world";
 		savefileName = "temp";

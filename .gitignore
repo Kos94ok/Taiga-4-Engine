@@ -11,6 +11,8 @@
 Release/Savefiles/*
 # Logs
 Release/Logs/*
+# Screenshots
+Release/Screenshots/*
 
 # Build results
 [Dd]ebug/

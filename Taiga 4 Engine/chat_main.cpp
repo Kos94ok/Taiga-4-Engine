@@ -2,6 +2,7 @@
 #include "chat.h"
 #include "main.h"
 #include "UI.h"
+#include "settings.h"
 
 cChat::cChat()
 {
@@ -33,7 +34,7 @@ void cChat::output(std::string str, int chatTab)
 		file.close();
 
 		// Returning to backup if no timestamp is needed
-		if (chatTab == CHATTAB_LOG) {
+		if (!settings.enableChatTimestamps) {
 			waitingQueue = backup;
 		}
 

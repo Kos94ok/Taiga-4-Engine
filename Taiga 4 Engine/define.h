@@ -248,7 +248,7 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 #define SUBCMD_ERROR					3
 #define SUBCMD_DEBUG					4
 
-#define CHATTAB_ALL					0
+#define CHATTAB_ALL						0
 #define CHATTAB_PLAYERS					1
 #define CHATTAB_LOG						2
 
@@ -274,3 +274,4 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 
 #define LOGMSG_ITEM_ADD					0
 #define LOGMSG_ITEM_REMOVE				1
+#define LOGMSG_SCREENSHOT				2

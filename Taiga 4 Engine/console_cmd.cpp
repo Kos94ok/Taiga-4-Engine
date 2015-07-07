@@ -9,6 +9,7 @@
 #include "editor.h"
 #include "database.h"
 #include "world.h"
+#include "settings.h"
 
 // Help command
 void cmd_help(string args[])
@@ -377,6 +378,18 @@ void cmd_database_reload(string args[])
 			}
 		}
 	}
+}
+
+// Settings.load
+void cmd_settings_load(std::string args[])
+{
+	settings.load();
+}
+
+// Settings.save
+void cmd_settings_save(std::string args[])
+{
+	settings.save();
 }
 
 // Exit command

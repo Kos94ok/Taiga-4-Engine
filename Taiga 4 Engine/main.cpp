@@ -158,6 +158,7 @@ int main(int argc, char* argv[])
 	core.thread_shutdown[1] = true;		threadServerWorld.join();
 	core.thread_shutdown[0] = true;		threadWindow.join();
 
+	chat << endl << endl;
 	console << "[MAIN] Cleaning up" << endl << endl << endl;
 	// Cleaning up
 	return 0;

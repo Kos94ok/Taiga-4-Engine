@@ -36,6 +36,8 @@ public:
 	void removeLastFromInput();
 	void flushInput();
 	int getLineCount();
+	sf::Vector2f getPos();
+	sf::Vector2f getSize();
 	void clearInput();
 	void clear();
 

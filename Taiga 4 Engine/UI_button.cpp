@@ -8,6 +8,7 @@
 #include "world.h"
 #include "editor.h"
 #include "target.h"
+#include "chat.h"
 
 void cUIButton::callbackLeft(int parent)
 {
@@ -167,6 +168,14 @@ void cUIButton::callbackLeft(int parent)
 		craft.checkActiveRecipe();
 		ui.updateInterfaceEquipment();
 		ui.updateInterfaceItemList();
+	}
+	else if (action == "chat_scrollUp")
+	{
+		chat.scroll(1);
+	}
+	else if (action == "chat_scrollDown")
+	{
+		chat.scroll(-1);
 	}
 	else if (action == "start_taigaMaxi")
 	{

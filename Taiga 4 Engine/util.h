@@ -39,13 +39,16 @@ public:
 	int getInventorySortingType();
 	void checkLog(std::string filename);
 	void checkLogFiles();
-	std::string getCurrentTimeString();
+	std::string getCurrentTimeString(bool removeSemi = false, bool includeDay = false);
 	
 	sf::Color convertUnitHighlightColor(int code);
 	sf::Color parseOldschoolColorCode(std::string code);
 
 	std::string buildRefToType(int ref);
 	int typeToBuildRef(std::string str);
+
+	bool screenshotRequested;
+	void makeScreenshot();
 	
 	bool intersects(sf::Vector2f pos, sf::Vector2f rectPos, sf::Vector2f rectSize);
 };

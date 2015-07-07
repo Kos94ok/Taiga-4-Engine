@@ -118,6 +118,10 @@ void cWindow::mainEvent()
 					if (!chat.inFocus) { chat.show(true); }
 					else { chat.flushInput(); chat.hide(); }
 				}
+				// Screenshot
+				if (eventPoll.key.code == settings.hkScreenshot) {
+					util.makeScreenshot();
+				}
 				// Escape
 				if (eventPoll.key.code == sf::Keyboard::Escape && ui.contextMenuTarget != CONTEXTMENU_NOTHING) { ui.clearContextMenu(); }
 				else if (eventPoll.key.code == sf::Keyboard::Escape && ui.invOpened) { ui.closeInventory(); }

@@ -61,7 +61,13 @@ void main()
 			shadowColor = vec4(tr, tr, tr, 1.0);
 			finalColor *= shadowColor;
 		}
-	}	
+	}
+
+	float val = max(finalColor.r, max(finalColor.g, finalColor.b));
+	float valB = max(texture(texLight, coord).r, max(texture(texLight, coord).g, texture(texLight, coord).b));
+	finalColor.r += (val - finalColor.r) * (1.0 - valB);
+	finalColor.g += (val - finalColor.g) * (1.0 - valB);
+	finalColor.b += (val - finalColor.b) * (1.0 - valB);
 
 	// Flush changes	
 	gl_FragColor = finalColor;
