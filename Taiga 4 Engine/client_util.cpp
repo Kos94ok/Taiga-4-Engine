@@ -43,6 +43,9 @@ void cClient::connect(string ip, short port)
 
 	// Sending client info
 	sf::Packet data;
+	data << MSG_PLAYER_NAME << client.playerName;
+	client.sendPacket(data);
+	data.clear();
 	data << MSG_INFO_CAMRES << camera.res.x << camera.res.y;
 	client.sendPacket(data);
 	data.clear();

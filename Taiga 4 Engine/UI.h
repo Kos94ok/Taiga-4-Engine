@@ -78,6 +78,8 @@ public:
 	sf::Color textColorHover;
 	std::string text;
 	sf::String textDisplay;
+	float textOutlineThickness;
+	sf::Color textOutlineColor;
 	int textFont;
 	int alpha;
 	int hoverAlpha;
@@ -118,6 +120,7 @@ public:
 		textColorHover = textColor;
 		textFont = FONT_MAIN;
 		textOffset = sf::Vector2f(0.00f, 0.00f);
+		textOutlineThickness = 0.00f;
 
 		isHovered = false;
 		hoverAlpha = 0;
@@ -132,6 +135,7 @@ public:
 	void open();
 	void close();
 	void update();
+	void updateInput();
 };
 
 class cUI

@@ -10,6 +10,7 @@ public:
 	cPacketQueue dataQueue[LIMIT_SERVER_PACKETQUEUE];
 
 	int unit;
+	std::string playerName;
 	
 	int packet;
 	bool connected;
@@ -41,6 +42,7 @@ public:
 		connected = false;
 		socket.setBlocking(false);
 		pingTimer = 0;
+		playerName = "Player";
 
 		dataQueueCounter = 0;
 	}

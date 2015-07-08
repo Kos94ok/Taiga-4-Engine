@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "window.h"
 #include "math.h"
+#include "client.h"
 
 void cSettings::setDefault()
 {
@@ -171,6 +172,7 @@ void cSettings::load()
 		else if (key.name == "enableMouseScroll") { enableMouseScroll = math.stringToInt(key.value); }
 		else if (key.name == "enableDynamicTooltips") { enableDynamicTooltips = math.stringToInt(key.value); }
 			// Chat
+		else if (key.name == "playerName") { client.playerName = key.value; }
 		else if (key.name == "chatPosX") { chatPosX = math.stringToInt(key.value); }
 		else if (key.name == "chatPosY") { chatPosY = math.stringToInt(key.value); }
 		else if (key.name == "chatSizeX") { chatSizeX = math.stringToInt(key.value); }

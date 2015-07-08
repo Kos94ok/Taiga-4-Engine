@@ -2,6 +2,7 @@
 #include "chat.h"
 #include "main.h"
 #include "UI.h"
+#include "client.h"
 #include "settings.h"
 
 cChat::cChat()
@@ -38,9 +39,12 @@ void cChat::output(std::string str, int chatTab)
 			waitingQueue = backup;
 		}
 
-		// Flushing to console
+		// Flushing
+		int timer = timeGetTime();
 		history[CHATTAB_ALL].push_back(sf::String(waitingQueue, locale("russian")));
+		historyTimer[CHATTAB_ALL].push_back(timer);
 		history[chatTab].push_back(sf::String(waitingQueue, locale("russian")));
+		historyTimer[chatTab].push_back(timer);
 		waitingQueue.clear();
 		if (scrollOffset != 0 && (int)history[CHATTAB_ALL].size() > getLineCount())
 		{
@@ -57,21 +61,39 @@ void cChat::output(std::string str, int chatTab)
 void cChat::addToInput(sf::String str)
 {
 	input.append(str.toAnsiString(locale("russian")));
-	inputDisplay += str;
+	updateInputDisplay();
 }
 
 void cChat::removeLastFromInput()
 {
 	if (input.length() == 0) { return; }
 	input.erase(input.length() - 1);
-	inputDisplay.erase(input.length());
+	updateInputDisplay();
 }
 
 void cChat::flushInput()
 {
-	console.scrollOffset = 0;
-	console.echo << "> " << input << endl;
-	if (input.length() == 0) { return; }
+	if (input.length() == 0)
+	{
+		//noFocusTimer = 2.00f;
+		chat.hide();
+		//ui.wndChat.update();
+	}
+	else
+	{
+		chat.scrollOffset = 0;
+		//chat.players << "> " << input << endl;
+
+		sf::Packet data;
+		data << MSG_PLAYER_CHAT << input;
+		client.sendPacket(data);
+		data.clear();
+
+		noFocusTimer = value.chatNoFocusTimer;
+		inFocus = false;
+		tempDisplay = true;
+		ui.wndChat.open();
+	}
 
 	//parseCommand(input);
 
@@ -82,4 +104,10 @@ void cChat::clearInput()
 {
 	input.clear();
 	inputDisplay.clear();
+	updateInputDisplay();
+}
+
+void cChat::updateInputDisplay()
+{
+	inputDisplay = "[" + client.playerName + "]: " + input + "_";
 }

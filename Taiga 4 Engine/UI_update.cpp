@@ -432,9 +432,9 @@ void cUI::updateChatWindow()
 		wndChat.update();
 	}
 	else {
-		chat.show(false);
+		chat.show(chat.inFocus);
 	}
-	if (!chat.inFocus) { chat.noFocusTimer = 1.50f; }
+	//if (!chat.inFocus) { chat.noFocusTimer = 1.50f; }
 }
 
 void cUI::updateFull()

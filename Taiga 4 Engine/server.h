@@ -8,6 +8,7 @@ class cServerPlayer
 {
 public:
 	int unit;
+	std::string name;
 	sf::Vector2f camPos;
 	sf::Vector2i camRes;
 	sf::Vector2f mousePos;
@@ -38,6 +39,7 @@ public:
 		packet = 0;
 		connected = false;
 		socket.setBlocking(false);
+		name = "Unknown Player";
 	}
 };
 

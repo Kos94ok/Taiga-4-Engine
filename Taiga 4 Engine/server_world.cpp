@@ -319,31 +319,34 @@ void serverWorldUI(int elapsedTime)
 		if (ui.element[i].isValid)
 		{
 			isHovered = false;
-			// Regular buttons
-			if (ui.element[i].hasRef(REF_UI_INVENTORY_BUTTON) && sf::Keyboard::isKeyPressed(settings.hkInventory))
+			if (!chat.inFocus && !console.displayed)
 			{
-				isHovered = true;
-			}
-			// Active buttons
-			for (int y = 1; y < LIMIT_ACTIVEBUTTONS; y++)
-			{
-				if (ui.element[i].hasRef(REF_UI_ACTIVEITEM + y) && sf::Keyboard::isKeyPressed(settings.hkActiveItem[y]))
+				// Regular buttons
+				if (ui.element[i].hasRef(REF_UI_INVENTORY_BUTTON) && sf::Keyboard::isKeyPressed(settings.hkInventory))
 				{
 					isHovered = true;
 				}
-			}
-			if (!isHovered)
-			{
-				if (ui.element[i].ignoreOrigin)
+				// Active buttons
+				for (int y = 1; y < LIMIT_ACTIVEBUTTONS; y++)
 				{
-					isHovered = math.isPointInRect(mousePos.x, mousePos.y, ui.element[i].pos.x,
-						ui.element[i].pos.y, ui.element[i].size.x, ui.element[i].size.y);
+					if (ui.element[i].hasRef(REF_UI_ACTIVEITEM + y) && sf::Keyboard::isKeyPressed(settings.hkActiveItem[y]))
+					{
+						isHovered = true;
+					}
 				}
-				else
+				if (!isHovered)
 				{
-					isHovered = math.isPointInRect(mousePos.x, mousePos.y, ui.element[i].pos.x - ui.element[i].size.x / 2,
-						ui.element[i].pos.y - ui.element[i].size.y / 2, ui.element[i].size.x, ui.element[i].size.y);
-				}	
+					if (ui.element[i].ignoreOrigin)
+					{
+						isHovered = math.isPointInRect(mousePos.x, mousePos.y, ui.element[i].pos.x,
+							ui.element[i].pos.y, ui.element[i].size.x, ui.element[i].size.y);
+					}
+					else
+					{
+						isHovered = math.isPointInRect(mousePos.x, mousePos.y, ui.element[i].pos.x - ui.element[i].size.x / 2,
+							ui.element[i].pos.y - ui.element[i].size.y / 2, ui.element[i].size.x, ui.element[i].size.y);
+					}
+				}
 			}
 
 			// Fadeout timers
@@ -437,7 +440,7 @@ void serverWorldUI(int elapsedTime)
 	float camVecModIn = 2.00f;
 	float camVecModOut = 5.00f;
 	//camera.moveVector = vec2(0.00f, 0.00f);
-	if (GetForegroundWindow() == window.winHandle.getSystemHandle() && !console.displayed)
+	if (GetForegroundWindow() == window.winHandle.getSystemHandle() && !console.displayed && !chat.inFocus)
 	{
 		bool isMoving = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(settings.hkCamMove[2])

@@ -62,6 +62,14 @@ bool cServer::msgRequest(int i, sf::Packet input)
 	}
 	// =======================================================
 	// =======================================================
+	// Client name
+	if (msg == MSG_PLAYER_NAME)
+	{
+		input >> argStr;
+		player[i].name = argStr;
+	}
+	// =======================================================
+	// =======================================================
 	// Client screen resolution
 	if (msg == MSG_INFO_CAMRES)
 	{
@@ -77,6 +85,20 @@ bool cServer::msgRequest(int i, sf::Packet input)
 	{
 		input >> argf[0] >> argf[1];
 		player[i].mousePos = vec2f(argf[0], argf[1]);
+
+		return true;
+	}
+	// =======================================================
+	// =======================================================
+	// Chat message
+	if (msg == MSG_PLAYER_CHAT)
+	{
+		input >> argStr;
+		data.clear();
+		data << MSG_PLAYER_CHAT << player[i].name + ": " + argStr;
+		sendPacket(PLAYERS_ALL, data);
+		data.clear();
+		console << "[CHAT] " << player[i].name + ": " + argStr << endl;
 
 		return true;
 	}

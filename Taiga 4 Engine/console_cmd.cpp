@@ -25,6 +25,16 @@ void cmd_help(string args[])
 	}
 }
 
+// Say
+void cmd_say(string args[])
+{
+	sf::Packet data;
+	data << MSG_PLAYER_CHAT << "Server: " + args[0];
+	server.sendPacket(PLAYERS_ALL, data);
+	data.clear();
+	console << "[CHAT] Server: " << args[0] << endl;
+}
+
 // Echo
 void cmd_echo(string args[])
 {

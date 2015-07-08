@@ -5,6 +5,7 @@
 #include "world.h"
 #include "camera.h"
 #include "UI.h"
+#include "chat.h"
 
 bool cClient::msgBig(sf::Packet input)
 {
@@ -395,6 +396,17 @@ bool cClient::msgGame(sf::Packet input)
 	{
 		input >> argf[0] >> argf[1];
 		camera.moveto(vec2f(argf[0], argf[1]));
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Chat message
+	if (msg == MSG_PLAYER_CHAT)
+	{
+		input >> argStr;
+		chat.players << argStr << endl;
+		if (!core.localServer) { console << "[CHAT] " << argStr << endl; }
+
 		return true;
 	}
 	return false;

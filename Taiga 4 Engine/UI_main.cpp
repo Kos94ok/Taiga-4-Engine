@@ -97,4 +97,3 @@ int cUI::findByRef(int ref)
 	}
 	return -1;
 }
-

@@ -98,25 +98,31 @@ void cWindow::mainEvent()
 		if (eventPoll.type == sf::Event::KeyReleased)
 		{
 			// Console
-			if (eventPoll.key.code == settings.hkConsole) { console.toggle(); }
-			else if (console.displayed)
+			if (!chat.inFocus)
 			{
-				if (eventPoll.key.code == sf::Keyboard::Up) { console.scrollHistory(-1); }
-				else if (eventPoll.key.code == sf::Keyboard::Down) { console.scrollHistory(1); }
+				if (eventPoll.key.code == settings.hkConsole) { console.toggle(); }
+				else if (console.displayed)
+				{
+					if (eventPoll.key.code == sf::Keyboard::Up) { console.scrollHistory(-1); }
+					else if (eventPoll.key.code == sf::Keyboard::Down) { console.scrollHistory(1); }
+				}
+			}
+			// Chat
+			if (!console.displayed)
+			{
+				if (eventPoll.key.code == settings.hkChat) {
+					if (!chat.inFocus) { chat.show(true); }
+					else { chat.flushInput(); }
+				}
 			}
 			// Global hotkeys
-			if (!console.displayed)
+			if (!console.displayed && !chat.inFocus)
 			{
 				// Debug
 				if (eventPoll.key.code == settings.hkDebugMode) { core.debugMode = !core.debugMode; }
 				if (eventPoll.key.code == settings.hkDebugAdvanced) {
 					core.advancedDebug = !core.advancedDebug;
 					if (core.advancedDebug) { core.debugMode = true; }
-				}
-				// Chat
-				if (eventPoll.key.code == settings.hkChat) {
-					if (!chat.inFocus) { chat.show(true); }
-					else { chat.flushInput(); chat.hide(); }
 				}
 				// Screenshot
 				if (eventPoll.key.code == settings.hkScreenshot) {
@@ -158,6 +164,7 @@ void cWindow::mainEvent()
 		// Text input
 		else if (eventPoll.type == sf::Event::TextEntered)
 		{
+			// Console
 			if (console.displayed)
 			{
 				// Enter
@@ -168,6 +175,23 @@ void cWindow::mainEvent()
 				else {
 					sf::String convert(eventPoll.text.unicode);
 					console.addToInput(convert);
+				}
+			}
+			// Chat
+			if (chat.inFocus)
+			{
+				// Enter
+				if (eventPoll.text.unicode == 13) {  }
+				// Backspace
+				else if (eventPoll.text.unicode == 8) {
+					chat.removeLastFromInput();
+					ui.wndChat.updateInput();
+				}
+				// Other
+				else {
+					sf::String convert(eventPoll.text.unicode);
+					chat.addToInput(convert);
+					ui.wndChat.updateInput();
 				}
 			}
 		}

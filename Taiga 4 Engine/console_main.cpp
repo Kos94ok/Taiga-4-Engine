@@ -37,9 +37,14 @@ cConsole::cConsole()
 	console.cmdFunc[cmdID] = cmd_help;
 	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^say *");
+	console.cmdWrong[cmdID] = "say";
+	console.cmdSyntax[cmdID] = "\"say [str]\" - Say the [string] to chat";
+	console.cmdFunc[cmdID] = cmd_say;
+	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^echo *");
 	console.cmdWrong[cmdID] = "echo";
-	console.cmdSyntax[cmdID] = "\"echo [str]\" - Echo the [string]";
+	console.cmdSyntax[cmdID] = "\"echo [str]\" - Echo the [string] to console";
 	console.cmdFunc[cmdID] = cmd_echo;
 	console.cmdServerOnly[cmdID] = false;
 	cmdID += 1;

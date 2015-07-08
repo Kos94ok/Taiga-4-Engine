@@ -8,8 +8,10 @@ void cChat::show(bool focus)
 {
 	inFocus = focus;
 	displayed = true;
+	if (focus) { tempDisplay = false; }
+	clearInput();
 	ui.wndChat.open();
-	if (!inFocus) { noFocusTimer = 2.00f; }
+	if (!focus) { noFocusTimer = value.chatNoFocusTimer; }
 }
 
 void cChat::hide()
@@ -17,6 +19,7 @@ void cChat::hide()
 	ui.wndChat.close();
 	inFocus = false;
 	displayed = false;
+	tempDisplay = false;
 	clearInput();
 }
 
@@ -37,7 +40,7 @@ int cChat::getLineCount()
 	vec2f chatPos = chat.getPos();
 	vec2f chatSize = chat.getSize();
 
-	return floor((chatSize.y - (float)settings.chatFontSize * 1.50) / (settings.chatFontSize + settings.chatLineSpacing));
+	return floor((chatSize.y - (float)settings.chatFontSize * 1.75) / (settings.chatFontSize + settings.chatLineSpacing));
 }
 
 vec2f cChat::getPos()
@@ -72,31 +75,6 @@ void cChat::clear()
 {
 	history[console.displayedPage].clear();
 	resetScroll();
-	if (displayedPage == SUBCMD_ALL)
-	{
-		history[SUBCMD_ALL].push_back("[CONSOLE] All Messages Tab");
-		history[SUBCMD_ALL].push_back("============================");
-	}
-	else if (displayedPage == SUBCMD_INFO)
-	{
-		history[SUBCMD_INFO].push_back("[CONSOLE] Info Messages Tab");
-		history[SUBCMD_INFO].push_back("============================");
-	}
-	else if (displayedPage == SUBCMD_ECHO)
-	{
-		history[SUBCMD_ECHO].push_back("[CONSOLE] Echo Messages Tab");
-		history[SUBCMD_ECHO].push_back("============================");
-	}
-	else if (displayedPage == SUBCMD_ERROR)
-	{
-		history[SUBCMD_ERROR].push_back("[CONSOLE] Error Messages Tab");
-		history[SUBCMD_ERROR].push_back("============================");
-	}
-	else if (displayedPage == SUBCMD_DEBUG)
-	{
-		history[SUBCMD_DEBUG].push_back("[CONSOLE] Debug Messages Tab");
-		history[SUBCMD_DEBUG].push_back("============================");
-	}
 }
 
 cChat& operator << (cChat& target, std::string str)

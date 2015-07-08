@@ -593,15 +593,37 @@ void cWindow::paintUI()
 					if (ui.element[i].textFont == FONT_DESCR) { brushText.setFont(visual.fontDescr); }
 					else { brushText.setFont(visual.fontMain); }
 					brushText.setCharacterSize(ui.element[i].textSize);
+					brushText.setString(ui.element[i].textDisplay);
+					floatRect = brushText.getGlobalBounds();
+					brushText.setOrigin(0.00f, 0.00f);
+					if (!ui.element[i].ignoreOrigin) { brushText.setOrigin(math.round(floatRect.width / 2.00f), math.round(floatRect.height / 2.00f) + 4); }
+					// Shadow/outline
+					float shadowThickness = ui.element[i].textOutlineThickness;
+					if (shadowThickness != 0.00f)
+					{
+						brushText.setColor(sf::Color(
+							ui.element[i].textOutlineColor.r,
+							ui.element[i].textOutlineColor.g,
+							ui.element[i].textOutlineColor.b,
+							ui.element[i].textOutlineColor.a * fade));
+						brushText.setPosition(ui.element[i].pos + ui.element[i].textOffset + vec2f(shadowThickness, -shadowThickness));
+						window.texHandleTop.draw(brushText, miniMatrix);
+
+						brushText.setPosition(ui.element[i].pos + ui.element[i].textOffset + vec2f(shadowThickness, shadowThickness));
+						window.texHandleTop.draw(brushText, miniMatrix);
+
+						brushText.setPosition(ui.element[i].pos + ui.element[i].textOffset + vec2f(-shadowThickness, -shadowThickness));
+						window.texHandleTop.draw(brushText, miniMatrix);
+
+						brushText.setPosition(ui.element[i].pos + ui.element[i].textOffset + vec2f(-shadowThickness, shadowThickness));
+						window.texHandleTop.draw(brushText, miniMatrix);
+					}
+					// Actual object
 					brushText.setColor(sf::Color(
 						ui.element[i].textColor.r * (1.00f - textAlpha) + ui.element[i].textColorHover.r * textAlpha,
 						ui.element[i].textColor.g * (1.00f - textAlpha) + ui.element[i].textColorHover.g * textAlpha,
 						ui.element[i].textColor.b * (1.00f - textAlpha) + ui.element[i].textColorHover.b * textAlpha,
 						255.00f * fade));
-					brushText.setString(ui.element[i].textDisplay);
-					floatRect = brushText.getGlobalBounds();
-					brushText.setOrigin(0.00f, 0.00f);
-					if (!ui.element[i].ignoreOrigin) { brushText.setOrigin(math.round(floatRect.width / 2.00f), math.round(floatRect.height / 2.00f) + 4); }
 					brushText.setPosition(ui.element[i].pos + ui.element[i].textOffset);
 					window.texHandleTop.draw(brushText, miniMatrix);
 				}

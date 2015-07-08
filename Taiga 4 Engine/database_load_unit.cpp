@@ -82,6 +82,7 @@ void cDatabase::loadUnits()
 	unit[i].health = 500.00f;
 	unit[i].maxHealth = 500.00f;
 	unit[i].resource = 275.00f;
+	unit[i].rotateSpeed = 5760.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_a_idle.png");
 	unit[i].animData[ANIM_DEATH].side.frameCount = 4;
 	unit[i].animData[ANIM_DEATH].side.frameDelay = 0.75f;
@@ -90,7 +91,9 @@ void cDatabase::loadUnits()
 	unit[i].collisionDistance = 10.00f;
 	unit[i].selectionOffset.x = -1.00f;
 	unit[i].selectionOffset.y = -3.00f;
-	unit[i].addItem("material_wood");
+	unit[i].drop.add("material_wood", 1, 1.00f);
+	unit[i].drop.add("material_wood", 1, 0.75f);
+	unit[i].drop.add("material_wood", 1, 0.50f);
 	unit[i].addRef(REF_UNIT_TREE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;

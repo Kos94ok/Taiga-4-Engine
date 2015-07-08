@@ -27,4 +27,5 @@ void cChat::logMessage(int msg, cArg args)
 		log << "Screenshot saved as " << name << endl;
 	}
 	ui.updateChatWindow();
+	chat.noFocusTimer = value.chatNoFocusTimer;
 }

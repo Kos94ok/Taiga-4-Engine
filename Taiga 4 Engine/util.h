@@ -64,6 +64,9 @@ public:
 	const float maxBuildDist = 200.00f;
 
 	const float enemyDamage = 10.00f;
+
+	const float chatNoFocusTimer = 7.50f;
+	const float chatRecentMessageTimer = 7.00f;
 };
 
 extern cValue value;

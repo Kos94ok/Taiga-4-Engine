@@ -13,6 +13,7 @@ class cChat
 public:
 	bool inFocus;
 	bool displayed;
+	bool tempDisplay;
 	int displayedPage;
 	int scrollOffset;
 
@@ -25,6 +26,7 @@ public:
 	sf::String inputDisplay;
 	std::string waitingQueue;
 	std::vector<sf::String> history[3];
+	std::vector<int> historyTimer[3];
 
 	cChat();
 	void show(bool focus);
@@ -35,6 +37,7 @@ public:
 	void addToInput(sf::String str);
 	void removeLastFromInput();
 	void flushInput();
+	void updateInputDisplay();
 	int getLineCount();
 	sf::Vector2f getPos();
 	sf::Vector2f getSize();

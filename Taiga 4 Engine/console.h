@@ -65,6 +65,7 @@ cSubConsole& operator << (cSubConsole& cmd, int i);
 cSubConsole& operator << (cSubConsole& cmd, float f);
 
 void cmd_help(std::string args[]);
+void cmd_say(std::string args[]);
 void cmd_echo(std::string args[]);
 void cmd_clear(std::string args[]);
 void cmd_macro(std::string args[]);
