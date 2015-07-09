@@ -596,6 +596,7 @@ void cWindow::paintUI()
 					brushText.setString(ui.element[i].textDisplay);
 					floatRect = brushText.getGlobalBounds();
 					brushText.setOrigin(0.00f, 0.00f);
+					//brushText.setStyle(sf::Text::Bold);
 					if (!ui.element[i].ignoreOrigin) { brushText.setOrigin(math.round(floatRect.width / 2.00f), math.round(floatRect.height / 2.00f) + 4); }
 					// Shadow/outline
 					float shadowThickness = ui.element[i].textOutlineThickness;

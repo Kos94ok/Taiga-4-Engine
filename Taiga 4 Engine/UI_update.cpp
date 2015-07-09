@@ -430,6 +430,7 @@ void cUI::updateChatWindow()
 {
 	if (chat.displayed) {
 		wndChat.update();
+		wndChat.updateInput();
 	}
 	else {
 		chat.show(chat.inFocus);

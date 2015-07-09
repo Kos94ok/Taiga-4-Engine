@@ -334,18 +334,18 @@ void serverWorldUI(int elapsedTime)
 						isHovered = true;
 					}
 				}
-				if (!isHovered)
+			}
+			if (!isHovered)
+			{
+				if (ui.element[i].ignoreOrigin)
 				{
-					if (ui.element[i].ignoreOrigin)
-					{
-						isHovered = math.isPointInRect(mousePos.x, mousePos.y, ui.element[i].pos.x,
-							ui.element[i].pos.y, ui.element[i].size.x, ui.element[i].size.y);
-					}
-					else
-					{
-						isHovered = math.isPointInRect(mousePos.x, mousePos.y, ui.element[i].pos.x - ui.element[i].size.x / 2,
-							ui.element[i].pos.y - ui.element[i].size.y / 2, ui.element[i].size.x, ui.element[i].size.y);
-					}
+					isHovered = math.isPointInRect(mousePos.x, mousePos.y, ui.element[i].pos.x,
+						ui.element[i].pos.y, ui.element[i].size.x, ui.element[i].size.y);
+				}
+				else
+				{
+					isHovered = math.isPointInRect(mousePos.x, mousePos.y, ui.element[i].pos.x - ui.element[i].size.x / 2,
+						ui.element[i].pos.y - ui.element[i].size.y / 2, ui.element[i].size.x, ui.element[i].size.y);
 				}
 			}
 

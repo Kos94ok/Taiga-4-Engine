@@ -19,9 +19,9 @@ bool cPath::calculate(vec2 start, vec2 end, float collision, int unitId)
 	float precision = 0.00f;
 	float dist = math.getDistance(start, end);
 	if (dist > 500.00f) { precision = 7.00f; }
-	else if (dist > 200.00f) { precision = 4.00f; }
-	else if (dist > 100.00f) { precision = 2.00f; }
-	else { precision = 1.00f; }
+	else if (dist > 200.00f) { precision = 6.00f; }
+	else if (dist > 100.00f) { precision = 5.00f; }
+	else { precision = 4.00f; }
 
 	int i = 0;
 	for (i = 0; i < 100; i++)

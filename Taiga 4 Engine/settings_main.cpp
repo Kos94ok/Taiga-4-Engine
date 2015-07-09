@@ -218,7 +218,7 @@ void cSettings::load()
 	}
 
 	// Fix the dependancies
-	if (enableScreenShaders == 0) { enableBetterShadows = 0; }
+	if (enableScreenShaders == 0) { enableBetterShadows = 0; enableBetterLight = 0; }
 
 	file.close();
 }

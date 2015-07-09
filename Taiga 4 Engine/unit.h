@@ -143,9 +143,9 @@ public:
 	void addMaxHealth(float d);
 	void setHealth(float hp);
 	void setMaxHealth(float hp);
-	void addItem(std::string type, int count = 1);
-	void removeItem(std::string type, int count = -1);
-	void removeItem(int id, int count = -1);
+	void addItem(std::string type, int count = 1, bool toLog = true);
+	void removeItem(std::string type, int count = -1, bool toLog = true);
+	void removeItem(int id, int count = -1, bool toLog = true);
 	void addBuff(int type, float duration = -1.00f, int power = 1);
 	void removeBuff(int type);
 	bool hasBuff(int type);

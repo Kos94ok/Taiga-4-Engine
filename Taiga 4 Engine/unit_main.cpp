@@ -17,6 +17,7 @@ void cUnit::addResource(float d) { setResource(resource + d); }
 
 void cUnit::setResource(float value)
 {
+	int delta = value - resource;
 	resource = value;
 
 	craft.checkActiveRecipe();
@@ -27,6 +28,11 @@ void cUnit::setResource(float value)
 		sf::Packet data;
 		data << MSG_UNIT_SETRESOURCE << globalId << value;
 		server.sendPacket(PLAYERS_REMOTE, data);
+	}
+	// Add to chat log
+	if (globalId == client.unit) {
+		if (delta > 0) { chat.logMessage(LOGMSG_RESOURCE_ADD, cArg(type, to_string(delta))); }
+		else { chat.logMessage(LOGMSG_RESOURCE_REMOVE, cArg(type, to_string(-delta))); }
 	}
 }
 
@@ -85,7 +91,7 @@ void cUnit::setMaxHealth(float hp)
 	}
 }
 
-void cUnit::addItem(string type, int count)
+void cUnit::addItem(string type, int count, bool toLog)
 {
 	container.add(type, count);
 	container.sort(util.getInventorySortingType());
@@ -93,43 +99,47 @@ void cUnit::addItem(string type, int count)
 	if (core.serverMode || core.localServer)
 	{
 		sf::Packet data;
-		data << MSG_UNIT_ADDITEM << globalId << type << count;
+		data << MSG_UNIT_ADDITEM << globalId << type << count << toLog;
 		server.sendPacket(PLAYERS_REMOTE, data);
 		data.clear();
 	}
 	// Add to chat log
-	if (globalId == client.unit) {
+	if (globalId == client.unit && toLog) {
 		chat.logMessage(LOGMSG_ITEM_ADD, cArg(type, to_string(count)));
 	}
 }
 
-void cUnit::removeItem(string type, int count)
+void cUnit::removeItem(string type, int count, bool toLog)
 {
 	container.remove(type, count);
 	// Broadcast the data
 	if (core.serverMode || core.localServer)
 	{
 		sf::Packet data;
-		data << MSG_UNIT_REMOVEITEM << globalId << type << count;
+		data << MSG_UNIT_REMOVEITEM << globalId << type << count << toLog;
 		server.sendPacket(PLAYERS_REMOTE, data);
 		data.clear();
 	}
 	// Add to chat log
-	if (globalId == client.unit) {
+	if (globalId == client.unit && toLog) {
 		chat.logMessage(LOGMSG_ITEM_REMOVE, cArg(type, to_string(count)));
 	}
 }
 
-void cUnit::removeItem(int id, int count)
+void cUnit::removeItem(int id, int count, bool toLog)
 {
 	container.remove(id, count);
 	// Broadcast the data
 	if (core.serverMode || core.localServer)
 	{
 		sf::Packet data;
-		data << MSG_UNIT_REMOVEITEM << globalId << container.get(id).type << count;
+		data << MSG_UNIT_REMOVEITEM << globalId << container.get(id).type << count << toLog;
 		server.sendPacket(PLAYERS_REMOTE, data);
 		data.clear();
+	}
+	// Add to chat log
+	if (globalId == client.unit && toLog) {
+		chat.logMessage(LOGMSG_ITEM_REMOVE, cArg(container.get(id).type, to_string(count)));
 	}
 }
 

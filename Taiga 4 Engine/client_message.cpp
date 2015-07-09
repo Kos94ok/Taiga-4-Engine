@@ -133,10 +133,10 @@ bool cClient::msgUnit(sf::Packet input)
 	// Add item to unit
 	if (msg == MSG_UNIT_ADDITEM)
 	{
-		input >> id >> type >> argi[0];
+		input >> id >> type >> argi[0] >> argb[1];
 		int changeId = game.getUnitId(id);
 		if (changeId != -1) {
-			game.unit[changeId].container.add(type, argi[0]);
+			game.unit[changeId].addItem(type, argi[0], argb[1]);
 		}
 		//else { console.error << "[cClient::msgUnit / MSG_UNIT_ADDITEM] Can't find target unit (" << id << ")!\n"; }
 		return true;
@@ -146,10 +146,10 @@ bool cClient::msgUnit(sf::Packet input)
 	// Remove item from unit
 	if (msg == MSG_UNIT_REMOVEITEM)
 	{
-		input >> id >> type >> argi[0];
+		input >> id >> type >> argi[0] >> argb[1];
 		id = game.getUnitId(id);
 		if (id != -1) {
-			game.unit[id].container.remove(type, argi[0]);
+			game.unit[id].removeItem(type, argi[0], argb[1]);
 		}
 		return true;
 	}

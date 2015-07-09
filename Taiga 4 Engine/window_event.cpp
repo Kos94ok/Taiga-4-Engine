@@ -280,29 +280,18 @@ void cWindow::mainEvent()
 				}
 			}
 		}
-		// Mouse dragging (move order)
-		/*if (eventPoll.type == sf::Event::MouseMoved && sf::Mouse::isButtonPressed(sf::Mouse::Left)
-			&& !sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && ui.mouseStateLMB == MOUSE_CONTROLS_MOVEMENT)
-		{
-			mousePos = window.getMousePos(true);
-			// Sending data to server
-			if (client.connected) {
-				data << MSG_CONTROLS_MOVETO << mousePos.x << mousePos.y << false;
-				client.sendPacket(data);
-			}
-		}*/
 		// =========================================================
 		// =========================================================
 		// Camera
 			// Snap camera to character
-		if (eventPoll.type == sf::Event::KeyPressed && eventPoll.key.code == settings.hkCamToHero && !console.displayed)
+		if (eventPoll.type == sf::Event::KeyPressed && eventPoll.key.code == settings.hkCamToHero && !console.displayed && !chat.inFocus)
 		{
 			camera.moveto(game.unit[game.getUnitId(client.unit)].pos);
 			camera.moveVector.x = 0.50f;
 			camera.moveVector.y = 0.50f;
 		}
 			// Camera zoom
-		if (eventPoll.type == sf::Event::MouseWheelMoved && !console.displayed)
+		if (eventPoll.type == sf::Event::MouseWheelMoved && !console.displayed && !chat.inFocus)
 		{
 			camera.adjustZoom(eventPoll.mouseWheel.delta);
 		}
@@ -310,6 +299,11 @@ void cWindow::mainEvent()
 		else if (eventPoll.type == sf::Event::MouseWheelMoved && console.displayed)
 		{
 			console.scroll(eventPoll.mouseWheel.delta);
+		}
+			// Chat scroll
+		else if (eventPoll.type == sf::Event::MouseWheelMoved && chat.inFocus)
+		{
+			chat.scroll(eventPoll.mouseWheel.delta);
 		}
 			// Reset camera zoom
 		if (eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Middle && !console.displayed)

@@ -65,8 +65,8 @@ public:
 
 	const float enemyDamage = 10.00f;
 
-	const float chatNoFocusTimer = 7.50f;
-	const float chatRecentMessageTimer = 7.00f;
+	const float chatNoFocusTimer = 3.50f;
+	const float chatRecentMessageTimer = 3.50f;
 };
 
 extern cValue value;

@@ -259,7 +259,7 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 			// Remove ingridients
 		for (int y = 0; y < craft.recipe[argi[0]].ingrCount; y++)
 		{
-			game.getUnit(server.player[i].unit).removeItem(craft.recipe[argi[0]].ingr[y].type, craft.recipe[argi[0]].ingr[y].count * argi[1]);
+			game.getUnit(server.player[i].unit).removeItem(craft.recipe[argi[0]].ingr[y].type, craft.recipe[argi[0]].ingr[y].count * argi[1], craft.recipe[argi[0]].ingr[y].consume);
 		}
 			// Remove resource
 		server.player[i].addResource(craft.recipe[argi[0]].resourceBalance * argi[1]);

@@ -94,7 +94,7 @@ void cUIChat::update()
 				ui.element[ui.getElementId(id)].pos = vec2f(chatPos.x + 7.00f, (elementsDisplayed * (settings.chatFontSize + settings.chatLineSpacing) + chatPos.y + 3.00f));
 				ui.element[ui.getElementId(id)].textOutlineThickness = 1.00f;
 				ui.element[ui.getElementId(id)].textOutlineColor = color(0, 0, 0);
-				ui.element[ui.getElementId(id)].textColor = color(200, 200, 200);
+				ui.element[ui.getElementId(id)].textColor = color(255, 250, 50);
 			}
 			ui.element[ui.getElementId(id)].setText(chat.history[chat.displayedPage][i].toAnsiString(locale("russian")));
 			ui.element[ui.getElementId(id)].textFont = FONT_DESCR;

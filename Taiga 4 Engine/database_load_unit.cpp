@@ -39,9 +39,10 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_MOVE].down.frameCount = 4;
 	unit[i].animData[ANIM_MOVE].down.frameDelay = 0.25f;
 	unit[i].animData[ANIM_MOVE].down.tex = visual.addTexture("player_move_down.png");
-	unit[i].animData[ANIM_WORK].side.frameCount = 4;
-	unit[i].animData[ANIM_WORK].side.frameDelay = 0.25f;
-	unit[i].animData[ANIM_WORK].side.tex = visual.addTexture("player_work_side.png");
+	unit[i].animData[ANIM_WORK] = unit[i].animData[ANIM_MOVE];
+	//unit[i].animData[ANIM_WORK].side.frameCount = 4;
+	//unit[i].animData[ANIM_WORK].side.frameDelay = 0.25f;
+	//unit[i].animData[ANIM_WORK].side.tex = visual.addTexture("player_work_side.png");
 	unit[i].animData[ANIM_ATTACK].side.frameCount = 4;
 	unit[i].animData[ANIM_ATTACK].side.frameDelay = 0.25f;
 	unit[i].animData[ANIM_ATTACK].side.tex = visual.addTexture("player_attack_side.png");
@@ -50,7 +51,7 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_PICKUP].side.tex = visual.addTexture("player_pickup_side.png");
 	unit[i].light.power = 320.00f;
 	unit[i].light.texture = visual.addTexture("light_whiteWeak.png");
-	unit[i].container.itemLimit = 1000;
+	unit[i].container.itemLimit = LIMIT_ITEMS;
 	//unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
 	unit[i].selectionOffset = vec2f(-1.50f, -7.00f);
