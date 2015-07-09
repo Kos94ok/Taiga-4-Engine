@@ -1,5 +1,7 @@
 
 #include "precomp.h"
+#include "define.h"
+#include "console.h"
 
 class cCore
 {

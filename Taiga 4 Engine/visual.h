@@ -1,12 +1,35 @@
 
 #pragma once
 #include "precomp.h"
+#include "define.h"
 
 class cTexture
 {
 public:
 	std::string name;
 	sf::Texture handle;
+};
+
+class cMousePointer
+{
+public:
+	int type;
+};
+
+class cProgressBar
+{
+public:
+	bool enabled;
+	bool manualMode;
+	float manualModeStep;
+	float timeCurrent;
+	float timeMaximum;
+	float fadeTimer;
+	int getTexFrameCountX();
+	int getTexFrameCountY();
+	float getCurrentAlpha();
+	sf::Vector2i getCurrentFrame();
+	sf::Vector2i getTexFrameSize();
 };
 
 class cVisual
@@ -21,6 +44,8 @@ public:
 	sf::Font fontDescr;
 	sf::Font fontConsole;
 	sf::Shader shader[LIMIT_SHADERS];
+	cMousePointer mouse;
+	cProgressBar progress;
 
 	float shadowBrightness;
 	int unitsPainted;
@@ -31,6 +56,12 @@ public:
 	int createIcon(std::string filename, std::string iconName, vec2i pos, vec2f gridSize);
 
 	int genHighlighted(std::string filename);
+
+	void setMousePointer(int tex);
+	void enableProgressBar(float time);
+	void enableProgressBarManual(float time, int stepCount);
+	void advanceProgressBar();
+	void disableProgressBar();
 
 	cVisual() {
 		hoveredUnit = -1;

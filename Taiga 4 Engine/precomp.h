@@ -31,8 +31,6 @@
 	#include <Windows.h>
 #endif
 
-#include "define.h"
-
 #define endl	"\n"
 
 typedef sf::Vector2f		vec;
@@ -43,5 +41,3 @@ typedef std::string			str;
 typedef sf::Color			color;
 
 using namespace std;
-
-#include "console.h"

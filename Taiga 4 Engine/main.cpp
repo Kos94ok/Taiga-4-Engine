@@ -28,6 +28,7 @@
 #include "world.h"
 #include "overworld.h"
 #include "editor.h"
+#include "logic.h"
 #include "script.h"
 #include "api.h"
 
@@ -55,6 +56,7 @@ cOverworld overworld;
 cEditor editor;
 cUtil util;
 cScript script;
+cGameLogic gamelogic;
 cAI ai;
 cAPI api;
 cMutexGlobal mutex;
@@ -63,6 +65,15 @@ cMutexGlobal mutex;
 TODO:
 - Script message (event) system?
 - Multiple levels of enemies based on the Slender-style system
+
+- Remake old menu
+- Add "Harvesting..." log messages
+- Add visual.mouse functionality
+- Change targeting to work with visual.mouse
+- Add automatic code line counter
+- Add order confirmation sfx
+- Add weather effects
+- Particle system
 */
 
 int main(int argc, char* argv[])
@@ -94,7 +105,7 @@ int main(int argc, char* argv[])
 	// Starting the threads
 	console << "[MAIN] Starting the threads\n";
 	thread threadWindow(windowMain);					Sleep(10);
-	thread threadServerWorld(serverWorldMain);			Sleep(10);
+	thread threadGameLogic(gameLogicMain);				Sleep(10);
 	thread threadServerConnect(serverConnectMain);		Sleep(10);
 	thread threadServerReceive(serverReceiveMain);		Sleep(10);
 	thread threadServerSend(serverSendMain);			Sleep(10);
@@ -155,7 +166,7 @@ int main(int argc, char* argv[])
 	core.thread_shutdown[4] = true;		threadServerSend.join();
 	core.thread_shutdown[3] = true;		threadServerReceive.join();
 	core.thread_shutdown[2] = true;		threadServerConnect.join();
-	core.thread_shutdown[1] = true;		threadServerWorld.join();
+	core.thread_shutdown[1] = true;		threadGameLogic.join();
 	core.thread_shutdown[0] = true;		threadWindow.join();
 
 	chat << endl << endl;

@@ -32,7 +32,7 @@ void cServer::removeFromHistoryQueue(int id)
 
 void cServer::checkHistoryQueue()
 {
-	int timeLimit = 100;
+	int timeLimit = 300;
 
 	int myTime = timeGetTime();
 	for (int i = 0; i < (int)historyQueue.size(); i++)

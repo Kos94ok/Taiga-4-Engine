@@ -112,7 +112,6 @@ public:
 
 extern cServer server;
 
-void serverWorldMain();
 void serverConnectMain();
 void serverReceiveMain();
 void serverSendMain();

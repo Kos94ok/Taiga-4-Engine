@@ -8,6 +8,7 @@
 #include "window.h"
 #include "path.h"
 #include "math.h"
+#include "console.h"
 
 void cTarget::enable_forButton(int elementId)
 {

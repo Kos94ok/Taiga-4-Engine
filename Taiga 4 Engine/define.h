@@ -1,4 +1,5 @@
 
+#pragma once
 const std::string NAME_SHORT = "Taiga";
 const std::string NAME_FULL = "Taiga Survival";
 const std::string NAME_ENGINE = "Taiga 4 Engine";
@@ -17,7 +18,7 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 #define LIMIT_SHADERS					32
 #define LIMIT_DESCR						8
 #define LIMIT_COMPONENTS				8
-#define LIMIT_DISMANTLE					8
+#define LIMIT_DISMANTLE					16
 #define LIMIT_RECIPES					64
 #define LIMIT_ITEMS						128
 #define LIMIT_DROP						16
@@ -189,6 +190,8 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 #define TEX_ICON_WINDOW					3
 #define TEX_SELECTION_CIRCLE			4
 #define TEX_MOUSE_TARGET				5
+#define TEX_MOUSE_PROGRESS				6
+#define TEX_MOUSE_PROGRESSBG			7
 
 #define SHADER_FULLSCREEN				1
 #define SHADER_BLOOM					2
@@ -281,3 +284,7 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 #define LOGMSG_SCREENSHOT				2
 #define LOGMSG_RESOURCE_ADD				3
 #define LOGMSG_RESOURCE_REMOVE			4
+
+#define POINTER_HARDWARE				0
+#define POINTER_DEFAULT					1
+#define POINTER_TARGET					2

@@ -1,6 +1,7 @@
 
 #pragma once
-void audioMain();
+#include "define.h"
+#include "util.h"
 
 class cSound
 {
@@ -77,3 +78,4 @@ public:
 };
 
 extern cAudio audio;
+void audioMain();

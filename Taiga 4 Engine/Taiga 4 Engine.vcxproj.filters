@@ -85,6 +85,15 @@
     <Filter Include="Файлы исходного кода\UI\Interfaces">
       <UniqueIdentifier>{9d68e313-af4b-4a57-a605-f5d53a81770e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Logic">
+      <UniqueIdentifier>{5e6b458a-9189-48e6-8b89-0ba4ad48732d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Util\Camera">
+      <UniqueIdentifier>{acfc19ba-112a-409e-90cc-715ede5d7d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Window\Paint">
+      <UniqueIdentifier>{f9cca39a-4709-45fc-8eab-1dc3149b4b55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -101,9 +110,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Файлы исходного кода\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="window_paint_main.cpp">
-      <Filter>Файлы исходного кода\Window</Filter>
     </ClCompile>
     <ClCompile Include="visual_main.cpp">
       <Filter>Файлы исходного кода\Visual</Filter>
@@ -137,9 +143,6 @@
     </ClCompile>
     <ClCompile Include="database_util.cpp">
       <Filter>Файлы исходного кода\Database</Filter>
-    </ClCompile>
-    <ClCompile Include="server_world.cpp">
-      <Filter>Файлы исходного кода\Network</Filter>
     </ClCompile>
     <ClCompile Include="server_message.cpp">
       <Filter>Файлы исходного кода\Network</Filter>
@@ -246,9 +249,6 @@
     <ClCompile Include="api_main.cpp">
       <Filter>Файлы исходного кода\Util\API</Filter>
     </ClCompile>
-    <ClCompile Include="camera_main.cpp">
-      <Filter>Файлы исходного кода\Window</Filter>
-    </ClCompile>
     <ClCompile Include="animation_main.cpp">
       <Filter>Файлы исходного кода\Character</Filter>
     </ClCompile>
@@ -306,6 +306,30 @@
     <ClCompile Include="server_history.cpp">
       <Filter>Файлы исходного кода\Network</Filter>
     </ClCompile>
+    <ClCompile Include="visual_mouse.cpp">
+      <Filter>Файлы исходного кода\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="logic_main.cpp">
+      <Filter>Файлы исходного кода\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic_units.cpp">
+      <Filter>Файлы исходного кода\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic_orders.cpp">
+      <Filter>Файлы исходного кода\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="camera_main.cpp">
+      <Filter>Файлы исходного кода\Util\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="paint_main.cpp">
+      <Filter>Файлы исходного кода\Window\Paint</Filter>
+    </ClCompile>
+    <ClCompile Include="paint_ui.cpp">
+      <Filter>Файлы исходного кода\Window\Paint</Filter>
+    </ClCompile>
+    <ClCompile Include="paint_units.cpp">
+      <Filter>Файлы исходного кода\Window\Paint</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -334,9 +358,6 @@
     </ClInclude>
     <ClInclude Include="client.h">
       <Filter>Файлы исходного кода\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>Файлы исходного кода\Window</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>Файлы исходного кода\UI</Filter>
@@ -409,6 +430,12 @@
     </ClInclude>
     <ClInclude Include="chat.h">
       <Filter>Файлы исходного кода\Chat</Filter>
+    </ClInclude>
+    <ClInclude Include="logic.h">
+      <Filter>Файлы исходного кода\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Файлы исходного кода\Util\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

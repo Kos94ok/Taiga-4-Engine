@@ -1,6 +1,7 @@
 
 #pragma once
 #include "precomp.h"
+#include "define.h"
 #include "audio.h"
 #include "refSystem.h"
 #include "ai.h"
@@ -117,6 +118,7 @@ public:
 	int addOrder_packunit(int target, bool overwrite = true);
 	int addOrder_death(bool overwrite = true);
 	void removeOrder(int id);
+	void clearOrders();
 	void removeAllOrders();
 
 	float health;

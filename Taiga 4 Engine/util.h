@@ -68,6 +68,8 @@ public:
 
 	const float chatNoFocusTimer = 3.50f;
 	const float chatRecentMessageTimer = 3.50f;
+	const float progressBarFadeInTimer = 0.10f;
+	const float progressBarFadeOutTimer = 0.30f;
 };
 
 extern cValue value;

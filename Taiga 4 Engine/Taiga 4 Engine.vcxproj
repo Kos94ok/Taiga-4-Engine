@@ -137,6 +137,8 @@
     <ClCompile Include="game_get.cpp" />
     <ClCompile Include="item_main.cpp" />
     <ClCompile Include="item_active.cpp" />
+    <ClCompile Include="logic_orders.cpp" />
+    <ClCompile Include="logic_units.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math_main.cpp" />
     <ClCompile Include="overworld_main.cpp" />
@@ -155,7 +157,7 @@
     <ClCompile Include="server_pack.cpp" />
     <ClCompile Include="server_players.cpp" />
     <ClCompile Include="server_util.cpp" />
-    <ClCompile Include="server_world.cpp" />
+    <ClCompile Include="logic_main.cpp" />
     <ClCompile Include="settings_main.cpp" />
     <ClCompile Include="settings_util.cpp" />
     <ClCompile Include="target_main.cpp" />
@@ -171,9 +173,12 @@
     <ClCompile Include="util_main.cpp" />
     <ClCompile Include="visual_gen.cpp" />
     <ClCompile Include="visual_main.cpp" />
+    <ClCompile Include="visual_mouse.cpp" />
     <ClCompile Include="window_event.cpp" />
     <ClCompile Include="window_main.cpp" />
-    <ClCompile Include="window_paint_main.cpp" />
+    <ClCompile Include="paint_main.cpp" />
+    <ClCompile Include="paint_ui.cpp" />
+    <ClCompile Include="paint_units.cpp" />
     <ClCompile Include="window_util.cpp" />
     <ClCompile Include="world_gen.cpp" />
     <ClCompile Include="world_main.cpp" />
@@ -197,6 +202,7 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="icon.h" />
     <ClInclude Include="item.h" />
+    <ClInclude Include="logic.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="overworld.h" />

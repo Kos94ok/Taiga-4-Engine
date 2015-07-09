@@ -249,6 +249,9 @@ void cDatabase::loadItems()
 	item[i].dismantle.add("tool_flashlight", 1);
 	item[i].dismantle.add("material_flint", 3);
 	item[i].dismantle.add("tool_axe_stone", 1);
+	item[i].dismantle.add("tool_axe_flint", 1);
+	item[i].dismantle.add("tool_axe_iron", 1);
+	item[i].dismantle.add("tool_axe_steel", 1);
 	item[i].dismantle.add("tool_pickaxe_stone", 1);
 	item[i].addRef(REF_ITEM_UNPACKABLE);
 	item[i].category = CATEGORY_OTHER;

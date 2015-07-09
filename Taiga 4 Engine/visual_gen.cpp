@@ -5,5 +5,4 @@
 int cVisual::genHighlighted(string filename)
 {
 	addTexture(filename);
-	
 }

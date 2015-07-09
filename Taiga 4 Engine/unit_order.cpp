@@ -5,18 +5,19 @@
 #include "world.h"
 #include "game.h"
 #include "path.h"
+#include "visual.h"
+#include "client.h"
 
 int cUnit::addOrder_moveto(sf::Vector2f target, bool overwrite)
 {
 	// If unit can not move, then ignore
 	if (movementSpeed <= 0.00f) { return -1; }
 	// If the target is too close, then ignore
-	if (math.getDistance(pos.x, pos.y, target.x, target.y) < movementSpeed / 10) { return -1; }
+	if (math.getDistance(pos.x, pos.y, target.x, target.y) < movementSpeed / 10.00f) { return -1; }
 
 	// Clearing the order list
-	if (overwrite) { orderCounter = 0; }
-	// Reset the action timer
-	if (orderCounter == 0) { actionTimer = 0.00f; }
+	if (overwrite) { clearOrders(); }
+	else if (orderCounter == 0) { actionTimer = 0.00f; }
 	// Check order limit
 	if (orderCounter >= LIMIT_ORDERS - 1) {
 		console.error << "[cUnit::addOrder_moveto] Order limit reached!" << endl;
@@ -51,7 +52,8 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 	if (world.map[targetChunk.x][targetChunk.y].type == CHUNK_UNDEFINED || world.map[targetChunk.x][targetChunk.y].type == CHUNK_BLOCKED) { return -1; }
 
 	game.access.lock();
-	if (overwrite) { orderCounter = 0; actionTimer = 0.00f; }
+	if (overwrite) { clearOrders(); }
+	else if (orderCounter == 0) { actionTimer = 0.00f; }
 
 	// Checking if unit is stuck
 	if (hasRef(REF_UNIT_BESTPATHING))
@@ -103,9 +105,8 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 int cUnit::addOrder_pickup(int target, bool overwrite)
 {
 	// Clearing the order list
-	if (overwrite) { orderCounter = 0; }
-	// Reset the action timer
-	if (orderCounter == 0) { actionTimer = 0.00f; }
+	if (overwrite) { clearOrders(); }
+	else if (orderCounter == 0) { actionTimer = 0.00f; }
 	// Check order limit
 	if (orderCounter >= LIMIT_ORDERS - 1) {
 		console.error << "[cUnit::addOrder_pickup] Order limit reached!" << endl;
@@ -131,9 +132,8 @@ int cUnit::addOrder_pickup(int target, bool overwrite)
 int cUnit::addOrder_harvest(int target, bool overwrite, int powerLevel)
 {
 	// Clearing the order list
-	if (overwrite) { orderCounter = 0; }
-	// Reset the action timer
-	if (orderCounter == 0) { actionTimer = 0.00f; }
+	if (overwrite) { clearOrders(); }
+	else if (orderCounter == 0) { actionTimer = 0.00f; }
 	// Check order limit
 	if (orderCounter >= LIMIT_ORDERS - 1) {
 		console.error << "[cUnit::addOrder_harvest] Order limit reached!" << endl;
@@ -160,9 +160,8 @@ int cUnit::addOrder_harvest(int target, bool overwrite, int powerLevel)
 int cUnit::addOrder_packunit(int target, bool overwrite)
 {
 	// Clearing the order list
-	if (overwrite) { orderCounter = 0; }
-	// Reset the action timer
-	if (orderCounter == 0) { actionTimer = 0.00f; }
+	if (overwrite) { clearOrders(); }
+	else if (orderCounter == 0) { actionTimer = 0.00f; }
 	// Check order limit
 	if (orderCounter >= LIMIT_ORDERS - 1) {
 		console.error << "[cUnit::addOrder_packunit] Order limit reached!" << endl;
@@ -190,9 +189,8 @@ int cUnit::addOrder_death(bool overwrite)
 	if (core.serverMode || core.localServer)
 	{
 		// Clearing the order list
-		if (overwrite) { orderCounter = 0; }
-		// Reset the action timer
-		if (orderCounter == 0) { actionTimer = 0.00f; }
+		if (overwrite) { clearOrders(); }
+		else if (orderCounter == 0) { actionTimer = 0.00f; }
 		// Check order limit
 		if (orderCounter >= LIMIT_ORDERS - 1) {
 			console.error << "[cUnit::addOrder_death] Order limit reached!" << endl;
@@ -226,6 +224,14 @@ void cUnit::removeOrder(int id)
 	if (id == 0) { actionTimer = 0.00f; }
 }
 
+void cUnit::clearOrders()
+{
+	orderCounter = 0;
+	actionTimer = 0.00f;
+	// Reset progress bar
+	if (globalId == client.unit && visual.progress.enabled) { visual.disableProgressBar(); }
+}
+
 void cUnit::removeAllOrders()
 {
 	orderCounter = 0;
@@ -235,7 +241,14 @@ void cUnit::removeAllOrders()
 	updateAction();
 	updateAnimation();
 
-	sf::Packet data;
-	data << MSG_ORDER_STOP << globalId;
-	server.sendPacket(PLAYERS_REMOTE, data);
+	// Reset progress bar
+	if (globalId == client.unit && visual.progress.enabled) { visual.disableProgressBar(); }
+	// Server side
+	if (core.serverSide())
+	{
+		sf::Packet data;
+		data << MSG_ORDER_STOP << globalId;
+		server.sendPacket(PLAYERS_REMOTE, data);
+		data.clear();
+	}
 }

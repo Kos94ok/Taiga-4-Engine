@@ -1,6 +1,7 @@
 
 #pragma once
 #include "precomp.h"
+#include "define.h"
 #include "unit.h"
 #include "item.h"
 #include "UI.h"

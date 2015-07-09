@@ -7,6 +7,7 @@
 #include "math.h"
 #include "chat.h"
 #include "client.h"
+#include "visual.h"
 
 bool cCharacter::animAvailable(int animType)
 {
@@ -31,7 +32,7 @@ void cUnit::setResource(float value)
 	}
 	// Add to chat log
 	if (globalId == client.unit) {
-		if (delta > 0) { chat.logMessage(LOGMSG_RESOURCE_ADD, cArg(type, to_string(delta))); }
+		if (delta >= 0) { chat.logMessage(LOGMSG_RESOURCE_ADD, cArg(type, to_string(delta))); }
 		else { chat.logMessage(LOGMSG_RESOURCE_REMOVE, cArg(type, to_string(-delta))); }
 	}
 }
@@ -41,7 +42,7 @@ void cUnit::moveTo(vec2 newPos)
 	float delta = max(pos.x - newPos.x, pos.y - newPos.y);
 	pos = newPos;
 
-	if ((core.serverMode || core.localServer) && abs(delta) > 0.02f)
+	if ((core.serverMode || core.localServer) && abs(delta) > 0.005f)
 	{
 		sf::Packet data;
 		data << MSG_UNIT_MOVETO << globalId << pos.x << pos.y;
@@ -54,7 +55,7 @@ void cUnit::rotateTo(float newAngle)
 	float delta = targetFacingAngle - newAngle;
 	targetFacingAngle = newAngle;
 
-	if ((core.serverMode || core.localServer) && abs(delta) > 0.05f)
+	if ((core.serverMode || core.localServer) && abs(delta) > 0.01f)
 	{
 		sf::Packet data;
 		data << MSG_UNIT_ROTATETO << globalId << newAngle;
@@ -206,7 +207,15 @@ void cUnit::updateAction()
 	if (orderCounter == 0 || actionTimer > 0.00f) { return; }
 	
 	if (order[0].type == ORDER_PICKUP) { actionTimer = 0.00f; }
-	else if (order[0].type == ORDER_HARVEST) { actionTimer = 3.00f; }
+	else if (order[0].type == ORDER_HARVEST)
+	{
+		// Selecting the work time
+		if (order[0].paramA == POWER_HAND) { actionTimer = 3.00f; }
+		else if (order[0].paramA == POWER_STONE) { actionTimer = 10.00f; }
+		else if (order[0].paramA == POWER_FLINT) { actionTimer = 8.00f; }
+		else if (order[0].paramA == POWER_IRON) { actionTimer = 6.00f; }
+		else if (order[0].paramA == POWER_STEEL) { actionTimer = 5.00f; }
+	}
 	else if (order[0].type == ORDER_PACKUNIT) { actionTimer = 6.00f; }
 	else if (order[0].type == ORDER_DEATH)
 	{
@@ -216,6 +225,10 @@ void cUnit::updateAction()
 			anim.play(ANIM_DEATH);
 			actionTimer = (getCurrentAnimDirection().data.frameCount - 1) * getCurrentAnimDirection().data.frameDelay;
 		}
+	}
+	// Creating the progress bar
+	if (globalId == client.unit && actionTimer > 0.00f) {
+		visual.enableProgressBar(actionTimer);
 	}
 }
 

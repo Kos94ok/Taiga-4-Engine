@@ -3,6 +3,7 @@
 #include "camera.h"
 #include "settings.h"
 #include "ui.h"
+#include "console.h"
 
 void cChat::show(bool focus)
 {

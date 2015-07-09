@@ -1,7 +1,9 @@
 
 #pragma once
 #include "precomp.h"
+#include "define.h"
 #include "refSystem.h"
+#include "util.h"
 
 class cUIButton
 {

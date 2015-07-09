@@ -28,10 +28,24 @@ void cWindow::mainEvent()
 			ui.mouseStateLMB = MOUSE_BUSY;
 		}
 			// Reset
-		if (target.active && eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Right)
+		if (eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Right)
 		{
-			target.reset();
-			ui.mouseStateRMB = MOUSE_BUSY;
+			// Targeting
+			if (target.active)
+			{
+				target.reset();
+				ui.mouseStateRMB = MOUSE_BUSY;
+			}
+			// Action in progress
+			if (visual.progress.enabled)
+			{
+				visual.disableProgressBar();
+				ui.mouseStateRMB = MOUSE_BUSY;
+				data.clear();
+				data << MSG_CONTROLS_STOP;
+				client.sendPacket(data);
+				data.clear();
+			}
 		}
 		// Interface
 			// Interface button click
