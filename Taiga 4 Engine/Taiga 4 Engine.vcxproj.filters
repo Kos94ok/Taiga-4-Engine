@@ -303,6 +303,9 @@
     <ClCompile Include="chat_log.cpp">
       <Filter>Файлы исходного кода\Chat</Filter>
     </ClCompile>
+    <ClCompile Include="server_history.cpp">
+      <Filter>Файлы исходного кода\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

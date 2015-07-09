@@ -1,6 +1,7 @@
 
 #include "main.h"
 #include "client.h"
+#include "math.h"
 
 void clientReceiveMain()
 {
@@ -11,7 +12,7 @@ void clientReceiveMain()
 	int retVal;
 	string cmd, type;
 	bool parsed = false;
-	int counter = 0;
+	int id;
 
 	while (!core.thread_shutdown[threadId])
 	{
@@ -21,11 +22,15 @@ void clientReceiveMain()
 			retVal = client.socket.receive(data);
 			if (retVal == sf::Socket::Done)
 			{
-				//console << "Received to client " << counter++ << endl;
-				parsed = client.msgBig(data);
-				if (!parsed) { parsed = client.msgUnit(data); }
-				if (!parsed) { parsed = client.msgOrder(data); }
-				if (!parsed) { parsed = client.msgGame(data); }
+				data >> id;
+				if (!client.isPacketDuplicate(id))
+				{
+					client.confirmPacket(id);
+					parsed = client.msgBig(data);
+					if (!parsed) { parsed = client.msgUnit(data); }
+					if (!parsed) { parsed = client.msgOrder(data); }
+					if (!parsed) { parsed = client.msgGame(data); }
+				}
 
 				data.clear();
 			}

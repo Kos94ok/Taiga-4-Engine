@@ -18,6 +18,16 @@ bool cServer::msgRequest(int i, sf::Packet input)
 	input >> msg;
 	// =======================================================
 	// =======================================================
+	// Packet confirmation
+	if (msg == MSG_CONFIRM)
+	{
+		input >> argi[0];
+		server.removeFromHistoryQueue(argi[0]);
+
+		return true;
+	}
+	// =======================================================
+	// =======================================================
 	// Echo
 	if (msg == MSG_ECHO)
 	{

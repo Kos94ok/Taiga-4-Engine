@@ -6,20 +6,35 @@
 #include "editor.h"
 #include "UI.h"
 
-bool socketFree = true;
-
-void cServer::sendPacket(int target, sf::Packet data)
+void cServer::sendPacket(int target, sf::Packet data, int overrideId)
 {
 	if (!core.localServer && !core.serverMode) { return; }
 
-	while (!socketFree) { Sleep(100); }
-	socketFree = false;
+	mutex.serverPacketQueue.lock();
 
+	if (overrideId != -1) { dataQueue[dataQueueCounter].id = overrideId; }
+	else {
+		dataQueue[dataQueueCounter].id = packetIdCounter;
+		packetIdCounter += 1;
+		if (packetIdCounter > 50000) { packetIdCounter = 0; }
+	}
 	dataQueue[dataQueueCounter].target = target;
 	dataQueue[dataQueueCounter].data = data;
 	dataQueueCounter += 1;
 
-	socketFree = true;
+	mutex.serverPacketQueue.unlock();
+}
+
+void cServer::removePacket(int localIndex)
+{
+	mutex.serverPacketQueue.lock();
+
+	for (int i = localIndex; i < server.dataQueueCounter - 1; i++) {
+		server.dataQueue[i] = server.dataQueue[i + 1];
+	}
+	server.dataQueueCounter -= 1;
+
+	mutex.serverPacketQueue.unlock();
 }
 
 void cServer::initialize()

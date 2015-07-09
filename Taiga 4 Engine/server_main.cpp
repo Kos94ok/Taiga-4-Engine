@@ -104,9 +104,10 @@ void serverSendMain()
 				{
 					if (server.player[i].connected)
 					{
-						//localData << server.player[i].packet++;
+						localData << server.dataQueue[0].id;
 						localData.append(server.dataQueue[0].data.getData(), server.dataQueue[0].data.getDataSize());
 						server.player[i].socket.send(localData);
+						server.addToHistoryQueue(i, server.dataQueue[0]);
 						//console.debug << "[DEBUG] Sending " << (int)localData.getDataSize() << " byte packet, " << server.dataQueueCounter << " packets in queue." << endl;
 						localData.clear();
 					}
@@ -117,23 +118,24 @@ void serverSendMain()
 			{
 				if (server.player[server.dataQueue[0].target].connected)
 				{
-					//localData << server.player[server.dataQueue[0].target].packet++;
+					localData << server.dataQueue[0].id;
 					localData.append(server.dataQueue[0].data.getData(), server.dataQueue[0].data.getDataSize());
 					server.player[server.dataQueue[0].target].socket.send(localData);
+					server.addToHistoryQueue(server.dataQueue[0].target, server.dataQueue[0]);
 					//console.debug << "[DEBUG] Sending " << (int)localData.getDataSize() << " byte packet, " << server.dataQueueCounter << " packets in queue." << endl;
 					localData.clear();
 				}
 			}
 			// Moving the packets in queue
-			for (int i = 0; i < server.dataQueueCounter - 1; i++)
-			{
-				server.dataQueue[i] = server.dataQueue[i + 1];
-			}
-			server.dataQueueCounter -= 1;
+			server.removePacket(0);
 		}
-		else if (server.pingTimer > 500) {
+		else if (server.pingTimer > 2000) {
 			server.pingPlayers();
 			server.pingTimer = 0;
+		}
+		else if (server.historyTimer > 300) {
+			server.checkHistoryQueue();
+			server.historyTimer = 0;
 		}
 		else { Sleep(10); }
 		core.thread_antifreeze[threadId] = 0;

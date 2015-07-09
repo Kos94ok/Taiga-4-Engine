@@ -149,6 +149,7 @@
     <ClCompile Include="saveload_util.cpp" />
     <ClCompile Include="script_main.cpp" />
     <ClCompile Include="script_data.cpp" />
+    <ClCompile Include="server_history.cpp" />
     <ClCompile Include="server_main.cpp" />
     <ClCompile Include="server_message.cpp" />
     <ClCompile Include="server_pack.cpp" />

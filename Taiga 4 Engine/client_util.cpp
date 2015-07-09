@@ -77,3 +77,27 @@ void cClient::pingServer()
 	lastPingTime = timeGetTime();
 	data.clear();
 }
+
+void cClient::confirmPacket(int id)
+{
+	sf::Packet data;
+	data << MSG_CONFIRM << id;
+	sendPacket(data);
+	data.clear();
+}
+
+bool cClient::isPacketDuplicate(int id)
+{
+	for (int i = 0; i < (int)receivedPackets.size(); i++)
+	{
+		if (receivedPackets[i] == id) { return true; }
+	}
+
+	receivedPackets.push_back(id);
+	// Check packet history size
+	if (receivedPackets.size() > 11000)
+	{
+		receivedPackets.erase(receivedPackets.begin(), receivedPackets.begin() + 1000);
+	}
+	return false;
+}

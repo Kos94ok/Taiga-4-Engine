@@ -29,11 +29,15 @@ public:
 	void connect(std::string ip, short port);
 	void disconnect();
 
+	void confirmPacket(int id);
 	bool msgBig(sf::Packet data);
 	bool msgUnit(sf::Packet data);
 	bool msgOrder(sf::Packet data);
 	bool msgGame(sf::Packet data);
 	void pingServer();
+
+	std::vector<int> receivedPackets;
+	bool isPacketDuplicate(int id);
 
 	cClient() {
 		unit = -1;

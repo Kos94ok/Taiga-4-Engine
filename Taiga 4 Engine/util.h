@@ -5,6 +5,7 @@
 class cPacketQueue
 {
 public:
+	int id;
 	int target;
 	sf::Packet data;
 };
@@ -91,6 +92,9 @@ public:
 	cMutex renderMain;
 	cMutex renderUnits;
 	cMutex mainMatrix;
+
+	cMutex serverHistory;
+	cMutex serverPacketQueue;
 };
 
 extern cMutexGlobal mutex;

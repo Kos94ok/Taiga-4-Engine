@@ -38,9 +38,10 @@ void cUnit::setResource(float value)
 
 void cUnit::moveTo(vec2 newPos)
 {
+	float delta = max(pos.x - newPos.x, pos.y - newPos.y);
 	pos = newPos;
 
-	if (core.serverMode || core.localServer)
+	if ((core.serverMode || core.localServer) && abs(delta) > 0.02f)
 	{
 		sf::Packet data;
 		data << MSG_UNIT_MOVETO << globalId << pos.x << pos.y;
@@ -50,9 +51,10 @@ void cUnit::moveTo(vec2 newPos)
 
 void cUnit::rotateTo(float newAngle)
 {
+	float delta = targetFacingAngle - newAngle;
 	targetFacingAngle = newAngle;
 
-	if (core.serverMode || core.localServer)
+	if ((core.serverMode || core.localServer) && abs(delta) > 0.05f)
 	{
 		sf::Packet data;
 		data << MSG_UNIT_ROTATETO << globalId << newAngle;

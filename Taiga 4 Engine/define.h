@@ -28,7 +28,7 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 #define LIMIT_DB_TEXTURES				32
 #define LIMIT_UI_ELEMENTS				128
 #define LIMIT_SERVER_PLAYERS			32
-#define LIMIT_SERVER_PACKETQUEUE		2048
+#define LIMIT_SERVER_PACKETQUEUE		8192
 #define LIMIT_MAP						64
 #define LIMIT_BUTTONSPERCOLUMN			5
 #define LIMIT_ACTIVEBUTTONS				35
@@ -59,6 +59,7 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 #define ANIM_PICKUP						4
 #define ANIM_DEATH						5
 
+#define MSG_CONFIRM						0
 #define MSG_CMD							1
 #define MSG_PING						2
 #define MSG_PONG						3

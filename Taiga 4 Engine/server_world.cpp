@@ -556,6 +556,8 @@ void serverWorldConnection(int elapsedTime)
 	// Ping
 	client.pingTimer += elapsedTime;
 	server.pingTimer += elapsedTime;
+	// Other timers
+	server.historyTimer += elapsedTime;
 	
 	// Sending the mouse position
 	vec2f mousePos = window.getMousePos(true);

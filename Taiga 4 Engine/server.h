@@ -46,11 +46,14 @@ public:
 class cServer
 {
 public:
+	int packetIdCounter;
+
 	cServerPlayer player[LIMIT_SERVER_PLAYERS];
 	int dataQueueCounter;
 	cPacketQueue dataQueue[LIMIT_SERVER_PACKETQUEUE];
 
-	void sendPacket(int target, sf::Packet data);
+	void sendPacket(int target, sf::Packet data, int overrideId = -1);
+	void removePacket(int localIndex);
 
 	bool isLocalPlayer(int player);
 	void initialize();
@@ -86,9 +89,20 @@ public:
 	// Returns: Unit data ready for transfer
 	sf::Packet packUnitData(int id, int variation = -1);
 
+	// History queue
+	int historyTimer;
+	std::vector<int> historyQueueTimer;
+	std::vector<cPacketQueue> historyQueue;
+
+	void addToHistoryQueue(int targetPlayer, cPacketQueue data);
+	void removeFromHistoryQueue(int id);
+	void checkHistoryQueue();
+
 	cServer()
 	{
 		pingTimer = 0;
+		historyTimer = 0;
+		packetIdCounter = 0;
 		dataQueueCounter = 0;
 		for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++) {
 			player[i].myId = i;
