@@ -52,7 +52,7 @@ void cDatabase::loadUnits()
 	unit[i].light.power = 320.00f;
 	unit[i].light.texture = visual.addTexture("light_whiteWeak.png");
 	unit[i].container.itemLimit = LIMIT_ITEMS;
-	//unit[i].interactDistance = 20.00f;
+	unit[i].interactDistance = 30.00f;
 	unit[i].collisionDistance = 20.00f;
 	unit[i].selectionOffset = vec2f(-1.50f, -7.00f);
 	unit[i].addRef(REF_UNIT_NOUNLOAD);

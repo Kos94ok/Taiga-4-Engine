@@ -14,6 +14,13 @@ class cMousePointer
 {
 public:
 	int type;
+	int texture;
+	int texturePress;
+
+	void showHardware();
+	void hideHardware();
+	sf::Vector2f getOrigin();
+	sf::Vector2i getTexSize();
 };
 
 class cProgressBar
@@ -57,7 +64,7 @@ public:
 
 	int genHighlighted(std::string filename);
 
-	void setMousePointer(int tex);
+	void setMousePointer(int type);
 	void enableProgressBar(float time);
 	void enableProgressBarManual(float time, int stepCount);
 	void advanceProgressBar();

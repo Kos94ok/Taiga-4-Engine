@@ -213,3 +213,58 @@ bool cUtil::intersects(vec2f pos, vec2f rectPos, vec2f rectSize)
 void cUtil::makeScreenshot() {
 	screenshotRequested = true;
 }
+
+void cUtil::checkLaunchStatus()
+{
+	ifstream file;
+	file.open("..//Taiga 4 Engine.sln");
+	if (file.good()) {
+		console << "[MAIN] Project file detected. Calculating statistics..." << endl;
+		file.close();
+		codeStats.calculate();
+		console << "[MAIN] - Header files: " << codeStats.headerFiles << endl;
+		console << "[MAIN] - Source files: " << codeStats.sourceFiles << endl;
+		console << "[MAIN] - Total lines of code: " << codeStats.linesOfCode << endl;
+	}
+}
+
+void cCodeStats::calculate()
+{
+	headerFiles = 0;
+	sourceFiles = 0;
+	linesOfCode = 0;
+
+	ifstream file;
+	char buf[256];
+
+	vector<string> fileArray;
+	WIN32_FIND_DATAA dataStruct;
+	HANDLE hFind;
+
+	hFind = FindFirstFileA("..//Taiga 4 Engine//*", &dataStruct);
+	if (hFind != INVALID_HANDLE_VALUE)
+	{
+		if (strlen(dataStruct.cFileName) > 2) { fileArray.push_back(dataStruct.cFileName); }
+		while (FindNextFileA(hFind, &dataStruct))
+		{
+			if (strlen(dataStruct.cFileName) > 2) { fileArray.push_back(dataStruct.cFileName); }
+		}
+	}
+
+	for (auto& filename : fileArray)
+	{
+		bool toParse = false;
+		if (filename.substr(filename.length() - 2) == ".h") { headerFiles += 1; toParse = true; }
+		else if (filename.substr(filename.length() - 4) == ".cpp") { sourceFiles += 1; toParse = true; }
+
+		if (toParse) {
+			file.open("..//Taiga 4 Engine//" + filename);
+			while (file.good() && !file.eof())
+			{
+				file.getline(buf, 256);
+				linesOfCode += 1;
+			}
+			file.close();
+		}
+	}
+}

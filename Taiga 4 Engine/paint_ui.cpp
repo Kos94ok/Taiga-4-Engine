@@ -139,7 +139,7 @@ void cWindow::paintUI()
 		}
 	}
 	// Targeting
-	if (target.active && !target.activeBuild)
+	/*if (target.active && !target.activeBuild)
 	{
 		brushRect.setTexture(&visual.gameTex[database.texture[TEX_MOUSE_TARGET]].handle, true);
 		brushRect.setSize(vec2f(40, 40));
@@ -147,7 +147,7 @@ void cWindow::paintUI()
 		brushRect.setPosition(window.getMousePos(false));
 		brushRect.setFillColor(color(255, 255, 255));
 		window.texHandleTop.draw(brushRect);
-	}
+	}*/
 	// Progress bar
 	if (visual.progress.getCurrentAlpha() > 0.00f)
 	{
@@ -164,6 +164,20 @@ void cWindow::paintUI()
 		brushRect.setTexture(&visual.gameTex[database.texture[TEX_MOUSE_PROGRESS]].handle, true);
 		brushRect.setFillColor(color(0, 0, 0, visual.progress.getCurrentAlpha() * 255.00f));
 		brushRect.setTextureRect(sf::IntRect(vec2i(barFrame.x * barFrameSize.x, barFrame.y * barFrameSize.y), barFrameSize));
+		window.texHandleTop.draw(brushRect);
+	}
+
+	// Mouse pointer
+	if (visual.mouse.type != POINTER_HARDWARE)
+	{
+		vec2i texSize = visual.mouse.getTexSize();
+		// Alternate texture is a mouse button is pressed
+		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right)) { brushRect.setTexture(&visual.gameTex[visual.mouse.texture].handle, true); }
+		else { brushRect.setTexture(&visual.gameTex[visual.mouse.texturePress].handle, true); }
+		brushRect.setSize(vec2f(texSize.x, texSize.y));
+		brushRect.setOrigin(visual.mouse.getOrigin());
+		brushRect.setPosition(window.getMousePos(false));
+		brushRect.setFillColor(color(255, 255, 255));
 		window.texHandleTop.draw(brushRect);
 	}
 	ui.access.unlock();

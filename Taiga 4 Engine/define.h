@@ -8,6 +8,7 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 
 #define	LINESOFCODE_01_02_2015			6372
 #define LINESOFCODE_31_05_2015			9050
+#define LINESOFCODE_09_07_2015			14244
 
 #define LIMIT_CMD						64
 #define LIMIT_TILEMAP					64
@@ -190,8 +191,11 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 #define TEX_ICON_WINDOW					3
 #define TEX_SELECTION_CIRCLE			4
 #define TEX_MOUSE_TARGET				5
-#define TEX_MOUSE_PROGRESS				6
-#define TEX_MOUSE_PROGRESSBG			7
+#define TEX_MOUSE_DEFAULT				6
+#define TEX_MOUSE_DEFAULTPRESS			7
+#define TEX_MOUSE_PROGRESS				8
+#define TEX_MOUSE_PROGRESSBG			9
+#define TEX_MOUSE_POINT					10
 
 #define SHADER_FULLSCREEN				1
 #define SHADER_BLOOM					2
@@ -287,4 +291,6 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 
 #define POINTER_HARDWARE				0
 #define POINTER_DEFAULT					1
-#define POINTER_TARGET					2
+#define POINTER_POINT					2
+#define POINTER_TARGET					3
+#define POINTER_NONE					4

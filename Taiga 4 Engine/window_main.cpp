@@ -51,6 +51,8 @@ void windowMain()
 	window.texHandleTop.create(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod);
 	window.winHandle.setVerticalSyncEnabled(math.intToBool(settings.enableVertSync));
 	window.updateAspectRatio();
+	// Set the pointer
+	visual.setMousePointer(POINTER_DEFAULT);
 	
 	console << "[WND] Starting the main loop" << "\n";
 	while (!core.thread_shutdown[threadId])

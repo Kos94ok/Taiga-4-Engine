@@ -271,7 +271,34 @@ void cWindow::paintUnits()
 						if (!settings.enableBetterShadows) { window.texHandle.draw(brushRect, window.matrixHandle); }
 						else
 						{
-							if (u == 0) { window.texHandle.draw(brushRect, window.matrixHandle); }
+							if (u == 0) {
+								// Unit outline
+								/*if (game.unit[i].globalId == visual.hoveredUnit)
+								{
+									float offset = 2.00f;
+									brushRect.setFillColor(sf::Color(0, 0, 0));
+									brushRect.setPosition((game.unit[i].pos.x), (game.unit[i].pos.y) + offset);
+									window.texHandle.draw(brushRect, window.matrixHandle);
+									brushRect.setPosition((game.unit[i].pos.x) + offset, (game.unit[i].pos.y));
+									window.texHandle.draw(brushRect, window.matrixHandle);
+									brushRect.setPosition((game.unit[i].pos.x), (game.unit[i].pos.y) - offset);
+									window.texHandle.draw(brushRect, window.matrixHandle);
+									brushRect.setPosition((game.unit[i].pos.x) - offset, (game.unit[i].pos.y));
+									window.texHandle.draw(brushRect, window.matrixHandle);
+									brushRect.setPosition((game.unit[i].pos.x) + offset, (game.unit[i].pos.y) + offset);
+									window.texHandle.draw(brushRect, window.matrixHandle);
+									brushRect.setPosition((game.unit[i].pos.x) - offset, (game.unit[i].pos.y) + offset);
+									window.texHandle.draw(brushRect, window.matrixHandle);
+									brushRect.setPosition((game.unit[i].pos.x) - offset, (game.unit[i].pos.y) - offset);
+									window.texHandle.draw(brushRect, window.matrixHandle);
+									brushRect.setPosition((game.unit[i].pos.x) + offset, (game.unit[i].pos.y) - offset);
+									window.texHandle.draw(brushRect, window.matrixHandle);
+
+									brushRect.setFillColor(sf::Color(255, 255, 255));
+									brushRect.setPosition((game.unit[i].pos.x), (game.unit[i].pos.y));
+								}*/
+								window.texHandle.draw(brushRect, window.matrixHandle);
+							}
 							else { window.texHandleShadow.draw(brushRect, window.matrixHandle); }
 						}
 						if (u == 0) { visual.unitsPainted += 1; }

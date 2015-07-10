@@ -57,6 +57,7 @@ cEditor editor;
 cUtil util;
 cScript script;
 cGameLogic gamelogic;
+cCodeStats codeStats;
 cAI ai;
 cAPI api;
 cMutexGlobal mutex;
@@ -70,7 +71,6 @@ TODO:
 - Add "Harvesting..." log messages
 - Add visual.mouse functionality
 - Change targeting to work with visual.mouse
-- Add automatic code line counter
 - Add order confirmation sfx
 - Add weather effects
 - Particle system
@@ -92,6 +92,7 @@ int main(int argc, char* argv[])
 	timeBeginPeriod(5);
 	if (!core.serverMode) { core.localServer = true; }
 	util.detectVideoCard();
+	util.checkLaunchStatus();
 
 	// Loading databases
 	console << "[MAIN] Loading databases" << "\n";

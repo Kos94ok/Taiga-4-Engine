@@ -9,6 +9,7 @@
 #include "path.h"
 #include "math.h"
 #include "console.h"
+#include "visual.h"
 
 void cTarget::enable_forButton(int elementId)
 {
@@ -23,6 +24,7 @@ void cTarget::enable_forButton(int elementId)
 	if (!active) {
 		active = true;
 	}
+	visual.setMousePointer(POINTER_TARGET);
 	forButton = elementId;
 }
 
@@ -99,6 +101,7 @@ void cTarget::reset()
 	if (oldUnit->type != "missingno") {
 		game.removeUnit(oldUnit->globalId, false);
 	}
+	visual.setMousePointer(POINTER_DEFAULT);
 }
 
 void cTarget::updateBuildStatus(int unitId)

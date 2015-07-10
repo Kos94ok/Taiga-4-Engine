@@ -91,6 +91,9 @@ void cDatabase::loadTextures()
 	database.texture[TEX_UI_TOOLTIP] = visual.addTexture("ui_tooltip.png");
 	database.texture[TEX_WORLD_GROUND] = visual.addTexture("bg_snow.jpg");
 	database.texture[TEX_SELECTION_CIRCLE] = visual.addTexture("selectionWhite512.png");
+	database.texture[TEX_MOUSE_DEFAULT] = visual.addTexture("mouse_default.png");
+	database.texture[TEX_MOUSE_DEFAULTPRESS] = visual.addTexture("mouse_defaultPress.png");
+	database.texture[TEX_MOUSE_POINT] = visual.addTexture("mouse_point.png");
 	database.texture[TEX_MOUSE_TARGET] = visual.addTexture("mouse_target40.png");
 	database.texture[TEX_MOUSE_PROGRESS] = visual.addTexture("mouse_progress.png");
 	database.texture[TEX_MOUSE_PROGRESSBG] = visual.addTexture("mouse_progressBG.png");

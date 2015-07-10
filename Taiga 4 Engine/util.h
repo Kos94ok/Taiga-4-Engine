@@ -33,6 +33,18 @@ public:
 	}
 };
 
+class cCodeStats
+{
+public:
+	int linesOfCode;
+	int headerFiles;
+	int sourceFiles;
+
+	void calculate();
+};
+
+extern cCodeStats codeStats;
+
 class cUtil
 {
 public:
@@ -50,6 +62,8 @@ public:
 
 	bool screenshotRequested;
 	void makeScreenshot();
+
+	void checkLaunchStatus();
 	
 	bool intersects(sf::Vector2f pos, sf::Vector2f rectPos, sf::Vector2f rectSize);
 };
