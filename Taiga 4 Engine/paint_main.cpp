@@ -26,6 +26,10 @@ void cWindow::mainPaint()
 	window.texHandleTop.clear(sf::Color(127, 127, 127));
 	// Initializing the brushes
 	brushText.setFont(visual.fontMain);
+	// V-sync trap
+	brushRect.setPosition(vec2f(-5000.00f, -5000.00f));
+	window.winHandle.draw(brushRect);
+
 	// Loading the matrix
 	float prec = 1.00f;
 	mutex.mainMatrix.lock();
@@ -39,13 +43,10 @@ void cWindow::mainPaint()
 	if (!core.serverMode)
 	{
 		mutex.renderMain.lock();
-		if (core.menuState == STATE_GAME)
-		{
-			window.paintTileMap();
-			window.paintUnits();
-			window.paintLighting();
-			window.paintPostFX();
-		}
+		window.paintTileMap();
+		window.paintUnits();
+		window.paintLighting();
+		window.paintPostFX();
 		window.paintUI();
 		window.paintDebugInfo();
 		mutex.renderMain.unlock();
@@ -71,7 +72,9 @@ void cWindow::mainPaint()
 	}
 
 	window.winHandle.draw(buffer);
+	window.winHandle.setVerticalSyncEnabled(settings.enableVertSync);
 	window.winHandle.display();
+	window.winHandle.setVerticalSyncEnabled(false);
 	core.thread_windowTicks += 1;
 }
 
@@ -222,8 +225,8 @@ void cWindow::paintPostFX()
 			buffer = sf::Sprite(window.texHandle.getTexture());
 		}
 		shader = &visual.shader[SHADER_CAMBLUR];
-		shader->setParameter("iSampleCount", 1.00f);
-		shader->setParameter("sampleOffset", 0.0025f);
+		shader->setParameter("iSampleCount", 3.00f);
+		shader->setParameter("sampleOffset", 0.0005f);
 		shader->setParameter("camVectorX", camera.moveVector.x);
 		shader->setParameter("camVectorY", camera.moveVector.y);
 		window.texHandleTop.draw(buffer, shader);

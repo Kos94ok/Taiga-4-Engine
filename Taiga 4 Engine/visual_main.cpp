@@ -54,6 +54,7 @@ void cVisual::init()
 	{
 		window.showWarning(MSG_NOSHADERSUPPORT);
 		settings.enableBetterShadows = 0;
+		settings.enableBetterLight = 0;
 		settings.enableDynamicLight = 0;
 		settings.enableCameraBlur = 0;
 		settings.enableScreenShaders = 0;

@@ -336,6 +336,9 @@
     <ClCompile Include="prerender_main.cpp">
       <Filter>Файлы исходного кода\Window\Pre-Render</Filter>
     </ClCompile>
+    <ClCompile Include="macro.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

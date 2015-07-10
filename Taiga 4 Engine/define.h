@@ -1,10 +1,12 @@
 
 #pragma once
-const std::string NAME_SHORT = "Taiga";
-const std::string NAME_FULL = "Taiga Survival";
-const std::string NAME_ENGINE = "Taiga 4 Engine";
-const std::string NAME_VERSION = "v0.10";
-const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
+extern const std::string NAME_SHORT;
+extern const std::string NAME_FULL;
+extern const std::string NAME_ENGINE;
+extern const std::string NAME_VERSION;
+extern const std::string NAME_VERSION_FULL;
+extern const std::string NAME_BUILDTIME_DATE;
+extern const std::string NAME_BUILDTIME_TIME;
 
 #define	LINESOFCODE_01_02_2015			6372
 #define LINESOFCODE_31_05_2015			9050

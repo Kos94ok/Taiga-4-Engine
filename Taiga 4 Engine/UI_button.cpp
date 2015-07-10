@@ -228,6 +228,10 @@ void cUIButton::callbackLeft(int parent)
 		stringstream(args[0]) >> id;
 		game.useItem(id);
 	}
+	else if (action == "exit")
+	{
+		core.shutdown = true;
+	}
 }
 
 void cUIButton::callbackRight(int parent)

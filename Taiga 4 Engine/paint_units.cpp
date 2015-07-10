@@ -61,7 +61,6 @@ void cWindow::paintUnits()
 	}
 
 	// Random initialization
-	float unitLeft, unitRight;
 	sf::FloatRect camRect(camera.pos.x, camera.pos.y, camera.res.x, camera.res.y);
 	sf::FloatRect objRect;
 
@@ -74,7 +73,6 @@ void cWindow::paintUnits()
 	mutex.renderUnits.lock();
 	preRender.units.ready = false;
 
-	int i;
 	int repeats = 1;
 	if (settings.enableBetterShadows) { repeats += 1; }
 	for (int u = 0; u < repeats; u++)

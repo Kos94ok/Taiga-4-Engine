@@ -395,7 +395,7 @@ void cUI::updateInterfaceEquipment()
 		}
 	
 		// Hidden button
-		id = ui.addElement("button", vec2(-2000.00f, 0));
+		id = ui.addElement("button", vec2f(-2000.00f, 0));
 		ui.element[ui.getElementId(id)].size = sf::Vector2f(40, 40);
 		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_icon_empty_white.png");
 		ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("ui_icon_empty_orange.png");
@@ -410,17 +410,26 @@ void cUI::updateInterfaceEquipment()
 		ui.element[ui.getElementId(id)].textSize = 12;
 		int baseId = id;
 
+		//id = ui.addElement(ui.element[ui.getElementId(baseId)], vec2f(-2000.00f, 0));
+		//ui.element[ui.getElementId(id)]
+		//int iconId = id;
+
 		// Actual buttons
 		for (int i = 0; i < itemsFound; i++)
 		{
 			id = ui.addElement(ui.element[ui.getElementId(baseId)], vec2(20.00f + 40.00f * floor(i / (LIMIT_BUTTONSPERCOLUMN)),
 							250.00f * resModY + 40.00f * (i % (LIMIT_BUTTONSPERCOLUMN)) ) );
-
 			ui.element[ui.getElementId(id)].addRef(REF_UI_ACTIVEITEM + i + 1);
 			ui.element[ui.getElementId(id)].button.action = "activeItem";
 			ui.element[ui.getElementId(id)].button.args[0] = to_string(equip[i].globalId);
 			ui.element[ui.getElementId(id)].tooltip.setText(equip[i].displayName);
 			ui.element[ui.getElementId(id)].setText(to_string(i + 1));
+
+			id = ui.addElement(ui.element[ui.getElementId(baseId)], vec2(20.00f + 40.00f * floor(i / (LIMIT_BUTTONSPERCOLUMN)),
+				250.00f * resModY + 40.00f * (i % (LIMIT_BUTTONSPERCOLUMN))));
+			ui.element[ui.getElementId(id)].size = vec2f(30.00f, 30.00f);
+			ui.element[ui.getElementId(id)].texture = equip[i].icon.tex;
+			ui.element[ui.getElementId(id)].textureHovered = equip[i].icon.tex;
 		}
 	}
 	access.unlock();

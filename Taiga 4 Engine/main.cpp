@@ -70,7 +70,6 @@ TODO:
 - Multiple levels of enemies based on the Slender-style system
 
 - Remake old menu
-- Add "Harvesting..." log messages
 - Add order confirmation sfx
 - Add weather effects
 - Particle system

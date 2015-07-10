@@ -13,7 +13,6 @@ void cPreRender::updateUnits()
 	preRender.units.ready = true;
 	preRender.units.queue.clear();
 
-	bool cameraIntersection;
 	float step = 20.00f;
 	sf::RenderStates renderState;
 	// Check step
