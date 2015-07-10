@@ -283,12 +283,6 @@ const std::string NAME_VERSION_FULL = "Alpha " + NAME_VERSION;
 #define FADE_STOP						0
 #define FADE_OUT						-1
 
-#define LOGMSG_ITEM_ADD					0
-#define LOGMSG_ITEM_REMOVE				1
-#define LOGMSG_SCREENSHOT				2
-#define LOGMSG_RESOURCE_ADD				3
-#define LOGMSG_RESOURCE_REMOVE			4
-
 #define POINTER_HARDWARE				0
 #define POINTER_DEFAULT					1
 #define POINTER_POINT					2

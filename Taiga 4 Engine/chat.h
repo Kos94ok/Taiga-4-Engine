@@ -3,6 +3,14 @@
 #include "define.h"
 #include "util.h"
 
+#define LOGMSG_ITEM_ADD					0
+#define LOGMSG_ITEM_REMOVE				1
+#define LOGMSG_SCREENSHOT				2
+#define LOGMSG_RESOURCE_ADD				3
+#define LOGMSG_RESOURCE_REMOVE			4
+#define LOGMSG_PROGRESS_HARVEST			20
+#define LOGMSG_PROGRESS_PACK			21
+
 class cChatTab
 {
 public:

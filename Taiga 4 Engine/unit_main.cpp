@@ -206,9 +206,11 @@ void cUnit::updateAction()
 {
 	if (orderCounter == 0 || actionTimer > 0.00f) { return; }
 	
+	int logMsg = -1;
 	if (order[0].type == ORDER_PICKUP) { actionTimer = 0.00f; }
 	else if (order[0].type == ORDER_HARVEST)
 	{
+		logMsg = LOGMSG_PROGRESS_HARVEST;
 		// Selecting the work time
 		if (order[0].paramA == POWER_HAND) { actionTimer = 3.00f; }
 		else if (order[0].paramA == POWER_STONE) { actionTimer = 10.00f; }
@@ -216,7 +218,7 @@ void cUnit::updateAction()
 		else if (order[0].paramA == POWER_IRON) { actionTimer = 6.00f; }
 		else if (order[0].paramA == POWER_STEEL) { actionTimer = 5.00f; }
 	}
-	else if (order[0].type == ORDER_PACKUNIT) { actionTimer = 6.00f; }
+	else if (order[0].type == ORDER_PACKUNIT) { actionTimer = 6.00f; logMsg = LOGMSG_PROGRESS_PACK; }
 	else if (order[0].type == ORDER_DEATH)
 	{
 		if (animAvailable(ANIM_DEATH))
@@ -229,6 +231,7 @@ void cUnit::updateAction()
 	// Creating the progress bar
 	if (globalId == client.unit && actionTimer > 0.00f) {
 		visual.enableProgressBar(actionTimer);
+		if (logMsg != -1) { chat.logMessage(logMsg, NULL); }
 	}
 }
 

@@ -69,8 +69,6 @@ TODO:
 
 - Remake old menu
 - Add "Harvesting..." log messages
-- Add visual.mouse functionality
-- Change targeting to work with visual.mouse
 - Add order confirmation sfx
 - Add weather effects
 - Particle system

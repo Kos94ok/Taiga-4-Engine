@@ -35,7 +35,14 @@ void cChat::logMessage(int msg, cArg args)
 		type = args[0];		stringstream(args[1]) >> argi[1];
 		log << "Lost: Resource x" << argi[1] << endl;
 		break;
+	case LOGMSG_PROGRESS_HARVEST:
+		log << "Harvesting..." << endl;
+		break;
+	case LOGMSG_PROGRESS_PACK:
+		log << "Packing..." << endl;
+		break;
 	}
+
 	ui.updateChatWindow();
 	chat.noFocusTimer = value.chatNoFocusTimer;
 }
