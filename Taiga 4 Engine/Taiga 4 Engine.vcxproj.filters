@@ -94,6 +94,9 @@
     <Filter Include="Файлы исходного кода\Window\Paint">
       <UniqueIdentifier>{f9cca39a-4709-45fc-8eab-1dc3149b4b55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Window\Pre-Render">
+      <UniqueIdentifier>{056a02b9-7a01-4f52-963c-b776b6a6981e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -330,6 +333,9 @@
     <ClCompile Include="paint_units.cpp">
       <Filter>Файлы исходного кода\Window\Paint</Filter>
     </ClCompile>
+    <ClCompile Include="prerender_main.cpp">
+      <Filter>Файлы исходного кода\Window\Pre-Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -436,6 +442,9 @@
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>Файлы исходного кода\Util\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="prerender.h">
+      <Filter>Файлы исходного кода\Window\Pre-Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

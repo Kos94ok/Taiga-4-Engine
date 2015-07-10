@@ -5,6 +5,7 @@
 #include "util.h"
 #include "chat.h"
 #include "console.h"
+#include "prerender.h"
 #include "window.h"
 #include "visual.h"
 #include "icon.h"
@@ -37,6 +38,7 @@ cValue value;
 cMath math;
 cChat chat;
 cConsole console;
+cPreRender preRender;
 cWindow window;
 cVisual visual;
 cAudio audio;
@@ -72,10 +74,14 @@ TODO:
 - Add order confirmation sfx
 - Add weather effects
 - Particle system
+- Fix main unit array memory consumption
+- Add bigger item icon to description
 */
 
 int main(int argc, char* argv[])
 {
+	//console << "Array size: " << (int)(sizeof(cUnit) * LIMIT_UNIT) << endl;
+
 	game.access.lock();
 	for (int i = 0; i < argc; i++)
 	{
@@ -113,6 +119,7 @@ int main(int argc, char* argv[])
 	thread threadWorldLoader(worldLoaderMain);			Sleep(10);
 	thread threadAICore(AICoreMain);					Sleep(10);
 	thread threadAudio(audioMain);						Sleep(10);
+	thread threadPreRender(preRenderMain);				Sleep(10);
 	
 	// Initializing the server
 	if (core.serverMode) {
@@ -140,8 +147,8 @@ int main(int argc, char* argv[])
 			core.thread_serverWorldTicks = 0;
 		}
 		// Adding some antifreeze
-		for (int i = 0; i < 10; i++) {
-			if (!(core.serverMode && (i == 5 || i == 6 || i == 9))) { core.thread_antifreeze[i] += 1; }
+		for (int i = 0; i < 11; i++) {
+			if (!(core.serverMode && (i == 5 || i == 6 || i == 9 || i == 10))) { core.thread_antifreeze[i] += 1; }
 			if (core.thread_antifreeze[i] > 1000) {
 				core.thread_antifreeze[i] = 0;
 				console.error << "[MAIN] Thread " << i << " appears to be frozen..." << endl;
@@ -157,6 +164,7 @@ int main(int argc, char* argv[])
 		script.threadVector[i].join();
 	}
 	console << "[MAIN] Waiting for core threads to finish..." << "\n";
+	core.thread_shutdown[10] = true;	threadPreRender.join();
 	core.thread_shutdown[9] = true;		threadAudio.join();
 	core.thread_shutdown[8] = true;		threadAICore.join();
 	core.thread_shutdown[7] = true;		threadWorldLoader.join();

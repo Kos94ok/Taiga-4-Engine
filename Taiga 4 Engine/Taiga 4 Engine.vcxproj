@@ -146,6 +146,7 @@
     <ClCompile Include="precomp.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="prerender_main.cpp" />
     <ClCompile Include="refSystem_main.cpp" />
     <ClCompile Include="saveload_main.cpp" />
     <ClCompile Include="saveload_util.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="overworld.h" />
     <ClInclude Include="path.h" />
     <ClInclude Include="precomp.h" />
+    <ClInclude Include="prerender.h" />
     <ClInclude Include="refSystem.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="saveload.h" />

@@ -41,10 +41,8 @@ void cWindow::mainPaint()
 		mutex.renderMain.lock();
 		if (core.menuState == STATE_GAME)
 		{
-			//game.access.lock();
 			window.paintTileMap();
 			window.paintUnits();
-			//game.access.unlock();
 			window.paintLighting();
 			window.paintPostFX();
 		}

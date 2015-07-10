@@ -8,6 +8,7 @@
 #include "math.h"
 #include "target.h"
 #include "editor.h"
+#include "prerender.h"
 
 extern sf::RectangleShape brushRect;
 extern sf::CircleShape brushCircle;
@@ -67,24 +68,21 @@ void cWindow::paintUnits()
 	brushVertex.setPrimitiveType(sf::PrimitiveType::Quads);
 	brushRect.setOutlineColor(sf::Color(0, 255, 0));
 
-	game.access.lock();
 	visual.unitsPainted = 0;
+
+	game.access.lock();
+	mutex.renderUnits.lock();
+	preRender.units.ready = false;
+
+	int i;
 	int repeats = 1;
 	if (settings.enableBetterShadows) { repeats += 1; }
-	mutex.renderUnits.lock();
 	for (int u = 0; u < repeats; u++)
 	{
-		for (float y = cameraTop; y < cameraBot; y += step)
-		{
-			for (int i = 0; i < game.unitCounter; i++)
-			{
-				unitLeft = game.unit[i].pos.x - game.unit[i].center.x;
-				unitRight = unitLeft + game.unit[i].size.x;
-
-				if (!game.unit[i].hasRef(REF_UNIT_NORENDER)
-					&& ((game.unit[i].pos.y >= y && game.unit[i].pos.y < y + step && unitRight >= cameraLeft && unitLeft <= cameraRight && !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE))
-					|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE) && y == cameraTop)))
+		for (int i : preRender.units.queue)
 				{
+					//i = preRender.units.queue[index];
+					//console.debug << "[DEBUG] Painting unit " << i << endl;
 					// Display the selection circle
 					/*if (visual.hoveredUnit == game.unit[i].globalId)
 					{
@@ -307,8 +305,6 @@ void cWindow::paintUnits()
 					brushRect.setOutlineThickness(0.00f);
 				}
 			}
-		}
-	}
 	mutex.renderUnits.unlock();
 	game.access.unlock();
 }
