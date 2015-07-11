@@ -36,7 +36,7 @@ void cGameLogic::updateOrders(int elapsedTime)
 					moveSpeed *= abs(cos((game.unit[i].facingAngle - angle) / 2.00f * math.DEGTORAD));
 					// Calculating the point
 					if (math.getDistance(game.unit[i].pos.x, game.unit[i].pos.y, game.unit[i].order[0].targetPos.x, game.unit[i].order[0].targetPos.y)
-				> moveSpeed * timevar)
+						> moveSpeed * timevar)
 					{
 						angle = math.getAngle(game.unit[i].pos.x, game.unit[i].pos.y, game.unit[i].order[0].targetPos.x, game.unit[i].order[0].targetPos.y);
 						offsetX = moveSpeed * timevar * cos(angle * math.DEGTORAD);
@@ -65,8 +65,14 @@ void cGameLogic::updateOrders(int elapsedTime)
 					// Check the camera status
 					if (game.unit[i].globalId == client.unit)
 					{
-						if (camera.lockedToCharacter) { camera.moveto(sf::Vector2f(game.unit[i].pos.x, game.unit[i].pos.y)); }
-						else if (camera.moveWithCharacter) { camera.move(sf::Vector2f(offsetX, offsetY)); }
+						if (camera.lockedToCharacter) {
+							camera.moveto(sf::Vector2f(game.unit[i].pos.x, game.unit[i].pos.y));
+							camera.pos.x = math.round(camera.pos.x);
+							camera.pos.y = math.round(camera.pos.y);
+						}
+						else if (camera.moveWithCharacter) {
+							camera.move(sf::Vector2f(offsetX, offsetY));
+						}
 					}
 					game.access.unlock();
 					// Missile collision check

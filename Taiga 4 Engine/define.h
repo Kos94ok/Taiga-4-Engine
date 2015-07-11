@@ -12,7 +12,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define LINESOFCODE_31_05_2015			9050
 #define LINESOFCODE_09_07_2015			14244
 
-#define LIMIT_CMD						64
+#define LIMIT_CMD						128
 #define LIMIT_TILEMAP					64
 #define LIMIT_TEXTURE					256
 #define LIMIT_ORDERS					256

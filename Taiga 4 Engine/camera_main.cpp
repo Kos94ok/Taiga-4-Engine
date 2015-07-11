@@ -4,6 +4,7 @@
 #include "client.h"
 #include "UI.h"
 #include "window.h"
+#include "math.h"
 
 bool cCamera::isMoving()
 {

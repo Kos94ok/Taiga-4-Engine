@@ -72,7 +72,7 @@ void cWindow::mainPaint()
 	}
 
 	window.winHandle.draw(buffer);
-	window.winHandle.setVerticalSyncEnabled(settings.enableVertSync);
+	window.winHandle.setVerticalSyncEnabled(math.intToBool(settings.enableVertSync));
 	window.winHandle.display();
 	window.winHandle.setVerticalSyncEnabled(false);
 	core.thread_windowTicks += 1;
@@ -81,6 +81,48 @@ void cWindow::mainPaint()
 sf::FloatRect tileRect, tileRectTex;
 sf::IntRect intRectTex;
 void cWindow::paintTileMap()
+{
+	sf::Vector2u texSize = visual.gameTex[database.texture[TEX_WORLD_GROUND]].handle.getSize();
+	sf::Transform miniMatrix;
+	miniMatrix.scale(sf::Vector2f(settings.sampleMod, settings.sampleMod));
+
+	brushRect.setOrigin(0, 0);
+	brushRect.setSize(sf::Vector2f(texSize.x, texSize.y));
+	brushRect.setTexture(&visual.gameTex[database.texture[TEX_WORLD_GROUND]].handle, true);
+	brushRect.setFillColor(sf::Color(255, 255, 255));
+	if (!settings.enableDynamicLight) {
+		brushRect.setFillColor(sf::Color(
+			min(game.ambientLight, 255.0f),
+			min(game.ambientLight, 255.0f),
+			min(game.ambientLight, 255.0f)));
+	}
+	//intRectTex = sf::IntRect(tileRectTex.left, tileRectTex.top, tileRectTex.width, tileRectTex.height);
+	//brushRect.setPosition((float)intRectTex.left - tileRectTex.left, (float)intRectTex.top - tileRectTex.top);
+	//brushRect.setTextureRect(intRectTex);
+
+	sf::FloatRect camRect(camera.pos.x, camera.pos.y, camera.res.x, camera.res.y);
+	int repeats = 1;
+	if (settings.enableBetterShadows) { repeats += 1; }
+
+	for (int rep = 0; rep < repeats; rep++)
+	{
+		for (int y = 0; y < floor(camera.res.y / texSize.y) + 2; y++)
+		{
+			for (int x = 0; x < floor(camera.res.x / texSize.x) + 2; x++)
+			{
+				brushRect.setPosition(math.round((floor(camera.pos.x / texSize.x) + x) * texSize.x), math.round((floor(camera.pos.y / texSize.y) + y) * texSize.y));
+				// Intersection check is faster than rendering
+				if (camRect.intersects(brushRect.getGlobalBounds()))
+				{
+					if (rep == 0) { window.texHandle.draw(brushRect, window.matrixHandle); }
+					else if (rep == 1) { window.texHandleShadow.draw(brushRect, window.matrixHandle); }
+				}
+			}
+		}
+	}
+}
+
+/*void cWindow::paintTileMap()
 {
 	sf::Vector2u texSize = visual.gameTex[database.texture[TEX_WORLD_GROUND]].handle.getSize();
 	sf::Transform miniMatrix;
@@ -96,7 +138,8 @@ void cWindow::paintTileMap()
 	brushRect.setSize(sf::Vector2f(camera.res.x * settings.sampleMod, camera.res.y * settings.sampleMod));
 	brushRect.setTexture(&visual.gameTex[database.texture[TEX_WORLD_GROUND]].handle);
 	brushRect.setFillColor(sf::Color(255, 255, 255));
-	if (!settings.enableDynamicLight) { brushRect.setFillColor(sf::Color(
+	if (!settings.enableDynamicLight) {
+		brushRect.setFillColor(sf::Color(
 			min(game.ambientLight, 255.0f),
 			min(game.ambientLight, 255.0f),
 			min(game.ambientLight, 255.0f)));
@@ -105,11 +148,11 @@ void cWindow::paintTileMap()
 	brushRect.setPosition((float)intRectTex.left - tileRectTex.left, (float)intRectTex.top - tileRectTex.top);
 	brushRect.setTextureRect(intRectTex);
 
-	/*brushRect.setPosition(0.00f, 0.00f);
-	brushRect.setTextureRect(sf::IntRect(tileRectTex));*/
+	brushRect.setPosition(0.00f, 0.00f);
+	brushRect.setTextureRect(sf::IntRect(tileRectTex));
 	window.texHandle.draw(brushRect);
 	if (settings.enableBetterShadows) { window.texHandleShadow.draw(brushRect); }
-}
+}*/
 
 void cWindow::paintLighting()
 {
@@ -212,7 +255,7 @@ void cWindow::paintPostFX()
 		window.texHandleTop.draw(buffer, shader);
 	}
 	// Camera blur
-	if (settings.enableCameraBlur && (camera.moveVector.x != 0 || camera.moveVector.y != 0))
+	if (settings.enableCameraBlur && (camera.moveVector.x != 0.00f || camera.moveVector.y != 0.00f))
 	{
 		if (bufferReady)
 		{

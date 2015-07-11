@@ -225,6 +225,11 @@ cConsole::cConsole()
 	console.cmdSyntax[cmdID] = "\"settings.save\" - Save the settings to the file";
 	console.cmdFunc[cmdID] = cmd_settings_save;
 	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^settings.update");
+	console.cmdWrong[cmdID] = "settings.update";
+	console.cmdSyntax[cmdID] = "\"settings.update\" - Update the settings file contents";
+	console.cmdFunc[cmdID] = cmd_settings_update;
+	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^exit");
 	console.cmdWrong[cmdID] = "exit";
 	console.cmdSyntax[cmdID] = "\"exit\" - Close the game";

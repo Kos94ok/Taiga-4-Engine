@@ -402,6 +402,12 @@ void cmd_settings_save(std::string args[])
 	settings.save();
 }
 
+// Settings.update
+void cmd_settings_update(std::string args[])
+{
+	settings.updateFile();
+}
+
 // Exit command
 void cmd_exit(string args[])
 {

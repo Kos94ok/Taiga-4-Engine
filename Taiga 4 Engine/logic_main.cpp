@@ -159,7 +159,7 @@ void cGameLogic::updateUI(int elapsedTime)
 	// Camera move
 	camera.moveUpdateTimer -= timevar;
 	if (camera.moveUpdateTimer < 0.00f) { camera.moveUpdateTimer = 0.00f; }
-	float camSpeed = 10.00f / camera.zoomFactor;
+	float camSpeed = 1000.00f / camera.zoomFactor;
 	float camVecModIn = 5.00f;
 	float camVecModOut = 5.00f;
 	//camera.moveVector = vec2(0.00f, 0.00f);

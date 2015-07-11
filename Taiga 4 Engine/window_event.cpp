@@ -10,6 +10,7 @@
 #include "camera.h"
 #include "target.h"
 #include "chat.h"
+#include "math.h"
 
 void cWindow::mainEvent()
 {
@@ -303,6 +304,8 @@ void cWindow::mainEvent()
 			camera.moveto(game.unit[game.getUnitId(client.unit)].pos);
 			camera.moveVector.x = 0.50f;
 			camera.moveVector.y = 0.50f;
+			camera.pos.x = math.round(camera.pos.x);
+			camera.pos.y = math.round(camera.pos.y);
 		}
 			// Camera zoom
 		if (eventPoll.type == sf::Event::MouseWheelMoved && !console.displayed && !chat.inFocus)
