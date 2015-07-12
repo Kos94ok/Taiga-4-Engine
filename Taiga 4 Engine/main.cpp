@@ -72,14 +72,11 @@ TODO:
 - Add order confirmation sfx
 - Add weather effects
 - Particle system
-- Fix main unit array memory consumption
 - Add bigger item icon to description
 */
 
 int main(int argc, char* argv[])
 {
-	//console << "Array size: " << (int)(sizeof(cUnit) * LIMIT_UNIT) << endl;
-
 	game.access.lock();
 	for (int i = 0; i < argc; i++)
 	{
@@ -129,7 +126,7 @@ int main(int argc, char* argv[])
 	}
 	game.access.unlock();
 
-	//ai.enable();
+	ai.enable();
 
 	console << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();

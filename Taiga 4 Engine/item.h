@@ -123,8 +123,10 @@ public:
 	bool openable;
 	int itemLimit;
 	int itemCounter;
-	cItem item[LIMIT_ITEMS];
-	int amount[LIMIT_ITEMS];
+	std::vector<cItem> item;
+	std::vector<int> amount;
+	//cItem item[LIMIT_ITEMS];
+	//int amount[LIMIT_ITEMS];
 
 	int add(cItem target, int count = 1);
 	int add(std::string type, int count = 1);

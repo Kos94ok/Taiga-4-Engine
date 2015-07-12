@@ -17,6 +17,7 @@ void cItem::addDescrLine(string line)
 	//descrLinesUsed += 1;
 }
 
+cItem newItem;
 int cItemContainer::add(cItem target, int count)
 {
 	int search = getId(target.type);
@@ -28,9 +29,12 @@ int cItemContainer::add(cItem target, int count)
 	}
 	else if (itemCounter < LIMIT_ITEMS && itemCounter < itemLimit)
 	{
-		item[itemCounter] = target;
-		item[itemCounter].globalId = game.itemGlobalCounter++;
-		amount[itemCounter] = count;
+		newItem = target;
+		newItem.globalId = game.itemGlobalCounter++;
+		item.push_back(newItem);
+		//item[itemCounter] = target;
+		//item[itemCounter].globalId = game.itemGlobalCounter++;
+		amount.push_back(count);
 		itemCounter += 1;
 		//sort(SORT_BYNAME);
 		return itemCounter - 1;
@@ -66,11 +70,13 @@ bool cItemContainer::remove(int id, int count)
 	{
 		if (count == -1 || amount[id] <= count)
 		{
-			for (int i = id; i < itemCounter - 1; i++)
+			/*for (int i = id; i < itemCounter - 1; i++)
 			{
 				item[i] = item[i + 1];
 				amount[i] = amount[i + 1];
-			}
+			}*/
+			item.erase(item.begin() + id);
+			amount.erase(amount.begin() + id);
 			itemCounter -= 1;
 		}
 		else { amount[id] -= count; }

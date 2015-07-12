@@ -25,7 +25,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define LIMIT_RECIPES					64
 #define LIMIT_ITEMS						128
 #define LIMIT_DROP						16
-#define LIMIT_UNIT						2048
+#define LIMIT_UNIT						4096
 #define LIMIT_DB_UNIT					64
 #define LIMIT_DB_ITEM					64
 #define LIMIT_DB_UIELEMENTS				32
