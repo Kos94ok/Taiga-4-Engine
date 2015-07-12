@@ -35,7 +35,7 @@ int cGame::addUnit(string type, vec2f pos, int owner, int variation, bool sendDa
 			// Incrementing
 			unitCounter += 1;
 		}
-		else { console.error << "[ERROR] Unit limit reached!" << "\n"; }
+		else { console.error << "[cGame::addUnit] Unit limit reached!" << "\n"; }
 	}
 
 	// Server

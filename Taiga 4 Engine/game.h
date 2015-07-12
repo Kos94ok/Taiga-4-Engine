@@ -4,6 +4,7 @@
 #include "unit.h"
 #include "util.h"
 #include "item.h"
+#include "particle.h"
 
 class cGame
 {
@@ -12,6 +13,7 @@ public:
 
 	int unitCounter;
 	cUnit unit[LIMIT_UNIT];
+	std::vector<cParticle> particle;
 
 	int unitGlobalCounter;
 	int itemGlobalCounter;

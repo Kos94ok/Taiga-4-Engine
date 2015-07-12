@@ -97,6 +97,9 @@
     <Filter Include="Файлы исходного кода\Window\Pre-Render">
       <UniqueIdentifier>{056a02b9-7a01-4f52-963c-b776b6a6981e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Character\Particle">
+      <UniqueIdentifier>{5ea1c5d8-6b87-4cce-bb62-52759c70be54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -448,6 +451,9 @@
     </ClInclude>
     <ClInclude Include="prerender.h">
       <Filter>Файлы исходного кода\Window\Pre-Render</Filter>
+    </ClInclude>
+    <ClInclude Include="particle.h">
+      <Filter>Файлы исходного кода\Character\Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

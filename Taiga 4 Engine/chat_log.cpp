@@ -25,6 +25,7 @@ void cChat::logMessage(int msg, cArg args)
 		// Args: Filename
 		name = args[0];
 		log << "Screenshot saved as " << name << endl;
+		break;
 	case LOGMSG_RESOURCE_ADD:
 		// Args: Item type, Item count
 		type = args[0];		stringstream(args[1]) >> argi[1];

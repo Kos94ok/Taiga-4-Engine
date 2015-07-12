@@ -112,6 +112,10 @@ void cWindow::mainEvent()
 		// Hotkeys
 		if (eventPoll.type == sf::Event::KeyReleased)
 		{
+			// Screenshot
+			if (eventPoll.key.code == settings.hkScreenshot) {
+				util.makeScreenshot();
+			}
 			// Console
 			if (!chat.inFocus)
 			{
@@ -138,10 +142,6 @@ void cWindow::mainEvent()
 				if (eventPoll.key.code == settings.hkDebugAdvanced) {
 					core.advancedDebug = !core.advancedDebug;
 					if (core.advancedDebug) { core.debugMode = true; }
-				}
-				// Screenshot
-				if (eventPoll.key.code == settings.hkScreenshot) {
-					util.makeScreenshot();
 				}
 				// Escape
 				if (eventPoll.key.code == sf::Keyboard::Escape && ui.contextMenuTarget != CONTEXTMENU_NOTHING) { ui.clearContextMenu(); }

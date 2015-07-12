@@ -215,6 +215,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="overworld.h" />
+    <ClInclude Include="particle.h" />
     <ClInclude Include="path.h" />
     <ClInclude Include="precomp.h" />
     <ClInclude Include="prerender.h" />

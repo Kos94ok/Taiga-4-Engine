@@ -69,7 +69,6 @@ TODO:
 - Script message (event) system?
 - Multiple levels of enemies based on the Slender-style system
 
-- Remake old menu
 - Add order confirmation sfx
 - Add weather effects
 - Particle system
@@ -130,7 +129,7 @@ int main(int argc, char* argv[])
 	}
 	game.access.unlock();
 
-	ai.enable();
+	//ai.enable();
 
 	console << "[MAIN] Overlooking the threads..." << "\n";
 	int globalTime = timeGetTime();
