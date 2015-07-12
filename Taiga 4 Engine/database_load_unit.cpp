@@ -274,7 +274,7 @@ void cDatabase::loadUnits()
 	unit[i].center = unit[i].size / 2.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("red.png");
 	unit[i].addRef(REF_UNIT_NOSHADOW);
-	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE);
+	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE_BOT);
 	i += 1;
 
 	unit[i].type = "fogofwar";
@@ -283,6 +283,6 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("grey.png");
 	unit[i].addRef(REF_UNIT_NOSHADOW);
 	unit[i].addRef(REF_UNIT_NOSELECTION);
-	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE);
+	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE_BOT);
 	i += 1;
 }

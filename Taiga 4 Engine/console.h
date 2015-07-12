@@ -84,6 +84,8 @@ void cmd_camera_lock(std::string args[]);
 void cmd_game_timemod(std::string args[]);
 void cmd_game_settime(std::string args[]);
 void cmd_game_setlight(std::string args[]);
+void cmd_weather_set(std::string args[]);
+void cmd_weather_getlist(std::string args[]);
 void cmd_client_connect(std::string args[]);
 void cmd_client_disconnect(std::string args[]);
 void cmd_server_open(std::string args[]);

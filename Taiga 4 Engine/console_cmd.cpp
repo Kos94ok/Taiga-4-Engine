@@ -10,6 +10,7 @@
 #include "database.h"
 #include "world.h"
 #include "settings.h"
+#include "weather.h"
 
 // Help command
 void cmd_help(string args[])
@@ -239,6 +240,22 @@ void cmd_game_setlight(string args[])
 	float light = 255.00f;
 	stringstream(args[0]) >> light;
 	game.setAmbientLight(light);
+}
+
+// Weather.set
+void cmd_weather_set(string args[])
+{
+	if (args[0] == "snow" && (args[1] == "0" || args[1] == "light")) { weather.set(WEATHER_SNOW_LIGHT); }	
+}
+
+// Weather.getlist
+void cmd_weather_getlist(string args[])
+{
+	console.echo << "[CMD] Weather types:" << endl;
+	console.echo << "[CMD] - snow" << endl;
+	console.echo << "[CMD] Weather modifiers:" << endl;
+	console.echo << "[CMD] - light" << endl;
+	console.echo << "[CMD] - heavy" << endl;
 }
 
 // Client.connect

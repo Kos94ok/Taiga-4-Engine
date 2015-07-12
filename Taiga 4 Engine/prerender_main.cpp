@@ -65,8 +65,10 @@ void cPreRender::updateUnits()
 			unitRight = unitLeft + game.unit[i].size.x;
 
 			if (!game.unit[i].hasRef(REF_UNIT_NORENDER)
-				&& ((game.unit[i].pos.y >= y && game.unit[i].pos.y < y + step && unitRight >= cameraLeft && unitLeft <= cameraRight && !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE))
-				|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE) && y == cameraTop)))
+				&& ((game.unit[i].pos.y >= y && game.unit[i].pos.y < y + step && unitRight >= cameraLeft && unitLeft <= cameraRight
+				&& !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_BOT) && !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_TOP))
+				|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_BOT) && y == cameraTop)
+				|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_TOP) && y == cameraBot - step)))
 			{
 				// Check if unit is already in the queue
 				bool found = false;

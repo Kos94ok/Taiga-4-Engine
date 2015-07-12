@@ -18,11 +18,13 @@ public:
 
 	void paintTileMap();
 	void paintUnits();
+	void paintParticles();
 	void paintLighting();
 	void paintPostFX();
 	void paintUI();
 	void paintDebugInfo();
 	void paintConsole();
+	void paintMousePointer();
 
 	void updateAspectRatio();
 	void showWarning(int msg, bool critical = false);

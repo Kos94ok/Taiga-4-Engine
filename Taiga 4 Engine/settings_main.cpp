@@ -37,6 +37,10 @@ void cSettings::setDefault()
 	this->enableTextureSmoothing = 1;
 	// Camera blur [Game world is blurred when the camera is moving]
 	this->enableCameraBlur = 1;
+	// Particle shadows [Enable snow or rain shadow casting]
+	this->enableParticleShadows = 1;
+	// High precision shadows [Enable high-precision mode for particle shadows]
+	this->enablePreciseParticleShadows = 0;
 	// Unit highlight color
 	this->visualUnitHoverColor = util.convertUnitHighlightColor(1);
 
@@ -219,6 +223,8 @@ void cSettings::load()
 		else if (key.name == "enableBetterLight") { enableBetterLight = math.stringToInt(key.value); }
 		else if (key.name == "enableTextureSmoothing") { enableTextureSmoothing = math.stringToInt(key.value); }
 		else if (key.name == "enableCameraBlur") { enableCameraBlur = math.stringToInt(key.value); }
+		else if (key.name == "enableParticleShadows") { enableParticleShadows = math.stringToInt(key.value); }
+		else if (key.name == "enablePreciseParticleShadows") { enablePreciseParticleShadows = math.stringToInt(key.value); }
 		else if (key.name == "shadowBlur") { shadowBlur = math.stringToInt(key.value); }
 		else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
 		else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
@@ -304,6 +310,8 @@ void cSettings::save()
 		file << "enableTextureSmoothing = " << enableTextureSmoothing << "\n";
 		file << "enableCameraBlur = " << enableCameraBlur << "\n";
 		file << "shadowBlur = " << shadowBlur << "\n";
+		file << "enableParticleShadows = " << enableParticleShadows << "\n";
+		file << "enablePreciseParticleShadows = " << enablePreciseParticleShadows << "\n";
 
 		file << endl << "[Gameplay]" << "\n";
 		file << "enableLazyCast = " << enableLazyCast << "\n";
@@ -411,6 +419,8 @@ void cSettings::updateFile()
 		else if (key.name == "enableTextureSmoothing") { file << key.name + " = " << enableTextureSmoothing << endl; }
 		else if (key.name == "enableCameraBlur") { file << key.name + " = " << enableCameraBlur << endl; }
 		else if (key.name == "shadowBlur") { file << key.name + " = " << shadowBlur << endl; }
+		else if (key.name == "enableParticleShadows") { file << key.name + " = " << enableParticleShadows << endl; }
+		else if (key.name == "enablePreciseParticleShadows") { file << key.name + " = " << enablePreciseParticleShadows << endl; }
 		//else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
 		//else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
 		// Gameplay

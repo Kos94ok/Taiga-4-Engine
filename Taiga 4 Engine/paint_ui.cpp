@@ -166,20 +166,6 @@ void cWindow::paintUI()
 		brushRect.setTextureRect(sf::IntRect(vec2i(barFrame.x * barFrameSize.x, barFrame.y * barFrameSize.y), barFrameSize));
 		window.texHandleTop.draw(brushRect);
 	}
-
-	// Mouse pointer
-	if (visual.mouse.type != POINTER_HARDWARE)
-	{
-		vec2i texSize = visual.mouse.getTexSize();
-		// Alternate texture is a mouse button is pressed
-		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right)) { brushRect.setTexture(&visual.gameTex[visual.mouse.texture].handle, true); }
-		else { brushRect.setTexture(&visual.gameTex[visual.mouse.texturePress].handle, true); }
-		brushRect.setSize(vec2f(texSize.x, texSize.y));
-		brushRect.setOrigin(visual.mouse.getOrigin());
-		brushRect.setPosition(window.getMousePos(false));
-		brushRect.setFillColor(color(255, 255, 255));
-		window.texHandleTop.draw(brushRect);
-	}
 	ui.access.unlock();
 }
 
@@ -330,6 +316,23 @@ void cWindow::paintConsole()
 		brushText.setString(console.history[console.displayedPage][i]);
 		window.texHandleTop.draw(brushText, miniMatrix);
 		console.access.unlock();
+	}
+}
+
+void cWindow::paintMousePointer()
+{
+	// Mouse pointer
+	if (visual.mouse.type != POINTER_HARDWARE)
+	{
+		vec2i texSize = visual.mouse.getTexSize();
+		// Alternate texture is a mouse button is pressed
+		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !sf::Mouse::isButtonPressed(sf::Mouse::Right)) { brushRect.setTexture(&visual.gameTex[visual.mouse.texture].handle, true); }
+		else { brushRect.setTexture(&visual.gameTex[visual.mouse.texturePress].handle, true); }
+		brushRect.setSize(vec2f(texSize.x, texSize.y));
+		brushRect.setOrigin(visual.mouse.getOrigin());
+		brushRect.setPosition(window.getMousePos(false));
+		brushRect.setFillColor(color(255, 255, 255));
+		window.texHandleTop.draw(brushRect);
 	}
 }
 

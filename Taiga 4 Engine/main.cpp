@@ -32,6 +32,8 @@
 #include "logic.h"
 #include "script.h"
 #include "api.h"
+#include "weather.h"
+#include "particle.h"
 
 cCore core;
 cValue value;
@@ -63,6 +65,8 @@ cCodeStats codeStats;
 cAI ai;
 cAPI api;
 cMutexGlobal mutex;
+cWeather weather;
+cParticle particle;
 
 /*
 TODO:
@@ -70,9 +74,21 @@ TODO:
 - Multiple levels of enemies based on the Slender-style system
 
 - Add order confirmation sfx
-- Add weather effects
-- Particle system
 - Add bigger item icon to description
+- Add rain and fog effects
+- Different power levels for weather (don't forget console commands)
+- Smooth transition for weather
+- Add enabled/disabled campfire states
+- Add campfire burnout
+- Add context menu based campfire heal with items
+- Campfire should be built in disabled state
+- Add cold and hunger
+- Fix tree death rotation
+- Add proper death animations for trees and stones
+- Fix item bag shadow
+- Fix interact bug (when character moves past the object before interacting)
+- Fix some item icons (mirror)
+- Add berries and mushrooms!
 */
 
 int main(int argc, char* argv[])

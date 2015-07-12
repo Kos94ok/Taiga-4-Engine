@@ -304,11 +304,12 @@ void gameLogicMain()
 			gamelogic.updateUI(elapsedTime);
 			gamelogic.updateUnits(elapsedTime);
 			gamelogic.updateConnection(elapsedTime);
+			gamelogic.updateParticles(elapsedTime);
 
 			core.thread_serverWorldTicks += 1;
 			core.thread_antifreeze[threadId] = 0;
 		}
-		Sleep(3);
+		Sleep(1);
 	}
 
 	console << "[LOGIC] Cleaning up" << "\n";

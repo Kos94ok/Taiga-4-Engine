@@ -139,6 +139,16 @@ cConsole::cConsole()
 	console.cmdSyntax[cmdID] = "\"game.setlight [num]\" - Set the ambient light to [value]";
 	console.cmdFunc[cmdID] = cmd_game_setlight;
 	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^weather.set [a-zA-Z0-9.,]+");
+	console.cmdWrong[cmdID] = "weather.set";
+	console.cmdSyntax[cmdID] = "\"weather.set [str] (str)\" - Set the weather to [type] with (power)";
+	console.cmdFunc[cmdID] = cmd_weather_set;
+	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^weather.getlist");
+	console.cmdWrong[cmdID] = "weather.getlist";
+	console.cmdSyntax[cmdID] = "\"weather.getlist\" - Display the list of possible weather types";
+	console.cmdFunc[cmdID] = cmd_weather_getlist;
+	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^client.connect [0-9.:a-zA-Z]+");
 	console.cmdWrong[cmdID] = "client.connect";
 	console.cmdSyntax[cmdID] = "\"client.connect [ip]\" - Connect to the server at [address]";

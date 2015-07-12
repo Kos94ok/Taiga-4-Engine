@@ -41,6 +41,10 @@ public:
 	int enableTextureSmoothing;
 	// Camera blur [Game world is blurred when the camera is moving]
 	int enableCameraBlur;
+	// Particle shadows [Enable snow or rain shadow casting]
+	int enableParticleShadows;
+	// High precision shadows [Enable high-precision mode for particle shadows]
+	int enablePreciseParticleShadows;
 	// Unit highlight color
 	sf::Color visualUnitHoverColor;
 

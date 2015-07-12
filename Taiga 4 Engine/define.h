@@ -30,6 +30,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define LIMIT_DB_ITEM					64
 #define LIMIT_DB_UIELEMENTS				32
 #define LIMIT_DB_TEXTURES				32
+#define LIMIT_DB_PARTICLES				32
 #define LIMIT_UI_ELEMENTS				128
 #define LIMIT_SERVER_PLAYERS			32
 #define LIMIT_SERVER_PACKETQUEUE		8192
@@ -150,22 +151,26 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_UNIT_PICKUP					0		// Unit can be picked up as an item
 #define REF_UNIT_HARVESTABLE			1		// Unit can be harvested for the resource
 #define REF_UNIT_NOSHADOW				2		// Unit can not create shadow
-#define REF_UNIT_ALWAYSVISIBLE			3		// Unit will always be rendered on the screen
-#define REF_UNIT_MISSILE				4		// Unit is a projectile
-#define REF_UNIT_ROTATE					5		// Unit's sprite is rotated to the facing angle
-#define REF_UNIT_NOSAVE					6		// Unit is not saved
-#define REF_UNIT_NORENDER				7		// Unit is not displayed on the screen
-#define REF_UNIT_NOUNLOAD				8		// Unit is never unloaded from memory
-#define REF_UNIT_BESTPATHING			9		// Unit's position is validated before moving
-#define REF_UNIT_TREE					10		// Unit can be harvested with axe
-#define REF_UNIT_STONE					11		// Unit can be harvested with pickaxe
-#define REF_UNIT_DAMAGE_RIFLE			12		// Unit deals the damage of the rifle on impact
-#define REF_UNIT_NOSELECTION			13		// Unit is not selectable
-#define REF_UNIT_TARGET					14		// Unit is mousebound target pointer
-#define REF_UNIT_PLACEHOLDER			15		// Unit is a buildable object placeholder
-#define REF_UNIT_NOCOLLISION			16		// Unit is not considered an obstacle
-#define REF_UNIT_PACK					17		// Unit can be packed
-#define REF_UNIT_PACK_TENT				18		// Unit is a packable tent
+#define REF_UNIT_ALWAYSVISIBLE_TOP		3		// Unit will always be rendered on the screen (on top of everything)
+#define REF_UNIT_ALWAYSVISIBLE_BOT		4		// Unit will always be rendered on the screen (below everything)
+#define REF_UNIT_MISSILE				5		// Unit is a projectile
+#define REF_UNIT_ROTATE					6		// Unit's sprite is rotated to the facing angle
+#define REF_UNIT_NOSAVE					7		// Unit is not saved
+#define REF_UNIT_NORENDER				8		// Unit is not displayed on the screen
+#define REF_UNIT_NOUNLOAD				9		// Unit is never unloaded from memory
+#define REF_UNIT_BESTPATHING			10		// Unit's position is validated before moving
+#define REF_UNIT_TREE					11		// Unit can be harvested with axe
+#define REF_UNIT_STONE					12		// Unit can be harvested with pickaxe
+#define REF_UNIT_DAMAGE_RIFLE			13		// Unit deals the damage of the rifle on impact
+#define REF_UNIT_NOSELECTION			14		// Unit is not selectable
+#define REF_UNIT_TARGET					15		// Unit is mousebound target pointer
+#define REF_UNIT_PLACEHOLDER			16		// Unit is a buildable object placeholder
+#define REF_UNIT_NOCOLLISION			17		// Unit is not considered an obstacle
+#define REF_UNIT_PACK					18		// Unit can be packed
+#define REF_UNIT_PACK_TENT				19		// Unit is a packable tent
+#define REF_UNIT_PARTICLE				20		// Unit is a particle
+#define REF_UNIT_PARTICLE_WEATHER		21		// Unit is a weather particle
+#define REF_UNIT_NOACCELERATION			22		// Unit can move backwards
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_CONSUME				2		// Item can be consumed
@@ -187,6 +192,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_ITEM_BUILD_TENT				18		// Item is a buildable tent
 #define REF_ITEM_FLASHLIGHT				19		// Item is a flashlight
 #define REF_ITEM_TORCH					20		// Item is a torch
+#define REF_PARTICLE_ONSCREEN			0		// Particle is always on screen
 
 #define TEX_UI_TOOLTIP					1
 #define TEX_WORLD_GROUND				2
@@ -272,7 +278,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define POWER_STEEL						4
 #define POWER_IMBA						5
 
-#define ID_TEMP							-10
+#define ID_LOCAL						-10
 
 #define MODE_NONE						-1
 #define MODE_TARGET_BUTTON				0

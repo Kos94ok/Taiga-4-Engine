@@ -9,6 +9,7 @@ public:
 	void updateUI(int elapsedTime);
 	void updateUnits(int elapsedTime);
 	void updateConnection(int elapsedTime);
+	void updateParticles(int elapsedTime);
 };
 
 extern cGameLogic gamelogic;

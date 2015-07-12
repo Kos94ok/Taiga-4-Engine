@@ -45,6 +45,7 @@ void cWindow::mainPaint()
 		mutex.renderMain.lock();
 		window.paintTileMap();
 		window.paintUnits();
+		window.paintParticles();
 		window.paintLighting();
 		window.paintPostFX();
 		window.paintUI();
@@ -52,6 +53,7 @@ void cWindow::mainPaint()
 		mutex.renderMain.unlock();
 	}
 	window.paintConsole();
+	if (!core.serverMode) { window.paintMousePointer(); }
 	sf::Sprite buffer;
 
 	// Flushing the buffer
@@ -153,6 +155,35 @@ void cWindow::paintTileMap()
 	window.texHandle.draw(brushRect);
 	if (settings.enableBetterShadows) { window.texHandleShadow.draw(brushRect); }
 }*/
+
+void cWindow::paintParticles()
+{
+	cParticleUnit* unit;
+	float shadowBrightness = (game.ambientLight - 150.00f) / 255.00f * 210.00f;
+	shadowBrightness = max(0.00f, min(255.00f, shadowBrightness));
+	for (int i = 0; i < (int)particle.unit.size(); i++)
+	{
+		unit = &particle.unit[i];
+		brushRect.setSize(unit->size * 0.20f * (unit->lifetime / unit->lifetimeMax) + unit->size * 0.80f);
+		if (i == 0 || particle.unit[i].type != particle.unit[i - 1].type)
+		{
+			brushRect.setOrigin(unit->size / 2.00f);
+			brushRect.setTexture(&visual.gameTex[unit->texture].handle, true);
+		}
+
+		// Object
+		float transpar = (unit->fadeVal / unit->fadeMax);
+		if (shadowBrightness > 0.00f && settings.enableParticleShadows)
+		{
+			brushRect.setPosition(unit->shadowPos);
+			brushRect.setFillColor(color(0, 0, 0, shadowBrightness * transpar));
+			window.texHandle.draw(brushRect, window.matrixHandle);
+		}
+		brushRect.setPosition(unit->pos);
+		brushRect.setFillColor(color(255, 255, 255, 255 * transpar));
+		window.texHandle.draw(brushRect, window.matrixHandle);
+	}
+}
 
 void cWindow::paintLighting()
 {

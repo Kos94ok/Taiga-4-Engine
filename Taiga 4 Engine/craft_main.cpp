@@ -57,7 +57,7 @@ int cCraft::getActiveRecipeRepeats(bool ignoreResource)
 	// Amount of ingridients
 	for (int y = 0; y < recipe[i].ingrCount; y++)
 	{
-		amount = min(amount, craft.cont.getAmount(recipe[i].ingr[y].type) / recipe[i].ingr[y].count);
+		amount = min(amount, craft.cont.getAmount(recipe[i].ingr[y].type) / max(recipe[i].ingr[y].count, 1));
 	}
 	// Amount of resource
 	if (recipe[i].resourceBalance < 0.00f && !ignoreResource)
@@ -93,6 +93,10 @@ void cCraft::checkActiveRecipe()
 {
 	bool match = true;
 	int matchId = -1, id = -1;
+	if (cont.itemCounter == 0) {
+		resultCont.itemCounter = 0;
+		return;
+	}
 
 	// Checking recipe index
 	int recCount = getActiveRecipeCount();

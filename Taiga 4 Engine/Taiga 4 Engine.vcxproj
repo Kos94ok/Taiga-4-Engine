@@ -146,10 +146,12 @@
     <ClCompile Include="item_active.cpp" />
     <ClCompile Include="logic_orders.cpp" />
     <ClCompile Include="logic_units.cpp" />
+    <ClCompile Include="logic_particle.cpp" />
     <ClCompile Include="macro.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math_main.cpp" />
     <ClCompile Include="overworld_main.cpp" />
+    <ClCompile Include="particle_main.cpp" />
     <ClCompile Include="path_main.cpp" />
     <ClCompile Include="precomp.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -183,6 +185,7 @@
     <ClCompile Include="visual_gen.cpp" />
     <ClCompile Include="visual_main.cpp" />
     <ClCompile Include="visual_mouse.cpp" />
+    <ClCompile Include="weather_main.cpp" />
     <ClCompile Include="window_event.cpp" />
     <ClCompile Include="window_main.cpp" />
     <ClCompile Include="paint_main.cpp" />
@@ -230,6 +233,7 @@
     <ClInclude Include="unit.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="visual.h" />
+    <ClInclude Include="weather.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>

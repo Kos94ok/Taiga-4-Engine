@@ -29,7 +29,7 @@ int cGame::addUnit(string type, vec2f pos, int owner, int variation, bool sendDa
 			else if (core.localServer || core.serverMode) { globalId = unitGlobalCounter++; }
 			unit[unitCounter].globalId = globalId;
 			// Playing the sound
-			if (unit[unitCounter].sound.idle.name != "" && globalId != ID_TEMP) {
+			if (unit[unitCounter].sound.idle.name != "" && globalId != ID_LOCAL) {
 				audio.playSound(cSoundQueue(unit[unitCounter].sound.idle, globalId, true));
 			}
 			// Incrementing
@@ -58,7 +58,6 @@ int cGame::addUnitID(string type, vec2f pos, int globalId)
 // Remove unit by global id
 void cGame::removeUnit(int id, bool sendData)
 {
-	//access.lock();
 	if (!sendData || core.serverMode || core.localServer)
 	{
 		// Server
@@ -74,14 +73,16 @@ void cGame::removeUnit(int id, bool sendData)
 		if (id != -1)
 		{
 			unit[id] = unit[unitCounter - 1];
-			/*for (int i = id; i < unitCounter - 1; i++)
-			{
-				unit[i] = unit[i + 1];
-			}*/
 			unitCounter -= 1;
 		}
 	}
-	//access.unlock();
+}
+
+// Remove unit by local id
+void cGame::removeLocalUnit(int id)
+{
+	unit[id] = unit[unitCounter - 1];
+	unitCounter -= 1;
 }
 
 // Kill unit

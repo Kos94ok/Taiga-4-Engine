@@ -4,6 +4,7 @@
 #include "define.h"
 #include "unit.h"
 #include "item.h"
+#include "particle.h"
 #include "UI.h"
 #include "util.h"
 
@@ -35,12 +36,14 @@ public:
 	cUnit unit[LIMIT_DB_UNIT];
 	cItem item[LIMIT_DB_ITEM];
 	cUIElement uiElement[LIMIT_DB_UIELEMENTS];
+	cParticleUnit particle[LIMIT_DB_PARTICLES];
 	int texture[LIMIT_DB_TEXTURES];
 
 	void init();
 	void loadUnits();
 	void loadItems();
 	void loadUI();
+	void loadParticles();
 	void loadTextures();
 	void loadExternal();
 	void clear();
@@ -49,6 +52,7 @@ public:
 	cItem& getItem(std::string type);
 	cItem& findItem(int ref);
 	cUIElement& getUIElement(std::string type);
+	cParticleUnit& getParticle(std::string type);
 
 	bool isItemGood(std::string type);
 };

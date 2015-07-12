@@ -16,6 +16,8 @@ void cDatabase::init()
 	loadUnits();
 	console << "[DATABASE] Loading UI" << endl;
 	loadUI();
+	console << "[DATABASE] Loading Particles" << endl;
+	loadParticles();
 	console << "[DATABASE] Loading Textures" << endl;
 	loadTextures();
 	console << "[DATABASE] Loading External" << endl;
@@ -83,6 +85,23 @@ void cDatabase::loadUI()
 	uiElement[i].tooltip.delay = 0.50f;
 	uiElement[i].tooltip.setText("");
 	uiElement[i].tooltip.offset.y = -20.00f;
+	i += 1;
+}
+
+void cDatabase::loadParticles()
+{
+	int i = 0;
+	particle[i].type = "missingno";
+	particle[i].size = vec2f(20, 20);
+	particle[i].texture = visual.addTexture("black.png");
+	i += 1;
+
+	// Weather: Snow
+	particle[i].type = "weather_snow";
+	particle[i].size = vec2(5, 5);
+	particle[i].movementSpeed = 200.00f;
+	particle[i].texture = visual.addTexture("particle_snow.png");
+	particle[i].addRef(REF_PARTICLE_ONSCREEN);
 	i += 1;
 }
 

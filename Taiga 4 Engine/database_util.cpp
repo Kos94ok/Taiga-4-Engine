@@ -56,6 +56,19 @@ cUIElement& cDatabase::getUIElement(string type)
 	return uiElement[0];
 }
 
+cParticleUnit& cDatabase::getParticle(string type)
+{
+	access.lock();
+	for (int i = 0; i < LIMIT_DB_PARTICLES; i++)
+	{
+		if (particle[i].type == type) { access.unlock(); return particle[i]; }
+	}
+	// Return error-unit
+	console.error << "[ERROR] Can't find the particle [" << type << "] in the database!" << "\n";
+	access.unlock();
+	return particle[0];
+}
+
 bool cDatabase::isItemGood(string type)
 {
 	for (int i = 0; i < LIMIT_DB_ITEM; i++)

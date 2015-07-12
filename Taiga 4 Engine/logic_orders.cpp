@@ -32,8 +32,11 @@ void cGameLogic::updateOrders(int elapsedTime)
 					game.access.lock();
 					// Calculating the movement speed
 					float moveSpeed = game.unit[i].movementSpeed;
-					angle = math.convertAngle(math.getAngle(game.unit[i].pos, game.unit[i].order[0].targetPos));
-					moveSpeed *= abs(cos((game.unit[i].facingAngle - angle) / 2.00f * math.DEGTORAD));
+					if (!game.unit[i].hasRef(REF_UNIT_NOACCELERATION))
+					{
+						angle = math.convertAngle(math.getAngle(game.unit[i].pos, game.unit[i].order[0].targetPos));
+						moveSpeed *= abs(cos((game.unit[i].facingAngle - angle) / 2.00f * math.DEGTORAD));
+					}
 					// Calculating the point
 					if (math.getDistance(game.unit[i].pos.x, game.unit[i].pos.y, game.unit[i].order[0].targetPos.x, game.unit[i].order[0].targetPos.y)
 						> moveSpeed * timevar)
@@ -190,18 +193,6 @@ void cGameLogic::updateOrders(int elapsedTime)
 		{
 			// Projectile destruction
 			if (game.unit[i].hasRef(REF_UNIT_MISSILE))
-			{
-				unitRemoved = true;
-				game.removeUnit(game.unit[i].globalId);
-				i -= 1;
-			}
-		}
-		// Life timer
-		if (game.unit[i].lifeTimer.enabled)
-		{
-			game.unit[i].lifeTimer.time -= timevar;
-			// Your time has come...
-			if (game.unit[i].lifeTimer.time <= 0.00f)
 			{
 				unitRemoved = true;
 				game.removeUnit(game.unit[i].globalId);

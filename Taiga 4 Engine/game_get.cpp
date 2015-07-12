@@ -69,6 +69,19 @@ cUnit& cGame::getUnitByRef(int refFilter)
 	return database.unit[0];
 }
 
+// Get local unit
+cUnit& cGame::getLocalUnit()
+{
+	cUnit* retVal = &database.unit[0];
+	for (int i = 0; i < unitCounter; i++)
+	{
+		if (unit[i].globalId == ID_LOCAL) {
+			retVal = &unit[i];
+		}
+	}
+	return *retVal;
+}
+
 // Get the distance required for interact
 float cGame::getUnitInteractDistance(cUnit unitA, cUnit unitB) {
 	return (unitA.interactDistance + unitB.interactDistance);

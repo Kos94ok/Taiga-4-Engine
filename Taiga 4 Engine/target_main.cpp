@@ -37,13 +37,13 @@ void cTarget::enable_building(int ref)
 	buildRef = ref;
 	// Adding the new unit
 	game.access.lock();
-	game.addUnit(type, vec2f(0.00f, 0.00f), -1, -1, false, ID_TEMP);
-	game.getUnit(ID_TEMP).addRef(REF_UNIT_TARGET);
-	game.getUnit(ID_TEMP).addRef(REF_UNIT_NOSHADOW);
-	game.getUnit(ID_TEMP).addRef(REF_UNIT_NOSELECTION);
-	game.getUnit(ID_TEMP).addRef(REF_UNIT_PLACEHOLDER);
-	game.getUnit(ID_TEMP).addRef(REF_UNIT_NOCOLLISION);
-	game.getUnit(ID_TEMP).light.power = 0.00f;
+	game.addUnit(type, vec2f(0.00f, 0.00f), -1, -1, false, ID_LOCAL);
+	game.getLocalUnit().addRef(REF_UNIT_TARGET);
+	game.getLocalUnit().addRef(REF_UNIT_NOSHADOW);
+	game.getLocalUnit().addRef(REF_UNIT_NOSELECTION);
+	game.getLocalUnit().addRef(REF_UNIT_PLACEHOLDER);
+	game.getLocalUnit().addRef(REF_UNIT_NOCOLLISION);
+	game.getLocalUnit().light.power = 0.00f;
 	game.access.unlock();
 
 	// Activating the script

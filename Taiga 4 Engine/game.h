@@ -4,7 +4,6 @@
 #include "unit.h"
 #include "util.h"
 #include "item.h"
-#include "particle.h"
 
 class cGame
 {
@@ -13,7 +12,6 @@ public:
 
 	int unitCounter;
 	cUnit unit[LIMIT_UNIT];
-	std::vector<cParticle> particle;
 
 	int unitGlobalCounter;
 	int itemGlobalCounter;
@@ -46,6 +44,9 @@ public:
 	// Takes: Unit global id
 	// Returns: Nothing
 	void removeUnit(int id, bool sendData = true);
+	// Takes: Unit local id
+	// Returns: Nothing
+	void removeLocalUnit(int id);
 	// Takes: Unit global id
 	// Returns: Nothing
 	void killUnit(int id);
@@ -71,8 +72,11 @@ public:
 	// Returns: Pointer to first found unit (using physical distance)
 	cUnit& getUnitPhys(sf::Vector2f &pos, int refFilter = -1);
 	// Takes: Reference
-	// Returts: Pointer to first found unit
+	// Returns: Pointer to first found unit
 	cUnit& getUnitByRef(int refFilter);
+	// Takes: Nothing
+	// Returns: Reference to last local-only unit
+	cUnit& getLocalUnit();
 	// Takes: Unit A, Unit B
 	// Returns: Minimum required interact distance
 	float getUnitInteractDistance(cUnit unitA, cUnit unitB);

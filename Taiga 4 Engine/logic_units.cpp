@@ -130,5 +130,17 @@ void cGameLogic::updateUnits(int elapsedTime)
 		{
 			game.killUnit(game.unit[i].globalId);
 		}
+		// Checking life timer
+		if (game.unit[i].lifeTimer.enabled)
+		{
+			game.unit[i].lifeTimer.time -= timevar;
+			// Your time has come...
+			if (game.unit[i].lifeTimer.time <= 0.00f)
+			{
+				if (game.unit[i].globalId == ID_LOCAL) { game.removeLocalUnit(i); }
+				else { game.removeUnit(game.unit[i].globalId); }
+				i -= 1;
+			}
+		}
 	}
 }
