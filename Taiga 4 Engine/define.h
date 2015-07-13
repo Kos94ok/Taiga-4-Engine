@@ -14,7 +14,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 
 #define LIMIT_CMD						128
 #define LIMIT_TILEMAP					64
-#define LIMIT_TEXTURE					256
+#define LIMIT_TEXTURE					512
 #define LIMIT_ORDERS					256
 #define LIMIT_ANIMATIONS				16
 #define LIMIT_REFERENCE					128
@@ -29,7 +29,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define LIMIT_DB_UNIT					64
 #define LIMIT_DB_ITEM					64
 #define LIMIT_DB_UIELEMENTS				32
-#define LIMIT_DB_TEXTURES				32
+#define LIMIT_DB_TEXTURES				512
 #define LIMIT_DB_PARTICLES				32
 #define LIMIT_UI_ELEMENTS				128
 #define LIMIT_SERVER_PLAYERS			32
@@ -44,6 +44,8 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define LIMIT_SOUND						64
 #define LIMIT_PRIORITY_UI				16
 #define LIMIT_PRIORITY_LIGHT			8
+#define LIMIT_GENTEXSIZE_CLOUD			512
+#define LIMIT_GENTEXCOUNT_CLOUD			128
 
 #define STATE_UNDEFINED					-1
 #define STATE_MAINMENU					0
@@ -198,12 +200,14 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define TEX_WORLD_GROUND				2
 #define TEX_ICON_WINDOW					3
 #define TEX_SELECTION_CIRCLE			4
-#define TEX_MOUSE_TARGET				5
-#define TEX_MOUSE_DEFAULT				6
-#define TEX_MOUSE_DEFAULTPRESS			7
-#define TEX_MOUSE_PROGRESS				8
-#define TEX_MOUSE_PROGRESSBG			9
-#define TEX_MOUSE_POINT					10
+#define TEX_CLOUD						5
+#define TEX_MOUSE_TARGET				6
+#define TEX_MOUSE_DEFAULT				7
+#define TEX_MOUSE_DEFAULTPRESS			8
+#define TEX_MOUSE_PROGRESS				9
+#define TEX_MOUSE_PROGRESSBG			10
+#define TEX_MOUSE_POINT					11
+#define TEX_GEN_CLOUD					128		// [128; 256)
 
 #define SHADER_FULLSCREEN				1
 #define SHADER_BLOOM					2

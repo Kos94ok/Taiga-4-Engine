@@ -1,6 +1,7 @@
 
 #pragma once
 #include "precomp.h"
+#include "define.h"
 #include "util.h"
 
 class cSubConsole

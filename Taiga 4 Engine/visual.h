@@ -59,10 +59,13 @@ public:
 	int hoveredUnit;
 
 	void init();
-	int addTexture(std::string name, bool ignoreFilter = false);
-	int createIcon(std::string filename, std::string iconName, vec2i pos, vec2f gridSize);
+	int addTexture(string name, bool ignoreFilter = false);
+	int addTexture(sf::Texture tex, bool ignoreFilter = false);
+	int createIcon(string filename, string iconName, vec2i pos, vec2f gridSize);
 
-	int genHighlighted(std::string filename);
+	sf::RenderTexture renderCloud;
+	int genHighlighted(string filename);
+	int genCloudTexture(vec2f size, vec2f pieceMin, vec2f pieceMax, int pieceCount);
 
 	void setMousePointer(int type);
 	void enableProgressBar(float time);

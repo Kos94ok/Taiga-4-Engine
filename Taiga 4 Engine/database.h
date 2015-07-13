@@ -46,6 +46,7 @@ public:
 	void loadParticles();
 	void loadTextures();
 	void loadExternal();
+	void generateTextures();
 	void clear();
 
 	cUnit& getUnit(std::string type);

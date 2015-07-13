@@ -7,20 +7,66 @@
 #include "math.h"
 #include "particle.h"
 
-float myTimer = 0.00f;
+float cloudTimer = 0.00f;
+float weatherTimer = 0.00f;
 void cGameLogic::updateParticles(int elapsedTime)
 {
-	vec2f bufferArea = vec2f(0.00f, 0.00f);
+	int id;
+	vec2f bufferArea = vec2f(2000.00f, 2000.00f), cloudPos, cloudSizeVec;
 	float timevar = (float)elapsedTime / 1000;
 	timevar *= core.timeModifier;
 
-	// Spawning particles
-	int id;
-	myTimer += timevar;
-	if (weather.current == WEATHER_SNOW_LIGHT && myTimer >= 0.05f)
+	sf::FloatRect camRect(camera.pos.x, camera.pos.y, camera.res.x, camera.res.y);
+	sf::FloatRect cloudRect;
+
+	// Spawning clouds
+	cloudTimer += timevar;
+	if (weather.cloudDensity > 0.00f)
 	{
-		myTimer = 0;
-		for (int i = 0; i < math.rand(3, 7); i++)
+		int cloudCount = (int)weather.cloud.size();
+		while (cloudCount < weather.cloudDensity / 100.00f)
+		{
+			cloudCount = (int)weather.cloud.size();
+			cloudTimer = 0.00f;
+			if (cloudCount < weather.cloudDensity / 100.00f && math.randf(0.00f, 1.00f) < 1.00f)
+			{
+				float cloudSize = math.randf(300.00f, 500.00f);
+				do
+				{
+					//cloudPos.x = camera.pos.x + camera.res.x + cloudSize;
+					//cloudPos.y = camera.pos.y + math.randf(0.00f, camera.res.y);
+					cloudPos.x = math.randf(camera.pos.x - bufferArea.x, camera.pos.x + camera.res.x + bufferArea.x);
+					cloudPos.y = math.randf(camera.pos.y - bufferArea.y, camera.pos.y + camera.res.y + bufferArea.y);
+					cloudSizeVec.x = cloudSize;
+					cloudSizeVec.y = cloudSize;
+					cloudRect = sf::FloatRect(cloudPos - cloudSizeVec / 2.00f, cloudSizeVec);
+				} while (cloudRect.intersects(camRect));
+				weather.createCloud(cloudPos, cloudSizeVec);
+			}
+		}
+	}
+
+	// Updating the cloud data
+	cWeatherCloud* cloud;
+	mutex.renderClouds.lock();
+	for (int i = 0; i < (int)weather.cloud.size(); i++)
+	{
+		cloud = &weather.cloud[i];
+		cloud->pos += cloud->moveVector * timevar;
+		if (weather.cloud[i].pos.x < camera.pos.x - bufferArea.x) { weather.removeCloud(i); }
+		else if (weather.cloud[i].pos.x > camera.pos.x + camera.res.x + bufferArea.x) { weather.removeCloud(i); }
+		else if (weather.cloud[i].pos.y < camera.pos.y - bufferArea.y) { weather.removeCloud(i); }
+		else if (weather.cloud[i].pos.y > camera.pos.y + camera.res.y + bufferArea.y) { weather.removeCloud(i); }
+	}
+	mutex.renderClouds.unlock();
+
+	// Spawning particles
+	weatherTimer += timevar;
+	if (weather.current == WEATHER_SNOW && weatherTimer >= 0.05f)
+	{
+		weatherTimer = 0;
+		int count = math.round(weather.power / 1000.00f);
+		for (int i = 0; i < math.rand(max(0, count - 5), count); i++)
 		{
 			vec2f spawnPoint = vec2f(camera.pos.x + math.randf(0.00, camera.res.x), camera.pos.y + math.randf(0.00f, camera.res.y));
 			id = particle.addUnit("weather_snow", spawnPoint, math.randf(265.00f, 275.00f), math.randf(1.00f, 2.00f), 45.00f);
@@ -61,7 +107,7 @@ void cGameLogic::updateParticles(int elapsedTime)
 			if (unit->lifetime <= 0.00f) {
 				unit->moveVector = vec2f(0.00f, 0.00f);
 				unit->lifetime = 0.00f;
-				unit->setFade(FADE_OUT, 3.00f);
+				unit->setFade(FADE_OUT, 0.50f);
 			}
 		}
 		// Fade

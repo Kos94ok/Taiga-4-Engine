@@ -18,6 +18,7 @@ public:
 
 	void paintTileMap();
 	void paintUnits();
+	void paintClouds();
 	void paintParticles();
 	void paintLighting();
 	void paintPostFX();

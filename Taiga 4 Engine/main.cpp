@@ -116,6 +116,7 @@ int main(int argc, char* argv[])
 	database.init();
 	craft.loadRecipes();
 	visual.init();
+	database.generateTextures();
 	world.analyzeBlueprints();
 
 	// Starting the threads

@@ -8,6 +8,8 @@
 #include "saveload.h"
 #include "game.h"
 #include "math.h"
+#include "weather.h"
+#include "visual.h"
 
 sf::RectangleShape brushRect;
 sf::CircleShape brushCircle;
@@ -45,6 +47,7 @@ void cWindow::mainPaint()
 		mutex.renderMain.lock();
 		window.paintTileMap();
 		window.paintUnits();
+		window.paintClouds();
 		window.paintParticles();
 		window.paintLighting();
 		window.paintPostFX();
@@ -156,24 +159,48 @@ void cWindow::paintTileMap()
 	if (settings.enableBetterShadows) { window.texHandleShadow.draw(brushRect); }
 }*/
 
+void cWindow::paintClouds()
+{
+	brushRect.setScale(vec2f(1.00f, 1.00f));
+	brushRect.setFillColor(color(0, 0, 0));
+	//brushRect.setTexture(&visual.gameTex[database.texture[TEX_CLOUD]].handle);
+	sf::FloatRect camRect(camera.pos.x, camera.pos.y, camera.res.x, camera.res.y);
+	mutex.renderClouds.lock();
+	for (int i = 0; i < (int)weather.cloud.size(); i++)
+	{
+		//brushRect.setTexture(&weather.cloudTexture[i], true);
+		brushRect.setTexture(&visual.gameTex[weather.cloud[i].tex].handle, true);
+		brushRect.setPosition(weather.cloud[i].pos);
+		brushRect.setSize(weather.cloud[i].size);
+		brushRect.setOrigin(weather.cloud[i].size / 2.00f);
+		if (camRect.intersects(brushRect.getGlobalBounds())) {
+			window.texHandleShadow.draw(brushRect, window.matrixHandle);
+		}
+	}
+	mutex.renderClouds.unlock();
+}
+
 void cWindow::paintParticles()
 {
 	cParticleUnit* unit;
 	float shadowBrightness = (game.ambientLight - 150.00f) / 255.00f * 210.00f;
 	shadowBrightness = max(0.00f, min(255.00f, shadowBrightness));
+	if (!settings.enableParticleShadows) { shadowBrightness = 0.00f; }
+
 	for (int i = 0; i < (int)particle.unit.size(); i++)
 	{
+		// Setup
 		unit = &particle.unit[i];
-		brushRect.setSize(unit->size * 0.20f * (unit->lifetime / unit->lifetimeMax) + unit->size * 0.80f);
+		brushRect.setSize(unit->size * 0.50f * (unit->lifetime / unit->lifetimeMax) + unit->size * 0.50f);
+		brushRect.setOrigin(unit->size / 2.00f);
 		if (i == 0 || particle.unit[i].type != particle.unit[i - 1].type)
 		{
-			brushRect.setOrigin(unit->size / 2.00f);
 			brushRect.setTexture(&visual.gameTex[unit->texture].handle, true);
 		}
 
-		// Object
+		// Display
 		float transpar = (unit->fadeVal / unit->fadeMax);
-		if (shadowBrightness > 0.00f && settings.enableParticleShadows)
+		if (shadowBrightness > 0.00f)
 		{
 			brushRect.setPosition(unit->shadowPos);
 			brushRect.setFillColor(color(0, 0, 0, shadowBrightness * transpar));

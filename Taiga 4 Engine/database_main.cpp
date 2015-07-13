@@ -2,6 +2,7 @@
 #include "main.h"
 #include "database.h"
 #include "visual.h"
+#include "math.h"
 
 void cDatabase::init()
 {
@@ -98,7 +99,7 @@ void cDatabase::loadParticles()
 
 	// Weather: Snow
 	particle[i].type = "weather_snow";
-	particle[i].size = vec2(5, 5);
+	particle[i].size = vec2(8, 8);
 	particle[i].movementSpeed = 200.00f;
 	particle[i].texture = visual.addTexture("particle_snow.png");
 	particle[i].addRef(REF_PARTICLE_ONSCREEN);
@@ -110,10 +111,27 @@ void cDatabase::loadTextures()
 	database.texture[TEX_UI_TOOLTIP] = visual.addTexture("ui_tooltip.png");
 	database.texture[TEX_WORLD_GROUND] = visual.addTexture("bg_snow.jpg");
 	database.texture[TEX_SELECTION_CIRCLE] = visual.addTexture("selectionWhite512.png");
+	database.texture[TEX_CLOUD] = visual.addTexture("weather_clouds.png");
 	database.texture[TEX_MOUSE_DEFAULT] = visual.addTexture("mouse_default.png");
 	database.texture[TEX_MOUSE_DEFAULTPRESS] = visual.addTexture("mouse_defaultPress.png");
 	database.texture[TEX_MOUSE_POINT] = visual.addTexture("mouse_point.png");
 	database.texture[TEX_MOUSE_TARGET] = visual.addTexture("mouse_target40.png");
 	database.texture[TEX_MOUSE_PROGRESS] = visual.addTexture("mouse_progress.png");
 	database.texture[TEX_MOUSE_PROGRESSBG] = visual.addTexture("mouse_progressBG.png");
+}
+
+void cDatabase::generateTextures()
+{
+	console << "[DATABASE] Generating textures" << endl;
+	// Generating cloud textures
+	for (int i = 0; i < LIMIT_GENTEXCOUNT_CLOUD; i++)
+	{
+		float cloudSize = math.randf(300.00f, 500.00f);
+		database.texture[TEX_GEN_CLOUD + i] = visual.genCloudTexture(
+			vec2f(cloudSize, cloudSize),
+			vec2f(cloudSize - 250.00f, cloudSize - 250.00f),
+			vec2f(cloudSize - 150.00f, cloudSize - 150.00f),
+			math.rand(3, 5));
+	}
+	console << "[DATABASE] Textures ready" << endl;
 }

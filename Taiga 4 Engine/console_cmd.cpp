@@ -245,7 +245,16 @@ void cmd_game_setlight(string args[])
 // Weather.set
 void cmd_weather_set(string args[])
 {
-	if (args[0] == "snow" && (args[1] == "0" || args[1] == "light")) { weather.set(WEATHER_SNOW_LIGHT); }	
+	int power;
+	if (args[1] == "light") { power = 7000; }
+	else if (args[1] == "0" || args[1] == "medium") { power = 12000; }
+	else if (args[1] == "heavy") { power = 15000; }
+	else { stringstream(args[1]) >> power; }
+
+	if (args[0] == "snow") { weather.set(WEATHER_SNOW, (float)power); }
+	else if (args[0] == "rain") { weather.set(WEATHER_RAIN, (float)power); }
+	else if (args[0] == "clear") { weather.set(WEATHER_CLEAR, (float)power); }
+	else if (args[0] == "cloud") { weather.setClouds((float)power); }
 }
 
 // Weather.getlist
@@ -253,8 +262,12 @@ void cmd_weather_getlist(string args[])
 {
 	console.echo << "[CMD] Weather types:" << endl;
 	console.echo << "[CMD] - snow" << endl;
+	console.echo << "[CMD] - rain" << endl;
+	console.echo << "[CMD] - clear" << endl;
+	console.echo << "[CMD] - cloud" << endl;
 	console.echo << "[CMD] Weather modifiers:" << endl;
 	console.echo << "[CMD] - light" << endl;
+	console.echo << "[CMD] - medium" << endl;
 	console.echo << "[CMD] - heavy" << endl;
 }
 

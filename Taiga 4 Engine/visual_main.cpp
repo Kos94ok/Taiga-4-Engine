@@ -10,6 +10,8 @@ void cVisual::init()
 {
 	// Initializing the constants
 	maxTextureSize = sf::Texture::getMaximumSize();
+	// Initializing the textures
+	renderCloud.create(LIMIT_GENTEXSIZE_CLOUD, LIMIT_GENTEXSIZE_CLOUD);
 	// Initializing the fonts
 	// Main font
 	if (!fontMain.loadFromFile("Data/Fonts/stylo.ttf"))
@@ -74,6 +76,16 @@ int cVisual::addTexture(string name, bool ignoreFilter)
 	visual.gameTex[visual.gameTexCounter].handle.setRepeated(true);
 	if (!ignoreFilter) { visual.gameTex[visual.gameTexCounter].handle.setSmooth(math.intToBool(settings.enableTextureSmoothing)); }
 	visual.gameTex[visual.gameTexCounter].handle.loadFromFile(filepath);
+	visual.gameTexCounter += 1;
+	return visual.gameTexCounter - 1;
+}
+
+int cVisual::addTexture(sf::Texture tex, bool ignoreFilter)
+{
+	visual.gameTex[visual.gameTexCounter].name = "autogen";
+	visual.gameTex[visual.gameTexCounter].handle.setRepeated(true);
+	if (!ignoreFilter) { visual.gameTex[visual.gameTexCounter].handle.setSmooth(math.intToBool(settings.enableTextureSmoothing)); }
+	visual.gameTex[visual.gameTexCounter].handle = tex;
 	visual.gameTexCounter += 1;
 	return visual.gameTexCounter - 1;
 }
