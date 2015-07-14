@@ -137,6 +137,8 @@ void cWindow::mainEvent()
 			// Global hotkeys
 			if (!console.displayed && !chat.inFocus)
 			{
+				// Hide interface
+				if (eventPoll.key.code == settings.hkHideInterface) { ui.toggleDisplay(); }
 				// Debug
 				if (eventPoll.key.code == settings.hkDebugMode) { core.debugMode = !core.debugMode; }
 				if (eventPoll.key.code == settings.hkDebugAdvanced) {

@@ -9,15 +9,131 @@
 
 float cloudTimer = 0.00f;
 float weatherTimer = 0.00f;
+float particleTimer = 0.00f;
 void cGameLogic::updateParticles(int elapsedTime)
 {
 	int id;
+	float randVal;
 	vec2f bufferArea = vec2f(2000.00f, 2000.00f), cloudPos, cloudSizeVec;
 	float timevar = (float)elapsedTime / 1000;
 	timevar *= core.timeModifier;
 
 	sf::FloatRect camRect(camera.pos.x, camera.pos.y, camera.res.x, camera.res.y);
 	sf::FloatRect cloudRect;
+
+	// Updating global weather data
+		// Determine the new values
+	weatherTimer += timevar;
+	if (weatherTimer > 15.00f)
+	{
+		weatherTimer = 0.00f;
+		// Only change weather on server side
+		if (core.serverSide() && math.randf(0.00f, 1.00f) < 0.20f)
+		{
+			randVal = math.randf(0.00f, 1.00f);
+			// Sunny ( 10% )
+			if (randVal <= 0.10f) {
+				console.debug << "[DEBUG] Weather: Sunny" << endl;
+				weather.changeTo(WEATHER_SNOW, 0.00f);
+				weather.changeWindTo(0.00f);
+				weather.changeCloudsTo(math.randf(500.00f, 2500.00f));
+			}
+			// Light snow ( 15% )
+			else if (randVal <= 0.25f) {
+				console.debug << "[DEBUG] Weather: Light snow" << endl;
+				weather.changeTo(WEATHER_SNOW, math.randf(2500.00f, 7500.00f));
+				weather.changeWindTo(math.randf(0.00f, 3000.00f));
+				weather.changeCloudsTo(math.randf(2500.00f, 10000.00f));
+			}
+			// Tons of snow ( 15% )
+			else if (randVal <= 0.40f) {
+				console.debug << "[DEBUG] Weather: Tons of snow" << endl;
+				weather.changeTo(WEATHER_SNOW, math.randf(15000.00, 25000.00f));
+				weather.changeWindTo(math.randf(0.00f, 3000.00f));
+				weather.changeCloudsTo(math.randf(30000.00f, 50000.00f));
+			}
+			// Really windy ( 10% )
+			else if (randVal <= 0.50f) {
+				console.debug << "[DEBUG] Weather: Really windy" << endl;
+				weather.changeTo(WEATHER_SNOW, math.randf(0.00f, 5000.00f));
+				weather.changeWindTo(math.randf(15000.00f, 20000.00f));
+				weather.changeCloudsTo(math.randf(500.00f, 10000.00f));
+			}
+			// Clouds everywhere ( 20% )
+			else if (randVal <= 0.70f) {
+				console.debug << "[DEBUG] Weather: Clouds everywhere" << endl;
+				weather.changeTo(WEATHER_SNOW, math.randf(0.00f, 1000.00f));
+				weather.changeWindTo(math.randf(0.00f, 5000.00f));
+				weather.changeCloudsTo(math.randf(30000.00f, 50000.00f));
+			}
+			// Blizzard ( 5% )
+			else if (randVal <= 0.75f) {
+				console.debug << "[DEBUG] Weather: Blizzard" << endl;
+				weather.changeTo(WEATHER_SNOW, math.randf(15000.00f, 25000.00f));
+				weather.changeWindTo(math.randf(15000.00f, 20000.00f));
+				weather.changeCloudsTo(math.randf(30000.00f, 50000.00f));
+			}
+			// Everything medium ( 15% )
+			else if (randVal <= 0.90f) {
+				console.debug << "[DEBUG] Weather: Everything medium" << endl;
+				weather.changeTo(WEATHER_SNOW, math.randf(7500.00f, 15000.00f));
+				weather.changeWindTo(math.randf(5000.00f, 15000.00f));
+				weather.changeCloudsTo(math.randf(15000.00f, 25000.00f));
+			}
+			// Completely random ( 10% )
+			else {
+				console.debug << "[DEBUG] Weather: Random" << endl;
+				weather.changeTo(WEATHER_SNOW, math.randf(0.00f, 25000.00f));
+				weather.changeWindTo(math.randf(0.00f, 20000.00f));
+				weather.changeCloudsTo(math.randf(500.00f, 50000.00f));
+			}
+
+			// Snow
+			/*if (math.randf(0.00f, 1.00f) < 0.20f) {
+				weather.changeTo(WEATHER_SNOW, math.randf(0.00f, 20000.00f));
+			}
+			// Wind
+			if (math.randf(0.00f, 1.00f) < 0.50f) {
+				weather.changeWindTo(math.randf(0.00f, 20000.00f));
+			}
+			// Clouds
+			if (math.randf(0.00f, 1.00f) < 0.10f) {
+				weather.changeCloudsTo(math.randf(500.00f, 50000.00f));
+			}*/
+		}
+	}
+		// Updating current values
+	float snowPowerMod = 250.00f;
+	float windPowerMod = 300.00f;
+	float cloudPowerMod = 300.00f;
+		// Snow power
+	if (weather.power[WEATHER_SNOW] < weather.targetPower[WEATHER_SNOW]) {
+		weather.power[WEATHER_SNOW] += snowPowerMod * timevar;
+		if (weather.power[WEATHER_SNOW] > weather.targetPower[WEATHER_SNOW]) { weather.power[WEATHER_SNOW] = weather.targetPower[WEATHER_SNOW]; }
+	}
+	else if (weather.power[WEATHER_SNOW] > weather.targetPower[WEATHER_SNOW]) {
+		weather.power[WEATHER_SNOW] -= snowPowerMod * timevar;
+		if (weather.power[WEATHER_SNOW] < weather.targetPower[WEATHER_SNOW]) { weather.power[WEATHER_SNOW] = weather.targetPower[WEATHER_SNOW]; }
+	}
+		// Wind power
+	if (weather.windPower < weather.targetWind) {
+		weather.windPower += windPowerMod * timevar;
+		if (weather.windPower > weather.targetWind) { weather.windPower = weather.targetWind; }
+	}
+	else if (weather.windPower > weather.targetWind) {
+		weather.windPower -= windPowerMod * timevar;
+		if (weather.windPower < weather.targetWind) { weather.windPower = weather.targetWind; }
+	}
+		// Cloud power
+	if (weather.cloudDensity < weather.targetCloud) {
+		weather.cloudDensity += cloudPowerMod * timevar;
+		if (weather.cloudDensity > weather.targetCloud) { weather.cloudDensity = weather.targetCloud; }
+	}
+	else if (weather.cloudDensity > weather.targetCloud) {
+		weather.cloudDensity -= cloudPowerMod * timevar;
+		if (weather.cloudDensity < weather.targetCloud) { weather.cloudDensity = weather.targetCloud; }
+	}
+	
 
 	// Spawning clouds
 	cloudTimer += timevar;
@@ -48,11 +164,12 @@ void cGameLogic::updateParticles(int elapsedTime)
 
 	// Updating the cloud data
 	cWeatherCloud* cloud;
+	float moveMod = timevar * max(0.20f, weather.windPower / 10000.00f);
 	mutex.renderClouds.lock();
 	for (int i = 0; i < (int)weather.cloud.size(); i++)
 	{
 		cloud = &weather.cloud[i];
-		cloud->pos += cloud->moveVector * timevar;
+		cloud->pos += cloud->moveVector * moveMod;
 		if (weather.cloud[i].pos.x < camera.pos.x - bufferArea.x) { weather.removeCloud(i); }
 		else if (weather.cloud[i].pos.x > camera.pos.x + camera.res.x + bufferArea.x) { weather.removeCloud(i); }
 		else if (weather.cloud[i].pos.y < camera.pos.y - bufferArea.y) { weather.removeCloud(i); }
@@ -60,19 +177,22 @@ void cGameLogic::updateParticles(int elapsedTime)
 	}
 	mutex.renderClouds.unlock();
 
-	// Spawning particles
-	weatherTimer += timevar;
-	if (weather.current == WEATHER_SNOW && weatherTimer >= 0.05f)
+	// Spawning snow
+	particleTimer += timevar;
+	if (particleTimer >= 0.05f)
 	{
-		weatherTimer = 0;
-		int count = math.round(weather.power / 1000.00f);
-		for (int i = 0; i < math.rand(max(0, count - 5), count); i++)
+		particleTimer = 0;
+		if (weather.power[WEATHER_SNOW] > 0.00f)
 		{
-			vec2f spawnPoint = vec2f(camera.pos.x + math.randf(0.00, camera.res.x), camera.pos.y + math.randf(0.00f, camera.res.y));
-			id = particle.addUnit("weather_snow", spawnPoint, math.randf(265.00f, 275.00f), math.randf(1.00f, 2.00f), 45.00f);
-			particle.unit[id].movementSpeed = math.rand(50, 100);
-			particle.unit[id].updateGenData();
-			particle.unit[id].setFade(FADE_IN, 0.50f);
+			int count = math.round(weather.power[WEATHER_SNOW] / 1000.00f);
+			for (int i = 0; i < math.rand(max(0, count - 5), count); i++)
+			{
+				vec2f spawnPoint = vec2f(camera.pos.x + math.randf(0.00, camera.res.x), camera.pos.y + math.randf(0.00f, camera.res.y));
+				id = particle.addUnit("weather_snow", spawnPoint, math.randf(265.00f, 275.00f) + (weather.windPower / 10000.00f) * 30.00f, math.randf(1.00f, 2.00f), 45.00f);
+				particle.unit[id].movementSpeed = math.rand(50, 100) * max(1.00f, weather.windPower / 2500.00f);
+				particle.unit[id].updateGenData();
+				particle.unit[id].setFade(FADE_IN, 0.50f);
+			}
 		}
 	}
 

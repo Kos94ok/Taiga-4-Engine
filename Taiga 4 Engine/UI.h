@@ -143,6 +143,8 @@ public:
 class cUI
 {
 public:
+	bool displayed;
+
 	int mouseStateLMB;
 	int mouseStateRMB;
 	float mouseNotMoving;
@@ -206,7 +208,11 @@ public:
 	void createContextMenuForUnit(int targetUnit);
 	void clearContextMenu();
 
+	// Other
+	void toggleDisplay();
+
 	cUI() {
+		displayed = true;
 		lastCalledElementId = -1;
 		clickTimer = 0.00f;
 		invOpened = false;

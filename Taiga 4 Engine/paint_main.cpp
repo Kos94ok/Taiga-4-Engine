@@ -166,6 +166,7 @@ void cWindow::paintClouds()
 	//brushRect.setTexture(&visual.gameTex[database.texture[TEX_CLOUD]].handle);
 	sf::FloatRect camRect(camera.pos.x, camera.pos.y, camera.res.x, camera.res.y);
 	mutex.renderClouds.lock();
+	visual.cloudsPainted = 0;
 	for (int i = 0; i < (int)weather.cloud.size(); i++)
 	{
 		//brushRect.setTexture(&weather.cloudTexture[i], true);
@@ -175,6 +176,7 @@ void cWindow::paintClouds()
 		brushRect.setOrigin(weather.cloud[i].size / 2.00f);
 		if (camRect.intersects(brushRect.getGlobalBounds())) {
 			window.texHandleShadow.draw(brushRect, window.matrixHandle);
+			visual.cloudsPainted += 1;
 		}
 	}
 	mutex.renderClouds.unlock();
@@ -186,8 +188,55 @@ void cWindow::paintParticles()
 	float shadowBrightness = (game.ambientLight - 150.00f) / 255.00f * 210.00f;
 	shadowBrightness = max(0.00f, min(255.00f, shadowBrightness));
 	if (!settings.enableParticleShadows) { shadowBrightness = 0.00f; }
+	visual.particlesPainted = 0;
 
-	for (int i = 0; i < (int)particle.unit.size(); i++)
+	int repeats = 1;
+	if (settings.enableParticleShadows && settings.enableBetterParticleShadows) { repeats += 1; }
+	for (int a = 0; a < repeats; a++)
+	{
+		for (int i = 0; i < (int)particle.unit.size(); i++)
+		{
+			// Setup
+			unit = &particle.unit[i];
+			brushRect.setSize(unit->size * 0.50f * (unit->lifetime / unit->lifetimeMax) + unit->size * 0.50f);
+			brushRect.setOrigin(unit->size / 2.00f);
+			if (i == 0 || particle.unit[i].type != particle.unit[i - 1].type)
+			{
+				brushRect.setTexture(&visual.gameTex[unit->texture].handle, true);
+			}
+
+			// Display
+			float transpar = (unit->fadeVal / unit->fadeMax);
+			if (a == 0)
+			{
+				if (shadowBrightness > 0.00f && settings.enableParticleShadows && !settings.enableBetterParticleShadows)
+				{
+					brushRect.setPosition(unit->shadowPos);
+					brushRect.setFillColor(color(0, 0, 0, shadowBrightness * transpar));
+					window.texHandle.draw(brushRect, window.matrixHandle);
+				}
+				brushRect.setPosition(unit->pos);
+				brushRect.setFillColor(color(255, 255, 255, 255 * transpar));
+				window.texHandle.draw(brushRect, window.matrixHandle);
+				visual.particlesPainted += 1;
+			}
+			else if (a == 1)
+			{
+				brushRect.setPosition(unit->shadowPos);
+				brushRect.setFillColor(color(0, 0, 0, 255 * transpar));
+				window.texHandleShadow.draw(brushRect, window.matrixHandle);
+				if (settings.enablePreciseParticleShadows)
+				{
+					brushRect.setPosition(unit->pos);
+					brushRect.setFillColor(color(255, 255, 255, 255 * transpar));
+					window.texHandleShadow.draw(brushRect, window.matrixHandle);
+				}
+			}
+		}
+	}
+
+
+	/*for (int i = 0; i < (int)particle.unit.size(); i++)
 	{
 		// Setup
 		unit = &particle.unit[i];
@@ -209,7 +258,8 @@ void cWindow::paintParticles()
 		brushRect.setPosition(unit->pos);
 		brushRect.setFillColor(color(255, 255, 255, 255 * transpar));
 		window.texHandle.draw(brushRect, window.matrixHandle);
-	}
+		visual.particlesPainted += 1;
+	}*/
 }
 
 void cWindow::paintLighting()

@@ -177,3 +177,8 @@ void cUI::setFadeTimeByRef(int ref, float time, int type)
 		}
 	}
 }
+
+void cUI::toggleDisplay()
+{
+	displayed = !displayed;
+}

@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "UI.h"
 #include "chat.h"
+#include "weather.h"
 
 bool cClient::msgBig(sf::Packet input)
 {
@@ -387,6 +388,36 @@ bool cClient::msgGame(sf::Packet input)
 	{
 		input >> argf[0];
 		game.ambientLight = argf[0];
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Weather type and power
+	if (msg == MSG_GAME_WEATHER)
+	{
+		input >> argi[0] >> argf[1];
+		weather.changeTo(argi[0], argf[1]);
+
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Wind power
+	if (msg == MSG_GAME_WIND)
+	{
+		input >> argf[0];
+		weather.changeWindTo(argf[0]);
+
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Clouds
+	if (msg == MSG_GAME_CLOUD)
+	{
+		input >> argf[0];
+		weather.changeCloudsTo(argf[0]);
+
 		return true;
 	}
 	// ============================================

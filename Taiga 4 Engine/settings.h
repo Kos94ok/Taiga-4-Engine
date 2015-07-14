@@ -43,6 +43,8 @@ public:
 	int enableCameraBlur;
 	// Particle shadows [Enable snow or rain shadow casting]
 	int enableParticleShadows;
+	// High precision shadows [Enable shader mode for particle shadows]
+	int enableBetterParticleShadows;
 	// High precision shadows [Enable high-precision mode for particle shadows]
 	int enablePreciseParticleShadows;
 	// Unit highlight color
@@ -125,6 +127,7 @@ public:
 	sf::Keyboard::Key hkConsole;
 	sf::Keyboard::Key hkDebugMode;
 	sf::Keyboard::Key hkDebugAdvanced;
+	sf::Keyboard::Key hkHideInterface;
 	sf::Keyboard::Key hkScreenshot;
 
 	//========================================

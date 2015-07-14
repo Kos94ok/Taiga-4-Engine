@@ -56,6 +56,8 @@ public:
 
 	float shadowBrightness;
 	int unitsPainted;
+	int cloudsPainted;
+	int particlesPainted;
 	int hoveredUnit;
 
 	void init();

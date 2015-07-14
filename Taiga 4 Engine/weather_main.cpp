@@ -1,10 +1,12 @@
 
+#include "main.h"
 #include "weather.h"
 #include "math.h"
 #include "camera.h"
 #include "console.h"
 #include "visual.h"
 #include "database.h"
+#include "server.h"
 
 void cWeatherCloud::updateGenData()
 {
@@ -13,19 +15,53 @@ void cWeatherCloud::updateGenData()
 
 void cWeather::set(int id, float power)
 {
-	current = id;
-	this->power = power;
-}
-
-void cWeather::changeTo(int id, float power, float time)
-{
-	set(id, power);
-	//changeType = id;
+	this->power[id] = power;
 }
 
 void cWeather::setClouds(float power)
 {
 	cloudDensity = power;
+}
+
+void cWeather::setWind(float power)
+{
+	windPower = power;
+}
+
+void cWeather::changeTo(int id, float power)
+{
+	targetPower[id] = power;
+	// Server side
+	if (core.serverSide())
+	{
+		sf::Packet data;
+		data << MSG_GAME_WEATHER << id << power;
+		server.sendPacket(PLAYERS_REMOTE, data);
+	}
+}
+
+void cWeather::changeCloudsTo(float power)
+{
+	targetCloud = power;
+	// Server side
+	if (core.serverSide())
+	{
+		sf::Packet data;
+		data << MSG_GAME_CLOUD << power;
+		server.sendPacket(PLAYERS_REMOTE, data);
+	}
+}
+
+void cWeather::changeWindTo(float power)
+{
+	targetWind = power;
+	// Server side
+	if (core.serverSide())
+	{
+		sf::Packet data;
+		data << MSG_GAME_WIND << power;
+		server.sendPacket(PLAYERS_REMOTE, data);
+	}
 }
 
 cWeatherCloud newCloud;
@@ -53,8 +89,4 @@ void cWeather::removeCloud(int id)
 	//cloudTexture.pop_back();
 	//cloud.erase(cloud.begin() + id);
 	//cloudTexture.erase(cloudTexture.begin() + id);
-}
-
-cWeather::cWeather() {
-	current = WEATHER_CLEAR;
 }

@@ -253,8 +253,8 @@ void cmd_weather_set(string args[])
 
 	if (args[0] == "snow") { weather.set(WEATHER_SNOW, (float)power); }
 	else if (args[0] == "rain") { weather.set(WEATHER_RAIN, (float)power); }
-	else if (args[0] == "clear") { weather.set(WEATHER_CLEAR, (float)power); }
 	else if (args[0] == "cloud") { weather.setClouds((float)power); }
+	else if (args[0] == "wind") { weather.setWind((float)power); }
 }
 
 // Weather.getlist
@@ -262,8 +262,7 @@ void cmd_weather_getlist(string args[])
 {
 	console.echo << "[CMD] Weather types:" << endl;
 	console.echo << "[CMD] - snow" << endl;
-	console.echo << "[CMD] - rain" << endl;
-	console.echo << "[CMD] - clear" << endl;
+	console.echo << "[CMD] - wind" << endl;
 	console.echo << "[CMD] - cloud" << endl;
 	console.echo << "[CMD] Weather modifiers:" << endl;
 	console.echo << "[CMD] - light" << endl;

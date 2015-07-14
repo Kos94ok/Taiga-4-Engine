@@ -10,6 +10,8 @@
 #include "game.h"
 #include "camera.h"
 #include "client.h"
+#include "particle.h"
+#include "weather.h"
 
 extern sf::RectangleShape brushRect;
 extern sf::CircleShape brushCircle;
@@ -19,6 +21,7 @@ extern sf::Text brushText;
 
 void cWindow::paintUI()
 {
+	if (!ui.displayed) { return; }
 	ui.access.lock();
 
 	float fade;
@@ -256,7 +259,7 @@ void cWindow::paintDebugInfo()
 	// Overlay
 	brushRect.setOrigin(0, 0);
 	brushRect.setPosition(0, 0);
-	brushRect.setSize(sf::Vector2f(150, 90));
+	brushRect.setSize(sf::Vector2f(160, 200));
 	brushRect.setTexture(0);
 	brushRect.setFillColor(sf::Color(0, 0, 0, 150));
 	window.texHandleTop.draw(brushRect, miniMatrix);
@@ -279,9 +282,39 @@ void cWindow::paintDebugInfo()
 	brushText.setString(text);
 	window.texHandleTop.draw(brushText, miniMatrix);
 
-	// Units
+	// Unit count
 	brushText.setPosition(5, 70);
 	text = "Units: " + to_string(visual.unitsPainted) + " / " + to_string(game.unitCounter);
+	brushText.setString(text);
+	window.texHandleTop.draw(brushText, miniMatrix);
+
+	// Cloud count
+	brushText.setPosition(5, 90);
+	text = "Clouds: " + to_string(visual.cloudsPainted) + " / " + to_string((int)weather.cloud.size());
+	brushText.setString(text);
+	window.texHandleTop.draw(brushText, miniMatrix);
+
+	// Particle count
+	brushText.setPosition(5, 110);
+	text = "Particles: " + to_string(visual.particlesPainted) + " / " + to_string(particle.unitCounter);
+	brushText.setString(text);
+	window.texHandleTop.draw(brushText, miniMatrix);
+
+	// Snow power
+	brushText.setPosition(5, 140);
+	text = "Snow power: " + to_string(math.round(weather.power[WEATHER_SNOW]));
+	brushText.setString(text);
+	window.texHandleTop.draw(brushText, miniMatrix);
+
+	// Wind power
+	brushText.setPosition(5, 160);
+	text = "Wind power: " + to_string(math.round(weather.windPower));
+	brushText.setString(text);
+	window.texHandleTop.draw(brushText, miniMatrix);
+
+	// Cloud density
+	brushText.setPosition(5, 180);
+	text = "Cloud density: " + to_string(math.round(weather.cloudDensity));
 	brushText.setString(text);
 	window.texHandleTop.draw(brushText, miniMatrix);
 }

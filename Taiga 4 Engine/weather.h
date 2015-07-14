@@ -1,10 +1,11 @@
 
 #include "precomp.h"
+#include "math.h"
 
-#define WEATHER_CLEAR			0
-#define WEATHER_SNOW			1
-#define WEATHER_RAIN			2
-#define WEATHER_CLOUD			3
+#define WEATHER_SNOW					0
+#define WEATHER_RAIN					1
+
+#define LIMIT_WEATHERTYPE				8
 
 class cWeatherCloud
 {
@@ -22,9 +23,12 @@ public:
 class cWeather
 {
 public:
-	int current;
-	float power;
+	float power[LIMIT_WEATHERTYPE];
 	float cloudDensity;
+	float windPower;
+	float targetPower[LIMIT_WEATHERTYPE];
+	float targetCloud;
+	float targetWind;
 
 	vector<cWeatherCloud> cloud;
 	vector<sf::Texture> cloudTexture;
@@ -36,10 +40,22 @@ public:
 	//float changeTimerMax;
 
 	void set(int id, float power);
-	void changeTo(int id, float power, float time);
 	void setClouds(float power);
+	void setWind(float power);
+	void changeTo(int id, float power);
+	void changeCloudsTo(float power);
+	void changeWindTo(float power);
 
-	cWeather();
+	cWeather() {
+		power[WEATHER_SNOW] = math.randf(0.00f, 20000.00f);
+		targetPower[WEATHER_SNOW] = math.randf(0.00f, 20000.00f);
+
+		windPower = math.randf(1000.00f, 5000.00f);
+		targetWind = math.randf(1000.00f, 5000.00f);
+
+		cloudDensity = math.randf(500.00f, 20000.00f);
+		targetCloud = math.randf(500.00f, 20000.00f);
+	}
 };
 
 extern cWeather weather;

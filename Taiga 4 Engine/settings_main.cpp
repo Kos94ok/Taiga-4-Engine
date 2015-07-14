@@ -39,8 +39,10 @@ void cSettings::setDefault()
 	this->enableCameraBlur = 1;
 	// Particle shadows [Enable snow or rain shadow casting]
 	this->enableParticleShadows = 1;
+	// High precision shadows [Enable shader mode for particle shadows]
+	this->enableBetterParticleShadows = 1;
 	// High precision shadows [Enable high-precision mode for particle shadows]
-	this->enablePreciseParticleShadows = 0;
+	this->enablePreciseParticleShadows = 1;
 	// Unit highlight color
 	this->visualUnitHoverColor = util.convertUnitHighlightColor(1);
 
@@ -132,6 +134,7 @@ void cSettings::setDefault()
 	this->hkConsole = sf::Keyboard::Tilde;
 	this->hkDebugMode = sf::Keyboard::F3;
 	this->hkDebugAdvanced = sf::Keyboard::F4;
+	this->hkHideInterface = sf::Keyboard::F11;
 	this->hkScreenshot = sf::Keyboard::F12;
 
 	//========================================
@@ -224,6 +227,7 @@ void cSettings::load()
 		else if (key.name == "enableTextureSmoothing") { enableTextureSmoothing = math.stringToInt(key.value); }
 		else if (key.name == "enableCameraBlur") { enableCameraBlur = math.stringToInt(key.value); }
 		else if (key.name == "enableParticleShadows") { enableParticleShadows = math.stringToInt(key.value); }
+		else if (key.name == "enableBetterParticleShadows") { enableBetterParticleShadows = math.stringToInt(key.value); }
 		else if (key.name == "enablePreciseParticleShadows") { enablePreciseParticleShadows = math.stringToInt(key.value); }
 		else if (key.name == "shadowBlur") { shadowBlur = math.stringToInt(key.value); }
 		else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
@@ -278,6 +282,7 @@ void cSettings::load()
 		else if (key.name == "hkConsole") { hkConsole = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkDebugMode") { hkDebugMode = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkDebugAdvanced") { hkDebugAdvanced = sf::Keyboard::Key(math.stringToInt(key.value)); }
+		else if (key.name == "hkHideInterface") { hkHideInterface = sf::Keyboard::Key(math.stringToInt(key.value)); }
 		else if (key.name == "hkScreenshot") { hkScreenshot = sf::Keyboard::Key(math.stringToInt(key.value)); }
 	}
 
@@ -311,6 +316,7 @@ void cSettings::save()
 		file << "enableCameraBlur = " << enableCameraBlur << "\n";
 		file << "shadowBlur = " << shadowBlur << "\n";
 		file << "enableParticleShadows = " << enableParticleShadows << "\n";
+		file << "enableBetterParticleShadows = " << enableBetterParticleShadows << "\n";
 		file << "enablePreciseParticleShadows = " << enablePreciseParticleShadows << "\n";
 
 		file << endl << "[Gameplay]" << "\n";
@@ -367,6 +373,7 @@ void cSettings::save()
 		file << "hkConsole = " << hkConsole << "\n";
 		file << "hkDebugMode = " << hkDebugMode << "\n";
 		file << "hkDebugAdvanced = " << hkDebugAdvanced << "\n";
+		file << "hkHideInterface = " << hkHideInterface << "\n";
 		file << "hkScreenshot = " << hkScreenshot << "\n";
 	}
 	else { console.error << "[ERROR] Can't save the settings file!" << "\n"; }
@@ -420,6 +427,7 @@ void cSettings::updateFile()
 		else if (key.name == "enableCameraBlur") { file << key.name + " = " << enableCameraBlur << endl; }
 		else if (key.name == "shadowBlur") { file << key.name + " = " << shadowBlur << endl; }
 		else if (key.name == "enableParticleShadows") { file << key.name + " = " << enableParticleShadows << endl; }
+		else if (key.name == "enableBetterParticleShadows") { file << key.name + " = " << enableBetterParticleShadows << endl; }
 		else if (key.name == "enablePreciseParticleShadows") { file << key.name + " = " << enablePreciseParticleShadows << endl; }
 		//else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
 		//else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
@@ -473,6 +481,7 @@ void cSettings::updateFile()
 		else if (key.name == "hkConsole") { file << key.name + " = " << hkConsole << endl; }
 		else if (key.name == "hkDebugMode") { file << key.name + " = " << hkDebugMode << endl; }
 		else if (key.name == "hkDebugAdvanced") { file << key.name + " = " << hkDebugAdvanced << endl; }
+		else if (key.name == "hkHideInterface") { file << key.name + " = " << hkHideInterface << endl; }
 		else if (key.name == "hkScreenshot") { file << key.name + " = " << hkScreenshot << endl; }
 		// Other
 		else { file << buffer << endl; }
