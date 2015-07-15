@@ -3,11 +3,10 @@
 #include "unit.h"
 #include "animation.h"
 
-cAnimDisplay cUnit::getCurrentAnimDirection()
+void cUnit::updateDisplayAnim()
 {
 	int animId = anim.type;
 	int curFrame = anim.curFrame;
-	cAnimDisplay animDisplay;
 
 	bool upDownAvailable = (animData[animId].up.tex != -1 && animData[animId].down.tex != -1);
 	bool diagAvailable = (animData[animId].upDiag.tex != -1 && animData[animId].downDiag.tex != -1);
@@ -67,8 +66,6 @@ cAnimDisplay cUnit::getCurrentAnimDirection()
 		animDisplay.data = animData[animId].downDiag;
 		animDisplay.texMod = 1;
 	}
-
-	return animDisplay;
 }
 
 cCurrentAnim::cCurrentAnim()

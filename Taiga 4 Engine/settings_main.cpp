@@ -182,10 +182,6 @@ void cSettings::setDefault()
 	//========================================
 	// Dynamic lighting [Enables realistic lighting system]
 	this->enableDynamicLight = 1;
-	// Unit depth [Higher values reduce unit flickering]
-	this->unitDepthCheck = 1;
-	// Render distance [Objects' shadows may not be visible sometimes on lower values]
-	this->unitRenderDistance = 1;
 	// Shadow blur [Uses shaders to make shadows look more realistic]
 	this->shadowBlur = 0;
 }

@@ -11,7 +11,7 @@ void cEditor::genBlueprint_Normal()
 	game.clearUnits();
 	int total = 0;
 	// Trees
-	for (int i = 0; i < math.rand(6, 12) && total < 100; i++)
+	for (int i = 0; i < math.rand(15, 25) && total < 100; i++)
 	{
 		dist = 1000.00f;
 		pos = vec2(math.randf(-LIMIT_CHUNKSIZE / 2, LIMIT_CHUNKSIZE / 2), math.randf(-LIMIT_CHUNKSIZE / 2, LIMIT_CHUNKSIZE / 2));
@@ -21,7 +21,7 @@ void cEditor::genBlueprint_Normal()
 			if (localDist < dist) { dist = localDist; }
 		}
 
-		if (dist > 125.00f) {
+		if (dist > 25.00f) {
 			if (math.randf(0.00f, 1.00f) < 0.80f) {
 				game.addUnit("tree_basic_", pos, -1, math.rand(0, 3));
 			}

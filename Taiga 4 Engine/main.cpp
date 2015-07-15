@@ -75,9 +75,6 @@ TODO:
 
 - Add order confirmation sfx
 - Add bigger item icon to description
-- Add rain and fog effects
-- Different power levels for weather (don't forget console commands)
-- Smooth transition for weather
 - Add enabled/disabled campfire states
 - Add campfire burnout
 - Add context menu based campfire heal with items
@@ -89,6 +86,7 @@ TODO:
 - Fix interact bug (when character moves past the object before interacting)
 - Fix some item icons (mirror)
 - Add berries and mushrooms!
+- Add particle density option
 */
 
 int main(int argc, char* argv[])

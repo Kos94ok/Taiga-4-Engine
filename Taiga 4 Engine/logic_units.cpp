@@ -16,7 +16,7 @@ void cGameLogic::updateAnim(int elapsedTime)
 	// Unit animations
 	for (int i = 0; i < game.unitCounter; i++)
 	{
-		cAnimDirection animDir = game.unit[i].getCurrentAnimDirection().data;
+		cAnimDirection animDir = game.unit[i].animDisplay.data;
 		// Sprite animation
 		game.unit[i].anim.curFrameTimer += timevar;
 		if (game.unit[i].anim.curFrameTimer >= animDir.frameDelay)
@@ -142,5 +142,7 @@ void cGameLogic::updateUnits(int elapsedTime)
 				i -= 1;
 			}
 		}
+		// Update animation data
+		//game.unit[i].updateDisplayAnim();
 	}
 }

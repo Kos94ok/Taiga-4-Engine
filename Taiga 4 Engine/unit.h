@@ -97,6 +97,7 @@ public:
 	bool animAvailable(int animType);
 
 	cCurrentAnim anim;
+	cAnimDisplay animDisplay;
 	cAnimation animData[LIMIT_ANIMATIONS];
 	cLightSource light;
 	cShader shader;
@@ -156,8 +157,7 @@ public:
 	void updateFacing();
 	void updateAction();
 	void updateAnimation();
-
-	cAnimDisplay getCurrentAnimDirection();
+	void updateDisplayAnim();
 
 	cUnit() {
 		toRemove = false;

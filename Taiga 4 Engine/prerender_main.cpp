@@ -13,13 +13,7 @@ void cPreRender::updateUnits()
 	preRender.units.ready = true;
 	preRender.units.queue.clear();
 
-	float step = 20.00f;
 	sf::RenderStates renderState;
-	// Check step
-	if (settings.unitDepthCheck == 0) { step = 10.00f; }
-	else if (settings.unitDepthCheck == 1) { step = 5.00f; }
-	else if (settings.unitDepthCheck == 2) { step = 3.00f; }
-	else if (settings.unitDepthCheck == 3) { step = 1.00f; }
 
 	float cameraLeft = camera.pos.x;
 	float cameraRight = camera.res.x + camera.pos.x;
@@ -31,59 +25,68 @@ void cPreRender::updateUnits()
 		cameraLeft -= 5000;	cameraRight += 5000;
 		cameraTop -= 5000;	cameraBot += 5000;
 	}
-	else if (settings.unitRenderDistance == 0)
-	{
-		cameraLeft -= 100;	cameraRight += 100;
-		cameraTop -= 50;	cameraBot += 350;
-	}
-	else if (settings.unitRenderDistance == 1)
+	else
 	{
 		cameraLeft -= 200;	cameraRight += 200;
-		cameraTop -= 100;	cameraBot += 450;
-	}
-	else if (settings.unitRenderDistance == 2)
-	{
-		cameraLeft -= 300;	cameraRight += 300;
-		cameraTop -= 100;	cameraBot += 550;
-	}
-	else if (settings.unitRenderDistance == 3)
-	{
-		cameraLeft -= 400;	cameraRight += 400;
-		cameraTop -= 150;	cameraBot += 750;
+		cameraTop -= 200;	cameraBot += 450;
 	}
 
 	// Random initialization
-	float unitLeft, unitRight;
+	float unitLeft, unitRight, unitTop, unitBot;
 	sf::FloatRect camRect(camera.pos.x, camera.pos.y, camera.res.x, camera.res.y);
 	sf::FloatRect objRect;
+	vector<int> miniQueue;
+	vector<int> sortedQueue;
 
-	for (float y = cameraTop; y < cameraBot; y += step)
+	for (int i = 0; i < game.unitCounter; i++)
 	{
-		for (int i = 0; i < game.unitCounter; i++)
-		{
-			unitLeft = game.unit[i].pos.x - game.unit[i].center.x;
-			unitRight = unitLeft + game.unit[i].size.x;
+		unitTop = game.unit[i].pos.y - game.unit[i].center.y;
+		unitBot = unitTop + game.unit[i].size.y;
+		unitLeft = game.unit[i].pos.x - game.unit[i].center.x;
+		unitRight = unitLeft + game.unit[i].size.x;
 
-			if (!game.unit[i].hasRef(REF_UNIT_NORENDER)
-				&& ((game.unit[i].pos.y >= y && game.unit[i].pos.y < y + step && unitRight >= cameraLeft && unitLeft <= cameraRight
-				&& !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_BOT) && !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_TOP))
-				|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_BOT) && y == cameraTop)
-				|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_TOP) && y == cameraBot - step)))
+		if (!game.unit[i].hasRef(REF_UNIT_NORENDER)
+			&& ((unitRight >= cameraLeft && unitLeft <= cameraRight && unitTop >= cameraTop && unitBot <= cameraBot
+			/*&& !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_BOT) && !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_TOP))
+			|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_BOT) && y == cameraTop)
+			|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_TOP) && y == cameraBot - step*/)))
+		{
+			// Check if unit is already in the queue
+			bool found = false;
+			for (int checkVal : miniQueue)
 			{
-				// Check if unit is already in the queue
-				bool found = false;
-				for (int checkVal : preRender.units.queue)
+				if (checkVal == i)
 				{
-					if (checkVal == i)
-					{
-						found = true;
-						break;
-					}
+					found = true;
+					break;
 				}
-				// Don't allow repeating
-				if (!found) { preRender.units.queue.push_back(i); }
+			}
+			// Don't allow repeating
+			if (!found) { miniQueue.push_back(i); }
+		}
+	}
+	// Sorting
+	int bestUnit = -1;
+	float bestPos = -1.00f;
+	while ((int)miniQueue.size() > 0)
+	{
+		// Search
+		for (int i = 0; i < (int)miniQueue.size(); i++)
+		{
+			if (bestUnit == -1 || game.unit[miniQueue[i]].pos.y < bestPos)
+			{
+				bestUnit = i;
+				bestPos = game.unit[miniQueue[i]].pos.y;
 			}
 		}
+		// Add
+		preRender.units.queue.push_back(miniQueue[bestUnit]);
+		// Erase
+		miniQueue[bestUnit] = miniQueue[miniQueue.size() - 1];
+		miniQueue.pop_back();
+		// Clear
+		bestUnit = -1;
+		bestPos = -1.00f;
 	}
 	mutex.renderUnits.unlock();
 	game.access.unlock();

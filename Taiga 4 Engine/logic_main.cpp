@@ -162,6 +162,7 @@ void cGameLogic::updateUI(int elapsedTime)
 	float camSpeed = 1000.00f / camera.zoomFactor;
 	float camVecModIn = 5.00f;
 	float camVecModOut = 5.00f;
+	float finalSpeed;
 	//camera.moveVector = vec2(0.00f, 0.00f);
 	if (GetForegroundWindow() == window.winHandle.getSystemHandle() && !console.displayed && !chat.inFocus)
 	{
@@ -169,34 +170,54 @@ void cGameLogic::updateUI(int elapsedTime)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(settings.hkCamMove[2])
 			|| (settings.enableMouseScroll && window.getMousePos().x < 1.00f))
 		{
-			camera.move(sf::Vector2f(-camSpeed * timevar / core.timeModifier, 0.00f));
-			camera.moveVector.x -= 1.00f * timevar * camVecModIn;
-			if (camera.moveVector.x < -1.00f) { camera.moveVector.x = -1.00f; }
-			isMoving = true;
+			finalSpeed = -camSpeed * timevar / core.timeModifier;
+			// Check for undefined chunks
+			if (camera.isCameraMoveValid(vec2f(finalSpeed, 0.00f)))
+			{
+				camera.move(sf::Vector2f(finalSpeed, 0.00f));
+				camera.moveVector.x -= 1.00f * timevar * camVecModIn;
+				if (camera.moveVector.x < -1.00f) { camera.moveVector.x = -1.00f; }
+				isMoving = true;
+			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(settings.hkCamMove[3])
 			|| (settings.enableMouseScroll && window.getMousePos().x > camera.res.x - 2.00f))
 		{
-			camera.move(sf::Vector2f(camSpeed * timevar / core.timeModifier, 0.00f));
-			camera.moveVector.x += 1.00f * timevar * camVecModIn;
-			if (camera.moveVector.x > 1.00f) { camera.moveVector.x = 1.00f; }
-			isMoving = true;
+			finalSpeed = camSpeed * timevar / core.timeModifier;
+			// Check for undefined chunks
+			if (camera.isCameraMoveValid(vec2f(finalSpeed, 0.00f)))
+			{
+				camera.move(sf::Vector2f(finalSpeed, 0.00f));
+				camera.moveVector.x += 1.00f * timevar * camVecModIn;
+				if (camera.moveVector.x > 1.00f) { camera.moveVector.x = 1.00f; }
+				isMoving = true;
+			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(settings.hkCamMove[0])
 			|| (settings.enableMouseScroll && window.getMousePos().y < 1.00f))
 		{
-			camera.move(sf::Vector2f(0.00f, -camSpeed * timevar / core.timeModifier));
-			camera.moveVector.y += 1.00f * timevar * camVecModIn;
-			if (camera.moveVector.y > 1.00f) { camera.moveVector.y = 1.00f; }
-			isMoving = true;
+			finalSpeed = -camSpeed * timevar / core.timeModifier;
+			// Check for undefined chunks
+			if (camera.isCameraMoveValid(vec2f(0.00f, finalSpeed)))
+			{
+				camera.move(sf::Vector2f(0.00f, finalSpeed));
+				camera.moveVector.y += 1.00f * timevar * camVecModIn;
+				if (camera.moveVector.y > 1.00f) { camera.moveVector.y = 1.00f; }
+				isMoving = true;
+			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(settings.hkCamMove[1])
 			|| (settings.enableMouseScroll && window.getMousePos().y > camera.res.y - 2.00f))
 		{
-			camera.move(sf::Vector2f(0.00f, camSpeed * timevar / core.timeModifier));
-			camera.moveVector.y -= 1.00f * timevar * camVecModIn;
-			if (camera.moveVector.y < -1.00f) { camera.moveVector.y = -1.00f; }
-			isMoving = true;
+			finalSpeed = camSpeed * timevar / core.timeModifier;
+			// Check for undefined chunks
+			if (camera.isCameraMoveValid(vec2f(0.00f, finalSpeed)))
+			{
+				camera.move(sf::Vector2f(0.00f, finalSpeed));
+				camera.moveVector.y -= 1.00f * timevar * camVecModIn;
+				if (camera.moveVector.y < -1.00f) { camera.moveVector.y = -1.00f; }
+				isMoving = true;
+			}
 		}
 		if (!isMoving)
 		{
@@ -309,7 +330,7 @@ void gameLogicMain()
 			core.thread_serverWorldTicks += 1;
 			core.thread_antifreeze[threadId] = 0;
 		}
-		Sleep(1);
+		Sleep(0);
 	}
 
 	console << "[LOGIC] Cleaning up" << "\n";

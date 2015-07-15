@@ -25,6 +25,8 @@ public:
 	int thread_windowTicksPerSec;
 	int thread_serverWorldTicksPerSec;
 
+	int perfCheck[16];
+
 	// Initializing
 	cCore() {
 		videoCard = VIDEO_OTHER;

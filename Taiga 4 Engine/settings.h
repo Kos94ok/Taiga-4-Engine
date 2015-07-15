@@ -155,10 +155,6 @@ public:
 	//========================================
 	// Dynamic lighting [Enables realistic lighting system]
 	int enableDynamicLight;
-	// Unit depth [Higher values reduce unit flickering]
-	int unitDepthCheck;
-	// Render distance [Objects' shadows may not be visible sometimes on lower values]
-	int unitRenderDistance;
 	// Shadow blur [Uses shaders to make shadows look more realistic]
 	int shadowBlur;
 

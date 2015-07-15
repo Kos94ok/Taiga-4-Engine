@@ -225,7 +225,7 @@ void cUnit::updateAction()
 		{
 			// Force the animation
 			anim.play(ANIM_DEATH);
-			actionTimer = (getCurrentAnimDirection().data.frameCount - 1) * getCurrentAnimDirection().data.frameDelay;
+			actionTimer = (animDisplay.data.frameCount - 1) * animDisplay.data.frameDelay;
 		}
 	}
 	// Creating the progress bar

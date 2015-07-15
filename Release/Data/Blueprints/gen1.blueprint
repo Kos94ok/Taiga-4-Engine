@@ -2,41 +2,81 @@ Type: 1
 [Units]
 ID: -1
 Type: tree_basic_b
-X: -72
+X: -239
+Y: 106
+===
+ID: -1
+Type: tree_basic_b
+X: -127
+Y: -147
+===
+ID: -1
+Type: stone_basic_a
+X: -16
+Y: -194
+===
+ID: -1
+Type: tree_basic_b
+X: -82
+Y: -66
+===
+ID: -1
+Type: stone_basic_c
+X: -230
+Y: 220
+===
+ID: -1
+Type: tree_basic_c
+X: -82
+Y: 110
+===
+ID: -1
+Type: tree_basic_c
+X: 187
+Y: 69
+===
+ID: -1
+Type: tree_basic_c
+X: 31
+Y: 44
+===
+ID: -1
+Type: tree_basic_b
+X: 23
+Y: 74
+===
+ID: -1
+Type: stone_basic_c
+X: -159
+Y: 83
+===
+ID: -1
+Type: tree_basic_b
+X: 121
+Y: 106
+===
+ID: -1
+Type: tree_basic_d
+X: 68
+Y: -223
+===
+ID: -1
+Type: tree_basic_c
+X: -181
+Y: 36
+===
+ID: -1
+Type: stone_basic_b
+X: -63
 Y: -158
 ===
 ID: -1
 Type: stone_basic_c
-X: 23
-Y: 62
+X: 30
+Y: -70
 ===
 ID: -1
-Type: stone_basic_d
-X: 235
-Y: 250
-===
-ID: -1
-Type: stone_basic_c
-X: 73
-Y: -235
-===
-ID: -1
-Type: stone_basic_a
-X: 208
-Y: 75
-===
-ID: -1
-Type: tree_basic_b
-X: -246
-Y: -26
-===
-ID: -1
-Type: tree_basic_c
-X: 1
-Y: 210
-===
-ID: -1
-Type: tree_basic_b
-X: 156
-Y: -136
+Type: tree_basic_a
+X: 175
+Y: -148
 ===

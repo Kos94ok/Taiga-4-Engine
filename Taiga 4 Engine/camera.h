@@ -19,6 +19,9 @@ public:
 	void moveto(sf::Vector2f newPos);
 	void setZoom(float zoom);
 	void adjustZoom(int delta);
+	sf::FloatRect getCameraRect(vec2f offset);
+	bool isPositionValid(vec2f loc);
+	bool isCameraMoveValid(vec2f offset);
 
 	cCamera() {
 		moveUpdateTimer = 0.00f;
