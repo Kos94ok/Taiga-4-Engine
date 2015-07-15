@@ -190,6 +190,7 @@ void cWindow::paintParticles()
 	if (!settings.enableParticleShadows) { shadowBrightness = 0.00f; }
 	visual.particlesPainted = 0;
 
+	mutex.renderParticles.lock();
 	int repeats = 1;
 	if (settings.enableParticleShadows && settings.enableBetterParticleShadows) { repeats += 1; }
 	for (int a = 0; a < repeats; a++)
@@ -234,6 +235,7 @@ void cWindow::paintParticles()
 			}
 		}
 	}
+	mutex.renderParticles.unlock();
 
 
 	/*for (int i = 0; i < (int)particle.unit.size(); i++)

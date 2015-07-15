@@ -108,6 +108,7 @@ public:
 	cMutex renderMain;
 	cMutex renderUnits;
 	cMutex renderClouds;
+	cMutex renderParticles;
 	cMutex mainMatrix;
 
 	cMutex serverHistory;

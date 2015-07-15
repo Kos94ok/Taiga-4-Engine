@@ -43,6 +43,10 @@ void cSettings::setDefault()
 	this->enableBetterParticleShadows = 1;
 	// High precision shadows [Enable high-precision mode for particle shadows]
 	this->enablePreciseParticleShadows = 1;
+	// Cloud density [Change the amount of clouds on the screen]
+	this->cloudDensity = 1.00f;
+	// Particle density [Change the amount of particles on the screen]
+	this->particleDensity = 1.00f;
 	// Unit highlight color
 	this->visualUnitHoverColor = util.convertUnitHighlightColor(1);
 
@@ -226,6 +230,8 @@ void cSettings::load()
 		else if (key.name == "enableBetterParticleShadows") { enableBetterParticleShadows = math.stringToInt(key.value); }
 		else if (key.name == "enablePreciseParticleShadows") { enablePreciseParticleShadows = math.stringToInt(key.value); }
 		else if (key.name == "shadowBlur") { shadowBlur = math.stringToInt(key.value); }
+		else if (key.name == "cloudDensity") { cloudDensity = (float)math.stringToInt(key.value) / 100.00f; }
+		else if (key.name == "particleDensity") { particleDensity = (float)math.stringToInt(key.value) / 100.00f; }
 		else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
 		else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
 			// Gameplay
@@ -314,6 +320,8 @@ void cSettings::save()
 		file << "enableParticleShadows = " << enableParticleShadows << "\n";
 		file << "enableBetterParticleShadows = " << enableBetterParticleShadows << "\n";
 		file << "enablePreciseParticleShadows = " << enablePreciseParticleShadows << "\n";
+		file << "cloudDensity = " << math.round(cloudDensity * 100.00f) << "\n";
+		file << "particleDensity = " << math.round(particleDensity * 100.00f) << "\n";
 
 		file << endl << "[Gameplay]" << "\n";
 		file << "enableLazyCast = " << enableLazyCast << "\n";
@@ -411,7 +419,7 @@ void cSettings::updateFile()
 		else if (key.name == "consoleWidth" && core.serverMode) { file << key.name + " = " << camera.res.x << endl; }
 		else if (key.name == "consoleHeight" && core.serverMode) { file << key.name + " = " << camera.res.y << endl; }
 		else if (key.name == "enableVertSync") { file << key.name + " = " << enableVertSync << endl; }
-		else if (key.name == "sampleMod") { file << key.name + " = " << sampleMod * 100.00f << endl; }
+		else if (key.name == "sampleMod") { file << key.name + " = " << math.round(sampleMod * 100.00f) << endl; }
 		else if (key.name == "framerateLimit") { file << key.name + " = " << framerateLimit << endl; }
 		// Visual
 		else if (key.name == "antialiasingLevel") { file << key.name + " = " << antialiasingLevel << endl; }
@@ -425,6 +433,8 @@ void cSettings::updateFile()
 		else if (key.name == "enableParticleShadows") { file << key.name + " = " << enableParticleShadows << endl; }
 		else if (key.name == "enableBetterParticleShadows") { file << key.name + " = " << enableBetterParticleShadows << endl; }
 		else if (key.name == "enablePreciseParticleShadows") { file << key.name + " = " << enablePreciseParticleShadows << endl; }
+		else if (key.name == "cloudDensity") { file << key.name + " = " << math.round(cloudDensity * 100.00f) << endl; }
+		else if (key.name == "particleDensity") { file << key.name + " = " << math.round(particleDensity * 100.00f) << endl; }
 		//else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
 		//else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
 		// Gameplay

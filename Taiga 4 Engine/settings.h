@@ -47,6 +47,10 @@ public:
 	int enableBetterParticleShadows;
 	// High precision shadows [Enable high-precision mode for particle shadows]
 	int enablePreciseParticleShadows;
+	// Cloud density [Change the amount of clouds on the screen]
+	float cloudDensity;
+	// Particle density [Change the amount of particles on the screen]
+	float particleDensity;
 	// Unit highlight color
 	sf::Color visualUnitHoverColor;
 

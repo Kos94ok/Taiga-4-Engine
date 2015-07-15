@@ -321,7 +321,6 @@ void gameLogicMain()
 		if (elapsedTime > 0 && elapsedTime < 100)
 		{
 			gamelogic.updateOrders(elapsedTime);
-			gamelogic.updateAnim(elapsedTime);
 			gamelogic.updateUI(elapsedTime);
 			gamelogic.updateUnits(elapsedTime);
 			gamelogic.updateConnection(elapsedTime);
@@ -330,8 +329,29 @@ void gameLogicMain()
 			core.thread_serverWorldTicks += 1;
 			core.thread_antifreeze[threadId] = 0;
 		}
-		Sleep(0);
+		Sleep(3);
 	}
+	console << "[LOGIC] Cleaning up" << "\n";
+}
 
+void animationMain()
+{
+	int threadId = 11;
+	console << "[ANIM] Starting the animation thread" << "\n";
+	int elapsedTime, globalTime = 0;
+	while (!core.thread_shutdown[threadId])
+	{
+		elapsedTime = timeGetTime() - globalTime;
+		globalTime = timeGetTime();
+		// Ignore system time change or huge lags
+		if (elapsedTime > 0 && elapsedTime < 100)
+		{
+			gamelogic.updateAnim(elapsedTime);
+
+			core.thread_animWorldTicks += 1;
+			core.thread_antifreeze[threadId] = 0;
+		}
+		Sleep(1);
+	}
 	console << "[LOGIC] Cleaning up" << "\n";
 }

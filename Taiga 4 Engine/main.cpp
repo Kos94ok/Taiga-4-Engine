@@ -130,6 +130,7 @@ int main(int argc, char* argv[])
 	thread threadAICore(AICoreMain);					Sleep(10);
 	thread threadAudio(audioMain);						Sleep(10);
 	thread threadPreRender(preRenderMain);				Sleep(10);
+	thread threadAnimation(animationMain);				Sleep(10);
 	
 	// Initializing the server
 	if (core.serverMode) {
@@ -153,12 +154,14 @@ int main(int argc, char* argv[])
 			globalTime = timeGetTime();
 			core.thread_windowTicksPerSec = core.thread_windowTicks;
 			core.thread_serverWorldTicksPerSec = core.thread_serverWorldTicks;
+			core.thread_animWorldTicksPerSec = core.thread_animWorldTicks;
 			core.thread_windowTicks = 0;
 			core.thread_serverWorldTicks = 0;
+			core.thread_animWorldTicks = 0;
 		}
 		// Adding some antifreeze
 		for (int i = 0; i < 11; i++) {
-			if (!(core.serverMode && (i == 5 || i == 6 || i == 9 || i == 10))) { core.thread_antifreeze[i] += 1; }
+			if (!(core.serverMode && (i == 5 || i == 6 || i == 9 || i == 10 || i == 11))) { core.thread_antifreeze[i] += 1; }
 			if (core.thread_antifreeze[i] > 1000) {
 				core.thread_antifreeze[i] = 0;
 				console.error << "[MAIN] Thread " << i << " appears to be frozen..." << endl;
@@ -174,6 +177,7 @@ int main(int argc, char* argv[])
 		script.threadVector[i].join();
 	}
 	console << "[MAIN] Waiting for core threads to finish..." << "\n";
+	core.thread_shutdown[11] = true;	threadAnimation.join();
 	core.thread_shutdown[10] = true;	threadPreRender.join();
 	core.thread_shutdown[9] = true;		threadAudio.join();
 	core.thread_shutdown[8] = true;		threadAICore.join();

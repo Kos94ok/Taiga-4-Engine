@@ -2,6 +2,7 @@
 #include "main.h"
 #include "unit.h"
 #include "animation.h"
+#include "logic.h"
 
 void cUnit::updateDisplayAnim()
 {

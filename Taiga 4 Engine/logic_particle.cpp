@@ -6,6 +6,7 @@
 #include "weather.h"
 #include "math.h"
 #include "particle.h"
+#include "settings.h"
 
 float cloudTimer = 0.00f;
 float weatherTimer = 0.00f;
@@ -14,7 +15,7 @@ void cGameLogic::updateParticles(int elapsedTime)
 {
 	int id;
 	float randVal;
-	vec2f bufferArea = vec2f(2000.00f, 2000.00f), cloudPos, cloudSizeVec;
+	vec2f bufferArea = vec2f(1000.00f, 1000.00f), cloudPos, cloudSizeVec;
 	float timevar = (float)elapsedTime / 1000;
 	timevar *= core.timeModifier;
 
@@ -28,84 +29,71 @@ void cGameLogic::updateParticles(int elapsedTime)
 	{
 		weatherTimer = 0.00f;
 		// Only change weather on server side
-		if (core.serverSide() && math.randf(0.00f, 1.00f) < 0.20f)
+		if (core.serverSide() && math.randf(0.00f, 1.00f) < 0.15f)
 		{
 			randVal = math.randf(0.00f, 1.00f);
 			// Sunny ( 10% )
 			if (randVal <= 0.10f) {
-				console.debug << "[DEBUG] Weather: Sunny" << endl;
+				//console.debug << "[DEBUG] Weather: Sunny" << endl;
 				weather.changeTo(WEATHER_SNOW, 0.00f);
 				weather.changeWindTo(0.00f);
 				weather.changeCloudsTo(math.randf(500.00f, 2500.00f));
 			}
 			// Light snow ( 15% )
 			else if (randVal <= 0.25f) {
-				console.debug << "[DEBUG] Weather: Light snow" << endl;
+				//console.debug << "[DEBUG] Weather: Light snow" << endl;
 				weather.changeTo(WEATHER_SNOW, math.randf(2500.00f, 7500.00f));
 				weather.changeWindTo(math.randf(0.00f, 3000.00f));
 				weather.changeCloudsTo(math.randf(2500.00f, 10000.00f));
 			}
 			// Tons of snow ( 15% )
 			else if (randVal <= 0.40f) {
-				console.debug << "[DEBUG] Weather: Tons of snow" << endl;
+				//console.debug << "[DEBUG] Weather: Tons of snow" << endl;
 				weather.changeTo(WEATHER_SNOW, math.randf(15000.00, 25000.00f));
 				weather.changeWindTo(math.randf(0.00f, 3000.00f));
 				weather.changeCloudsTo(math.randf(30000.00f, 50000.00f));
 			}
 			// Really windy ( 10% )
 			else if (randVal <= 0.50f) {
-				console.debug << "[DEBUG] Weather: Really windy" << endl;
+				//console.debug << "[DEBUG] Weather: Really windy" << endl;
 				weather.changeTo(WEATHER_SNOW, math.randf(0.00f, 5000.00f));
 				weather.changeWindTo(math.randf(15000.00f, 20000.00f));
 				weather.changeCloudsTo(math.randf(500.00f, 10000.00f));
 			}
 			// Clouds everywhere ( 20% )
 			else if (randVal <= 0.70f) {
-				console.debug << "[DEBUG] Weather: Clouds everywhere" << endl;
+				//console.debug << "[DEBUG] Weather: Clouds everywhere" << endl;
 				weather.changeTo(WEATHER_SNOW, math.randf(0.00f, 1000.00f));
 				weather.changeWindTo(math.randf(0.00f, 5000.00f));
 				weather.changeCloudsTo(math.randf(30000.00f, 50000.00f));
 			}
 			// Blizzard ( 5% )
 			else if (randVal <= 0.75f) {
-				console.debug << "[DEBUG] Weather: Blizzard" << endl;
+				//console.debug << "[DEBUG] Weather: Blizzard" << endl;
 				weather.changeTo(WEATHER_SNOW, math.randf(15000.00f, 25000.00f));
 				weather.changeWindTo(math.randf(15000.00f, 20000.00f));
 				weather.changeCloudsTo(math.randf(30000.00f, 50000.00f));
 			}
 			// Everything medium ( 15% )
 			else if (randVal <= 0.90f) {
-				console.debug << "[DEBUG] Weather: Everything medium" << endl;
+				//console.debug << "[DEBUG] Weather: Everything medium" << endl;
 				weather.changeTo(WEATHER_SNOW, math.randf(7500.00f, 15000.00f));
 				weather.changeWindTo(math.randf(5000.00f, 15000.00f));
 				weather.changeCloudsTo(math.randf(15000.00f, 25000.00f));
 			}
 			// Completely random ( 10% )
 			else {
-				console.debug << "[DEBUG] Weather: Random" << endl;
+				//console.debug << "[DEBUG] Weather: Random" << endl;
 				weather.changeTo(WEATHER_SNOW, math.randf(0.00f, 25000.00f));
 				weather.changeWindTo(math.randf(0.00f, 20000.00f));
 				weather.changeCloudsTo(math.randf(500.00f, 50000.00f));
 			}
-
-			// Snow
-			/*if (math.randf(0.00f, 1.00f) < 0.20f) {
-				weather.changeTo(WEATHER_SNOW, math.randf(0.00f, 20000.00f));
-			}
-			// Wind
-			if (math.randf(0.00f, 1.00f) < 0.50f) {
-				weather.changeWindTo(math.randf(0.00f, 20000.00f));
-			}
-			// Clouds
-			if (math.randf(0.00f, 1.00f) < 0.10f) {
-				weather.changeCloudsTo(math.randf(500.00f, 50000.00f));
-			}*/
 		}
 	}
 		// Updating current values
 	float snowPowerMod = 250.00f;
 	float windPowerMod = 300.00f;
-	float cloudPowerMod = 300.00f;
+	float cloudPowerMod = 750.00f;
 		// Snow power
 	if (weather.power[WEATHER_SNOW] < weather.targetPower[WEATHER_SNOW]) {
 		weather.power[WEATHER_SNOW] += snowPowerMod * timevar;
@@ -140,12 +128,14 @@ void cGameLogic::updateParticles(int elapsedTime)
 	if (weather.cloudDensity > 0.00f)
 	{
 		int cloudCount = (int)weather.cloud.size();
-		while (cloudCount < weather.cloudDensity / 100.00f)
+		int targetCount = weather.cloudDensity * settings.cloudDensity / 100.00f;
+		while (cloudCount < targetCount)
 		{
 			cloudCount = (int)weather.cloud.size();
 			cloudTimer = 0.00f;
-			if (cloudCount < weather.cloudDensity / 100.00f && math.randf(0.00f, 1.00f) < 1.00f)
+			if (cloudCount < targetCount)
 			{
+				int saver = 0;
 				float cloudSize = math.randf(300.00f, 500.00f);
 				do
 				{
@@ -156,8 +146,9 @@ void cGameLogic::updateParticles(int elapsedTime)
 					cloudSizeVec.x = cloudSize;
 					cloudSizeVec.y = cloudSize;
 					cloudRect = sf::FloatRect(cloudPos - cloudSizeVec / 2.00f, cloudSizeVec);
-				} while (cloudRect.intersects(camRect));
-				weather.createCloud(cloudPos, cloudSizeVec);
+					saver += 1;
+				} while (cloudRect.intersects(camRect) && saver < 200);
+				if (saver < 200) { weather.createCloud(cloudPos, cloudSizeVec); }
 			}
 		}
 	}
@@ -179,12 +170,13 @@ void cGameLogic::updateParticles(int elapsedTime)
 
 	// Spawning snow
 	particleTimer += timevar;
+	mutex.renderParticles.lock();
 	if (particleTimer >= 0.05f)
 	{
 		particleTimer = 0;
 		if (weather.power[WEATHER_SNOW] > 0.00f)
 		{
-			int count = math.round(weather.power[WEATHER_SNOW] / 1000.00f);
+			int count = math.round(weather.power[WEATHER_SNOW] * settings.particleDensity / 1000.00f);
 			for (int i = 0; i < math.rand(max(0, count - 5), count); i++)
 			{
 				vec2f spawnPoint = vec2f(camera.pos.x + math.randf(0.00, camera.res.x), camera.pos.y + math.randf(0.00f, camera.res.y));
@@ -246,4 +238,5 @@ void cGameLogic::updateParticles(int elapsedTime)
 			}
 		}
 	}
+	mutex.renderParticles.unlock();
 }

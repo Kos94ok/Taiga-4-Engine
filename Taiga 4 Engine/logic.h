@@ -14,3 +14,4 @@ public:
 
 extern cGameLogic gamelogic;
 void gameLogicMain();
+void animationMain();

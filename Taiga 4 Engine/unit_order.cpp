@@ -49,7 +49,7 @@ int cUnit::addOrder_moveto_path(sf::Vector2f target, bool overwrite)
 	// If clicked to the restricted area, then... you know
 	vec2i targetChunk = world.getChunkInPos(target);
 	vec2f startingPos;
-	if (world.map[targetChunk.x][targetChunk.y].type == CHUNK_UNDEFINED || world.map[targetChunk.x][targetChunk.y].type == CHUNK_BLOCKED) { return -1; }
+	if (world.map[targetChunk.x][targetChunk.y].type == CHUNK_UNDEFINED) { return -1; }
 
 	game.access.lock();
 	if (overwrite) { clearOrders(); }

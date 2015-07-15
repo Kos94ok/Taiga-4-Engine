@@ -22,10 +22,10 @@ public:
 	bool thread_shutdown[16];
 	int thread_windowTicks;
 	int thread_serverWorldTicks;
+	int thread_animWorldTicks;
 	int thread_windowTicksPerSec;
 	int thread_serverWorldTicksPerSec;
-
-	int perfCheck[16];
+	int thread_animWorldTicksPerSec;
 
 	// Initializing
 	cCore() {
