@@ -175,6 +175,8 @@ void cDatabase::loadUnits()
 	unit[i].center = vec2(20, 45);
 	unit[i].health = 5000.00f;
 	unit[i].maxHealth = 5000.00f;
+	unit[i].resource = 50.00f;
+	unit[i].resourceLimit = 300.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_idle.png");
 	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("campfire_idle_shadow.png");
 	unit[i].animData[ANIM_IDLE].side.frameCount = 4;
@@ -187,6 +189,7 @@ void cDatabase::loadUnits()
 	unit[i].light.flickerMod = 0.04f;
 	unit[i].light.flickerTime = 0.25f;
 	unit[i].sound.idle = cSound("fire2.ogg", 50.00f, 100.00f, 700.00f);
+	unit[i].addRef(REF_UNIT_BURNOUT_CAMPFIRE);
 	i += 1;
 
 	// Tent

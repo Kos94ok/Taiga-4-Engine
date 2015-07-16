@@ -86,7 +86,6 @@ TODO:
 - Fix interact bug (when character moves past the object before interacting)
 - Fix some item icons (mirror)
 - Add berries and mushrooms!
-- Add particle density option
 */
 
 int main(int argc, char* argv[])

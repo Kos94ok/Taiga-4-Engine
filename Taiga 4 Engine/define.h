@@ -156,8 +156,8 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_UNIT_PICKUP					0		// Unit can be picked up as an item
 #define REF_UNIT_HARVESTABLE			1		// Unit can be harvested for the resource
 #define REF_UNIT_NOSHADOW				2		// Unit can not create shadow
-#define REF_UNIT_ALWAYSVISIBLE_TOP		3		// Unit will always be rendered on the screen (on top of everything)
-#define REF_UNIT_ALWAYSVISIBLE_BOT		4		// Unit will always be rendered on the screen (below everything)
+#define REF_UNIT_ALWAYSVISIBLE_TOP		3		// Unit will always be rendered on the screen (on top of everything) - NYI
+#define REF_UNIT_ALWAYSVISIBLE_BOT		4		// Unit will always be rendered on the screen (below everything) - NYI
 #define REF_UNIT_MISSILE				5		// Unit is a projectile
 #define REF_UNIT_ROTATE					6		// Unit's sprite is rotated to the facing angle
 #define REF_UNIT_NOSAVE					7		// Unit is not saved
@@ -176,6 +176,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_UNIT_PARTICLE				20		// Unit is a particle
 #define REF_UNIT_PARTICLE_WEATHER		21		// Unit is a weather particle
 #define REF_UNIT_NOACCELERATION			22		// Unit can move backwards
+#define REF_UNIT_BURNOUT_CAMPFIRE		23		// Unit is burning out as a campfire
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_CONSUME				2		// Item can be consumed
@@ -198,6 +199,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_ITEM_FLASHLIGHT				19		// Item is a flashlight
 #define REF_ITEM_TORCH					20		// Item is a torch
 #define REF_PARTICLE_ONSCREEN			0		// Particle is always on screen
+#define REF_SOUND_IDLE					0		// Sound is the unit's idle
 
 #define TEX_UI_TOOLTIP					1
 #define TEX_WORLD_GROUND				2

@@ -137,8 +137,9 @@ public:
 	cUnitSoundbank sound;
 
 	float resource;
-	void addResource(float d);
-	void setResource(float value);
+	float resourceLimit;
+	void addResource(float d, bool sendMessage = true);
+	void setResource(float value, bool sendMessage = true);
 
 	void moveTo(sf::Vector2f newPos);
 	void rotateTo(float newAngle);
@@ -164,6 +165,7 @@ public:
 		flyingHeight = 0.00f;
 		actionTimer = 0.00f;
 		resource = 0.00f;
+		resourceLimit = 1000000.00f;
 		interactDistance = 0.00f;
 		collisionDistance = 0.00f;
 		orderCounter = 0;

@@ -6,6 +6,7 @@
 #include "settings.h"
 #include "visual.h"
 #include "window.h"
+#include "database.h"
 
 void cGameLogic::updateAnim(int elapsedTime)
 {
@@ -13,6 +14,8 @@ void cGameLogic::updateAnim(int elapsedTime)
 	mutex.renderUnits.lock();
 	float timevar = (float)elapsedTime / 1000;
 	timevar *= core.timeModifier;
+	// Database entries
+	cUnit* dbCampfire = &database.getUnit("campfire_full");
 	// Unit animations
 	for (int i = 0; i < game.unitCounter; i++)
 	{
@@ -49,6 +52,47 @@ void cGameLogic::updateAnim(int elapsedTime)
 			if (game.unit[i].light.flickerCurTime >= game.unit[i].light.flickerTime * 2.00f)
 			{
 				game.unit[i].light.flickerCurTime -= game.unit[i].light.flickerTime * 2.00f;
+			}
+		}
+		// Campfire burnout
+		if (game.unit[i].hasRef(REF_UNIT_BURNOUT_CAMPFIRE) && game.unit[i].resource > 0.00f)
+		{
+			// 100p: 300
+			// 66p: 200
+			// 33p: 100
+			// Dead: 0
+			game.unit[i].resource -= timevar;
+			game.unit[i].light.power = dbCampfire->light.power * (game.unit[i].resource / game.unit[i].resourceLimit);
+			// Full
+			if (game.unit[i].resource > game.unit[i].resourceLimit * 0.66f) {
+				game.unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_100p_idle.png");
+				game.unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("campfire_100p_shadow.png");
+			}
+			// 66p
+			else if (game.unit[i].resource > game.unit[i].resourceLimit * 0.33f && game.unit[i].resource <= game.unit[i].resourceLimit * 0.66f) {
+				game.unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_66p_idle.png");
+				game.unit[i].animData[ANIM_IDLE].side.texShadow = -1;
+			}
+			// 33p
+			else if (game.unit[i].resource > 0.00f && game.unit[i].resource <= game.unit[i].resourceLimit * 0.33f) {
+				game.unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_33p_idle.png");
+				game.unit[i].animData[ANIM_IDLE].side.texShadow = -1;
+			}
+			// Dead
+			else {
+				game.unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_dead_idle.png");
+				game.unit[i].animData[ANIM_IDLE].side.texShadow = -1;
+			}
+			game.unit[i].sound.idle.volume = dbCampfire->sound.idle.volume * (game.unit[i].resource / game.unit[i].resourceLimit);
+			// Update sound
+			for (int i = 0; i < LIMIT_SOUND; i++) {
+				if (audio.sound[i].getStatus() == sf::Sound::Playing)
+				{
+					console.debug << audio.soundData[i].unitId << endl;
+					if (audio.soundData[i].unitId == game.unit[i].globalId) {
+						audio.soundData[i].data.volume = game.unit[i].sound.idle.volume;
+					}
+				}
 			}
 		}
 	}

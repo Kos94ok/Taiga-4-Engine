@@ -43,6 +43,7 @@ void cTarget::enable_building(int ref)
 	game.getLocalUnit().addRef(REF_UNIT_NOSELECTION);
 	game.getLocalUnit().addRef(REF_UNIT_PLACEHOLDER);
 	game.getLocalUnit().addRef(REF_UNIT_NOCOLLISION);
+	game.getLocalUnit().removeRef(REF_UNIT_BURNOUT_CAMPFIRE);
 	game.getLocalUnit().light.power = 0.00f;
 	game.access.unlock();
 

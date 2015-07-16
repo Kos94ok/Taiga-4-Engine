@@ -53,6 +53,7 @@ int cCraft::getActiveRecipeRepeats(bool ignoreResource)
 {
 	bool match = true;
 	int i = getActiveRecipeId();
+	if (i == -1) { return 0; }
 	int amount = 100;
 	// Amount of ingridients
 	for (int y = 0; y < recipe[i].ingrCount; y++)
@@ -106,7 +107,7 @@ void cCraft::checkActiveRecipe()
 	// Searching for the active recipe
 	matchId = getActiveRecipeId();
 	// If recipe found
-	if (match)
+	if (matchId != -1)
 	{
 		int rpt = getActiveRecipeRepeats();
 		// Adding the recipe result

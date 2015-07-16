@@ -2,11 +2,12 @@
 #pragma once
 #include "define.h"
 #include "util.h"
+#include "refSystem.h"
 
 class cSound
 {
 public:
-	std::string name;
+	string name;
 	float volume;
 	float minDist;
 	float maxDist;
@@ -19,7 +20,7 @@ public:
 	cSound(int null) {
 		cSound();
 	}
-	cSound(std::string data, float maxVolume = 100.00f, float minDistance = 0.00f, float maxDistance = 300.00f) {
+	cSound(string data, float maxVolume = 100.00f, float minDistance = 0.00f, float maxDistance = 300.00f) {
 		name = data;
 		volume = maxVolume;
 		minDist = minDistance;
@@ -33,7 +34,7 @@ public:
 	}
 };
 
-class cSoundQueue
+class cSoundQueue : public cReference
 {
 public:
 	cSound data;
@@ -43,17 +44,18 @@ public:
 	cSoundQueue() {
 
 	}
-	cSoundQueue(cSound input, int inUnitId, bool repeat) {
+	cSoundQueue(cSound input, int inUnitId, bool repeat, int ref = -1) {
 		data = input;
 		unitId = inUnitId;
 		loop = repeat;
+		if (ref != -1) { addRef(ref); }
 	}
 };
 
 class cMusic
 {
 public:
-	std::string name;
+	string name;
 };
 
 class cAudio
@@ -65,7 +67,7 @@ public:
 	sf::SoundBuffer soundBuffer[LIMIT_SOUND];
 	cSoundQueue soundData[LIMIT_SOUND];
 
-	std::vector<cSoundQueue> soundQueue;
+	vector<cSoundQueue> soundQueue;
 
 	void playSound(cSound data);
 	void playSound(cSoundQueue data);

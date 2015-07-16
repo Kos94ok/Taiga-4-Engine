@@ -14,24 +14,25 @@ bool cCharacter::animAvailable(int animType)
 	return (animData[animType].side.tex != -1);
 }
 
-void cUnit::addResource(float d) { setResource(resource + d); }
+void cUnit::addResource(float d, bool sendMessage) { setResource(resource + d, sendMessage); }
 
-void cUnit::setResource(float value)
+void cUnit::setResource(float value, bool sendMessage)
 {
+	value = min(value, resourceLimit);
 	int delta = value - resource;
 	resource = value;
 
 	craft.checkActiveRecipe();
 	ui.updateInterfaceItemList();
 
-	if (core.serverMode || core.localServer)
+	if (sendMessage && (core.serverMode || core.localServer))
 	{
 		sf::Packet data;
 		data << MSG_UNIT_SETRESOURCE << globalId << value;
 		server.sendPacket(PLAYERS_REMOTE, data);
 	}
 	// Add to chat log
-	if (globalId == client.unit) {
+	if (sendMessage && globalId == client.unit) {
 		if (delta >= 0) { chat.logMessage(LOGMSG_RESOURCE_ADD, cArg(type, to_string(delta))); }
 		else { chat.logMessage(LOGMSG_RESOURCE_REMOVE, cArg(type, to_string(-delta))); }
 	}
