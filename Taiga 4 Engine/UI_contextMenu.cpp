@@ -302,6 +302,18 @@ void cUI::createContextMenuForUnit(int targetUnit)
 	ui.element[ui.getElementId(id)].textColor = sf::Color(175, 175, 175);
 	ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 127, 0);
 	ui.element[ui.getElementId(id)].priority = 10;
+	// Add resource
+	if (game.getUnit(targetUnit).hasRef(REF_UNIT_ADDRESOURCE))
+	{
+		if (game.getUnit(client.unit).resource > 50)
+		{
+			id = ui.addElement(ui.element[ui.getElementId(id)], mousePos + sf::Vector2f(5.00f, 5.00f + (buttonY + buttonDist) * buttonCount++));
+			ui.element[ui.getElementId(id)].setText("Add Resource");
+			ui.element[ui.getElementId(id)].button.action = "unit_addResource";
+			ui.element[ui.getElementId(id)].button.args[0] = to_string(targetUnit);
+			ui.element[ui.getElementId(id)].button.args[1] = to_string(50);
+		}
+	}
 	// Pack
 	if (game.getUnit(targetUnit).hasRef(REF_UNIT_PACK))
 	{

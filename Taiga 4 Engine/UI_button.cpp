@@ -12,7 +12,7 @@
 
 void cUIButton::callbackLeft(int parent)
 {
-	int id;
+	int id, count;
 	sf::Packet data;
 	if (action == "noAction") {
 		console.error << "[ERROR] Button has no action assigned!" << "\n";
@@ -20,6 +20,15 @@ void cUIButton::callbackLeft(int parent)
 	else if (action == "contextMenu_close")
 	{
 		ui.clearContextMenu();
+	}
+	else if (action == "unit_addResource")
+	{
+		ui.clearContextMenu();
+		stringstream(args[0]) >> id;
+		stringstream(args[1]) >> count;
+		data << MSG_CONTROLS_ADDRESOURCE << id << count;
+		client.sendPacket(data);
+		data.clear();
 	}
 	else if (action == "unit_pack")
 	{

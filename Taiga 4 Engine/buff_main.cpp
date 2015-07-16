@@ -1,21 +1,23 @@
 
 #include "buff.h"
 
-void cBuffList::add(int type, float duration, int power)
+void cBuffList::add(int type, float duration, int power, int ownerUnit)
 {
 	cBuff entry;
 	entry.type = type;
-	entry.duration = duration;
 	entry.power = power;
+	entry.duration = duration;
+	entry.ownerUnit = ownerUnit;
 
 	list.push_back(entry);
 }
 
-void cBuffList::remove(int type)
+void cBuffList::remove(int type, int owner)
 {
 	for (int i = 0; i < (int)list.size(); i++) {
-		if (list[i].type == type) {
+		if (list[i].type == type && (owner == -1 || list[i].ownerUnit == owner)) {
 			list.erase(list.begin() + i);
+			i -= 1;
 		}
 	}
 }

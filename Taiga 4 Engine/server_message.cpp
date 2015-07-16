@@ -240,6 +240,19 @@ bool cServer::msgControlUnit(int i, sf::Packet input)
 	{
 		input >> argf[0] >> argf[1];
 		server.player[i].camPos = vec2f(argf[0], argf[1]);
+
+		return true;
+	}
+	// =======================================================
+	// =======================================================
+	// Player gives some resource to unit
+	if (msg == MSG_CONTROLS_ADDRESOURCE)
+	{
+		input >> argi[0] >> argi[1];
+		if (game.getUnit(player[i].unit).resource >= argi[1]) {
+			player[i].addResource(-argi[1]);
+			game.getUnit(argi[0]).addResource(argi[1]);
+		}
 	}
 	return false;
 }

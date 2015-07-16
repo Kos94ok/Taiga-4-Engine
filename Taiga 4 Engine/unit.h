@@ -8,6 +8,7 @@
 #include "item.h"
 #include "animation.h"
 #include "buff.h"
+#include "aura.h"
 
 class cUnitSoundbank
 {
@@ -129,6 +130,7 @@ public:
 	float targetFacingAngle;
 	float rotateSpeed;
 	float movementSpeed;
+	cAura aura;
 	cAIBrain ai;
 	cBuffList buff;
 	cLifeTimer lifeTimer;

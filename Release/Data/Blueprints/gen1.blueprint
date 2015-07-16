@@ -80,3 +80,8 @@ Type: tree_basic_a
 X: 175
 Y: -148
 ===
+ID: -1
+Type: bg_test
+X: 0
+Y: 0
+===

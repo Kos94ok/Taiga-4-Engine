@@ -30,3 +30,8 @@ Type: tree_basic_a
 X: 23
 Y: 174
 ===
+ID: -1
+Type: bg_test
+X: 0
+Y: 0
+===

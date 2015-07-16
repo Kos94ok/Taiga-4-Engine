@@ -10,3 +10,8 @@ Type: tent_basic
 X: 100
 Y: -40
 ===
+ID: -1
+Type: bg_test
+X: 0
+Y: 0
+===

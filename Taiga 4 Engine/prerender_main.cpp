@@ -46,10 +46,10 @@ void cPreRender::updateUnits()
 		unitRight = unitLeft + game.unit[i].size.x;
 
 		if (!game.unit[i].hasRef(REF_UNIT_NORENDER)
-			&& ((unitRight >= cameraLeft && unitLeft <= cameraRight && unitTop >= cameraTop && unitBot <= cameraBot
+			&& (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE) || (unitRight >= cameraLeft && unitLeft <= cameraRight && unitTop >= cameraTop && unitBot <= cameraBot)
 			/*&& !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_BOT) && !game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_TOP))
 			|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_BOT) && y == cameraTop)
-			|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_TOP) && y == cameraBot - step*/)))
+			|| (game.unit[i].hasRef(REF_UNIT_ALWAYSVISIBLE_TOP) && y == cameraBot - step*/))
 		{
 			// Check if unit is already in the queue
 			bool found = false;
@@ -66,6 +66,8 @@ void cPreRender::updateUnits()
 		}
 	}
 	// Sorting
+	bool renderFirst = false;
+	bool renderLast = false;
 	int bestUnit = -1;
 	float bestPos = -1.00f;
 	while ((int)miniQueue.size() > 0)
@@ -73,10 +75,11 @@ void cPreRender::updateUnits()
 		// Search
 		for (int i = 0; i < (int)miniQueue.size(); i++)
 		{
-			if (bestUnit == -1 || game.unit[miniQueue[i]].pos.y < bestPos)
+			if (bestUnit == -1 || game.unit[miniQueue[i]].pos.y < bestPos || game.unit[miniQueue[i]].hasRef(REF_UNIT_RENDERFIRST))
 			{
 				bestUnit = i;
 				bestPos = game.unit[miniQueue[i]].pos.y;
+				if (game.unit[miniQueue[i]].hasRef(REF_UNIT_RENDERFIRST)) { break; }
 			}
 		}
 		// Add

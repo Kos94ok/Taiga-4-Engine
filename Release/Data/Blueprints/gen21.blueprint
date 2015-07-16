@@ -30,3 +30,8 @@ Type: stone_basic_d
 X: 91
 Y: -27
 ===
+ID: -1
+Type: bg_test
+X: 0
+Y: 0
+===

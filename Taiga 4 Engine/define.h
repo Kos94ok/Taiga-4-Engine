@@ -105,6 +105,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define MSG_CONTROLS_HARVEST			152
 #define MSG_CONTROLS_STOP				153
 #define MSG_CONTROLS_CAMERA				154
+#define MSG_CONTROLS_ADDRESOURCE		155
 #define MSG_CONTROLS_CRAFTITEM			160
 #define MSG_CONTROLS_DROPITEM			161
 #define MSG_CONTROLS_DISMANTLE			162
@@ -156,8 +157,8 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_UNIT_PICKUP					0		// Unit can be picked up as an item
 #define REF_UNIT_HARVESTABLE			1		// Unit can be harvested for the resource
 #define REF_UNIT_NOSHADOW				2		// Unit can not create shadow
-#define REF_UNIT_ALWAYSVISIBLE_TOP		3		// Unit will always be rendered on the screen (on top of everything) - NYI
-#define REF_UNIT_ALWAYSVISIBLE_BOT		4		// Unit will always be rendered on the screen (below everything) - NYI
+#define REF_UNIT_ALWAYSVISIBLE			3		// Unit will always be rendered on the screen
+#define REF_UNIT_ADDRESOURCE			4		// Unit can be given resource
 #define REF_UNIT_MISSILE				5		// Unit is a projectile
 #define REF_UNIT_ROTATE					6		// Unit's sprite is rotated to the facing angle
 #define REF_UNIT_NOSAVE					7		// Unit is not saved
@@ -177,6 +178,8 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_UNIT_PARTICLE_WEATHER		21		// Unit is a weather particle
 #define REF_UNIT_NOACCELERATION			22		// Unit can move backwards
 #define REF_UNIT_BURNOUT_CAMPFIRE		23		// Unit is burning out as a campfire
+#define REF_UNIT_RENDERFIRST			24		// Unit will be rendered as soon as possible
+#define REF_UNIT_RENDERLAST				25		// Unit will be rendered as late as possible
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_CONSUME				2		// Item can be consumed
@@ -292,9 +295,6 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define MODE_NONE						-1
 #define MODE_TARGET_BUTTON				0
 #define MODE_TARGET_BUILDING			1
-
-#define BUFF_FLASHLIGHT					0
-#define BUFF_TORCH						1
 
 #define FADE_IN							1
 #define FADE_STOP						0

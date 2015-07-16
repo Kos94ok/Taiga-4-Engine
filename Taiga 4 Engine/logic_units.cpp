@@ -7,6 +7,7 @@
 #include "visual.h"
 #include "window.h"
 #include "database.h"
+#include "aura.h"
 
 void cGameLogic::updateAnim(int elapsedTime)
 {
@@ -54,15 +55,28 @@ void cGameLogic::updateAnim(int elapsedTime)
 				game.unit[i].light.flickerCurTime -= game.unit[i].light.flickerTime * 2.00f;
 			}
 		}
+		// Aura system
+		if (game.unit[i].aura.enabled)
+		{
+			for (cAuraBuff val : game.unit[i].aura.buffList)
+			{
+				for (int y = 0; y < game.unitCounter; y++)
+				{
+					float dist = math.getDistance(&game.unit[i], &game.unit[y]) - game.unit[i].collisionDistance - game.unit[y].collisionDistance
+						+ val.range * math.boolToInt(val.burnoutEffect) * (1.00f - game.unit[i].resource / game.unit[i].resourceLimit);
+					if (dist < val.range) {
+						game.unit[y].buff.remove(val.type, game.unit[i].globalId);
+						float power = val.power - (val.fadeout * (val.power * dist / val.range));
+						game.unit[y].buff.add(val.type, 0.10f, power, game.unit[i].globalId);
+					}
+				}
+			}
+		}
 		// Campfire burnout
 		if (game.unit[i].hasRef(REF_UNIT_BURNOUT_CAMPFIRE) && game.unit[i].resource > 0.00f)
 		{
-			// 100p: 300
-			// 66p: 200
-			// 33p: 100
-			// Dead: 0
 			game.unit[i].resource -= timevar;
-			game.unit[i].light.power = dbCampfire->light.power * (game.unit[i].resource / game.unit[i].resourceLimit);
+			game.unit[i].light.power = dbCampfire->light.power * max(0.10f, game.unit[i].resource / game.unit[i].resourceLimit);
 			// Full
 			if (game.unit[i].resource > game.unit[i].resourceLimit * 0.66f) {
 				game.unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_100p_idle.png");
@@ -82,15 +96,15 @@ void cGameLogic::updateAnim(int elapsedTime)
 			else {
 				game.unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_dead_idle.png");
 				game.unit[i].animData[ANIM_IDLE].side.texShadow = -1;
+				game.unit[i].light.power = 0.00f;
 			}
 			game.unit[i].sound.idle.volume = dbCampfire->sound.idle.volume * (game.unit[i].resource / game.unit[i].resourceLimit);
 			// Update sound
-			for (int i = 0; i < LIMIT_SOUND; i++) {
-				if (audio.sound[i].getStatus() == sf::Sound::Playing)
+			for (int s = 0; s < LIMIT_SOUND; s++) {
+				if (audio.sound[s].getStatus() == sf::Sound::Playing)
 				{
-					console.debug << audio.soundData[i].unitId << endl;
-					if (audio.soundData[i].unitId == game.unit[i].globalId) {
-						audio.soundData[i].data.volume = game.unit[i].sound.idle.volume;
+					if (audio.soundData[s].unitId == game.unit[i].globalId) {
+						audio.soundData[s].data.volume = game.unit[i].sound.idle.volume;
 					}
 				}
 			}

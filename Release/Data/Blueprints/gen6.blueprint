@@ -85,3 +85,8 @@ Type: tree_basic_c
 X: -10
 Y: 171
 ===
+ID: -1
+Type: bg_test
+X: 0
+Y: 0
+===

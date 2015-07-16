@@ -103,6 +103,9 @@
     <Filter Include="Файлы исходного кода\Character\Particle">
       <UniqueIdentifier>{06e86680-257d-4c9b-9550-0c0dfb1eba05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Util\Aura">
+      <UniqueIdentifier>{f3fa08c8-9f9a-4952-9b85-4a6f50378066}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console_cmd.cpp">
@@ -354,6 +357,9 @@
     <ClCompile Include="logic_particle.cpp">
       <Filter>Файлы исходного кода\Logic</Filter>
     </ClCompile>
+    <ClCompile Include="aura_main.cpp">
+      <Filter>Файлы исходного кода\Util\Aura</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -469,6 +475,9 @@
     </ClInclude>
     <ClInclude Include="particle.h">
       <Filter>Файлы исходного кода\Character\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="aura.h">
+      <Filter>Файлы исходного кода\Util\Aura</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

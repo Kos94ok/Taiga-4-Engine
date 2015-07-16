@@ -76,7 +76,6 @@ TODO:
 - Add order confirmation sfx
 - Add bigger item icon to description
 - Add enabled/disabled campfire states
-- Add campfire burnout
 - Add context menu based campfire heal with items
 - Campfire should be built in disabled state
 - Add cold and hunger
@@ -86,6 +85,8 @@ TODO:
 - Fix interact bug (when character moves past the object before interacting)
 - Fix some item icons (mirror)
 - Add berries and mushrooms!
+- Fix campfire build
+- Fix craft result display
 */
 
 int main(int argc, char* argv[])

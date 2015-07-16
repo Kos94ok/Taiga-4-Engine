@@ -87,7 +87,7 @@ sf::FloatRect tileRect, tileRectTex;
 sf::IntRect intRectTex;
 void cWindow::paintTileMap()
 {
-	sf::Vector2u texSize = visual.gameTex[database.texture[TEX_WORLD_GROUND]].handle.getSize();
+	/*sf::Vector2u texSize = visual.gameTex[database.texture[TEX_WORLD_GROUND]].handle.getSize();
 	sf::Transform miniMatrix;
 	miniMatrix.scale(sf::Vector2f(settings.sampleMod, settings.sampleMod));
 
@@ -124,7 +124,7 @@ void cWindow::paintTileMap()
 				}
 			}
 		}
-	}
+	}*/
 }
 
 /*void cWindow::paintTileMap()

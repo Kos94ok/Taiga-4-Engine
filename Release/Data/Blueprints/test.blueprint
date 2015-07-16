@@ -40,3 +40,8 @@ Type: campfire_full
 X: -44
 Y: -49
 ===
+ID: -1
+Type: bg_test
+X: 0
+Y: 0
+===

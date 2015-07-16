@@ -189,6 +189,8 @@ void cDatabase::loadUnits()
 	unit[i].light.flickerMod = 0.04f;
 	unit[i].light.flickerTime = 0.25f;
 	unit[i].sound.idle = cSound("fire2.ogg", 50.00f, 100.00f, 700.00f);
+	unit[i].aura.add(BUFF_HEAT, 100, 500.00f, true, true);
+	unit[i].addRef(REF_UNIT_ADDRESOURCE);
 	unit[i].addRef(REF_UNIT_BURNOUT_CAMPFIRE);
 	i += 1;
 
@@ -237,6 +239,18 @@ void cDatabase::loadUnits()
 	unit[i].addRef(REF_UNIT_NOCOLLISION);
 	i += 1;
 
+	// Backgrounds
+	unit[i].type = "bg_test";
+	unit[i].size = vec2f(500.00f, 500.00f);
+	unit[i].center = unit[i].size / 2.00f;
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow500.jpg");
+	unit[i].addRef(REF_UNIT_NOSHADOW);
+	unit[i].addRef(REF_UNIT_NOCOLLISION);
+	unit[i].addRef(REF_UNIT_NOSELECTION);
+	unit[i].addRef(REF_UNIT_RENDERFIRST);
+	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE);
+	i += 1;
+
 	// Other
 	unit[i].type = "editor";
 	unit[i].size = vec2(0, 0);
@@ -277,7 +291,7 @@ void cDatabase::loadUnits()
 	unit[i].center = unit[i].size / 2.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("red.png");
 	unit[i].addRef(REF_UNIT_NOSHADOW);
-	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE_BOT);
+	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE);
 	i += 1;
 
 	unit[i].type = "fogofwar";
@@ -286,6 +300,6 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("grey.png");
 	unit[i].addRef(REF_UNIT_NOSHADOW);
 	unit[i].addRef(REF_UNIT_NOSELECTION);
-	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE_BOT);
+	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE);
 	i += 1;
 }
