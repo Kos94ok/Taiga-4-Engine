@@ -176,9 +176,9 @@ void cDatabase::loadUnits()
 	unit[i].health = 5000.00f;
 	unit[i].maxHealth = 5000.00f;
 	unit[i].resource = 50.00f;
-	unit[i].resourceLimit = 300.00f;
-	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_idle.png");
-	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("campfire_idle_shadow.png");
+	unit[i].resourceLimit = 200.00f;
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("campfire_100p_idle.png");
+	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("campfire_100p_shadow.png");
 	unit[i].animData[ANIM_IDLE].side.frameCount = 4;
 	unit[i].animData[ANIM_IDLE].side.frameDelay = 0.20f;
 	unit[i].interactDistance = 20.00f;
@@ -240,15 +240,40 @@ void cDatabase::loadUnits()
 	i += 1;
 
 	// Backgrounds
-	unit[i].type = "bg_test";
+	unit[i].type = "bg_snow_1";
 	unit[i].size = vec2f(500.00f, 500.00f);
 	unit[i].center = unit[i].size / 2.00f;
-	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow500.jpg");
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_1.png");
 	unit[i].addRef(REF_UNIT_NOSHADOW);
 	unit[i].addRef(REF_UNIT_NOCOLLISION);
 	unit[i].addRef(REF_UNIT_NOSELECTION);
 	unit[i].addRef(REF_UNIT_RENDERFIRST);
 	unit[i].addRef(REF_UNIT_ALWAYSVISIBLE);
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "bg_snow_2";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_2.png");
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "bg_snow_3";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_3.png");
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "bg_snow_4";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_4.png");
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "bg_snow_5";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_5.png");
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "bg_snow_6";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_6.png");
 	i += 1;
 
 	// Other

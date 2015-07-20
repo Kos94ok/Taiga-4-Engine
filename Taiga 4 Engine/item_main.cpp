@@ -98,6 +98,13 @@ bool cItemContainer::remove(string type, int count, int begin)
 	return false;
 }
 
+void cItemContainer::clear()
+{
+	item.clear();
+	amount.clear();
+	itemCounter = 0;
+}
+
 int cItemContainer::getId(int id)
 {
 	for (int i = 0; i < itemCounter; i++)

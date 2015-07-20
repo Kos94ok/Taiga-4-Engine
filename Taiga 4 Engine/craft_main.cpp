@@ -95,7 +95,7 @@ void cCraft::checkActiveRecipe()
 	bool match = true;
 	int matchId = -1, id = -1;
 	if (cont.itemCounter == 0) {
-		resultCont.itemCounter = 0;
+		resultCont.clear();
 		return;
 	}
 
@@ -111,13 +111,13 @@ void cCraft::checkActiveRecipe()
 	{
 		int rpt = getActiveRecipeRepeats();
 		// Adding the recipe result
-		resultCont.itemCounter = 0;
+		resultCont.clear();
 		resultCont.add(recipe[matchId].result.type, recipe[matchId].result.count * rpt);
 	}
 	// No recipe found
 	else
 	{
-		resultCont.itemCounter = 0;
+		resultCont.clear();
 	}
 }
 

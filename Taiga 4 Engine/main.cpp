@@ -83,10 +83,7 @@ TODO:
 - Add proper death animations for trees and stones
 - Fix item bag shadow
 - Fix interact bug (when character moves past the object before interacting)
-- Fix some item icons (mirror)
 - Add berries and mushrooms!
-- Fix campfire build
-- Fix craft result display
 */
 
 int main(int argc, char* argv[])

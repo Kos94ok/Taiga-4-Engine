@@ -4,6 +4,7 @@
 #include "define.h"
 #include "refSystem.h"
 #include "icon.h"
+#include "buff.h"
 
 class cItemDrop
 {
@@ -49,6 +50,9 @@ public:
 		item[itemCounter] = type;
 		amount[itemCounter++] = count;
 	}
+	void clear() {
+		itemCounter = 0;
+	}
 
 	cItemDismantle() {
 		itemCounter = 0;
@@ -64,9 +68,12 @@ public:
 	float chance[LIMIT_DROP];
 	int powerLevel[LIMIT_DROP];
 
-	void add(std::string type, int count = 1, float chance = 1.00f, int powerLevel = POWER_HAND);
+	void add(string type, int count = 1, float chance = 1.00f, int powerLevel = POWER_HAND);
 	int flush(int unitId, int usedPowerLevel = POWER_IMBA);
-	int flush(sf::Vector2f pos, int usedPowerLevel = POWER_IMBA);
+	int flush(vec2f pos, int usedPowerLevel = POWER_IMBA);
+	void clear() {
+		itemCounter = 0;
+	}
 
 	cDropContainer() {
 		itemCounter = 0;
@@ -77,6 +84,7 @@ class cItemConsume
 {
 public:
 	int healthBalance;
+	cBuffList buff;
 
 	cItemConsume(){
 		healthBalance = 0;
@@ -88,10 +96,10 @@ class cItem : public cReference
 public:
 	int globalId;
 	int category;
-	std::string type;
-	std::string displayName;
+	string type;
+	string displayName;
 	int descrLinesUsed;
-	std::string description[LIMIT_DESCR];
+	string description[LIMIT_DESCR];
 
 	bool equipped;
 	float weight;
@@ -100,8 +108,8 @@ public:
 	cItemConsume consume;
 	cItemDismantle dismantle;
 
-	void addDescrLine(std::string line);
-	void setName(std::string txt);
+	void addDescrLine(string line);
+	void setName(string txt);
 
 	void use();
 	void equip();
@@ -123,8 +131,8 @@ public:
 	bool openable;
 	int itemLimit;
 	int itemCounter;
-	std::vector<cItem> item;
-	std::vector<int> amount;
+	vector<cItem> item;
+	vector<int> amount;
 	//cItem item[LIMIT_ITEMS];
 	//int amount[LIMIT_ITEMS];
 
@@ -133,18 +141,20 @@ public:
 	// Get item from global id
 	cItem& get(int id);
 	// Get item from type
-	cItem& get(std::string type, int begin = 0);
+	cItem& get(string type, int begin = 0);
 	// Get amount of items with that type
-	int getAmount(std::string type);
+	int getAmount(string type);
 	// Remove item using it's global id
 	bool remove(int id, int count = -1);
 	// Remove item with given type
-	bool remove(std::string type, int count = -1, int begin = 0);
+	bool remove(string type, int count = -1, int begin = 0);
+	// Remove all items
+	void clear();
 
 	// Get list number from global id
 	int getId(int id);
 	// Get list number from item type
-	int getId(std::string type, int begin = 0);
+	int getId(string type, int begin = 0);
 
 	void sort(int sortType);
 

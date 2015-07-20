@@ -114,7 +114,7 @@ void cUIButton::callbackLeft(int parent)
 			game.unit[game.getUnitId(client.unit)].container.add(craft.cont.item[i], craft.cont.amount[i]);
 		}
 		game.unit[game.getUnitId(client.unit)].container.sort(util.getInventorySortingType());
-		craft.cont.itemCounter = 0;
+		craft.cont.clear();
 		craft.checkActiveRecipe();
 		ui.clearContextMenu();
 		ui.updateInterfaceEquipment();
