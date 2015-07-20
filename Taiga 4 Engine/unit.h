@@ -152,7 +152,8 @@ public:
 	void addItem(std::string type, int count = 1, bool toLog = true);
 	void removeItem(std::string type, int count = -1, bool toLog = true);
 	void removeItem(int id, int count = -1, bool toLog = true);
-	void addBuff(int type, float duration = -1.00f, int power = 1);
+	void addBuff(int type, float duration = -1.00f, int power = 1, int owner = -1);
+	void addBuff(cBuff entry);
 	void removeBuff(int type);
 	bool hasBuff(int type);
 	void setLifeTimer(float time);

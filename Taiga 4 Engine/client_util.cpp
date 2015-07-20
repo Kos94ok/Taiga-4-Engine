@@ -101,3 +101,19 @@ bool cClient::isPacketDuplicate(int id)
 	}
 	return false;
 }
+
+void cClient::addCold(float value) {
+	setCold(statCold + value);
+}
+
+void cClient::setCold(float value) {
+	statCold = value;
+}
+
+void cClient::addHunger(float value) {
+	setHunger(statHunger + value);
+}
+
+void cClient::setHunger(float value) {
+	statHunger = value;
+}

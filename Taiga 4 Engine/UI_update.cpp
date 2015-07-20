@@ -22,6 +22,20 @@ void cUI::updateInterface()
 			ui.element[search].bar.maxValue = game.unit[id].maxHealth;
 		}
 	}
+	// Cold bar
+	search = findByRef(REF_UI_COLDBAR);
+	if (search != -1)
+	{
+		ui.element[search].bar.value = value.getMaxColdLocal() - client.statCold;
+		ui.element[search].bar.maxValue = value.getMaxColdLocal();
+	}
+	// Hunger bar
+	search = findByRef(REF_UI_HUNGERBAR);
+	if (search != -1)
+	{
+		ui.element[search].bar.value = value.getMaxHungerLocal() - client.statHunger;
+		ui.element[search].bar.maxValue = value.getMaxHungerLocal();
+	}
 }
 
 void cUI::updateInterfaceItemDescr()
@@ -455,11 +469,23 @@ void cUI::updateFull()
 	int id;
 	if (!core.editorMode)
 	{
-		id = ui.addElement("icon_health", sf::Vector2f(32, 32));
+		id = ui.addElement("bar", vec2f(64.00f, 8.00f));
+		ui.element[ui.getElementId(id)].size = vec2f(128, 16);
 		ui.element[ui.getElementId(id)].addRef(REF_UI_HEALTHBAR);
-		ui.element[ui.getElementId(id)].bar.minOffset = 0.20f;
-		ui.element[ui.getElementId(id)].bar.maxOffset = 0.20f;
-		ui.element[ui.getElementId(id)].bar.vertical = true;
+		//ui.element[ui.getElementId(id)].bar.minOffset = 0.20f;
+		//ui.element[ui.getElementId(id)].bar.maxOffset = 0.20f;
+		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_bar_health_bg.png");
+		ui.element[ui.getElementId(id)].bar.texture = visual.addTexture("ui_bar_health_full.png");
+		id = ui.addElement("bar", vec2f(64.00f, 24.00f));
+		ui.element[ui.getElementId(id)].size = vec2f(128, 16);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_COLDBAR);
+		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_bar_cold_bg.png");
+		ui.element[ui.getElementId(id)].bar.texture = visual.addTexture("ui_bar_cold_full.png");
+		id = ui.addElement("bar", vec2f(64.00f, 40.00f));
+		ui.element[ui.getElementId(id)].size = vec2f(128, 16);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_HUNGERBAR);
+		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_bar_hunger_bg.png");
+		ui.element[ui.getElementId(id)].bar.texture = visual.addTexture("ui_bar_hunger_full.png");
 	}
 
 	id = ui.addElement("button_test", sf::Vector2f(camera.res.x - 70.00f, 20.00f));

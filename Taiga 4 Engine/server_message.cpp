@@ -349,6 +349,9 @@ bool cServer::msgControlItem(int i, sf::Packet input)
 
 		// Apply consume effect
 		game.getUnit(server.player[i].unit).addHealth(consumeData.healthBalance * argi[0]);
+		for (int y = 0; y < (int)consumeData.buff.list.size(); y++) {
+			player[i].addBuff(consumeData.buff.list[y]);
+		}
 		// Dismantle on consume
 		if (target->hasRef(REF_ITEM_DISMANTLE_ON_CONSUME))
 		{

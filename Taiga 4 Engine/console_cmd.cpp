@@ -205,6 +205,54 @@ void cmd_unit_item_getlist(std::string args[])
 	}
 }
 
+// Unit.buff.add
+void cmd_unit_buff_add(std::string args[])
+{
+	int unitId, power = 1, time = -1;
+	string type = args[1];
+	stringstream(args[0]) >> unitId;
+	if (args[2] != "0") { stringstream(args[2]) >> power; }
+	if (args[3] != "0") { stringstream(args[3]) >> time; }
+
+	cUnit* target = &game.getUnit(unitId);
+	if (target->type != "missingno") {
+		int buffId = util.typeToBuffId(type);
+		if (buffId != -1) {
+			target->addBuff(buffId, (float)time, power);
+		}
+	}
+}
+
+// Unit.buff.remove
+void cmd_unit_buff_remove(std::string args[])
+{
+	int id;
+	string type = args[1];
+	stringstream(args[0]) >> id;
+
+	cUnit* target = &game.getUnit(id);
+	if (target->type != "missingno") {
+		target->removeBuff(util.typeToBuffId(type));
+	}
+}
+
+// Unit.buff.getlist
+void cmd_unit_buff_getlist(std::string args[])
+{
+	int id;
+	stringstream(args[0]) >> id;
+
+	cUnit* target = &game.getUnit(id);
+	if (target->type != "missingno") {
+		console.echo << "[CMD] [Type]: Time / Power / Owner" << endl;
+
+		for (cBuff entry : target->buff.list)
+		{
+			console.echo << "[CMD] [" << util.buffIdToType(entry.type) << "]: " << entry.duration << " / " << entry.power << " / " << entry.ownerUnit << endl;
+		}
+	}
+}
+
 // Camera.attach
 void cmd_camera_attach(string args[])
 {
@@ -245,16 +293,17 @@ void cmd_game_setlight(string args[])
 // Weather.set
 void cmd_weather_set(string args[])
 {
-	int power;
-	if (args[1] == "light") { power = 7000; }
-	else if (args[1] == "0" || args[1] == "medium") { power = 12000; }
-	else if (args[1] == "heavy") { power = 15000; }
+	float power;
+	if (args[1] == "none") { power = 0.00f; }
+	else if (args[1] == "light") { power = 7000.00f; }
+	else if (args[1] == "0" || args[1] == "medium") { power = 15000.00f; }
+	else if (args[1] == "heavy") { power = 25000.00f; }
+	else if (args[1] == "insane") { power = 50000.00f; }
 	else { stringstream(args[1]) >> power; }
 
-	if (args[0] == "snow") { weather.set(WEATHER_SNOW, (float)power); }
-	else if (args[0] == "rain") { weather.set(WEATHER_RAIN, (float)power); }
-	else if (args[0] == "cloud") { weather.setClouds((float)power); }
-	else if (args[0] == "wind") { weather.setWind((float)power); }
+	if (args[0] == "snow") { weather.set(WEATHER_SNOW, power); weather.changeTo(WEATHER_SNOW, power); }
+	else if (args[0] == "cloud") { weather.setClouds(power); weather.changeCloudsTo(power); }
+	else if (args[0] == "wind") { weather.setWind(power); weather.changeWindTo(power); }
 }
 
 // Weather.getlist
@@ -268,6 +317,8 @@ void cmd_weather_getlist(string args[])
 	console.echo << "[CMD] - light" << endl;
 	console.echo << "[CMD] - medium" << endl;
 	console.echo << "[CMD] - heavy" << endl;
+	console.echo << "[CMD] - insane" << endl;
+	console.echo << "[CMD] - none" << endl;
 }
 
 // Client.connect
@@ -385,8 +436,8 @@ void cmd_editor_setgentype(string args[])
 	editor.autogenType = type;
 }
 
-// Database.getunitlist
-void cmd_database_getunitlist(string args[])
+// Database.unit.getlist
+void cmd_database_unit_getlist(string args[])
 {
 	string type;
 	stringstream(args[0]) >> type;
@@ -396,6 +447,36 @@ void cmd_database_getunitlist(string args[])
 		if (database.unit[i].type.length() > 0 && (type == "0" || database.unit[i].type.find(type) != -1))
 		{
 			console << "- " << database.unit[i].type << endl;
+		}
+	}
+}
+
+// Database.item.getlist
+void cmd_database_item_getlist(std::string args[])
+{
+	string type;
+	stringstream(args[0]) >> type;
+	console.echo << "[CMD] Type / Display name" << "\n";
+	for (int i = 0; i < LIMIT_DB_ITEM; i++)
+	{
+		if (database.item[i].type.length() > 0 && (type == "0" || database.item[i].type.find(type) != -1 || database.item[i].displayName.find(type) != -1))
+		{
+			console << "- " << database.item[i].type << " / " << database.item[i].displayName << endl;
+		}
+	}
+}
+
+// Database.buff.getlist
+void cmd_database_buff_getlist(std::string args[])
+{
+	string type;
+	console.echo << "[CMD] Type" << "\n";
+	
+	for (int i = 0; i < 64; i++)
+	{
+		type = util.buffIdToType(i);
+		if (type != "missingno") {
+			console.echo << "[CMD] - " << type << endl;
 		}
 	}
 }

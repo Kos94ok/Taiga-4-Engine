@@ -10,7 +10,9 @@ public:
 	cPacketQueue dataQueue[LIMIT_SERVER_PACKETQUEUE];
 
 	int unit;
-	std::string playerName;
+	string playerName;
+	float statCold;
+	float statHunger;
 	
 	int packet;
 	bool connected;
@@ -24,9 +26,14 @@ public:
 	sf::Vector2f lastMousePos;
 	sf::Vector2f lastMoveOrderPos;
 
-	void sendEcho(std::string str);
+	void addCold(float value);
+	void setCold(float value);
+	void addHunger(float value);
+	void setHunger(float value);
+
+	void sendEcho(string str);
 	void sendPacket(sf::Packet data);
-	void connect(std::string ip, short port);
+	void connect(string ip, short port);
 	void disconnect();
 
 	void confirmPacket(int id);
@@ -36,7 +43,7 @@ public:
 	bool msgGame(sf::Packet data);
 	void pingServer();
 
-	std::vector<int> receivedPackets;
+	vector<int> receivedPackets;
 	bool isPacketDuplicate(int id);
 
 	cClient() {

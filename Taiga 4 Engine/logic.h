@@ -10,6 +10,9 @@ public:
 	void updateUnits(int elapsedTime);
 	void updateConnection(int elapsedTime);
 	void updateParticles(int elapsedTime);
+	void updateSurvivalStats(int elapsedTime);
+
+	void updateStatsFor(int unit, int player, float timevar);
 };
 
 extern cGameLogic gamelogic;

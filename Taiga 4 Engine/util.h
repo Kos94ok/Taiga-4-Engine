@@ -50,15 +50,16 @@ class cUtil
 public:
 	void detectVideoCard();
 	int getInventorySortingType();
-	void checkLog(std::string filename);
+	void checkLog(string filename);
 	void checkLogFiles();
-	std::string getCurrentTimeString(bool removeSemi = false, bool includeDay = false);
+	string getCurrentTimeString(bool removeSemi = false, bool includeDay = false);
 	
 	sf::Color convertUnitHighlightColor(int code);
-	sf::Color parseOldschoolColorCode(std::string code);
-
-	std::string buildRefToType(int ref);
-	int typeToBuildRef(std::string str);
+	sf::Color parseOldschoolColorCode(string code);
+	string buildRefToType(int ref);
+	int typeToBuildRef(string str);
+	string buffIdToType(int buff);
+	int typeToBuffId(string str);
 
 	bool screenshotRequested;
 	void makeScreenshot();
@@ -84,6 +85,13 @@ public:
 	const float chatRecentMessageTimer = 1.50f;
 	const float progressBarFadeInTimer = 0.10f;
 	const float progressBarFadeOutTimer = 0.30f;
+
+	const float statCold_normal_day = 1.00f;
+	const float statCold_normal_night = 1.30f;
+	const float statHunger_normal = 0.70f;
+
+	float getMaxColdLocal() { return 100.00f; }
+	float getMaxHungerLocal() { return 100.00f; }
 };
 
 extern cValue value;

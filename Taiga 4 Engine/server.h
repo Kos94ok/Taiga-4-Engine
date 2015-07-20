@@ -8,7 +8,9 @@ class cServerPlayer
 {
 public:
 	int unit;
-	std::string name;
+	string name;
+	float statCold;
+	float statHunger;
 	sf::Vector2f camPos;
 	sf::Vector2i camRes;
 	sf::Vector2f mousePos;
@@ -23,14 +25,19 @@ public:
 	int lastPongTime;
 
 	void disconnect();
+	void addCold(float value, bool local = false);
+	void setCold(float value, bool local = false);
+	void addHunger(float value, bool local = false);
+	void setHunger(float value, bool local = false);
 	void addResource(float value);
 	void setResource(float value);
 	void setHealth(float hp);
 	void setMaxHealth(float maxHp);
-	void addItem(std::string type, int count = 1);
-	bool hasItem(std::string type, int count = 1);
+	void addItem(string type, int count = 1);
+	bool hasItem(string type, int count = 1);
 	void moveCamera(sf::Vector2f target);
-	void addBuff(int type, float duration = -1.00f, int power = 1);
+	void addBuff(int type, float duration = -1.00f, int power = 1, int owner = -1);
+	void addBuff(cBuff value);
 	void removeBuff(int type);
 
 	cServerPlayer() {
@@ -62,7 +69,7 @@ public:
 	void sendWorldData(int playerId);
 	void assignUnit(int playerId, int unitId);
 
-	void sendEcho(int source, std::string str);
+	void sendEcho(int source, string str);
 
 	int pingTimer;
 	void pingPlayers();
@@ -91,8 +98,8 @@ public:
 
 	// History queue
 	int historyTimer;
-	std::vector<int> historyQueueTimer;
-	std::vector<cPacketQueue> historyQueue;
+	vector<int> historyQueueTimer;
+	vector<cPacketQueue> historyQueue;
 
 	void addToHistoryQueue(int targetPlayer, cPacketQueue data);
 	void removeFromHistoryQueue(int id);

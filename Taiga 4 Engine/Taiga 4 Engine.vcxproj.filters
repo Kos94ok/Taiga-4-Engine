@@ -360,6 +360,12 @@
     <ClCompile Include="aura_main.cpp">
       <Filter>Файлы исходного кода\Util\Aura</Filter>
     </ClCompile>
+    <ClCompile Include="logic_survival.cpp">
+      <Filter>Файлы исходного кода\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="util_convert.cpp">
+      <Filter>Файлы исходного кода\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

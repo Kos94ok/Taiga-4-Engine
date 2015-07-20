@@ -325,6 +325,7 @@ void gameLogicMain()
 			gamelogic.updateUnits(elapsedTime);
 			gamelogic.updateConnection(elapsedTime);
 			gamelogic.updateParticles(elapsedTime);
+			gamelogic.updateSurvivalStats(elapsedTime);
 
 			core.thread_serverWorldTicks += 1;
 			core.thread_antifreeze[threadId] = 0;

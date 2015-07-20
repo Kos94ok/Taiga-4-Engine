@@ -142,6 +142,9 @@ void cDatabase::loadItems()
 	item[i].addDescrLine("- Consumable");
 	item[i].dismantle.add("material_tin", 1);
 	item[i].consume.healthBalance = 25;
+	item[i].consume.buff.add(BUFF_FOOD, 30.00f, 7);
+	item[i].consume.buff.add(BUFF_FOOD, 20.00f, 7);
+	item[i].consume.buff.add(BUFF_FOOD, 10.00f, 7);
 	item[i].addRef(REF_ITEM_CONSUME);
 	item[i].addRef(REF_ITEM_EMPTIABLE);
 	item[i].addRef(REF_ITEM_DISMANTLE_ON_CONSUME);

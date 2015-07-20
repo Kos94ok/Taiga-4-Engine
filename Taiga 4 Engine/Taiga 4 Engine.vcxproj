@@ -146,6 +146,7 @@
     <ClCompile Include="item_main.cpp" />
     <ClCompile Include="item_active.cpp" />
     <ClCompile Include="logic_orders.cpp" />
+    <ClCompile Include="logic_survival.cpp" />
     <ClCompile Include="logic_units.cpp" />
     <ClCompile Include="logic_particle.cpp" />
     <ClCompile Include="macro.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="UI_util.cpp" />
     <ClCompile Include="unit_main.cpp" />
     <ClCompile Include="unit_order.cpp" />
+    <ClCompile Include="util_convert.cpp" />
     <ClCompile Include="util_main.cpp" />
     <ClCompile Include="visual_gen.cpp" />
     <ClCompile Include="visual_main.cpp" />

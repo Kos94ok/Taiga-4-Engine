@@ -147,17 +147,22 @@ void cUnit::removeItem(int id, int count, bool toLog)
 	}
 }
 
-void cUnit::addBuff(int type, float duration, int power)
+void cUnit::addBuff(int type, float duration, int power, int owner)
 {
-	buff.add(type, duration, power);
+	buff.add(type, duration, power, owner);
 	// Broadcast the data
 	if (core.serverMode || core.localServer)
 	{
 		sf::Packet data;
-		data << MSG_UNIT_ADDBUFF << globalId << type << duration << power;
+		data << MSG_UNIT_ADDBUFF << globalId << type << duration << power << owner;
 		server.sendPacket(PLAYERS_REMOTE, data);
 		data.clear();
 	}
+}
+
+void cUnit::addBuff(cBuff entry)
+{
+	addBuff(entry.type, entry.duration, entry.power, entry.ownerUnit);
 }
 
 void cUnit::removeBuff(int type)

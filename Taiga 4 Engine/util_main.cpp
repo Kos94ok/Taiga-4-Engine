@@ -183,24 +183,6 @@ sf::Color cUtil::parseOldschoolColorCode(string code)
 	return retVal;
 }
 
-string cUtil::buildRefToType(int ref)
-{
-	if (ref == REF_ITEM_BUILD_CAMPFIRE) { return "campfire_full"; }
-	else if (ref == REF_ITEM_BUILD_FURNACEBASIC) { return "furnace_basic"; }
-	else if (ref == REF_ITEM_BUILD_FURNACEIND) { return "furnace_industrial"; }
-	else if (ref == REF_ITEM_BUILD_TENT) { return "tent_basic"; }
-	return "missingno";
-}
-
-int cUtil::typeToBuildRef(string str)
-{
-	if (str == "campfire_full") { return REF_ITEM_BUILD_CAMPFIRE; }
-	else if (str == "furnace_basic") { return REF_ITEM_BUILD_FURNACEBASIC; }
-	else if (str == "furnace_industrial") { return REF_ITEM_BUILD_FURNACEIND; }
-	else if (str == "tent_basic") { return REF_ITEM_BUILD_TENT; }
-	return -1;
-}
-
 bool cUtil::intersects(vec2f pos, vec2f rectPos, vec2f rectSize)
 {
 	if (pos.x < rectPos.x) { return false; }

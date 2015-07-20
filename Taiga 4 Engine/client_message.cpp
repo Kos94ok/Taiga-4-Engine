@@ -183,10 +183,10 @@ bool cClient::msgUnit(sf::Packet input)
 	// Add buff
 	if (msg == MSG_UNIT_ADDBUFF)
 	{
-		input >> id >> argi[0] >> argf[1] >> argi[2];
+		input >> id >> argi[0] >> argf[1] >> argi[2] >> argi[3];
 		id = game.getUnitId(id);
 		if (id != -1) {
-			game.unit[id].addBuff(argi[0], argf[1], argi[2]);
+			game.unit[id].addBuff(argi[0], argf[1], argi[2], argi[3]);
 		}
 		return true;
 	}
@@ -437,6 +437,26 @@ bool cClient::msgGame(sf::Packet input)
 		input >> argStr;
 		chat.players << argStr << endl;
 		if (!core.localServer) { console << "[CHAT] " << argStr << endl; }
+
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Cold update
+	if (msg == MSG_PLAYER_COLD)
+	{
+		input >> argf[0];
+		client.setCold(argf[0]);
+
+		return true;
+	}
+	// ============================================
+	// ============================================
+	// Hunger update
+	if (msg == MSG_PLAYER_HUNGER)
+	{
+		input >> argf[0];
+		client.setHunger(argf[0]);
 
 		return true;
 	}

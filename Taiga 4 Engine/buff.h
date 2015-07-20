@@ -5,6 +5,7 @@
 #define BUFF_FLASHLIGHT					0
 #define BUFF_TORCH						1
 #define BUFF_HEAT						2
+#define BUFF_FOOD						3
 
 class cBuff
 {
@@ -28,6 +29,7 @@ public:
 	std::vector<cBuff> list;
 
 	void add(int type, float duration = -1.00f, int power = 1, int ownerUnit = -1);
+	void add(cBuff entry);
 	void remove(int type, int owner = -1);
 	void removeById(int id);
 	int getPower(int type);

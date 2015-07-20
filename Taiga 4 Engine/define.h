@@ -81,6 +81,8 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define MSG_CAMERA_MOVETO				12
 #define MSG_PLAYER_NAME					13
 #define MSG_PLAYER_CHAT					14
+#define MSG_PLAYER_COLD					15
+#define MSG_PLAYER_HUNGER				16
 #define MSG_UNIT_HERO					50
 #define MSG_UNIT_ADD					51
 #define MSG_UNIT_REMOVE					52
@@ -147,12 +149,14 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_UI_INVENTORY_BUTTON			9		// Object is the button that opens inventory
 #define REF_UI_INVENTORY_ITEM			10		// Object is the button that is linked to some item
 #define REF_UI_INVENTORY_DESCR			11		// Object is part of the hovered item description
-#define REF_UI_HEALTHBAR				12
-#define REF_UI_INVENTORY_WEIGHT			13		// Object is a total weight description
-#define REF_UI_CONTEXTMENU				14		// Object belongs to the context menu
-#define REF_UI_CHAT						15		// Object is a part of the chat ui
-#define REF_UI_CHAT_TEXT				16		// Object is text in the chat window
-#define REF_UI_CHAT_INPUT				17		// Object is text being edited by the player
+#define REF_UI_HEALTHBAR				12		// Object is a health bar
+#define REF_UI_COLDBAR					13		// Object is a coldness bar
+#define REF_UI_HUNGERBAR				14		// Object is a hunger bar
+#define REF_UI_INVENTORY_WEIGHT			15		// Object is a total weight description
+#define REF_UI_CONTEXTMENU				16		// Object belongs to the context menu
+#define REF_UI_CHAT						17		// Object is a part of the chat ui
+#define REF_UI_CHAT_TEXT				18		// Object is text in the chat window
+#define REF_UI_CHAT_INPUT				19		// Object is text being edited by the player
 #define REF_UI_ACTIVEITEM				50		// Object is one of the active equipped item buttons [50...85]
 #define REF_UNIT_PICKUP					0		// Unit can be picked up as an item
 #define REF_UNIT_HARVESTABLE			1		// Unit can be harvested for the resource

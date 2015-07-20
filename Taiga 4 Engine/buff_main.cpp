@@ -9,6 +9,11 @@ void cBuffList::add(int type, float duration, int power, int ownerUnit)
 	entry.duration = duration;
 	entry.ownerUnit = ownerUnit;
 
+	add(entry);
+}
+
+void cBuffList::add(cBuff entry)
+{
 	list.push_back(entry);
 }
 

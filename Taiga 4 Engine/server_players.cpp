@@ -19,6 +19,38 @@ void cServerPlayer::moveCamera(vec2f target)
 	data.clear();
 }
 
+void cServerPlayer::addCold(float value, bool local) {
+	setCold(statCold + value, local);
+}
+
+void cServerPlayer::setCold(float value, bool local)
+{
+	statCold = value;
+
+	if (!local)
+	{
+		sf::Packet data;
+		data << MSG_PLAYER_COLD << value;
+		server.sendPacket(myId, data);
+	}
+}
+
+void cServerPlayer::addHunger(float value, bool local) {
+	setHunger(statHunger + value, local);
+}
+
+void cServerPlayer::setHunger(float value, bool local)
+{
+	statHunger = value;
+
+	if (!local)
+	{
+		sf::Packet data;
+		data << MSG_PLAYER_HUNGER << value;
+		server.sendPacket(myId, data);
+	}
+}
+
 void cServerPlayer::addResource(float d) {
 	game.getUnit(unit).addResource(d);
 }
@@ -43,8 +75,12 @@ bool cServerPlayer::hasItem(std::string type, int count) {
 	return game.getUnit(unit).container.getAmount(type) >= count;
 }
 
-void cServerPlayer::addBuff(int type, float duration, int power) {
-	game.getUnit(unit).addBuff(type, duration, power);
+void cServerPlayer::addBuff(int type, float duration, int power, int owner) {
+	game.getUnit(unit).addBuff(type, duration, power, owner);
+}
+
+void cServerPlayer::addBuff(cBuff value) {
+	game.getUnit(unit).addBuff(value);
 }
 
 void cServerPlayer::removeBuff(int type) {
