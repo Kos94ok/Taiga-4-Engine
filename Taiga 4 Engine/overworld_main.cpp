@@ -9,7 +9,7 @@ void cOverworld::generateMap()
 	// Test maps
 	newOverworldMap.id = mapCounter++;
 	newOverworldMap.name = "Spawn";
-	newOverworldMap.pos = vec2f(50.00f, 300.00f);
+	newOverworldMap.pos = vec2f(0.00f, 0.00f);
 	newOverworldMap.level = 1;
 	map.push_back(newOverworldMap);
 

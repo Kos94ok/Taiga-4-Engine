@@ -1,6 +1,7 @@
 
 #include "main.h"
 #include "overworld.h"
+#include "UI.h"
 
 void cOverworld::linkMaps(int a, int b)
 {
@@ -18,4 +19,30 @@ bool cOverworld::isMapAvailable(int index)
 		if (link.b == index && link.a == activeMap) { return true; }
 	}
 	return false;
+}
+
+int cOverworld::getActiveMapIndex()
+{
+	for (int i = 0; i < (int)map.size(); i++)
+	{
+		if (map[i].id == activeMap) { return i; }
+	}
+	return 0;
+}
+
+int cOverworld::getSelectedMapIndex()
+{
+	for (int i = 0; i < (int)map.size(); i++)
+	{
+		if (map[i].id == selectedMap) { return i; }
+	}
+	return 0;
+}
+
+void cOverworld::selectMap(int id)
+{
+	selectedMap = id;
+	if (ui.wndOverworld.isDisplayed) {
+		ui.wndOverworld.update();
+	}
 }

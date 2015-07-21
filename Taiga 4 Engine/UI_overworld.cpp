@@ -16,6 +16,7 @@ void cUIOverworld::open()
 	isDisplayed = true;
 
 	//ui.addElement
+	ui.removeElementsByRef(REF_UI_OVERWORLD);
 	ui.removeElementsByRef(REF_UI_GAMEPLAY, 0.10f);
 
 	// Background
@@ -35,26 +36,7 @@ void cUIOverworld::open()
 	ui.element[ui.getElementId(id)].addRef(REF_UI_OVERWORLD_BUTTON);
 
 	// Overworld maps
-	for (cOverworldMap entry : overworld.map)
-	{
-		id = ui.addElement("button", entry.pos + vec2f(300.00f, 300.00f));
-		ui.element[ui.getElementId(id)].size = vec2f(24.00f, 24.00f);
-		ui.element[ui.getElementId(id)].setText(entry.name + " (Level " + to_string(entry.level) + ")");
-		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_roundbtn.png", false, true);
-		ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("ui_roundbtn_hover.png", false, true);
-		ui.element[ui.getElementId(id)].textOffset = vec2f(0.00f, 20.00f);
-		ui.element[ui.getElementId(id)].textColorHover = color(255, 127, 0);
-		ui.element[ui.getElementId(id)].addRef(REF_UI_OVERWORLD);
-
-		id = ui.addElement(ui.element[ui.getElementId(id)], entry.pos + vec2f(300.00f, 300.00f));
-		ui.element[ui.getElementId(id)].setText("");
-		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_roundbtn_overlay.png", false, true);
-		ui.element[ui.getElementId(id)].textureHovered = -1;
-		ui.element[ui.getElementId(id)].bodyColor = color(175, 10, 10);
-		if (entry.id == overworld.activeMap) { ui.element[ui.getElementId(id)].bodyColor = color(10, 10, 175); }
-		else if (overworld.isMapAvailable(entry.id)) { ui.element[ui.getElementId(id)].bodyColor = color(10, 175, 10); }
-		ui.element[ui.getElementId(id)].hoverColor = ui.element[ui.getElementId(id)].bodyColor;
-	}
+	update();
 
 	ui.access.unlock();
 }
@@ -65,4 +47,35 @@ void cUIOverworld::close()
 	ui.removeElementsByRef(REF_UI_OVERWORLD, 0.10f);
 	ui.updateFull();
 	game.resume();
+}
+
+void cUIOverworld::update()
+{
+	int id;
+	ui.removeElementsByRef(REF_UI_OVERWORLD_MAP);
+	vec2f center(camera.res.x / 2.00f, camera.res.y / 2.00f);
+	vec2f mainOffset = overworld.map[overworld.getSelectedMapIndex()].pos;
+	for (cOverworldMap entry : overworld.map)
+	{
+		id = ui.addElement("button", entry.pos + center - mainOffset);
+		ui.element[ui.getElementId(id)].size = vec2f(24.00f, 24.00f);
+		ui.element[ui.getElementId(id)].setText(entry.name + " (Level " + to_string(entry.level) + ")");
+		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_roundbtn.png", false, true);
+		ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("ui_roundbtn_hover.png", false, true);
+		ui.element[ui.getElementId(id)].textOffset = vec2f(0.00f, 20.00f);
+		ui.element[ui.getElementId(id)].textColorHover = color(255, 127, 0);
+		ui.element[ui.getElementId(id)].button.action = "selectOverworldMap";
+		ui.element[ui.getElementId(id)].button.args[0] = to_string(entry.id);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_OVERWORLD);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_OVERWORLD_MAP);
+
+		id = ui.addElement(ui.element[ui.getElementId(id)], entry.pos + center - mainOffset);
+		ui.element[ui.getElementId(id)].setText("");
+		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_roundbtn_overlay.png", false, true);
+		ui.element[ui.getElementId(id)].textureHovered = -1;
+		ui.element[ui.getElementId(id)].bodyColor = color(175, 10, 10);
+		if (entry.id == overworld.activeMap) { ui.element[ui.getElementId(id)].bodyColor = color(10, 10, 175); }
+		else if (overworld.isMapAvailable(entry.id)) { ui.element[ui.getElementId(id)].bodyColor = color(10, 175, 10); }
+		ui.element[ui.getElementId(id)].hoverColor = ui.element[ui.getElementId(id)].bodyColor;
+	}
 }

@@ -248,6 +248,11 @@ void cUIButton::callbackLeft(int parent)
 		stringstream(args[0]) >> id;
 		game.useItem(id);
 	}
+	else if (action == "selectOverworldMap")
+	{
+		stringstream(args[0]) >> id;
+		overworld.selectMap(id);
+	}
 	else if (action == "exit")
 	{
 		core.shutdown = true;

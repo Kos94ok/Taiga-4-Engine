@@ -152,6 +152,7 @@ public:
 
 	void open();
 	void close();
+	void update();
 };
 
 class cUI

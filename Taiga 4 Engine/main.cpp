@@ -82,7 +82,9 @@ TODO:
 - Add proper death animations for trees and stones
 - Fix item bag shadow
 - Fix interact bug (when character moves past the object before interacting)
-- Add berries and mushrooms!
+- Add berries and mushrooms
+- Finish overworld
+- Add separate audio subsystem for unit idle sound (no sound stacking allowed)
 */
 
 int main(int argc, char* argv[])
