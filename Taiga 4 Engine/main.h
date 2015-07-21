@@ -7,6 +7,7 @@ class cCore
 {
 public:
 	int videoCard;
+	bool paused;
 	float timeModifier;
 
 	int menuState;
@@ -30,6 +31,7 @@ public:
 	// Initializing
 	cCore() {
 		videoCard = VIDEO_OTHER;
+		paused = false;
 		timeModifier = 1.00f;
 		menuState = STATE_GAME;
 		serverMode = false;

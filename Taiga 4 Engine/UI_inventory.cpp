@@ -7,6 +7,7 @@
 
 void cUI::openInventory()
 {
+	game.pause();
 	access.lock();
 	int id;
 	ui.invOpened = true;
@@ -14,7 +15,7 @@ void cUI::openInventory()
 	float resModX = (float)camera.res.x / 1280.00f;
 	float resModY = (float)camera.res.y / 800.00f;
 
-	ui.removeElementsByRef(REF_UI_INVENTORY_BUTTON, 0.10f);
+	ui.removeElementsByRef(REF_UI_GAMEPLAY, 0.10f);
 
 	// Opening full page
 	if (ui.inventoryPage == INV_FULL)
@@ -115,16 +116,10 @@ void cUI::openInventory()
 void cUI::closeInventory()
 {
 	access.lock();
-	int id;
 	ui.invOpened = false;
 
 	ui.removeElementsByRef(REF_UI_INVENTORY, 0.10f);
-
-	id = ui.addElement("button_test", sf::Vector2f(camera.res.x - 70.00f, 20.00f));
-	ui.element[ui.getElementId(id)].button.action = "invToggle";
-	ui.element[ui.getElementId(id)].setText("Inventory");
-	ui.element[ui.getElementId(id)].tooltip.setText("Open inventory screen");
-	ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_BUTTON);
-	ui.element[ui.getElementId(id)].setFadeTimer(0.10f, FADE_IN);
+	ui.updateFull();
 	access.unlock();
+	game.resume();
 }

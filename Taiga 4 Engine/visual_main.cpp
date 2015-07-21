@@ -63,7 +63,7 @@ void cVisual::init()
 	}
 }
 
-int cVisual::addTexture(string name, bool ignoreFilter)
+int cVisual::addTexture(string name, bool ignoreFilter, bool forceFilter)
 {
 	// Looking for the texture
 	for (int i = 0; i < gameTexCounter; i++)
@@ -74,17 +74,21 @@ int cVisual::addTexture(string name, bool ignoreFilter)
 	string filepath = "Data\\Textures\\" + name;
 	visual.gameTex[visual.gameTexCounter].name = name;
 	visual.gameTex[visual.gameTexCounter].handle.setRepeated(true);
-	if (!ignoreFilter) { visual.gameTex[visual.gameTexCounter].handle.setSmooth(math.intToBool(settings.enableTextureSmoothing)); }
+	if (!ignoreFilter && (settings.enableTextureSmoothing || forceFilter)) {
+		visual.gameTex[visual.gameTexCounter].handle.setSmooth(true);
+	}
 	visual.gameTex[visual.gameTexCounter].handle.loadFromFile(filepath);
 	visual.gameTexCounter += 1;
 	return visual.gameTexCounter - 1;
 }
 
-int cVisual::addTexture(sf::Texture tex, bool ignoreFilter)
+int cVisual::addTexture(sf::Texture tex, bool ignoreFilter, bool forceFilter)
 {
 	visual.gameTex[visual.gameTexCounter].name = "autogen";
 	visual.gameTex[visual.gameTexCounter].handle.setRepeated(true);
-	if (!ignoreFilter) { visual.gameTex[visual.gameTexCounter].handle.setSmooth(math.intToBool(settings.enableTextureSmoothing)); }
+	if (!ignoreFilter && (settings.enableTextureSmoothing || forceFilter)) {
+		visual.gameTex[visual.gameTexCounter].handle.setSmooth(true);
+	}
 	visual.gameTex[visual.gameTexCounter].handle = tex;
 	visual.gameTexCounter += 1;
 	return visual.gameTexCounter - 1;

@@ -61,8 +61,8 @@ public:
 	int hoveredUnit;
 
 	void init();
-	int addTexture(string name, bool ignoreFilter = false);
-	int addTexture(sf::Texture tex, bool ignoreFilter = false);
+	int addTexture(string name, bool ignoreFilter = false, bool forceFilter = false);
+	int addTexture(sf::Texture tex, bool ignoreFilter = false, bool forceFilter = false);
 	int createIcon(string filename, string iconName, vec2i pos, vec2f gridSize);
 
 	sf::RenderTexture renderCloud;

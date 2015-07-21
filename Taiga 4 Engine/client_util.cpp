@@ -3,6 +3,7 @@
 #include "client.h"
 #include "camera.h"
 #include "game.h"
+#include "util.h"
 
 void cClient::sendPacket(sf::Packet data)
 {
@@ -102,18 +103,22 @@ bool cClient::isPacketDuplicate(int id)
 	return false;
 }
 
-void cClient::addCold(float value) {
-	setCold(statCold + value);
+void cClient::addCold(float val) {
+	setCold(statCold + val);
 }
 
-void cClient::setCold(float value) {
-	statCold = value;
+void cClient::setCold(float val) {
+	statCold = val;
+	if (statCold < value.getMinColdLocal()) { statCold = value.getMinColdLocal(); }
+	else if (statCold > value.getMaxColdLocal()) { statCold = value.getMaxColdLocal(); }
 }
 
-void cClient::addHunger(float value) {
-	setHunger(statHunger + value);
+void cClient::addHunger(float val) {
+	setHunger(statHunger + val);
 }
 
-void cClient::setHunger(float value) {
-	statHunger = value;
+void cClient::setHunger(float val) {
+	statHunger = val;
+	if (statHunger < value.getMinHungerLocal()) { statHunger = value.getMinHungerLocal(); }
+	else if (statHunger > value.getMaxHungerLocal()) { statHunger = value.getMaxHungerLocal(); }
 }

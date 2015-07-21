@@ -88,9 +88,11 @@ public:
 
 	const float statCold_normal_day = 1.00f;
 	const float statCold_normal_night = 1.30f;
-	const float statHunger_normal = 0.70f;
+	const float statHunger_normal = 0.30f;
 
+	float getMinColdLocal() { return -5.00f; }
 	float getMaxColdLocal() { return 100.00f; }
+	float getMinHungerLocal() { return -5.00f; }
 	float getMaxHungerLocal() { return 100.00f; }
 };
 

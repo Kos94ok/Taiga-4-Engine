@@ -42,7 +42,7 @@ void cWindow::paintUI()
 				// Normal
 				if (ui.element[i].texture != -1)
 				{
-					brushRect.setFillColor(sf::Color(255, 255, 255, ui.element[i].alpha * fade));
+					brushRect.setFillColor(sf::Color(ui.element[i].bodyColor.r, ui.element[i].bodyColor.g, ui.element[i].bodyColor.b, ui.element[i].alpha * fade));
 					brushRect.setOrigin(0.00f, 0.00f);
 					if (!ui.element[i].ignoreOrigin) { brushRect.setOrigin(ui.element[i].size.x / 2, ui.element[i].size.y / 2); }
 					brushRect.setPosition(ui.element[i].pos.x, ui.element[i].pos.y);
@@ -54,7 +54,8 @@ void cWindow::paintUI()
 				// Hover
 				if (ui.element[i].hoverAlpha > 0 && ui.element[i].textureHovered != -1)
 				{
-					brushRect.setFillColor(sf::Color(255, 255, 255, min(255.00f, (float)ui.element[i].hoverAlpha * ((float)ui.element[i].alpha / 255.00f)) * fade));
+					brushRect.setFillColor(sf::Color(ui.element[i].hoverColor.r, ui.element[i].hoverColor.g, ui.element[i].hoverColor.b,
+						min(255.00f, (float)ui.element[i].hoverAlpha * ((float)ui.element[i].alpha / 255.00f)) * fade));
 					brushRect.setOrigin(0.00f, 0.00f);
 					if (!ui.element[i].ignoreOrigin) { brushRect.setOrigin(ui.element[i].size.x / 2, ui.element[i].size.y / 2); }
 					brushRect.setPosition(ui.element[i].pos.x, ui.element[i].pos.y);

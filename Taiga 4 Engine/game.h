@@ -25,6 +25,9 @@ public:
 	bool lightens();
 	bool darkens();
 
+	void pause();
+	void resume();
+
 	cGame() {
 		ambientLight = 255.00f;
 		ambientLightMin = 0.00f;

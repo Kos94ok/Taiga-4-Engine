@@ -4,11 +4,12 @@
 class cGameLogic
 {
 public:
+	void updateUI(int elapsedTime);
+	void updateConnection(int elapsedTime);
+
 	void updateOrders(int elapsedTime);
 	void updateAnim(int elapsedTime);
-	void updateUI(int elapsedTime);
 	void updateUnits(int elapsedTime);
-	void updateConnection(int elapsedTime);
 	void updateParticles(int elapsedTime);
 	void updateSurvivalStats(int elapsedTime);
 

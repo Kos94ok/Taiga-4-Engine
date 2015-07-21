@@ -157,6 +157,9 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_UI_CHAT						17		// Object is a part of the chat ui
 #define REF_UI_CHAT_TEXT				18		// Object is text in the chat window
 #define REF_UI_CHAT_INPUT				19		// Object is text being edited by the player
+#define REF_UI_OVERWORLD				20		// Object is a part of the overworld ui
+#define REF_UI_OVERWORLD_BUTTON			21		// Object is the button that opens overworld map
+#define REF_UI_GAMEPLAY					22		// Object is a part of gameplay ui
 #define REF_UI_ACTIVEITEM				50		// Object is one of the active equipped item buttons [50...85]
 #define REF_UNIT_PICKUP					0		// Unit can be picked up as an item
 #define REF_UNIT_HARVESTABLE			1		// Unit can be harvested for the resource

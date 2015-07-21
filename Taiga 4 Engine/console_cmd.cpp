@@ -248,7 +248,8 @@ void cmd_unit_buff_getlist(std::string args[])
 
 		for (cBuff entry : target->buff.list)
 		{
-			console.echo << "[CMD] [" << util.buffIdToType(entry.type) << "]: " << entry.duration << " / " << entry.power << " / " << entry.ownerUnit << endl;
+			console.echo << "[CMD] [" << util.buffIdToType(entry.type) << "]: " << entry.duration << " / " << entry.power << " / " << entry.ownerUnit 
+				<< " [" << game.getUnit(entry.ownerUnit).type << "]" << endl;
 		}
 	}
 }

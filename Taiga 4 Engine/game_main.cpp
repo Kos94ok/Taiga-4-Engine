@@ -188,3 +188,18 @@ void cGame::packUnitToItem(int id)
 		console.error << "[cGame::packUnitToItem] Unit \"" << unit[id].type << "\" is not packable!" << endl;
 	}
 }
+
+// Pause and resume
+void cGame::pause()
+{
+	// Only singleplayer
+	if (server.getPlayerCount() == 1)
+	{
+		core.paused = true;
+	}
+}
+
+void cGame::resume()
+{
+	core.paused = false;
+}

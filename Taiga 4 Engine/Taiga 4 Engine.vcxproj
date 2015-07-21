@@ -153,6 +153,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math_main.cpp" />
     <ClCompile Include="overworld_main.cpp" />
+    <ClCompile Include="overworld_util.cpp" />
     <ClCompile Include="particle_main.cpp" />
     <ClCompile Include="path_main.cpp" />
     <ClCompile Include="precomp.cpp">
@@ -179,6 +180,7 @@
     <ClCompile Include="UI_contextMenu.cpp" />
     <ClCompile Include="UI_inventory.cpp" />
     <ClCompile Include="UI_main.cpp" />
+    <ClCompile Include="UI_overworld.cpp" />
     <ClCompile Include="UI_update.cpp" />
     <ClCompile Include="UI_util.cpp" />
     <ClCompile Include="unit_main.cpp" />

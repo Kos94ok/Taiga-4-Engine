@@ -464,7 +464,7 @@ void cUI::updateChatWindow()
 void cUI::updateFull()
 {
 	access.lock();
-	removeElementsByRef(-1, 0.50f);
+	removeElementsByRef(REF_UI_GAMEPLAY, 0.10f);
 
 	int id;
 	if (!core.editorMode)
@@ -472,6 +472,7 @@ void cUI::updateFull()
 		id = ui.addElement("bar", vec2f(64.00f, 8.00f));
 		ui.element[ui.getElementId(id)].size = vec2f(128, 16);
 		ui.element[ui.getElementId(id)].addRef(REF_UI_HEALTHBAR);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_GAMEPLAY);
 		//ui.element[ui.getElementId(id)].bar.minOffset = 0.20f;
 		//ui.element[ui.getElementId(id)].bar.maxOffset = 0.20f;
 		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_bar_health_bg.png");
@@ -479,11 +480,13 @@ void cUI::updateFull()
 		id = ui.addElement("bar", vec2f(64.00f, 24.00f));
 		ui.element[ui.getElementId(id)].size = vec2f(128, 16);
 		ui.element[ui.getElementId(id)].addRef(REF_UI_COLDBAR);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_GAMEPLAY);
 		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_bar_cold_bg.png");
 		ui.element[ui.getElementId(id)].bar.texture = visual.addTexture("ui_bar_cold_full.png");
 		id = ui.addElement("bar", vec2f(64.00f, 40.00f));
 		ui.element[ui.getElementId(id)].size = vec2f(128, 16);
 		ui.element[ui.getElementId(id)].addRef(REF_UI_HUNGERBAR);
+		ui.element[ui.getElementId(id)].addRef(REF_UI_GAMEPLAY);
 		ui.element[ui.getElementId(id)].texture = visual.addTexture("ui_bar_hunger_bg.png");
 		ui.element[ui.getElementId(id)].bar.texture = visual.addTexture("ui_bar_hunger_full.png");
 	}
@@ -493,6 +496,16 @@ void cUI::updateFull()
 	ui.element[ui.getElementId(id)].setText("Inventory");
 	ui.element[ui.getElementId(id)].tooltip.setText("Open inventory screen");
 	ui.element[ui.getElementId(id)].addRef(REF_UI_INVENTORY_BUTTON);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_GAMEPLAY);
+
+	id = ui.addElement("button_test", sf::Vector2f(camera.res.x - 70.00f, 60.00f));
+	ui.element[ui.getElementId(id)].button.action = "overworldToggle";
+	ui.element[ui.getElementId(id)].setText("Overworld (WIP)");
+	ui.element[ui.getElementId(id)].tooltip.setText("Open overworld map");
+	ui.element[ui.getElementId(id)].addRef(REF_UI_OVERWORLD_BUTTON);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_GAMEPLAY);
+
+	ui.setFadeTimeByRef(REF_UI_GAMEPLAY, 0.10f, FADE_IN);
 
 	access.unlock();
 

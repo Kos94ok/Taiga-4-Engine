@@ -195,3 +195,15 @@ void cServer::pingPlayers()
 	}
 	data.clear();
 }
+
+int cServer::getPlayerCount()
+{
+	int retVal = 0;
+	for (int i = 0; i < LIMIT_SERVER_PLAYERS; i++)
+	{
+		if (player[i].connected) {
+			retVal += 1;
+		}
+	}
+	return retVal;
+}

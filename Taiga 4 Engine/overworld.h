@@ -4,18 +4,36 @@
 
 class cOverworldMap
 {
-	sf::Vector2f pos;
-	std::string name;
-	std::string descr;
+public:
+	int id;
+
+	vec2f pos;
+	string name;
+	string descr;
+	int level;
+};
+
+class cOverworldLink
+{
+public:
+	int a;
+	int b;
 };
 
 class cOverworld
 {
 public:
+	int mapCounter;
 	int activeMap;
-	std::vector<cOverworldMap> map;
+	vector<cOverworldMap> map;
+	vector<cOverworldLink> links;
 
 	void generateMap();
-	//void save(std::string saveName);
-	//void load(std::string saveName);
+	void generatePath(int depth, vec2f pos, float angle = 720.00f);
+	void linkMaps(int a, int b);
+	bool isMapAvailable(int index);
+	//void save(string saveName);
+	//void load(string saveName);
 };
+
+extern cOverworld overworld;

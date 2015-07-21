@@ -70,7 +70,7 @@ public:
 	bool isValid;
 	int globalId;
 	int priority;
-	std::string type;
+	string type;
 	bool ignoreOrigin;
 	sf::Vector2f pos;
 	sf::Vector2f size;
@@ -78,11 +78,13 @@ public:
 	sf::Vector2f textOffset;
 	sf::Color textColor;
 	sf::Color textColorHover;
-	std::string text;
+	string text;
 	sf::String textDisplay;
 	float textOutlineThickness;
 	sf::Color textOutlineColor;
 	int textFont;
+	sf::Color bodyColor;
+	sf::Color hoverColor;
 	int alpha;
 	int hoverAlpha;
 	bool isHovered;
@@ -94,7 +96,7 @@ public:
 	sf::FloatRect textRect;
 
 	bool hasText();
-	void setText(std::string txt);
+	void setText(string txt);
 
 	int fadeType;
 	float fadeTimer;
@@ -124,6 +126,9 @@ public:
 		textOffset = sf::Vector2f(0.00f, 0.00f);
 		textOutlineThickness = 0.00f;
 
+		bodyColor = sf::Color(255, 255, 255);
+		hoverColor = sf::Color(255, 255, 255);
+
 		isHovered = false;
 		hoverAlpha = 0;
 		texture = -1;
@@ -138,6 +143,15 @@ public:
 	void close();
 	void update();
 	void updateInput();
+};
+
+class cUIOverworld
+{
+public:
+	bool isDisplayed = false;
+
+	void open();
+	void close();
 };
 
 class cUI
@@ -191,6 +205,8 @@ public:
 	void closeInventory();
 	// Chat
 	cUIChat wndChat;
+	// Overworld
+	cUIOverworld wndOverworld;
 
 	// Util
 	void createLine(sf::Vector2f begin, sf::Vector2f end, int ref = -1, int priority = 5);

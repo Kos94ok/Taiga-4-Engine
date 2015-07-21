@@ -78,7 +78,6 @@ TODO:
 - Add enabled/disabled campfire states
 - Add context menu based campfire heal with items
 - Campfire should be built in disabled state
-- Add cold and hunger
 - Fix tree death rotation
 - Add proper death animations for trees and stones
 - Fix item bag shadow
@@ -105,13 +104,17 @@ int main(int argc, char* argv[])
 	util.checkLaunchStatus();
 
 	// Loading databases
-	console << "[MAIN] Loading databases" << "\n";
+	console << "[MAIN] Parsing settings.ini" << "\n";
 	settings.setDefault();
 	settings.load();
+	console << "[MAIN] Initializing main database" << "\n";
 	database.init();
+	console << "[MAIN] Loading craft recipes" << "\n";
 	craft.loadRecipes();
+	console << "[MAIN] Initializing visual data" << "\n";
 	visual.init();
 	database.generateTextures();
+	console << "[MAIN] Analyzing world blueprints" << "\n";
 	world.analyzeBlueprints();
 
 	// Starting the threads

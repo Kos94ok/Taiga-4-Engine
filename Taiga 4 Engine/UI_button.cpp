@@ -9,6 +9,7 @@
 #include "editor.h"
 #include "target.h"
 #include "chat.h"
+#include "overworld.h"
 
 void cUIButton::callbackLeft(int parent)
 {
@@ -189,6 +190,8 @@ void cUIButton::callbackLeft(int parent)
 	else if (action == "start_taigaMaxi")
 	{
 		world.genNormalWorld();
+		overworld.generateMap();
+		ui.removeElementsByRef(REF_UI_MAINMENU, 0.50f);
 		ui.updateFull();
 		client.connect("localserver", 21045);
 		script.execute(cScript::shooter_respawnSystem, 0);
@@ -196,6 +199,7 @@ void cUIButton::callbackLeft(int parent)
 	else if (action == "start_genericShooter")
 	{
 		world.genNormalWorld();
+		ui.removeElementsByRef(REF_UI_MAINMENU, 0.50f);
 		ui.updateFull();
 		client.connect("localserver", 21045);
 
@@ -209,17 +213,24 @@ void cUIButton::callbackLeft(int parent)
 	{
 		editor.enable();
 		client.connect("localserver", 21045);
+		ui.removeElementsByRef(REF_UI_MAINMENU, 0.50f);
 		ui.updateFull();
 	}
 	else if (action == "connect_temp")
 	{
 		client.connect("84.50.50.87", 21045);
+		ui.removeElementsByRef(REF_UI_MAINMENU, 0.50f);
 		ui.updateFull();
 	}
 	else if (action == "invToggle")
 	{
 		if (ui.invOpened) { ui.closeInventory(); }
 		else { ui.openInventory(); }
+	}
+	else if (action == "overworldToggle")
+	{
+		if (ui.wndOverworld.isDisplayed) { ui.wndOverworld.close(); }
+		else { ui.wndOverworld.open(); }
 	}
 	else if (action.substr(0, 8) == "category")
 	{

@@ -106,25 +106,30 @@ void cScript::ui_initialMenu(cArg args)
 	int id = ui.addElement("image", vec2f(camera.res.x / 2, camera.res.y / 2));
 	ui.element[ui.getElementId(id)].texture = visual.addTexture("bg_artBlur.png");
 	ui.element[ui.getElementId(id)].size = vec2f(camera.res.x, camera.res.y);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_MAINMENU);
 	// Button background
 	id = ui.addElement("image", vec2f(125.00f, 0.00f));
 	ui.element[ui.getElementId(id)].texture = visual.addTexture("black.png");
 	ui.element[ui.getElementId(id)].size = vec2f(250.00f, camera.res.y);
 	ui.element[ui.getElementId(id)].ignoreOrigin = true;
 	ui.element[ui.getElementId(id)].alpha = 150;
+	ui.element[ui.getElementId(id)].addRef(REF_UI_MAINMENU);
 
 	// Main menu
 	id = ui.createText(vec2f(250.00f, 100.00f), "Main Menu");
 	ui.element[ui.getElementId(id)].ignoreOrigin = false;
 	ui.element[ui.getElementId(id)].textSize = 40.00f;
+	ui.element[ui.getElementId(id)].addRef(REF_UI_MAINMENU);
 	// Full name
 	id = ui.createText(vec2f(camera.res.x / 2, 50.00f), NAME_FULL, "Its a tooltip!");
 	ui.element[ui.getElementId(id)].ignoreOrigin = false;
 	ui.element[ui.getElementId(id)].textSize = 36.00f;
+	ui.element[ui.getElementId(id)].addRef(REF_UI_MAINMENU);
 	// Version number
 	id = ui.createText(vec2f(camera.res.x - 330.00f, camera.res.y - 20.00f), "Version: " + NAME_VERSION_FULL + " (" + NAME_BUILDTIME_DATE + ", " + NAME_BUILDTIME_TIME + ")",
 		"But not in early access!");
 	ui.element[ui.getElementId(id)].textSize = 16.00f;
+	ui.element[ui.getElementId(id)].addRef(REF_UI_MAINMENU);
 
 	float vertPos = 200.00f;
 	id = ui.addElement("button", sf::Vector2f(250.00f, vertPos + 0.00f));
@@ -135,19 +140,24 @@ void cScript::ui_initialMenu(cArg args)
 	ui.element[ui.getElementId(id)].textColorHover = sf::Color(255, 127, 0);
 	ui.element[ui.getElementId(id)].setText("Taiga Mini");
 	ui.element[ui.getElementId(id)].button.action = "start_taigaMaxi";
+	ui.element[ui.getElementId(id)].addRef(REF_UI_MAINMENU);
 	id = ui.addElement(ui.element[ui.getElementId(id)], sf::Vector2f(250.00f, vertPos + 35.00f));
 	ui.element[ui.getElementId(id)].setText("Generic Shooter");
 	ui.element[ui.getElementId(id)].button.action = "start_genericShooter";
+	ui.element[ui.getElementId(id)].addRef(REF_UI_MAINMENU);
 	id = ui.addElement(ui.element[ui.getElementId(id)], sf::Vector2f(250.00f, vertPos + 70.00f));
 	ui.element[ui.getElementId(id)].setText("Quick Connect");
 	ui.element[ui.getElementId(id)].button.action = "connect_temp";
+	ui.element[ui.getElementId(id)].addRef(REF_UI_MAINMENU);
 	id = ui.addElement(ui.element[ui.getElementId(id)], sf::Vector2f(250.00f, vertPos + 105.00f));
 	ui.element[ui.getElementId(id)].setText("Editor");
 	ui.element[ui.getElementId(id)].button.action = "start_editor";
+	ui.element[ui.getElementId(id)].addRef(REF_UI_MAINMENU);
 
 	id = ui.addElement(ui.element[ui.getElementId(id)], sf::Vector2f(250.00f, camera.res.y - 50.00f));
 	ui.element[ui.getElementId(id)].setText("Exit");
 	ui.element[ui.getElementId(id)].button.action = "exit";
+	ui.element[ui.getElementId(id)].addRef(REF_UI_MAINMENU);
 }
 
 void cScript::server_sendChunkData(cArg args)

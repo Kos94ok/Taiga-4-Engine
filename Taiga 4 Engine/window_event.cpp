@@ -112,6 +112,12 @@ void cWindow::mainEvent()
 		// Hotkeys
 		if (eventPoll.type == sf::Event::KeyReleased)
 		{
+			// Escape
+			if (eventPoll.key.code == sf::Keyboard::Escape && ui.contextMenuTarget != CONTEXTMENU_NOTHING) { ui.clearContextMenu(); }
+			else if (eventPoll.key.code == sf::Keyboard::Escape && ui.invOpened) { ui.closeInventory(); }
+			else if (eventPoll.key.code == sf::Keyboard::Escape && ui.wndOverworld.isDisplayed) { ui.wndOverworld.close(); }
+			else if (eventPoll.key.code == sf::Keyboard::Escape && chat.inFocus) { chat.hide(); }
+			else if (eventPoll.key.code == sf::Keyboard::Escape && chat.displayed) { chat.hide(); }
 			// Screenshot
 			if (eventPoll.key.code == settings.hkScreenshot) {
 				util.makeScreenshot();
@@ -145,9 +151,6 @@ void cWindow::mainEvent()
 					core.advancedDebug = !core.advancedDebug;
 					if (core.advancedDebug) { core.debugMode = true; }
 				}
-				// Escape
-				if (eventPoll.key.code == sf::Keyboard::Escape && ui.contextMenuTarget != CONTEXTMENU_NOTHING) { ui.clearContextMenu(); }
-				else if (eventPoll.key.code == sf::Keyboard::Escape && ui.invOpened) { ui.closeInventory(); }
 				// UI Element hotkeys
 				for (int i = 0; i < LIMIT_UI_ELEMENTS; i++)
 				{

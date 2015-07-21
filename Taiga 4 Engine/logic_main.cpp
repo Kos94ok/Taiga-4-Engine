@@ -320,12 +320,15 @@ void gameLogicMain()
 		// Ignore system time change or huge lags
 		if (elapsedTime > 0 && elapsedTime < 100)
 		{
-			gamelogic.updateOrders(elapsedTime);
 			gamelogic.updateUI(elapsedTime);
-			gamelogic.updateUnits(elapsedTime);
 			gamelogic.updateConnection(elapsedTime);
-			gamelogic.updateParticles(elapsedTime);
-			gamelogic.updateSurvivalStats(elapsedTime);
+			if (!core.paused)
+			{
+				gamelogic.updateOrders(elapsedTime);
+				gamelogic.updateUnits(elapsedTime);
+				gamelogic.updateParticles(elapsedTime);
+				gamelogic.updateSurvivalStats(elapsedTime);
+			}
 
 			core.thread_serverWorldTicks += 1;
 			core.thread_antifreeze[threadId] = 0;
@@ -347,7 +350,10 @@ void animationMain()
 		// Ignore system time change or huge lags
 		if (elapsedTime > 0 && elapsedTime < 100)
 		{
-			gamelogic.updateAnim(elapsedTime);
+			if (!core.paused)
+			{
+				gamelogic.updateAnim(elapsedTime);
+			}
 
 			core.thread_animWorldTicks += 1;
 			core.thread_antifreeze[threadId] = 0;

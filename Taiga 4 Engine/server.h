@@ -40,6 +40,11 @@ public:
 	void addBuff(cBuff value);
 	void removeBuff(int type);
 
+	float getMinCold();
+	float getMaxCold();
+	float getMinHunger();
+	float getMaxHunger();
+
 	cServerPlayer() {
 		unit = -1;
 		ping = -1;
@@ -73,6 +78,7 @@ public:
 
 	int pingTimer;
 	void pingPlayers();
+	int getPlayerCount();
 
 	// Takes: Unit global id
 	// Returns: Controlling player id
