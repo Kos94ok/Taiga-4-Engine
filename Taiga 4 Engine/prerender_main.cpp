@@ -28,7 +28,7 @@ void cPreRender::updateUnits()
 	else
 	{
 		cameraLeft -= 200;	cameraRight += 200;
-		cameraTop -= 200;	cameraBot += 450;
+		cameraTop -= 300;	cameraBot += 550;
 	}
 
 	// Random initialization

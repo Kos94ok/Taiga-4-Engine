@@ -163,13 +163,19 @@ void cGameLogic::updateUI(int elapsedTime)
 	float camVecModIn = 5.00f;
 	float camVecModOut = 5.00f;
 	float finalSpeed;
+	mousePos = window.getMousePos();
 	//camera.moveVector = vec2(0.00f, 0.00f);
 	if (GetForegroundWindow() == window.winHandle.getSystemHandle() && !console.displayed && !chat.inFocus)
 	{
 		bool isMoving = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(settings.hkCamMove[2])
-			|| (settings.enableMouseScroll && window.getMousePos().x < 1.00f))
+			|| (settings.enableMouseScroll && mousePos.x < 1.00f)
+			|| (sf::Mouse::isButtonPressed(sf::Mouse::Middle) && mousePos.x - visual.mouseWheelScrollAnchor.x < -5.00f))
 		{
+			camSpeed = value.scrollSpeed_keyboard_normal;
+			if (mousePos.y > camera.res.y - 2.00f) { camSpeed = value.scrollSpeed_mouse_normal; }
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) { camSpeed = -value.scrollSpeed_mouseWheel_normal * (mousePos.x - visual.mouseWheelScrollAnchor.x); }
+
 			finalSpeed = -camSpeed * timevar / core.timeModifier;
 			// Check for undefined chunks
 			if (camera.isCameraMoveValid(vec2f(finalSpeed, 0.00f)))
@@ -181,8 +187,13 @@ void cGameLogic::updateUI(int elapsedTime)
 			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(settings.hkCamMove[3])
-			|| (settings.enableMouseScroll && window.getMousePos().x > camera.res.x - 2.00f))
+			|| (settings.enableMouseScroll && mousePos.x > camera.res.x - 2.00f)
+			|| (sf::Mouse::isButtonPressed(sf::Mouse::Middle) && mousePos.x - visual.mouseWheelScrollAnchor.x > 5.00f))
 		{
+			camSpeed = value.scrollSpeed_keyboard_normal;
+			if (mousePos.y > camera.res.y - 2.00f) { camSpeed = value.scrollSpeed_mouse_normal; }
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) { camSpeed = value.scrollSpeed_mouseWheel_normal * (mousePos.x - visual.mouseWheelScrollAnchor.x); }
+
 			finalSpeed = camSpeed * timevar / core.timeModifier;
 			// Check for undefined chunks
 			if (camera.isCameraMoveValid(vec2f(finalSpeed, 0.00f)))
@@ -194,8 +205,13 @@ void cGameLogic::updateUI(int elapsedTime)
 			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(settings.hkCamMove[0])
-			|| (settings.enableMouseScroll && window.getMousePos().y < 1.00f))
+			|| (settings.enableMouseScroll && mousePos.y < 1.00f)
+			|| (sf::Mouse::isButtonPressed(sf::Mouse::Middle) && mousePos.y - visual.mouseWheelScrollAnchor.y < -5.00f))
 		{
+			camSpeed = value.scrollSpeed_keyboard_normal;
+			if (mousePos.y > camera.res.y - 2.00f) { camSpeed = value.scrollSpeed_mouse_normal; }
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) { camSpeed = -value.scrollSpeed_mouseWheel_normal * (mousePos.y - visual.mouseWheelScrollAnchor.y); }
+
 			finalSpeed = -camSpeed * timevar / core.timeModifier;
 			// Check for undefined chunks
 			if (camera.isCameraMoveValid(vec2f(0.00f, finalSpeed)))
@@ -207,8 +223,13 @@ void cGameLogic::updateUI(int elapsedTime)
 			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(settings.hkCamMove[1])
-			|| (settings.enableMouseScroll && window.getMousePos().y > camera.res.y - 2.00f))
+			|| (settings.enableMouseScroll && mousePos.y > camera.res.y - 2.00f)
+			|| (sf::Mouse::isButtonPressed(sf::Mouse::Middle) && mousePos.y - visual.mouseWheelScrollAnchor.y > 5.00f))
 		{
+			camSpeed = value.scrollSpeed_keyboard_normal;
+			if (mousePos.y > camera.res.y - 2.00f) { camSpeed = value.scrollSpeed_mouse_normal; }
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) { camSpeed = value.scrollSpeed_mouseWheel_normal * (mousePos.y - visual.mouseWheelScrollAnchor.y); }
+
 			finalSpeed = camSpeed * timevar / core.timeModifier;
 			// Check for undefined chunks
 			if (camera.isCameraMoveValid(vec2f(0.00f, finalSpeed)))
@@ -219,6 +240,7 @@ void cGameLogic::updateUI(int elapsedTime)
 				isMoving = true;
 			}
 		}
+		// 
 		if (!isMoving)
 		{
 			if (camera.moveVector.x > 0.00f) {
@@ -265,6 +287,11 @@ void cGameLogic::updateUI(int elapsedTime)
 	else if (!visual.progress.enabled && visual.progress.fadeTimer > 0.00f) {
 		visual.progress.fadeTimer -= timevar;
 		if (visual.progress.fadeTimer < 0.00f) { visual.progress.fadeTimer = 0.00f; }
+	}
+	// Double click timer
+	if (visual.lastMouseClickTimer > 0.00f) {
+		visual.lastMouseClickTimer -= timevar;
+		if (visual.lastMouseClickTimer < 0.00f) { visual.lastMouseClickTimer = 0.00f; }
 	}
 }
 

@@ -5,6 +5,9 @@
 #include "util.h"
 #include "item.h"
 
+#define FILTER_ALL						0
+#define FILTER_ONLYEDITOR				1
+
 class cGame
 {
 public:
@@ -40,10 +43,10 @@ public:
 
 	// Takes: Unit type, Unit position, Owner, Variation, Data send flag, Global Id
 	// Returns: Unit global id
-	int addUnit(std::string type, sf::Vector2f pos, int owner = -1, int variation = -1, bool sendData = true, int overrideGlobalId = -1);
+	int addUnit(string type, vec2f pos, int owner = -1, int variation = -1, bool sendData = true, int overrideGlobalId = -1);
 	// Takes: Unit type, Unit position, Unit Global Id
 	// Returns: Unit global id
-	int addUnitID(std::string type, sf::Vector2f pos, int globalId = -1);
+	int addUnitID(string type, vec2f pos, int globalId = -1);
 	// Takes: Unit global id
 	// Returns: Nothing
 	void removeUnit(int id, bool sendData = true);
@@ -56,24 +59,24 @@ public:
 	// Takes: Unit global id, Amount of damage
 	// Returns: Nothing
 	void damageUnit(int id, float damage);
-	// Takes: Nothing
+	// Takes: Clear filter type
 	// Returns: Nothing
-	void clearUnits();
+	void clearUnits(int filter = FILTER_ALL);
 	// Takes: Unit global id
 	// Returns: Unit local id
 	int getUnitId(int globalId);
 	// Takes: World location
 	// Returns: First found unit's local id
-	int getUnitId(sf::Vector2f pos, int refFilter = -1);
+	int getUnitId(vec2f pos, int refFilter = -1);
 	// Takes: Unit global id
 	// Returns: Pointer to unit
 	cUnit& getUnit(int id);
 	// Takes: World location
 	// Returns: Pointer to first found unit (using interact distance)
-	cUnit& getUnit(sf::Vector2f pos, int refFilter = -1);
+	cUnit& getUnit(vec2f pos, int refFilter = -1);
 	// Takes: World location
 	// Returns: Pointer to first found unit (using physical distance)
-	cUnit& getUnitPhys(sf::Vector2f &pos, int refFilter = -1);
+	cUnit& getUnitPhys(vec2f &pos, int refFilter = -1);
 	// Takes: Reference
 	// Returns: Pointer to first found unit
 	cUnit& getUnitByRef(int refFilter);
@@ -91,7 +94,7 @@ public:
 	vec2f getUnitInteractPoint(cUnit unitA, cUnit unitB);
 	// Takes: Unit type
 	// Returns: Amount of units of that type
-	int getUnitCount(std::string type);
+	int getUnitCount(string type);
 	// Takes: Unit ref
 	// Returns: Amount of units with that ref
 	int getUnitCount(int refId);
@@ -103,10 +106,10 @@ public:
 	bool isUnitDead(int globalId);
 	// Takes: Position, Item list
 	// Returns: Created unit global id
-	int createDrop(sf::Vector2f pos, cItemDrop itemA, cItemDrop itemB = "", cItemDrop itemC = "", cItemDrop itemD = "", int unitId = -1);
+	int createDrop(vec2f pos, cItemDrop itemA, cItemDrop itemB = "", cItemDrop itemC = "", cItemDrop itemD = "", int unitId = -1);
 	// Takes: Position, Item vector
 	// Returns: Created unit global id
-	int createDrop(sf::Vector2f pos, std::vector<cItemDrop> itemList, int unitId = -1);
+	int createDrop(vec2f pos, vector<cItemDrop> itemList, int unitId = -1);
 	// Takes: Time (24-hour format)
 	// Returns: Nothing
 	void setTimeOfDay(float time);

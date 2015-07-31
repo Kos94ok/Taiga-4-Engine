@@ -78,13 +78,14 @@ void cDatabase::loadUnits()
 
 	// Trees
 	unit[i].type = "tree_basic_a";
-	unit[i].size = vec2(100, 170);
-	unit[i].center = vec2(50, 167);
+	unit[i].size = vec2(150, 300);
+	unit[i].center = vec2(75, 280);
 	unit[i].health = 500.00f;
 	unit[i].maxHealth = 500.00f;
 	unit[i].resource = 275.00f;
 	unit[i].rotateSpeed = 5760.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_a_idle.png");
+	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("tree_basic_a_idle_shadow.png");
 	unit[i].animData[ANIM_DEATH].side.frameCount = 4;
 	unit[i].animData[ANIM_DEATH].side.frameDelay = 0.75f;
 	unit[i].animData[ANIM_DEATH].side.tex = visual.addTexture("tree_basic_a_death.png");
@@ -99,28 +100,37 @@ void cDatabase::loadUnits()
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;
 
-	unit[i] = unit[i - 1];
+	unit[i] = database.getUnit("tree_basic_a");
 	unit[i].type = "tree_basic_b";
-	unit[i].center = vec2(52, 170);
-	unit[i].shadowOffset = vec2(0, -1);
+	unit[i].size = vec2f(175, 175);
+	unit[i].center = vec2f(95, 155);
+	unit[i].shadowOffset = vec2f(0, -5);
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_b_idle.png");
+	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("tree_basic_b_idle_shadow.png");
 	unit[i].selectionOffset.x = 0.00f;
 	unit[i].selectionOffset.y = -3.00f;
 	i += 1;
 
-	unit[i] = unit[i - 1];
+	unit[i] = database.getUnit("tree_basic_a");
 	unit[i].type = "tree_basic_c";
-	unit[i].shadowOffset = vec2(0, 0);
+	unit[i].size = vec2f(220, 220);
+	unit[i].center = vec2f(100, 190);
+	unit[i].shadowOffset = vec2f(0, -5);
+	unit[i].collisionDistance = 15.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_c_idle.png");
+	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("tree_basic_c_idle_shadow.png");
 	unit[i].selectionOffset.x = -3.00f;
 	unit[i].selectionOffset.y = -8.00f;
 	i += 1;
 
-	unit[i] = unit[i - 1];
+	unit[i] = database.getUnit("tree_basic_a");
 	unit[i].type = "tree_basic_d";
-	unit[i].center = vec2(50, 160);
-	unit[i].shadowOffset = vec2(0, -10);
+	unit[i].size = vec2f(230, 230);
+	unit[i].center = vec2f(160, 205);
+	unit[i].shadowOffset = vec2f(0, -5);
+	unit[i].collisionDistance = 15.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_d_idle.png");
+	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("tree_basic_d_idle_shadow.png");
 	unit[i].selectionOffset.x = 0.00f;
 	unit[i].selectionOffset.y = 0.00f;
 	i += 1;
@@ -240,10 +250,10 @@ void cDatabase::loadUnits()
 	i += 1;
 
 	// Backgrounds
-	unit[i].type = "bg_snow_1";
+	unit[i].type = "bg_snow_a";
 	unit[i].size = vec2f(500.00f, 500.00f);
 	unit[i].center = unit[i].size / 2.00f;
-	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_1.png");
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_a.png");
 	unit[i].addRef(REF_UNIT_NOSHADOW);
 	unit[i].addRef(REF_UNIT_NOCOLLISION);
 	unit[i].addRef(REF_UNIT_NOSELECTION);
@@ -252,28 +262,28 @@ void cDatabase::loadUnits()
 	i += 1;
 
 	unit[i] = unit[i - 1];
-	unit[i].type = "bg_snow_2";
-	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_2.png");
+	unit[i].type = "bg_snow_b";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_b.png");
 	i += 1;
 
 	unit[i] = unit[i - 1];
-	unit[i].type = "bg_snow_3";
-	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_3.png");
+	unit[i].type = "bg_snow_c";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_c.png");
 	i += 1;
 
 	unit[i] = unit[i - 1];
-	unit[i].type = "bg_snow_4";
-	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_4.png");
+	unit[i].type = "bg_snow_d";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_d.png");
 	i += 1;
 
 	unit[i] = unit[i - 1];
-	unit[i].type = "bg_snow_5";
-	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_5.png");
+	unit[i].type = "bg_snow_e";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_e.png");
 	i += 1;
 
 	unit[i] = unit[i - 1];
-	unit[i].type = "bg_snow_6";
-	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_6.png");
+	unit[i].type = "bg_snow_f";
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("bg_snow_f.png");
 	i += 1;
 
 	// Other

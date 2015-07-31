@@ -14,9 +14,11 @@ int cGame::addUnit(string type, vec2f pos, int owner, int variation, bool sendDa
 	if (!sendData || core.serverMode || core.localServer)
 	{
 		if (variation == 0) { type += "a"; }
-		if (variation == 1) { type += "b"; }
-		if (variation == 2) { type += "c"; }
-		if (variation == 3) { type += "d"; }
+		else if (variation == 1) { type += "b"; }
+		else if (variation == 2) { type += "c"; }
+		else if (variation == 3) { type += "d"; }
+		else if (variation == 4) { type += "e"; }
+		else if (variation == 5) { type += "f"; }
 		// Apply
 		if (unitCounter < LIMIT_UNIT - 1)
 		{
@@ -103,9 +105,21 @@ void cGame::damageUnit(int id, float damage)
 }
 
 // Remove all units
-void cGame::clearUnits()
+void cGame::clearUnits(int filter)
 {
-	unitCounter = 0;
+	mutex.renderUnits.lock();
+	if (filter == FILTER_ALL) {
+		unitCounter = 0;
+	}
+	else if (filter == FILTER_ONLYEDITOR) {
+		for (int i = 0; i < unitCounter; i++) {
+			if (unit[i].type != "editor") {
+				removeLocalUnit(i);
+				i -= 1;
+			}
+		}
+	}
+	mutex.renderUnits.unlock();
 }
 
 // Quick create drop

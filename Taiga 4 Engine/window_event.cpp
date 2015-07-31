@@ -147,7 +147,7 @@ void cWindow::mainEvent()
 				if (eventPoll.key.code == settings.hkHideInterface) { ui.toggleDisplay(); }
 				// Debug
 				if (eventPoll.key.code == settings.hkDebugMode) { core.debugMode = !core.debugMode; }
-				if (eventPoll.key.code == settings.hkDebugAdvanced) {
+				if (eventPoll.key.code == settings.hkDebugAdvanced && !eventPoll.key.alt) {
 					core.advancedDebug = !core.advancedDebug;
 					if (core.advancedDebug) { core.debugMode = true; }
 				}
@@ -227,6 +227,7 @@ void cWindow::mainEvent()
 		{
 			mousePos = window.getMousePos(true);
 			bool matchFound = false;
+			bool doubleClick = visual.isDoubleClick() || eventPoll.mouseButton.button == sf::Mouse::Right;
 			int search;
 			// Editor mode
 			if (core.editorMode)
@@ -245,7 +246,7 @@ void cWindow::mainEvent()
 				search = visual.hoveredUnit;
 				cUnit* target = &game.getUnit(search);
 				// Item on the ground
-				if (search != -1 && target->hasRef(REF_UNIT_PICKUP))
+				if (doubleClick && search != -1 && target->hasRef(REF_UNIT_PICKUP))
 				{
 					if (eventPoll.mouseButton.button == sf::Mouse::Left) {
 						ui.mouseStateLMB = MOUSE_CONTROLS_UNITCLICK;
@@ -259,7 +260,7 @@ void cWindow::mainEvent()
 					}
 				}
 				// Harvestable object
-				else if (search != -1 && target->hasRef(REF_UNIT_HARVESTABLE))
+				else if (doubleClick && search != -1 && target->hasRef(REF_UNIT_HARVESTABLE))
 				{
 					if (eventPoll.mouseButton.button == sf::Mouse::Left) {
 						ui.mouseStateLMB = MOUSE_CONTROLS_UNITCLICK;
@@ -273,7 +274,7 @@ void cWindow::mainEvent()
 					}
 				}
 				// Some other object
-				else if (search != -1)
+				else if (doubleClick && search != -1)
 				{
 					if (eventPoll.mouseButton.button == sf::Mouse::Right)
 					{
@@ -291,6 +292,8 @@ void cWindow::mainEvent()
 						data << MSG_CONTROLS_MOVETO << mousePos.x << mousePos.y << sf::Keyboard::isKeyPressed(sf::Keyboard::LShift);
 						client.sendPacket(data);
 						data.clear();
+						// Register the click
+						visual.registerMouseClick();
 					}
 					else
 					{
@@ -312,11 +315,6 @@ void cWindow::mainEvent()
 			camera.pos.x = math.round(camera.pos.x);
 			camera.pos.y = math.round(camera.pos.y);
 		}
-			// Camera zoom
-		if (eventPoll.type == sf::Event::MouseWheelMoved && !console.displayed && !chat.inFocus)
-		{
-			camera.adjustZoom(eventPoll.mouseWheel.delta);
-		}
 			// Console scroll
 		else if (eventPoll.type == sf::Event::MouseWheelMoved && console.displayed)
 		{
@@ -327,15 +325,39 @@ void cWindow::mainEvent()
 		{
 			chat.scroll(eventPoll.mouseWheel.delta);
 		}
-			// Reset camera zoom
-		if (eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Middle && !console.displayed)
-		{
-			camera.setZoom(1.00f);
-		}
 			// Reset console position
 		else if (eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Middle && console.displayed)
 		{
 			console.resetScroll();
+		}
+			// Reset chat position
+		else if (eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Middle && chat.inFocus)
+		{
+			chat.resetScroll();
+		}
+			// Middle mouse button press
+		if (eventPoll.type == sf::Event::MouseButtonPressed && eventPoll.mouseButton.button == sf::Mouse::Middle && !console.displayed && !chat.inFocus)
+		{
+			ui.removeElementsByRef(REF_UI_MOUSEWHEELSCROLL);
+			visual.mouseWheelScrollAnchor = window.getMousePos();
+			int id = ui.addElement("mouseWheelScroll", window.getMousePos());
+			ui.setFadeTimeByRef(REF_UI_MOUSEWHEELSCROLL, 0.10f, FADE_IN);
+		}
+			// Middle mouse button release
+		if (eventPoll.type == sf::Event::MouseButtonReleased && eventPoll.mouseButton.button == sf::Mouse::Middle && !console.displayed && !chat.inFocus)
+		{
+			ui.removeElementsByRef(REF_UI_MOUSEWHEELSCROLL, 0.10f);
+		}
+			// Middle mouse camera scroll
+		if (eventPoll.type == sf::Event::MouseMoved && sf::Mouse::isButtonPressed(sf::Mouse::Middle))
+		{
+			//visual.updateMouseWheelScroll();
+		}
+			// Scroll through hovered unit
+		if (eventPoll.type == sf::Event::MouseWheelMoved && !console.displayed && !chat.inFocus)
+		{
+			visual.unitHoverScroll(eventPoll.mouseWheel.delta);
+			//camera.adjustZoom(eventPoll.mouseWheel.delta);
 		}
 		// =========================================================
 		// =========================================================

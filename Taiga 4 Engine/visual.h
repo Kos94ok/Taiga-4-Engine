@@ -60,6 +60,12 @@ public:
 	int particlesPainted;
 	int hoveredUnit;
 
+	vec2f lastMouseClickPos;
+	float lastMouseClickTimer;
+	vec2f mouseWheelScrollAnchor;
+
+	vector<int> unitHoverQueue;
+
 	void init();
 	int addTexture(string name, bool ignoreFilter = false, bool forceFilter = false);
 	int addTexture(sf::Texture tex, bool ignoreFilter = false, bool forceFilter = false);
@@ -74,6 +80,11 @@ public:
 	void enableProgressBarManual(float time, int stepCount);
 	void advanceProgressBar();
 	void disableProgressBar();
+
+	void registerMouseClick();
+	bool isDoubleClick();
+
+	void unitHoverScroll(int delta);
 
 	cVisual() {
 		hoveredUnit = -1;

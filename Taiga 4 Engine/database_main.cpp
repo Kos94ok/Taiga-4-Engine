@@ -58,6 +58,12 @@ void cDatabase::loadUI()
 	uiElement[i].textureHovered = -1;
 	i += 1;
 
+	uiElement[i].type = "mouseWheelScroll";
+	uiElement[i].addRef(REF_UI_MOUSEWHEELSCROLL);
+	uiElement[i].texture = visual.addTexture("mouse_progressBG.png");
+	uiElement[i].textureHovered = uiElement[i].texture;
+	i += 1;
+
 
 	uiElement[i].type = "icon_health";
 	uiElement[i].size = vec2(64, 64);

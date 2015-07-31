@@ -9,13 +9,13 @@ public:
 	cMutex access;
 
 	int waypointCounter;
-	sf::Vector2f waypoint[LIMIT_ORDERS];
+	vec2f waypoint[LIMIT_ORDERS];
 
-	void addWaypoint(sf::Vector2f loc);
+	void addWaypoint(vec2f loc);
 	void clear();
-	bool isPointFree(sf::Vector2f loc, float dist, int unitId);
-	sf::Vector2f validatePoint(sf::Vector2f loc, float dist, int unitId);
-	bool calculate(sf::Vector2f start, sf::Vector2f end, float collision, int unitId);
+	bool isPointFree(vec2f loc, float dist, int unitId);
+	vec2f validatePoint(vec2f loc, float dist, int unitId);
+	bool calculate(vec2f start, vec2f end, float collision, int unitId);
 };
 
 extern cPath path;

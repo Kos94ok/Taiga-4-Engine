@@ -8,10 +8,12 @@ void cEditor::genBlueprint_Normal()
 {
 	float dist = 1000.00f, localDist;
 	vec2 pos;
-	game.clearUnits();
+	game.clearUnits(FILTER_ONLYEDITOR);
 	int total = 0;
-	// Trees
-	for (int i = 0; i < math.rand(15, 25) && total < 100; i++)
+	// Background
+	game.addUnit("bg_snow_", vec2f(0.00f, 0.00f), -1, math.rand(0, 3));
+	// Objects
+	for (int i = 0; i < math.rand(12, 20) && total < 100; i++)
 	{
 		dist = 1000.00f;
 		pos = vec2(math.randf(-LIMIT_CHUNKSIZE / 2, LIMIT_CHUNKSIZE / 2), math.randf(-LIMIT_CHUNKSIZE / 2, LIMIT_CHUNKSIZE / 2));
@@ -38,12 +40,20 @@ void cEditor::genBlueprint_Normal()
 void cEditor::genBlueprint_Blocked()
 {
 	vec2 pos;
-	game.clearUnits();
+	game.clearUnits(FILTER_ONLYEDITOR);
 	int total = 0;
-	for (int i = 0; i < math.rand(25, 50) && total < 100; i++)
+	// Background
+	game.addUnit("bg_snow_", vec2f(0.00f, 0.00f), -1, math.rand(0, 3));
+	// Objects
+	for (int i = 0; i < math.rand(35, 50) && total < 100; i++)
 	{
 		pos = vec2(math.randf(-LIMIT_CHUNKSIZE / 2, LIMIT_CHUNKSIZE / 2), math.randf(-LIMIT_CHUNKSIZE / 2, LIMIT_CHUNKSIZE / 2));
-		game.addUnit("tree_basic_", pos, -1, math.rand(0, 3));
+		if (math.randf(0.00f, 1.00f) < 0.80f) {
+			game.addUnit("tree_basic_", pos, -1, math.rand(0, 3));
+		}
+		else {
+			game.addUnit("stone_basic_", pos, -1, math.rand(0, 3));
+		}
 		total += 1;
 	}
 }

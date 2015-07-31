@@ -90,6 +90,7 @@ public:
 	sf::Vector2f size;
 	sf::Vector2f shadowOffset;
 	sf::Vector2f selectionOffset;
+	sf::Vector2f lastGoodPos;
 	float interactDistance;
 	float collisionDistance;
 	float flyingHeight;

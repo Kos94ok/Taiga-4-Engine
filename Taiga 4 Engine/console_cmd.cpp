@@ -419,16 +419,21 @@ void cmd_editor_autogen(string args[])
 	int count, startIndex = 0;
 	stringstream(args[0]) >> count;
 	stringstream(args[1]) >> startIndex;
+	string index;
 
-	editor.genBlueprint();
+	if (count == 0) { editor.genBlueprint(); }
 	for (int i = 0; i < count; i++)
 	{
-		editor.saveBlueprint("gen" + to_string(i + startIndex));
 		editor.genBlueprint();
+
+		if (i + startIndex < 10) { index = "00" + to_string(i + startIndex); }
+		else if (i + startIndex < 100) { index = "0" + to_string(i + startIndex); }
+		else { index = to_string(i + startIndex); }
+		editor.saveBlueprint("gen_t" + to_string(editor.autogenType) + "_" + index);
 	}
 }
 
-// Editor.autogen.settype
+// Editor.setgentype
 void cmd_editor_setgentype(string args[])
 {
 	int type;

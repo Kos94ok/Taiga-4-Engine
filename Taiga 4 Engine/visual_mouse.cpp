@@ -4,6 +4,8 @@
 #include "database.h"
 #include "window.h"
 #include "target.h"
+#include "camera.h"
+#include "console.h"
 
 void cVisual::setMousePointer(int type)
 {
@@ -118,4 +120,40 @@ void cVisual::disableProgressBar()
 	progress.enabled = false;
 	progress.fadeTimer = value.progressBarFadeOutTimer;
 	setMousePointer(POINTER_DEFAULT);
+}
+
+void cVisual::registerMouseClick()
+{
+	lastMouseClickPos = window.getMousePos(false);
+	lastMouseClickTimer = value.mouseDoubleClickTimer;
+}
+
+bool cVisual::isDoubleClick()
+{
+	if (lastMouseClickTimer <= 0.00f) { return false; }
+	if (math.getDistance(window.getMousePos(false), lastMouseClickPos) > 1.00f) { return false; }
+	return true;
+}
+
+void cVisual::unitHoverScroll(int delta)
+{
+	if (hoveredUnit == -1) { return; }
+
+	mutex.renderUnits.lock();
+	for (int i = 0; i < (int)unitHoverQueue.size(); i++)
+	{
+		if (unitHoverQueue[i] == hoveredUnit) {
+			hoveredUnit = unitHoverQueue[i + delta];
+			if (i + delta >= (int)unitHoverQueue.size()) {
+				console.debug << "[DEBUG] Test 1: " << delta << endl;
+				hoveredUnit = unitHoverQueue[i + delta - (int)unitHoverQueue.size()];
+			}
+			else if (i + delta < 0) {
+				console.debug << "[DEBUG] Test 2: " << delta << endl;
+				hoveredUnit = unitHoverQueue[i + delta + (int)unitHoverQueue.size()];
+			}
+			break;
+		}
+	}
+	mutex.renderUnits.unlock();
 }

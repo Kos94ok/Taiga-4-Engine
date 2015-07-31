@@ -66,7 +66,7 @@ public:
 
 	void checkLaunchStatus();
 	
-	bool intersects(sf::Vector2f pos, sf::Vector2f rectPos, sf::Vector2f rectSize);
+	bool intersects(vec2f pos, vec2f rectPos, vec2f rectSize);
 };
 
 extern cUtil util;
@@ -86,9 +86,15 @@ public:
 	const float progressBarFadeInTimer = 0.10f;
 	const float progressBarFadeOutTimer = 0.30f;
 
-	const float statCold_normal_day = 1.00f;
-	const float statCold_normal_night = 1.30f;
-	const float statHunger_normal = 0.30f;
+	const float statCold_normal_day = 0.50f;
+	const float statCold_normal_night = 0.80f;
+	const float statHunger_normal = 0.20f;
+
+	const float mouseDoubleClickTimer = 0.20f;
+
+	const float scrollSpeed_mouse_normal = 1000.00f;
+	const float scrollSpeed_keyboard_normal = 1000.00f;
+	const float scrollSpeed_mouseWheel_normal = 5.00f;
 
 	float getMinColdLocal() { return -5.00f; }
 	float getMaxColdLocal() { return 100.00f; }
@@ -130,9 +136,9 @@ extern cMutexGlobal mutex;
 class cArg
 {
 public:
-	std::string data[4];
+	string data[4];
 
-	cArg(std::string a = "0", std::string b = "0", std::string c = "0", std::string d = "0") {
+	cArg(string a = "0", string b = "0", string c = "0", string d = "0") {
 		data[0] = a;
 		data[1] = b;
 		data[2] = c;
@@ -143,6 +149,6 @@ public:
 		cArg();
 	}
 
-	std::string operator [](int i) const { return data[i]; }
-	std::string & operator [](int i) { return data[i]; }
+	string operator [](int i) const { return data[i]; }
+	string & operator [](int i) { return data[i]; }
 };

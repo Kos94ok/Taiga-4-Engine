@@ -85,6 +85,7 @@ TODO:
 - Add berries and mushrooms
 - Finish overworld
 - Add separate audio subsystem for unit idle sound (no sound stacking allowed)
+- Add camera scrolling speed for all types
 */
 
 int main(int argc, char* argv[])

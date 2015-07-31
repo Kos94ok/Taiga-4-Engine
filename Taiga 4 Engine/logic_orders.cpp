@@ -56,8 +56,10 @@ void cGameLogic::updateOrders(int elapsedTime)
 					if (game.unit[i].hasRef(REF_UNIT_BESTPATHING))
 					{
 						// Validate the point before moving
-						vec2f newPoint = path.validatePoint(vec2f(game.unit[i].pos.x + offsetX, game.unit[i].pos.y + offsetY), game.unit[i].collisionDistance, game.unit[i].globalId);
-						game.unit[i].pos = newPoint;
+						vec2f newPoint(game.unit[i].pos.x + offsetX, game.unit[i].pos.y + offsetY);
+						if (path.isPointFree(newPoint, game.unit[i].collisionDistance, game.unit[i].globalId)) {
+							game.unit[i].pos = newPoint;
+						}
 					}
 					else
 					{

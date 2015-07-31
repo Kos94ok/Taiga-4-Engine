@@ -128,22 +128,26 @@ void cGameLogic::updateAnim(int elapsedTime)
 	}
 
 	// Hovered unit
-	mutex.renderMain.lock();
+	mutex.renderUnits.lock();
 	int oldHover = visual.hoveredUnit;
 	int oldPriority = -1;
 	visual.hoveredUnit = -1;
 	vec2f mousePos = window.getMousePos(true);
+	visual.unitHoverQueue.clear();
 	for (int i = 0; i < game.unitCounter; i++)
 	{
 		if (!game.unit[i].hasRef(REF_UNIT_NOSELECTION)
-			&& util.intersects(mousePos, game.unit[i].pos - game.unit[i].center, game.unit[i].size)
-			&& (visual.hoveredUnit == -1 || game.unit[i].globalId == oldHover || game.unit[i].selectionPriority > oldPriority))
+			&& util.intersects(mousePos, game.unit[i].pos - game.unit[i].center, game.unit[i].size))
 		{
-			visual.hoveredUnit = game.unit[i].globalId;
-			oldPriority = game.unit[i].selectionPriority;
+			visual.unitHoverQueue.push_back(game.unit[i].globalId);
+			if (visual.hoveredUnit == -1 || game.unit[i].globalId == oldHover || game.unit[i].selectionPriority > oldPriority)
+			{
+				visual.hoveredUnit = game.unit[i].globalId;
+				oldPriority = game.unit[i].selectionPriority;
+			}
 		}
 	}
-	mutex.renderMain.unlock();
+	mutex.renderUnits.unlock();
 }
 
 void cGameLogic::updateUnits(int elapsedTime)
