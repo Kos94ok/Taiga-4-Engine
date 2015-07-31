@@ -14,6 +14,13 @@ public:
 		frameCount = 1;
 		frameDelay = 0.25f;
 	}
+	cAnimDirection(int tex, int texShadow, int frameCount, float frameDelay)
+	{
+		this->tex = tex;
+		this->texShadow = texShadow;
+		this->frameCount = frameCount;
+		this->frameDelay = frameDelay;
+	}
 };
 
 class cAnimDisplay

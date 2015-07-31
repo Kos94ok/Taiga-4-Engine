@@ -85,7 +85,10 @@ TODO:
 - Add berries and mushrooms
 - Finish overworld
 - Add separate audio subsystem for unit idle sound (no sound stacking allowed)
-- Add camera scrolling speed for all types
+- Add camera scrolling speed settings for all types
+- Finish with rabbit AI!
+- Add wolf
+- Add animal spawn
 */
 
 int main(int argc, char* argv[])

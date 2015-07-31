@@ -346,7 +346,7 @@ void cWindow::mainEvent()
 			// Middle mouse button release
 		if (eventPoll.type == sf::Event::MouseButtonReleased && eventPoll.mouseButton.button == sf::Mouse::Middle && !console.displayed && !chat.inFocus)
 		{
-			ui.removeElementsByRef(REF_UI_MOUSEWHEELSCROLL, 0.10f);
+			ui.removeElementsByRef(REF_UI_MOUSEWHEELSCROLL, 0.20f);
 		}
 			// Middle mouse camera scroll
 		if (eventPoll.type == sf::Event::MouseMoved && sf::Mouse::isButtonPressed(sf::Mouse::Middle))

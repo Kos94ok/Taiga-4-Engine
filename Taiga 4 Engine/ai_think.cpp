@@ -8,7 +8,7 @@ void cAI::think_enemy(int globalId)
 {
 	cUnit* me = &game.getUnit(globalId);
 
-	std::vector<int> idList;
+	vector<int> idList;
 	for (int i = 0; i < game.unitCounter; i++)
 	{
 		if (game.unit[i].type == "player")
@@ -25,5 +25,23 @@ void cAI::think_enemy(int globalId)
 			game.getUnit(target).addHealth(-value.enemyDamage);
 		}
 		else { me->addOrder_moveto_path(game.getUnit(target).pos); }
+	}
+}
+
+void cAI::think_rabbit(int globalId)
+{
+	cUnit* me = &game.getUnit(globalId);
+
+	// Determine new goal
+	if (me->ai.int_goal == AIGOAL_NONE) {
+		me->ai.int_goal = AIGOAL_WANDER;
+	}
+
+	// Act according to the goal
+	if (me->ai.int_goal == AIGOAL_WANDER)
+	{
+		if (me->orderCounter == 0 && math.randf(0.00f, 1.00f) < 0.10f) {
+			me->addOrder_moveto_path(me->pos + vec2f(-500.00f, 500.00f));
+		}
 	}
 }

@@ -2,28 +2,35 @@
 #pragma once
 void AICoreMain();
 
+#define AIGOAL_NONE					-1
+#define AIGOAL_WANDER				0
+#define AIGOAL_FLEE					1
+#define AIGOAL_KILL					2
+
 class cAIBrain
 {
 public:
 	// Core
 	bool enabled;
 	int thinkTimer;
-	std::function<void(int globalId)> thinkFunc;
+	function<void(int globalId)> thinkFunc;
 
 	// Intelligence
-	int intTarget;
+	int int_goal;
+	int int_targetUnit;
+	vec2f int_attractedTo;
 
 	// Constructors
 	cAIBrain() {
-		intTarget = -1;
+		int_goal = -1;
 		thinkTimer = 0;
 		enabled = false;
 	}
-	cAIBrain(std::function<void(int globalId)> function) {
+	cAIBrain(function<void(int globalId)> function) {
 		enabled = true;
 		thinkFunc = function;
 	}
-	cAIBrain& operator= (std::function<void(int globalId)> function) {
+	cAIBrain& operator= (function<void(int globalId)> function) {
 		enabled = true;
 		thinkFunc = function;
 
@@ -47,6 +54,7 @@ public:
 
 	// Thinking functions
 	static void think_enemy(int globalId);
+	static void think_rabbit(int globalId);
 
 	cAI()
 	{
