@@ -3,6 +3,7 @@
 #include "unit.h"
 #include "animation.h"
 #include "logic.h"
+#include "game.h"
 
 void cUnit::updateDisplayAnim()
 {
@@ -79,6 +80,7 @@ void cCurrentAnim::reset()
 	type = ANIM_IDLE;
 	curFrame = 0;
 	curFrameTimer = 0.00f;
+	game.getUnit(ownerUnit).updateDisplayAnim();
 }
 
 void cCurrentAnim::play(int animType, bool forceInterrupt)
@@ -88,5 +90,6 @@ void cCurrentAnim::play(int animType, bool forceInterrupt)
 	{
 		reset();
 		type = animType;
+		game.getUnit(ownerUnit).updateDisplayAnim();
 	}
 }

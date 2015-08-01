@@ -1,6 +1,7 @@
 
 #pragma once
 #include "precomp.h"
+#include "world.h"
 
 class cEditorSelection
 {
@@ -28,8 +29,8 @@ public:
 	void enable();
 	void initialize();
 
-	void saveBlueprint(std::string name);
-	void loadBlueprint(std::string name);
+	void saveBlueprint(string name);
+	void loadBlueprint(string name);
 
 	void genBlueprint();
 	void genBlueprint_Normal();

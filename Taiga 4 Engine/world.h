@@ -4,6 +4,17 @@
 #include "util.h"
 #include "saveload.h"
 
+#define CHUNK_UNDEFINED					0
+#define CHUNK_NORMAL					1
+#define CHUNK_BLOCKED					2
+#define CHUNK_SPAWN						3
+#define CHUNK_VILLAGE					4
+#define CHUNK_LOOT_COMMON				5
+#define CHUNK_LOOT_GOOD					6
+#define CHUNK_LOOT_RARE					7
+#define CHUNK_LOOT_PERFECT				8
+#define CHUNK_TEMP						100
+
 void worldLoaderMain();
 
 class cBlueprint
@@ -21,11 +32,13 @@ class cMapTile
 public:
 	int blueprint;
 	bool isLoaded;
+	bool isInitialized;
 	int type;
 
 	cMapTile() {
 		blueprint = -1;
 		isLoaded = false;
+		isInitialized = false;
 		type = CHUNK_UNDEFINED;
 	}
 };
@@ -40,7 +53,7 @@ public:
 	cMapTile map[LIMIT_MAP][LIMIT_MAP];
 
 	void analyzeBlueprints();
-	void applyBlueprint(sf::Vector2i position, int type);
+	void applyBlueprint(vec2i position, int type);
 	vector<cUnitEntry> getBlueprintUnitList(int index);
 	vector<cUnitEntry> getChunkUnitList(vec2i pos);
 	vector<int> unloadVector;

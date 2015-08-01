@@ -81,7 +81,7 @@ void cGameLogic::updateOrders(int elapsedTime)
 					}
 					game.access.unlock();
 					// Missile collision check
-					if (game.unit[i].hasRef(REF_UNIT_MISSILE))
+					if (game.unit[i].hasRef(REF_UNIT_MISSILE) && core.serverSide())
 					{
 						for (int y = 0; y < game.unitCounter; y++)
 						{

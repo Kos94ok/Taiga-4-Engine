@@ -68,6 +68,8 @@ void cWorld::genNormalWorld()
 		for (int i = 0; i < LIMIT_MAP; i++)
 		{
 			map[i][j].type = CHUNK_UNDEFINED;
+			map[i][j].isLoaded = false;
+			map[i][j].isInitialized = false;
 		}
 	}
 
@@ -87,20 +89,32 @@ void cWorld::genNormalWorld()
 	map[spawnPointI.x][spawnPointI.y].type = CHUNK_SPAWN;
 
 	// Creating a wall around the normal chunks
-	for (int j = 1; j < LIMIT_MAP - 1; j++)
+	for (int y = 0; y < 2; y++)
 	{
-		for (int i = 1; i < LIMIT_MAP - 1; i++)
+		for (int j = 1; j < LIMIT_MAP - 1; j++)
 		{
-			if (map[i][j].type == CHUNK_UNDEFINED &&
-				(map[i + 1][j].type == CHUNK_NORMAL || map[i + 1][j].type == CHUNK_SPAWN
-				|| map[i + 1][j + 1].type == CHUNK_NORMAL || map[i + 1][j + 1].type == CHUNK_SPAWN
-				|| map[i][j + 1].type == CHUNK_NORMAL || map[i][j + 1].type == CHUNK_SPAWN
-				|| map[i - 1][j + 1].type == CHUNK_NORMAL || map[i - 1][j + 1].type == CHUNK_SPAWN
-				|| map[i - 1][j].type == CHUNK_NORMAL || map[i - 1][j].type == CHUNK_SPAWN
-				|| map[i - 1][j - 1].type == CHUNK_NORMAL || map[i - 1][j - 1].type == CHUNK_SPAWN
-				|| map[i][j - 1].type == CHUNK_NORMAL || map[i][j - 1].type == CHUNK_SPAWN
-				|| map[i + 1][j - 1].type == CHUNK_NORMAL || map[i + 1][j - 1].type == CHUNK_SPAWN))
+			for (int i = 1; i < LIMIT_MAP - 1; i++)
 			{
+				if (map[i][j].type == CHUNK_UNDEFINED &&
+					((map[i + 1][j].type != CHUNK_UNDEFINED && (map[i + 1][j].type != CHUNK_TEMP || y == 1) && map[i + 1][j].type != CHUNK_TEMP + 1)
+					|| (map[i + 1][j + 1].type != CHUNK_UNDEFINED && (map[i + 1][j + 1].type != CHUNK_TEMP || y == 1) && map[i + 1][j + 1].type != CHUNK_TEMP + 1)
+					|| (map[i][j + 1].type != CHUNK_UNDEFINED && (map[i][j + 1].type != CHUNK_TEMP || y == 1) && map[i][j + 1].type != CHUNK_TEMP + 1)
+					|| (map[i - 1][j + 1].type != CHUNK_UNDEFINED && (map[i - 1][j + 1].type != CHUNK_TEMP || y == 1) && map[i - 1][j + 1].type != CHUNK_TEMP + 1)
+					|| (map[i - 1][j].type != CHUNK_UNDEFINED && (map[i - 1][j].type != CHUNK_TEMP || y == 1) && map[i - 1][j].type != CHUNK_TEMP + 1)
+					|| (map[i - 1][j - 1].type != CHUNK_UNDEFINED && (map[i - 1][j - 1].type != CHUNK_TEMP || y == 1) && map[i - 1][j - 1].type != CHUNK_TEMP + 1)
+					|| (map[i][j - 1].type != CHUNK_UNDEFINED && (map[i][j - 1].type != CHUNK_TEMP || y == 1) && map[i][j - 1].type != CHUNK_TEMP + 1)
+					|| (map[i + 1][j - 1].type != CHUNK_UNDEFINED && (map[i + 1][j - 1].type != CHUNK_TEMP || y == 1) && map[i + 1][j - 1].type != CHUNK_TEMP + 1)))
+				{
+					map[i][j].type = CHUNK_TEMP;
+					if (y == 1) { map[i][j].type = CHUNK_TEMP + 1; }
+				}
+			}
+		}
+	}
+	// Swap temp to normal
+	for (int j = 1; j < LIMIT_MAP - 1; j++) {
+		for (int i = 1; i < LIMIT_MAP - 1; i++) {
+			if (map[i][j].type == CHUNK_TEMP || map[i][j].type == CHUNK_TEMP + 1) {
 				map[i][j].type = CHUNK_BLOCKED;
 			}
 		}
@@ -147,7 +161,7 @@ void cWorld::genNormalWorld()
 		{
 			if (map[i][j].type != CHUNK_UNDEFINED)
 			{
-				applyBlueprint(vec2i(i, j), map[i][j].type);
+				//applyBlueprint(vec2i(i, j), map[i][j].type);
 			}
 		}
 	}

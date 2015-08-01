@@ -43,6 +43,7 @@ void cWorld::applyBlueprint(vec2i position, int type)
 		out << in.rdbuf();
 	}
 	else { console.error << "[ERROR] No valid blueprints for type " << type << " at (" << position.x << "; " << position.y << ")!" << "\n"; }
+	map[position.x][position.y].isInitialized = true;
 }
 
 bool cWorld::isChunkLoaded(vec2i pos)

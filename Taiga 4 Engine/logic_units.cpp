@@ -25,11 +25,21 @@ void cGameLogic::updateAnim(int elapsedTime)
 		game.unit[i].anim.curFrameTimer += timevar;
 		if (game.unit[i].anim.curFrameTimer >= animDir.frameDelay)
 		{
+			// Anim main
 			game.unit[i].anim.curFrameTimer = 0.00f;
 			game.unit[i].anim.curFrame += 1;
 			if (game.unit[i].anim.curFrame >= animDir.frameCount)
 			{
 				game.unit[i].anim.curFrame = 0;
+			}
+			// Footsteps
+			cSoundFootsteps* steps = &game.unit[i].sound.footsteps;
+			if (game.unit[i].anim.type == ANIM_MOVE && (int)steps->data.size() > 0) {
+				for (int val : steps->frames) {
+					if (val == game.unit[i].anim.curFrame) {
+						audio.playSound(cSoundQueue(steps->data[math.rand(0, steps->data.size() - 1)], game.unit[i].globalId, false));
+					}
+				}
 			}
 		}
 		// Health bar animation

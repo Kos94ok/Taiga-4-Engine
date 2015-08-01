@@ -89,7 +89,10 @@ void audioMain()
 						data = dataQueue.data;
 						dist = math.getDistance(listener, unit->pos);
 
-						if (dist < data.minDist) { audio.sound[i].setVolume(audio.soundData[i].data.volume * settings.volEffects * settings.volMaster); }
+						if (dist < data.minDist) {
+							if (data.classification == AUDIO_EFFECT) { audio.sound[i].setVolume(audio.soundData[i].data.volume * settings.volEffects * settings.volMaster); }
+							else if (data.classification == AUDIO_FOOTSTEPS) { audio.sound[i].setVolume(audio.soundData[i].data.volume * settings.volFootsteps * settings.volMaster); }
+						}
 						else {
 							audio.sound[i].setVolume(audio.soundData[i].data.volume * settings.volEffects * settings.volMaster *
 								min(1.00f, max(0.00f, (data.maxDist - dist + data.minDist) / data.maxDist)) );

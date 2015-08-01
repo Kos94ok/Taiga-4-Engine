@@ -41,7 +41,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define LIMIT_CHUNKSIZE					500
 #define LIMIT_ICONSIZE					24
 #define LIMIT_SCRIPTCOUNT				64
-#define LIMIT_SOUND						64
+#define LIMIT_SOUND						512
 #define LIMIT_PRIORITY_UI				16
 #define LIMIT_PRIORITY_LIGHT			8
 #define LIMIT_GENTEXSIZE_CLOUD			512
@@ -189,6 +189,7 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_UNIT_BURNOUT_CAMPFIRE		23		// Unit is burning out as a campfire
 #define REF_UNIT_RENDERFIRST			24		// Unit will be rendered as soon as possible
 #define REF_UNIT_RENDERLAST				25		// Unit will be rendered as late as possible
+#define REF_UNIT_SCARY					26		// Unit is considered scary for the AI
 #define REF_ITEM_EQUIP					0		// Item can be equipped
 #define REF_ITEM_ACTIVE					1		// Item can be activated
 #define REF_ITEM_CONSUME				2		// Item can be consumed
@@ -268,16 +269,6 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define DIR_UP							1
 #define DIR_LEFT						2
 #define DIR_DOWN						3
-
-#define CHUNK_UNDEFINED					0
-#define CHUNK_NORMAL					1
-#define CHUNK_BLOCKED					2
-#define CHUNK_SPAWN						3
-#define CHUNK_VILLAGE					4
-#define CHUNK_LOOT_COMMON				5
-#define CHUNK_LOOT_GOOD					6
-#define CHUNK_LOOT_RARE					7
-#define CHUNK_LOOT_PERFECT				8
 
 #define SORT_BYNAME						0
 #define SORT_BYTYPE						1

@@ -14,6 +14,7 @@ class cUnitSoundbank
 {
 public:
 	cSound idle;
+	cSoundFootsteps footsteps;
 };
 
 class cOrder

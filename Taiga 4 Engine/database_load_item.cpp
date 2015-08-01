@@ -138,7 +138,7 @@ void cDatabase::loadItems()
 	item[i].addDescrLine("against hunger.");
 	item[i].addDescrLine("");
 	item[i].addDescrLine("- Restores 25 health");
-	item[i].addDescrLine("- Restores Y hunger");
+	item[i].addDescrLine("- Restores 42 hunger");
 	item[i].addDescrLine("- Consumable");
 	item[i].dismantle.add("material_tin", 1);
 	item[i].consume.healthBalance = 25;
@@ -160,6 +160,21 @@ void cDatabase::loadItems()
 	item[i].addDescrLine("- Restores 50 health");
 	item[i].addDescrLine("- Consumable");
 	item[i].consume.healthBalance = 50;
+	item[i].addRef(REF_ITEM_CONSUME);
+	item[i].category = CATEGORY_CONSUMABLES;
+	i += 1;
+
+	// Raw meat
+	item[i].type = "food_meat_raw";
+	item[i].setName("Raw Meat");
+	item[i].addDescrLine("Some raw meat. Can be cooked in a few ways to");
+	item[i].addDescrLine("make it better in all ways.");
+	item[i].addDescrLine("");
+	item[i].addDescrLine("- Restores 10 health");
+	item[i].addDescrLine("- Restores 20 hunger");
+	item[i].addDescrLine("- Consumable");
+	item[i].consume.healthBalance = 10;
+	item[i].consume.buff.add(BUFF_FOOD, 10.00f, 20);
 	item[i].addRef(REF_ITEM_CONSUME);
 	item[i].category = CATEGORY_CONSUMABLES;
 	i += 1;

@@ -30,6 +30,7 @@ int cGame::addUnit(string type, vec2f pos, int owner, int variation, bool sendDa
 			if (overrideGlobalId != -1) { globalId = overrideGlobalId; }
 			else if (core.localServer || core.serverMode) { globalId = unitGlobalCounter++; }
 			unit[unitCounter].globalId = globalId;
+			unit[unitCounter].anim.ownerUnit = globalId;
 			// Playing the sound
 			if (unit[unitCounter].sound.idle.name != "" && globalId != ID_LOCAL) {
 				audio.playSound(cSoundQueue(unit[unitCounter].sound.idle, globalId, true, REF_SOUND_IDLE));
@@ -90,7 +91,15 @@ void cGame::removeLocalUnit(int id)
 // Kill unit
 void cGame::killUnit(int id)
 {
-	game.getUnit(id).addOrder_death();
+	cUnit* target = &game.getUnit(id);
+	target->rotateSpeed = 0.00f;
+	target->movementSpeed = 0.00f;
+	target->addOrder_death();
+
+	target->updateFacing();
+	target->updateAction();
+	target->updateAnimation();
+	target->updateDisplayAnim();
 }
 
 // Damage unit

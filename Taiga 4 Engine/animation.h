@@ -43,6 +43,7 @@ public:
 class cCurrentAnim
 {
 public:
+	int ownerUnit;
 	int type;
 	int curFrame;
 	float curFrameTimer;

@@ -2,6 +2,7 @@
 #include "main.h"
 #include "world.h"
 #include "game.h"
+#include "math.h"
 
 void cWorld::saveChunk(vec2i pos)
 {
@@ -59,8 +60,11 @@ void cWorld::loadChunk(vec2i pos)
 	int attachIndex = -1;
 	vec2 anchor = getChunkCenter(pos);
 
+	if (!map[pos.x][pos.y].isInitialized) { applyBlueprint(pos, map[pos.x][pos.y].type); }
+
 	// Adding units
 	int id = 0;
+	int type = save.getHeaderFromFile(save.getChunkFilePath(pos)).type;
 	vector<cUnitEntry> unitList = getChunkUnitList(pos);
 	for (int i = 0; i < (int)unitList.size(); i++)
 	{
@@ -87,6 +91,14 @@ void cWorld::loadChunk(vec2i pos)
 			}
 		}
 	}
+	// Spawning units
+	if (type == CHUNK_NORMAL) {
+		if (math.randf(0.00f, 1.00f) < 0.50f) {
+			game.addUnit("rabbit", anchor + vec2f(math.randf(-LIMIT_CHUNKSIZE / 2, LIMIT_CHUNKSIZE / 2), math.randf(-LIMIT_CHUNKSIZE / 2, LIMIT_CHUNKSIZE / 2)));
+		}
+	}
+
+	// Finishing
 	map[pos.x][pos.y].isLoaded = true;
 
 	//game.access.unlock();
@@ -100,7 +112,8 @@ void cWorld::unloadChunk(vec2i pos)
 	//game.access.lock();
 	for (int i = 0; i < game.unitCounter; i++)
 	{
-		if (game.unit[i].chunkPos == pos && !game.unit[i].hasRef(REF_UNIT_NOUNLOAD))
+		if (!game.unit[i].hasRef(REF_UNIT_NOUNLOAD)
+			&& ((game.unit[i].movementSpeed <= 0.00f && game.unit[i].chunkPos == pos) || (game.unit[i].movementSpeed > 0.00f && world.getChunkInPos(game.unit[i].pos) == pos)))
 		{
 			game.removeUnit(game.unit[i].globalId, false);
 			i -= 1;
