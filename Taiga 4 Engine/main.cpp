@@ -67,6 +67,7 @@ cAPI api;
 cMutexGlobal mutex;
 cWeather weather;
 cParticle particle;
+cUtilTimer utilTimer;
 
 /*
 TODO:
@@ -137,6 +138,7 @@ int main(int argc, char* argv[])
 	thread threadAudio(audioMain);						Sleep(10);
 	thread threadPreRender(preRenderMain);				Sleep(10);
 	thread threadAnimation(animationMain);				Sleep(10);
+	thread threadMusic(musicMain);						Sleep(10);
 	
 	// Initializing the server
 	if (core.serverMode) {
@@ -145,6 +147,7 @@ int main(int argc, char* argv[])
 	// Creating the menu
 	else {
 		script.ui_initialMenu(NULL);
+		audio.playMusic(MUSIC_MENU);
 	}
 	game.access.unlock();
 
@@ -166,11 +169,11 @@ int main(int argc, char* argv[])
 			core.thread_animWorldTicks = 0;
 		}
 		// Adding some antifreeze
-		for (int i = 0; i < 11; i++) {
-			if (!(core.serverMode && (i == 5 || i == 6 || i == 9 || i == 10 || i == 11))) { core.thread_antifreeze[i] += 1; }
+		for (int i = 0; i < 12; i++) {
+			if (!(core.serverMode && (i == 5 || i == 6 || i == 9 || i == 10 || i == 11 || i == 12))) { core.thread_antifreeze[i] += 1; }
 			if (core.thread_antifreeze[i] > 1000) {
 				core.thread_antifreeze[i] = 0;
-				console.error << "[MAIN] Thread " << i << " appears to be frozen..." << endl;
+				console.error << "[MAIN] Thread " << i << " is not responding..." << endl;
 			}
 		}
 		Sleep(1);
@@ -183,6 +186,7 @@ int main(int argc, char* argv[])
 		script.threadVector[i].join();
 	}
 	console << "[MAIN] Waiting for core threads to finish..." << "\n";
+	core.thread_shutdown[12] = true;	threadMusic.join();
 	core.thread_shutdown[11] = true;	threadAnimation.join();
 	core.thread_shutdown[10] = true;	threadPreRender.join();
 	core.thread_shutdown[9] = true;		threadAudio.join();

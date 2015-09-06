@@ -92,17 +92,17 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sfml-system-s.lib;sfml-main.lib;sfml-window-s.lib;sfml-network-s.lib;sfml-graphics-s.lib;sfml-audio-s.lib;gdi32.lib;Winmm.lib;opengl32.lib;ws2_32.lib;freetype.lib;jpeg.lib;glew.lib;sndfile.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;sfml-system-s.lib;ws2_32.lib;sfml-network-s.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-audio-s.lib;opengl32.lib;gdi32.lib;sfml-window-s.lib;freetype.lib;jpeg.lib;sfml-graphics-s.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <StackReserveSize>
       </StackReserveSize>
       <ProgramDatabaseFile>$(MSBuildProjectDirectory)/$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <PreBuildEvent>
-      <Command>del "$(ProjectDir)Release\macro.obj"</Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
       <Command>
       </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>del "$(ProjectDir)Release\macro.obj"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release 3|Win32'">
@@ -131,6 +131,7 @@
     <ClCompile Include="console_cmd.cpp" />
     <ClCompile Include="console_util.cpp" />
     <ClCompile Include="craft_main.cpp" />
+    <ClCompile Include="database_load_audio.cpp" />
     <ClCompile Include="database_load_item.cpp" />
     <ClCompile Include="database_main.cpp" />
     <ClCompile Include="database_external.cpp" />

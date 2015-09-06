@@ -7,7 +7,7 @@
 
 void cUI::openInventory()
 {
-	game.pause();
+	//game.pause();
 	access.lock();
 	int id;
 	ui.invOpened = true;
@@ -121,5 +121,5 @@ void cUI::closeInventory()
 	ui.removeElementsByRef(REF_UI_INVENTORY, 0.10f);
 	ui.updateFull();
 	access.unlock();
-	game.resume();
+	//game.resume();
 }

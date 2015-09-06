@@ -9,7 +9,7 @@
 void windowMain()
 {
 	int threadId = 0;
-	console << "[WND] Window thread started" << "\n";
+	console << "[WND] Window thread started" << " [ID: " << threadId << "]" << "\n";
 	srand(time(0));
 	sf::Uint32 screenMode;
 	sf::ContextSettings context;
@@ -31,7 +31,7 @@ void windowMain()
 		if (settings.sampleMod > 1.00f) { settings.sampleMod = 1.00f; }
 	}
 	// Creating the window
-	console << "[WND] Creating " << camera.res.x << "x" << camera.res.y << " window rendering at " << camera.res.x * settings.sampleMod << "x" << camera.res.y * settings.sampleMod << endl;
+	console << "[WND] Creating " << camera.res.x << "x" << camera.res.y << " window rendering at " << math.round(camera.res.x * settings.sampleMod) << "x" << math.round(camera.res.y * settings.sampleMod) << endl;
 	window.winHandle.create(sf::VideoMode(camera.res.x, camera.res.y), NAME_FULL + " " + NAME_VERSION_FULL + " [" + NAME_ENGINE + "]", screenMode, context);
 	sf::Image icon;
 	icon.loadFromFile("Data//Textures//icon32.png");

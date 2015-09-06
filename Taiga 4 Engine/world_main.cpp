@@ -50,7 +50,7 @@ void cWorld::analyzeBlueprints()
 void worldLoaderMain()
 {
 	int threadId = 7;
-	console << "[WORLD_LOADER] Starting the world loader thread" << "\n";
+	console << "[WORLD_LOADER] Starting the world loader thread" << " [ID: " << threadId << "]" << "\n";
 
 	sf::Packet data;
 	bool isViable;

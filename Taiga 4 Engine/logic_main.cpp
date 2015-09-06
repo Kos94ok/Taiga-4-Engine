@@ -337,7 +337,7 @@ void cGameLogic::updateConnection(int elapsedTime)
 void gameLogicMain()
 {
 	int threadId = 1;
-	console << "[LOGIC] Starting the main logic thread" << "\n";
+	console << "[LOGIC] Starting the main logic thread" << " [ID: " << threadId << "]" << "\n";
 	srand(time(0));
 	int elapsedTime, globalTime = 0;
 	while (!core.thread_shutdown[threadId])
@@ -368,7 +368,7 @@ void gameLogicMain()
 void animationMain()
 {
 	int threadId = 11;
-	console << "[ANIM] Starting the animation thread" << "\n";
+	console << "[ANIM] Starting the animation thread" << " [ID: " << threadId << "]" << "\n";
 	int elapsedTime, globalTime = 0;
 	while (!core.thread_shutdown[threadId])
 	{

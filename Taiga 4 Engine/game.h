@@ -68,6 +68,9 @@ public:
 	// Takes: World location
 	// Returns: First found unit's local id
 	int getUnitId(vec2f pos, int refFilter = -1);
+	// Takes: Nothing
+	// Returns: Pointer to controlled unit
+	cUnit& getPlayer();
 	// Takes: Unit global id
 	// Returns: Pointer to unit
 	cUnit& getUnit(int id);

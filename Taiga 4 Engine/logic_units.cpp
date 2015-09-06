@@ -37,7 +37,7 @@ void cGameLogic::updateAnim(int elapsedTime)
 			if (game.unit[i].anim.type == ANIM_MOVE && (int)steps->data.size() > 0) {
 				for (int val : steps->frames) {
 					if (val == game.unit[i].anim.curFrame) {
-						audio.playSound(cSoundQueue(steps->data[math.rand(0, steps->data.size() - 1)], game.unit[i].globalId, false));
+						audio.playSound(steps->data[math.rand(0, steps->data.size() - 1)], game.unit[i].pos);
 					}
 				}
 			}
@@ -110,14 +110,14 @@ void cGameLogic::updateAnim(int elapsedTime)
 			}
 			game.unit[i].sound.idle.volume = dbCampfire->sound.idle.volume * (game.unit[i].resource / game.unit[i].resourceLimit);
 			// Update sound
-			for (int s = 0; s < LIMIT_SOUND; s++) {
+			/*for (int s = 0; s < LIMIT_SOUND; s++) {
 				if (audio.sound[s].getStatus() == sf::Sound::Playing)
 				{
 					if (audio.soundData[s].unitId == game.unit[i].globalId) {
 						audio.soundData[s].data.volume = game.unit[i].sound.idle.volume;
 					}
 				}
-			}
+			}*/
 		}
 	}
 	mutex.renderUnits.unlock();

@@ -100,7 +100,7 @@ void preRenderMain()
 	if (core.serverMode) { return; }
 
 	int threadId = 10;
-	console << "[RENDER] Pre-render thread started" << "\n";
+	console << "[RENDER] Pre-render thread started" << " [ID: " << threadId << "]" << "\n";
 	while (!core.thread_shutdown[threadId])
 	{
 		if (!preRender.units.ready) { preRender.updateUnits(); }

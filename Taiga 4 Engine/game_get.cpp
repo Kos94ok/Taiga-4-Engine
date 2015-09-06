@@ -3,6 +3,7 @@
 #include "game.h"
 #include "database.h"
 #include "math.h"
+#include "client.h"
 
 // Convert global id to local id
 int cGame::getUnitId(int globalId)
@@ -20,6 +21,12 @@ int cGame::getUnitId(sf::Vector2f pos, int refFilter)
 	cUnit unit = getUnit(pos, refFilter);
 	if (unit.type == "missingno") { return -1; }
 	return unit.globalId;
+}
+
+// Get player
+cUnit& cGame::getPlayer()
+{
+	return getUnit(client.unit);
 }
 
 // Get unit

@@ -195,6 +195,7 @@ void cUIButton::callbackLeft(int parent)
 		ui.updateFull();
 		client.connect("localserver", 21045);
 		script.execute(cScript::shooter_respawnSystem, 0);
+		audio.playMusic(MUSIC_DAY);
 	}
 	else if (action == "start_genericShooter")
 	{

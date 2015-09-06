@@ -396,6 +396,9 @@
     <ClCompile Include="overworld_util.cpp">
       <Filter>Файлы исходного кода\World\Overworld</Filter>
     </ClCompile>
+    <ClCompile Include="database_load_audio.cpp">
+      <Filter>Файлы исходного кода\Database</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

@@ -250,3 +250,17 @@ void cCodeStats::calculate()
 		}
 	}
 }
+
+int cUtilTimer::getElapsedTimeForThread(int threadId)
+{
+	int retVal;
+	int curTime = timeGetTime();
+	if (curTime - threadTimer[threadId] > 1000) {
+		retVal = 0;
+	}
+	else {
+		retVal = curTime - threadTimer[threadId];
+	}
+	threadTimer[threadId] = curTime;
+	return retVal;
+}

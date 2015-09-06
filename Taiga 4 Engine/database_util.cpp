@@ -1,6 +1,20 @@
 
 #include "main.h"
 #include "database.h"
+#include "math.h"
+
+cSound& cDatabase::getSound(string type)
+{
+	access.lock();
+	for (int i = 0; i < LIMIT_DB_SOUNDS; i++)
+	{
+		if (sound[i].name == type) { access.unlock(); return sound[i]; }
+	}
+	// Return error-unit
+	console.error << "[ERROR] Can't find the sound [" << type << "] in the database!" << "\n";
+	access.unlock();
+	return sound[0];
+}
 
 cUnit& cDatabase::getUnit(string type)
 {
@@ -67,6 +81,25 @@ cParticleUnit& cDatabase::getParticle(string type)
 	console.error << "[ERROR] Can't find the particle [" << type << "] in the database!" << "\n";
 	access.unlock();
 	return particle[0];
+}
+
+cMusic& cDatabase::getRandomMusic(int group)
+{
+	vector<int> indexes;
+	access.lock();
+	for (int i = 0; i < LIMIT_DB_MUSIC; i++)
+	{
+		if (music[i].group == group) { indexes.push_back(i); }
+	}
+	// Select the random one
+	if (indexes.size() > 0) {
+		access.unlock();
+		return music[indexes[math.rand(0, indexes.size() - 1)]];
+	}
+	// Return error-music
+	console.error << "[ERROR] Requested incorrect music group [" << group << "]!" << endl;
+	access.unlock();
+	return music[0];
 }
 
 bool cDatabase::isItemGood(string type)

@@ -4,16 +4,26 @@
 #include "util.h"
 #include "refSystem.h"
 
-#define AUDIO_MUSIC					0
-#define AUDIO_EFFECT				1
-#define AUDIO_AMBIENT				2
-#define AUDIO_WEATHER				3
-#define AUDIO_FOOTSTEPS				4
+#define LIMIT_MUSIC						5
+#define LIMIT_SOUND						128
+
+#define AUDIO_MUSIC						0
+#define AUDIO_EFFECT					1
+#define AUDIO_AMBIENT					2
+#define AUDIO_WEATHER					3
+#define AUDIO_FOOTSTEPS					4
+
+#define MUSIC_MENU						0
+#define MUSIC_DAY						1
+#define MUSIC_NIGHT						2
+#define MUSIC_CAMPFIRE					3
+#define MUSIC_CREDITS					4
 
 class cSound
 {
 public:
 	string name;
+	string file;
 	float volume;
 	float minDist;
 	float maxDist;
@@ -21,22 +31,7 @@ public:
 
 	cSound() {
 		name = "";
-		minDist = 0.00f;
-		maxDist = 300.00f;
-	}
-	cSound(int null) {
-		cSound();
-	}
-	cSound(string data, float maxVolume = 100.00f, float minDistance = 0.00f, float maxDistance = 300.00f, int soundType = AUDIO_EFFECT) {
-		name = data;
-		volume = maxVolume;
-		minDist = minDistance;
-		maxDist = maxDistance;
-		classification = soundType;
-	}
-	cSound(const char* data) {
-		name = data;
-		volume = 100.00f;
+		file = "";
 		minDist = 0.00f;
 		maxDist = 300.00f;
 	}
@@ -45,8 +40,8 @@ public:
 class cSoundFootsteps
 {
 public:
-	vector<cSound> data;
 	vector<int> frames;
+	vector<string> data;
 
 	void setFrames(int a = -1, int b = -1, int c = -1, int d = -1, int e = -1, int f = -1) {
 		frames.clear();
@@ -57,30 +52,50 @@ public:
 		if (e != -1) { frames.push_back(e); }
 		if (f != -1) { frames.push_back(f); }
 	}
+	void setData(string a = "", string b = "", string c = "", string d = "", string e = "", string f = "") {
+		data.clear();
+		if (a != "") { data.push_back(a); }
+		if (b != "") { data.push_back(b); }
+		if (c != "") { data.push_back(c); }
+		if (d != "") { data.push_back(d); }
+		if (e != "") { data.push_back(e); }
+		if (f != "") { data.push_back(f); }
+	}
 };
 
-class cSoundQueue : public cReference
+class cSoundQueue
 {
 public:
-	cSound data;
-	int unitId;
-	bool loop;
+	string name;
+	vec2f pos;
 
-	cSoundQueue() {
+	bool positional;
 
-	}
-	cSoundQueue(cSound input, int inUnitId, bool repeat, int ref = -1) {
-		data = input;
-		unitId = inUnitId;
-		loop = repeat;
-		if (ref != -1) { addRef(ref); }
+	cSoundQueue() {}
+	cSoundQueue(string name, vec2f pos = vec2f(0.00f, 0.00f)) {
+		this->name = name;
+		if (pos == vec2f(0.00f, 0.00f)) {
+			positional = false;
+		}
+		else {
+			positional = true;
+			this->pos = pos;
+		}
 	}
 };
 
 class cMusic
 {
 public:
-	string name;
+	int group;
+	string file;
+	float volume;
+
+	cMusic() {
+		group = MUSIC_MENU;
+		file = "";
+		volume = 100.00f;
+	}
 };
 
 class cAudio
@@ -91,18 +106,29 @@ public:
 	sf::Sound sound[LIMIT_SOUND];
 	sf::SoundBuffer soundBuffer[LIMIT_SOUND];
 	cSoundQueue soundData[LIMIT_SOUND];
-
 	vector<cSoundQueue> soundQueue;
 
-	void playSound(cSound data);
-	void playSound(cSoundQueue data);
+	int musicActiveGroup;
+	bool musicRestartRequired;
+	sf::Music music[LIMIT_MUSIC];
+	cMusic musicData[LIMIT_MUSIC];
+
+	void playSound(string name);
+	void playSound(string name, vec2f pos);
+	void playMusic(int group);
+	void playMusicFromStart(int group);
+
 	int getFreeSound();
 
-	cAudio()
-	{
-
+	cAudio() {
+		musicActiveGroup = -1;
+		musicRestartRequired = false;
+		for (int i = 0; i < LIMIT_MUSIC; i++) {
+			music[i].setVolume(0.00f);
+		}
 	}
 };
 
 extern cAudio audio;
 void audioMain();
+void musicMain();

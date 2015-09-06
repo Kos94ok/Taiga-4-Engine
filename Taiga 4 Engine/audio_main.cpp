@@ -7,30 +7,45 @@
 #include "game.h"
 #include "client.h"
 #include "math.h"
+#include "database.h"
 
-void cAudio::playSound(cSound data)
+void cAudio::playSound(string name)
 {
 	if (core.serverMode) { return; }
-	soundQueue.push_back(cSoundQueue(data, -1, false));
+	soundQueue.push_back(cSoundQueue(name));
 }
 
-void cAudio::playSound(cSoundQueue data)
+void cAudio::playSound(string name, vec2f pos)
 {
 	if (core.serverMode) { return; }
-	soundQueue.push_back(data);
+	soundQueue.push_back(cSoundQueue(name, pos));
+}
+
+void cAudio::playMusic(int group)
+{
+	if (core.serverMode) { return; }
+	musicActiveGroup = group;
+	musicRestartRequired = false;
+}
+
+void cAudio::playMusicFromStart(int group)
+{
+	if (core.serverMode) { return; }
+	musicActiveGroup = group;
+	musicRestartRequired = true;
 }
 
 void audioMain()
 {
 	int threadId = 9;
 	if (core.serverMode) { return; }
-	console << "[AUDIO] Starting the audio thread" << "\n";
+	console << "[AUDIO] Starting the audio thread" << " [ID: " << threadId << "]" << "\n";
 	int slot;
 	cSound data;
 	cUnit* unit;
 	vec2f listener;
 	cSoundQueue dataQueue;
-	float dist;
+	float dist, vol, volMod;
 	while (!core.thread_shutdown[threadId])
 	{
 		// Adjusting listener's position
@@ -45,27 +60,39 @@ void audioMain()
 		{
 			slot = audio.getFreeSound();
 			// Getting the next sound in the queue
-			data = audio.soundQueue[0].data;
+			data = database.getSound(audio.soundQueue[0].name);
 			// Executing
-			if (ifstream("Data//Sounds//" + data.name).good()) {
-				// Adding additional information
+			if (ifstream("Data//Sounds//" + data.file).good()) {
+				// Saving the information
 				audio.soundData[slot] = audio.soundQueue[0];
+				// Determining the volume modifier
+					// Classification
+				if (data.classification == AUDIO_FOOTSTEPS) { volMod = settings.volFootsteps; }
+				else if (data.classification == AUDIO_EFFECT) { volMod = settings.volEffects; }
+				else { volMod = settings.volEffects; }
+					// Master volume
+				volMod *= settings.volMaster;
 				// Playing the sound
-				audio.soundBuffer[slot].loadFromFile("Data//Sounds//" + data.name);
+				audio.soundBuffer[slot].loadFromFile("Data//Sounds//" + data.file);
 				audio.sound[slot].setBuffer(audio.soundBuffer[slot]);
 				// Checking the volume
-				if (audio.soundData[slot].unitId == -1) {
-					audio.sound[slot].setVolume(data.volume);
+				if (audio.soundData[slot].positional) {
+					dist = math.getDistance(listener, audio.soundData[slot].pos);
+					vol = data.volume * volMod * min(1.00f, max(0.00f, (data.maxDist - dist + data.minDist) / data.maxDist));
+					audio.sound[slot].setVolume(vol);
 				}
 				else {
-					audio.sound[slot].setVolume(0.00f);
+					vol = data.volume * volMod;
+					audio.sound[slot].setVolume(vol);
 				}
-				audio.sound[slot].setLoop(audio.soundData[slot].loop);
-				audio.sound[slot].play();
+				// Don't play the sound if the volume is zero
+				if (vol > 1.00f) {
+					audio.sound[slot].play();
+				}
 			}
 			// Sound not found
 			else {
-				console.error << "[AUDIO] Can't open sound \"Data//Sounds//" + data.name + "\"" << endl;
+				console.error << "[AUDIO] Can't open sound \"Data//Sounds//" + data.file + "\"" << endl;
 			}
 			// Erasing the used data
 			audio.soundQueue.erase(audio.soundQueue.begin());
@@ -73,37 +100,6 @@ void audioMain()
 		// No free sound slots
 		else if (audio.soundQueue.size() > 0) {
 			console.error << "[AUDIO] No free sound queue slots!" << endl;
-		}
-		// Checking the existing sounds
-		for (int i = 0; i < LIMIT_SOUND; i++)
-		{
-			if (audio.sound[i].getStatus() == sf::Sound::Playing)
-			{
-				// Checking unit attachment
-				if (audio.soundData[i].unitId != -1)
-				{
-					unit = &game.getUnit(audio.soundData[i].unitId);
-					// Checking the volume if the unit is valid
-					if (unit->type != "missingno") {
-						dataQueue = audio.soundData[i];
-						data = dataQueue.data;
-						dist = math.getDistance(listener, unit->pos);
-
-						if (dist < data.minDist) {
-							if (data.classification == AUDIO_EFFECT) { audio.sound[i].setVolume(audio.soundData[i].data.volume * settings.volEffects * settings.volMaster); }
-							else if (data.classification == AUDIO_FOOTSTEPS) { audio.sound[i].setVolume(audio.soundData[i].data.volume * settings.volFootsteps * settings.volMaster); }
-						}
-						else {
-							audio.sound[i].setVolume(audio.soundData[i].data.volume * settings.volEffects * settings.volMaster *
-								min(1.00f, max(0.00f, (data.maxDist - dist + data.minDist) / data.maxDist)) );
-						}
-					}
-					// Stopping if the unit does not exist
-					else if (unit->type == "missingno") {
-						audio.sound[i].stop();
-					}
-				}
-			}
 		}
 		// Thread routine
 		core.thread_antifreeze[threadId] = 0;
@@ -115,5 +111,62 @@ void audioMain()
 	{
 		audio.sound[i].stop();
 		audio.sound[i].resetBuffer();
+	}
+}
+
+void musicMain()
+{
+	int threadId = 12;
+	if (core.serverMode) { return; }
+	console << "[MUSIC] Starting the music thread" << " [ID: " << threadId << "]" << "\n";
+	cMusic* data;
+	int elapsedTime, globalTime = 0;
+	while (!core.thread_shutdown[threadId])
+	{
+		// Get elapsed time
+		elapsedTime = utilTimer.getElapsedTimeForThread(threadId);
+		float timevar = (float)elapsedTime / 1000.00f * core.timeModifier;
+		// Check if playing
+		int nowPlaying = -1;
+		for (int i = 0; i < LIMIT_MUSIC; i++)
+		{
+			if (audio.music[i].getVolume() > 1.00f) { nowPlaying = i; break; }
+		}
+		// Check each music group
+		for (int i = 0; i < LIMIT_MUSIC; i++)
+		{
+			// Restarting the music
+			if (audio.music[i].getStatus() == sf::Music::Stopped) {
+				data = &database.getRandomMusic(i);
+				audio.music[i].openFromFile("Data//Music//" + data->file);
+				audio.musicData[i] = *data;
+				audio.music[i].play();
+			}
+			// Handling the music change
+				// Mute all the wrong groups
+			if (i != audio.musicActiveGroup && audio.music[i].getVolume() > 0.01f) {
+				audio.music[i].setVolume(audio.music[i].getVolume() - timevar * value.musicFadeOutSpeed);
+				if (audio.music[i].getVolume() <= 0.01f) { audio.music[i].setVolume(0.00f); }
+			}
+				// Add volume to the correct group
+			float maxVolume = audio.musicData[i].volume * settings.volMusic * settings.volMaster;
+			if (i == audio.musicActiveGroup && (nowPlaying == -1 || nowPlaying == i)
+				&& audio.music[i].getVolume() < maxVolume)
+			{
+				audio.music[i].setVolume(audio.music[i].getVolume() + timevar * value.musicFadeInSpeed);
+				if (audio.music[i].getVolume() > maxVolume) {
+					audio.music[i].setVolume(maxVolume);
+				}
+			}
+		}
+		// Thread routine
+		core.thread_antifreeze[threadId] = 0;
+		Sleep(1);
+	}
+	console << "[MUSIC] Cleaning up" << "\n";
+	// Stopping all the music
+	for (int i = 0; i < LIMIT_MUSIC; i++)
+	{
+		audio.music[i].stop();
 	}
 }

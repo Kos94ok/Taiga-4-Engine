@@ -1,4 +1,5 @@
 
+#pragma once
 #include "precomp.h"
 #include "define.h"
 #include "console.h"
@@ -44,7 +45,7 @@ public:
 
 		thread_windowTicks = 0;
 		thread_serverWorldTicks = 0;
-		for (int i = 0; i < 16; i++) { thread_shutdown[i] = false; thread_antifreeze[i] = 0; }
+		for (int i = 0; i < LIMIT_THREAD; i++) { thread_shutdown[i] = false; thread_antifreeze[i] = 0; }
 	}
 
 	// Some functions

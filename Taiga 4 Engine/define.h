@@ -26,11 +26,6 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define LIMIT_ITEMS						128
 #define LIMIT_DROP						16
 #define LIMIT_UNIT						4096
-#define LIMIT_DB_UNIT					64
-#define LIMIT_DB_ITEM					64
-#define LIMIT_DB_UIELEMENTS				32
-#define LIMIT_DB_TEXTURES				512
-#define LIMIT_DB_PARTICLES				32
 #define LIMIT_UI_ELEMENTS				128
 #define LIMIT_SERVER_PLAYERS			32
 #define LIMIT_SERVER_PACKETQUEUE		8192
@@ -41,11 +36,11 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define LIMIT_CHUNKSIZE					500
 #define LIMIT_ICONSIZE					24
 #define LIMIT_SCRIPTCOUNT				64
-#define LIMIT_SOUND						512
 #define LIMIT_PRIORITY_UI				16
 #define LIMIT_PRIORITY_LIGHT			8
 #define LIMIT_GENTEXSIZE_CLOUD			512
 #define LIMIT_GENTEXCOUNT_CLOUD			128
+#define LIMIT_THREAD					16
 
 #define STATE_UNDEFINED					-1
 #define STATE_MAINMENU					0

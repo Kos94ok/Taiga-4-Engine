@@ -36,10 +36,8 @@ void cDatabase::loadUnits()
 	unit[i].interactDistance = 30.00f;
 	unit[i].collisionDistance = 20.00f;
 	unit[i].selectionOffset = vec2f(-1.50f, -7.00f);
-	unit[i].sound.footsteps.data.push_back(cSound("footsteps_snow001.wav", 50.00f, 0.00f, 500.00f, AUDIO_FOOTSTEPS));
-	unit[i].sound.footsteps.data.push_back(cSound("footsteps_snow002.wav", 30.00f, 0.00f, 500.00f, AUDIO_FOOTSTEPS));
-	unit[i].sound.footsteps.data.push_back(cSound("footsteps_snow003.wav", 50.00f, 0.00f, 500.00f, AUDIO_FOOTSTEPS));
 	unit[i].sound.footsteps.setFrames(0, 2);
+	unit[i].sound.footsteps.setData("footsteps_human_snow001", "footsteps_human_snow002", "footsteps_human_snow003");
 	unit[i].addRef(REF_UNIT_NOUNLOAD);
 	unit[i].addRef(REF_UNIT_BESTPATHING);
 	unit[i].addRef(REF_UNIT_SCARY);
@@ -68,10 +66,8 @@ void cDatabase::loadUnits()
 	unit[i].interactDistance = 10.00f;
 	unit[i].collisionDistance = 10.00f;
 	unit[i].ai = cAI::think_rabbit;
-	unit[i].sound.footsteps.data.push_back(cSound("footsteps_snow001.wav", 10.00f, 0.00f, 200.00f, AUDIO_FOOTSTEPS));
-	unit[i].sound.footsteps.data.push_back(cSound("footsteps_snow002.wav", 7.00f, 0.00f, 200.00f, AUDIO_FOOTSTEPS));
-	unit[i].sound.footsteps.data.push_back(cSound("footsteps_snow003.wav", 10.00f, 0.00f, 200.00f, AUDIO_FOOTSTEPS));
 	unit[i].sound.footsteps.setFrames(0, 2);
+	unit[i].sound.footsteps.setData("footsteps_animal_snow001", "footsteps_animal_snow002", "footsteps_animal_snow003");
 	unit[i].addRef(REF_UNIT_NOSAVE);
 	unit[i].addRef(REF_UNIT_BESTPATHING);
 	i += 1;
@@ -215,7 +211,7 @@ void cDatabase::loadUnits()
 	unit[i].light.texture = visual.addTexture("light_orange.png");
 	unit[i].light.flickerMod = 0.04f;
 	unit[i].light.flickerTime = 0.25f;
-	unit[i].sound.idle = cSound("fire2.ogg", 50.00f, 100.00f, 700.00f);
+	//unit[i].sound.idle = cSound("fire2.ogg", 50.00f, 100.00f, 700.00f);
 	unit[i].aura.add(BUFF_HEAT, 100, 500.00f, true, true);
 	unit[i].addRef(REF_UNIT_ADDRESOURCE);
 	unit[i].addRef(REF_UNIT_BURNOUT_CAMPFIRE);

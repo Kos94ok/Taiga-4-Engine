@@ -96,6 +96,9 @@ public:
 	const float scrollSpeed_keyboard_normal = 1000.00f;
 	const float scrollSpeed_mouseWheel_normal = 5.00f;
 
+	const float musicFadeInSpeed = 5.00f;
+	const float musicFadeOutSpeed = 5.00f;
+
 	float getMinColdLocal() { return -5.00f; }
 	float getMaxColdLocal() { return 100.00f; }
 	float getMinHungerLocal() { return -5.00f; }
@@ -152,3 +155,13 @@ public:
 	string operator [](int i) const { return data[i]; }
 	string & operator [](int i) { return data[i]; }
 };
+
+class cUtilTimer
+{
+public:
+	int threadTimer[LIMIT_THREAD];
+
+	int getElapsedTimeForThread(int threadId);
+};
+
+extern cUtilTimer utilTimer;

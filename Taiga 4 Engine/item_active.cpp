@@ -5,6 +5,8 @@
 #include "window.h"
 #include "game.h"
 #include "visual.h"
+#include "database.h"
+#include "client.h"
 
 void cItem::use()
 {
@@ -28,6 +30,7 @@ void cItem::use()
 		data << MSG_CONTROLS_RIFLE << window.getMousePos(true).x << window.getMousePos(true).y;
 		client.sendPacket(data);
 		data.clear();
+		audio.playSound("rifle_shot", game.getPlayer().pos);
 	}
 	// Axe
 	if (hasRef(REF_ITEM_AXE))

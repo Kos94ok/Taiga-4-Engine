@@ -32,9 +32,9 @@ int cGame::addUnit(string type, vec2f pos, int owner, int variation, bool sendDa
 			unit[unitCounter].globalId = globalId;
 			unit[unitCounter].anim.ownerUnit = globalId;
 			// Playing the sound
-			if (unit[unitCounter].sound.idle.name != "" && globalId != ID_LOCAL) {
-				audio.playSound(cSoundQueue(unit[unitCounter].sound.idle, globalId, true, REF_SOUND_IDLE));
-			}
+			//if (unit[unitCounter].sound.idle.name != "" && globalId != ID_LOCAL) {
+				//audio.playSound(cSoundQueue(unit[unitCounter].sound.idle, globalId, true, REF_SOUND_IDLE));
+			//}
 			// Incrementing
 			unitCounter += 1;
 		}

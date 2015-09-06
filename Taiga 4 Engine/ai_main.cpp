@@ -22,7 +22,7 @@ void cAI::tick(int elapsedTime)
 void AICoreMain()
 {
 	int threadId = 8;
-	console << "[AI_CORE] Starting the AI core thread" << "\n";
+	console << "[AI_CORE] Starting the AI core thread" << " [ID: " << threadId << "]" << "\n";
 	srand(time(0));
 	int elapsedTime, globalTime = 0;
 	while (!core.thread_shutdown[threadId])

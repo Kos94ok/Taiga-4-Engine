@@ -7,6 +7,15 @@
 #include "particle.h"
 #include "UI.h"
 #include "util.h"
+#include "audio.h"
+
+#define LIMIT_DB_UNIT					64
+#define LIMIT_DB_ITEM					64
+#define LIMIT_DB_UIELEMENTS				32
+#define LIMIT_DB_TEXTURES				512
+#define LIMIT_DB_PARTICLES				32
+#define LIMIT_DB_SOUNDS					32
+#define LIMIT_DB_MUSIC					16
 
 //extern cVisual visual;
 
@@ -33,29 +42,35 @@ public:
 	cMutex access;
 
 	cDatabaseExternal ext;
+	cSound sound[LIMIT_DB_SOUNDS];
 	cUnit unit[LIMIT_DB_UNIT];
 	cItem item[LIMIT_DB_ITEM];
 	cUIElement uiElement[LIMIT_DB_UIELEMENTS];
 	cParticleUnit particle[LIMIT_DB_PARTICLES];
+	cMusic music[LIMIT_DB_MUSIC];
 	int texture[LIMIT_DB_TEXTURES];
 
 	void init();
+	void loadSounds();
 	void loadUnits();
 	void loadItems();
 	void loadUI();
 	void loadParticles();
 	void loadTextures();
+	void loadMusic();
 	void loadExternal();
 	void generateTextures();
 	void clear();
 
-	cUnit& getUnit(std::string type);
-	cItem& getItem(std::string type);
+	cSound& getSound(string type);
+	cUnit& getUnit(string type);
+	cItem& getItem(string type);
 	cItem& findItem(int ref);
-	cUIElement& getUIElement(std::string type);
-	cParticleUnit& getParticle(std::string type);
+	cUIElement& getUIElement(string type);
+	cParticleUnit& getParticle(string type);
+	cMusic& getRandomMusic(int group);
 
-	bool isItemGood(std::string type);
+	bool isItemGood(string type);
 };
 
 extern cDatabase database;

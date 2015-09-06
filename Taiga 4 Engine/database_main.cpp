@@ -11,6 +11,8 @@ void cDatabase::init()
 	// Clearing everything
 	database.clear();
 	// Loading assets
+	console << "[DATABASE] Loading Sounds" << endl;
+	loadSounds();
 	console << "[DATABASE] Loading Items" << endl;
 	loadItems();
 	console << "[DATABASE] Loading Units" << endl;
@@ -21,6 +23,8 @@ void cDatabase::init()
 	loadParticles();
 	console << "[DATABASE] Loading Textures" << endl;
 	loadTextures();
+	console << "[DATABASE] Loading Music" << endl;
+	loadMusic();
 	console << "[DATABASE] Loading External" << endl;
 	loadExternal();
 	console << "[DATABASE] Main database ready" << endl;

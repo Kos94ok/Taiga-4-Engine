@@ -7,7 +7,7 @@ void clientReceiveMain()
 {
 	int threadId = 5;
 	if (core.serverMode) { return; }
-	console << "[CLIENT_RECEIVE] Starting the client receive thread\n";
+	console << "[CLIENT_RECEIVE] Starting the client receive thread" << " [ID: " << threadId << "]" << "\n";
 	sf::Packet data;
 	int retVal;
 	string cmd, type;
@@ -52,7 +52,7 @@ void clientSendMain()
 {
 	int threadId = 6;
 	if (core.serverMode) { return; }
-	console << "[CLIENT_SEND] Starting the client send thread\n";
+	console << "[CLIENT_SEND] Starting the client send thread" << " [ID: " << threadId << "]" << "\n";
 
 	while (!core.thread_shutdown[threadId])
 	{

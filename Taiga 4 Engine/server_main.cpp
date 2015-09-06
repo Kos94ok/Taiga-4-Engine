@@ -7,7 +7,7 @@
 void serverConnectMain()
 {
 	int threadId = 2;
-	console << "[SRV_CONNECT] Starting the server connect thread\n";
+	console << "[SRV_CONNECT] Starting the server connect thread" << " [ID: " << threadId << "]" << "\n";
 
 	sf::TcpListener listener;
 	listener.setBlocking(false);
@@ -48,7 +48,7 @@ void serverConnectMain()
 void serverReceiveMain()
 {
 	int threadId = 3;
-	console << "[SRV_RECEIVE] Starting the server receive thread\n";
+	console << "[SRV_RECEIVE] Starting the server receive thread " << "[ID: " << threadId << "]" << "\n";
 	sf::Packet data;
 	int retVal = 0;
 	bool parsed = false;
@@ -90,7 +90,7 @@ void serverSendMain()
 {
 	int threadId = 4;
 	sf::Packet localData;
-	console << "[SRV_SEND] Starting the server send thread\n";
+	console << "[SRV_SEND] Starting the server send thread" << " [ID: " << threadId << "]" << "\n";
 	while (!core.thread_shutdown[threadId])
 	{
 		if (server.dataQueueCounter > 0)
