@@ -108,7 +108,7 @@ void cGameLogic::updateAnim(int elapsedTime)
 				game.unit[i].animData[ANIM_IDLE].side.texShadow = -1;
 				game.unit[i].light.power = 0.00f;
 			}
-			game.unit[i].sound.idle.volume = dbCampfire->sound.idle.volume * (game.unit[i].resource / game.unit[i].resourceLimit);
+			//game.unit[i].sound.idle.volume = dbCampfire->sound.idle.volume * (game.unit[i].resource / game.unit[i].resourceLimit);
 			// Update sound
 			/*for (int s = 0; s < LIMIT_SOUND; s++) {
 				if (audio.sound[s].getStatus() == sf::Sound::Playing)

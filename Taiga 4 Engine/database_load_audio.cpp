@@ -9,12 +9,34 @@ void cDatabase::loadSounds()
 	sound[i].volume = 0.00f;
 	i += 1;
 
+	// Effects
 	sound[i].name = "rifle_shot";
 	sound[i].file = "rifle.ogg";
 	sound[i].volume = 50.00f;
 	sound[i].minDist = 100.00f;
 	sound[i].maxDist = 700.00f;
 	sound[i].classification = AUDIO_EFFECT;
+	i += 1;
+
+	// Idle
+		// Campfire
+	sound[i].name = "campfire";
+	sound[i].file = "fire2.ogg";
+	sound[i].volume = 50.00f;
+	sound[i].minDist = 100.00f;
+	sound[i].maxDist = 700.00f;
+	sound[i].classification = AUDIO_AMBIENT;
+	audio.registerIdleSound(sound[i]);
+	i += 1;
+
+		// Wind
+	sound[i].name = "wind_tree";
+	sound[i].file = "wind_light.wav";
+	sound[i].volume = 20.00f;
+	sound[i].minDist = 50.00f;
+	sound[i].maxDist = 1000.00f;
+	sound[i].classification = AUDIO_AMBIENT;
+	audio.registerIdleSound(sound[i]);
 	i += 1;
 
 	// Footsteps

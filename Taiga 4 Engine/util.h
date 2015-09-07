@@ -132,6 +132,8 @@ public:
 
 	cMutex serverHistory;
 	cMutex serverPacketQueue;
+
+	cMutex audioMain;
 };
 
 extern cMutexGlobal mutex;

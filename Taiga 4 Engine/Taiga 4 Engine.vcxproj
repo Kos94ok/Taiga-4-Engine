@@ -86,6 +86,7 @@
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <PrecompiledHeaderFile>precomp.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>precomp.h%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -104,6 +105,9 @@
     <PostBuildEvent>
       <Command>del "$(ProjectDir)Release\macro.obj"</Command>
     </PostBuildEvent>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release 3|Win32'">
     <Link>
@@ -249,6 +253,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Release\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

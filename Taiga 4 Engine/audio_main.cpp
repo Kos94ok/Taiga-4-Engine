@@ -42,7 +42,6 @@ void audioMain()
 	console << "[AUDIO] Starting the audio thread" << " [ID: " << threadId << "]" << "\n";
 	int slot;
 	cSound data;
-	cUnit* unit;
 	vec2f listener;
 	cSoundQueue dataQueue;
 	float dist, vol, volMod;
@@ -120,9 +119,17 @@ void musicMain()
 	if (core.serverMode) { return; }
 	console << "[MUSIC] Starting the music thread" << " [ID: " << threadId << "]" << "\n";
 	cMusic* data;
+	vec2f listener;
 	int elapsedTime, globalTime = 0;
 	while (!core.thread_shutdown[threadId])
 	{
+		// Adjusting listener's position
+		if (settings.enableCameraListener) {
+			listener = camera.pos + vec2f(camera.res.x, camera.res.y) / 2.00f;
+		}
+		else if (client.unit != -1) {
+			listener = game.getUnit(client.unit).pos;
+		}
 		// Get elapsed time
 		elapsedTime = utilTimer.getElapsedTimeForThread(threadId);
 		float timevar = (float)elapsedTime / 1000.00f * core.timeModifier;
@@ -159,9 +166,48 @@ void musicMain()
 				}
 			}
 		}
+
+		// Check the idle sound
+		audio.updateSoundEmitters();
+		for (int i = 0; i < LIMIT_SOUNDIDLE; i++)
+		{
+			float vol = 0.00f, bestVol = 0.00f;
+			// Calculating the volume
+			for (int y = 0; y < (int)audio.soundEmitters.size(); y++)
+			{
+				cUnit* unit = &game.getUnit(audio.soundEmitters[y]);
+				if (unit->sound.idle == audio.soundIdle[i].data.name)
+				{
+					float dist = math.getDistance(unit->pos, listener);
+					vol = audio.soundIdle[i].data.volume * min(1.00f, max(0.00f, (audio.soundIdle[i].data.maxDist - dist + audio.soundIdle[i].data.minDist) / audio.soundIdle[i].data.maxDist));
+					// Apply the burnout effect
+					if (unit->hasRef(REF_UNIT_BURNOUT_CAMPFIRE)) { vol *= unit->resource / unit->resourceLimit; }
+					// Check the best volume
+					bestVol = max(vol, bestVol);
+				}
+			}
+			// Applying the settings
+			bestVol *= settings.volMaster * settings.volAmbient;
+			// Starting the sound
+			if (bestVol > 1.00f)
+			{
+				audio.soundIdle[i].handle.setVolume(bestVol);
+				if (audio.soundIdle[i].handle.getStatus() == sf::Music::Stopped)
+				{
+					audio.soundIdle[i].handle.openFromFile("Data//Sounds//" + audio.soundIdle[i].data.file);
+					audio.soundIdle[i].handle.setLoop(true);
+					audio.soundIdle[i].handle.play();
+				}
+			}
+			else {
+				audio.soundIdle[i].handle.stop();
+			}
+		}
+
+
 		// Thread routine
 		core.thread_antifreeze[threadId] = 0;
-		Sleep(1);
+		Sleep(50);
 	}
 	console << "[MUSIC] Cleaning up" << "\n";
 	// Stopping all the music

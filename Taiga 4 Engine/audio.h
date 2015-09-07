@@ -6,6 +6,7 @@
 
 #define LIMIT_MUSIC						5
 #define LIMIT_SOUND						128
+#define LIMIT_SOUNDIDLE					8
 
 #define AUDIO_MUSIC						0
 #define AUDIO_EFFECT					1
@@ -35,6 +36,13 @@ public:
 		minDist = 0.00f;
 		maxDist = 300.00f;
 	}
+};
+
+class cSoundIdle
+{
+public:
+	cSound data;
+	sf::Music handle;
 };
 
 class cSoundFootsteps
@@ -84,6 +92,13 @@ public:
 	}
 };
 
+class cSoundMapEntry
+{
+public:
+	vec2f pos;
+	string sound;
+};
+
 class cMusic
 {
 public:
@@ -113,6 +128,14 @@ public:
 	sf::Music music[LIMIT_MUSIC];
 	cMusic musicData[LIMIT_MUSIC];
 
+	int soundIdleCount;
+	cSoundIdle soundIdle[LIMIT_SOUNDIDLE];
+	vector<int> soundEmitters;
+	// Calling this function will add the sound from the database to a local db
+	void registerIdleSound(cSound data);
+	// Calling this function will rebuild the internal sound emitter unit list
+	void updateSoundEmitters();
+
 	void playSound(string name);
 	void playSound(string name, vec2f pos);
 	void playMusic(int group);
@@ -121,6 +144,7 @@ public:
 	int getFreeSound();
 
 	cAudio() {
+		soundIdleCount = 0;
 		musicActiveGroup = -1;
 		musicRestartRequired = false;
 		for (int i = 0; i < LIMIT_MUSIC; i++) {

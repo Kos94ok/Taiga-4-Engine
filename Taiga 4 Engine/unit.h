@@ -13,7 +13,7 @@
 class cUnitSoundbank
 {
 public:
-	cSound idle;
+	string idle;
 	cSoundFootsteps footsteps;
 };
 

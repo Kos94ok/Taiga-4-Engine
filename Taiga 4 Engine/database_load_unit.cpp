@@ -106,6 +106,7 @@ void cDatabase::loadUnits()
 	unit[i].collisionDistance = 10.00f;
 	unit[i].selectionOffset.x = -1.00f;
 	unit[i].selectionOffset.y = -3.00f;
+	unit[i].sound.idle = "wind_tree";
 	unit[i].drop.add("material_wood", 1, 1.00f);
 	unit[i].drop.add("material_wood", 1, 0.75f);
 	unit[i].drop.add("material_wood", 1, 0.50f);
@@ -211,7 +212,7 @@ void cDatabase::loadUnits()
 	unit[i].light.texture = visual.addTexture("light_orange.png");
 	unit[i].light.flickerMod = 0.04f;
 	unit[i].light.flickerTime = 0.25f;
-	//unit[i].sound.idle = cSound("fire2.ogg", 50.00f, 100.00f, 700.00f);
+	unit[i].sound.idle = "campfire";
 	unit[i].aura.add(BUFF_HEAT, 100, 500.00f, true, true);
 	unit[i].addRef(REF_UNIT_ADDRESOURCE);
 	unit[i].addRef(REF_UNIT_BURNOUT_CAMPFIRE);
