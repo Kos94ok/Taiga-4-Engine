@@ -222,12 +222,6 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define TEX_MOUSE_POINT					11
 #define TEX_GEN_CLOUD					128		// [128; 256)
 
-#define SHADER_FULLSCREEN				1
-#define SHADER_BLOOM					2
-#define SHADER_LIGHT					3
-#define SHADER_SHADOW					4
-#define SHADER_CAMBLUR					5
-
 #define INV_FULL						0
 #define INV_SIDE						1
 #define INV_CHAR						2

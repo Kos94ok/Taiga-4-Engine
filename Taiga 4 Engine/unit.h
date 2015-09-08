@@ -80,22 +80,44 @@ public:
 	}
 };
 
+class cSelectionOffset
+{
+public:
+	float top;
+	float bot;
+	float left;
+	float right;
+
+	cSelectionOffset() {
+		top = 0.00f;
+		bot = 0.00f;
+		left = 0.00f;
+		right = 0.00f;
+	}
+	cSelectionOffset(vec4f input) {
+		top = input.a;
+		bot = input.b;
+		left = input.c;
+		right = input.d;
+	}
+};
+
 class cCharacter : public cReference
 {
 public:
 	int owner;
 	int globalId;
-	std::string type;
-	sf::Vector2f pos;
-	sf::Vector2f center;
-	sf::Vector2f size;
-	sf::Vector2f shadowOffset;
-	sf::Vector2f selectionOffset;
-	sf::Vector2f lastGoodPos;
+	string type;
+	vec2f pos;
+	vec2f center;
+	vec2f size;
+	vec2f shadowOffset;
+	vec2f lastGoodPos;
 	float interactDistance;
 	float collisionDistance;
 	float flyingHeight;
 	int selectionPriority;
+	cSelectionOffset selectionOffset;
 
 	bool animAvailable(int animType);
 
@@ -115,8 +137,8 @@ public:
 	float actionTimer;
 	sf::Vector2i chunkPos;
 
-	int addOrder_moveto(sf::Vector2f target, bool overwrite = true);
-	int addOrder_moveto_path(sf::Vector2f target, bool overwrite = true);
+	int addOrder_moveto(vec2f target, bool overwrite = true);
+	int addOrder_moveto_path(vec2f target, bool overwrite = true);
 	int addOrder_pickup(int target, bool overwrite = true);
 	int addOrder_harvest(int target, bool overwrite = true, int powerLevel = POWER_HAND);
 	int addOrder_packunit(int target, bool overwrite = true);
@@ -145,14 +167,14 @@ public:
 	void addResource(float d, bool sendMessage = true);
 	void setResource(float value, bool sendMessage = true);
 
-	void moveTo(sf::Vector2f newPos);
+	void moveTo(vec2f newPos);
 	void rotateTo(float newAngle);
 	void addHealth(float d);
 	void addMaxHealth(float d);
 	void setHealth(float hp);
 	void setMaxHealth(float hp);
-	void addItem(std::string type, int count = 1, bool toLog = true);
-	void removeItem(std::string type, int count = -1, bool toLog = true);
+	void addItem(string type, int count = 1, bool toLog = true);
+	void removeItem(string type, int count = -1, bool toLog = true);
 	void removeItem(int id, int count = -1, bool toLog = true);
 	void addBuff(int type, float duration = -1.00f, int power = 1, int owner = -1);
 	void addBuff(cBuff entry);

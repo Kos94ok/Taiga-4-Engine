@@ -35,7 +35,6 @@ void cDatabase::loadUnits()
 	unit[i].container.itemLimit = LIMIT_ITEMS;
 	unit[i].interactDistance = 30.00f;
 	unit[i].collisionDistance = 20.00f;
-	unit[i].selectionOffset = vec2f(-1.50f, -7.00f);
 	unit[i].sound.footsteps.setFrames(0, 2);
 	unit[i].sound.footsteps.setData("footsteps_human_snow001", "footsteps_human_snow002", "footsteps_human_snow003");
 	unit[i].addRef(REF_UNIT_NOUNLOAD);
@@ -104,8 +103,7 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_DEATH].side.tex = visual.addTexture("tree_basic_a_death.png");
 	unit[i].interactDistance = 15.00f;
 	unit[i].collisionDistance = 10.00f;
-	unit[i].selectionOffset.x = -1.00f;
-	unit[i].selectionOffset.y = -3.00f;
+	unit[i].selectionOffset = vec4f(0.00f, 0.00f, 0.25f, 0.25f);
 	unit[i].sound.idle = "wind_tree";
 	unit[i].drop.add("material_wood", 1, 1.00f);
 	unit[i].drop.add("material_wood", 1, 0.75f);
@@ -121,8 +119,7 @@ void cDatabase::loadUnits()
 	unit[i].shadowOffset = vec2f(0, -5);
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_b_idle.png");
 	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("tree_basic_b_idle_shadow.png");
-	unit[i].selectionOffset.x = 0.00f;
-	unit[i].selectionOffset.y = -3.00f;
+	unit[i].selectionOffset = vec4f(0.00f, 0.00f, 0.25f, 0.25f);
 	i += 1;
 
 	unit[i] = database.getUnit("tree_basic_a");
@@ -133,8 +130,7 @@ void cDatabase::loadUnits()
 	unit[i].collisionDistance = 15.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_c_idle.png");
 	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("tree_basic_c_idle_shadow.png");
-	unit[i].selectionOffset.x = -3.00f;
-	unit[i].selectionOffset.y = -8.00f;
+	unit[i].selectionOffset = vec4f(0.10f, 0.00f, 0.25f, 0.25f);
 	i += 1;
 
 	unit[i] = database.getUnit("tree_basic_a");
@@ -145,8 +141,7 @@ void cDatabase::loadUnits()
 	unit[i].collisionDistance = 15.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_d_idle.png");
 	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("tree_basic_d_idle_shadow.png");
-	unit[i].selectionOffset.x = 0.00f;
-	unit[i].selectionOffset.y = 0.00f;
+	unit[i].selectionOffset = vec4f(0.00f, 0.00f, 0.50f, 0.20f);
 	i += 1;
 
 	// Stones
@@ -160,7 +155,6 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("stone_basic_a_idle.png");
 	unit[i].interactDistance = 35.00f;
 	unit[i].collisionDistance = 25.00f;
-	unit[i].selectionOffset.y = -10.00f;
 	unit[i].drop.add("material_stone", 1, 1.00f);
 	unit[i].drop.add("material_stone", 1, 0.75f);
 	unit[i].drop.add("material_stone", 1, 0.50f);
@@ -207,7 +201,6 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.frameDelay = 0.20f;
 	unit[i].interactDistance = 20.00f;
 	unit[i].collisionDistance = 20.00f;
-	unit[i].selectionOffset = vec2f(0.00f, -10.00f);
 	unit[i].light.power = 700.00f;
 	unit[i].light.texture = visual.addTexture("light_orange.png");
 	unit[i].light.flickerMod = 0.04f;
@@ -228,7 +221,6 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tent_basic.png");
 	unit[i].interactDistance = 42.00f;
 	unit[i].collisionDistance = 35.00f;
-	unit[i].selectionOffset = vec2f(2.50f, -13.00f);
 	unit[i].addRef(REF_UNIT_PACK);
 	unit[i].addRef(REF_UNIT_PACK_TENT);
 	i += 1;

@@ -86,7 +86,7 @@
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <PrecompiledHeaderFile>precomp.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>precomp.h%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformation>false</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -190,6 +190,7 @@
     <ClCompile Include="UI_util.cpp" />
     <ClCompile Include="unit_main.cpp" />
     <ClCompile Include="unit_order.cpp" />
+    <ClCompile Include="unit_util.cpp" />
     <ClCompile Include="util_convert.cpp" />
     <ClCompile Include="util_main.cpp" />
     <ClCompile Include="visual_gen.cpp" />

@@ -42,28 +42,6 @@ void cWindow::paintUnits()
 	{
 		for (int i : preRender.units.queue)
 		{
-			//i = preRender.units.queue[index];
-			//console.debug << "[DEBUG] Painting unit " << i << endl;
-			// Display the selection circle
-			/*if (visual.hoveredUnit == game.unit[i].globalId)
-			{
-			brushRect.setRotation(0.00f);
-			brushRect.setScale(1.00f, 1.00f);
-			brushRect.setFillColor(sf::Color(255, 127, 0));
-			brushRect.setPosition(game.unit[i].pos + game.unit[i].selectionOffset);
-			brushRect.setOrigin(game.unit[i].interactDistance, game.unit[i].interactDistance);
-			brushRect.setSize(vec2f(game.unit[i].interactDistance * 2, game.unit[i].interactDistance * 2));
-			brushRect.setTexture(&visual.gameTex[database.texture[TEX_SELECTION_CIRCLE]].handle, true);
-
-			// Last-minute check
-			if (!settings.enableBetterShadows) { window.texHandle.draw(brushRect, window.matrixHandle); }
-			else
-			{
-			if (u == 0) { window.texHandle.draw(brushRect, window.matrixHandle); }
-			else { window.texHandleShadow.draw(brushRect, window.matrixHandle); }
-			}
-			}*/
-
 			// Unit animation
 			game.unit[i].updateDisplayAnim();
 			animDisplay = &game.unit[i].animDisplay;
@@ -205,7 +183,7 @@ void cWindow::paintUnits()
 			brushRect.setScale(1.00f, 1.00f);
 			brushRect.setFillColor(sf::Color(255, 255, 255));
 			// Hover
-			if (visual.hoveredUnit == game.unit[i].globalId) {
+			if (visual.hoveredUnit == game.unit[i].globalId && settings.enableUnitHighlightColor) {
 				brushRect.setFillColor(settings.visualUnitHoverColor);
 			}
 			// No light
@@ -242,30 +220,34 @@ void cWindow::paintUnits()
 				{
 					if (u == 0) {
 						// Unit outline
-						/*if (game.unit[i].globalId == visual.hoveredUnit)
+						if (game.unit[i].globalId == visual.hoveredUnit && settings.enableUnitHighlightOutline)
 						{
 							float offset = 2.00f;
-							brushRect.setFillColor(sf::Color(0, 0, 0));
-							brushRect.setPosition((game.unit[i].pos.x), (game.unit[i].pos.y) + offset);
-							window.texHandle.draw(brushRect, window.matrixHandle);
-							brushRect.setPosition((game.unit[i].pos.x) + offset, (game.unit[i].pos.y));
-							window.texHandle.draw(brushRect, window.matrixHandle);
-							brushRect.setPosition((game.unit[i].pos.x), (game.unit[i].pos.y) - offset);
-							window.texHandle.draw(brushRect, window.matrixHandle);
-							brushRect.setPosition((game.unit[i].pos.x) - offset, (game.unit[i].pos.y));
-							window.texHandle.draw(brushRect, window.matrixHandle);
+							sf::RenderStates state;
+							sf::Shader* shader = &visual.shader[SHADER_COLORBLUR];
+							shader->setParameter("iSampleCount", 3.00f);
+							shader->setParameter("sampleOffset", 0.003f);
+							shader->setParameter("colorR", settings.visualUnitHoverOutline.r / 255.00f);
+							shader->setParameter("colorG", settings.visualUnitHoverOutline.g / 255.00f);
+							shader->setParameter("colorB", settings.visualUnitHoverOutline.b / 255.00f);
+							state.transform = window.matrixHandle;
+							state.shader = shader;
+
 							brushRect.setPosition((game.unit[i].pos.x) + offset, (game.unit[i].pos.y) + offset);
-							window.texHandle.draw(brushRect, window.matrixHandle);
+							window.texHandle.draw(brushRect, state);
 							brushRect.setPosition((game.unit[i].pos.x) - offset, (game.unit[i].pos.y) + offset);
-							window.texHandle.draw(brushRect, window.matrixHandle);
+							window.texHandle.draw(brushRect, state);
 							brushRect.setPosition((game.unit[i].pos.x) - offset, (game.unit[i].pos.y) - offset);
-							window.texHandle.draw(brushRect, window.matrixHandle);
+							window.texHandle.draw(brushRect, state);
 							brushRect.setPosition((game.unit[i].pos.x) + offset, (game.unit[i].pos.y) - offset);
-							window.texHandle.draw(brushRect, window.matrixHandle);
+							window.texHandle.draw(brushRect, state);
 
 							brushRect.setFillColor(sf::Color(255, 255, 255));
+							if (settings.enableUnitHighlightColor) {
+								brushRect.setFillColor(settings.visualUnitHoverColor);
+							}
 							brushRect.setPosition((game.unit[i].pos.x), (game.unit[i].pos.y));
-						}*/
+						}
 						window.texHandle.draw(brushRect, window.matrixHandle);
 					}
 					else { window.texHandleShadow.draw(brushRect, window.matrixHandle); }

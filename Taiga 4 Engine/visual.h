@@ -3,10 +3,18 @@
 #include "precomp.h"
 #include "define.h"
 
+#define SHADER_FULLSCREEN				1
+#define SHADER_BLOOM					2
+#define SHADER_LIGHT					3
+#define SHADER_SHADOW					4
+#define SHADER_CAMBLUR					5
+#define SHADER_BLUR						6
+#define SHADER_COLORBLUR				7
+
 class cTexture
 {
 public:
-	std::string name;
+	string name;
 	sf::Texture handle;
 };
 
@@ -19,8 +27,8 @@ public:
 
 	void showHardware();
 	void hideHardware();
-	sf::Vector2f getOrigin();
-	sf::Vector2i getTexSize();
+	vec2f getOrigin();
+	vec2i getTexSize();
 };
 
 class cProgressBar
@@ -35,8 +43,8 @@ public:
 	int getTexFrameCountX();
 	int getTexFrameCountY();
 	float getCurrentAlpha();
-	sf::Vector2i getCurrentFrame();
-	sf::Vector2i getTexFrameSize();
+	vec2i getCurrentFrame();
+	vec2i getTexFrameSize();
 };
 
 class cVisual

@@ -144,10 +144,16 @@ void cGameLogic::updateAnim(int elapsedTime)
 	visual.hoveredUnit = -1;
 	vec2f mousePos = window.getMousePos(true);
 	visual.unitHoverQueue.clear();
+	vec2f unitPos, unitSize;
 	for (int i = 0; i < game.unitCounter; i++)
 	{
+		unitPos = game.unit[i].pos - game.unit[i].center
+			+ vec2f(game.unit[i].selectionOffset.left * game.unit[i].size.x, game.unit[i].selectionOffset.top * game.unit[i].size.y);
+		unitSize = game.unit[i].size
+			- vec2f(game.unit[i].selectionOffset.left * game.unit[i].size.x, game.unit[i].selectionOffset.top * game.unit[i].size.y)
+			- vec2f(game.unit[i].selectionOffset.right * game.unit[i].size.x, game.unit[i].selectionOffset.bot * game.unit[i].size.y);
 		if (!game.unit[i].hasRef(REF_UNIT_NOSELECTION)
-			&& util.intersects(mousePos, game.unit[i].pos - game.unit[i].center, game.unit[i].size))
+			&& util.intersects(mousePos, unitPos, unitSize))
 		{
 			visual.unitHoverQueue.push_back(game.unit[i].globalId);
 			if (visual.hoveredUnit == -1 || game.unit[i].globalId == oldHover || game.unit[i].selectionPriority > oldPriority)

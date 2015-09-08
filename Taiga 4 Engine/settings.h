@@ -51,8 +51,14 @@ public:
 	float cloudDensity;
 	// Particle density [Change the amount of particles on the screen]
 	float particleDensity;
+	// Enable unit highlight color [Change the unit color when highlighted]
+	int enableUnitHighlightColor;
+	// Enable unit highlight outline [Add outline to unit when hightlighted]
+	int enableUnitHighlightOutline;
 	// Unit highlight color
 	sf::Color visualUnitHoverColor;
+	// Unit highline outline color
+	sf::Color visualUnitHoverOutline;
 
 	//========================================
 	// Gameplay

@@ -47,8 +47,14 @@ void cSettings::setDefault()
 	this->cloudDensity = 1.00f;
 	// Particle density [Change the amount of particles on the screen]
 	this->particleDensity = 1.00f;
+	// Enable unit highlight color [Change the unit color when highlighted]
+	int enableUnitHighlightColor = 1;
+	// Enable unit highlight outline [Add outline to unit when hightlighted]
+	int enableUnitHighlightOutline = 1;
 	// Unit highlight color
 	this->visualUnitHoverColor = util.convertUnitHighlightColor(1);
+	// Unit highlight outline color
+	this->visualUnitHoverOutline = util.convertUnitHighlightColor(2);
 
 	//========================================
 	// Gameplay
@@ -232,8 +238,12 @@ void cSettings::load()
 		else if (key.name == "shadowBlur") { shadowBlur = math.stringToInt(key.value); }
 		else if (key.name == "cloudDensity") { cloudDensity = (float)math.stringToInt(key.value) / 100.00f; }
 		else if (key.name == "particleDensity") { particleDensity = (float)math.stringToInt(key.value) / 100.00f; }
+		else if (key.name == "enableUnitHighlightColor") { enableUnitHighlightColor = math.stringToInt(key.value); }
+		else if (key.name == "enableUnitHighlightOutline") { enableUnitHighlightOutline = math.stringToInt(key.value); }
 		else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
 		else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
+		else if (key.name == "visualUnitHoverOutlineCode") { visualUnitHoverOutline = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
+		else if (key.name == "visualUnitHoverOutline16") { visualUnitHoverOutline = util.parseOldschoolColorCode(key.value); }
 			// Gameplay
 		else if (key.name == "enableLazyCast") { enableLazyCast = math.stringToInt(key.value); }
 		else if (key.name == "enableQuickCast") { enableQuickCast = math.stringToInt(key.value); }
@@ -322,6 +332,8 @@ void cSettings::save()
 		file << "enablePreciseParticleShadows = " << enablePreciseParticleShadows << "\n";
 		file << "cloudDensity = " << math.round(cloudDensity * 100.00f) << "\n";
 		file << "particleDensity = " << math.round(particleDensity * 100.00f) << "\n";
+		file << "enableUnitHighlightColor = " << enableUnitHighlightColor << "\n";
+		file << "enableUnitHighlightOutline = " << enableUnitHighlightOutline << "\n";
 
 		file << endl << "[Gameplay]" << "\n";
 		file << "enableLazyCast = " << enableLazyCast << "\n";
@@ -435,6 +447,8 @@ void cSettings::updateFile()
 		else if (key.name == "enablePreciseParticleShadows") { file << key.name + " = " << enablePreciseParticleShadows << endl; }
 		else if (key.name == "cloudDensity") { file << key.name + " = " << math.round(cloudDensity * 100.00f) << endl; }
 		else if (key.name == "particleDensity") { file << key.name + " = " << math.round(particleDensity * 100.00f) << endl; }
+		else if (key.name == "enableUnitHightlightColor") { file << key.name + " = " << enableUnitHighlightColor << endl; }
+		else if (key.name == "enableUnitHightlightOutline") { file << key.name + " = " << enableUnitHighlightOutline << endl; }
 		//else if (key.name == "visualUnitHoverColorCode") { visualUnitHoverColor = util.convertUnitHighlightColor(math.stringToInt(key.value)); }
 		//else if (key.name == "visualUnitHoverColor16") { visualUnitHoverColor = util.parseOldschoolColorCode(key.value); }
 		// Gameplay

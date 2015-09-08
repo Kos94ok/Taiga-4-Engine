@@ -167,3 +167,20 @@ public:
 };
 
 extern cUtilTimer utilTimer;
+
+template <typename type> class Vector4
+{
+public:
+	type a, b, c, d;
+
+	Vector4(type a, type b, type c, type d) {
+		this->a = a;
+		this->b = b;
+		this->c = c;
+		this->d = d;
+	}
+};
+
+typedef Vector4<int> vec4i;
+typedef Vector4<float> vec4;
+typedef Vector4<float> vec4f;

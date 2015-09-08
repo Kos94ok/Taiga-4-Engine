@@ -399,6 +399,9 @@
     <ClCompile Include="database_load_audio.cpp">
       <Filter>Файлы исходного кода\Database</Filter>
     </ClCompile>
+    <ClCompile Include="unit_util.cpp">
+      <Filter>Файлы исходного кода\Character\Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

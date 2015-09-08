@@ -50,6 +50,8 @@ void cVisual::init()
 		if (!shader[SHADER_BLOOM].loadFromFile("Data/Shaders/bloom.frag", sf::Shader::Fragment)) { shaderFail += 1; }
 		if (!shader[SHADER_SHADOW].loadFromFile("Data/Shaders/shadow.frag", sf::Shader::Fragment)) { shaderFail += 1; }
 		if (!shader[SHADER_CAMBLUR].loadFromFile("Data/Shaders/camblur.frag", sf::Shader::Fragment)) { shaderFail += 1; }
+		if (!shader[SHADER_BLUR].loadFromFile("Data/Shaders/blur.frag", sf::Shader::Fragment)) { shaderFail += 1; }
+		if (!shader[SHADER_COLORBLUR].loadFromFile("Data/Shaders/colorblur.frag", sf::Shader::Fragment)) { shaderFail += 1; }
 		if (shaderFail > 0) { window.showWarning(MSG_SHADERCOMPILE_OTHER); }
 	}
 	else
