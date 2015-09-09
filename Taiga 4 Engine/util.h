@@ -61,6 +61,10 @@ public:
 	string buffIdToType(int buff);
 	int typeToBuffId(string str);
 
+	void copyFile(string input, string output);
+	void copyFolder(string input, string output);
+	void clearFolder(string input);
+
 	bool screenshotRequested;
 	void makeScreenshot();
 
@@ -134,6 +138,7 @@ public:
 	cMutex serverPacketQueue;
 
 	cMutex audioMain;
+	cMutex worldMain;
 };
 
 extern cMutexGlobal mutex;

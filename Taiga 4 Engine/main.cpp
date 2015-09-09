@@ -85,7 +85,6 @@ TODO:
 - Fix interact bug (when character moves past the object before interacting)
 - Add berries and mushrooms
 - Finish overworld
-- Add separate audio subsystem for unit idle sound (no sound stacking allowed)
 - Add camera scrolling speed settings for all types
 - Finish with rabbit AI!
 - Add wolf

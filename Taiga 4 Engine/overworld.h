@@ -10,6 +10,7 @@ public:
 	vec2f pos;
 	string name;
 	string descr;
+	string dirpath;
 	int level;
 };
 
@@ -30,7 +31,6 @@ public:
 	vector<cOverworldLink> links;
 
 	void generateMap();
-	void generatePath(int depth, vec2f pos, float angle = 720.00f);
 	void linkMaps(int a, int b);
 
 	bool isMapAvailable(int index);
@@ -38,6 +38,7 @@ public:
 	int getSelectedMapIndex();
 
 	void selectMap(int id);
+	void moveTo(int target);
 	//void save(string saveName);
 	//void load(string saveName);
 };

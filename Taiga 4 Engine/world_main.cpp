@@ -51,11 +51,11 @@ void worldLoaderMain()
 {
 	int threadId = 7;
 	console << "[WORLD_LOADER] Starting the world loader thread" << " [ID: " << threadId << "]" << "\n";
-
 	sf::Packet data;
 	bool isViable;
 	while (!core.thread_shutdown[threadId])
 	{
+		mutex.worldMain.lock();
 		if (!core.editorMode)
 		{
 			for (int y = 0; y < LIMIT_MAP; y++)
@@ -94,6 +94,7 @@ void worldLoaderMain()
 				}
 			}
 		}
+		mutex.worldMain.unlock();
 		Sleep(5);
 		core.thread_antifreeze[threadId] = 0;
 	}

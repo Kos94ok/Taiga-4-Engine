@@ -524,6 +524,18 @@ void cmd_settings_update(std::string args[])
 	settings.updateFile();
 }
 
+// World.saveTo
+void cmd_world_saveto(std::string args[])
+{
+	world.saveTo(args[0], args[1]);
+}
+
+// World.loadFrom
+void cmd_world_loadfrom(std::string args[])
+{
+	world.loadFrom(args[0], args[1]);
+}
+
 // Exit command
 void cmd_exit(string args[])
 {

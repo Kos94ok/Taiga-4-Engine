@@ -270,6 +270,16 @@ cConsole::cConsole()
 	console.cmdSyntax[cmdID] = "\"settings.update\" - Update the settings file contents";
 	console.cmdFunc[cmdID] = cmd_settings_update;
 	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^world.saveto [a-zA-Z0-9.]+ [a-zA-Z0-9.]+");
+	console.cmdWrong[cmdID] = "world.saveto";
+	console.cmdSyntax[cmdID] = "\"world.saveto [str] [str]\" - Save current world to [savefile] as [world]";
+	console.cmdFunc[cmdID] = cmd_world_saveto;
+	cmdID += 1;
+	console.cmdRegex[cmdID].assign("^world.loadfrom [a-zA-Z0-9.]+ [a-zA-Z0-9.]+");
+	console.cmdWrong[cmdID] = "world.loadfrom";
+	console.cmdSyntax[cmdID] = "\"world.loadfrom [str] [str]\" - Load from [savefile] [world]";
+	console.cmdFunc[cmdID] = cmd_world_loadfrom;
+	cmdID += 1;
 	console.cmdRegex[cmdID].assign("^exit");
 	console.cmdWrong[cmdID] = "exit";
 	console.cmdSyntax[cmdID] = "\"exit\" - Close the game";

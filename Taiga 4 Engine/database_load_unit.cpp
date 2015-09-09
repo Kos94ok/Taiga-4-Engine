@@ -98,9 +98,6 @@ void cDatabase::loadUnits()
 	unit[i].rotateSpeed = 5760.00f;
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_a_idle.png");
 	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("tree_basic_a_idle_shadow.png");
-	unit[i].animData[ANIM_DEATH].side.frameCount = 4;
-	unit[i].animData[ANIM_DEATH].side.frameDelay = 0.75f;
-	unit[i].animData[ANIM_DEATH].side.tex = visual.addTexture("tree_basic_a_death.png");
 	unit[i].interactDistance = 15.00f;
 	unit[i].collisionDistance = 10.00f;
 	unit[i].selectionOffset = vec4f(0.00f, 0.00f, 0.25f, 0.25f);
@@ -142,6 +139,47 @@ void cDatabase::loadUnits()
 	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_basic_d_idle.png");
 	unit[i].animData[ANIM_IDLE].side.texShadow = visual.addTexture("tree_basic_d_idle_shadow.png");
 	unit[i].selectionOffset = vec4f(0.00f, 0.00f, 0.50f, 0.20f);
+	i += 1;
+
+	// Fir trees
+	unit[i].type = "tree_fir_a";
+	unit[i].size = vec2(100, 170);
+	unit[i].center = vec2(50, 167);
+	unit[i].health = 500.00f;
+	unit[i].maxHealth = 500.00f;
+	unit[i].resource = 275.00f;
+	unit[i].rotateSpeed = 5760.00f;
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_fir_a_idle.png");
+	unit[i].animData[ANIM_DEATH].side.frameCount = 4;
+	unit[i].animData[ANIM_DEATH].side.frameDelay = 0.75f;
+	unit[i].animData[ANIM_DEATH].side.tex = visual.addTexture("tree_fir_a_death.png");
+	unit[i].interactDistance = 15.00f;
+	unit[i].collisionDistance = 10.00f;
+	unit[i].drop.add("material_wood", 1, 1.00f);
+	unit[i].drop.add("material_wood", 1, 0.75f);
+	unit[i].drop.add("material_wood", 1, 0.50f);
+	unit[i].addRef(REF_UNIT_TREE);
+	unit[i].addRef(REF_UNIT_HARVESTABLE);
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "tree_fir_b";
+	unit[i].center = vec2(52, 170);
+	unit[i].shadowOffset = vec2(0, -1);
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_fir_b_idle.png");
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "tree_fir_c";
+	unit[i].shadowOffset = vec2(0, 0);
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_fir_c_idle.png");
+	i += 1;
+
+	unit[i] = unit[i - 1];
+	unit[i].type = "tree_fir_d";
+	unit[i].center = vec2(50, 160);
+	unit[i].shadowOffset = vec2(0, -10);
+	unit[i].animData[ANIM_IDLE].side.tex = visual.addTexture("tree_fir_d_idle.png");
 	i += 1;
 
 	// Stones

@@ -192,6 +192,7 @@
     <ClCompile Include="unit_order.cpp" />
     <ClCompile Include="unit_util.cpp" />
     <ClCompile Include="util_convert.cpp" />
+    <ClCompile Include="util_file.cpp" />
     <ClCompile Include="util_main.cpp" />
     <ClCompile Include="visual_gen.cpp" />
     <ClCompile Include="visual_main.cpp" />
@@ -203,6 +204,7 @@
     <ClCompile Include="paint_ui.cpp" />
     <ClCompile Include="paint_units.cpp" />
     <ClCompile Include="window_util.cpp" />
+    <ClCompile Include="world_bigsave.cpp" />
     <ClCompile Include="world_gen.cpp" />
     <ClCompile Include="world_main.cpp" />
     <ClCompile Include="world_save.cpp" />

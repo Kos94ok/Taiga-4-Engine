@@ -5,7 +5,7 @@
 class cItemEntry
 {
 public:
-	std::string type;
+	string type;
 	int count;
 };
 
@@ -13,9 +13,9 @@ class cUnitEntry
 {
 public:
 	int globalId;
-	std::string type;
-	sf::Vector2f pos;
-	std::vector<cItemEntry> itemList;
+	string type;
+	vec2f pos;
+	vector<cItemEntry> itemList;
 
 	cUnitEntry() {
 		globalId = -1;
@@ -45,19 +45,19 @@ public:
 class cSave
 {
 public:
-	std::string savefileName;
-	std::string worldName;
+	string savefileName;
+	string worldName;
 
-	std::string getChunkFilePath(sf::Vector2i pos);
-	cBlueprintHeader getHeaderFromFile(std::string filename);
-	std::vector<cUnitEntry> getListFromFile(std::string filename);
-	void flushListToFile(cBlueprintHeader header, std::vector<cUnitEntry> list, std::string filename);
+	string getChunkFilePath(vec2i pos);
+	cBlueprintHeader getHeaderFromFile(string filename);
+	vector<cUnitEntry> getListFromFile(string filename);
+	void flushListToFile(cBlueprintHeader header, vector<cUnitEntry> list, string filename);
 
 	void saveScreenshot(sf::Image img);
 
 	cSave() {
-		worldName = "world";
-		savefileName = "temp";
+		worldName = "_world";
+		savefileName = "_temp";
 	}
 };
 

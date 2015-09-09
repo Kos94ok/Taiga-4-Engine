@@ -108,16 +108,11 @@ vec2 cWorld::getChunkCenter(vec2i pos)
 
 void cWorld::clearWorld()
 {
-	char* buf = new char[512];
-	for (int y = 0; y < LIMIT_MAP; y++)
-	{
-		for (int x = 0; x < LIMIT_MAP; x++)
-		{
-			sprintf_s(buf, 512, "Savefiles//%s//%s//%i-%i.chunk", save.savefileName.c_str(), save.worldName.c_str(), x, y);
-			remove(buf);
-		}
-	}
-	delete[] buf;
+	mutex.worldMain.lock();
+	util.clearFolder("Savefiles//" + save.savefileName + "//" + save.worldName + "//");
+	unloadAll();
+	applyUnload();
+	mutex.worldMain.unlock();
 }
 
 void cWorld::applyUnload()

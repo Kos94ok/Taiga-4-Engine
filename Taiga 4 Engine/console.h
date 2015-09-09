@@ -109,4 +109,6 @@ void cmd_database_reload(std::string args[]);
 void cmd_settings_load(std::string args[]);
 void cmd_settings_save(std::string args[]);
 void cmd_settings_update(std::string args[]);
+void cmd_world_saveto(std::string args[]);
+void cmd_world_loadfrom(std::string args[]);
 void cmd_exit(std::string args[]);

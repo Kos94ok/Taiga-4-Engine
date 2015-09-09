@@ -72,8 +72,14 @@ public:
 	void saveAll();
 	void unloadAll();
 	void applyUnload();
-	sf::Vector2i getChunkInPos(vec2f pos);
-	sf::Vector2f getChunkCenter(vec2i pos);
+	void saveMapData();
+	void loadMapData();
+	vec2i getChunkInPos(vec2f pos);
+	vec2f getChunkCenter(vec2i pos);
+
+	void saveTo(string overworldName, string worldName);
+	void loadFrom(string overworldName, string worldName);
+	void clear();
 };
 
 extern cWorld world;

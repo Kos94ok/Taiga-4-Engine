@@ -71,7 +71,7 @@ void cWeather::createCloud(vec2f pos, vec2f size)
 	newCloud.pos = pos;
 	newCloud.size = size;
 	newCloud.moveSpeed = math.randf(10.00f, 50.00f);
-	newCloud.moveAngle = math.randf(170.00f, 190.00f);
+	newCloud.moveAngle = math.randf(180.00f, 180.00f);
 	//sf::Texture gen = visual.genCloudTexture(size, pieceSizeMin, pieceSizeMax, pieceCount);
 	newCloud.updateGenData();
 
@@ -85,8 +85,4 @@ void cWeather::removeCloud(int id)
 {
 	cloud[id] = cloud[(int)cloud.size() - 1];
 	cloud.pop_back();
-	//cloudTexture[id] = cloudTexture[(int)cloudTexture.size() - 1];
-	//cloudTexture.pop_back();
-	//cloud.erase(cloud.begin() + id);
-	//cloudTexture.erase(cloudTexture.begin() + id);
 }

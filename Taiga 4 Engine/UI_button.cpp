@@ -233,6 +233,10 @@ void cUIButton::callbackLeft(int parent)
 		if (ui.wndOverworld.isDisplayed) { ui.wndOverworld.close(); }
 		else { ui.wndOverworld.open(); }
 	}
+	else if (action == "overworldMoveto")
+	{
+		overworld.moveTo(overworld.selectedMap);
+	}
 	else if (action.substr(0, 8) == "category")
 	{
 		if (action.substr(9) == "all") { ui.inventoryCategory = CATEGORY_ALL; }

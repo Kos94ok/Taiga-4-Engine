@@ -402,6 +402,12 @@
     <ClCompile Include="unit_util.cpp">
       <Filter>Файлы исходного кода\Character\Unit</Filter>
     </ClCompile>
+    <ClCompile Include="world_bigsave.cpp">
+      <Filter>Файлы исходного кода\World</Filter>
+    </ClCompile>
+    <ClCompile Include="util_file.cpp">
+      <Filter>Файлы исходного кода\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">

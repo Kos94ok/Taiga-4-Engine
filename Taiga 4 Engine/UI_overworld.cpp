@@ -35,6 +35,16 @@ void cUIOverworld::open()
 	ui.element[ui.getElementId(id)].addRef(REF_UI_OVERWORLD);
 	ui.element[ui.getElementId(id)].addRef(REF_UI_OVERWORLD_BUTTON);
 
+	// Moveto button
+	id = ui.addElement("button", sf::Vector2f(camera.res.x - 15 - 5 - 145, 15 + 5 + 145 + 50.00f));
+	ui.element[ui.getElementId(id)].size = sf::Vector2f(96, 48);
+	ui.element[ui.getElementId(id)].setText("Move to");
+	ui.element[ui.getElementId(id)].texture = visual.addTexture("alpha.png");
+	ui.element[ui.getElementId(id)].textureHovered = visual.addTexture("black.png");
+	ui.element[ui.getElementId(id)].button.action = "overworldMoveto";
+	ui.element[ui.getElementId(id)].addRef(REF_UI_OVERWORLD);
+	ui.element[ui.getElementId(id)].addRef(REF_UI_OVERWORLD_BUTTON);
+
 	// Overworld maps
 	update();
 

@@ -60,7 +60,9 @@ void cConsole::output(std::string str, int subConsole)
 		}
 
 		// Flushing to console
-		history[SUBCMD_ALL].push_back(sf::String(waitingQueue, locale("russian")));
+		if (subConsole != SUBCMD_DEBUG) {
+			history[SUBCMD_ALL].push_back(sf::String(waitingQueue, locale("russian")));
+		}
 		history[subConsole].push_back(sf::String(waitingQueue, locale("russian")));
 		waitingQueue.clear();
 		if (scrollOffset != 0 && (int)history[SUBCMD_ALL].size() > getLineCount())
