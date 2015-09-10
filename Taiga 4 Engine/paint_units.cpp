@@ -233,6 +233,8 @@ void cWindow::paintUnits()
 							state.transform = window.matrixHandle;
 							state.shader = shader;
 
+							float memOutlineThickness = brushRect.getOutlineThickness();
+							brushRect.setOutlineThickness(0.00f);
 							brushRect.setPosition((game.unit[i].pos.x) + offset, (game.unit[i].pos.y) + offset);
 							window.texHandle.draw(brushRect, state);
 							brushRect.setPosition((game.unit[i].pos.x) - offset, (game.unit[i].pos.y) + offset);
@@ -242,6 +244,7 @@ void cWindow::paintUnits()
 							brushRect.setPosition((game.unit[i].pos.x) + offset, (game.unit[i].pos.y) - offset);
 							window.texHandle.draw(brushRect, state);
 
+							brushRect.setOutlineThickness(memOutlineThickness);
 							brushRect.setFillColor(sf::Color(255, 255, 255));
 							if (settings.enableUnitHighlightColor) {
 								brushRect.setFillColor(settings.visualUnitHoverColor);

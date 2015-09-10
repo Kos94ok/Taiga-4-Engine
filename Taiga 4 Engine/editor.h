@@ -13,6 +13,7 @@ public:
 	void remove(int target);
 	void clear();
 	bool isSelected(int target);
+	void destroySelected();
 
 	cEditorSelection() {
 		count = 0;

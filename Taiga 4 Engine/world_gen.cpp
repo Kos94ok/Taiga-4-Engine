@@ -77,9 +77,39 @@ void cWorld::genNormalWorld()
 	vec2i spawnPointI = vec2i(LIMIT_MAP / 2, LIMIT_MAP / 2);
 
 	// Generating paths
+	endPoints.clear();
 	for (int i = 0; i < settings.wgStartingPath; i++)
 	{
 		genChunkPath(1, spawnPointI);
+	}
+	// Searching for escape points
+	float dist;
+	float d1 = 0, d2 = 0, d3 = 0;
+	vec2i p1, p2, p3;
+	for (int i = 0; i < (int)endPoints.size(); i++)
+	{
+		dist = math.getDistance(endPoints[i], spawnPointI);
+		if (dist > d1) {
+			d3 = d2;		p3 = p2;
+			d2 = d1;		p2 = p1;
+			d1 = dist;		p1 = endPoints[i];
+		}
+		else if (dist > d2) {
+			d3 = d2;		p3 = p2;
+			d2 = dist;		p2 = endPoints[i];
+		}
+		else if (dist > d3) {
+			d3 = dist;		p3 = endPoints[i];
+		}
+	}
+	// Determining the escape points
+	float randVal = math.randf(0.00f, 1.00f);
+	map[p1.x][p1.y].type = CHUNK_ESCAPE;
+	if (randVal <= 0.70f && d2 > 10) {
+		map[p2.x][p2.y].type = CHUNK_ESCAPE;
+	}
+	if (randVal <= 0.30f && d3 > 10) {
+		map[p3.x][p3.y].type = CHUNK_ESCAPE;
 	}
 
 	// Writing global spawn point
@@ -142,7 +172,7 @@ void cWorld::genNormalWorld()
 			else if (map[i][j].type == CHUNK_NORMAL) { file << "~ "; }
 			else if (map[i][j].type == CHUNK_BLOCKED) { file << "X "; }
 			else if (map[i][j].type == CHUNK_SPAWN) { file << "@ "; }
-			else if (map[i][j].type == CHUNK_VILLAGE) { file << "& "; }
+			else if (map[i][j].type == CHUNK_ESCAPE) { file << "& "; }
 		}
 		file << "\n";
 	}
@@ -193,7 +223,10 @@ void cWorld::genChunkPath(int val, vec2i pos)
 		map[pos.x][pos.y].type = CHUNK_NORMAL;
 
 		// Termination chance
-		if (math.rand(settings.wgMinimalPathLength, settings.wgMaximalPathLength) < val) { return; }
+		if (math.rand(settings.wgMinimalPathLength, settings.wgMaximalPathLength) < val) {
+			endPoints.push_back(pos);
+			return;
+		}
 			// Not terminated - continue
 		genChunkPath(val + 1, pos);
 			// Chance to fork

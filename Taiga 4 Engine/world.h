@@ -8,11 +8,12 @@
 #define CHUNK_NORMAL					1
 #define CHUNK_BLOCKED					2
 #define CHUNK_SPAWN						3
-#define CHUNK_VILLAGE					4
+#define CHUNK_ESCAPE					4
 #define CHUNK_LOOT_COMMON				5
 #define CHUNK_LOOT_GOOD					6
 #define CHUNK_LOOT_RARE					7
 #define CHUNK_LOOT_PERFECT				8
+#define CHUNK_MAXVALUE					8
 #define CHUNK_TEMP						100
 
 void worldLoaderMain();
@@ -57,6 +58,7 @@ public:
 	vector<cUnitEntry> getBlueprintUnitList(int index);
 	vector<cUnitEntry> getChunkUnitList(vec2i pos);
 	vector<int> unloadVector;
+	vector<vec2i> endPoints;
 
 	void genTaigaMini();
 	void genArena();

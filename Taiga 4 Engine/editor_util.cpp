@@ -1,6 +1,7 @@
 
 #include "main.h"
 #include "editor.h"
+#include "game.h"
 
 void cEditorSelection::add(int target)
 {
@@ -39,4 +40,13 @@ bool cEditorSelection::isSelected(int target)
 		if (target == unit[i]) { return true; }
 	}
 	return false;
+}
+
+void cEditorSelection::destroySelected()
+{
+	for (int i = 0; i < count; i++)
+	{
+		game.removeUnit(unit[i]);
+	}
+	clear();
 }

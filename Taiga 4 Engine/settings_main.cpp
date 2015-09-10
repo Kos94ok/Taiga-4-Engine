@@ -151,11 +151,11 @@ void cSettings::setDefault()
 	// Internal: World generation
 	//========================================
 	// Starting path counter [Increases the open area close to spawn point]
-	this->wgStartingPath = 3;
+	this->wgStartingPath = 1;
 	// Minimal path length [Increases the total map size]
-	this->wgMinimalPathLength = 15;
+	this->wgMinimalPathLength = 10;
 	// Maximum path length [Decreases the maximum map size]
-	this->wgMaximalPathLength = 100;
+	this->wgMaximalPathLength = 30;
 	// Path fork chance [Increases the amount of paths on the map]
 	this->wgPathForkChance = 20;
 	/*

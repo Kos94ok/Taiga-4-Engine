@@ -15,6 +15,10 @@ float cMath::getDistance(vec2f &a, vec2f &b) {
 	return getDistance(a.x, a.y, b.x, b.y);
 }
 
+float cMath::getDistance(vec2i &a, vec2i &b) {
+	return getDistance(math.round(a.x), math.round(a.y), math.round(b.x), math.round(b.y));
+}
+
 float cMath::getDistance(cUnit* unitA, cUnit* unitB) {
 	return getDistance(unitA->pos, unitB->pos);
 }
@@ -25,6 +29,10 @@ float cMath::getAngle(float ax, float ay, float bx, float by) {
 
 float cMath::getAngle(vec2f a, vec2f b) {
 	return getAngle(a.x, a.y, b.x, b.y);
+}
+
+float cMath::getAngle(vec2i a, vec2i b) {
+	return getAngle(math.round(a.x), math.round(a.y), math.round(b.x), math.round(b.y));
 }
 
 float cMath::getAngle(cUnit* unitA, cUnit* unitB) {

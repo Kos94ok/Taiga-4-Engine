@@ -36,7 +36,7 @@ void cWorld::analyzeBlueprints()
 		// Getting the header
 		header = save.getHeaderFromFile("Data//Blueprints//" + list[i]);
 		// Checking the header
-		if (header.isValid && header.type > CHUNK_UNDEFINED && header.type <= CHUNK_VILLAGE)
+		if (header.isValid && header.type > CHUNK_UNDEFINED && header.type <= CHUNK_MAXVALUE)
 		{
 			countCorrect += 1;
 			print.type = header.type;

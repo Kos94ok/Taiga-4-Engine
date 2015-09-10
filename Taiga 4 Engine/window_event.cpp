@@ -143,6 +143,8 @@ void cWindow::mainEvent()
 			// Global hotkeys
 			if (!console.displayed && !chat.inFocus)
 			{
+				// Editor
+				if (eventPoll.key.code == sf::Keyboard::Delete) { editor.sel.destroySelected(); }
 				// Hide interface
 				if (eventPoll.key.code == settings.hkHideInterface) { ui.toggleDisplay(); }
 				// Debug
@@ -233,10 +235,9 @@ void cWindow::mainEvent()
 			if (core.editorMode)
 			{
 				if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) { editor.sel.clear(); }
-				search = game.getUnitId(mousePos);
-				if (search != -1)
+				if (visual.hoveredUnit != -1)
 				{
-					editor.sel.add(search);
+					editor.sel.add(visual.hoveredUnit);
 				}
 			}
 			// Regular mode

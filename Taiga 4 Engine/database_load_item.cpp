@@ -363,31 +363,28 @@ void cDatabase::loadItems()
 	i += 1;
 
 	// Editor items
-	item[i].type = "tree_basic_a";
-	item[i].setName("Tree A");
+	item[i].type = "tree_basic_";
+	item[i].setName("Tree Basic");
 	item[i].addRef(REF_ITEM_EDITOR);
 	item[i].addRef(REF_ITEM_EQUIP);
 	item[i].addRef(REF_ITEM_ACTIVE);
+	item[i].addRef(REF_ITEM_EDITOR_VAR4);
 	i += 1;
 
 	item[i] = item[i - 1];
-	item[i].type = "tree_basic_b";
-	item[i].setName("Tree B");
+	item[i].type = "tree_fir_";
+	item[i].setName("Tree Fir");
 	i += 1;
 
 	item[i] = item[i - 1];
-	item[i].type = "tree_basic_c";
-	item[i].setName("Tree C");
-	i += 1;
-
-	item[i] = item[i - 1];
-	item[i].type = "tree_basic_d";
-	item[i].setName("Tree D");
+	item[i].type = "stone_basic_";
+	item[i].setName("Stone Basic");
 	i += 1;
 
 	item[i] = item[i - 1];
 	item[i].type = "campfire_full";
 	item[i].setName("Campfire");
+	item[i].removeRef(REF_ITEM_EDITOR_VAR4);
 	i += 1;
 
 	// More test items

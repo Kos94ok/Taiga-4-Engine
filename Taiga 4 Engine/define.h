@@ -206,6 +206,13 @@ extern const std::string NAME_BUILDTIME_TIME;
 #define REF_ITEM_BUILD_TENT				18		// Item is a buildable tent
 #define REF_ITEM_FLASHLIGHT				19		// Item is a flashlight
 #define REF_ITEM_TORCH					20		// Item is a torch
+#define REF_ITEM_EDITOR_VAR2			21		// Item is an editor item with 2 variations
+#define REF_ITEM_EDITOR_VAR3			22		// Item is an editor item with 3 variations
+#define REF_ITEM_EDITOR_VAR4			23		// Item is an editor item with 4 variations
+#define REF_ITEM_EDITOR_VAR5			24		// Item is an editor item with 5 variations
+#define REF_ITEM_EDITOR_VAR6			25		// Item is an editor item with 6 variations
+#define REF_ITEM_EDITOR_VAR7			26		// Item is an editor item with 7 variations
+#define REF_ITEM_EDITOR_VAR8			27		// Item is an editor item with 8 variations
 #define REF_PARTICLE_ONSCREEN			0		// Particle is always on screen
 #define REF_SOUND_IDLE					0		// Sound is the unit's idle
 

@@ -17,17 +17,14 @@ void cEditor::initialize()
 	cItem* targetItem;
 	if (clientUnit->type != "missingno")
 	{
-		clientUnit->container.add("tree_basic_a");
-		targetItem = &clientUnit->container.get("tree_basic_a");
+		clientUnit->container.add("tree_basic_");
+		targetItem = &clientUnit->container.get("tree_basic_");
 		targetItem->equipped = true;
-		clientUnit->container.add("tree_basic_b");
-		targetItem = &clientUnit->container.get("tree_basic_b");
+		clientUnit->container.add("tree_fir_");
+		targetItem = &clientUnit->container.get("tree_fir_");
 		targetItem->equipped = true;
-		clientUnit->container.add("tree_basic_c");
-		targetItem = &clientUnit->container.get("tree_basic_c");
-		targetItem->equipped = true;
-		clientUnit->container.add("tree_basic_d");
-		targetItem = &clientUnit->container.get("tree_basic_d");
+		clientUnit->container.add("stone_basic_");
+		targetItem = &clientUnit->container.get("stone_basic_");
 		targetItem->equipped = true;
 		clientUnit->container.add("campfire_full");
 		targetItem = &clientUnit->container.get("campfire_full");

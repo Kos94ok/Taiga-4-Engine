@@ -7,6 +7,7 @@
 #include "visual.h"
 #include "database.h"
 #include "client.h"
+#include "math.h"
 
 void cItem::use()
 {
@@ -62,7 +63,15 @@ void cItem::use()
 	// Editor items
 	if (hasRef(REF_ITEM_EDITOR))
 	{
-		game.addUnit(type, window.getMousePos(true));
+		int variation = -1;
+		if (hasRef(REF_ITEM_EDITOR_VAR2)) { variation = math.rand(0, 1); }
+		if (hasRef(REF_ITEM_EDITOR_VAR3)) { variation = math.rand(0, 2); }
+		if (hasRef(REF_ITEM_EDITOR_VAR4)) { variation = math.rand(0, 3); }
+		if (hasRef(REF_ITEM_EDITOR_VAR5)) { variation = math.rand(0, 4); }
+		if (hasRef(REF_ITEM_EDITOR_VAR6)) { variation = math.rand(0, 5); }
+		if (hasRef(REF_ITEM_EDITOR_VAR7)) { variation = math.rand(0, 6); }
+		if (hasRef(REF_ITEM_EDITOR_VAR8)) { variation = math.rand(0, 7); }
+		game.addUnit(type, window.getMousePos(true), -1, variation);
 	}
 }
 

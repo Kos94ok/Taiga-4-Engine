@@ -9,10 +9,12 @@ class cMath
 public:
 	int round(float num);
 	float getDistance(float ax, float ay, float bx, float by);
-	float getDistance(sf::Vector2f &a, sf::Vector2f &b);
+	float getDistance(vec2f &a, vec2f &b);
+	float getDistance(vec2i &a, vec2i &b);
 	float getDistance(cUnit* unitA, cUnit* unitB);
 	float getAngle(float ax, float ay, float bx, float by);
-	float getAngle(sf::Vector2f a, sf::Vector2f b);
+	float getAngle(vec2f a, vec2f b);
+	float getAngle(vec2i a, vec2i b);
 	float getAngle(cUnit* unitA, cUnit* unitB);
 	float polarX(float x, float dist, float angle);
 	float polarY(float y, float dist, float angle);

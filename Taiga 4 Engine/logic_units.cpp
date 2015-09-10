@@ -83,7 +83,7 @@ void cGameLogic::updateAnim(int elapsedTime)
 			}
 		}
 		// Campfire burnout
-		if (game.unit[i].hasRef(REF_UNIT_BURNOUT_CAMPFIRE) && game.unit[i].resource > 0.00f)
+		if (game.unit[i].hasRef(REF_UNIT_BURNOUT_CAMPFIRE) && game.unit[i].resource > 0.00f && !core.editorMode)
 		{
 			game.unit[i].resource -= timevar / 2.00f;
 			game.unit[i].light.power = dbCampfire->light.power * max(0.10f, game.unit[i].resource / game.unit[i].resourceLimit);
