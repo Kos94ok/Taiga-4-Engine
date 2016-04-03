@@ -27,6 +27,10 @@ void cServerPlayer::setResource(float value) {
 	game.getUnit(unit).setResource(value);
 }
 
+void cServerPlayer::addHealth(float val) {
+	game.getUnit(unit).addHealth(val);
+}
+
 void cServerPlayer::setHealth(float hp) {
 	game.getUnit(unit).setHealth(hp);
 }
@@ -64,8 +68,9 @@ void cServerPlayer::addCold(float value, bool local) {
 
 void cServerPlayer::setCold(float value, bool local)
 {
+	float damage = 0.00f;
 	statCold = value;
-	if (statCold < getMinCold()) { statCold = getMinCold(); }
+	if (statCold < getMinCold()) { damage = abs(getMinCold() - statCold); statCold = getMinCold(); }
 	else if (statCold > getMaxCold()) { statCold = getMaxCold(); }
 
 	if (!local)
@@ -73,6 +78,9 @@ void cServerPlayer::setCold(float value, bool local)
 		sf::Packet data;
 		data << MSG_PLAYER_COLD << statCold;
 		server.sendPacket(myId, data);
+		data.clear();
+		if (damage > 0.00f)
+			game.getUnit(unit).addHealth(-damage);
 	}
 }
 
@@ -82,8 +90,9 @@ void cServerPlayer::addHunger(float value, bool local) {
 
 void cServerPlayer::setHunger(float value, bool local)
 {
+	float damage = 0.00f;
 	statHunger = value;
-	if (statHunger < getMinHunger()) { statHunger = getMinHunger(); }
+	if (statHunger < getMinHunger()) { damage = abs(getMinHunger() - statHunger); statHunger = getMinHunger(); }
 	else if (statHunger > getMaxHunger()) { statHunger = getMaxHunger(); }
 
 	if (!local)
@@ -91,6 +100,8 @@ void cServerPlayer::setHunger(float value, bool local)
 		sf::Packet data;
 		data << MSG_PLAYER_HUNGER << statHunger;
 		server.sendPacket(myId, data);
+		if (damage > 0.00f)
+			game.getUnit(unit).addHealth(-damage);
 	}
 }
 

@@ -219,7 +219,7 @@ void cUIButton::callbackLeft(int parent)
 	}
 	else if (action == "connect_temp")
 	{
-		client.connect("84.50.50.87", 21045);
+		client.connect("localhost", 21045);
 		ui.removeElementsByRef(REF_UI_MAINMENU, 0.50f);
 		ui.updateFull();
 	}

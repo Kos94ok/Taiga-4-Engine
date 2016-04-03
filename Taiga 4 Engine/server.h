@@ -31,6 +31,7 @@ public:
 	void setHunger(float value, bool local = false);
 	void addResource(float value);
 	void setResource(float value);
+	void addHealth(float val);
 	void setHealth(float hp);
 	void setMaxHealth(float maxHp);
 	void addItem(string type, int count = 1);

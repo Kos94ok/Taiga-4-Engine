@@ -21,6 +21,7 @@ void cGameLogic::updateStatsFor(int unit, int player, float timevar)
 
 	// Flush to client
 	if (player == -1) {
+		
 		client.addCold(coldDelta);
 		client.addHunger(hungerDelta);
 	}

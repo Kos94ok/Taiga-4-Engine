@@ -17,20 +17,62 @@ sf::Vertex vertex[4];
 sf::VertexArray brushVertex;
 sf::Text brushText;
 
+int msIsItTime = 0;
+int frameBigCount = 0;
+int frameCount = 0;
+int msInit = 0;
+int msVsyncTrap = 0;
+int msMatrixInit = 0;
+int msWaitForRender = 0;
+int msTileMap = 0;
+int msUnits = 0;
+int msClouds = 0;
+int msParticles = 0;
+int msLighting = 0;
+int msPostFX = 0;
+int msUI = 0;
+int msDebugInfo = 0;
+int msConsole = 0;
+int msFlush = 0;
+int msDisplay = 0;
+int msTotal = 0;
+
+extern int msUnitInit;
+extern int msUnitLockWait;
+extern int msUnitAnimDisplay;
+extern int msUnitTextureSetup;
+extern int msUnitShadowDay;
+extern int msUnitShadowNight;
+extern int msUnitRandomStuff;
+extern int msUnitLastMinuteCheck;
+extern int msUnitRender;
+
 void cWindow::mainPaint()
 {
+	int t0 = timeGetTime();
+	int t1 = timeGetTime();
+	float lightColor = min(255.00f, game.ambientLight);
 	// Clearing the window
-	window.winHandle.clear(sf::Color(127, 127, 127));
-	window.texHandle.clear(sf::Color(127, 127, 127));
+	window.winHandle.clear();
+	//window.texHandle.clear();
 	window.texHandleShadow.clear(sf::Color(255, 255, 255));
-	window.texHandleLight.clear(sf::Color(min(255.00f, game.ambientLight), min(255.00f, game.ambientLight), min(255.00f, game.ambientLight)));
-	window.texHandleLightMult.clear(sf::Color(0, 0, 0, 0));
-	window.texHandleTop.clear(sf::Color(127, 127, 127));
+	window.texHandleLight.clear(sf::Color(lightColor, lightColor, lightColor));
+	window.texHandleLightMult.clear();
+	window.texHandleTop.clear();
 	// Initializing the brushes
-	brushText.setFont(visual.fontMain);
+	//brushText.setFont(visual.fontMain);
+
+	msInit += timeGetTime() - t1;
+	msTotal += timeGetTime() - t1;
+	t1 = timeGetTime();
+
 	// V-sync trap
 	brushRect.setPosition(vec2f(-5000.00f, -5000.00f));
 	window.winHandle.draw(brushRect);
+
+	msVsyncTrap += timeGetTime() - t1;
+	msTotal += timeGetTime() - t1;
+	t1 = timeGetTime();
 
 	// Loading the matrix
 	float prec = 1.00f;
@@ -40,24 +82,77 @@ void cWindow::mainPaint()
 	window.matrixHandle.scale(vec2(camera.zoomFactor, camera.zoomFactor), vec2(camera.res.x / 2, camera.res.y / 2));
 	window.matrixHandle.translate(-camera.pos);
 	mutex.mainMatrix.unlock();
+
+	msMatrixInit += timeGetTime() - t1;
+	msTotal += timeGetTime() - t1;
+	t1 = timeGetTime();
 	//window.matrixHandle.translate(sf::Vector2f(math.round(-camera.pos.x * prec) / prec, math.round(-camera.pos.y * prec) / prec));
 	// Painting the game data
 	if (!core.serverMode)
 	{
 		mutex.renderMain.lock();
+		
+		msWaitForRender += timeGetTime() - t1;
+		msTotal += timeGetTime() - t1;
+		t1 = timeGetTime();
+
 		window.paintTileMap();
+
+		msTileMap += timeGetTime() - t1;
+		msTotal += timeGetTime() - t1;
+		t1 = timeGetTime();
+
 		window.paintUnits();
+
+		msUnits += timeGetTime() - t1;
+		msTotal += timeGetTime() - t1;
+		t1 = timeGetTime();
+
 		window.paintClouds();
+
+		msClouds += timeGetTime() - t1;
+		msTotal += timeGetTime() - t1;
+		t1 = timeGetTime();
+
 		window.paintParticles();
+
+		msParticles += timeGetTime() - t1;
+		msTotal += timeGetTime() - t1;
+		t1 = timeGetTime();
+
 		window.paintLighting();
+
+		msLighting += timeGetTime() - t1;
+		msTotal += timeGetTime() - t1;
+		t1 = timeGetTime();
+
 		window.paintPostFX();
+
+		msPostFX += timeGetTime() - t1;
+		msTotal += timeGetTime() - t1;
+		t1 = timeGetTime();
+
 		window.paintUI();
+
+		msUI += timeGetTime() - t1;
+		msTotal += timeGetTime() - t1;
+		t1 = timeGetTime();
+
 		window.paintDebugInfo();
+
+		msDebugInfo += timeGetTime() - t1;
+		msTotal += timeGetTime() - t1;
+		t1 = timeGetTime();
+
 		mutex.renderMain.unlock();
 	}
 	window.paintConsole();
 	if (!core.serverMode) { window.paintMousePointer(); }
 	sf::Sprite buffer;
+
+	msConsole += timeGetTime() - t1;
+	msTotal += timeGetTime() - t1;
+	t1 = timeGetTime();
 
 	// Flushing the buffer
 	window.texHandleTop.display();
@@ -65,6 +160,10 @@ void cWindow::mainPaint()
 	else { window.texHandleTop.setSmooth(false); }
 	buffer = sf::Sprite(window.texHandleTop.getTexture());
 	buffer.scale(1.00f / settings.sampleMod, 1.00f / settings.sampleMod);
+
+	msFlush += timeGetTime() - t1;
+	msTotal += timeGetTime() - t1;
+	t1 = timeGetTime();
 
 	//window.texHandleLight.display();
 	//buffer = sf::Sprite(window.texHandleLight.getTexture());
@@ -80,7 +179,71 @@ void cWindow::mainPaint()
 	window.winHandle.setVerticalSyncEnabled(math.intToBool(settings.enableVertSync));
 	window.winHandle.display();
 	window.winHandle.setVerticalSyncEnabled(false);
+
+	msDisplay += timeGetTime() - t1;
+	msTotal += timeGetTime() - t1;
+
 	core.thread_windowTicks += 1;
+	frameCount += 1;
+
+	msIsItTime += timeGetTime() - t0;
+	if (msIsItTime >= 1000)
+	{
+		console.debug << "===== Frame [" + to_string(frameCount) + " / " + to_string(msIsItTime - 1000) + "]: =====" << endl;
+		console.debug << "msInit: " + to_string(msInit) << endl;
+		console.debug << "msVsyncTrap: " + to_string(msVsyncTrap) << endl;
+		console.debug << "msMatrixInit: " + to_string(msMatrixInit) << endl;
+		console.debug << "msWaitForRender: " + to_string(msWaitForRender) << endl;
+		console.debug << "msTileMap: " + to_string(msTileMap) << endl;
+		console.debug << "msUnits: " + to_string(msUnits) << endl;
+		console.debug << "msUnitInit: " + to_string(msUnitInit) << endl;
+		console.debug << "msUnitLockWait: " + to_string(msUnitLockWait) << endl;
+		console.debug << "msUnitAnimDisplay: " + to_string(msUnitAnimDisplay) << endl;
+		console.debug << "msUnitTextureSetup: " + to_string(msUnitTextureSetup) << endl;
+		console.debug << "msUnitShadowDay: " + to_string(msUnitShadowDay) << endl;
+		console.debug << "msUnitShadowNight: " + to_string(msUnitShadowNight) << endl;
+		console.debug << "msUnitRandomStuff: " + to_string(msUnitRandomStuff) << endl;
+		console.debug << "msUnitLastMinuteCheck: " + to_string(msUnitLastMinuteCheck) << endl;
+		console.debug << "msUnitRender: " + to_string(msUnitRender) << endl;
+		console.debug << "msClouds: " + to_string(msClouds) << endl;
+		console.debug << "msParticles: " + to_string(msParticles) << endl;
+		console.debug << "msLighting: " + to_string(msLighting) << endl;
+		console.debug << "msPostFX: " + to_string(msPostFX) << endl;
+		console.debug << "msUI: " + to_string(msUI) << endl;
+		console.debug << "msDebugInfo: " + to_string(msDebugInfo) << endl;
+		console.debug << "msConsole: " + to_string(msConsole) << endl;
+		console.debug << "msFlush: " + to_string(msFlush) << endl;
+		console.debug << "msDisplay: " + to_string(msDisplay) << endl;
+		console.debug << "TOTAL: " + to_string(msTotal) << endl;
+
+		frameCount = 0;
+		msIsItTime = 0;
+		msInit = 0;
+		msVsyncTrap = 0;
+		msMatrixInit = 0;
+		msWaitForRender = 0;
+		msTileMap = 0;
+		msUnits = 0;
+		msUnitInit = 0;
+		msUnitLockWait = 0;
+		msUnitAnimDisplay = 0;
+		msUnitTextureSetup = 0;
+		msUnitShadowDay = 0;
+		msUnitShadowNight = 0;
+		msUnitRandomStuff = 0;
+		msUnitLastMinuteCheck = 0;
+		msUnitRender = 0;
+		msClouds = 0;
+		msParticles = 0;
+		msLighting = 0;
+		msPostFX = 0;
+		msUI = 0;
+		msDebugInfo = 0;
+		msConsole = 0;
+		msFlush = 0;
+		msDisplay = 0;
+		msTotal = 0;
+	}
 }
 
 sf::FloatRect tileRect, tileRectTex;

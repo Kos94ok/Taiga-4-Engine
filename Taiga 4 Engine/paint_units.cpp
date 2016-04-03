@@ -16,8 +16,20 @@ extern sf::Vertex vertex[4];
 extern sf::VertexArray brushVertex;
 extern sf::Text brushText;
 
+int msUnitInit = 0;
+int msUnitLockWait = 0;
+int msUnitAnimDisplay = 0;
+int msUnitTextureSetup = 0;
+int msUnitShadowDay = 0;
+int msUnitShadowNight = 0;
+int msUnitRandomStuff = 0;
+int msUnitLastMinuteCheck = 0;
+int msUnitRender = 0;
+
 void cWindow::paintUnits()
 {
+	int t1 = timeGetTime();
+
 	bool cameraIntersection;
 	sf::RenderStates renderState;
 
@@ -31,10 +43,16 @@ void cWindow::paintUnits()
 
 	visual.unitsPainted = 0;
 
+	msUnitInit += timeGetTime() - t1;
+	t1 = timeGetTime();
+
 	game.access.lock();
 	mutex.renderUnits.lock();
 	preRender.units.ready = false;
 	int boundTexture = -1;
+
+	msUnitLockWait += timeGetTime() - t1;
+	t1 = timeGetTime();
 
 	int repeats = 1;
 	if (settings.enableBetterShadows) { repeats += 1; }
@@ -42,9 +60,13 @@ void cWindow::paintUnits()
 	{
 		for (int i : preRender.units.queue)
 		{
+			t1 = timeGetTime();
 			// Unit animation
 			game.unit[i].updateDisplayAnim();
 			animDisplay = &game.unit[i].animDisplay;
+
+			msUnitAnimDisplay += timeGetTime() - t1;
+			t1 = timeGetTime();
 
 			int anim = game.unit[i].anim.type;
 			int curFrame = game.unit[i].anim.curFrame;
@@ -67,6 +89,9 @@ void cWindow::paintUnits()
 			else {
 				brushRect.setTextureRect(sf::IntRect((curFrame + 1) * frameWidth, 0, -frameWidth, texHeight));
 			}
+
+			msUnitTextureSetup += timeGetTime() - t1;
+			t1 = timeGetTime();
 
 			// Shadow (day)
 			if (!game.unit[i].hasRef(REF_UNIT_NOSHADOW) && (u == 1 || !settings.enableBetterShadows))
@@ -114,16 +139,12 @@ void cWindow::paintUnits()
 					if (camRect.intersects(objRect))
 					{
 						renderState.transform = window.matrixHandle;
-						if (visual.shader[SHADER_SHADOW].isAvailable() && settings.shadowBlur > 1)
-						{
-							visual.shader[SHADER_SHADOW].setParameter("transpar", shadowBrightness / 255.00f);
-							visual.shader[SHADER_SHADOW].setParameter("sampleCount", settings.shadowBlur);
-							renderState.shader = &visual.shader[SHADER_SHADOW];
-						}
 						if (!settings.enableBetterShadows) { window.texHandle.draw(brushRect, renderState); }
 						else { window.texHandleShadow.draw(brushRect, renderState); }
 					}
 				}
+				msUnitShadowDay += timeGetTime() - t1;
+				t1 = timeGetTime();
 
 				// Shadow (night)
 				//visual.updateLightLevel(game.unit[i].pos);
@@ -166,16 +187,13 @@ void cWindow::paintUnits()
 					objRect = brushRect.getGlobalBounds();
 					if (camRect.intersects(objRect))
 					{
-						if (visual.shader[SHADER_SHADOW].isAvailable() && settings.shadowBlur > 1)
-						{
-							visual.shader[SHADER_SHADOW].setParameter("transpar", shadowBrightness / 255.00f);
-							visual.shader[SHADER_SHADOW].setParameter("sampleCount", settings.shadowBlur);
-							renderState.shader = &visual.shader[SHADER_SHADOW];
-						}
 						if (!settings.enableBetterShadows) { window.texHandle.draw(brushRect, renderState); }
 						else { window.texHandleShadow.draw(brushRect, renderState); }
 					}
 				}
+
+				msUnitShadowNight += timeGetTime() - t1;
+				t1 = timeGetTime();
 			}
 
 			// Display the object
@@ -210,9 +228,17 @@ void cWindow::paintUnits()
 				brushRect.setTexture(&visual.gameTex[animDisplay->data.tex].handle);
 				boundTexture = animDisplay->data.tex;
 			}
+
+			msUnitRandomStuff += timeGetTime() - t1;
+			t1 = timeGetTime();
+
 			// Last-minute check
 			objRect = brushRect.getGlobalBounds();
 			cameraIntersection = camRect.intersects(objRect);
+
+			msUnitLastMinuteCheck += timeGetTime() - t1;
+			t1 = timeGetTime();
+
 			if (core.advancedDebug || cameraIntersection)
 			{
 				if (!settings.enableBetterShadows) { window.texHandle.draw(brushRect, window.matrixHandle); }
@@ -257,6 +283,10 @@ void cWindow::paintUnits()
 				}
 				if (u == 0) { visual.unitsPainted += 1; }
 			}
+
+			msUnitRender += timeGetTime() - t1;
+			t1 = timeGetTime();
+
 			brushRect.setRotation(0.00f);
 			brushRect.setOutlineThickness(0.00f);
 		}

@@ -90,8 +90,10 @@ public:
 	const float progressBarFadeInTimer = 0.10f;
 	const float progressBarFadeOutTimer = 0.30f;
 
-	const float statCold_normal_day = 0.50f;
+	//const float statCold_normal_day = 0.50f;
+	const float statCold_normal_day = 2.50f;
 	const float statCold_normal_night = 0.80f;
+	//const float statCold_normal_night = 3.00f;
 	const float statHunger_normal = 0.20f;
 
 	const float mouseDoubleClickTimer = 0.20f;
