@@ -101,10 +101,11 @@ void cDatabase::loadUnits()
 	unit[i].interactDistance = 15.00f;
 	unit[i].collisionDistance = 10.00f;
 	unit[i].selectionOffset = vec4f(0.00f, 0.00f, 0.25f, 0.25f);
-	unit[i].sound.idle = "wind_tree";
+	//unit[i].sound.idle = "wind_tree";
 	unit[i].drop.add("material_wood", 1, 1.00f);
 	unit[i].drop.add("material_wood", 1, 0.75f);
 	unit[i].drop.add("material_wood", 1, 0.50f);
+	unit[i].drop.add("material_wood", 1, 0.25f);
 	unit[i].addRef(REF_UNIT_TREE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;
@@ -158,6 +159,7 @@ void cDatabase::loadUnits()
 	unit[i].drop.add("material_wood", 1, 1.00f);
 	unit[i].drop.add("material_wood", 1, 0.75f);
 	unit[i].drop.add("material_wood", 1, 0.50f);
+	unit[i].drop.add("material_wood", 1, 0.25f);
 	unit[i].addRef(REF_UNIT_TREE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;
@@ -196,11 +198,11 @@ void cDatabase::loadUnits()
 	unit[i].drop.add("material_stone", 1, 1.00f);
 	unit[i].drop.add("material_stone", 1, 0.75f);
 	unit[i].drop.add("material_stone", 1, 0.50f);
-	unit[i].drop.add("material_flint", 1, 0.50f, POWER_STONE);
-	unit[i].drop.add("material_flint", 1, 0.40f, POWER_STONE);
-	unit[i].drop.add("material_flint", 1, 0.30f, POWER_STONE);
-	unit[i].drop.add("material_iron_raw", 1, 0.75f, POWER_FLINT);
-	unit[i].drop.add("material_iron_raw", 1, 0.50f, POWER_FLINT);
+	unit[i].drop.add("material_flint", 1, 0.50f);
+	unit[i].drop.add("material_flint", 1, 0.40f);
+	unit[i].drop.add("material_flint", 1, 0.30f);
+	unit[i].drop.add("material_iron_raw", 1, 0.75f);
+	unit[i].drop.add("material_iron_raw", 1, 0.50f);
 	unit[i].addRef(REF_UNIT_STONE);
 	unit[i].addRef(REF_UNIT_HARVESTABLE);
 	i += 1;

@@ -153,11 +153,11 @@ void cSettings::setDefault()
 	// Starting path counter [Increases the open area close to spawn point]
 	this->wgStartingPath = 1;
 	// Minimal path length [Increases the total map size]
-	this->wgMinimalPathLength = 10;
+	this->wgMinimalPathLength = 30;
 	// Maximum path length [Decreases the maximum map size]
-	this->wgMaximalPathLength = 30;
+	this->wgMaximalPathLength = 50;
 	// Path fork chance [Increases the amount of paths on the map]
-	this->wgPathForkChance = 20;
+	this->wgPathForkChance = 10;
 	/*
 	Taiga Mini:
 		wgStartingPath = 1;
